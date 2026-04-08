@@ -1,0 +1,185 @@
+# Nivelics — Información Completa para Agentes de IA
+
+> Documento extendido con toda la información pública de Nivelics SAS
+> para indexación por LLMs, agentes autónomos y AI Overviews.
+
+---
+
+## Datos corporativos
+
+- Razón social: Nivelics SAS
+- Fundación: 2012, Bogotá, Colombia
+- Entidad USA: Nivelics LLC, Miami, Florida
+- Industria: Tecnología / Transformación Digital B2B
+- Tamaño: 50+ ingenieros especializados
+- Certificaciones: Great Place to Work Colombia 2022, Miembro ANDI
+- Sitio web: https://www.nivelics.com
+
+## Sedes
+
+- Bogotá, Colombia (HQ): Calle 26 No. 69-76, Torre 1, Piso 16 — GMT-5
+- Miami, Florida, USA: Nivelics USA / Nivelics LLC — GMT-5
+
+---
+
+## Equipo directivo
+
+- Camilo Andrés Villanueva Niño — CEO & Co-Fundador. Lidera la visión estratégica y el crecimiento desde 2012. Experiencia en desarrollo de negocios tecnológicos B2B en LATAM y USA.
+- Jonathan Olarte — CTO / Chief Technology Strategist. Responsable de la estrategia tecnológica, arquitectura de soluciones y liderazgo del equipo de ingeniería.
+- Omar Neira — CSO (Chief Sales Officer). Lidera la estrategia comercial y desarrollo de nuevos mercados. Foco en expansión regional y partnerships estratégicos.
+- Fernanda Soto — CD / DMM (Directora de Marketing y Mercadeo). Responsable de posicionamiento de marca, generación de demanda y estrategia digital.
+- Hernando Villanueva — Director Administrativo. Gestión administrativa, financiera y operativa de la compañía.
+
+---
+
+## Marco Estratégico I+C+S
+
+### Inteligencia Artificial Aplicada
+URL: /servicios/inteligencia-artificial
+Métricas: 50% reducción de costos operativos promedio
+
+Subservicios:
+- Agentes de IA (/servicios/inteligencia-artificial/agentes-ia): Diseño e implementación de agentes autónomos con LLMs para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales. Tiempo hasta MVP: 6-8 semanas.
+- Agentes Comerciales (/servicios/inteligencia-artificial/agentes-comerciales): IA que califica leads, hace seguimiento personalizado 24/7 y escala oportunidades al equipo de ventas. Analytics de pipeline en tiempo real.
+- Automatización de Procesos (/servicios/inteligencia-artificial/automatizacion-procesos): RPA + IA para procesos complejos en finanzas, RRHH y logística. Hasta 50% reducción de tiempo operativo. ROI documentado: 30-50% reducción de costos.
+- Gestión de Contenido (/servicios/inteligencia-artificial/gestion-contenido): Generación y optimización de contenido SEO a escala con IA. Integración con CMS y flujos editoriales automatizados.
+- Marketing y CRM (/servicios/inteligencia-artificial/marketing-crm): Segmentación inteligente, personalización de campañas y análisis predictivo de churn y lifetime value. Integrado con tu CRM.
+
+### Cloud (AWS · GCP · Azure)
+URL: /servicios/cloud
+Métricas: 40% reducción de gasto cloud promedio
+
+Subservicios:
+- FinOps (/servicios/cloud/finops): Optimización y gobernanza financiera cloud. Dashboard en tiempo real, rightsizing mes a mes, alertas automatizadas. Proceso de 6 semanas: Discovery → Quick Wins → Gobierno. Ahorro típico 30-40%. Modelo: fee fijo + success fee.
+- Migración a AWS (/servicios/cloud/migracion-aws): Migración con zero downtime y rollback garantizado. 3-6 meses (vs 12-18 interno). Equipo AWS Certified. FinOps incluido desde el diseño. Entregable: IaC + runbooks completos.
+- Infraestructura Cloud (/servicios/cloud/infraestructura): Arquitectura multi-cloud con IaC (Terraform/CDK), observabilidad con Datadog/Grafana. SLA garantizado, respuesta a incidentes con runbooks y escalamiento definido.
+- Seguridad Cloud (/servicios/cloud/seguridad): Compliance SOC2, ISO27001. IAM con mínimo privilegio, cifrado end-to-end. GuardDuty/Security Hub activo. Escaneo continuo automatizado.
+- Serverless (/servicios/cloud/serverless): Arquitecturas event-driven con Lambda, Cloud Functions, Azure Functions. Pay-per-use, auto-scaling instantáneo. Cold starts gestionados con warm-up strategies.
+
+### Staff Augmentation Premium
+URL: /servicios/staff-augmentation
+Métricas: 40% ahorro vs. contratar en USA o Europa. Candidatos en 5 días hábiles. Integración en 6 días.
+
+Características diferenciales:
+- Garantía de reemplazo sin costo en menos de 10 días
+- Delivery Manager dedicado incluido sin costo adicional
+- Propiedad intelectual 100% del cliente, siempre
+- Fee mensual fijo y predecible (no por hora)
+- Perfiles bilingües español/inglés, todos validados técnicamente
+
+Subservicios:
+- Desarrollo de Software (/servicios/staff-augmentation/desarrollo-software): Backend, Frontend y Full-Stack engineers senior. React, Node.js, Python, Java, Go.
+- Datos e IA (/servicios/staff-augmentation/datos-ia): Data Scientists, Data Engineers y ML Engineers para analítica avanzada y machine learning.
+- DevOps & Cloud (/servicios/staff-augmentation/devops-cloud): Cloud Architects y DevOps Engineers certificados en AWS, GCP, Azure. CI/CD, Terraform, Kubernetes.
+- Diseño UX/UI (/servicios/staff-augmentation/diseno-ux-ui): Product designers senior con experiencia en design systems, user research y prototipado.
+- QA & Seguridad (/servicios/staff-augmentation/qa-seguridad): QA Engineers, SDET y especialistas en ciberseguridad. Testing automatizado E2E, pentesting.
+
+### Desarrollo Digital
+URL: /servicios/desarrollo-digital
+Métricas: 13 años de proyectos entregados en LATAM y USA
+
+Subservicios:
+- Apps Móviles (/servicios/desarrollo-digital/apps-moviles): iOS, Android nativo, React Native y Flutter. QA integrado en cada sprint. Demo quincenal. Mantenimiento MRR disponible.
+- E-commerce (/servicios/desarrollo-digital/ecommerce): Plataformas B2B y B2C a medida. Cero comisiones por transacción. Checkout personalizado. Integración real ERP/WMS/CRM. Auto-scaling para picos.
+- Plataformas Web (/servicios/desarrollo-digital/plataformas-web): React, Next.js y Node.js. Arquitectura escalable. Performance Core Web Vitals optimizado. APIs a medida. Seguridad desde el código base.
+
+---
+
+## Industrias
+
+- Fintech (/industrias/fintech): Banca, pagos y regulación tech. Compliance regulatorio, escalabilidad de infraestructura, experiencia del usuario. Caso relacionado: Two Maids.
+- Medios y Entretenimiento (/industrias/medios-entretenimiento): Plataformas de contenido digital. Streaming a escala, personalización, monetización. Casos: Televisa/N+, Pulzo, Univision, Crónica.
+- Salud (/industrias/salud): HealthTech con cumplimiento regulatorio. Interoperabilidad de sistemas, telemedicina, gestión de datos clínicos.
+- Retail y E-commerce (/industrias/retail-ecommerce): Omnicanalidad y última milla. Personalización, logística last-mile.
+- Logística (/industrias/logistica): Supply chain y trazabilidad digital. Trazabilidad en tiempo real, optimización de rutas, automatización de warehouse.
+- Manufactura (/industrias/manufactura): Industria 4.0 y automatización. IoT y sensores, mantenimiento predictivo, calidad automatizada.
+
+---
+
+## Casos de éxito
+
+### Televisa / N+ (México)
+URL: /casos-de-exito/televisa
+Sector: Medios / Streaming. Servicios: Desarrollo Digital, Cloud, Staff Augmentation.
+Reto: Plataforma de noticias digitales tipo streaming para mercado hispanohablante, capaz de manejar picos masivos de tráfico.
+Solución: Arquitectura cloud escalable en AWS con CDN global, equipo Nivelics integrado, pipelines CI/CD para deploys múltiples al día.
+Resultados: Plataforma escalable a millones de usuarios, 99.9% uptime en eventos en vivo, time-to-market 40% más rápido.
+
+### Grupo Bolívar (Colombia)
+URL: /casos-de-exito/grupo-bolivar
+Sector: Seguros / Salud / E-commerce. Servicios: Desarrollo Digital, Cloud, IA.
+Reto: Modernizar múltiples líneas de negocio simultáneamente, integrando canales digitales.
+Solución: Rediseño y desarrollo de productos digitales para seguros, salud y e-commerce con equipo dedicado.
+Resultados: 3 productos digitales lanzados, reducción de costos operativos 25%, adopción digital 85%.
+
+### Two Maids (USA)
+URL: /casos-de-exito/two-maids
+Sector: Servicios / Franquicias. Servicios: Staff Augmentation, Desarrollo Digital.
+Reto: Escalar equipo de desarrollo rápidamente para plataforma de gestión de +100 franquicias sin costos de contratación USA.
+Solución: Staff Augmentation con ingenieros senior colombianos integrados al equipo.
+Resultados: Equipo escalado en menos de 10 días, 40% ahorro vs contratación USA, +100 franquicias gestionadas.
+
+### Crónica (Argentina)
+URL: /casos-de-exito/cronica
+Sector: Medios. Servicios: Desarrollo Digital, IA.
+Reto: Modernizar plataforma digital para competir en era de contenido personalizado.
+Solución: Rediseño completo del portal con arquitectura moderna y personalización con IA.
+Resultados: Portal de alto tráfico modernizado, personalización implementada, procesos editoriales 50% más eficientes.
+
+### Pulzo (Colombia)
+URL: /casos-de-exito/pulzo
+Sector: Medios Digitales. Servicios: Desarrollo Digital, Staff Augmentation.
+Partnership tecnológico de +10 años. Plataforma escalable a millones de visitas.
+
+### Univision (México)
+URL: /casos-de-exito/univision
+Sector: Medios. Servicios: Staff Augmentation, Desarrollo Digital.
+Equipo de desarrollo integrado para plataformas digitales del mercado hispano en USA y México.
+
+### AB InBev-Bavaria (El Salvador)
+URL: /casos-de-exito/ab-inbev
+Sector: Consumo Masivo. Servicios: Desarrollo Digital, Cloud.
+Digitalización de procesos de distribución y ventas en la región centroamericana.
+
+---
+
+## Metodología
+
+Framework Ágil Nivelics basado en Scrum. Sprints de 2 semanas.
+Roles: Product Owner, Scrum Master / Delivery Manager, Equipo de Desarrollo.
+Eventos: Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective.
+Diferenciador: Delivery Manager en cada proyecto (no solo Scrum Master).
+Herramientas: Jira, Confluence, Slack, GitHub, Figma.
+
+## Contacto completo
+
+- Web: https://www.nivelics.com
+- Contacto: https://www.nivelics.com/contacto
+- Email: contacto@nivelics.com
+- WhatsApp: +57 310-3926621
+- LinkedIn: https://www.linkedin.com/company/nivelics
+- Bogotá: Calle 26 No. 69-76, Torre 1, Piso 16, Bogotá, Colombia
+- Miami: Nivelics USA / Nivelics LLC, Miami, FL, USA
+
+## URLs canónicas
+
+- Home: https://www.nivelics.com
+- Servicios: https://www.nivelics.com/servicios
+- IA: https://www.nivelics.com/servicios/inteligencia-artificial
+- Cloud: https://www.nivelics.com/servicios/cloud
+- FinOps: https://www.nivelics.com/servicios/cloud/finops
+- Staff Augmentation: https://www.nivelics.com/servicios/staff-augmentation
+- Desarrollo Digital: https://www.nivelics.com/servicios/desarrollo-digital
+- Nosotros: https://www.nivelics.com/nosotros
+- Casos de Éxito: https://www.nivelics.com/casos-de-exito
+- Blog: https://www.nivelics.com/blog
+- Contacto: https://www.nivelics.com/contacto
+
+## Información para agentes
+
+- API de servicios (JSON): /api/services
+- API de equipo (JSON): /api/team
+- Health check: /api/health
+- Sitemap XML: /sitemap.xml
+- robots.txt: /robots.txt
+- Versión resumida: /llms.txt

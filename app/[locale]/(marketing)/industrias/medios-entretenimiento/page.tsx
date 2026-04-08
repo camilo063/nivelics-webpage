@@ -1,0 +1,149 @@
+import type { Metadata } from "next";
+import { Tv, Sparkles, DollarSign } from "lucide-react";
+import { PageWrapper } from "@/components/layout";
+import { CTABanner, ServiceBadge } from "@/components/shared";
+import { getServiceSchema } from "@/lib/schema/service";
+import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+
+export const metadata: Metadata = {
+  title: "Tecnología para Medios y Entretenimiento | Nivelics",
+  description:
+    "Soluciones de streaming, personalización de contenido y monetización digital para empresas de medios y entretenimiento.",
+  alternates: {
+    canonical: "https://www.nivelics.com/industrias/medios-entretenimiento",
+    languages: {
+      es: "https://www.nivelics.com/industrias/medios-entretenimiento",
+      en: "https://www.nivelics.com/en/industries/media-entertainment",
+      "x-default": "https://www.nivelics.com/industrias/medios-entretenimiento",
+    },
+  },
+};
+
+const CHALLENGES = [
+  {
+    icon: Tv,
+    title: "Streaming a escala",
+    description:
+      "Entregar contenido en vivo y on-demand a millones de usuarios simultáneos con baja latencia y alta disponibilidad.",
+  },
+  {
+    icon: Sparkles,
+    title: "Personalización de contenido",
+    description:
+      "Recomendar el contenido correcto al usuario correcto en el momento correcto para maximizar engagement y retención.",
+  },
+  {
+    icon: DollarSign,
+    title: "Monetización digital",
+    description:
+      "Diversificar fuentes de ingreso entre suscripciones, publicidad programática y modelos freemium sin sacrificar experiencia.",
+  },
+];
+
+const SOLUTIONS = [
+  {
+    badge: "ia" as const,
+    title: "IA para Medios",
+    description:
+      "Motores de recomendación, clasificación automática de contenido y analítica de audiencia con modelos de machine learning.",
+  },
+  {
+    badge: "cloud" as const,
+    title: "Cloud para Medios",
+    description:
+      "CDN global, transcodificación elástica y arquitecturas serverless que soportan millones de streams concurrentes.",
+  },
+  {
+    badge: "staffing" as const,
+    title: "Staffing para Medios",
+    description:
+      "Equipos de desarrollo con experiencia en plataformas editoriales, CMS headless y stacks de video digital.",
+  },
+];
+
+export default function MediosEntretenimientoPage() {
+  const serviceSchema = getServiceSchema({
+    name: "Tecnología para Medios y Entretenimiento",
+    description:
+      "IA, cloud y staffing para empresas de medios que necesitan streaming a escala, personalización y monetización digital.",
+    url: "/industrias/medios-entretenimiento",
+    serviceType: "Media Technology Consulting",
+  });
+  const breadcrumb = getBreadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Industrias", url: "/industrias" },
+    { name: "Medios y Entretenimiento", url: "/industrias/medios-entretenimiento" },
+  ]);
+
+  return (
+    <PageWrapper>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
+      {/* Hero */}
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
+          <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
+            IA &middot; Cloud &middot; Staffing para Medios y Entretenimiento
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-text-70">
+            Potenciamos plataformas de contenido digital con tecnología que escala, personaliza y
+            monetiza como Televisa/N+, Pulzo, Univision y Crónica.
+          </p>
+        </div>
+      </section>
+
+      {/* Challenges */}
+      <section className="bg-bg-surface py-16 md:py-24">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+          <h2 className="text-3xl font-bold text-text-100">
+            Los 3 retos tech de Medios y Entretenimiento
+          </h2>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {CHALLENGES.map((ch) => {
+              const Icon = ch.icon;
+              return (
+                <div key={ch.title} className="glass glow-hover rounded-xl p-6">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                    <Icon size={24} className="text-primary" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-70">{ch.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+          <h2 className="text-3xl font-bold text-text-100">Cómo el marco I+C+S resuelve esto</h2>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {SOLUTIONS.map((sol) => (
+              <div key={sol.title} className="glass glow-hover rounded-xl p-6">
+                <ServiceBadge variant={sol.badge} className="mb-4">
+                  {sol.badge === "ia"
+                    ? "IA"
+                    : sol.badge.charAt(0).toUpperCase() + sol.badge.slice(1)}
+                </ServiceBadge>
+                <h3 className="text-lg font-semibold text-text-100">{sol.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-70">{sol.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTABanner title="Hablemos de tu proyecto en Medios y Entretenimiento" />
+    </PageWrapper>
+  );
+}
