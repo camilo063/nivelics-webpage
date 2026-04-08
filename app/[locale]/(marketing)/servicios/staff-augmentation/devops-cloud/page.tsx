@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Award, GitBranch, Container } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
+import { CTABanner } from "@/components/shared";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroSelector } from "@/components/sections/hero-selector";
+import { MetricsBar } from "@/components/sections/metrics-bar";
+import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -41,6 +46,33 @@ const BENEFITS = [
   },
 ];
 
+const DEVOPS_ROLES = [
+  {
+    icon: "\u2601\uFE0F",
+    label: "Cloud Architect",
+    url: "/servicios/staff-augmentation/devops-cloud",
+    description: "AWS, GCP, Azure, diseño de infraestructura",
+  },
+  {
+    icon: "\u{1F504}",
+    label: "DevOps Engineer",
+    url: "/servicios/staff-augmentation/devops-cloud",
+    description: "CI/CD, Terraform, Ansible, automatización",
+  },
+  {
+    icon: "\u2699\uFE0F",
+    label: "SRE (Site Reliability)",
+    url: "/servicios/staff-augmentation/devops-cloud",
+    description: "Observabilidad, SLOs, incident management",
+  },
+  {
+    icon: "\u{1F4E6}",
+    label: "Platform Engineer",
+    url: "/servicios/staff-augmentation/devops-cloud",
+    description: "Kubernetes, Helm, service mesh, IDP",
+  },
+];
+
 export default function DevOpsCloudPage() {
   const serviceSchema = getServiceSchema({
     name: "DevOps e Infraestructura",
@@ -58,6 +90,45 @@ export default function DevOpsCloudPage() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{
+          name: "Staff Augmentation",
+          nameEn: "Staff Augmentation",
+          accentColor: "#10B981",
+        }}
+        siblings={[
+          {
+            name: "Desarrollo de Software",
+            nameEn: "Software Development",
+            url: "/servicios/staff-augmentation/desarrollo-software",
+            urlEn: "/en/services/staff-augmentation/software-development",
+          },
+          {
+            name: "Datos e IA",
+            nameEn: "Data & AI",
+            url: "/servicios/staff-augmentation/datos-ia",
+            urlEn: "/en/services/staff-augmentation/data-ai",
+          },
+          {
+            name: "DevOps & Cloud",
+            nameEn: "DevOps & Cloud",
+            url: "/servicios/staff-augmentation/devops-cloud",
+            urlEn: "/en/services/staff-augmentation/devops-cloud",
+          },
+          {
+            name: "Diseño UX/UI",
+            nameEn: "UX/UI Design",
+            url: "/servicios/staff-augmentation/diseno-ux-ui",
+            urlEn: "/en/services/staff-augmentation/ux-ui-design",
+          },
+          {
+            name: "QA & Seguridad",
+            nameEn: "QA & Security",
+            url: "/servicios/staff-augmentation/qa-seguridad",
+            urlEn: "/en/services/staff-augmentation/qa-security",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -67,19 +138,36 @@ export default function DevOpsCloudPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-staffing/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="staffing">Staff Augmentation</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            DevOps e Infraestructura
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform,
-            Kubernetes.
-          </p>
-        </div>
-      </section>
+      <HeroSplit
+        badge="Staff Aug · DevOps"
+        h1="DevOps senior"
+        h1Accent="integrado en días"
+        subtitle="Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform, Kubernetes y observabilidad para tu equipo."
+        bullets={[
+          "Candidatos presentados en 5 días hábiles",
+          "Ahorro de hasta 40% vs contratar en USA",
+          "Garantía de reemplazo sin costo en 10 días",
+        ]}
+        ctaPrimary={{ text: "Ver perfiles disponibles", url: "/contacto" }}
+        ctaSecondary={{ text: "Conoce el proceso", url: "/servicios/staff-augmentation" }}
+        accentColor="#10B981"
+        rightPanel={
+          <HeroSelector
+            title="Selecciona el rol que necesitas"
+            options={DEVOPS_ROLES}
+            accentColor="#10B981"
+          />
+        }
+      />
+
+      <MetricsBar
+        metrics={[
+          { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
+          { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
+          { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
+          { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
+        ]}
+      />
 
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
@@ -150,6 +238,7 @@ export default function DevOpsCloudPage() {
       />
 
       <CTABanner />
+      <StickyMobileCta text="Ver perfiles →" url="/contacto" accentColor="#10B981" />
     </PageWrapper>
   );
 }

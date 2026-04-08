@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Zap, Scaling, DollarSign } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
+import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroCalculator } from "@/components/sections/hero-calculator";
+import { MetricsBar } from "@/components/sections/metrics-bar";
+import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
@@ -31,13 +36,13 @@ const BENEFITS = [
     icon: Scaling,
     title: "Auto-scaling nativo",
     description:
-      "Escalamiento automático de cero a millones de requests sin configuración manual ni gestión de servidores.",
+      "Escalamiento autom\u00e1tico de cero a millones de requests sin configuraci\u00f3n manual ni gesti\u00f3n de servidores.",
   },
   {
     icon: DollarSign,
     title: "Costos basados en uso real",
     description:
-      "Paga solo por el tiempo de ejecución que consumes. Sin servidores idle, sin costos fijos innecesarios.",
+      "Paga solo por el tiempo de ejecuci\u00f3n que consumes. Sin servidores idle, sin costos fijos innecesarios.",
   },
 ];
 
@@ -58,6 +63,41 @@ export default function ServerlessPage() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{ name: "Cloud", nameEn: "Cloud", accentColor: "#3B82F6" }}
+        siblings={[
+          {
+            name: "FinOps",
+            nameEn: "FinOps",
+            url: "/servicios/cloud/finops",
+            urlEn: "/en/services/cloud/finops",
+          },
+          {
+            name: "Migración a AWS",
+            nameEn: "AWS Migration",
+            url: "/servicios/cloud/migracion-aws",
+            urlEn: "/en/services/cloud/aws-migration",
+          },
+          {
+            name: "Infraestructura",
+            nameEn: "Infrastructure",
+            url: "/servicios/cloud/infraestructura",
+            urlEn: "/en/services/cloud/infrastructure",
+          },
+          {
+            name: "Seguridad Cloud",
+            nameEn: "Cloud Security",
+            url: "/servicios/cloud/seguridad",
+            urlEn: "/en/services/cloud/security",
+          },
+          {
+            name: "Serverless",
+            nameEn: "Serverless",
+            url: "/servicios/cloud/serverless",
+            urlEn: "/en/services/cloud/serverless",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -67,21 +107,32 @@ export default function ServerlessPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-cloud/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="cloud">Cloud</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Soluciones Serverless
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por
-            lo que usas.
-          </p>
-        </div>
-      </section>
+      <HeroSplit
+        badge="Cloud \u00b7 Serverless"
+        h1="Paga solo lo que usas,"
+        h1Accent="escala sin l\u00edmites"
+        subtitle="Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Escala de cero a millones sin gestionar servidores."
+        bullets={[
+          "Auto-scaling de 0 a millones de requests",
+          "Pay-per-use real \u2014 sin servidores idle",
+          "Cold starts gestionados con warm-up strategies",
+        ]}
+        ctaPrimary={{ text: "Hablar con un experto", url: "/contacto" }}
+        ctaSecondary={{ text: "Ver beneficios", url: "#beneficios" }}
+        accentColor="#3B82F6"
+        rightPanel={<HeroCalculator type="cloud" accentColor="#3B82F6" />}
+      />
 
-      <section className="bg-bg-surface py-16 md:py-24">
+      <MetricsBar
+        metrics={[
+          { value: "0", label: "Servidores que gestionar", sublabel: "Infraestructura invisible" },
+          { value: "70%", label: "Menos costo", sublabel: "vs. servidores dedicados" },
+          { value: "100ms", label: "Cold start", sublabel: "Con warm-up strategies" },
+          { value: "10x", label: "M\u00e1s r\u00e1pido", sublabel: "Time-to-market" },
+        ]}
+      />
+
+      <section id="beneficios" className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
@@ -102,29 +153,29 @@ export default function ServerlessPage() {
       </section>
 
       <ComparisonTable
-        title="¿Serverless con Nivelics vs. arquitectura tradicional?"
+        title="\u00bfServerless con Nivelics vs. arquitectura tradicional?"
         alternativeLabel="Arquitectura tradicional"
         nivelicsLabel="Nivelics Serverless"
         rows={[
           {
-            criterion: "Costo de cómputo",
-            alternative: "Fijo — pagas aunque no uses los recursos",
-            nivelics: "Pay-per-use — solo lo que consumes",
+            criterion: "Costo de c\u00f3mputo",
+            alternative: "Fijo \u2014 pagas aunque no uses los recursos",
+            nivelics: "Pay-per-use \u2014 solo lo que consumes",
           },
           {
             criterion: "Escalabilidad",
-            alternative: "Manual o semi-automática",
-            nivelics: "Automática e instantánea sin intervención",
+            alternative: "Manual o semi-autom\u00e1tica",
+            nivelics: "Autom\u00e1tica e instant\u00e1nea sin intervenci\u00f3n",
           },
           {
-            criterion: "Gestión de servidores",
+            criterion: "Gesti\u00f3n de servidores",
             alternative: "Tu equipo la absorbe completamente",
-            nivelics: "Cero gestión de infraestructura",
+            nivelics: "Cero gesti\u00f3n de infraestructura",
           },
           {
             criterion: "Time-to-market",
-            alternative: "Más lento — infra previa necesaria",
-            nivelics: "Más rápido — foco en lógica de negocio",
+            alternative: "M\u00e1s lento \u2014 infra previa necesaria",
+            nivelics: "M\u00e1s r\u00e1pido \u2014 foco en l\u00f3gica de negocio",
           },
           {
             criterion: "Cold starts",
@@ -134,12 +185,18 @@ export default function ServerlessPage() {
           {
             criterion: "Costo a largo plazo",
             alternative: "Predecible pero inflexible",
-            nivelics: "Escala con el negocio — baja en periodos bajos",
+            nivelics: "Escala con el negocio \u2014 baja en periodos bajos",
           },
         ]}
       />
 
       <CTABanner />
+
+      <StickyMobileCta
+        text="Solicitar auditor\u00eda \u2192"
+        url="/contacto"
+        accentColor="#3B82F6"
+      />
     </PageWrapper>
   );
 }

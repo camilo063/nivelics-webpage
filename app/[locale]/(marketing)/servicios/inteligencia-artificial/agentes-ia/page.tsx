@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { MessageSquare, Plug, UserCheck } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroSelector } from "@/components/sections/hero-selector";
+import { MetricsBar } from "@/components/sections/metrics-bar";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { FAQAccordion } from "@/components/sections/faq-accordion";
+import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
@@ -19,27 +24,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
-const BENEFITS = [
-  {
-    icon: MessageSquare,
-    title: "Agentes conversacionales 24/7",
-    description:
-      "Agentes de IA que atienden consultas, resuelven problemas y generan oportunidades las 24 horas del día, los 7 días de la semana.",
-  },
-  {
-    icon: Plug,
-    title: "Integración con CRM y WhatsApp",
-    description:
-      "Conectamos tus agentes con WhatsApp Business, HubSpot, Salesforce y las herramientas que ya usas.",
-  },
-  {
-    icon: UserCheck,
-    title: "Escalamiento inteligente a humanos",
-    description:
-      "El agente detecta cuándo escalar a un humano, transfiriendo contexto completo para una resolución rápida.",
-  },
-];
 
 export default function AgentesIAPage() {
   const serviceSchema = getServiceSchema({
@@ -58,6 +42,45 @@ export default function AgentesIAPage() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{
+          name: "Inteligencia Artificial",
+          nameEn: "Artificial Intelligence",
+          accentColor: "#8B5CF6",
+        }}
+        siblings={[
+          {
+            name: "Agentes IA",
+            nameEn: "AI Agents",
+            url: "/servicios/inteligencia-artificial/agentes-ia",
+            urlEn: "/en/services/artificial-intelligence/ai-agents",
+          },
+          {
+            name: "Agentes Comerciales",
+            nameEn: "Sales Agents",
+            url: "/servicios/inteligencia-artificial/agentes-comerciales",
+            urlEn: "/en/services/artificial-intelligence/sales-agents",
+          },
+          {
+            name: "Automatización",
+            nameEn: "Automation",
+            url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+            urlEn: "/en/services/artificial-intelligence/process-automation",
+          },
+          {
+            name: "Gestión de Contenido",
+            nameEn: "Content Management",
+            url: "/servicios/inteligencia-artificial/gestion-contenido",
+            urlEn: "/en/services/artificial-intelligence/content-management",
+          },
+          {
+            name: "Marketing y CRM",
+            nameEn: "Marketing & CRM",
+            url: "/servicios/inteligencia-artificial/marketing-crm",
+            urlEn: "/en/services/artificial-intelligence/marketing-crm",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -67,40 +90,84 @@ export default function AgentesIAPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-ia/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="ia">Inteligencia Artificial</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Agentes de IA para Empresas
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Diseñamos agentes de IA para ventas, soporte y operaciones. Integración con WhatsApp,
-            CRM y plataformas empresariales.
-          </p>
-        </div>
-      </section>
+      {/* Hero */}
+      <HeroSplit
+        badge="Inteligencia Artificial · Agentes"
+        h1="Agentes IA que trabajan"
+        h1Accent="mientras tu duermes"
+        subtitle="Agentes autónomos que ejecutan tareas complejas de negocio sin intervención humana. Conectados a tus sistemas, con trazabilidad completa y escalamiento inteligente."
+        bullets={[
+          "Primer agente en producción en 6-8 semanas",
+          "Integrado con tu CRM, ERP y canales de comunicación",
+          "Trazabilidad completa: logging, evals y alertas en cada ejecución",
+        ]}
+        ctaPrimary={{ text: "Agendar discovery", url: "/contacto" }}
+        ctaSecondary={{
+          text: "Ver todos los servicios IA",
+          url: "/servicios/inteligencia-artificial",
+        }}
+        accentColor="#8B5CF6"
+        rightPanel={
+          <HeroSelector
+            title="Casos de uso más comunes"
+            accentColor="#8B5CF6"
+            options={[
+              {
+                icon: "📧",
+                label: "Calificar leads",
+                url: "/servicios/inteligencia-artificial/agentes-comerciales",
+                description: "Puntúa y prioriza leads automáticamente con criterios MEDDPICC",
+              },
+              {
+                icon: "📄",
+                label: "Procesar documentos",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Extrae, clasifica y rutea documentos con IA generativa",
+              },
+              {
+                icon: "💬",
+                label: "Atención 24/7",
+                url: "/servicios/inteligencia-artificial/agentes-ia",
+                description: "Resuelve consultas en cualquier canal sin intervención humana",
+              },
+              {
+                icon: "📊",
+                label: "Reportes automáticos",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Genera reportes ejecutivos desde tus datos en segundos",
+              },
+              {
+                icon: "🔄",
+                label: "Flujos de negocio",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Orquesta procesos multi-paso con decisiones inteligentes",
+              },
+            ]}
+          />
+        }
+        dataSection="agentes-ia-hero"
+        ariaLabel="Agentes de IA para empresas — automatización inteligente con trazabilidad completa"
+      />
 
-      <section className="bg-bg-surface py-16 md:py-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-ia/10">
-                    <Icon size={24} className="text-ia" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Metrics */}
+      <MetricsBar
+        metrics={[
+          {
+            value: "6-8",
+            label: "Semanas al primer agente",
+            sublabel: "desde discovery hasta producción",
+          },
+          { value: "24/7", label: "Disponibilidad", sublabel: "los agentes no tienen horario" },
+          {
+            value: "50%",
+            label: "Reducción de costos",
+            sublabel: "promedio en tareas automatizadas",
+          },
+          { value: "100%", label: "Trazabilidad", sublabel: "logging y evals en cada ejecución" },
+        ]}
+      />
 
+      {/* Comparison */}
       <ComparisonTable
         title="¿Por qué agentes IA con Nivelics vs. desarrollo interno?"
         alternativeLabel="Desarrollo interno"
@@ -108,8 +175,8 @@ export default function AgentesIAPage() {
         rows={[
           {
             criterion: "Tiempo hasta MVP funcional",
-            alternative: "4–6 meses mínimo",
-            nivelics: "6–8 semanas",
+            alternative: "4-6 meses mínimo",
+            nivelics: "6-8 semanas",
           },
           {
             criterion: "Expertise en LLMs y RAG",
@@ -144,7 +211,48 @@ export default function AgentesIAPage() {
         ]}
       />
 
-      <CTABanner />
+      {/* FAQ */}
+      <FAQAccordion
+        title="Preguntas frecuentes sobre Agentes de IA"
+        schemaEnabled
+        faqs={[
+          {
+            question: "¿Qué es un agente de IA y en qué se diferencia de un chatbot?",
+            answer:
+              "Un chatbot responde preguntas siguiendo scripts predefinidos. Un agente de IA toma decisiones, ejecuta acciones en tus sistemas (CRM, ERP, bases de datos) y puede orquestar flujos multi-paso de forma autónoma, con escalamiento inteligente a humanos cuando es necesario.",
+          },
+          {
+            question: "¿Con qué sistemas se integran los agentes?",
+            answer:
+              "Integramos con WhatsApp Business, Slack, HubSpot, Salesforce, Odoo, sistemas ERP, bases de datos SQL/NoSQL, APIs REST y servicios cloud (AWS, GCP, Azure). Si tienes un sistema legacy, construimos conectores personalizados.",
+          },
+          {
+            question: "¿Cuánto cuesta implementar un agente de IA?",
+            answer:
+              "Un agente simple parte de $8,000 USD en implementación + MRR de operación mensual. En el discovery de la primera semana definimos el costo exacto con ROI proyectado para tu caso específico.",
+          },
+          {
+            question: "¿Qué pasa si el agente comete errores?",
+            answer:
+              "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente con contexto completo. El monitoreo es continuo y recibes alertas en tiempo real.",
+          },
+          {
+            question: "¿Mis datos están seguros?",
+            answer:
+              "Sí. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
+          },
+        ]}
+      />
+
+      {/* Contact */}
+      <InlineContactForm
+        title="¿Qué proceso quieres automatizar con agentes IA?"
+        subtitle="Cuéntanos tu caso y diseñamos el agente ideal para tu operación."
+        serviceDefault="ia"
+        accentColor="#8B5CF6"
+      />
+
+      <StickyMobileCta text="Hablar con un experto →" url="/contacto" accentColor="#8B5CF6" />
     </PageWrapper>
   );
 }

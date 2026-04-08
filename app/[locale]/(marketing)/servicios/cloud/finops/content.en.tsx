@@ -1,5 +1,6 @@
 import { DollarSign, TrendingDown, PieChart, Eye, BarChart, Settings } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { getServiceSchema } from "@/lib/schema/service";
@@ -55,6 +56,41 @@ export function FinOpsContentEn() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{ name: "Cloud", nameEn: "Cloud", accentColor: "#3B82F6" }}
+        siblings={[
+          {
+            name: "FinOps",
+            nameEn: "FinOps",
+            url: "/servicios/cloud/finops",
+            urlEn: "/en/services/cloud/finops",
+          },
+          {
+            name: "Migración a AWS",
+            nameEn: "AWS Migration",
+            url: "/servicios/cloud/migracion-aws",
+            urlEn: "/en/services/cloud/aws-migration",
+          },
+          {
+            name: "Infraestructura",
+            nameEn: "Infrastructure",
+            url: "/servicios/cloud/infraestructura",
+            urlEn: "/en/services/cloud/infrastructure",
+          },
+          {
+            name: "Seguridad Cloud",
+            nameEn: "Cloud Security",
+            url: "/servicios/cloud/seguridad",
+            urlEn: "/en/services/cloud/security",
+          },
+          {
+            name: "Serverless",
+            nameEn: "Serverless",
+            url: "/servicios/cloud/serverless",
+            urlEn: "/en/services/cloud/serverless",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}

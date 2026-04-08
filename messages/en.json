@@ -73,6 +73,8 @@
     "ecommerceDesc": "Own platforms with zero commissions",
     "webPlatforms": "Web Platforms",
     "webPlatformsDesc": "Scalable architecture from day 1",
+    "agenticWeb": "Agentic-First Websites",
+    "agenticWebDesc": "Websites crawlable by AI, agents and LLMs",
     "viewAll": "View all Digital Development →"
   },
   "navIndustries": {
@@ -159,6 +161,7 @@
     "mobileApps": "Mobile Apps",
     "ecommerce": "E-commerce",
     "webPlatforms": "Web Platforms",
+    "agenticWeb": "Agentic-First Websites",
     "about": "About",
     "history": "History",
     "team": "Team",

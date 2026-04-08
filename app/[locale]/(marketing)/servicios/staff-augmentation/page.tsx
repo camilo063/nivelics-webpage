@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Code2, Palette, Cloud, Brain, ShieldCheck, CheckCircle, ArrowRight } from "lucide-react";
+import { Code2, Palette, Cloud, Brain, ShieldCheck, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { MetricsBar } from "@/components/sections/metrics-bar";
+import { ClientLogosBar } from "@/components/sections/client-logos-bar";
+import { ProcessTimeline } from "@/components/sections/process-timeline";
+import { CaseStudyCard } from "@/components/sections/case-study-card";
+import { FAQAccordion } from "@/components/sections/faq-accordion";
+import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
@@ -74,7 +81,8 @@ export default function StaffAugmentationPage() {
   ]);
 
   return (
-    <PageWrapper>
+    <PageWrapper className="pt-16">
+      {/* JSON-LD Schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -108,24 +116,44 @@ export default function StaffAugmentationPage() {
         }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-staffing/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="staffing">Staff Augmentation</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Talento tech{" "}
-            <span className="bg-gradient-to-r from-staffing to-primary bg-clip-text text-transparent">
-              on-demand y verificado
-            </span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Escalá tu capacidad de engineering con profesionales senior que se integran a tu cultura
-            y procesos desde el día uno.
-          </p>
-        </div>
-      </section>
+      {/* 1. Hero — HeroSplit + HeroCalculator */}
+      <HeroSplit
+        badge="Staff Augmentation Premium"
+        h1="Talento tech colombiano"
+        h1Accent="en 5 días hábiles"
+        subtitle="Desarrolladores, data engineers y diseñadores validados e integrados en tu equipo. Sin riesgos laborales, sin costos ocultos."
+        bullets={[
+          "Candidatos presentados en máximo 5 días hábiles",
+          "40% de ahorro vs. contratar en USA o Europa",
+          "Garantía de reemplazo en menos de 10 días",
+        ]}
+        ctaPrimary={{ text: "Ver perfiles disponibles", url: "#perfiles" }}
+        ctaSecondary={{ text: "Hablar por WhatsApp", url: "https://wa.me/573103926621" }}
+        accentColor="#10B981"
+        rightPanel={<HeroCalculator type="staff" accentColor="#10B981" />}
+        dataSection="staff-augmentation-hero"
+        ariaLabel="Staff Augmentation Premium — talento tech colombiano bilingüe integrado en 5 días hábiles, ahorro del 40% vs USA o Europa"
+      />
 
-      {/* Sub-services */}
+      {/* 2. MetricsBar */}
+      <MetricsBar
+        metrics={[
+          { value: "5", label: "Días hábiles", sublabel: "para presentar el primer candidato" },
+          {
+            value: "40%",
+            label: "Ahorro promedio",
+            sublabel: "vs. contratar directo en USA o Europa",
+          },
+          { value: "10", label: "Días de garantía", sublabel: "reemplazo sin costo si no encaja" },
+          {
+            value: "100%",
+            label: "Propiedad intelectual",
+            sublabel: "siempre del cliente, sin excepción",
+          },
+        ]}
+      />
+
+      {/* 3. Sub-services */}
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Perfiles especializados</h2>
@@ -155,6 +183,19 @@ export default function StaffAugmentationPage() {
         </div>
       </section>
 
+      {/* 4. ClientLogosBar */}
+      <ClientLogosBar
+        title="Equipos que hemos ampliado"
+        logos={[
+          { name: "Two Maids", sector: "Servicios / USA" },
+          { name: "Televisa / N+", sector: "Medios" },
+          { name: "Grupo Bolívar", sector: "Fintech" },
+          { name: "Univision", sector: "Medios" },
+          { name: "AB InBev-Bavaria", sector: "CPG" },
+        ]}
+      />
+
+      {/* 5. ComparisonTable */}
       <ComparisonTable
         title="¿Por qué Nivelics vs. contratar directamente?"
         alternativeLabel="Contratar directo en USA/Europa"
@@ -203,10 +244,138 @@ export default function StaffAugmentationPage() {
         ]}
       />
 
-      <CTABanner
-        title="¿Necesitas ampliar tu equipo tech?"
-        description="Cuéntanos tu necesidad y en 48 horas te presentamos candidatos verificados."
-        buttonText="Solicitar talento"
+      {/* 6. Guarantees */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+          <h2 className="text-3xl font-bold text-text-100">Lo que garantizamos por escrito</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Candidatos en 5 días hábiles",
+                description:
+                  "Presentamos perfiles validados en máximo 5 días. Si no los tenemos, te lo decimos antes.",
+              },
+              {
+                title: "Reemplazo en 10 días sin costo",
+                description:
+                  "Si el perfil no funciona por cualquier razón, lo reemplazamos en menos de 10 días hábiles sin cargo adicional.",
+              },
+              {
+                title: "Propiedad intelectual 100% del cliente",
+                description:
+                  "Todo el código, diseños y entregables son exclusivamente tuyos. Sin letra pequeña.",
+              },
+              {
+                title: "Integración en 6 días hábiles",
+                description:
+                  "El perfil puede estar operativo en tu equipo en menos de una semana de aceptar la propuesta.",
+              },
+            ].map((g) => (
+              <div
+                key={g.title}
+                className="rounded-xl border border-[rgba(16,185,129,0.2)] bg-[rgba(16,185,129,0.04)] p-5"
+              >
+                <h3 className="text-sm font-semibold text-text-100">{g.title}</h3>
+                <p className="mt-1 text-[12px] leading-relaxed text-text-70">{g.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. ProcessTimeline */}
+      <ProcessTimeline
+        title="Cómo funciona el proceso"
+        accentColor="#10B981"
+        steps={[
+          {
+            number: "01",
+            title: "Brief de perfil",
+            description: "Nos cuentas qué necesitas: stack, nivel, dedicación, zona horaria.",
+            duration: "30 minutos",
+            deliverable: "Perfil de búsqueda definido",
+          },
+          {
+            number: "02",
+            title: "Selección y validación",
+            description: "Filtramos, entrevistamos técnicamente y validamos el match cultural.",
+            duration: "3-4 días",
+            deliverable: "Shortlist de 2-3 candidatos",
+          },
+          {
+            number: "03",
+            title: "Entrevista con el cliente",
+            description: "Presentamos los perfiles y coordinas tu propio proceso de entrevista.",
+            duration: "Día 5",
+            deliverable: "Candidato seleccionado",
+          },
+          {
+            number: "04",
+            title: "Onboarding e integración",
+            description: "Coordinamos el acceso, herramientas y primeros días con tu equipo.",
+            duration: "Día 6-10",
+            deliverable: "Perfil activo en tu equipo",
+          },
+          {
+            number: "05",
+            title: "Seguimiento continuo",
+            description: "Delivery Manager asignado para asegurar que todo funcione bien.",
+            duration: "Mensual",
+            deliverable: "Check-in y ajustes",
+          },
+        ]}
+      />
+
+      {/* 8. CaseStudyCard */}
+      <CaseStudyCard
+        client="Two Maids"
+        sector="Servicios / Tecnología"
+        country="USA"
+        countryFlag="🇺🇸"
+        result="Escalamiento del equipo técnico en menos de 10 días"
+        metric="40% de ahorro vs. contratar localmente en USA"
+        service="Staff Augmentation"
+        url="/casos-de-exito/two-maids"
+      />
+
+      {/* 9. FAQAccordion */}
+      <FAQAccordion
+        title="Preguntas frecuentes sobre Staff Augmentation"
+        schemaEnabled
+        faqs={[
+          {
+            question: "¿Cuál es el modelo de contratación?",
+            answer:
+              "Mensual por recurso asignado. El mínimo recomendado es 3 meses para que el perfil genere valor real, pero ofrecemos flexibilidad mensual con preaviso de 5 días hábiles. Sin costos ocultos, sin prestaciones, sin riesgos laborales.",
+          },
+          {
+            question: "¿Los perfiles trabajan en nuestra zona horaria?",
+            answer:
+              "Sí. Nuestros ingenieros en Colombia tienen overlap total con EST (New York) y PST (California), y trabajan en los horarios que tu equipo necesite. Para clientes en Europa coordinamos horarios adaptados.",
+          },
+          {
+            question: "¿Cómo garantizan la calidad técnica de los perfiles?",
+            answer:
+              "Todo candidato pasa por: prueba técnica en el stack específico, entrevista con nuestro CTO o lead técnico, validación de inglés (si aplica) y verificación de referencias. Solo presentamos perfiles que nosotros contrataríamos para nuestros propios proyectos.",
+          },
+          {
+            question: "¿Qué pasa si el perfil no funciona?",
+            answer:
+              "Lo reemplazamos en menos de 10 días hábiles sin costo adicional. Sin preguntas, sin burocracia. Esta garantía está en el contrato.",
+          },
+          {
+            question: "¿Pueden escalar varios perfiles a la vez?",
+            answer:
+              "Sí. Hemos escalado equipos de hasta 15 personas simultáneamente para clientes con necesidades urgentes. Contamos con bench activo y red de talentos validados para escalar rápido cuando se necesita.",
+          },
+        ]}
+      />
+
+      {/* 10. InlineContactForm */}
+      <InlineContactForm
+        title="¿Qué perfil necesitas?"
+        subtitle="Cuéntanos el stack y el nivel. En 5 días tienes candidatos."
+        serviceDefault="staffing"
       />
     </PageWrapper>
   );

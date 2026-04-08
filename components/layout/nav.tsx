@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Link, usePathname } from "@/lib/i18n/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -165,6 +166,13 @@ const SERVICES_COLUMNS = [
     metric: { value: "13", context: "años de proyectos en LATAM y USA" },
     items: [
       {
+        label: "Sitios Web Agentic-First",
+        desc: "Sitios navegables por IA, agentes y LLMs",
+        href: "/servicios/desarrollo-digital/sitios-web-agentic",
+        ariaLabel:
+          "Sitios Web Agentic-First — sitios optimizados para indexación por LLMs, agentes IA y Google SGE",
+      },
+      {
         label: "Apps Móviles",
         desc: "iOS, Android, Flutter, React Native",
         href: "/servicios/desarrollo-digital/apps-moviles",
@@ -180,7 +188,8 @@ const SERVICES_COLUMNS = [
         label: "Plataformas Web",
         desc: "Arquitectura escalable desde el día 1",
         href: "/servicios/desarrollo-digital/plataformas-web",
-        ariaLabel: "Plataformas Web — desarrollo full-stack con React, Next.js y Node.js",
+        ariaLabel:
+          "Sitios Web Agentic-First — sitios optimizados para indexación por LLMs, agentes IA y Google SGE",
       },
     ],
   },
@@ -382,6 +391,21 @@ export function Nav() {
   const industriasPanel = useHoverPanel();
   const nosotrosPanel = useHoverPanel();
 
+  // Close all panels (on link click)
+  const closeAll = () => {
+    serviciosPanel.setOpen(false);
+    industriasPanel.setOpen(false);
+    nosotrosPanel.setOpen(false);
+  };
+
+  // Event delegation: close panels when any link inside is clicked
+  const handlePanelClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a")) {
+      closeAll();
+    }
+  };
+
   // Mutual exclusion: close other panels when one opens
   const serviciosEnter = () => {
     industriasPanel.setOpen(false);
@@ -398,6 +422,13 @@ export function Nav() {
     industriasPanel.setOpen(false);
     nosotrosPanel.enter();
   };
+
+  // Close all panels on route change
+  useEffect(() => {
+    closeAll();
+    setMobileOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   function isActive(href: string) {
     return pathname === href || pathname.startsWith(href + "/");
@@ -555,6 +586,7 @@ export function Nav() {
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={serviciosEnter}
             onMouseLeave={serviciosPanel.leave}
+            onClick={handlePanelClick}
           >
             <div
               className="border-y border-white/[0.06]"
@@ -662,6 +694,7 @@ export function Nav() {
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={industriasEnter}
             onMouseLeave={industriasPanel.leave}
+            onClick={handlePanelClick}
           >
             <div
               className="border-y border-white/[0.06]"
@@ -749,6 +782,7 @@ export function Nav() {
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={nosotrosEnter}
             onMouseLeave={nosotrosPanel.leave}
+            onClick={handlePanelClick}
           >
             <div
               className="border-y border-white/[0.06]"

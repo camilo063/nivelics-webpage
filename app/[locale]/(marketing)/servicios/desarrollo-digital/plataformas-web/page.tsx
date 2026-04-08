@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { Globe, Network, CloudCog } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
+import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroSelector } from "@/components/sections/hero-selector";
+import { MetricsBar } from "@/components/sections/metrics-bar";
+import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 
 export const metadata: Metadata = {
   title: "Plataformas Web | Desarrollo Full-Stack Escalable",
@@ -25,19 +30,19 @@ const BENEFITS = [
     icon: Globe,
     title: "React y Next.js",
     description:
-      "Desarrollo frontend con React y Next.js para aplicaciones web rápidas, SEO-friendly y con excelente experiencia de usuario.",
+      "Desarrollo frontend con React y Next.js para aplicaciones web rapidas, SEO-friendly y con excelente experiencia de usuario.",
   },
   {
     icon: Network,
     title: "APIs RESTful y GraphQL",
     description:
-      "Backend robusto con APIs RESTful y GraphQL diseñadas para escalabilidad, seguridad y facilidad de integración.",
+      "Backend robusto con APIs RESTful y GraphQL disenadas para escalabilidad, seguridad y facilidad de integracion.",
   },
   {
     icon: CloudCog,
     title: "Arquitectura serverless",
     description:
-      "Despliegue en arquitecturas serverless que escalan automáticamente y eliminan la gestión de infraestructura.",
+      "Despliegue en arquitecturas serverless que escalan automaticamente y eliminan la gestion de infraestructura.",
   },
 ];
 
@@ -58,6 +63,39 @@ export default function PlataformasWebPage() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{
+          name: "Desarrollo Digital",
+          nameEn: "Digital Development",
+          accentColor: "#06B6D4",
+        }}
+        siblings={[
+          {
+            name: "Sitios Agentic-First",
+            nameEn: "Agentic-First Websites",
+            url: "/servicios/desarrollo-digital/sitios-web-agentic",
+            urlEn: "/en/services/digital-development/agentic-web",
+          },
+          {
+            name: "Apps Móviles",
+            nameEn: "Mobile Apps",
+            url: "/servicios/desarrollo-digital/apps-moviles",
+            urlEn: "/en/services/digital-development/mobile-apps",
+          },
+          {
+            name: "E-commerce",
+            nameEn: "E-commerce",
+            url: "/servicios/desarrollo-digital/ecommerce",
+            urlEn: "/en/services/digital-development/ecommerce",
+          },
+          {
+            name: "Plataformas Web",
+            nameEn: "Web Platforms",
+            url: "/servicios/desarrollo-digital/plataformas-web",
+            urlEn: "/en/services/digital-development/web-platforms",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -67,20 +105,71 @@ export default function PlataformasWebPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-dev/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="dev">Desarrollo Digital</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Plataformas Web
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna y
-            escalable.
-          </p>
-        </div>
-      </section>
+      {/* Hero */}
+      <HeroSplit
+        badge="Desarrollo Digital &middot; Plataformas Web"
+        h1="Plataforma web"
+        h1Accent="sin limites de escala"
+        subtitle="Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna, APIs robustas y despliegue serverless que escala con tu negocio sin limites tecnicos."
+        bullets={[
+          "SaaS, portales empresariales y dashboards a medida",
+          "Integracion real con tus sistemas core (ERP, CRM, APIs)",
+          "Codigo tuyo, stack estandar -- cero vendor lock-in",
+        ]}
+        ctaPrimary={{ text: "Cuentanos tu proyecto", url: "/contacto" }}
+        ctaSecondary={{ text: "Ver casos de exito", url: "/casos-de-exito" }}
+        accentColor="#06B6D4"
+        rightPanel={
+          <HeroSelector
+            title="Que tipo de plataforma necesitas?"
+            accentColor="#06B6D4"
+            options={[
+              {
+                icon: "\u2601\uFE0F",
+                label: "SaaS",
+                url: "/servicios/desarrollo-digital/plataformas-web",
+                description: "Software como servicio multi-tenant escalable",
+              },
+              {
+                icon: "\uD83C\uDFE2",
+                label: "Portal empresarial",
+                url: "/servicios/desarrollo-digital/plataformas-web",
+                description: "Intranet, extranet o portal de clientes",
+              },
+              {
+                icon: "\uD83D\uDCCA",
+                label: "Dashboard/Analytics",
+                url: "/servicios/desarrollo-digital/plataformas-web",
+                description: "Visualizacion de datos y reportes en tiempo real",
+              },
+              {
+                icon: "\uD83D\uDD17",
+                label: "Integracion de sistemas",
+                url: "/servicios/desarrollo-digital/plataformas-web",
+                description: "Middleware y APIs para conectar tus sistemas",
+              },
+            ]}
+          />
+        }
+        dataSection="plataformas-web-hero"
+        ariaLabel="Plataformas web empresariales -- sin limites de escala, SaaS, portales, dashboards e integraciones"
+      />
 
+      {/* Metrics */}
+      <MetricsBar
+        metrics={[
+          {
+            value: "50+",
+            label: "Plataformas entregadas",
+            sublabel: "SaaS, portales y dashboards",
+          },
+          { value: "<2s", label: "Tiempo de carga", sublabel: "Core Web Vitals optimizado" },
+          { value: "99.9%", label: "Uptime", sublabel: "arquitectura cloud-native" },
+          { value: "0", label: "Vendor lock-in", sublabel: "codigo tuyo, stack estandar" },
+        ]}
+      />
+
+      {/* Benefits */}
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
@@ -101,50 +190,53 @@ export default function PlataformasWebPage() {
         </div>
       </section>
 
+      {/* Comparison Table */}
       <ComparisonTable
-        title="¿Plataforma web a medida vs. WordPress o low-code?"
+        title="Plataforma web a medida vs. WordPress o low-code?"
         alternativeLabel="WordPress / Low-code"
-        nivelicsLabel="Plataforma a medida — Nivelics"
+        nivelicsLabel="Plataforma a medida -- Nivelics"
         rows={[
           {
-            criterion: "Escalabilidad técnica",
-            alternative: "Limitada — plugins y templates",
-            nivelics: "Arquitectura pensada para crecer desde el diseño",
+            criterion: "Escalabilidad tecnica",
+            alternative: "Limitada -- plugins y templates",
+            nivelics: "Arquitectura pensada para crecer desde el diseno",
           },
           {
             criterion: "Performance (Core Web Vitals)",
             alternative: "Mediocre por sobrecarga de plugins",
-            nivelics: "LCP < 2s, CLS = 0 — optimizado por diseño",
+            nivelics: "LCP < 2s, CLS = 0 -- optimizado por diseno",
           },
           {
             criterion: "Seguridad",
             alternative: "Dependiente de plugins de terceros",
-            nivelics: "Hardening desde el código base",
+            nivelics: "Hardening desde el codigo base",
           },
           {
-            criterion: "Customización real",
-            alternative: "Temas y plugins — siempre hay límites",
-            nivelics: "Sin límites — código propio",
+            criterion: "Customizacion real",
+            alternative: "Temas y plugins -- siempre hay limites",
+            nivelics: "Sin limites -- codigo propio",
           },
           {
-            criterion: "Integración con sistemas core (ERP, CRM)",
-            alternative: "Conectores genéricos de mercado",
+            criterion: "Integracion con sistemas core (ERP, CRM)",
+            alternative: "Conectores genericos de mercado",
             nivelics: "APIs a medida para tus sistemas reales",
           },
           {
-            criterion: "Costo de mantenimiento a 3 años",
-            alternative: "Creciente — licencias, plugins, parches",
+            criterion: "Costo de mantenimiento a 3 anos",
+            alternative: "Creciente -- licencias, plugins, parches",
             nivelics: "Estable y predecible",
           },
           {
             criterion: "Vendor lock-in",
-            alternative: "Alto — dependencia de la plataforma",
-            nivelics: "Cero — código tuyo, stack estándar",
+            alternative: "Alto -- dependencia de la plataforma",
+            nivelics: "Cero -- codigo tuyo, stack estandar",
           },
         ]}
       />
 
       <CTABanner />
+
+      <StickyMobileCta text="Cuentanos tu proyecto \u2192" url="/contacto" accentColor="#06B6D4" />
     </PageWrapper>
   );
 }

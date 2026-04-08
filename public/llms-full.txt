@@ -82,6 +82,7 @@ Subservicios:
 - Apps Móviles (/servicios/desarrollo-digital/apps-moviles): iOS, Android nativo, React Native y Flutter. QA integrado en cada sprint. Demo quincenal. Mantenimiento MRR disponible.
 - E-commerce (/servicios/desarrollo-digital/ecommerce): Plataformas B2B y B2C a medida. Cero comisiones por transacción. Checkout personalizado. Integración real ERP/WMS/CRM. Auto-scaling para picos.
 - Plataformas Web (/servicios/desarrollo-digital/plataformas-web): React, Next.js y Node.js. Arquitectura escalable. Performance Core Web Vitals optimizado. APIs a medida. Seguridad desde el código base.
+- Sitios Web Agentic-First (/servicios/desarrollo-digital/sitios-web-agentic): Sitios web diseñados para ser navegables por humanos, agentes IA y LLMs. Multi-idioma nativo (next-intl), Schema.org completo (JSON-LD server-side), llms.txt bilingüe, robots.txt agentic-aware, Core Web Vitals ≥95, breadcrumbs con BreadcrumbList, mega menú semántico con aria-labels y data-attributes. Indexados por Google SGE, ChatGPT, Claude y Perplexity.
 
 ---
 

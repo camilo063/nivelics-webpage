@@ -41,6 +41,7 @@
   - Mobile Apps: /servicios/desarrollo-digital/apps-moviles | /en/services/digital-development/mobile-apps
   - E-commerce: /servicios/desarrollo-digital/ecommerce | /en/services/digital-development/ecommerce
   - Web Platforms / Plataformas Web: /servicios/desarrollo-digital/plataformas-web | /en/services/digital-development/web-platforms
+  - Agentic-First Websites / Sitios Web Agentic-First: /servicios/desarrollo-digital/sitios-web-agentic | /en/services/digital-development/agentic-web
 
 ## Industries / Industrias
 

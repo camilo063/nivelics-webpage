@@ -92,6 +92,10 @@ export const routing = defineRouting({
       es: "/servicios/desarrollo-digital/plataformas-web",
       en: "/services/digital-development/web-platforms",
     },
+    "/servicios/desarrollo-digital/sitios-web-agentic": {
+      es: "/servicios/desarrollo-digital/sitios-web-agentic",
+      en: "/services/digital-development/agentic-web",
+    },
     "/industrias/fintech": { es: "/industrias/fintech", en: "/industries/fintech" },
     "/industrias/medios-entretenimiento": {
       es: "/industrias/medios-entretenimiento",

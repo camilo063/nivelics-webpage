@@ -44,6 +44,8 @@ const SLUG_TO_KEY: Record<string, string> = {
   ecommerce: "ecommerce",
   "plataformas-web": "webPlatforms",
   "web-platforms": "webPlatforms",
+  "sitios-web-agentic": "agenticWeb",
+  "agentic-web": "agenticWeb",
   nosotros: "about",
   about: "about",
   historia: "history",

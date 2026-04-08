@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Cog, Server, BarChart3 } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroSelector } from "@/components/sections/hero-selector";
+import { MetricsBar } from "@/components/sections/metrics-bar";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { FAQAccordion } from "@/components/sections/faq-accordion";
+import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
@@ -20,27 +25,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
-const BENEFITS = [
-  {
-    icon: Cog,
-    title: "RPA + IA para procesos complejos",
-    description:
-      "Combinamos robotic process automation con inteligencia artificial para automatizar flujos que requieren juicio y contexto.",
-  },
-  {
-    icon: Server,
-    title: "Integración con sistemas legacy",
-    description:
-      "Conectamos tus sistemas existentes sin necesidad de reemplazarlos, extrayendo el máximo valor de tu infraestructura actual.",
-  },
-  {
-    icon: BarChart3,
-    title: "Métricas de eficiencia en tiempo real",
-    description:
-      "Dashboards con KPIs de productividad, tiempos de proceso y tasas de error para medir el impacto real de la automatización.",
-  },
-];
 
 export default function AutomatizacionProcesosPage() {
   const serviceSchema = getServiceSchema({
@@ -62,6 +46,45 @@ export default function AutomatizacionProcesosPage() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{
+          name: "Inteligencia Artificial",
+          nameEn: "Artificial Intelligence",
+          accentColor: "#8B5CF6",
+        }}
+        siblings={[
+          {
+            name: "Agentes IA",
+            nameEn: "AI Agents",
+            url: "/servicios/inteligencia-artificial/agentes-ia",
+            urlEn: "/en/services/artificial-intelligence/ai-agents",
+          },
+          {
+            name: "Agentes Comerciales",
+            nameEn: "Sales Agents",
+            url: "/servicios/inteligencia-artificial/agentes-comerciales",
+            urlEn: "/en/services/artificial-intelligence/sales-agents",
+          },
+          {
+            name: "Automatización",
+            nameEn: "Automation",
+            url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+            urlEn: "/en/services/artificial-intelligence/process-automation",
+          },
+          {
+            name: "Gestión de Contenido",
+            nameEn: "Content Management",
+            url: "/servicios/inteligencia-artificial/gestion-contenido",
+            urlEn: "/en/services/artificial-intelligence/content-management",
+          },
+          {
+            name: "Marketing y CRM",
+            nameEn: "Marketing & CRM",
+            url: "/servicios/inteligencia-artificial/marketing-crm",
+            urlEn: "/en/services/artificial-intelligence/marketing-crm",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -71,40 +94,88 @@ export default function AutomatizacionProcesosPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-ia/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="ia">Inteligencia Artificial</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Automatización de Procesos con IA
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Automatizamos procesos en finanzas, RRHH y logística. Hasta 50% reducción de tiempo
-            operativo.
-          </p>
-        </div>
-      </section>
+      {/* Hero */}
+      <HeroSplit
+        badge="IA · Automatización"
+        h1="Procesos que tardaban horas,"
+        h1Accent="ahora en segundos"
+        subtitle="Combinamos RPA con IA generativa para automatizar flujos complejos que requieren juicio y contexto. Finanzas, RRHH, logística y operaciones — sin reemplazar tus sistemas actuales."
+        bullets={[
+          "Hasta 50% reducción de tiempo operativo documentado",
+          "Integración con sistemas legacy sin necesidad de reemplazarlos",
+          "Log completo de cada ejecución para auditoría y compliance",
+        ]}
+        ctaPrimary={{ text: "Agendar discovery", url: "/contacto" }}
+        ctaSecondary={{
+          text: "Ver todos los servicios IA",
+          url: "/servicios/inteligencia-artificial",
+        }}
+        accentColor="#8B5CF6"
+        rightPanel={
+          <HeroSelector
+            title="¿Qué proceso automatizas?"
+            accentColor="#8B5CF6"
+            options={[
+              {
+                icon: "📄",
+                label: "Procesamiento de documentos",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Extracción, clasificación y ruteo automático de documentos",
+              },
+              {
+                icon: "💰",
+                label: "Conciliaciones financieras",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Cruces automáticos entre sistemas contables y bancarios",
+              },
+              {
+                icon: "👥",
+                label: "Flujos de RRHH",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Onboarding, nómina y gestión documental automatizada",
+              },
+              {
+                icon: "📦",
+                label: "Logística y supply chain",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Seguimiento, alertas y optimización de inventario",
+              },
+              {
+                icon: "📊",
+                label: "Reportes ejecutivos",
+                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+                description: "Generación automática desde múltiples fuentes de datos",
+              },
+            ]}
+          />
+        }
+        dataSection="automatizacion-hero"
+        ariaLabel="Automatización de Procesos con IA — eficiencia operacional para finanzas, RRHH y logística"
+      />
 
-      <section className="bg-bg-surface py-16 md:py-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-ia/10">
-                    <Icon size={24} className="text-ia" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Metrics */}
+      <MetricsBar
+        metrics={[
+          {
+            value: "50%",
+            label: "Reducción de tiempo operativo",
+            sublabel: "promedio documentado en proyectos",
+          },
+          { value: "0", label: "Errores humanos", sublabel: "en procesos automatizados" },
+          {
+            value: "24/7",
+            label: "Disponibilidad",
+            sublabel: "sin costo adicional por hora extra",
+          },
+          {
+            value: "30-50%",
+            label: "Ahorro en costos",
+            sublabel: "reducción de costos operativos promedio",
+          },
+        ]}
+      />
 
+      {/* Comparison */}
       <ComparisonTable
         title="¿Automatizar con IA vs. seguir con procesos manuales?"
         alternativeLabel="Proceso manual actual"
@@ -143,12 +214,53 @@ export default function AutomatizacionProcesosPage() {
           {
             criterion: "ROI documentado",
             alternative: "N/A",
-            nivelics: "30–50% reducción de costos operativos promedio",
+            nivelics: "30-50% reducción de costos operativos promedio",
           },
         ]}
       />
 
-      <CTABanner />
+      {/* FAQ */}
+      <FAQAccordion
+        title="Preguntas frecuentes sobre Automatización de Procesos"
+        schemaEnabled
+        faqs={[
+          {
+            question: "¿Qué procesos se pueden automatizar con IA?",
+            answer:
+              "Cualquier proceso repetitivo que involucre documentos, datos o decisiones basadas en reglas: conciliaciones financieras, procesamiento de facturas, onboarding de empleados, generación de reportes, gestión de inventario, aprobaciones y flujos de trabajo multi-paso.",
+          },
+          {
+            question: "¿Necesito reemplazar mis sistemas actuales?",
+            answer:
+              "No. Nos integramos con tus sistemas existentes (ERP, CRM, bases de datos, herramientas legacy) sin necesidad de migración. Construimos conectores que extraen el máximo valor de tu infraestructura actual.",
+          },
+          {
+            question: "¿Cuánto tiempo toma implementar la automatización?",
+            answer:
+              "Un proceso típico se automatiza en 4-8 semanas. En la primera semana hacemos un discovery para mapear el proceso actual, identificar cuellos de botella y definir el alcance del MVP.",
+          },
+          {
+            question: "¿Cómo se mide el ROI de la automatización?",
+            answer:
+              "Medimos tiempo ahorrado, errores eliminados, volumen procesado y costo por transacción antes y después. Nuestros clientes ven entre 30-50% de reducción en costos operativos promedio.",
+          },
+          {
+            question: "¿Qué pasa con los empleados que hacían esas tareas?",
+            answer:
+              "La automatización libera a tu equipo de tareas repetitivas para que se enfoquen en trabajo de mayor valor: análisis, estrategia, relaciones con clientes. En nuestra experiencia, los equipos terminan más productivos y satisfechos.",
+          },
+        ]}
+      />
+
+      {/* Contact */}
+      <InlineContactForm
+        title="¿Qué proceso quieres automatizar?"
+        subtitle="Cuéntanos el caso y calculamos el ROI potencial de la automatización."
+        serviceDefault="ia"
+        accentColor="#8B5CF6"
+      />
+
+      <StickyMobileCta text="Hablar con un experto →" url="/contacto" accentColor="#8B5CF6" />
     </PageWrapper>
   );
 }

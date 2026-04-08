@@ -49,6 +49,7 @@ const EN_TRANSLATION_STATUS: Record<string, TranslationStatus> = {
   "/servicios/desarrollo-digital/apps-moviles": "pending",
   "/servicios/desarrollo-digital/ecommerce": "pending",
   "/servicios/desarrollo-digital/plataformas-web": "pending",
+  "/servicios/desarrollo-digital/sitios-web-agentic": "complete",
 
   // ── Industrias ──
   "/industrias/fintech": "pending",

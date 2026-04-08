@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Target, Clock, TrendingUp } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
+import { HeroSplit } from "@/components/sections/hero-split";
+import { HeroSelector } from "@/components/sections/hero-selector";
+import { MetricsBar } from "@/components/sections/metrics-bar";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { FAQAccordion } from "@/components/sections/faq-accordion";
+import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
@@ -19,27 +24,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
-const BENEFITS = [
-  {
-    icon: Target,
-    title: "Calificación automática de leads",
-    description:
-      "El agente evalúa y puntúa cada lead según criterios personalizados, priorizando las oportunidades con mayor potencial de cierre.",
-  },
-  {
-    icon: Clock,
-    title: "Seguimiento personalizado 24/7",
-    description:
-      "Seguimiento automático con mensajes contextuales por email, WhatsApp y chat, sin dejar ningún lead sin atender.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Analytics de pipeline en tiempo real",
-    description:
-      "Visibilidad completa del embudo de ventas con métricas de conversión, velocidad de cierre y forecast predictivo.",
-  },
-];
 
 export default function AgentesComerciales() {
   const serviceSchema = getServiceSchema({
@@ -61,6 +45,45 @@ export default function AgentesComerciales() {
 
   return (
     <PageWrapper>
+      <SiblingServicesNav
+        parentService={{
+          name: "Inteligencia Artificial",
+          nameEn: "Artificial Intelligence",
+          accentColor: "#8B5CF6",
+        }}
+        siblings={[
+          {
+            name: "Agentes IA",
+            nameEn: "AI Agents",
+            url: "/servicios/inteligencia-artificial/agentes-ia",
+            urlEn: "/en/services/artificial-intelligence/ai-agents",
+          },
+          {
+            name: "Agentes Comerciales",
+            nameEn: "Sales Agents",
+            url: "/servicios/inteligencia-artificial/agentes-comerciales",
+            urlEn: "/en/services/artificial-intelligence/sales-agents",
+          },
+          {
+            name: "Automatización",
+            nameEn: "Automation",
+            url: "/servicios/inteligencia-artificial/automatizacion-procesos",
+            urlEn: "/en/services/artificial-intelligence/process-automation",
+          },
+          {
+            name: "Gestión de Contenido",
+            nameEn: "Content Management",
+            url: "/servicios/inteligencia-artificial/gestion-contenido",
+            urlEn: "/en/services/artificial-intelligence/content-management",
+          },
+          {
+            name: "Marketing y CRM",
+            nameEn: "Marketing & CRM",
+            url: "/servicios/inteligencia-artificial/marketing-crm",
+            urlEn: "/en/services/artificial-intelligence/marketing-crm",
+          },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -70,40 +93,92 @@ export default function AgentesComerciales() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-ia/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
-          <ServiceBadge variant="ia">Inteligencia Artificial</ServiceBadge>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Agentes Comerciales Inteligentes
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Agentes de IA que califican leads, hacen seguimiento y escalan oportunidades a tu equipo
-            de ventas.
-          </p>
-        </div>
-      </section>
+      {/* Hero */}
+      <HeroSplit
+        badge="IA · Ventas"
+        h1="Tu equipo comercial"
+        h1Accent="que nunca descansa"
+        subtitle="Agentes de IA que califican leads, hacen seguimiento personalizado y escalan oportunidades reales a tu equipo de ventas. Respuesta inmediata, 24/7, en cualquier canal."
+        bullets={[
+          "Calificación automática con criterios MEDDPICC personalizados",
+          "Seguimiento multicanal: email, WhatsApp, chat en vivo",
+          "Sync en tiempo real con Odoo, HubSpot y Salesforce",
+        ]}
+        ctaPrimary={{ text: "Agendar demo", url: "/contacto" }}
+        ctaSecondary={{
+          text: "Ver todos los servicios IA",
+          url: "/servicios/inteligencia-artificial",
+        }}
+        accentColor="#8B5CF6"
+        rightPanel={
+          <HeroSelector
+            title="¿Qué automatizas en ventas?"
+            accentColor="#8B5CF6"
+            options={[
+              {
+                icon: "🎯",
+                label: "Calificación de leads",
+                url: "/servicios/inteligencia-artificial/agentes-comerciales",
+                description: "Scoring automático basado en comportamiento e intención",
+              },
+              {
+                icon: "📩",
+                label: "Seguimiento automático",
+                url: "/servicios/inteligencia-artificial/agentes-comerciales",
+                description: "Cadencias personalizadas por email y WhatsApp",
+              },
+              {
+                icon: "📊",
+                label: "Pipeline analytics",
+                url: "/servicios/inteligencia-artificial/agentes-comerciales",
+                description: "Dashboard en tiempo real con forecast predictivo",
+              },
+              {
+                icon: "🤝",
+                label: "Escalamiento inteligente",
+                url: "/servicios/inteligencia-artificial/agentes-comerciales",
+                description: "Transfiere al vendedor con contexto completo",
+              },
+              {
+                icon: "🔗",
+                label: "Integración CRM",
+                url: "/servicios/inteligencia-artificial/agentes-comerciales",
+                description: "Sync automático con tu CRM sin entrada manual",
+              },
+            ]}
+          />
+        }
+        dataSection="agentes-comerciales-hero"
+        ariaLabel="Agentes Comerciales Inteligentes — IA que califica leads y automatiza seguimiento de ventas"
+      />
 
-      <section className="bg-bg-surface py-16 md:py-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-ia/10">
-                    <Icon size={24} className="text-ia" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Metrics */}
+      <MetricsBar
+        metrics={[
+          {
+            value: "10x",
+            label: "Más leads procesados",
+            sublabel: "mismo equipo, sin SDRs adicionales",
+          },
+          {
+            value: "<5s",
+            label: "Tiempo de respuesta",
+            sublabel: "vs. horas o días del proceso manual",
+          },
+          {
+            value: "24/7",
+            label: "Seguimiento activo",
+            sublabel: "cadencias que nunca se detienen",
+          },
+          {
+            value: "40%",
+            label: "Más conversiones",
+            sublabel: "promedio por mejor calificación y timing",
+          },
+        ]}
+      />
 
+      {/* Comparison */}
       <ComparisonTable
         title="¿Agentes comerciales con IA vs. proceso de ventas manual?"
         alternativeLabel="Proceso manual actual"
@@ -147,7 +222,48 @@ export default function AgentesComerciales() {
         ]}
       />
 
-      <CTABanner />
+      {/* FAQ */}
+      <FAQAccordion
+        title="Preguntas frecuentes sobre Agentes Comerciales IA"
+        schemaEnabled
+        faqs={[
+          {
+            question: "¿El agente comercial reemplaza a mis vendedores?",
+            answer:
+              "No. El agente maneja la calificación inicial, el seguimiento automatizado y la recopilación de contexto. Cuando detecta una oportunidad real, escala al vendedor con toda la información necesaria para cerrar. Tu equipo se enfoca en vender, no en perseguir leads fríos.",
+          },
+          {
+            question: "¿Cómo se personaliza el scoring de leads?",
+            answer:
+              "Definimos los criterios de calificación junto a tu equipo comercial (industria, cargo, tamaño de empresa, señales de intención, presupuesto). El agente aprende de los cierres exitosos y ajusta el scoring continuamente.",
+          },
+          {
+            question: "¿Se integra con mi CRM actual?",
+            answer:
+              "Sí. Tenemos conectores pre-construidos para Odoo, HubSpot, Salesforce y Pipedrive. Para otros CRMs, construimos la integración en las primeras semanas del proyecto.",
+          },
+          {
+            question: "¿Puedo ver qué hace el agente en tiempo real?",
+            answer:
+              "Sí. Tienes un dashboard con cada interacción, scoring aplicado, mensajes enviados y resultados. También configuramos alertas para eventos críticos como leads de alto valor o anomalías.",
+          },
+          {
+            question: "¿En cuánto tiempo veo resultados?",
+            answer:
+              "El agente está en producción en 6-8 semanas. El impacto en pipeline suele ser visible desde el primer mes, con mejoras incrementales a medida que el modelo de scoring se ajusta con datos reales.",
+          },
+        ]}
+      />
+
+      {/* Contact */}
+      <InlineContactForm
+        title="¿Listo para escalar tu pipeline de ventas?"
+        subtitle="Cuéntanos sobre tu proceso comercial y diseñamos el agente ideal."
+        serviceDefault="ia"
+        accentColor="#8B5CF6"
+      />
+
+      <StickyMobileCta text="Hablar con un experto →" url="/contacto" accentColor="#8B5CF6" />
     </PageWrapper>
   );
 }

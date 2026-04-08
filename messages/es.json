@@ -73,6 +73,8 @@
     "ecommerceDesc": "Plataformas propias sin comisiones",
     "webPlatforms": "Plataformas Web",
     "webPlatformsDesc": "Arquitectura escalable desde el día 1",
+    "agenticWeb": "Sitios Web Agentic-First",
+    "agenticWebDesc": "Sitios navegables por IA, agentes y LLMs",
     "viewAll": "Ver todo Desarrollo Digital →"
   },
   "navIndustries": {
@@ -159,6 +161,7 @@
     "mobileApps": "Apps Móviles",
     "ecommerce": "E-commerce",
     "webPlatforms": "Plataformas Web",
+    "agenticWeb": "Sitios Web Agentic-First",
     "about": "Nosotros",
     "history": "Historia",
     "team": "Equipo",

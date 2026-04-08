@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -6,6 +7,21 @@ import { routing } from "@/lib/i18n/routing";
 import { Nav, Footer } from "@/components/layout";
 import { WhatsAppFAB } from "@/components/shared";
 import { TranslationBanner } from "@/components/shared/translation-banner";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
+  weight: ["400", "500", "700"],
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -66,12 +82,19 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <Nav />
-      <TranslationBanner />
-      {children}
-      <Footer />
-      <WhatsAppFAB />
-    </NextIntlClientProvider>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <NextIntlClientProvider messages={messages}>
+          <Nav />
+          <TranslationBanner />
+          {children}
+          <Footer />
+          <WhatsAppFAB />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
