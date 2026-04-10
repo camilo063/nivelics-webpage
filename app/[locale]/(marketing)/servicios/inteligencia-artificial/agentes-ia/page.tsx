@@ -10,22 +10,34 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Agentes de IA para Empresas | Automatización Inteligente",
-  description:
-    "Diseñamos agentes de IA para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
-    languages: {
-      es: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
-      en: "https://www.nivelics.com/en/services/artificial-intelligence/ai-agents",
-      "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("agentes-ia", locale);
+  return {
+    title: cms?.seoTitle || "Agentes de IA para Empresas | Automatización Inteligente",
+    description:
+      cms?.seoDescription ||
+      "Diseñamos agentes de IA para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
+      languages: {
+        es: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
+        en: "https://www.nivelics.com/en/services/artificial-intelligence/ai-agents",
+        "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
+      },
     },
-  },
-};
+  };
+}
 
-export default function AgentesIAPage() {
+export default async function AgentesIAPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("agentes-ia", locale);
   const serviceSchema = getServiceSchema({
     name: "Agentes de IA para Empresas",
     description:
@@ -93,9 +105,12 @@ export default function AgentesIAPage() {
       {/* Hero */}
       <HeroSplit
         badge="Inteligencia Artificial · Agentes"
-        h1="Agentes IA que trabajan"
+        h1={cms?.title || "Agentes IA que trabajan"}
         h1Accent="mientras tu duermes"
-        subtitle="Agentes autónomos que ejecutan tareas complejas de negocio sin intervención humana. Conectados a tus sistemas, con trazabilidad completa y escalamiento inteligente."
+        subtitle={
+          cms?.subtitle ||
+          "Agentes autónomos que ejecutan tareas complejas de negocio sin intervención humana. Conectados a tus sistemas, con trazabilidad completa y escalamiento inteligente."
+        }
         bullets={[
           "Primer agente en producción en 6-8 semanas",
           "Integrado con tu CRM, ERP y canales de comunicación",
@@ -151,20 +166,32 @@ export default function AgentesIAPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          {
-            value: "6-8",
-            label: "Semanas al primer agente",
-            sublabel: "desde discovery hasta producción",
-          },
-          { value: "24/7", label: "Disponibilidad", sublabel: "los agentes no tienen horario" },
-          {
-            value: "50%",
-            label: "Reducción de costos",
-            sublabel: "promedio en tareas automatizadas",
-          },
-          { value: "100%", label: "Trazabilidad", sublabel: "logging y evals en cada ejecución" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "6-8",
+                  label: "Semanas al primer agente",
+                  sublabel: "desde discovery hasta producción",
+                },
+                {
+                  value: "24/7",
+                  label: "Disponibilidad",
+                  sublabel: "los agentes no tienen horario",
+                },
+                {
+                  value: "50%",
+                  label: "Reducción de costos",
+                  sublabel: "promedio en tareas automatizadas",
+                },
+                {
+                  value: "100%",
+                  label: "Trazabilidad",
+                  sublabel: "logging y evals en cada ejecución",
+                },
+              ]
+        }
       />
 
       {/* Comparison */}
@@ -215,33 +242,37 @@ export default function AgentesIAPage() {
       <FAQAccordion
         title="Preguntas frecuentes sobre Agentes de IA"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿Qué es un agente de IA y en qué se diferencia de un chatbot?",
-            answer:
-              "Un chatbot responde preguntas siguiendo scripts predefinidos. Un agente de IA toma decisiones, ejecuta acciones en tus sistemas (CRM, ERP, bases de datos) y puede orquestar flujos multi-paso de forma autónoma, con escalamiento inteligente a humanos cuando es necesario.",
-          },
-          {
-            question: "¿Con qué sistemas se integran los agentes?",
-            answer:
-              "Integramos con WhatsApp Business, Slack, HubSpot, Salesforce, Odoo, sistemas ERP, bases de datos SQL/NoSQL, APIs REST y servicios cloud (AWS, GCP, Azure). Si tienes un sistema legacy, construimos conectores personalizados.",
-          },
-          {
-            question: "¿Cuánto cuesta implementar un agente de IA?",
-            answer:
-              "Un agente simple parte de $8,000 USD en implementación + MRR de operación mensual. En el discovery de la primera semana definimos el costo exacto con ROI proyectado para tu caso específico.",
-          },
-          {
-            question: "¿Qué pasa si el agente comete errores?",
-            answer:
-              "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente con contexto completo. El monitoreo es continuo y recibes alertas en tiempo real.",
-          },
-          {
-            question: "¿Mis datos están seguros?",
-            answer:
-              "Sí. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿Qué es un agente de IA y en qué se diferencia de un chatbot?",
+                  answer:
+                    "Un chatbot responde preguntas siguiendo scripts predefinidos. Un agente de IA toma decisiones, ejecuta acciones en tus sistemas (CRM, ERP, bases de datos) y puede orquestar flujos multi-paso de forma autónoma, con escalamiento inteligente a humanos cuando es necesario.",
+                },
+                {
+                  question: "¿Con qué sistemas se integran los agentes?",
+                  answer:
+                    "Integramos con WhatsApp Business, Slack, HubSpot, Salesforce, Odoo, sistemas ERP, bases de datos SQL/NoSQL, APIs REST y servicios cloud (AWS, GCP, Azure). Si tienes un sistema legacy, construimos conectores personalizados.",
+                },
+                {
+                  question: "¿Cuánto cuesta implementar un agente de IA?",
+                  answer:
+                    "Un agente simple parte de $8,000 USD en implementación + MRR de operación mensual. En el discovery de la primera semana definimos el costo exacto con ROI proyectado para tu caso específico.",
+                },
+                {
+                  question: "¿Qué pasa si el agente comete errores?",
+                  answer:
+                    "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente con contexto completo. El monitoreo es continuo y recibes alertas en tiempo real.",
+                },
+                {
+                  question: "¿Mis datos están seguros?",
+                  answer:
+                    "Sí. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
+                },
+              ]
+        }
       />
 
       {/* Contact */}

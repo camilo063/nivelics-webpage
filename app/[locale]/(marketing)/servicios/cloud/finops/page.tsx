@@ -12,6 +12,10 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { FinOpsContentEn } from "./content.en";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
+
+export const revalidate = 86400;
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -20,14 +24,19 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
+  const cms = await getServicioData("finops", locale as Locale);
 
   return {
-    title: isEn
-      ? "FinOps | Cloud Cost Optimization up to 40%"
-      : "FinOps Cloud Colombia | Reduce costos AWS y GCP",
-    description: isEn
-      ? "Real-time cloud financial governance. Automated anomaly alerts and up to 40% savings in 90 days. AWS, GCP and Azure."
-      : "Optimizaci\u00f3n y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento.",
+    title:
+      cms?.seoTitle ||
+      (isEn
+        ? "FinOps | Cloud Cost Optimization up to 40%"
+        : "FinOps Cloud Colombia | Reduce costos AWS y GCP"),
+    description:
+      cms?.seoDescription ||
+      (isEn
+        ? "Real-time cloud financial governance. Automated anomaly alerts and up to 40% savings in 90 days. AWS, GCP and Azure."
+        : "Optimizaci\u00f3n y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento."),
     alternates: {
       canonical: "https://www.nivelics.com/servicios/cloud/finops",
       languages: {
@@ -76,6 +85,7 @@ const PILLARS = [
 export default async function FinOpsPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const cms = await getServicioData("finops", locale as Locale);
 
   if (locale === "en") {
     return <FinOpsContentEn />;
@@ -143,9 +153,12 @@ export default async function FinOpsPage({ params }: PageProps) {
 
       <HeroSplit
         badge="Cloud \u00b7 FinOps"
-        h1="Optimiza tu inversi\u00f3n en cloud"
+        h1={cms?.title || "Optimiza tu inversi\u00f3n en cloud"}
         h1Accent="hasta un 40%"
-        subtitle="Implementamos pr\u00e1cticas FinOps para que cada d\u00f3lar en la nube genere valor medible para tu negocio."
+        subtitle={
+          cms?.subtitle ||
+          "Implementamos pr\u00e1cticas FinOps para que cada d\u00f3lar en la nube genere valor medible para tu negocio."
+        }
         bullets={[
           "Dashboards de gasto en tiempo real",
           "Alertas autom\u00e1ticas de anomal\u00edas",
@@ -158,20 +171,28 @@ export default async function FinOpsPage({ params }: PageProps) {
       />
 
       <MetricsBar
-        metrics={[
-          {
-            value: "40%",
-            label: "Reducci\u00f3n de factura",
-            sublabel: "Promedio en 90 d\u00edas",
-          },
-          { value: "5x", label: "ROI del proyecto", sublabel: "Retorno sobre inversi\u00f3n" },
-          { value: "2", label: "Semanas a primer ahorro", sublabel: "Quick wins inmediatos" },
-          {
-            value: "30%",
-            label: "Recursos hu\u00e9rfanos",
-            sublabel: "Eliminados en auditor\u00eda",
-          },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "40%",
+                  label: "Reducci\u00f3n de factura",
+                  sublabel: "Promedio en 90 d\u00edas",
+                },
+                {
+                  value: "5x",
+                  label: "ROI del proyecto",
+                  sublabel: "Retorno sobre inversi\u00f3n",
+                },
+                { value: "2", label: "Semanas a primer ahorro", sublabel: "Quick wins inmediatos" },
+                {
+                  value: "30%",
+                  label: "Recursos hu\u00e9rfanos",
+                  sublabel: "Eliminados en auditor\u00eda",
+                },
+              ]
+        }
       />
 
       <section id="pilares" className="bg-bg-surface py-16 md:py-24">

@@ -5,9 +5,13 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getBlogPost, getAllBlogPosts, mapBlogPost } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
 
 export const revalidate = 3600;
 
+// LEGACY FALLBACK
 const POSTS: Record<string, { title: string; content: string; date: string; readTime: string }> = {
   "como-implementar-ia-generativa-en-tu-empresa": {
     title: "Cómo implementar IA generativa en tu empresa: guía práctica 2026",
@@ -106,11 +110,30 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
+  const dbPosts = await getAllBlogPosts();
+  if (dbPosts.length > 0) {
+    return dbPosts.map((p) => ({ slug: (p as Record<string, unknown>).slug as string }));
+  }
+  // LEGACY FALLBACK
   return Object.keys(POSTS).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata(props: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await props.params;
+  const locale = (await getLocale()) as Locale;
+
+  // Try DB first
+  const dbPost = await getBlogPost(slug);
+  if (dbPost) {
+    const mapped = mapBlogPost(dbPost as Record<string, unknown>, locale);
+    return {
+      title: mapped.seoTitle || mapped.title,
+      description: mapped.seoDescription || mapped.excerpt.slice(0, 160),
+      alternates: { canonical: `https://www.nivelics.com/blog/${slug}` },
+    };
+  }
+
+  // LEGACY FALLBACK
   const post = POSTS[slug];
   if (!post) return { title: "Post no encontrado" };
   return {
@@ -122,6 +145,88 @@ export async function generateMetadata(props: BlogPostPageProps): Promise<Metada
 
 export default async function BlogPostPage(props: BlogPostPageProps) {
   const { slug } = await props.params;
+  const locale = (await getLocale()) as Locale;
+
+  // Try DB first
+  const dbPost = await getBlogPost(slug);
+  if (dbPost) {
+    const mapped = mapBlogPost(dbPost as Record<string, unknown>, locale);
+    const breadcrumb = getBreadcrumbSchema([
+      { name: "Inicio", url: "/" },
+      { name: "Blog", url: "/blog" },
+      { name: mapped.title, url: `/blog/${slug}` },
+    ]);
+
+    return (
+      <PageWrapper>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        />
+        <article className="py-16 md:py-24">
+          <div className="mx-auto max-w-3xl px-6 md:px-20">
+            <Button asChild variant="ghost" size="sm" className="mb-8">
+              <Link href="/blog">
+                <ArrowLeft size={14} />
+                Volver al blog
+              </Link>
+            </Button>
+
+            <div className="flex items-center gap-3 text-sm text-text-40">
+              {mapped.publishedAt && (
+                <time>
+                  {new Date(mapped.publishedAt).toLocaleDateString("es-CO", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              )}
+              {mapped.readingTimeMinutes && (
+                <>
+                  <span>·</span>
+                  <span>{mapped.readingTimeMinutes} min de lectura</span>
+                </>
+              )}
+            </div>
+
+            <h1 className="mt-4 text-3xl font-bold text-text-100 md:text-4xl">{mapped.title}</h1>
+
+            <div className="prose-invert mt-12 max-w-none">
+              {mapped.content.split("\n\n").map((paragraph, i) => {
+                if (paragraph.startsWith("## ")) {
+                  return (
+                    <h2 key={i} className="mt-8 mb-4 text-xl font-bold text-text-100">
+                      {paragraph.replace("## ", "")}
+                    </h2>
+                  );
+                }
+                if (paragraph.startsWith("**") && paragraph.includes("**:")) {
+                  return (
+                    <p key={i} className="mb-4 text-text-70 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  );
+                }
+                return (
+                  <p key={i} className="mb-4 text-text-70 leading-relaxed">
+                    {paragraph}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+        </article>
+
+        <CTABanner
+          title="¿Te interesa este tema?"
+          description="Conversemos sobre cómo aplicar estas ideas en tu empresa."
+        />
+      </PageWrapper>
+    );
+  }
+
+  // LEGACY FALLBACK
   const post = POSTS[slug];
 
   if (!post) {

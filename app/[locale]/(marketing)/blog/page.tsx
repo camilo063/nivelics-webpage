@@ -3,6 +3,11 @@ import Link from "next/link";
 import { PageWrapper } from "@/components/layout";
 import { ServiceBadge } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getAllBlogPosts, getBlogCategoriesPublic, mapBlogPost } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Blog de Transformación Digital | IA, Cloud y Nearshoring",
@@ -17,6 +22,7 @@ export const metadata: Metadata = {
   },
 };
 
+// LEGACY FALLBACK
 const POSTS = [
   {
     slug: "como-implementar-ia-generativa-en-tu-empresa",
@@ -54,12 +60,82 @@ const POSTS = [
   },
 ];
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const locale = (await getLocale()) as Locale;
+  const dbPosts = await getAllBlogPosts();
+  const mappedPosts = dbPosts.length
+    ? dbPosts.map((p) => mapBlogPost(p as Record<string, unknown>, locale))
+    : null;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Blog", url: "/blog" },
   ]);
 
+  // If DB posts exist, use them; otherwise fall back to hardcoded POSTS
+  if (mappedPosts && mappedPosts.length > 0) {
+    return (
+      <PageWrapper>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        />
+
+        <section className="py-16 md:py-24">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+            <h1 className="text-4xl font-bold text-text-100 md:text-5xl">Blog</h1>
+            <p className="mt-4 max-w-2xl text-lg text-text-70">
+              Insights, guías y tendencias sobre transformación digital, IA, cloud y talento tech.
+            </p>
+          </div>
+        </section>
+
+        <section className="bg-bg-surface py-16 md:py-24">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+            <div className="grid gap-6 md:grid-cols-2">
+              {mappedPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group glass glow-hover rounded-xl p-6 block"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    {post.tags[0] && (
+                      <ServiceBadge
+                        variant={post.tags[0] as "ia" | "cloud" | "staffing" | "finops" | "dev"}
+                      >
+                        {post.tags[0] === "ia"
+                          ? "IA"
+                          : post.tags[0].charAt(0).toUpperCase() + post.tags[0].slice(1)}
+                      </ServiceBadge>
+                    )}
+                    {post.readingTimeMinutes && (
+                      <span className="text-xs text-text-40">{post.readingTimeMinutes} min</span>
+                    )}
+                  </div>
+                  <h2 className="text-xl font-semibold text-text-100 group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="mt-2 text-sm text-text-70">{post.excerpt}</p>
+                  {post.publishedAt && (
+                    <time className="mt-4 block text-xs text-text-40">
+                      {new Date(post.publishedAt).toLocaleDateString("es-CO", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      </PageWrapper>
+    );
+  }
+
+  // LEGACY FALLBACK — hardcoded posts
   return (
     <PageWrapper>
       <script

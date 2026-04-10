@@ -10,20 +10,30 @@ import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Soluciones Serverless | Escala sin Administrar Servidores",
-  description:
-    "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por lo que usas.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/cloud/serverless",
-    languages: {
-      es: "https://www.nivelics.com/servicios/cloud/serverless",
-      en: "https://www.nivelics.com/en/services/cloud/serverless",
-      "x-default": "https://www.nivelics.com/servicios/cloud/serverless",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("serverless", locale);
+  return {
+    title: cms?.seoTitle || "Soluciones Serverless | Escala sin Administrar Servidores",
+    description:
+      cms?.seoDescription ||
+      "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por lo que usas.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/cloud/serverless",
+      languages: {
+        es: "https://www.nivelics.com/servicios/cloud/serverless",
+        en: "https://www.nivelics.com/en/services/cloud/serverless",
+        "x-default": "https://www.nivelics.com/servicios/cloud/serverless",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function ServerlessPage() {
+export default async function ServerlessPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("serverless", locale);
   const serviceSchema = getServiceSchema({
     name: "Soluciones Serverless",
     description:
@@ -109,9 +121,12 @@ export default function ServerlessPage() {
 
       <HeroSplit
         badge="Cloud \u00b7 Serverless"
-        h1="Paga solo lo que usas,"
+        h1={cms?.title || "Paga solo lo que usas,"}
         h1Accent="escala sin l\u00edmites"
-        subtitle="Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Escala de cero a millones sin gestionar servidores."
+        subtitle={
+          cms?.subtitle ||
+          "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Escala de cero a millones sin gestionar servidores."
+        }
         bullets={[
           "Auto-scaling de 0 a millones de requests",
           "Pay-per-use real \u2014 sin servidores idle",
@@ -124,12 +139,20 @@ export default function ServerlessPage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "0", label: "Servidores que gestionar", sublabel: "Infraestructura invisible" },
-          { value: "70%", label: "Menos costo", sublabel: "vs. servidores dedicados" },
-          { value: "100ms", label: "Cold start", sublabel: "Con warm-up strategies" },
-          { value: "10x", label: "M\u00e1s r\u00e1pido", sublabel: "Time-to-market" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "0",
+                  label: "Servidores que gestionar",
+                  sublabel: "Infraestructura invisible",
+                },
+                { value: "70%", label: "Menos costo", sublabel: "vs. servidores dedicados" },
+                { value: "100ms", label: "Cold start", sublabel: "Con warm-up strategies" },
+                { value: "10x", label: "M\u00e1s r\u00e1pido", sublabel: "Time-to-market" },
+              ]
+        }
       />
 
       <section id="beneficios" className="bg-bg-surface py-16 md:py-24">

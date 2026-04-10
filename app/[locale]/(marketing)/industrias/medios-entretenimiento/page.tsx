@@ -4,21 +4,34 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getIndustria, mapIndustria } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Tecnología para Medios y Entretenimiento | Nivelics",
-  description:
-    "Soluciones de streaming, personalización de contenido y monetización digital para empresas de medios y entretenimiento.",
-  alternates: {
-    canonical: "https://www.nivelics.com/industrias/medios-entretenimiento",
-    languages: {
-      es: "https://www.nivelics.com/industrias/medios-entretenimiento",
-      en: "https://www.nivelics.com/en/industries/media-entertainment",
-      "x-default": "https://www.nivelics.com/industrias/medios-entretenimiento",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getIndustria("medios-entretenimiento");
+  const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
+
+  return {
+    title: ind?.seoTitle || "Tecnología para Medios y Entretenimiento | Nivelics",
+    description:
+      ind?.seoDescription ||
+      "Soluciones de streaming, personalización de contenido y monetización digital para empresas de medios y entretenimiento.",
+    alternates: {
+      canonical: "https://www.nivelics.com/industrias/medios-entretenimiento",
+      languages: {
+        es: "https://www.nivelics.com/industrias/medios-entretenimiento",
+        en: "https://www.nivelics.com/en/industries/media-entertainment",
+        "x-default": "https://www.nivelics.com/industrias/medios-entretenimiento",
+      },
     },
-  },
-};
+  };
+}
 
+// LEGACY FALLBACK
 const CHALLENGES = [
   {
     icon: Tv,
@@ -40,6 +53,7 @@ const CHALLENGES = [
   },
 ];
 
+// LEGACY FALLBACK
 const SOLUTIONS = [
   {
     badge: "ia" as const,
@@ -61,10 +75,18 @@ const SOLUTIONS = [
   },
 ];
 
-export default function MediosEntretenimientoPage() {
+export default async function MediosEntretenimientoPage() {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getIndustria("medios-entretenimiento");
+  const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
+
+  const challenges = ind?.painPoints?.length ? ind.painPoints : CHALLENGES;
+  const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
+
   const serviceSchema = getServiceSchema({
-    name: "Tecnología para Medios y Entretenimiento",
+    name: ind?.name || "Tecnología para Medios y Entretenimiento",
     description:
+      ind?.heroSubtitle ||
       "IA, cloud y staffing para empresas de medios que necesitan streaming a escala, personalización y monetización digital.",
     url: "/industrias/medios-entretenimiento",
     serviceType: "Media Technology Consulting",
@@ -72,7 +94,7 @@ export default function MediosEntretenimientoPage() {
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
-    { name: "Medios y Entretenimiento", url: "/industrias/medios-entretenimiento" },
+    { name: ind?.name || "Medios y Entretenimiento", url: "/industrias/medios-entretenimiento" },
   ]);
 
   return (
@@ -91,11 +113,11 @@ export default function MediosEntretenimientoPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
         <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            IA &middot; Cloud &middot; Staffing para Medios y Entretenimiento
+            {ind?.heroTitle || "IA \u00B7 Cloud \u00B7 Staffing para Medios y Entretenimiento"}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Potenciamos plataformas de contenido digital con tecnología que escala, personaliza y
-            monetiza como Televisa/N+, Pulzo, Univision y Crónica.
+            {ind?.heroSubtitle ||
+              "Potenciamos plataformas de contenido digital con tecnología que escala, personaliza y monetiza como Televisa/N+, Pulzo, Univision y Crónica."}
           </p>
         </div>
       </section>
@@ -107,15 +129,21 @@ export default function MediosEntretenimientoPage() {
             Los 3 retos tech de Medios y Entretenimiento
           </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CHALLENGES.map((ch) => {
-              const Icon = ch.icon;
+            {challenges.map((ch) => {
+              const Icon = "icon" in ch && typeof ch.icon !== "string" ? ch.icon : null;
               return (
                 <div key={ch.title} className="glass glow-hover rounded-xl p-6">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon size={24} className="text-primary" aria-hidden="true" />
+                    {Icon ? (
+                      <Icon size={24} className="text-primary" aria-hidden="true" />
+                    ) : (
+                      <Tv size={24} className="text-primary" aria-hidden="true" />
+                    )}
                   </div>
                   <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{ch.description}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-text-70">
+                    {"description" in ch ? ch.description : "desc" in ch ? ch.desc : ""}
+                  </p>
                 </div>
               );
             })}
@@ -128,22 +156,27 @@ export default function MediosEntretenimientoPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Cómo el marco I+C+S resuelve esto</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SOLUTIONS.map((sol) => (
-              <div key={sol.title} className="glass glow-hover rounded-xl p-6">
-                <ServiceBadge variant={sol.badge} className="mb-4">
-                  {sol.badge === "ia"
-                    ? "IA"
-                    : sol.badge.charAt(0).toUpperCase() + sol.badge.slice(1)}
-                </ServiceBadge>
-                <h3 className="text-lg font-semibold text-text-100">{sol.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-70">{sol.description}</p>
-              </div>
-            ))}
+            {solutions.map((sol) => {
+              const badge = "badge" in sol ? sol.badge : null;
+              return (
+                <div key={sol.title} className="glass glow-hover rounded-xl p-6">
+                  {badge && (
+                    <ServiceBadge variant={badge} className="mb-4">
+                      {badge === "ia" ? "IA" : badge.charAt(0).toUpperCase() + badge.slice(1)}
+                    </ServiceBadge>
+                  )}
+                  <h3 className="text-lg font-semibold text-text-100">{sol.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-70">
+                    {"description" in sol ? sol.description : "desc" in sol ? sol.desc : ""}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <CTABanner title="Hablemos de tu proyecto en Medios y Entretenimiento" />
+      <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Medios y Entretenimiento"} />
     </PageWrapper>
   );
 }

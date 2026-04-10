@@ -28,22 +28,38 @@ import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getWebSiteSchema } from "@/lib/schema/website";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { AmericaMapWrapper } from "@/components/sections/america-map-wrapper";
+import { getLocale } from "next-intl/server";
+import { getHomeContent, getAllCasosExito, getHubServicios } from "@/lib/cms";
+import { mapHomeContent, mapServicio, mapCasoExito } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Transformación Digital IA · Cloud · Staffing | Nivelics Colombia",
-  description:
-    "Empresa colombiana de transformación digital B2B. IA aplicada, Cloud (AWS, GCP, Azure) y Staff Augmentation premium para LATAM y USA. Desde 2012.",
-  alternates: {
-    canonical: "https://www.nivelics.com",
-    languages: {
-      es: "https://www.nivelics.com",
-      en: "https://www.nivelics.com/en",
-      "x-default": "https://www.nivelics.com",
+export const revalidate = 3600;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const homeRaw = await getHomeContent();
+  const home = homeRaw ? mapHomeContent(homeRaw as Record<string, unknown>, locale) : null;
+
+  return {
+    title: home?.heroTitle
+      ? `${home.heroTitle} | Nivelics Colombia`
+      : "Transformación Digital IA · Cloud · Staffing | Nivelics Colombia",
+    description:
+      home?.heroSubtitle ||
+      "Empresa colombiana de transformación digital B2B. IA aplicada, Cloud (AWS, GCP, Azure) y Staff Augmentation premium para LATAM y USA. Desde 2012.",
+    alternates: {
+      canonical: "https://www.nivelics.com",
+      languages: {
+        es: "https://www.nivelics.com",
+        en: "https://www.nivelics.com/en",
+        "x-default": "https://www.nivelics.com",
+      },
     },
-  },
-  other: { "link-llms": "/llms.txt" },
-};
+    other: { "link-llms": "/llms.txt" },
+  };
+}
 
+// LEGACY FALLBACK
 const HOME_FAQS = [
   {
     question: "¿Qué es Nivelics y qué servicios ofrece?",
@@ -72,6 +88,7 @@ const HOME_FAQS = [
   },
 ];
 
+// LEGACY FALLBACK
 const SERVICES = [
   {
     icon: Brain,
@@ -115,6 +132,7 @@ const SERVICES = [
   },
 ];
 
+// LEGACY FALLBACK
 const CASES = [
   {
     client: "Televisa / N+",
@@ -227,10 +245,27 @@ const INDUSTRIES = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const locale = (await getLocale()) as Locale;
+  const homeRaw = await getHomeContent();
+  const home = homeRaw ? mapHomeContent(homeRaw as Record<string, unknown>, locale) : null;
+
+  // Use DB FAQs if available, otherwise legacy fallback
+  const faqsToShow = home?.faqs.length ? home.faqs : HOME_FAQS;
+
+  // Use DB metrics if available, otherwise legacy fallback
+  const metricsToShow = home?.metrics.length
+    ? home.metrics.map((m) => ({ value: m.value, label: m.unit, sublabel: m.label }))
+    : [
+        { value: "13+", label: "Años", sublabel: "Fundados en 2012" },
+        { value: "7+", label: "Países", sublabel: "Colombia, USA, México y más" },
+        { value: "40%", label: "Ahorro", sublabel: "vs. contratar en USA o Europa" },
+        { value: "50+", label: "Proyectos", sublabel: "entregados en LATAM y USA" },
+      ];
+
   const orgSchema = getOrganizationSchema();
   const webSiteSchema = getWebSiteSchema();
-  const faqSchema = getFAQSchema(HOME_FAQS);
+  const faqSchema = getFAQSchema(faqsToShow);
 
   return (
     <PageWrapper className="pt-0">
@@ -257,19 +292,19 @@ export default function HomePage() {
         <div className="absolute left-1/4 top-1/3 h-72 w-72 rounded-full bg-primary/5 blur-[100px]" />
         <div className="relative mx-auto max-w-[1280px] px-6 text-center md:px-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary">
-            IA · Cloud · Staffing Premium
+            {home?.heroBadge || "IA · Cloud · Staffing Premium"}
           </span>
           <h1 className="mt-6 text-4xl font-bold text-text-100 md:text-6xl">
-            Transforma más rápido.
+            {home?.heroTitle || "Transforma más rápido."}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-text-70">
-            Empresa colombiana de transformación digital B2B. IA aplicada, Cloud (AWS, GCP, Azure) y
-            Staff Augmentation premium para empresas en LATAM y USA. Desde 2012.
+            {home?.heroSubtitle ||
+              "Empresa colombiana de transformación digital B2B. IA aplicada, Cloud (AWS, GCP, Azure) y Staff Augmentation premium para empresas en LATAM y USA. Desde 2012."}
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button asChild variant="cta" size="lg">
               <Link href="/contacto">
-                Agenda tu diagnóstico <ArrowRight size={18} />
+                {home?.heroCtaPrimary || "Agenda tu diagnóstico"} <ArrowRight size={18} />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
@@ -278,7 +313,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <MessageCircle size={18} /> Hablar por WhatsApp
+                <MessageCircle size={18} /> {home?.heroCtaSecondary || "Hablar por WhatsApp"}
               </a>
             </Button>
           </div>
@@ -293,7 +328,7 @@ export default function HomePage() {
       >
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
-            IA + Cloud + Staffing — los tres pilares integrados
+            {home?.servicesSectionTitle || "IA + Cloud + Staffing — los tres pilares integrados"}
           </h2>
           <p className="mt-3 max-w-2xl text-text-70">
             La mayoría ataca estos retos por separado. Nosotros los conectamos en un solo aliado.
@@ -333,14 +368,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ 3. MÉTRICAS ═══ */}
-      <MetricsBar
-        metrics={[
-          { value: "13+", label: "Años", sublabel: "Fundados en 2012" },
-          { value: "7+", label: "Países", sublabel: "Colombia, USA, México y más" },
-          { value: "40%", label: "Ahorro", sublabel: "vs. contratar en USA o Europa" },
-          { value: "50+", label: "Proyectos", sublabel: "entregados en LATAM y USA" },
-        ]}
-      />
+      <MetricsBar metrics={metricsToShow} />
 
       {/* ═══ 4. CASOS DE ÉXITO (grid 7 casos) ═══ */}
       <section
@@ -350,7 +378,7 @@ export default function HomePage() {
       >
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
-            Resultados reales en 7 países
+            {home?.casesSectionTitle || "Resultados reales en 7 países"}
           </h2>
           <p className="mt-3 max-w-2xl text-text-70">
             Empresas en medios, fintech, retail y servicios que eligieron Nivelics para transformar
@@ -551,18 +579,18 @@ export default function HomePage() {
       </section>
 
       {/* ═══ 9. FAQ ═══ */}
-      <FAQAccordion title="Preguntas frecuentes" faqs={HOME_FAQS} schemaEnabled />
+      <FAQAccordion title="Preguntas frecuentes" faqs={faqsToShow} schemaEnabled />
 
       {/* ═══ 10. CTA FINAL ═══ */}
       <section className="relative overflow-hidden py-14 md:py-20">
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark opacity-5" />
         <div className="relative mx-auto max-w-[800px] px-6 text-center md:px-20">
           <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
-            ¿Listo para transformar más rápido?
+            {home?.finalCtaTitle || "¿Listo para transformar más rápido?"}
           </h2>
           <p className="mt-4 text-lg text-text-70">
-            Diagnóstico gratuito en 30 minutos. Sin RFP, sin presentaciones largas. Solo cuéntanos
-            tu reto.
+            {home?.finalCtaCopy ||
+              "Diagnóstico gratuito en 30 minutos. Sin RFP, sin presentaciones largas. Solo cuéntanos tu reto."}
           </p>
           <div className="mt-6 flex flex-col items-center gap-2">
             {[

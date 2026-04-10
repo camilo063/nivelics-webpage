@@ -14,20 +14,30 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "IA Aplicada a Negocios | Agentes, Automatización y RAG",
-  description:
-    "Soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/inteligencia-artificial",
-    languages: {
-      es: "https://www.nivelics.com/servicios/inteligencia-artificial",
-      en: "https://www.nivelics.com/en/services/artificial-intelligence",
-      "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("inteligencia-artificial", locale);
+  return {
+    title: cms?.seoTitle || "IA Aplicada a Negocios | Agentes, Automatización y RAG",
+    description:
+      cms?.seoDescription ||
+      "Soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial",
+      languages: {
+        es: "https://www.nivelics.com/servicios/inteligencia-artificial",
+        en: "https://www.nivelics.com/en/services/artificial-intelligence",
+        "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial",
+      },
     },
-  },
-};
+  };
+}
 
 const SUB_SERVICES = [
   {
@@ -67,7 +77,9 @@ const SUB_SERVICES = [
   },
 ];
 
-export default function IAPage() {
+export default async function IAPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("inteligencia-artificial", locale);
   const serviceSchema = getServiceSchema({
     name: "Inteligencia Artificial Aplicada",
     description:
@@ -120,9 +132,12 @@ export default function IAPage() {
       {/* Hero */}
       <HeroSplit
         badge="Inteligencia Artificial Aplicada"
-        h1="Agentes IA que"
+        h1={cms?.title || "Agentes IA que"}
         h1Accent="ejecutan tareas reales"
-        subtitle="No chatbots. Agentes autónomos integrados con tus sistemas que trabajan 24/7 y se miden con resultados reales."
+        subtitle={
+          cms?.subtitle ||
+          "No chatbots. Agentes autónomos integrados con tus sistemas que trabajan 24/7 y se miden con resultados reales."
+        }
         bullets={[
           "50% reducción promedio en costos operativos",
           "Primer agente en producción en 6-8 semanas",
@@ -175,20 +190,32 @@ export default function IAPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          {
-            value: "50%",
-            label: "Reducción de costos operativos",
-            sublabel: "promedio en proyectos de automatización",
-          },
-          {
-            value: "6-8",
-            label: "Semanas al primer agente",
-            sublabel: "desde discovery hasta producción",
-          },
-          { value: "24/7", label: "Disponibilidad", sublabel: "los agentes no tienen horario" },
-          { value: "100%", label: "Trazabilidad", sublabel: "logging y evals en cada ejecución" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "50%",
+                  label: "Reducción de costos operativos",
+                  sublabel: "promedio en proyectos de automatización",
+                },
+                {
+                  value: "6-8",
+                  label: "Semanas al primer agente",
+                  sublabel: "desde discovery hasta producción",
+                },
+                {
+                  value: "24/7",
+                  label: "Disponibilidad",
+                  sublabel: "los agentes no tienen horario",
+                },
+                {
+                  value: "100%",
+                  label: "Trazabilidad",
+                  sublabel: "logging y evals en cada ejecución",
+                },
+              ]
+        }
       />
 
       {/* Sub-services */}
@@ -298,33 +325,37 @@ export default function IAPage() {
       <FAQAccordion
         title="Preguntas frecuentes sobre IA"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿Cuánto cuesta implementar un agente de IA?",
-            answer:
-              "Depende del proceso a automatizar y las integraciones requeridas. Un agente simple parte de $8,000 USD en implementación + MRR de operación. En el discovery de la primera semana definimos el costo exacto con ROI proyectado.",
-          },
-          {
-            question: "¿En cuánto tiempo veo resultados?",
-            answer:
-              "En 6-8 semanas tienes el primer agente en producción. El ROI medible aparece típicamente en el mes 2-3, cuando el volumen procesado supera el costo de implementación.",
-          },
-          {
-            question: "¿Mis datos se usan para entrenar los modelos?",
-            answer:
-              "No. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
-          },
-          {
-            question: "¿Qué pasa si el agente comete errores?",
-            answer:
-              "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente. El monitoreo es continuo.",
-          },
-          {
-            question: "¿La IA reemplaza a mi equipo?",
-            answer:
-              "No. Los agentes de IA manejan las tareas repetitivas y de alto volumen, liberando a tu equipo para trabajo de mayor valor. En todos nuestros proyectos, los equipos cliente terminan más productivos, no más pequeños.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿Cuánto cuesta implementar un agente de IA?",
+                  answer:
+                    "Depende del proceso a automatizar y las integraciones requeridas. Un agente simple parte de $8,000 USD en implementación + MRR de operación. En el discovery de la primera semana definimos el costo exacto con ROI proyectado.",
+                },
+                {
+                  question: "¿En cuánto tiempo veo resultados?",
+                  answer:
+                    "En 6-8 semanas tienes el primer agente en producción. El ROI medible aparece típicamente en el mes 2-3, cuando el volumen procesado supera el costo de implementación.",
+                },
+                {
+                  question: "¿Mis datos se usan para entrenar los modelos?",
+                  answer:
+                    "No. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
+                },
+                {
+                  question: "¿Qué pasa si el agente comete errores?",
+                  answer:
+                    "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente. El monitoreo es continuo.",
+                },
+                {
+                  question: "¿La IA reemplaza a mi equipo?",
+                  answer:
+                    "No. Los agentes de IA manejan las tareas repetitivas y de alto volumen, liberando a tu equipo para trabajo de mayor valor. En todos nuestros proyectos, los equipos cliente terminan más productivos, no más pequeños.",
+                },
+              ]
+        }
       />
 
       {/* Contact form */}

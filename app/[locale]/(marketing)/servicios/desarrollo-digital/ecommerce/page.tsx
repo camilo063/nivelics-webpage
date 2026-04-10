@@ -10,20 +10,30 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Desarrollo E-commerce | Tiendas Digitales que Venden",
-  description:
-    "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
-    languages: {
-      es: "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
-      en: "https://www.nivelics.com/en/services/digital-development/ecommerce",
-      "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("ecommerce", locale);
+  return {
+    title: cms?.seoTitle || "Desarrollo E-commerce | Tiendas Digitales que Venden",
+    description:
+      cms?.seoDescription ||
+      "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
+      languages: {
+        es: "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
+        en: "https://www.nivelics.com/en/services/digital-development/ecommerce",
+        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function EcommercePage() {
+export default async function EcommercePage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("ecommerce", locale);
   const serviceSchema = getServiceSchema({
     name: "Desarrollo E-commerce",
     description:
@@ -108,9 +120,12 @@ export default function EcommercePage() {
       {/* Hero */}
       <HeroSplit
         badge="Desarrollo Digital &middot; E-commerce"
-        h1="Tu tienda online"
+        h1={cms?.title || "Tu tienda online"}
         h1Accent="sin comisiones"
-        subtitle="E-commerce a medida con cero comisiones por transaccion. Catalogo inteligente, pricing dinamico, pasarelas de pago y conexion real con tu ERP. Cada venta es 100% tuya."
+        subtitle={
+          cms?.subtitle ||
+          "E-commerce a medida con cero comisiones por transaccion. Catalogo inteligente, pricing dinamico, pasarelas de pago y conexion real con tu ERP. Cada venta es 100% tuya."
+        }
         bullets={[
           "Cero comisiones por venta -- a diferencia de Shopify o WooCommerce",
           "Integracion real con tu ERP, WMS y CRM",
@@ -157,12 +172,24 @@ export default function EcommercePage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          { value: "0%", label: "Comisiones por venta", sublabel: "cada venta es 100% tuya" },
-          { value: "99.9%", label: "Uptime garantizado", sublabel: "incluso en Black Friday" },
-          { value: "100%", label: "Datos del cliente tuyos", sublabel: "en tu infraestructura" },
-          { value: "<2s", label: "Tiempo de carga", sublabel: "checkout optimizado" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "0%", label: "Comisiones por venta", sublabel: "cada venta es 100% tuya" },
+                {
+                  value: "99.9%",
+                  label: "Uptime garantizado",
+                  sublabel: "incluso en Black Friday",
+                },
+                {
+                  value: "100%",
+                  label: "Datos del cliente tuyos",
+                  sublabel: "en tu infraestructura",
+                },
+                { value: "<2s", label: "Tiempo de carga", sublabel: "checkout optimizado" },
+              ]
+        }
       />
 
       {/* Benefits */}

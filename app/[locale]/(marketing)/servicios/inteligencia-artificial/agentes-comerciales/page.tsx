@@ -10,22 +10,35 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Agentes Comerciales Inteligentes | IA para Ventas",
-  description:
-    "Agentes de IA que califican leads, hacen seguimiento y escalan oportunidades a tu equipo de ventas.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
-    languages: {
-      es: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
-      en: "https://www.nivelics.com/en/services/artificial-intelligence/sales-agents",
-      "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("agentes-comerciales", locale);
+  return {
+    title: cms?.seoTitle || "Agentes Comerciales Inteligentes | IA para Ventas",
+    description:
+      cms?.seoDescription ||
+      "Agentes de IA que califican leads, hacen seguimiento y escalan oportunidades a tu equipo de ventas.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
+      languages: {
+        es: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
+        en: "https://www.nivelics.com/en/services/artificial-intelligence/sales-agents",
+        "x-default":
+          "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
+      },
     },
-  },
-};
+  };
+}
 
-export default function AgentesComerciales() {
+export default async function AgentesComerciales() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("agentes-comerciales", locale);
   const serviceSchema = getServiceSchema({
     name: "Agentes Comerciales Inteligentes",
     description:
@@ -96,9 +109,12 @@ export default function AgentesComerciales() {
       {/* Hero */}
       <HeroSplit
         badge="IA · Ventas"
-        h1="Tu equipo comercial"
+        h1={cms?.title || "Tu equipo comercial"}
         h1Accent="que nunca descansa"
-        subtitle="Agentes de IA que califican leads, hacen seguimiento personalizado y escalan oportunidades reales a tu equipo de ventas. Respuesta inmediata, 24/7, en cualquier canal."
+        subtitle={
+          cms?.subtitle ||
+          "Agentes de IA que califican leads, hacen seguimiento personalizado y escalan oportunidades reales a tu equipo de ventas. Respuesta inmediata, 24/7, en cualquier canal."
+        }
         bullets={[
           "Calificación automática con criterios MEDDPICC personalizados",
           "Seguimiento multicanal: email, WhatsApp, chat en vivo",
@@ -154,28 +170,32 @@ export default function AgentesComerciales() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          {
-            value: "10x",
-            label: "Más leads procesados",
-            sublabel: "mismo equipo, sin SDRs adicionales",
-          },
-          {
-            value: "<5s",
-            label: "Tiempo de respuesta",
-            sublabel: "vs. horas o días del proceso manual",
-          },
-          {
-            value: "24/7",
-            label: "Seguimiento activo",
-            sublabel: "cadencias que nunca se detienen",
-          },
-          {
-            value: "40%",
-            label: "Más conversiones",
-            sublabel: "promedio por mejor calificación y timing",
-          },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "10x",
+                  label: "Más leads procesados",
+                  sublabel: "mismo equipo, sin SDRs adicionales",
+                },
+                {
+                  value: "<5s",
+                  label: "Tiempo de respuesta",
+                  sublabel: "vs. horas o días del proceso manual",
+                },
+                {
+                  value: "24/7",
+                  label: "Seguimiento activo",
+                  sublabel: "cadencias que nunca se detienen",
+                },
+                {
+                  value: "40%",
+                  label: "Más conversiones",
+                  sublabel: "promedio por mejor calificación y timing",
+                },
+              ]
+        }
       />
 
       {/* Comparison */}
@@ -226,33 +246,37 @@ export default function AgentesComerciales() {
       <FAQAccordion
         title="Preguntas frecuentes sobre Agentes Comerciales IA"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿El agente comercial reemplaza a mis vendedores?",
-            answer:
-              "No. El agente maneja la calificación inicial, el seguimiento automatizado y la recopilación de contexto. Cuando detecta una oportunidad real, escala al vendedor con toda la información necesaria para cerrar. Tu equipo se enfoca en vender, no en perseguir leads fríos.",
-          },
-          {
-            question: "¿Cómo se personaliza el scoring de leads?",
-            answer:
-              "Definimos los criterios de calificación junto a tu equipo comercial (industria, cargo, tamaño de empresa, señales de intención, presupuesto). El agente aprende de los cierres exitosos y ajusta el scoring continuamente.",
-          },
-          {
-            question: "¿Se integra con mi CRM actual?",
-            answer:
-              "Sí. Tenemos conectores pre-construidos para Odoo, HubSpot, Salesforce y Pipedrive. Para otros CRMs, construimos la integración en las primeras semanas del proyecto.",
-          },
-          {
-            question: "¿Puedo ver qué hace el agente en tiempo real?",
-            answer:
-              "Sí. Tienes un dashboard con cada interacción, scoring aplicado, mensajes enviados y resultados. También configuramos alertas para eventos críticos como leads de alto valor o anomalías.",
-          },
-          {
-            question: "¿En cuánto tiempo veo resultados?",
-            answer:
-              "El agente está en producción en 6-8 semanas. El impacto en pipeline suele ser visible desde el primer mes, con mejoras incrementales a medida que el modelo de scoring se ajusta con datos reales.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿El agente comercial reemplaza a mis vendedores?",
+                  answer:
+                    "No. El agente maneja la calificación inicial, el seguimiento automatizado y la recopilación de contexto. Cuando detecta una oportunidad real, escala al vendedor con toda la información necesaria para cerrar. Tu equipo se enfoca en vender, no en perseguir leads fríos.",
+                },
+                {
+                  question: "¿Cómo se personaliza el scoring de leads?",
+                  answer:
+                    "Definimos los criterios de calificación junto a tu equipo comercial (industria, cargo, tamaño de empresa, señales de intención, presupuesto). El agente aprende de los cierres exitosos y ajusta el scoring continuamente.",
+                },
+                {
+                  question: "¿Se integra con mi CRM actual?",
+                  answer:
+                    "Sí. Tenemos conectores pre-construidos para Odoo, HubSpot, Salesforce y Pipedrive. Para otros CRMs, construimos la integración en las primeras semanas del proyecto.",
+                },
+                {
+                  question: "¿Puedo ver qué hace el agente en tiempo real?",
+                  answer:
+                    "Sí. Tienes un dashboard con cada interacción, scoring aplicado, mensajes enviados y resultados. También configuramos alertas para eventos críticos como leads de alto valor o anomalías.",
+                },
+                {
+                  question: "¿En cuánto tiempo veo resultados?",
+                  answer:
+                    "El agente está en producción en 6-8 semanas. El impacto en pipeline suele ser visible desde el primer mes, con mejoras incrementales a medida que el modelo de scoring se ajusta con datos reales.",
+                },
+              ]
+        }
       />
 
       {/* Contact */}

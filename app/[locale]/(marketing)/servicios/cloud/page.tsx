@@ -13,20 +13,30 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Servicios Cloud AWS · GCP · Azure | Migración y FinOps",
-  description:
-    "Arquitectura multi-cloud, migración, DevOps y optimización de costos con enfoque FinOps.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/cloud",
-    languages: {
-      es: "https://www.nivelics.com/servicios/cloud",
-      en: "https://www.nivelics.com/en/services/cloud",
-      "x-default": "https://www.nivelics.com/servicios/cloud",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("cloud", locale);
+  return {
+    title: cms?.seoTitle || "Servicios Cloud AWS · GCP · Azure | Migración y FinOps",
+    description:
+      cms?.seoDescription ||
+      "Arquitectura multi-cloud, migración, DevOps y optimización de costos con enfoque FinOps.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/cloud",
+      languages: {
+        es: "https://www.nivelics.com/servicios/cloud",
+        en: "https://www.nivelics.com/en/services/cloud",
+        "x-default": "https://www.nivelics.com/servicios/cloud",
+      },
     },
-  },
-};
+  };
+}
 
 const SUB_SERVICES = [
   {
@@ -66,7 +76,9 @@ const SUB_SERVICES = [
   },
 ];
 
-export default function CloudPage() {
+export default async function CloudPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("cloud", locale);
   const serviceSchema = getServiceSchema({
     name: "Cloud Computing (AWS, GCP, Azure)",
     description:
@@ -118,9 +130,12 @@ export default function CloudPage() {
       {/* Hero */}
       <HeroSplit
         badge="Cloud · AWS · GCP · Azure"
-        h1="Cloud con gobierno real"
+        h1={cms?.title || "Cloud con gobierno real"}
         h1Accent="y 40% menos de costos"
-        subtitle="Diseñamos, migramos y operamos tu infraestructura cloud con las mejores prácticas de la industria. FinOps desde el día uno."
+        subtitle={
+          cms?.subtitle ||
+          "Diseñamos, migramos y operamos tu infraestructura cloud con las mejores prácticas de la industria. FinOps desde el día uno."
+        }
         bullets={[
           "30-40% reducción de gasto cloud en 90 días",
           "Migraciones con zero downtime garantizado",
@@ -135,20 +150,32 @@ export default function CloudPage() {
       />
 
       <MetricsBar
-        metrics={[
-          {
-            value: "40%",
-            label: "Reducción gasto cloud",
-            sublabel: "promedio en proyectos FinOps",
-          },
-          { value: "3-6", label: "Meses a migración completa", sublabel: "con zero downtime" },
-          { value: "99.9%", label: "SLA de uptime", sublabel: "en operación de infraestructura" },
-          {
-            value: "0",
-            label: "Downtime en migraciones",
-            sublabel: "estrategia de rollback siempre activa",
-          },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "40%",
+                  label: "Reducción gasto cloud",
+                  sublabel: "promedio en proyectos FinOps",
+                },
+                {
+                  value: "3-6",
+                  label: "Meses a migración completa",
+                  sublabel: "con zero downtime",
+                },
+                {
+                  value: "99.9%",
+                  label: "SLA de uptime",
+                  sublabel: "en operación de infraestructura",
+                },
+                {
+                  value: "0",
+                  label: "Downtime en migraciones",
+                  sublabel: "estrategia de rollback siempre activa",
+                },
+              ]
+        }
       />
 
       {/* Sub-services */}
@@ -244,33 +271,37 @@ export default function CloudPage() {
       <FAQAccordion
         title="Preguntas frecuentes sobre Cloud"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿Cuánto puedo ahorrar con FinOps?",
-            answer:
-              "El promedio en nuestros proyectos es 30-40% de reducción en la factura cloud en los primeros 90 días. El rango varía según el nivel de optimización previo. En la auditoría inicial (gratuita) te damos una proyección concreta basada en tu factura actual.",
-          },
-          {
-            question: "¿Cuánto tiempo toma una migración a AWS?",
-            answer:
-              "Entre 3 y 6 meses para la mayoría de los proyectos, dependiendo del tamaño del ambiente y las interdependencias. Trabajamos con estrategia de rollback en todas las migraciones para garantizar zero downtime.",
-          },
-          {
-            question: "¿Necesito cambiar todo a la vez o puedo migrar gradualmente?",
-            answer:
-              "Migración gradual es nuestro enfoque recomendado. Empezamos por las cargas de trabajo menos críticas, validamos el proceso y escalamos. Nunca exponemos el negocio a un riesgo innecesario.",
-          },
-          {
-            question: "¿Pueden gestionar nuestra infraestructura existente en AWS?",
-            answer:
-              "Sí. Hacemos una auditoría del ambiente actual, identificamos oportunidades de mejora y asumimos la operación. El proceso de onboarding típicamente toma 2-3 semanas.",
-          },
-          {
-            question: "¿Trabajan solo con AWS o también con GCP y Azure?",
-            answer:
-              "Las tres. Aunque nuestra mayor experiencia y certificaciones son en AWS, tenemos proyectos activos en GCP (especialmente con Vertex AI y BigQuery) y Azure (con Azure OpenAI). Multi-cloud también.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿Cuánto puedo ahorrar con FinOps?",
+                  answer:
+                    "El promedio en nuestros proyectos es 30-40% de reducción en la factura cloud en los primeros 90 días. El rango varía según el nivel de optimización previo. En la auditoría inicial (gratuita) te damos una proyección concreta basada en tu factura actual.",
+                },
+                {
+                  question: "¿Cuánto tiempo toma una migración a AWS?",
+                  answer:
+                    "Entre 3 y 6 meses para la mayoría de los proyectos, dependiendo del tamaño del ambiente y las interdependencias. Trabajamos con estrategia de rollback en todas las migraciones para garantizar zero downtime.",
+                },
+                {
+                  question: "¿Necesito cambiar todo a la vez o puedo migrar gradualmente?",
+                  answer:
+                    "Migración gradual es nuestro enfoque recomendado. Empezamos por las cargas de trabajo menos críticas, validamos el proceso y escalamos. Nunca exponemos el negocio a un riesgo innecesario.",
+                },
+                {
+                  question: "¿Pueden gestionar nuestra infraestructura existente en AWS?",
+                  answer:
+                    "Sí. Hacemos una auditoría del ambiente actual, identificamos oportunidades de mejora y asumimos la operación. El proceso de onboarding típicamente toma 2-3 semanas.",
+                },
+                {
+                  question: "¿Trabajan solo con AWS o también con GCP y Azure?",
+                  answer:
+                    "Las tres. Aunque nuestra mayor experiencia y certificaciones son en AWS, tenemos proyectos activos en GCP (especialmente con Vertex AI y BigQuery) y Azure (con Azure OpenAI). Multi-cloud también.",
+                },
+              ]
+        }
       />
 
       <InlineContactForm

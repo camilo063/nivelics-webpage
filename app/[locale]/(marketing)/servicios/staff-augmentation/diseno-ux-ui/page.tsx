@@ -10,20 +10,30 @@ import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Diseñadores UX/UI | Product Designers Senior",
-  description:
-    "Product designers senior con experiencia en design systems, research y prototipado.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/staff-augmentation/diseno-ux-ui",
-    languages: {
-      es: "https://www.nivelics.com/servicios/staff-augmentation/diseno-ux-ui",
-      en: "https://www.nivelics.com/en/services/staff-augmentation/ux-ui-design",
-      "x-default": "https://www.nivelics.com/servicios/staff-augmentation/diseno-ux-ui",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("diseno-ux-ui", locale);
+  return {
+    title: cms?.seoTitle || "Diseñadores UX/UI | Product Designers Senior",
+    description:
+      cms?.seoDescription ||
+      "Product designers senior con experiencia en design systems, research y prototipado.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/staff-augmentation/diseno-ux-ui",
+      languages: {
+        es: "https://www.nivelics.com/servicios/staff-augmentation/diseno-ux-ui",
+        en: "https://www.nivelics.com/en/services/staff-augmentation/ux-ui-design",
+        "x-default": "https://www.nivelics.com/servicios/staff-augmentation/diseno-ux-ui",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -67,7 +77,9 @@ const DESIGN_ROLES = [
   },
 ];
 
-export default function DisenoUXUIPage() {
+export default async function DisenoUXUIPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("diseno-ux-ui", locale);
   const serviceSchema = getServiceSchema({
     name: "Diseñadores UX/UI",
     description:
@@ -134,9 +146,12 @@ export default function DisenoUXUIPage() {
 
       <HeroSplit
         badge="Staff Aug · Diseño"
-        h1="Diseñadores que"
+        h1={cms?.title || "Diseñadores que"}
         h1Accent="convierten"
-        subtitle="Product designers senior con experiencia en design systems, research y prototipado. UX y UI que impulsan métricas de negocio."
+        subtitle={
+          cms?.subtitle ||
+          "Product designers senior con experiencia en design systems, research y prototipado. UX y UI que impulsan métricas de negocio."
+        }
         bullets={[
           "Candidatos presentados en 5 días hábiles",
           "Ahorro de hasta 40% vs contratar en USA",
@@ -155,12 +170,16 @@ export default function DisenoUXUIPage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
-          { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
-          { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
-          { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
+                { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
+                { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
+                { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
+              ]
+        }
       />
 
       <section className="bg-bg-surface py-16 md:py-24">

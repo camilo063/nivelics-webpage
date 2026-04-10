@@ -10,20 +10,30 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Desarrollo de Apps Moviles | iOS, Android y React Native",
-  description:
-    "Apps nativas y cross-platform con React Native, Flutter, Swift y Kotlin. De la idea al App Store.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/desarrollo-digital/apps-moviles",
-    languages: {
-      es: "https://www.nivelics.com/servicios/desarrollo-digital/apps-moviles",
-      en: "https://www.nivelics.com/en/services/digital-development/mobile-apps",
-      "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/apps-moviles",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("apps-moviles", locale);
+  return {
+    title: cms?.seoTitle || "Desarrollo de Apps Moviles | iOS, Android y React Native",
+    description:
+      cms?.seoDescription ||
+      "Apps nativas y cross-platform con React Native, Flutter, Swift y Kotlin. De la idea al App Store.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/desarrollo-digital/apps-moviles",
+      languages: {
+        es: "https://www.nivelics.com/servicios/desarrollo-digital/apps-moviles",
+        en: "https://www.nivelics.com/en/services/digital-development/mobile-apps",
+        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/apps-moviles",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function AppsMovilesPage() {
+export default async function AppsMovilesPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("apps-moviles", locale);
   const serviceSchema = getServiceSchema({
     name: "Desarrollo de Apps Moviles",
     description:
@@ -108,9 +120,12 @@ export default function AppsMovilesPage() {
       {/* Hero */}
       <HeroSplit
         badge="Desarrollo Digital &middot; Mobile"
-        h1="Tu app movil,"
+        h1={cms?.title || "Tu app movil,"}
         h1Accent="del concepto al store"
-        subtitle="iOS, Android, Flutter y React Native. Construimos apps nativas y cross-platform con entregas quincenales, QA integrado y codigo 100% tuyo desde el primer sprint."
+        subtitle={
+          cms?.subtitle ||
+          "iOS, Android, Flutter y React Native. Construimos apps nativas y cross-platform con entregas quincenales, QA integrado y codigo 100% tuyo desde el primer sprint."
+        }
         bullets={[
           "Demo cada 2 semanas -- siempre ves avance real",
           "100% propiedad del codigo -- tuyo desde el dia uno",
@@ -157,12 +172,24 @@ export default function AppsMovilesPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          { value: "50+", label: "Apps entregadas", sublabel: "iOS, Android y cross-platform" },
-          { value: "2", label: "Semanas por sprint", sublabel: "demo quincenal con cliente" },
-          { value: "100%", label: "Propiedad del codigo", sublabel: "siempre del cliente" },
-          { value: "4.8", label: "Rating promedio en stores", sublabel: "App Store y Google Play" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "50+",
+                  label: "Apps entregadas",
+                  sublabel: "iOS, Android y cross-platform",
+                },
+                { value: "2", label: "Semanas por sprint", sublabel: "demo quincenal con cliente" },
+                { value: "100%", label: "Propiedad del codigo", sublabel: "siempre del cliente" },
+                {
+                  value: "4.8",
+                  label: "Rating promedio en stores",
+                  sublabel: "App Store y Google Play",
+                },
+              ]
+        }
       />
 
       {/* Benefits */}

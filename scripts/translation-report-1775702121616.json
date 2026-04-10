@@ -1,0 +1,77 @@
+{
+  "startedAt": "2026-04-09T02:28:55.642Z",
+  "total": 463,
+  "translated": 36,
+  "skipped": 427,
+  "errors": [],
+  "sections": {
+    "home_content": {
+      "translated": 0,
+      "skipped": 9,
+      "errors": 0
+    },
+    "servicios": {
+      "translated": 0,
+      "skipped": 147,
+      "errors": 0
+    },
+    "casos_exito": {
+      "translated": 28,
+      "skipped": 42,
+      "errors": 0
+    },
+    "industrias": {
+      "translated": 0,
+      "skipped": 36,
+      "errors": 0
+    },
+    "team_members": {
+      "translated": 0,
+      "skipped": 10,
+      "errors": 0
+    },
+    "historia_items": {
+      "translated": 0,
+      "skipped": 24,
+      "errors": 0
+    },
+    "certificaciones": {
+      "translated": 0,
+      "skipped": 6,
+      "errors": 0
+    },
+    "blog_posts": {
+      "translated": 8,
+      "skipped": 16,
+      "errors": 0
+    },
+    "blog_categories": {
+      "translated": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "pages_general": {
+      "translated": 0,
+      "skipped": 9,
+      "errors": 0
+    },
+    "site_config": {
+      "translated": 0,
+      "skipped": 1,
+      "errors": 0
+    },
+    "media": {
+      "translated": 0,
+      "skipped": 0,
+      "errors": 0
+    }
+  },
+  "needsHumanReview": [
+    {
+      "table": "pages_general",
+      "id": "74d154d3-355b-4e25-9caa-f43f6b0b990f",
+      "reason": "Privacy policy — requires legal review of translation"
+    }
+  ],
+  "completedAt": "2026-04-09T02:35:21.616Z"
+}

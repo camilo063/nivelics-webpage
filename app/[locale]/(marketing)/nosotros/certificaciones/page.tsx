@@ -3,6 +3,11 @@ import { Award, Building2, Globe } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getCertificacionesPublic } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Reconocimientos y Certificaciones | Nivelics",
@@ -18,6 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
+// LEGACY FALLBACK
 const CERTIFICATIONS = [
   {
     icon: Award,
@@ -39,12 +45,34 @@ const CERTIFICATIONS = [
   },
 ];
 
-export default function CertificacionesPage() {
+export default async function CertificacionesPage() {
+  const locale = (await getLocale()) as Locale;
+  const dbCerts = await getCertificacionesPublic();
+
+  // Map DB certificaciones to display format
+  const dbMapped = dbCerts.length
+    ? dbCerts.map((c) => {
+        const data = c as Record<string, unknown>;
+        const title =
+          locale === "en"
+            ? (data.nameEn as string) || (data.nameEs as string) || ""
+            : (data.nameEs as string) || "";
+        const description =
+          locale === "en"
+            ? (data.descriptionEn as string) || (data.descriptionEs as string) || ""
+            : (data.descriptionEs as string) || "";
+        return { title, description };
+      })
+    : null;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
     { name: "Certificaciones", url: "/nosotros/certificaciones" },
   ]);
+
+  // Use DB data or fall back to hardcoded CERTIFICATIONS
+  const useDbData = dbMapped && dbMapped.length > 0;
 
   return (
     <PageWrapper>
@@ -71,22 +99,36 @@ export default function CertificacionesPage() {
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="grid gap-8">
-            {CERTIFICATIONS.map((cert) => {
-              const Icon = cert.icon;
-              return (
-                <div key={cert.title} className="glass glow-hover rounded-xl p-8 md:p-10">
-                  <div className="flex items-start gap-6">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <Icon size={28} className="text-primary" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-semibold text-text-100">{cert.title}</h2>
-                      <p className="mt-3 text-text-70 leading-relaxed">{cert.description}</p>
+            {useDbData
+              ? dbMapped.map((cert) => (
+                  <div key={cert.title} className="glass glow-hover rounded-xl p-8 md:p-10">
+                    <div className="flex items-start gap-6">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                        <Award size={28} className="text-primary" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-semibold text-text-100">{cert.title}</h2>
+                        <p className="mt-3 text-text-70 leading-relaxed">{cert.description}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                ))
+              : CERTIFICATIONS.map((cert) => {
+                  const Icon = cert.icon;
+                  return (
+                    <div key={cert.title} className="glass glow-hover rounded-xl p-8 md:p-10">
+                      <div className="flex items-start gap-6">
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                          <Icon size={28} className="text-primary" aria-hidden="true" />
+                        </div>
+                        <div>
+                          <h2 className="text-xl font-semibold text-text-100">{cert.title}</h2>
+                          <p className="mt-3 text-text-70 leading-relaxed">{cert.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
           </div>
         </div>
       </section>

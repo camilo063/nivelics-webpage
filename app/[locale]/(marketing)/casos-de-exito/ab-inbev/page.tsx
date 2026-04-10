@@ -5,32 +5,53 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getCasoExito, mapCasoExito } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Caso de Éxito AB InBev-Bavaria | Nivelics",
-  description:
-    "Cómo Nivelics ayudó a AB InBev-Bavaria a digitalizar procesos de distribución y ventas en Centroamérica.",
-  alternates: {
-    canonical: "https://www.nivelics.com/casos-de-exito/ab-inbev",
-    languages: {
-      es: "https://www.nivelics.com/casos-de-exito/ab-inbev",
-      en: "https://www.nivelics.com/en/case-studies/ab-inbev",
-      "x-default": "https://www.nivelics.com/casos-de-exito/ab-inbev",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getCasoExito("ab-inbev");
+  const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
+
+  return {
+    title: caso?.seoTitle || "Caso de Éxito AB InBev-Bavaria | Nivelics",
+    description:
+      caso?.seoDescription ||
+      "Cómo Nivelics ayudó a AB InBev-Bavaria a digitalizar procesos de distribución y ventas en Centroamérica.",
+    alternates: {
+      canonical: "https://www.nivelics.com/casos-de-exito/ab-inbev",
+      languages: {
+        es: "https://www.nivelics.com/casos-de-exito/ab-inbev",
+        en: "https://www.nivelics.com/en/case-studies/ab-inbev",
+        "x-default": "https://www.nivelics.com/casos-de-exito/ab-inbev",
+      },
     },
-  },
-};
+  };
+}
 
+// LEGACY FALLBACK
 const RESULTS = [
   { metric: "Digital", label: "Procesos de distribución digitalizados" },
   { metric: "Real-time", label: "Trazabilidad en tiempo real" },
   { metric: "Mejorada", label: "Eficiencia operativa mejorada" },
 ];
 
-export default function ABInBevPage() {
+export default async function ABInBevPage() {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getCasoExito("ab-inbev");
+  const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
+
+  const results = caso?.metrics?.length
+    ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
+    : RESULTS;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Casos de Éxito", url: "/casos-de-exito" },
-    { name: "AB InBev-Bavaria", url: "/casos-de-exito/ab-inbev" },
+    { name: caso?.clientName || "AB InBev-Bavaria", url: "/casos-de-exito/ab-inbev" },
   ]);
 
   return (
@@ -51,11 +72,14 @@ export default function ABInBevPage() {
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
             <ServiceBadge variant="cloud">Cloud</ServiceBadge>
-            <span className="text-sm text-text-40">El Salvador &middot; Consumo Masivo</span>
+            <span className="text-sm text-text-40">
+              {caso?.clientCountry || "El Salvador"} &middot;{" "}
+              {caso?.clientSector || "Consumo Masivo"}
+            </span>
           </div>
 
           <h1 className="text-4xl font-bold text-text-100 md:text-5xl">
-            AB InBev-Bavaria: Transformación Digital en Consumo Masivo
+            {caso?.title || "AB InBev-Bavaria: Transformación Digital en Consumo Masivo"}
           </h1>
         </div>
       </section>
@@ -66,15 +90,15 @@ export default function ABInBevPage() {
             <div>
               <h2 className="text-2xl font-bold text-text-100">El Reto</h2>
               <p className="mt-4 text-text-70 leading-relaxed">
-                AB InBev-Bavaria necesitaba digitalizar procesos de distribución y ventas en la
-                región centroamericana para mejorar eficiencia y trazabilidad.
+                {caso?.challenge ||
+                  "AB InBev-Bavaria necesitaba digitalizar procesos de distribución y ventas en la región centroamericana para mejorar eficiencia y trazabilidad."}
               </p>
             </div>
             <div>
               <h2 className="text-2xl font-bold text-text-100">La Solución</h2>
               <p className="mt-4 text-text-70 leading-relaxed">
-                Desarrollo de soluciones digitales para optimizar la cadena de distribución y las
-                operaciones de venta en campo.
+                {caso?.solution ||
+                  "Desarrollo de soluciones digitales para optimizar la cadena de distribución y las operaciones de venta en campo."}
               </p>
             </div>
           </div>
@@ -82,7 +106,7 @@ export default function ABInBevPage() {
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-text-100">Resultados</h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-3">
-              {RESULTS.map((r) => (
+              {results.map((r) => (
                 <div key={r.label} className="glass rounded-xl p-6 text-center">
                   <p className="text-3xl font-mono font-bold text-primary">{r.metric}</p>
                   <p className="mt-2 text-sm text-text-70">{r.label}</p>
@@ -90,6 +114,20 @@ export default function ABInBevPage() {
               ))}
             </div>
           </div>
+
+          {caso?.testimonialQuote && (
+            <blockquote className="mt-12 glass rounded-xl p-8 border-l-4 border-primary">
+              <p className="text-text-70 italic leading-relaxed">
+                &ldquo;{caso.testimonialQuote}&rdquo;
+              </p>
+              {caso.testimonialAuthor && (
+                <footer className="mt-4 text-sm text-text-40">
+                  &mdash; {caso.testimonialAuthor}
+                  {caso.testimonialRole && `, ${caso.testimonialRole}`}
+                </footer>
+              )}
+            </blockquote>
+          )}
 
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-text-100">Servicios utilizados</h2>

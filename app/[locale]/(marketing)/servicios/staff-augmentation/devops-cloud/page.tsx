@@ -10,20 +10,30 @@ import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "DevOps e Infraestructura | Cloud Architects Certificados",
-  description:
-    "Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform, Kubernetes.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/staff-augmentation/devops-cloud",
-    languages: {
-      es: "https://www.nivelics.com/servicios/staff-augmentation/devops-cloud",
-      en: "https://www.nivelics.com/en/services/staff-augmentation/devops-cloud",
-      "x-default": "https://www.nivelics.com/servicios/staff-augmentation/devops-cloud",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("devops-cloud", locale);
+  return {
+    title: cms?.seoTitle || "DevOps e Infraestructura | Cloud Architects Certificados",
+    description:
+      cms?.seoDescription ||
+      "Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform, Kubernetes.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/staff-augmentation/devops-cloud",
+      languages: {
+        es: "https://www.nivelics.com/servicios/staff-augmentation/devops-cloud",
+        en: "https://www.nivelics.com/en/services/staff-augmentation/devops-cloud",
+        "x-default": "https://www.nivelics.com/servicios/staff-augmentation/devops-cloud",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -73,7 +83,9 @@ const DEVOPS_ROLES = [
   },
 ];
 
-export default function DevOpsCloudPage() {
+export default async function DevOpsCloudPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("devops-cloud", locale);
   const serviceSchema = getServiceSchema({
     name: "DevOps e Infraestructura",
     description:
@@ -140,9 +152,12 @@ export default function DevOpsCloudPage() {
 
       <HeroSplit
         badge="Staff Aug · DevOps"
-        h1="DevOps senior"
+        h1={cms?.title || "DevOps senior"}
         h1Accent="integrado en días"
-        subtitle="Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform, Kubernetes y observabilidad para tu equipo."
+        subtitle={
+          cms?.subtitle ||
+          "Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform, Kubernetes y observabilidad para tu equipo."
+        }
         bullets={[
           "Candidatos presentados en 5 días hábiles",
           "Ahorro de hasta 40% vs contratar en USA",
@@ -161,12 +176,16 @@ export default function DevOpsCloudPage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
-          { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
-          { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
-          { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
+                { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
+                { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
+                { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
+              ]
+        }
       />
 
       <section className="bg-bg-surface py-16 md:py-24">

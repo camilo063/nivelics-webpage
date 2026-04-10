@@ -10,23 +10,36 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Automatización de Procesos con IA | Eficiencia Operacional",
-  description:
-    "Automatizamos procesos en finanzas, RRHH y logística. Hasta 50% reducción de tiempo operativo.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
-    languages: {
-      es: "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
-      en: "https://www.nivelics.com/en/services/artificial-intelligence/process-automation",
-      "x-default":
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("automatizacion-procesos", locale);
+  return {
+    title: cms?.seoTitle || "Automatización de Procesos con IA | Eficiencia Operacional",
+    description:
+      cms?.seoDescription ||
+      "Automatizamos procesos en finanzas, RRHH y logística. Hasta 50% reducción de tiempo operativo.",
+    alternates: {
+      canonical:
         "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
+      languages: {
+        es: "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
+        en: "https://www.nivelics.com/en/services/artificial-intelligence/process-automation",
+        "x-default":
+          "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
+      },
     },
-  },
-};
+  };
+}
 
-export default function AutomatizacionProcesosPage() {
+export default async function AutomatizacionProcesosPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("automatizacion-procesos", locale);
   const serviceSchema = getServiceSchema({
     name: "Automatización de Procesos con IA",
     description:
@@ -97,9 +110,12 @@ export default function AutomatizacionProcesosPage() {
       {/* Hero */}
       <HeroSplit
         badge="IA · Automatización"
-        h1="Procesos que tardaban horas,"
+        h1={cms?.title || "Procesos que tardaban horas,"}
         h1Accent="ahora en segundos"
-        subtitle="Combinamos RPA con IA generativa para automatizar flujos complejos que requieren juicio y contexto. Finanzas, RRHH, logística y operaciones — sin reemplazar tus sistemas actuales."
+        subtitle={
+          cms?.subtitle ||
+          "Combinamos RPA con IA generativa para automatizar flujos complejos que requieren juicio y contexto. Finanzas, RRHH, logística y operaciones — sin reemplazar tus sistemas actuales."
+        }
         bullets={[
           "Hasta 50% reducción de tiempo operativo documentado",
           "Integración con sistemas legacy sin necesidad de reemplazarlos",
@@ -155,24 +171,28 @@ export default function AutomatizacionProcesosPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          {
-            value: "50%",
-            label: "Reducción de tiempo operativo",
-            sublabel: "promedio documentado en proyectos",
-          },
-          { value: "0", label: "Errores humanos", sublabel: "en procesos automatizados" },
-          {
-            value: "24/7",
-            label: "Disponibilidad",
-            sublabel: "sin costo adicional por hora extra",
-          },
-          {
-            value: "30-50%",
-            label: "Ahorro en costos",
-            sublabel: "reducción de costos operativos promedio",
-          },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "50%",
+                  label: "Reducción de tiempo operativo",
+                  sublabel: "promedio documentado en proyectos",
+                },
+                { value: "0", label: "Errores humanos", sublabel: "en procesos automatizados" },
+                {
+                  value: "24/7",
+                  label: "Disponibilidad",
+                  sublabel: "sin costo adicional por hora extra",
+                },
+                {
+                  value: "30-50%",
+                  label: "Ahorro en costos",
+                  sublabel: "reducción de costos operativos promedio",
+                },
+              ]
+        }
       />
 
       {/* Comparison */}
@@ -223,33 +243,37 @@ export default function AutomatizacionProcesosPage() {
       <FAQAccordion
         title="Preguntas frecuentes sobre Automatización de Procesos"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿Qué procesos se pueden automatizar con IA?",
-            answer:
-              "Cualquier proceso repetitivo que involucre documentos, datos o decisiones basadas en reglas: conciliaciones financieras, procesamiento de facturas, onboarding de empleados, generación de reportes, gestión de inventario, aprobaciones y flujos de trabajo multi-paso.",
-          },
-          {
-            question: "¿Necesito reemplazar mis sistemas actuales?",
-            answer:
-              "No. Nos integramos con tus sistemas existentes (ERP, CRM, bases de datos, herramientas legacy) sin necesidad de migración. Construimos conectores que extraen el máximo valor de tu infraestructura actual.",
-          },
-          {
-            question: "¿Cuánto tiempo toma implementar la automatización?",
-            answer:
-              "Un proceso típico se automatiza en 4-8 semanas. En la primera semana hacemos un discovery para mapear el proceso actual, identificar cuellos de botella y definir el alcance del MVP.",
-          },
-          {
-            question: "¿Cómo se mide el ROI de la automatización?",
-            answer:
-              "Medimos tiempo ahorrado, errores eliminados, volumen procesado y costo por transacción antes y después. Nuestros clientes ven entre 30-50% de reducción en costos operativos promedio.",
-          },
-          {
-            question: "¿Qué pasa con los empleados que hacían esas tareas?",
-            answer:
-              "La automatización libera a tu equipo de tareas repetitivas para que se enfoquen en trabajo de mayor valor: análisis, estrategia, relaciones con clientes. En nuestra experiencia, los equipos terminan más productivos y satisfechos.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿Qué procesos se pueden automatizar con IA?",
+                  answer:
+                    "Cualquier proceso repetitivo que involucre documentos, datos o decisiones basadas en reglas: conciliaciones financieras, procesamiento de facturas, onboarding de empleados, generación de reportes, gestión de inventario, aprobaciones y flujos de trabajo multi-paso.",
+                },
+                {
+                  question: "¿Necesito reemplazar mis sistemas actuales?",
+                  answer:
+                    "No. Nos integramos con tus sistemas existentes (ERP, CRM, bases de datos, herramientas legacy) sin necesidad de migración. Construimos conectores que extraen el máximo valor de tu infraestructura actual.",
+                },
+                {
+                  question: "¿Cuánto tiempo toma implementar la automatización?",
+                  answer:
+                    "Un proceso típico se automatiza en 4-8 semanas. En la primera semana hacemos un discovery para mapear el proceso actual, identificar cuellos de botella y definir el alcance del MVP.",
+                },
+                {
+                  question: "¿Cómo se mide el ROI de la automatización?",
+                  answer:
+                    "Medimos tiempo ahorrado, errores eliminados, volumen procesado y costo por transacción antes y después. Nuestros clientes ven entre 30-50% de reducción en costos operativos promedio.",
+                },
+                {
+                  question: "¿Qué pasa con los empleados que hacían esas tareas?",
+                  answer:
+                    "La automatización libera a tu equipo de tareas repetitivas para que se enfoquen en trabajo de mayor valor: análisis, estrategia, relaciones con clientes. En nuestra experiencia, los equipos terminan más productivos y satisfechos.",
+                },
+              ]
+        }
       />
 
       {/* Contact */}

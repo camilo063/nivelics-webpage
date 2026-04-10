@@ -3,21 +3,34 @@ import { MessageCircle, Mail, Clock, HelpCircle } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
+import { getLocale } from "next-intl/server";
+import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Soporte y Contacto Técnico | Nivelics",
-  description:
-    "Soporte técnico Nivelics. Contacto por WhatsApp y email. Horario de atención: Lunes a Viernes 8:00 - 18:00 (GMT-5).",
-  alternates: {
-    canonical: "https://www.nivelics.com/soporte",
-    languages: {
-      es: "https://www.nivelics.com/soporte",
-      en: "https://www.nivelics.com/en/support",
-      "x-default": "https://www.nivelics.com/soporte",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getPageGeneral("support");
+  const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+
+  return {
+    title: page?.seoTitle || "Soporte y Contacto Técnico | Nivelics",
+    description:
+      page?.seoDescription ||
+      "Soporte técnico Nivelics. Contacto por WhatsApp y email. Horario de atención: Lunes a Viernes 8:00 - 18:00 (GMT-5).",
+    alternates: {
+      canonical: "https://www.nivelics.com/soporte",
+      languages: {
+        es: "https://www.nivelics.com/soporte",
+        en: "https://www.nivelics.com/en/support",
+        "x-default": "https://www.nivelics.com/soporte",
+      },
     },
-  },
-};
+  };
+}
 
+// LEGACY FALLBACK
 const FAQ_ITEMS = [
   {
     question: "¿Cuál es el tiempo de respuesta del soporte técnico?",
@@ -36,6 +49,7 @@ const FAQ_ITEMS = [
   },
 ];
 
+// LEGACY FALLBACK
 const CHANNELS = [
   {
     icon: MessageCircle,
@@ -55,10 +69,14 @@ const CHANNELS = [
   },
 ];
 
-export default function SoportePage() {
+export default async function SoportePage() {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getPageGeneral("support");
+  const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
-    { name: "Soporte", url: "/soporte" },
+    { name: page?.title || "Soporte", url: "/soporte" },
   ]);
   const faqSchema = getFAQSchema(FAQ_ITEMS);
 
@@ -77,7 +95,7 @@ export default function SoportePage() {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Soporte y Contacto Técnico
+            {page?.title || "Soporte y Contacto Técnico"}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-text-70">
             Estamos aquí para ayudarte. Nuestro equipo de soporte técnico atiende tus consultas,

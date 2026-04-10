@@ -4,21 +4,34 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { ApplyForm } from "./apply-form";
+import { getLocale } from "next-intl/server";
+import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
 
-export const metadata: Metadata = {
-  title: "Trabaja con Nivelics | Únete al Equipo",
-  description:
-    "Únete al equipo de Nivelics. Cultura directa, humana y ambiciosa. Posiciones en desarrollo, cloud, IA y más.",
-  alternates: {
-    canonical: "https://www.nivelics.com/trabaja-con-nosotros",
-    languages: {
-      es: "https://www.nivelics.com/trabaja-con-nosotros",
-      en: "https://www.nivelics.com/en/careers",
-      "x-default": "https://www.nivelics.com/trabaja-con-nosotros",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getPageGeneral("careers");
+  const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+
+  return {
+    title: page?.seoTitle || "Trabaja con Nivelics | Únete al Equipo",
+    description:
+      page?.seoDescription ||
+      "Únete al equipo de Nivelics. Cultura directa, humana y ambiciosa. Posiciones en desarrollo, cloud, IA y más.",
+    alternates: {
+      canonical: "https://www.nivelics.com/trabaja-con-nosotros",
+      languages: {
+        es: "https://www.nivelics.com/trabaja-con-nosotros",
+        en: "https://www.nivelics.com/en/careers",
+        "x-default": "https://www.nivelics.com/trabaja-con-nosotros",
+      },
     },
-  },
-};
+  };
+}
 
+// LEGACY FALLBACK
 const CULTURE_VALUES = [
   {
     icon: MessageCircle,
@@ -46,10 +59,14 @@ const CULTURE_VALUES = [
   },
 ];
 
-export default function TrabajaConNosotrosPage() {
+export default async function TrabajaConNosotrosPage() {
+  const locale = (await getLocale()) as Locale;
+  const raw = await getPageGeneral("careers");
+  const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
-    { name: "Trabaja con Nosotros", url: "/trabaja-con-nosotros" },
+    { name: page?.title || "Trabaja con Nosotros", url: "/trabaja-con-nosotros" },
   ]);
 
   return (
@@ -63,7 +80,7 @@ export default function TrabajaConNosotrosPage() {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Trabaja con Nivelics
+            {page?.title || "Trabaja con Nivelics"}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-text-70">
             Somos un equipo de ingenieros y estrategas apasionados por la tecnología y el impacto

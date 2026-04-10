@@ -10,20 +10,30 @@ import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Seguridad Cloud | Gobierno e Identidad en AWS y GCP",
-  description:
-    "Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/cloud/seguridad",
-    languages: {
-      es: "https://www.nivelics.com/servicios/cloud/seguridad",
-      en: "https://www.nivelics.com/en/services/cloud/security",
-      "x-default": "https://www.nivelics.com/servicios/cloud/seguridad",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("seguridad", locale);
+  return {
+    title: cms?.seoTitle || "Seguridad Cloud | Gobierno e Identidad en AWS y GCP",
+    description:
+      cms?.seoDescription ||
+      "Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/cloud/seguridad",
+      languages: {
+        es: "https://www.nivelics.com/servicios/cloud/seguridad",
+        en: "https://www.nivelics.com/en/services/cloud/security",
+        "x-default": "https://www.nivelics.com/servicios/cloud/seguridad",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function SeguridadCloudPage() {
+export default async function SeguridadCloudPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("seguridad", locale);
   const serviceSchema = getServiceSchema({
     name: "Seguridad Cloud",
     description:
@@ -109,9 +121,12 @@ export default function SeguridadCloudPage() {
 
       <HeroSplit
         badge="Cloud \u00b7 Seguridad"
-        h1="Seguridad cloud"
+        h1={cms?.title || "Seguridad cloud"}
         h1Accent="sin excusas"
-        subtitle="Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud."
+        subtitle={
+          cms?.subtitle ||
+          "Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud."
+        }
         bullets={[
           "Compliance SOC2, ISO27001 desde semana 1",
           "Arquitectura Zero Trust implementada",
@@ -161,12 +176,20 @@ export default function SeguridadCloudPage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "100%", label: "Cifrado", sublabel: "En tr\u00e1nsito y reposo" },
-          { value: "0", label: "Brechas", sublabel: "Tolerancia cero a incidentes" },
-          { value: "24h", label: "Respuesta", sublabel: "Tiempo m\u00e1ximo a incidentes" },
-          { value: "95%", label: "Compliance", sublabel: "Controles cubiertos desde d\u00eda 1" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "100%", label: "Cifrado", sublabel: "En tr\u00e1nsito y reposo" },
+                { value: "0", label: "Brechas", sublabel: "Tolerancia cero a incidentes" },
+                { value: "24h", label: "Respuesta", sublabel: "Tiempo m\u00e1ximo a incidentes" },
+                {
+                  value: "95%",
+                  label: "Compliance",
+                  sublabel: "Controles cubiertos desde d\u00eda 1",
+                },
+              ]
+        }
       />
 
       <section id="capas" className="bg-bg-surface py-16 md:py-24">

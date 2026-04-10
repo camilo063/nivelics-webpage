@@ -3,6 +3,11 @@ import { PageWrapper } from "@/components/layout";
 import { ServicesGrid } from "@/components/sections";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getHubServiciosData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Servicios de Transformación Digital | IA · Cloud · Staffing",
@@ -18,7 +23,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServiciosPage() {
+export default async function ServiciosPage() {
+  const locale = (await getLocale()) as Locale;
+  // Pre-fetch hub services data for potential future use
+  const _hubServicios = await getHubServiciosData(locale);
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },

@@ -10,20 +10,30 @@ import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Migraci\u00f3n a AWS | Cloud Migration sin Interrupciones",
-  description:
-    "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\u00f3n de costos desde el d\u00eda uno.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/cloud/migracion-aws",
-    languages: {
-      es: "https://www.nivelics.com/servicios/cloud/migracion-aws",
-      en: "https://www.nivelics.com/en/services/cloud/aws-migration",
-      "x-default": "https://www.nivelics.com/servicios/cloud/migracion-aws",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("migracion-aws", locale);
+  return {
+    title: cms?.seoTitle || "Migraci\u00f3n a AWS | Cloud Migration sin Interrupciones",
+    description:
+      cms?.seoDescription ||
+      "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\u00f3n de costos desde el d\u00eda uno.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/cloud/migracion-aws",
+      languages: {
+        es: "https://www.nivelics.com/servicios/cloud/migracion-aws",
+        en: "https://www.nivelics.com/en/services/cloud/aws-migration",
+        "x-default": "https://www.nivelics.com/servicios/cloud/migracion-aws",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function MigracionAWSPage() {
+export default async function MigracionAWSPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("migracion-aws", locale);
   const serviceSchema = getServiceSchema({
     name: "Migraci\u00f3n a AWS",
     description:
@@ -109,9 +121,12 @@ export default function MigracionAWSPage() {
 
       <HeroSplit
         badge="Cloud \u00b7 AWS Migration"
-        h1="Migra a AWS"
+        h1={cms?.title || "Migra a AWS"}
         h1Accent="sin downtime"
-        subtitle="Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\u00f3n de costos desde el d\u00eda uno."
+        subtitle={
+          cms?.subtitle ||
+          "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\u00f3n de costos desde el d\u00eda uno."
+        }
         bullets={[
           "Assessment gratuito de tu infraestructura",
           "Estrategia 6R adaptada a cada workload",
@@ -161,12 +176,20 @@ export default function MigracionAWSPage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "0", label: "Downtime", sublabel: "Zero interrupciones garantizado" },
-          { value: "60%", label: "M\u00e1s r\u00e1pido", sublabel: "vs. migraci\u00f3n interna" },
-          { value: "100%", label: "Documentado", sublabel: "IaC + runbooks entregados" },
-          { value: "30%", label: "Ahorro desde d\u00eda 1", sublabel: "FinOps incluido" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "0", label: "Downtime", sublabel: "Zero interrupciones garantizado" },
+                {
+                  value: "60%",
+                  label: "M\u00e1s r\u00e1pido",
+                  sublabel: "vs. migraci\u00f3n interna",
+                },
+                { value: "100%", label: "Documentado", sublabel: "IaC + runbooks entregados" },
+                { value: "30%", label: "Ahorro desde d\u00eda 1", sublabel: "FinOps incluido" },
+              ]
+        }
       />
 
       <section id="beneficios" className="bg-bg-surface py-16 md:py-24">

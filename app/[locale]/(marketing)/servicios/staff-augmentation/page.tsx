@@ -14,20 +14,30 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Staff Augmentation Premium Colombia | Talento Tech LATAM",
-  description:
-    "Equipos de ingeniería on-demand con talento senior verificado. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/staff-augmentation",
-    languages: {
-      es: "https://www.nivelics.com/servicios/staff-augmentation",
-      en: "https://www.nivelics.com/en/services/staff-augmentation",
-      "x-default": "https://www.nivelics.com/servicios/staff-augmentation",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("staff-augmentation", locale);
+  return {
+    title: cms?.seoTitle || "Staff Augmentation Premium Colombia | Talento Tech LATAM",
+    description:
+      cms?.seoDescription ||
+      "Equipos de ingeniería on-demand con talento senior verificado. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/staff-augmentation",
+      languages: {
+        es: "https://www.nivelics.com/servicios/staff-augmentation",
+        en: "https://www.nivelics.com/en/services/staff-augmentation",
+        "x-default": "https://www.nivelics.com/servicios/staff-augmentation",
+      },
     },
-  },
-};
+  };
+}
 
 const SUB_SERVICES = [
   {
@@ -66,7 +76,9 @@ const SUB_SERVICES = [
   },
 ];
 
-export default function StaffAugmentationPage() {
+export default async function StaffAugmentationPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("staff-augmentation", locale);
   const serviceSchema = getServiceSchema({
     name: "Staff Augmentation Premium",
     description:
@@ -119,9 +131,12 @@ export default function StaffAugmentationPage() {
       {/* 1. Hero — HeroSplit + HeroCalculator */}
       <HeroSplit
         badge="Staff Augmentation Premium"
-        h1="Talento tech colombiano"
+        h1={cms?.title || "Talento tech colombiano"}
         h1Accent="en 5 días hábiles"
-        subtitle="Desarrolladores, data engineers y diseñadores validados e integrados en tu equipo. Sin riesgos laborales, sin costos ocultos."
+        subtitle={
+          cms?.subtitle ||
+          "Desarrolladores, data engineers y diseñadores validados e integrados en tu equipo. Sin riesgos laborales, sin costos ocultos."
+        }
         bullets={[
           "Candidatos presentados en máximo 5 días hábiles",
           "40% de ahorro vs. contratar en USA o Europa",
@@ -137,20 +152,32 @@ export default function StaffAugmentationPage() {
 
       {/* 2. MetricsBar */}
       <MetricsBar
-        metrics={[
-          { value: "5", label: "Días hábiles", sublabel: "para presentar el primer candidato" },
-          {
-            value: "40%",
-            label: "Ahorro promedio",
-            sublabel: "vs. contratar directo en USA o Europa",
-          },
-          { value: "10", label: "Días de garantía", sublabel: "reemplazo sin costo si no encaja" },
-          {
-            value: "100%",
-            label: "Propiedad intelectual",
-            sublabel: "siempre del cliente, sin excepción",
-          },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "5",
+                  label: "Días hábiles",
+                  sublabel: "para presentar el primer candidato",
+                },
+                {
+                  value: "40%",
+                  label: "Ahorro promedio",
+                  sublabel: "vs. contratar directo en USA o Europa",
+                },
+                {
+                  value: "10",
+                  label: "Días de garantía",
+                  sublabel: "reemplazo sin costo si no encaja",
+                },
+                {
+                  value: "100%",
+                  label: "Propiedad intelectual",
+                  sublabel: "siempre del cliente, sin excepción",
+                },
+              ]
+        }
       />
 
       {/* 3. Sub-services */}
@@ -342,33 +369,37 @@ export default function StaffAugmentationPage() {
       <FAQAccordion
         title="Preguntas frecuentes sobre Staff Augmentation"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿Cuál es el modelo de contratación?",
-            answer:
-              "Mensual por recurso asignado. El mínimo recomendado es 3 meses para que el perfil genere valor real, pero ofrecemos flexibilidad mensual con preaviso de 5 días hábiles. Sin costos ocultos, sin prestaciones, sin riesgos laborales.",
-          },
-          {
-            question: "¿Los perfiles trabajan en nuestra zona horaria?",
-            answer:
-              "Sí. Nuestros ingenieros en Colombia tienen overlap total con EST (New York) y PST (California), y trabajan en los horarios que tu equipo necesite. Para clientes en Europa coordinamos horarios adaptados.",
-          },
-          {
-            question: "¿Cómo garantizan la calidad técnica de los perfiles?",
-            answer:
-              "Todo candidato pasa por: prueba técnica en el stack específico, entrevista con nuestro CTO o lead técnico, validación de inglés (si aplica) y verificación de referencias. Solo presentamos perfiles que nosotros contrataríamos para nuestros propios proyectos.",
-          },
-          {
-            question: "¿Qué pasa si el perfil no funciona?",
-            answer:
-              "Lo reemplazamos en menos de 10 días hábiles sin costo adicional. Sin preguntas, sin burocracia. Esta garantía está en el contrato.",
-          },
-          {
-            question: "¿Pueden escalar varios perfiles a la vez?",
-            answer:
-              "Sí. Hemos escalado equipos de hasta 15 personas simultáneamente para clientes con necesidades urgentes. Contamos con bench activo y red de talentos validados para escalar rápido cuando se necesita.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿Cuál es el modelo de contratación?",
+                  answer:
+                    "Mensual por recurso asignado. El mínimo recomendado es 3 meses para que el perfil genere valor real, pero ofrecemos flexibilidad mensual con preaviso de 5 días hábiles. Sin costos ocultos, sin prestaciones, sin riesgos laborales.",
+                },
+                {
+                  question: "¿Los perfiles trabajan en nuestra zona horaria?",
+                  answer:
+                    "Sí. Nuestros ingenieros en Colombia tienen overlap total con EST (New York) y PST (California), y trabajan en los horarios que tu equipo necesite. Para clientes en Europa coordinamos horarios adaptados.",
+                },
+                {
+                  question: "¿Cómo garantizan la calidad técnica de los perfiles?",
+                  answer:
+                    "Todo candidato pasa por: prueba técnica en el stack específico, entrevista con nuestro CTO o lead técnico, validación de inglés (si aplica) y verificación de referencias. Solo presentamos perfiles que nosotros contrataríamos para nuestros propios proyectos.",
+                },
+                {
+                  question: "¿Qué pasa si el perfil no funciona?",
+                  answer:
+                    "Lo reemplazamos en menos de 10 días hábiles sin costo adicional. Sin preguntas, sin burocracia. Esta garantía está en el contrato.",
+                },
+                {
+                  question: "¿Pueden escalar varios perfiles a la vez?",
+                  answer:
+                    "Sí. Hemos escalado equipos de hasta 15 personas simultáneamente para clientes con necesidades urgentes. Contamos con bench activo y red de talentos validados para escalar rápido cuando se necesita.",
+                },
+              ]
+        }
       />
 
       {/* 10. InlineContactForm */}

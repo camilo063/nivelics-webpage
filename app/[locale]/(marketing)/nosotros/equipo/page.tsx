@@ -4,6 +4,11 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
+import { getLocale } from "next-intl/server";
+import { getTeamMembers, mapTeamMember } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Equipo Directivo | Nivelics",
@@ -19,13 +24,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EquipoPage() {
+export default async function EquipoPage() {
+  const locale = (await getLocale()) as Locale;
+  const dbMembers = await getTeamMembers();
+  const mappedMembers = dbMembers.length
+    ? dbMembers.map((m) => mapTeamMember(m as Record<string, unknown>, locale))
+    : null;
+
+  // Use DB members or fall back to TEAM_MEMBERS from schema
+  const membersToShow =
+    mappedMembers && mappedMembers.length > 0
+      ? mappedMembers.map((m) => ({ name: m.name, jobTitle: m.role, description: m.bio }))
+      : TEAM_MEMBERS;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
     { name: "Equipo", url: "/nosotros/equipo" },
   ]);
-  const teamSchemas = TEAM_MEMBERS.map((m) => getPersonSchema(m));
+  const teamSchemas = membersToShow.map((m) => getPersonSchema(m));
 
   return (
     <PageWrapper>
@@ -55,7 +72,7 @@ export default function EquipoPage() {
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM_MEMBERS.map((member) => (
+            {membersToShow.map((member) => (
               <div key={member.name} className="glass glow-hover rounded-xl p-6">
                 <div className="flex items-start justify-between">
                   <div>

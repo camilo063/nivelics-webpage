@@ -8,6 +8,11 @@ import { METRICS, SITE } from "@/lib/constants";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
+import { getLocale } from "next-intl/server";
+import { getTeamMembers, mapTeamMember } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Quiénes Somos | Nivelics — 13 años en transformación digital LATAM",
@@ -41,13 +46,25 @@ const VALUES = [
   },
 ];
 
-export default function NosotrosPage() {
+export default async function NosotrosPage() {
+  const locale = (await getLocale()) as Locale;
+  const dbMembers = await getTeamMembers();
+  const mappedMembers = dbMembers.length
+    ? dbMembers.map((m) => mapTeamMember(m as Record<string, unknown>, locale))
+    : null;
+
+  // Use DB members or fall back to TEAM_MEMBERS
+  const membersToShow =
+    mappedMembers && mappedMembers.length > 0
+      ? mappedMembers.map((m) => ({ name: m.name, jobTitle: m.role, description: m.bio }))
+      : TEAM_MEMBERS;
+
   const orgSchema = getOrganizationSchema();
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
   ]);
-  const teamSchemas = TEAM_MEMBERS.map((m) => getPersonSchema(m));
+  const teamSchemas = membersToShow.map((m) => getPersonSchema(m));
 
   return (
     <PageWrapper>
@@ -107,7 +124,7 @@ export default function NosotrosPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Equipo Directivo</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM_MEMBERS.map((member) => (
+            {membersToShow.map((member) => (
               <div key={member.name} className="glass glow-hover rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-text-100">{member.name}</h3>
                 <p className="mt-1 text-sm font-medium text-primary">{member.jobTitle}</p>

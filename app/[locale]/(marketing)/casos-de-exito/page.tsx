@@ -3,6 +3,11 @@ import { PageWrapper } from "@/components/layout";
 import { ServiceBadge, CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { getLocale } from "next-intl/server";
+import { getAllCasosExito, mapCasoExito } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Casos de Éxito | Televisa, Grupo Bolívar, Two Maids",
@@ -18,6 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
+// LEGACY FALLBACK
 const CASES = [
   {
     title: "Migración Cloud para Grupo Financiero",
@@ -61,7 +67,13 @@ const CASES = [
   },
 ];
 
-export default function CasosDeExitoPage() {
+export default async function CasosDeExitoPage() {
+  const locale = (await getLocale()) as Locale;
+  const rawCases = await getAllCasosExito();
+  const dbCases = rawCases.length
+    ? rawCases.map((c) => mapCasoExito(c as Record<string, unknown>, locale))
+    : null;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Casos de Éxito", url: "/casos-de-exito" },
@@ -128,48 +140,86 @@ export default function CasosDeExitoPage() {
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="space-y-8">
-            {CASES.map((c) => (
-              <article key={c.title} className="glass glow-hover rounded-xl p-8">
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <ServiceBadge variant={c.badge}>
-                    {c.badge === "ia"
-                      ? "IA"
-                      : c.badge === "dev"
-                        ? "Desarrollo"
-                        : c.badge.charAt(0).toUpperCase() + c.badge.slice(1)}
-                  </ServiceBadge>
-                  <span className="text-xs text-text-40">{c.industry}</span>
-                </div>
-                <h2 className="text-2xl font-bold text-text-100">{c.title}</h2>
+            {dbCases
+              ? dbCases.map((c) => (
+                  <article key={c.id} className="glass glow-hover rounded-xl p-8">
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      {c.clientSector && (
+                        <span className="text-xs text-text-40">{c.clientSector}</span>
+                      )}
+                    </div>
+                    <h2 className="text-2xl font-bold text-text-100">{c.title}</h2>
 
-                <div className="mt-6 grid gap-6 md:grid-cols-3">
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                      Desafío
-                    </h3>
-                    <p className="mt-2 text-sm text-text-70">{c.challenge}</p>
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                      Solución
-                    </h3>
-                    <p className="mt-2 text-sm text-text-70">{c.solution}</p>
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                      Resultados
-                    </h3>
-                    <ul className="mt-2 space-y-1">
-                      {c.results.map((r) => (
-                        <li key={r} className="text-sm font-mono text-primary">
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </article>
-            ))}
+                    <div className="mt-6 grid gap-6 md:grid-cols-3">
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
+                          Desafío
+                        </h3>
+                        <p className="mt-2 text-sm text-text-70">{c.challenge}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
+                          Solución
+                        </h3>
+                        <p className="mt-2 text-sm text-text-70">{c.solution}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
+                          Resultados
+                        </h3>
+                        <ul className="mt-2 space-y-1">
+                          {c.metrics.map((m) => (
+                            <li key={m.label} className="text-sm font-mono text-primary">
+                              {m.value} {m.label}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+                ))
+              : CASES.map((c) => (
+                  <article key={c.title} className="glass glow-hover rounded-xl p-8">
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <ServiceBadge variant={c.badge}>
+                        {c.badge === "ia"
+                          ? "IA"
+                          : c.badge === "dev"
+                            ? "Desarrollo"
+                            : c.badge.charAt(0).toUpperCase() + c.badge.slice(1)}
+                      </ServiceBadge>
+                      <span className="text-xs text-text-40">{c.industry}</span>
+                    </div>
+                    <h2 className="text-2xl font-bold text-text-100">{c.title}</h2>
+
+                    <div className="mt-6 grid gap-6 md:grid-cols-3">
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
+                          Desafío
+                        </h3>
+                        <p className="mt-2 text-sm text-text-70">{c.challenge}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
+                          Solución
+                        </h3>
+                        <p className="mt-2 text-sm text-text-70">{c.solution}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
+                          Resultados
+                        </h3>
+                        <ul className="mt-2 space-y-1">
+                          {c.results.map((r) => (
+                            <li key={r} className="text-sm font-mono text-primary">
+                              {r}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+                ))}
           </div>
         </div>
       </section>

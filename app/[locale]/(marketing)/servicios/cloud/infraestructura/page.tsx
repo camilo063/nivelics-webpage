@@ -10,20 +10,30 @@ import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Arquitectura e Infraestructura Cloud | AWS \u00b7 GCP \u00b7 Azure",
-  description:
-    "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/cloud/infraestructura",
-    languages: {
-      es: "https://www.nivelics.com/servicios/cloud/infraestructura",
-      en: "https://www.nivelics.com/en/services/cloud/infrastructure",
-      "x-default": "https://www.nivelics.com/servicios/cloud/infraestructura",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("infraestructura", locale);
+  return {
+    title: cms?.seoTitle || "Arquitectura e Infraestructura Cloud | AWS \u00b7 GCP \u00b7 Azure",
+    description:
+      cms?.seoDescription ||
+      "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/cloud/infraestructura",
+      languages: {
+        es: "https://www.nivelics.com/servicios/cloud/infraestructura",
+        en: "https://www.nivelics.com/en/services/cloud/infrastructure",
+        "x-default": "https://www.nivelics.com/servicios/cloud/infraestructura",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function InfraestructuraPage() {
+export default async function InfraestructuraPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("infraestructura", locale);
   const serviceSchema = getServiceSchema({
     name: "Arquitectura e Infraestructura Cloud",
     description:
@@ -109,9 +121,12 @@ export default function InfraestructuraPage() {
 
       <HeroSplit
         badge="Cloud \u00b7 Infraestructura"
-        h1="Tu infra cloud"
+        h1={cms?.title || "Tu infra cloud"}
         h1Accent="siempre operando"
-        subtitle="Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n."
+        subtitle={
+          cms?.subtitle ||
+          "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n."
+        }
         bullets={[
           "Arquitecturas multi-AZ y multi-regi\u00f3n",
           "IaC con Terraform, Pulumi o CDK",
@@ -161,12 +176,16 @@ export default function InfraestructuraPage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "99.9%", label: "Disponibilidad", sublabel: "SLA garantizado" },
-          { value: "100%", label: "IaC", sublabel: "Infraestructura como c\u00f3digo" },
-          { value: "24/7", label: "Monitoreo", sublabel: "Observabilidad completa" },
-          { value: "50%", label: "Menos incidentes", sublabel: "vs. gesti\u00f3n manual" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "99.9%", label: "Disponibilidad", sublabel: "SLA garantizado" },
+                { value: "100%", label: "IaC", sublabel: "Infraestructura como c\u00f3digo" },
+                { value: "24/7", label: "Monitoreo", sublabel: "Observabilidad completa" },
+                { value: "50%", label: "Menos incidentes", sublabel: "vs. gesti\u00f3n manual" },
+              ]
+        }
       />
 
       <section id="beneficios" className="bg-bg-surface py-16 md:py-24">

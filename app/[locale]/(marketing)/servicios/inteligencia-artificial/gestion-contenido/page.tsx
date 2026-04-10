@@ -10,22 +10,34 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Gestión de Contenido con IA | SEO y Marketing Automatizado",
-  description:
-    "Generación y optimización de contenido a escala con IA. Integración con tu CMS y flujos editoriales.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
-    languages: {
-      es: "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
-      en: "https://www.nivelics.com/en/services/artificial-intelligence/content-management",
-      "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("gestion-contenido", locale);
+  return {
+    title: cms?.seoTitle || "Gestión de Contenido con IA | SEO y Marketing Automatizado",
+    description:
+      cms?.seoDescription ||
+      "Generación y optimización de contenido a escala con IA. Integración con tu CMS y flujos editoriales.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
+      languages: {
+        es: "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
+        en: "https://www.nivelics.com/en/services/artificial-intelligence/content-management",
+        "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
+      },
     },
-  },
-};
+  };
+}
 
-export default function GestionContenidoPage() {
+export default async function GestionContenidoPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("gestion-contenido", locale);
   const serviceSchema = getServiceSchema({
     name: "Gestión de Contenido con IA",
     description:
@@ -96,9 +108,12 @@ export default function GestionContenidoPage() {
       {/* Hero */}
       <HeroSplit
         badge="IA · Contenido"
-        h1="10x más contenido,"
+        h1={cms?.title || "10x más contenido,"}
         h1Accent="el mismo equipo"
-        subtitle="Pipelines de contenido impulsados por IA generativa: desde la ideación hasta la publicación. SEO optimizado, tono de marca consistente y publicación directa a tu CMS."
+        subtitle={
+          cms?.subtitle ||
+          "Pipelines de contenido impulsados por IA generativa: desde la ideación hasta la publicación. SEO optimizado, tono de marca consistente y publicación directa a tu CMS."
+        }
         bullets={[
           "Artículos, landing pages y descripciones de producto optimizados para SEO",
           "Variantes automáticas por segmento y audiencia",
@@ -154,28 +169,32 @@ export default function GestionContenidoPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          {
-            value: "10x",
-            label: "Más volumen de producción",
-            sublabel: "con el mismo equipo editorial",
-          },
-          {
-            value: "80%",
-            label: "Menos tiempo por pieza",
-            sublabel: "de días a horas por contenido",
-          },
-          {
-            value: "100%",
-            label: "Consistencia de marca",
-            sublabel: "tono de voz aplicado automáticamente",
-          },
-          {
-            value: "3x",
-            label: "Mejor posicionamiento SEO",
-            sublabel: "por optimización automática de keywords",
-          },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "10x",
+                  label: "Más volumen de producción",
+                  sublabel: "con el mismo equipo editorial",
+                },
+                {
+                  value: "80%",
+                  label: "Menos tiempo por pieza",
+                  sublabel: "de días a horas por contenido",
+                },
+                {
+                  value: "100%",
+                  label: "Consistencia de marca",
+                  sublabel: "tono de voz aplicado automáticamente",
+                },
+                {
+                  value: "3x",
+                  label: "Mejor posicionamiento SEO",
+                  sublabel: "por optimización automática de keywords",
+                },
+              ]
+        }
       />
 
       {/* Comparison */}
@@ -226,33 +245,37 @@ export default function GestionContenidoPage() {
       <FAQAccordion
         title="Preguntas frecuentes sobre Gestión de Contenido con IA"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿El contenido generado con IA es detectable?",
-            answer:
-              "No si se hace bien. Nuestro pipeline incluye etapas de humanización, revisión de estilo y verificación de originalidad. El contenido pasa por tu flujo editorial antes de publicarse — la IA acelera la producción, no reemplaza el criterio humano.",
-          },
-          {
-            question: "¿Se integra con mi CMS actual?",
-            answer:
-              "Sí. Tenemos integraciones con WordPress, Contentful, Strapi, Sanity y otros CMS headless. La publicación puede ser directa vía API o pasar por un flujo de aprobación antes del publish.",
-          },
-          {
-            question: "¿Cómo se mantiene el tono de marca?",
-            answer:
-              "Configuramos un brand voice profile con ejemplos de tu contenido actual, guías de estilo y restricciones. El agente aplica estas reglas de forma consistente en todo el contenido que produce.",
-          },
-          {
-            question: "¿Funciona para contenido en múltiples idiomas?",
-            answer:
-              "Sí. El agente puede producir contenido en español, inglés, portugués y otros idiomas, adaptando no solo el idioma sino el estilo y las referencias culturales para cada mercado.",
-          },
-          {
-            question: "¿Cuánto cuesta la generación de contenido con IA?",
-            answer:
-              "El costo por pieza es una fracción del costo editorial tradicional. El modelo incluye una implementación inicial + un MRR por volumen de producción mensual. En el discovery definimos el precio exacto según tu volumen y necesidades.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿El contenido generado con IA es detectable?",
+                  answer:
+                    "No si se hace bien. Nuestro pipeline incluye etapas de humanización, revisión de estilo y verificación de originalidad. El contenido pasa por tu flujo editorial antes de publicarse — la IA acelera la producción, no reemplaza el criterio humano.",
+                },
+                {
+                  question: "¿Se integra con mi CMS actual?",
+                  answer:
+                    "Sí. Tenemos integraciones con WordPress, Contentful, Strapi, Sanity y otros CMS headless. La publicación puede ser directa vía API o pasar por un flujo de aprobación antes del publish.",
+                },
+                {
+                  question: "¿Cómo se mantiene el tono de marca?",
+                  answer:
+                    "Configuramos un brand voice profile con ejemplos de tu contenido actual, guías de estilo y restricciones. El agente aplica estas reglas de forma consistente en todo el contenido que produce.",
+                },
+                {
+                  question: "¿Funciona para contenido en múltiples idiomas?",
+                  answer:
+                    "Sí. El agente puede producir contenido en español, inglés, portugués y otros idiomas, adaptando no solo el idioma sino el estilo y las referencias culturales para cada mercado.",
+                },
+                {
+                  question: "¿Cuánto cuesta la generación de contenido con IA?",
+                  answer:
+                    "El costo por pieza es una fracción del costo editorial tradicional. El modelo incluye una implementación inicial + un MRR por volumen de producción mensual. En el discovery definimos el precio exacto según tu volumen y necesidades.",
+                },
+              ]
+        }
       />
 
       {/* Contact */}

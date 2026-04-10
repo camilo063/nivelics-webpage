@@ -1,0 +1,294 @@
+{
+  "startedAt": "2026-04-09T01:58:03.891Z",
+  "total": 463,
+  "translated": 0,
+  "skipped": 427,
+  "errors": [
+    {
+      "table": "casos_exito",
+      "id": "287abb45-caf8-45ac-a108-0e3907be283e",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNMCcjsyW2LTVoJm9y2\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "287abb45-caf8-45ac-a108-0e3907be283e",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNN67MNTPSfYcGRqNBo\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "287abb45-caf8-45ac-a108-0e3907be283e",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNNuBZCCKBQcnjzwcQ2\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "287abb45-caf8-45ac-a108-0e3907be283e",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNPhjFiXjrgx1aejkfR\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "634bc536-922f-4607-a696-9e89bb068924",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNQVzqu8MjF3a22goWv\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "634bc536-922f-4607-a696-9e89bb068924",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNRJ9yWPrEgCNS1EMQB\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "634bc536-922f-4607-a696-9e89bb068924",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNS6aExC24J3Dj66KCo\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "634bc536-922f-4607-a696-9e89bb068924",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNT2yUWZW6udysfPyeG\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "4654993c-6a24-4215-bbaa-dab36baa3322",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNTr7tr9n57FKRwXHmo\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "4654993c-6a24-4215-bbaa-dab36baa3322",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNUePjAVXgChAVakpEr\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "4654993c-6a24-4215-bbaa-dab36baa3322",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNVSm1symg8yBsGBEg6\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "4654993c-6a24-4215-bbaa-dab36baa3322",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNWErS8EgRmXoNaPbb6\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "33647df9-9178-43d0-bb1d-69909b9992f1",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNX3h12EpJ8oxyu3Xcp\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "33647df9-9178-43d0-bb1d-69909b9992f1",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNXrLAA4rx31Ma6ase8\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "33647df9-9178-43d0-bb1d-69909b9992f1",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNYew5rj8bCLbAndKe6\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "33647df9-9178-43d0-bb1d-69909b9992f1",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNZTQKjxwTgmyGcSia1\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "12615d29-5054-4d9a-9142-d1c555c34a5f",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNaGcTi5oSJqmMsFM7k\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "12615d29-5054-4d9a-9142-d1c555c34a5f",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNb5RY2rrG1PECg5N83\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "12615d29-5054-4d9a-9142-d1c555c34a5f",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNbtWjfXkAeq5o7JugJ\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "12615d29-5054-4d9a-9142-d1c555c34a5f",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNchE78wBqLzXKvkyJd\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "31792b18-029b-41a3-95eb-ae1363253215",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNdW6uEw2yw14nkYVYw\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "31792b18-029b-41a3-95eb-ae1363253215",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNeKjqbqiJ9iHxEwYrG\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "31792b18-029b-41a3-95eb-ae1363253215",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNf8Sxq77SvGjdYUS5a\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "31792b18-029b-41a3-95eb-ae1363253215",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNfvSgJFBAWcoKj9KZu\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "1ed67e87-1406-46ed-80bf-d73bc3eb4b6f",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNgiweyHgHZFuHdSmmJ\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "1ed67e87-1406-46ed-80bf-d73bc3eb4b6f",
+      "field": "challengeEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNhZBocm9WdnJ2CxaP1\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "1ed67e87-1406-46ed-80bf-d73bc3eb4b6f",
+      "field": "solutionEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNiN4MPStf1HTDnemS8\"}"
+    },
+    {
+      "table": "casos_exito",
+      "id": "1ed67e87-1406-46ed-80bf-d73bc3eb4b6f",
+      "field": "resultsEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNjC5cS7B57ZozZ8aBv\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "25f9e8c2-9c54-4ae8-95f9-bac39167a88d",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNkF1VxCfNEokegT3Ww\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "25f9e8c2-9c54-4ae8-95f9-bac39167a88d",
+      "field": "excerptEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNm3B8fEysL529MdEfx\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "7694f424-c855-4116-abb3-c65f0b92c170",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNmqPEvFL6wyGH7JoXi\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "7694f424-c855-4116-abb3-c65f0b92c170",
+      "field": "excerptEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNndRBtiHPjjPgdp1E5\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "726dad3f-1884-4b92-b523-85127f49610b",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNoSBYKJyS9DoMh5DxK\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "726dad3f-1884-4b92-b523-85127f49610b",
+      "field": "excerptEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNpEGi2Buyzd5YL7Uyv\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "52d235b6-8856-45c1-b1db-f1575665470b",
+      "field": "titleEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNq2mgizJ1gqPrTPKgY\"}"
+    },
+    {
+      "table": "blog_posts",
+      "id": "52d235b6-8856-45c1-b1db-f1575665470b",
+      "field": "excerptEn",
+      "error": "API 404: {\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"model: claude-sonnet-4-6-20250514\"},\"request_id\":\"req_011CZsNqrsQM9ur9Qcdh6A5e\"}"
+    }
+  ],
+  "sections": {
+    "home_content": {
+      "translated": 0,
+      "skipped": 9,
+      "errors": 0
+    },
+    "servicios": {
+      "translated": 0,
+      "skipped": 147,
+      "errors": 0
+    },
+    "casos_exito": {
+      "translated": 0,
+      "skipped": 42,
+      "errors": 28
+    },
+    "industrias": {
+      "translated": 0,
+      "skipped": 36,
+      "errors": 0
+    },
+    "team_members": {
+      "translated": 0,
+      "skipped": 10,
+      "errors": 0
+    },
+    "historia_items": {
+      "translated": 0,
+      "skipped": 24,
+      "errors": 0
+    },
+    "certificaciones": {
+      "translated": 0,
+      "skipped": 6,
+      "errors": 0
+    },
+    "blog_posts": {
+      "translated": 0,
+      "skipped": 16,
+      "errors": 8
+    },
+    "blog_categories": {
+      "translated": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "pages_general": {
+      "translated": 0,
+      "skipped": 9,
+      "errors": 0
+    },
+    "site_config": {
+      "translated": 0,
+      "skipped": 1,
+      "errors": 0
+    },
+    "media": {
+      "translated": 0,
+      "skipped": 0,
+      "errors": 0
+    }
+  },
+  "needsHumanReview": [
+    {
+      "table": "pages_general",
+      "id": "74d154d3-355b-4e25-9caa-f43f6b0b990f",
+      "reason": "Privacy policy — requires legal review of translation"
+    }
+  ],
+  "completedAt": "2026-04-09T02:04:49.177Z"
+}

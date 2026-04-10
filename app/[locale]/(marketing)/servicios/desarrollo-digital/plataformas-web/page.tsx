@@ -10,20 +10,30 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Plataformas Web | Desarrollo Full-Stack Escalable",
-  description:
-    "Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna y escalable.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
-    languages: {
-      es: "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
-      en: "https://www.nivelics.com/en/services/digital-development/web-platforms",
-      "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("plataformas-web", locale);
+  return {
+    title: cms?.seoTitle || "Plataformas Web | Desarrollo Full-Stack Escalable",
+    description:
+      cms?.seoDescription ||
+      "Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna y escalable.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
+      languages: {
+        es: "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
+        en: "https://www.nivelics.com/en/services/digital-development/web-platforms",
+        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function PlataformasWebPage() {
+export default async function PlataformasWebPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("plataformas-web", locale);
   const serviceSchema = getServiceSchema({
     name: "Plataformas Web",
     description:
@@ -108,9 +120,12 @@ export default function PlataformasWebPage() {
       {/* Hero */}
       <HeroSplit
         badge="Desarrollo Digital &middot; Plataformas Web"
-        h1="Plataforma web"
+        h1={cms?.title || "Plataforma web"}
         h1Accent="sin limites de escala"
-        subtitle="Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna, APIs robustas y despliegue serverless que escala con tu negocio sin limites tecnicos."
+        subtitle={
+          cms?.subtitle ||
+          "Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna, APIs robustas y despliegue serverless que escala con tu negocio sin limites tecnicos."
+        }
         bullets={[
           "SaaS, portales empresariales y dashboards a medida",
           "Integracion real con tus sistemas core (ERP, CRM, APIs)",
@@ -157,16 +172,20 @@ export default function PlataformasWebPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          {
-            value: "50+",
-            label: "Plataformas entregadas",
-            sublabel: "SaaS, portales y dashboards",
-          },
-          { value: "<2s", label: "Tiempo de carga", sublabel: "Core Web Vitals optimizado" },
-          { value: "99.9%", label: "Uptime", sublabel: "arquitectura cloud-native" },
-          { value: "0", label: "Vendor lock-in", sublabel: "codigo tuyo, stack estandar" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                {
+                  value: "50+",
+                  label: "Plataformas entregadas",
+                  sublabel: "SaaS, portales y dashboards",
+                },
+                { value: "<2s", label: "Tiempo de carga", sublabel: "Core Web Vitals optimizado" },
+                { value: "99.9%", label: "Uptime", sublabel: "arquitectura cloud-native" },
+                { value: "0", label: "Vendor lock-in", sublabel: "codigo tuyo, stack estandar" },
+              ]
+        }
       />
 
       {/* Benefits */}

@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { AgenticContentEs } from "./content.es";
 import { AgenticContentEn } from "./content.en";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
+
+export const revalidate = 86400;
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -10,14 +14,19 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
+  const cms = await getServicioData("sitios-web-agentic", locale as Locale);
 
   return {
-    title: isEn
-      ? "Agentic-First Websites | AI-Ready SEO + LLM Indexing"
-      : "Sitios Web Agentic-First | SEO Técnico + IA-Ready",
-    description: isEn
-      ? "We build websites navigable by AI agents and LLMs. Multilingual, complete Schema.org, llms.txt, Core Web Vitals ≥95. Indexed by Google SGE, ChatGPT, Claude and Perplexity."
-      : "Construimos sitios web navegables por IA, agentes y LLMs. Multi-idioma, Schema.org completo, llms.txt, Core Web Vitals ≥95. Indexados por Google SGE, ChatGPT, Claude y Perplexity.",
+    title:
+      cms?.seoTitle ||
+      (isEn
+        ? "Agentic-First Websites | AI-Ready SEO + LLM Indexing"
+        : "Sitios Web Agentic-First | SEO Técnico + IA-Ready"),
+    description:
+      cms?.seoDescription ||
+      (isEn
+        ? "We build websites navigable by AI agents and LLMs. Multilingual, complete Schema.org, llms.txt, Core Web Vitals ≥95. Indexed by Google SGE, ChatGPT, Claude and Perplexity."
+        : "Construimos sitios web navegables por IA, agentes y LLMs. Multi-idioma, Schema.org completo, llms.txt, Core Web Vitals ≥95. Indexados por Google SGE, ChatGPT, Claude y Perplexity."),
     alternates: {
       canonical: "https://www.nivelics.com/servicios/desarrollo-digital/sitios-web-agentic",
       languages: {

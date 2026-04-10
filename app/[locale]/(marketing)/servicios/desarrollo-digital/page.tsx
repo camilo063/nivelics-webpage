@@ -15,20 +15,30 @@ import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { IndustryGrid } from "@/components/sections/industry-grid";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Desarrollo de Software y Apps | Plataformas Digitales",
-  description:
-    "Desarrollo de productos digitales, aplicaciones web y móviles con metodologías ágiles y arquitectura moderna.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/desarrollo-digital",
-    languages: {
-      es: "https://www.nivelics.com/servicios/desarrollo-digital",
-      en: "https://www.nivelics.com/en/services/digital-development",
-      "x-default": "https://www.nivelics.com/servicios/desarrollo-digital",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("desarrollo-digital", locale);
+  return {
+    title: cms?.seoTitle || "Desarrollo de Software y Apps | Plataformas Digitales",
+    description:
+      cms?.seoDescription ||
+      "Desarrollo de productos digitales, aplicaciones web y móviles con metodologías ágiles y arquitectura moderna.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/desarrollo-digital",
+      languages: {
+        es: "https://www.nivelics.com/servicios/desarrollo-digital",
+        en: "https://www.nivelics.com/en/services/digital-development",
+        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital",
+      },
     },
-  },
-};
+  };
+}
 
 const SUB_SERVICES = [
   {
@@ -61,7 +71,9 @@ const SUB_SERVICES = [
   },
 ];
 
-export default function DesarrolloDigitalPage() {
+export default async function DesarrolloDigitalPage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("desarrollo-digital", locale);
   const serviceSchema = getServiceSchema({
     name: "Desarrollo Digital",
     description:
@@ -90,9 +102,12 @@ export default function DesarrolloDigitalPage() {
       {/* Hero */}
       <HeroSplit
         badge="Desarrollo Digital"
-        h1="Del concepto"
+        h1={cms?.title || "Del concepto"}
         h1Accent="a producción"
-        subtitle="Diseñamos y construimos apps móviles, plataformas web y e-commerce con arquitectura moderna y entregas cada 2 semanas."
+        subtitle={
+          cms?.subtitle ||
+          "Diseñamos y construimos apps móviles, plataformas web y e-commerce con arquitectura moderna y entregas cada 2 semanas."
+        }
         bullets={[
           "Demo quincenal — siempre sabes en qué estamos",
           "Código 100% tuyo desde el primer sprint",
@@ -139,12 +154,16 @@ export default function DesarrolloDigitalPage() {
 
       {/* Metrics */}
       <MetricsBar
-        metrics={[
-          { value: "50+", label: "Proyectos entregados", sublabel: "en LATAM y USA" },
-          { value: "13+", label: "Años de experiencia", sublabel: "desde 2012" },
-          { value: "7", label: "Países", sublabel: "Colombia, USA, México y más" },
-          { value: "100%", label: "Propiedad del código", sublabel: "siempre del cliente" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "50+", label: "Proyectos entregados", sublabel: "en LATAM y USA" },
+                { value: "13+", label: "Años de experiencia", sublabel: "desde 2012" },
+                { value: "7", label: "Países", sublabel: "Colombia, USA, México y más" },
+                { value: "100%", label: "Propiedad del código", sublabel: "siempre del cliente" },
+              ]
+        }
       />
 
       {/* Sub-services */}
@@ -299,33 +318,37 @@ export default function DesarrolloDigitalPage() {
       <FAQAccordion
         title="Preguntas frecuentes"
         schemaEnabled
-        faqs={[
-          {
-            question: "¿Qué tecnologías usa Nivelics para desarrollo de software?",
-            answer:
-              "Usamos React, Next.js y Node.js para aplicaciones web, React Native y Flutter para apps móviles, y arquitecturas serverless y de microservicios con APIs RESTful y GraphQL. Elegimos la stack según las necesidades del proyecto.",
-          },
-          {
-            question: "¿Cuánto tiempo toma desarrollar un MVP?",
-            answer:
-              "Un MVP funcional puede estar listo en 6-10 semanas usando metodología lean y sprints ágiles. Esto incluye product discovery, diseño UX, desarrollo, QA y despliegue en producción.",
-          },
-          {
-            question: "¿Nivelics desarrolla aplicaciones móviles nativas?",
-            answer:
-              "Sí, desarrollamos apps móviles nativas para iOS (Swift) y Android (Kotlin), así como aplicaciones cross-platform con React Native y Flutter. Recomendamos el enfoque óptimo según el presupuesto, timeline y requerimientos técnicos del proyecto.",
-          },
-          {
-            question: "¿Qué pasa con la propiedad del código?",
-            answer:
-              "El código es 100% del cliente, siempre. Entregamos el repositorio completo con documentación. Sin vendor lock-in.",
-          },
-          {
-            question: "¿Ofrecen mantenimiento post-lanzamiento?",
-            answer:
-              "Sí. Ofrecemos planes de soporte continuo (MRR) que incluyen monitoreo, corrección de bugs, actualizaciones de seguridad y evolución del producto.",
-          },
-        ]}
+        faqs={
+          cms?.faqs?.length
+            ? cms.faqs
+            : /* LEGACY FALLBACK */ [
+                {
+                  question: "¿Qué tecnologías usa Nivelics para desarrollo de software?",
+                  answer:
+                    "Usamos React, Next.js y Node.js para aplicaciones web, React Native y Flutter para apps móviles, y arquitecturas serverless y de microservicios con APIs RESTful y GraphQL. Elegimos la stack según las necesidades del proyecto.",
+                },
+                {
+                  question: "¿Cuánto tiempo toma desarrollar un MVP?",
+                  answer:
+                    "Un MVP funcional puede estar listo en 6-10 semanas usando metodología lean y sprints ágiles. Esto incluye product discovery, diseño UX, desarrollo, QA y despliegue en producción.",
+                },
+                {
+                  question: "¿Nivelics desarrolla aplicaciones móviles nativas?",
+                  answer:
+                    "Sí, desarrollamos apps móviles nativas para iOS (Swift) y Android (Kotlin), así como aplicaciones cross-platform con React Native y Flutter. Recomendamos el enfoque óptimo según el presupuesto, timeline y requerimientos técnicos del proyecto.",
+                },
+                {
+                  question: "¿Qué pasa con la propiedad del código?",
+                  answer:
+                    "El código es 100% del cliente, siempre. Entregamos el repositorio completo con documentación. Sin vendor lock-in.",
+                },
+                {
+                  question: "¿Ofrecen mantenimiento post-lanzamiento?",
+                  answer:
+                    "Sí. Ofrecemos planes de soporte continuo (MRR) que incluyen monitoreo, corrección de bugs, actualizaciones de seguridad y evolución del producto.",
+                },
+              ]
+        }
       />
 
       {/* Contact form */}

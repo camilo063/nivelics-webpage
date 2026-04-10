@@ -4,6 +4,8 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: "Metodología Ágil | Framework Scrum para Productos Digitales",
   description:

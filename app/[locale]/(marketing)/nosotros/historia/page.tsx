@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getHistoriaItems, mapHistoriaItem } from "@/lib/cms";
+import type { Locale } from "@/lib/cms";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Historia de Nivelics | De Bogotá al mundo",
@@ -10,6 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.nivelics.com/nosotros/historia" },
 };
 
+// LEGACY FALLBACK
 const TIMELINE = [
   {
     year: "2012",
@@ -74,7 +80,23 @@ const TIMELINE = [
   },
 ];
 
-export default function HistoriaPage() {
+export default async function HistoriaPage() {
+  const locale = (await getLocale()) as Locale;
+  const dbItems = await getHistoriaItems();
+  const mappedItems = dbItems.length
+    ? dbItems.map((item) => mapHistoriaItem(item as Record<string, unknown>, locale))
+    : null;
+
+  // Use DB items or fall back to hardcoded TIMELINE
+  const timelineToShow =
+    mappedItems && mappedItems.length > 0
+      ? mappedItems.map((item) => ({
+          year: String(item.year),
+          title: item.title,
+          description: item.description,
+        }))
+      : TIMELINE;
+
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
@@ -101,7 +123,7 @@ export default function HistoriaPage() {
             <div className="absolute left-4 top-0 bottom-0 w-px bg-border md:left-1/2" />
 
             <div className="space-y-12">
-              {TIMELINE.map((item, i) => (
+              {timelineToShow.map((item, i) => (
                 <div
                   key={item.year}
                   className={`relative flex flex-col md:flex-row ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-start gap-8`}

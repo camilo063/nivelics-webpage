@@ -10,20 +10,30 @@ import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getLocale } from "next-intl/server";
+import { getServicioData } from "@/lib/cms/get-servicio-data";
+import type { Locale } from "@/lib/cms/types";
 
-export const metadata: Metadata = {
-  title: "Desarrolladores de Software | Backend, Frontend y Full-Stack",
-  description:
-    "Ingenieros senior de software colombianos bilingües. React, Node.js, Python, Java, Go y más.",
-  alternates: {
-    canonical: "https://www.nivelics.com/servicios/staff-augmentation/desarrollo-software",
-    languages: {
-      es: "https://www.nivelics.com/servicios/staff-augmentation/desarrollo-software",
-      en: "https://www.nivelics.com/en/services/staff-augmentation/software-development",
-      "x-default": "https://www.nivelics.com/servicios/staff-augmentation/desarrollo-software",
+export const revalidate = 86400;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("desarrollo-software", locale);
+  return {
+    title: cms?.seoTitle || "Desarrolladores de Software | Backend, Frontend y Full-Stack",
+    description:
+      cms?.seoDescription ||
+      "Ingenieros senior de software colombianos bilingües. React, Node.js, Python, Java, Go y más.",
+    alternates: {
+      canonical: "https://www.nivelics.com/servicios/staff-augmentation/desarrollo-software",
+      languages: {
+        es: "https://www.nivelics.com/servicios/staff-augmentation/desarrollo-software",
+        en: "https://www.nivelics.com/en/services/staff-augmentation/software-development",
+        "x-default": "https://www.nivelics.com/servicios/staff-augmentation/desarrollo-software",
+      },
     },
-  },
-};
+  };
+}
 
 const BENEFITS = [
   {
@@ -46,7 +56,9 @@ const BENEFITS = [
   },
 ];
 
-export default function DesarrolloSoftwarePage() {
+export default async function DesarrolloSoftwarePage() {
+  const locale = (await getLocale()) as Locale;
+  const cms = await getServicioData("desarrollo-software", locale);
   const serviceSchema = getServiceSchema({
     name: "Desarrolladores de Software",
     description:
@@ -116,9 +128,12 @@ export default function DesarrolloSoftwarePage() {
 
       <HeroSplit
         badge="Staff Aug · Desarrollo"
-        h1="Desarrolladores validados"
+        h1={cms?.title || "Desarrolladores validados"}
         h1Accent="en 5 días hábiles"
-        subtitle="Backend, frontend, mobile y full-stack. Ingenieros senior colombianos bilingües listos para integrarse a tu equipo con onboarding incluido."
+        subtitle={
+          cms?.subtitle ||
+          "Backend, frontend, mobile y full-stack. Ingenieros senior colombianos bilingües listos para integrarse a tu equipo con onboarding incluido."
+        }
         bullets={[
           "Candidatos presentados en 5 días hábiles",
           "Ahorro de hasta 40% vs contratar en USA",
@@ -131,12 +146,16 @@ export default function DesarrolloSoftwarePage() {
       />
 
       <MetricsBar
-        metrics={[
-          { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
-          { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
-          { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
-          { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
-        ]}
+        metrics={
+          cms?.metrics?.length
+            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            : /* LEGACY FALLBACK */ [
+                { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
+                { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
+                { value: "10", label: "Días garantía", sublabel: "Reemplazo sin costo" },
+                { value: "100%", label: "Bilingüe", sublabel: "Español e inglés" },
+              ]
+        }
       />
 
       <section className="bg-bg-surface py-16 md:py-24">
