@@ -496,3 +496,17 @@ export const casosExitoRelations = relations(casosExito, ({ one }) => ({
     references: [industrias.casoDestacadoId],
   }),
 }));
+
+// ─── LEADS (Landing Pages) ───────────────────────────────
+
+export const leads = pgTable("leads", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  nombre: varchar("nombre", { length: 255 }).notNull(),
+  empresa: varchar("empresa", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  servicio: varchar("servicio", { length: 100 }),
+  fuente: varchar("fuente", { length: 100 }).notNull(),
+  status: varchar("status", { length: 50 }).default("nuevo").notNull(),
+  mensaje: text("mensaje"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

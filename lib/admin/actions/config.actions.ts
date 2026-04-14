@@ -54,4 +54,8 @@ export async function updateSiteConfig(input: {
   });
 
   revalidatePath("/admin/configuracion");
+  // Revalidate public files served from this config
+  revalidatePath("/llms.txt");
+  revalidatePath("/llms-full.txt");
+  revalidatePath("/robots.txt");
 }

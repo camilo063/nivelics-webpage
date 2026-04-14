@@ -192,10 +192,16 @@ export function LandingListClient({ initialLandings, initialTotal }: LandingList
                     <span className="font-medium text-text-100">{landing.campaignName}</span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="flex items-center gap-1 text-sm text-text-70">
+                    <a
+                      href={`/lp/${landing.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Abrir landing en nueva pestaña"
+                      className="inline-flex items-center gap-1 text-sm text-text-70 hover:text-primary transition-colors"
+                    >
                       /lp/{landing.slug}
-                      <ExternalLink className="h-3 w-3 text-text-40" />
-                    </span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
                   </td>
                   <td className="px-4 py-3">
                     {landing.serviceType ? (

@@ -1,0 +1,81 @@
+import {
+  Shield,
+  Clock,
+  RotateCcw,
+  TrendingUp,
+  ShoppingCart,
+  Package,
+  Zap,
+  Link,
+  BarChart2,
+  Search,
+  Target,
+  FileText,
+  Check,
+  Award,
+  Quote,
+  HelpCircle,
+  Megaphone,
+  Columns,
+  PlayCircle,
+  CheckCircle,
+  Minus,
+  Layout,
+  Image,
+  Star,
+  CreditCard,
+  ListOrdered,
+  BarChart3,
+  type LucideIcon,
+} from "lucide-react";
+
+/**
+ * Resolves icon names used in landing-page blocks to Lucide components.
+ * Default fallback: CheckCircle.
+ */
+const ICON_MAP: Record<string, LucideIcon> = {
+  shield: Shield,
+  clock: Clock,
+  "rotate-ccw": RotateCcw,
+  rotateccw: RotateCcw,
+  "trending-up": TrendingUp,
+  trendingup: TrendingUp,
+  "shopping-cart": ShoppingCart,
+  shoppingcart: ShoppingCart,
+  package: Package,
+  zap: Zap,
+  link: Link,
+  "bar-chart-2": BarChart2,
+  barchart2: BarChart2,
+  "bar-chart-3": BarChart3,
+  barchart3: BarChart3,
+  search: Search,
+  target: Target,
+  "file-text": FileText,
+  filetext: FileText,
+  check: Check,
+  "check-circle": CheckCircle,
+  checkcircle: CheckCircle,
+  award: Award,
+  quote: Quote,
+  "help-circle": HelpCircle,
+  helpcircle: HelpCircle,
+  megaphone: Megaphone,
+  columns: Columns,
+  "play-circle": PlayCircle,
+  playcircle: PlayCircle,
+  minus: Minus,
+  layout: Layout,
+  image: Image,
+  star: Star,
+  "credit-card": CreditCard,
+  creditcard: CreditCard,
+  "list-ordered": ListOrdered,
+  listordered: ListOrdered,
+};
+
+export function resolveIcon(name: string | undefined): LucideIcon {
+  if (!name) return CheckCircle;
+  const key = name.toLowerCase().trim();
+  return ICON_MAP[key] || CheckCircle;
+}

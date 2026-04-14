@@ -1,10 +1,36 @@
 import type { MetadataRoute } from "next";
+import { db } from "@/lib/db";
+import { landingPages } from "@/lib/db/schema/admin";
+import { eq, and } from "drizzle-orm";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600;
+
+async function getIndexableLandings() {
+  if (!db) return [];
+  try {
+    return await db
+      .select({ slug: landingPages.slug, updatedAt: landingPages.updatedAt })
+      .from(landingPages)
+      .where(and(eq(landingPages.status, "published"), eq(landingPages.noindex, false)));
+  } catch {
+    return [];
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.nivelics.com";
   const now = new Date("2026-04-01");
 
+  const lps = await getIndexableLandings();
+  const lpEntries: MetadataRoute.Sitemap = lps.map((lp) => ({
+    url: `${baseUrl}/lp/${lp.slug}`,
+    lastModified: lp.updatedAt || now,
+    priority: 0.7,
+    changeFrequency: "weekly" as const,
+  }));
+
   return [
+    ...lpEntries,
     // HOME
     {
       url: baseUrl,

@@ -4,9 +4,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/lib/i18n/routing";
-import { Nav, Footer } from "@/components/layout";
-import { WhatsAppFAB } from "@/components/shared";
-import { TranslationBanner } from "@/components/shared/translation-banner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -87,13 +84,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>
-          <Nav />
-          <TranslationBanner />
-          {children}
-          <Footer />
-          <WhatsAppFAB />
-        </NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
   );
