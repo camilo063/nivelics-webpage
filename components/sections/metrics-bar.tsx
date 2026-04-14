@@ -65,9 +65,9 @@ export function MetricsBar({ metrics }: MetricsBarProps) {
             metrics.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3",
           )}
         >
-          {metrics.map((m) => (
+          {metrics.map((m, i) => (
             <div
-              key={m.label}
+              key={`${m.label}-${i}`}
               className="rounded-xl border border-[rgba(0,212,255,0.15)] bg-[rgba(255,255,255,0.03)] p-6 text-center transition-all duration-200 hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.05)]"
             >
               <AnimatedValue value={m.value} />
