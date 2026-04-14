@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Save } from "lucide-react";
 import { updateSiteConfig } from "@/lib/admin/actions/config.actions";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 
 const inputClass =
   "w-full rounded-lg border border-border bg-bg-elevated px-4 py-3 text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors";
@@ -146,14 +147,12 @@ export default function ConfigClient({ initialData }: { initialData: Partial<Con
               </div>
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium text-text-70">
-                OG Image por defecto (URL)
-              </label>
-              <input
+              <ImageUploader
                 value={config.defaultOgImage}
-                onChange={(e) => update("defaultOgImage", e.target.value)}
-                className={inputClass}
-                placeholder="https://..."
+                onChange={(url) => update("defaultOgImage", url)}
+                folder="og"
+                label="OG Image por defecto"
+                aspectRatio="16/9"
               />
             </div>
           </>

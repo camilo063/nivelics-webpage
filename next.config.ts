@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: `${process.env.AWS_S3_BUCKET || process.env.S3_BUCKET_NAME || "nivelics-media"}.s3.${process.env.AWS_REGION || "us-east-1"}.amazonaws.com`,
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: `${process.env.AWS_S3_BUCKET || process.env.S3_BUCKET_NAME || "nivelics-media"}.s3.amazonaws.com`,
+        pathname: "/**",
+      },
+    ],
   },
 
   async headers() {

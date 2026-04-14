@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BilingualField } from "@/components/admin/ui/BilingualEditor";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 import { updateServicio } from "@/lib/admin/actions/servicios.actions";
 import { Plus, X, ChevronUp, ChevronDown, Search } from "lucide-react";
 
@@ -359,23 +360,13 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
               />
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-text-70">
-                  Imagen de portada (URL)
-                </label>
-                <input
-                  type="text"
+                <ImageUploader
                   value={servicio.coverImage}
-                  onChange={(e) => update("coverImage", e.target.value)}
-                  className={inputClass}
-                  placeholder="https://..."
+                  onChange={(url) => update("coverImage", url)}
+                  folder="servicios"
+                  label="Imagen de portada"
+                  aspectRatio="16/9"
                 />
-                {servicio.coverImage && (
-                  <img
-                    src={servicio.coverImage}
-                    alt="Preview"
-                    className="mt-3 rounded-lg border border-border max-h-40 object-cover"
-                  />
-                )}
               </div>
 
               <div>

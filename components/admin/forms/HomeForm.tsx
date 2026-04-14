@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BilingualField } from "@/components/admin/ui/BilingualEditor";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 import { updateHomeContent } from "@/lib/admin/actions/home.actions";
 import { Save, Plus, Trash2 } from "lucide-react";
 
@@ -194,13 +195,12 @@ export default function HomeForm({ initialData }: HomeFormProps) {
             />
 
             <div>
-              <label className="mb-2 block text-sm font-medium text-text-70">Hero Image URL</label>
-              <input
-                type="text"
+              <ImageUploader
                 value={data.heroImage}
-                onChange={(e) => update("heroImage", e.target.value)}
-                placeholder="URL de la imagen hero"
-                className={inputClass}
+                onChange={(url) => update("heroImage", url)}
+                folder="home"
+                label="Imagen del Hero"
+                aspectRatio="16/9"
               />
             </div>
           </div>
@@ -325,19 +325,20 @@ export default function HomeForm({ initialData }: HomeFormProps) {
             </div>
 
             {data.trustBarLogos.map((logo, idx) => (
-              <div key={idx} className="flex items-center gap-3">
-                <span className="text-xs text-text-40 w-6">{idx + 1}</span>
-                <input
-                  type="text"
-                  value={logo}
-                  onChange={(e) => {
-                    const updated = [...data.trustBarLogos];
-                    updated[idx] = e.target.value;
-                    update("trustBarLogos", updated);
-                  }}
-                  placeholder="URL del logo"
-                  className={`flex-1 ${inputClass}`}
-                />
+              <div key={idx} className="flex items-start gap-3">
+                <span className="text-xs text-text-40 w-6 mt-2">{idx + 1}</span>
+                <div className="flex-1">
+                  <ImageUploader
+                    value={logo}
+                    onChange={(url) => {
+                      const updated = [...data.trustBarLogos];
+                      updated[idx] = url;
+                      update("trustBarLogos", updated);
+                    }}
+                    folder="home"
+                    aspectRatio="auto"
+                  />
+                </div>
                 <button
                   type="button"
                   onClick={() =>
@@ -346,7 +347,7 @@ export default function HomeForm({ initialData }: HomeFormProps) {
                       data.trustBarLogos.filter((_, i) => i !== idx),
                     )
                   }
-                  className="text-red-400 hover:text-red-300 transition-colors"
+                  className="text-red-400 hover:text-red-300 transition-colors mt-2"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>

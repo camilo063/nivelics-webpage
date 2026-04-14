@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BilingualEditor, BilingualField } from "@/components/admin/ui/BilingualEditor";
 import { SlugInput } from "@/components/admin/ui/SlugInput";
 import { PublishControls } from "@/components/admin/ui/PublishControls";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 import {
   createCasoExito,
   updateCasoExito,
@@ -198,12 +199,14 @@ export default function CasoForm({ initialData, isNew = true }: CasoFormProps) {
               />
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium text-text-70">Logo (URL)</label>
-              <input
-                type="text"
+              <label className="mb-2 block text-sm font-medium text-text-70">
+                Logo del cliente
+              </label>
+              <ImageUploader
                 value={caso.clientLogo}
-                onChange={(e) => update("clientLogo", e.target.value)}
-                className="w-full rounded-lg border border-border bg-bg-elevated px-4 py-3 text-text-100 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                onChange={(url) => update("clientLogo", url)}
+                folder="casos"
+                aspectRatio="1/1"
               />
             </div>
           </div>
@@ -472,12 +475,11 @@ export default function CasoForm({ initialData, isNew = true }: CasoFormProps) {
         {/* Cover image */}
         <div className="rounded-xl border border-border bg-bg-surface p-5 space-y-3">
           <h3 className="text-sm font-semibold text-text-100">Imagen de portada</h3>
-          <input
-            type="text"
+          <ImageUploader
             value={caso.coverImage}
-            onChange={(e) => update("coverImage", e.target.value)}
-            placeholder="URL de la imagen"
-            className="w-full rounded-lg border border-border bg-bg-elevated px-4 py-2.5 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+            onChange={(url) => update("coverImage", url)}
+            folder="casos"
+            aspectRatio="16/9"
           />
         </div>
 

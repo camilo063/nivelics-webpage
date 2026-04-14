@@ -15,6 +15,7 @@ import {
   GripVertical,
 } from "lucide-react";
 import { BLOCK_TYPES, type BlockTypeKey } from "@/lib/admin/landing-blocks";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 
 // ─── Types ──────────────────────────────────────────────
 
@@ -454,15 +455,12 @@ export function LandingEditor({ landing }: LandingEditorProps) {
 
                 {/* OG Image */}
                 <div>
-                  <label className="mb-1 block text-xs font-medium text-text-70">
-                    OG Image URL
-                  </label>
-                  <input
-                    type="text"
+                  <ImageUploader
                     value={config.ogImage}
-                    onChange={(e) => setConfig((p) => ({ ...p, ogImage: e.target.value }))}
-                    className={smallInputClass}
-                    placeholder="https://..."
+                    onChange={(url) => setConfig((p) => ({ ...p, ogImage: url }))}
+                    folder="og"
+                    label="OG Image"
+                    aspectRatio="16/9"
                   />
                 </div>
 
@@ -735,6 +733,22 @@ function BlockFieldEditor({ blockType, data, onChange }: BlockFieldEditorProps) 
     </label>
   );
 
+  const renderImageField = (
+    key: string,
+    label: string,
+    aspectRatio: "16/9" | "1/1" | "4/3" | "auto" = "16/9",
+  ) => (
+    <div key={key}>
+      <ImageUploader
+        value={(data[key] as string) || ""}
+        onChange={(url) => onChange(key, url)}
+        folder="landing-pages"
+        label={label}
+        aspectRatio={aspectRatio}
+      />
+    </div>
+  );
+
   switch (blockType) {
     case "B01":
       return (
@@ -745,7 +759,7 @@ function BlockFieldEditor({ blockType, data, onChange }: BlockFieldEditorProps) 
           {renderTextField("cta_primario_texto", "CTA primario texto")}
           {renderTextField("cta_primario_url", "CTA primario URL")}
           {renderTextField("cta_secundario_texto", "CTA secundario texto")}
-          {renderTextField("imagen_hero", "Imagen hero URL")}
+          {renderImageField("imagen_hero", "Imagen del hero")}
         </div>
       );
 
@@ -785,7 +799,7 @@ function BlockFieldEditor({ blockType, data, onChange }: BlockFieldEditorProps) 
           {renderTextField("h2", "Titulo H2")}
           {renderTextArea("parrafo", "Parrafo")}
           {renderJsonField("bullets", "Bullets (array de strings)")}
-          {renderTextField("imagen", "Imagen URL")}
+          {renderImageField("imagen", "Imagen")}
           {renderTextField("cta_texto", "CTA texto")}
           {renderTextField("cta_url", "CTA URL")}
         </div>
@@ -824,7 +838,7 @@ function BlockFieldEditor({ blockType, data, onChange }: BlockFieldEditorProps) 
           {renderTextField("autor_nombre", "Nombre del autor")}
           {renderTextField("autor_cargo", "Cargo")}
           {renderTextField("autor_empresa", "Empresa")}
-          {renderTextField("autor_foto", "Foto URL")}
+          {renderImageField("autor_foto", "Foto del autor", "1/1")}
         </div>
       );
 
@@ -898,7 +912,7 @@ function BlockFieldEditor({ blockType, data, onChange }: BlockFieldEditorProps) 
       return (
         <div className="space-y-3">
           {renderTextField("video_url", "URL del video")}
-          {renderTextField("thumbnail", "Thumbnail URL")}
+          {renderImageField("thumbnail", "Thumbnail del video", "16/9")}
           {renderTextField("caption", "Caption")}
         </div>
       );

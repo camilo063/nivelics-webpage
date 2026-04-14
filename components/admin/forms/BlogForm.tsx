@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BilingualEditor, BilingualField } from "@/components/admin/ui/BilingualEditor";
 import { SlugInput } from "@/components/admin/ui/SlugInput";
 import { PublishControls } from "@/components/admin/ui/PublishControls";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 import { createBlogPost, updateBlogPost, deleteBlogPost } from "@/lib/admin/actions/blog.actions";
 
 interface BlogPostData {
@@ -330,20 +331,12 @@ export default function BlogForm({ initialData, isNew = true }: BlogFormProps) {
         {/* Cover image */}
         <div className="rounded-xl border border-border bg-bg-surface p-5 space-y-3">
           <h3 className="text-sm font-semibold text-text-100">Imagen de portada</h3>
-          <input
-            type="text"
+          <ImageUploader
             value={post.coverImage}
-            onChange={(e) => update("coverImage", e.target.value)}
-            placeholder="URL de la imagen"
-            className="w-full rounded-lg border border-border bg-bg-elevated px-4 py-2.5 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+            onChange={(url) => update("coverImage", url)}
+            folder="blog"
+            aspectRatio="16/9"
           />
-          {post.coverImage && (
-            <img
-              src={post.coverImage}
-              alt="Preview"
-              className="mt-2 rounded-lg border border-border"
-            />
-          )}
         </div>
 
         {/* Reading time */}
