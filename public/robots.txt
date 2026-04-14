@@ -60,6 +60,14 @@ Disallow: /staging/
 Disallow: /_next/
 Disallow: /*?preview=*
 Disallow: /*?draft=*
+# Landing pages — solo las de SEO estratégico se indexan
+Disallow: /lp/staff-augmentation-colombia
+Disallow: /lp/finops-aws
+Disallow: /en/lp/staff-augmentation-colombia
+Disallow: /en/lp/finops-aws
+Allow: /lp/ia-retail
+Allow: /lp/staffing-vs-contratar
+Allow: /lp/diagnostico-gratuito
 Crawl-delay: 5
 
 # ── SITEMAPS ──
