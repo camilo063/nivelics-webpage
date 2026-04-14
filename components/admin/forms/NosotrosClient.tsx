@@ -13,6 +13,7 @@ import {
   updateCertificacion,
   deleteCertificacion,
 } from "@/lib/admin/actions/nosotros.actions";
+import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 import { Plus, Pencil, Trash2, Star, Save, X } from "lucide-react";
 
 // ─── Types ──────────────────────────────────────────────
@@ -512,12 +513,12 @@ export default function NosotrosClient({
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-text-70">Foto URL</label>
-                  <input
-                    type="text"
+                  <ImageUploader
                     value={memberForm.photo}
-                    onChange={(e) => setMemberForm((p) => ({ ...p, photo: e.target.value }))}
-                    className={inputClass}
+                    onChange={(url) => setMemberForm((p) => ({ ...p, photo: url }))}
+                    folder="team"
+                    label="Foto del miembro"
+                    aspectRatio="1/1"
                   />
                 </div>
                 <div>
@@ -976,12 +977,12 @@ export default function NosotrosClient({
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-text-70">Logo URL</label>
-                  <input
-                    type="text"
+                  <ImageUploader
                     value={certForm.logo}
-                    onChange={(e) => setCertForm((p) => ({ ...p, logo: e.target.value }))}
-                    className={inputClass}
+                    onChange={(url) => setCertForm((p) => ({ ...p, logo: url }))}
+                    folder="certificaciones"
+                    label="Logo de la certificación"
+                    aspectRatio="1/1"
                   />
                 </div>
                 <div>
