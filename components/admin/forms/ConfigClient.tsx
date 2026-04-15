@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Save } from "lucide-react";
 import { updateSiteConfig } from "@/lib/admin/actions/config.actions";
@@ -14,6 +14,14 @@ interface ConfigData {
   siteNameEn: string;
   taglineEs: string;
   taglineEn: string;
+  logoUrl: string;
+  logoWidth: number | null;
+  logoHeight: number | null;
+  logoAltEs: string;
+  logoAltEn: string;
+  logoTitleEs: string;
+  logoTitleEn: string;
+  faviconUrl: string;
   defaultOgImage: string;
   phoneWhatsapp: string;
   emailContact: string;
@@ -31,6 +39,14 @@ const defaultConfig: ConfigData = {
   siteNameEn: "Nivelics",
   taglineEs: "",
   taglineEn: "",
+  logoUrl: "",
+  logoWidth: null,
+  logoHeight: null,
+  logoAltEs: "Nivelics",
+  logoAltEn: "Nivelics",
+  logoTitleEs: "",
+  logoTitleEn: "",
+  faviconUrl: "",
   defaultOgImage: "",
   phoneWhatsapp: "+573103926621",
   emailContact: "contacto@nivelics.com",
@@ -54,6 +70,25 @@ export default function ConfigClient({ initialData }: { initialData: Partial<Con
   function update<K extends keyof ConfigData>(key: K, value: ConfigData[K]) {
     setConfig((prev) => ({ ...prev, [key]: value }));
   }
+
+  useEffect(() => {
+    if (!config.logoUrl) {
+      if (config.logoWidth !== null || config.logoHeight !== null) {
+        setConfig((prev) => ({ ...prev, logoWidth: null, logoHeight: null }));
+      }
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      setConfig((prev) =>
+        prev.logoUrl === config.logoUrl
+          ? { ...prev, logoWidth: img.naturalWidth, logoHeight: img.naturalHeight }
+          : prev,
+      );
+    };
+    img.src = config.logoUrl;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.logoUrl]);
 
   async function handleSave() {
     setSaving(true);
@@ -106,6 +141,121 @@ export default function ConfigClient({ initialData }: { initialData: Partial<Con
       <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-6">
         {activeTab === "sitio" && (
           <>
+            <div className="pb-6 border-b border-border">
+              <h3 className="text-sm font-semibold text-text-100 mb-1">Logo del sitio</h3>
+              <p className="text-xs text-text-40 mb-4">
+                Aparece en el header y footer. Recomendado: SVG o PNG transparente, ancho máximo
+                160px, altura máxima 40px.
+              </p>
+              <div className="grid grid-cols-2 gap-6 items-start">
+                <div>
+                  <ImageUploader
+                    value={config.logoUrl}
+                    onChange={(url) => update("logoUrl", url)}
+                    folder="nav"
+                    label="Archivo del logo"
+                    aspectRatio="auto"
+                    accept="image/svg+xml,image/png,image/webp"
+                    maxSizeMB={1}
+                  />
+                  {config.logoUrl && (
+                    <p className="mt-2 truncate font-mono text-xs text-text-40">{config.logoUrl}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-2 block text-xs font-medium text-text-70">
+                    Preview en header
+                  </label>
+                  <div className="flex items-center gap-3 rounded-lg border border-border bg-[#0A0A0F] p-4">
+                    {config.logoUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={config.logoUrl}
+                        alt={config.logoAltEs || "Nivelics"}
+                        style={{ height: "28px", width: "auto", objectFit: "contain" }}
+                      />
+                    ) : (
+                      <span className="text-lg font-bold tracking-tight text-white">Nivelics</span>
+                    )}
+                    <span className="text-sm text-text-40/60">Admin</span>
+                  </div>
+                  <p className="mt-2 text-xs text-text-40">
+                    Si no hay logo, se muestra el texto &quot;Nivelics&quot; como fallback.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 rounded-lg border border-border p-4 space-y-4">
+                <div>
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-text-70">
+                    SEO del Logo
+                  </h4>
+                  <p className="mt-1 text-xs text-text-40">
+                    Alt = texto alternativo para accesibilidad y SEO. Title = tooltip al pasar el
+                    mouse (señal SEO adicional en desktop).
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="block text-xs font-medium text-text-70">
+                      Alt del logo (ES){" "}
+                      <span className="text-text-40">— marca + servicio principal</span>
+                    </label>
+                    <input
+                      value={config.logoAltEs}
+                      onChange={(e) => update("logoAltEs", e.target.value)}
+                      placeholder="Nivelics — Transformación Digital B2B en LATAM"
+                      maxLength={120}
+                      className={inputClass}
+                    />
+                    <p className="text-[11px] text-text-40">Máx. 120 caracteres.</p>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-xs font-medium text-text-70">
+                      Alt del logo (EN)
+                    </label>
+                    <input
+                      value={config.logoAltEn}
+                      onChange={(e) => update("logoAltEn", e.target.value)}
+                      placeholder="Nivelics — Digital Transformation for B2B in LATAM"
+                      maxLength={120}
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="block text-xs font-medium text-text-70">
+                      Title del logo (ES) <span className="text-text-40">— slogan / tooltip</span>
+                    </label>
+                    <input
+                      value={config.logoTitleEs}
+                      onChange={(e) => update("logoTitleEs", e.target.value)}
+                      placeholder="Nivelics — Transforma más rápido. IA · Cloud · Staffing Premium"
+                      maxLength={150}
+                      className={inputClass}
+                    />
+                    <p className="text-[11px] text-text-40">
+                      Aparece como tooltip en desktop. Máx. 150 caracteres.
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-xs font-medium text-text-70">
+                      Title del logo (EN)
+                    </label>
+                    <input
+                      value={config.logoTitleEn}
+                      onChange={(e) => update("logoTitleEn", e.target.value)}
+                      placeholder="Nivelics — Transform faster. AI · Cloud · Premium Staffing"
+                      maxLength={150}
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="mb-2 block text-sm font-medium text-text-70">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bot, BarChart3, Workflow, FileText, Megaphone, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -41,35 +42,35 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const SUB_SERVICES = [
   {
-    icon: Bot,
+    icon: "bot",
     title: "Agentes de IA",
     description:
       "Automatización inteligente para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales.",
     href: "/servicios/inteligencia-artificial/agentes-ia",
   },
   {
-    icon: BarChart3,
+    icon: "bar-chart3",
     title: "Agentes Comerciales",
     description:
       "IA que califica leads, hace seguimiento y escala oportunidades a tu equipo de ventas.",
     href: "/servicios/inteligencia-artificial/agentes-comerciales",
   },
   {
-    icon: Workflow,
+    icon: "workflow",
     title: "Automatización de Procesos",
     description:
       "Eficiencia operacional con RPA + IA. Hasta 50% reducción de tiempo operativo en finanzas, RRHH y logística.",
     href: "/servicios/inteligencia-artificial/automatizacion-procesos",
   },
   {
-    icon: FileText,
+    icon: "file-text",
     title: "Gestión de Contenido",
     description:
       "SEO y marketing automatizado con IA. Generación y optimización de contenido a escala integrado con tu CMS.",
     href: "/servicios/inteligencia-artificial/gestion-contenido",
   },
   {
-    icon: Megaphone,
+    icon: "megaphone",
     title: "Marketing y CRM",
     description:
       "Segmentación inteligente, personalización de campañas y análisis predictivo integrado con tu CRM.",
@@ -131,6 +132,7 @@ export default async function IAPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="diagonal"
         badge="Inteligencia Artificial Aplicada"
         h1={cms?.title || "Agentes IA que"}
         h1Accent="ejecutan tareas reales"
@@ -224,16 +226,14 @@ export default async function IAPage() {
           <h2 className="text-3xl font-bold text-text-100">Soluciones especializadas</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {SUB_SERVICES.map((s) => {
-              const Icon = s.icon;
+              const iconName = s.icon;
               return (
                 <Link
                   key={s.href}
                   href={s.href}
                   className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-ia/10">
-                    <Icon size={24} className="text-ia" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="violet" />
                   <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
                     {s.title}
                   </h3>

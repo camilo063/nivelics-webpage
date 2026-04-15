@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Code2, Palette, Cloud, Brain, ShieldCheck, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { ComparisonTable } from "@/components/shared/comparison-table";
@@ -41,34 +42,34 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const SUB_SERVICES = [
   {
-    icon: Code2,
+    icon: "code2",
     title: "Desarrollo de Software",
     description:
       "Backend, Frontend y Full-Stack engineers senior con React, Node.js, Python, Java y Go.",
     href: "/servicios/staff-augmentation/desarrollo-software",
   },
   {
-    icon: Brain,
+    icon: "brain",
     title: "Datos e IA",
     description:
       "Data Scientists, Data Engineers y ML Engineers para analítica avanzada y machine learning.",
     href: "/servicios/staff-augmentation/datos-ia",
   },
   {
-    icon: Cloud,
+    icon: "cloud",
     title: "DevOps y Cloud",
     description: "Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure.",
     href: "/servicios/staff-augmentation/devops-cloud",
   },
   {
-    icon: Palette,
+    icon: "palette",
     title: "Diseño UX/UI",
     description:
       "Product designers senior con experiencia en design systems, research y prototipado.",
     href: "/servicios/staff-augmentation/diseno-ux-ui",
   },
   {
-    icon: ShieldCheck,
+    icon: "shield-check",
     title: "QA y Ciberseguridad",
     description:
       "QA Engineers, SDET y especialistas en ciberseguridad. Calidad garantizada en cada sprint.",
@@ -130,6 +131,7 @@ export default async function StaffAugmentationPage() {
 
       {/* 1. Hero — HeroSplit + HeroCalculator */}
       <HeroSplit
+        heroEffect="diagonal"
         badge="Staff Augmentation Premium"
         h1={cms?.title || "Talento tech colombiano"}
         h1Accent="en 5 días hábiles"
@@ -186,16 +188,14 @@ export default async function StaffAugmentationPage() {
           <h2 className="text-3xl font-bold text-text-100">Perfiles especializados</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {SUB_SERVICES.map((s) => {
-              const Icon = s.icon;
+              const iconName = s.icon;
               return (
                 <Link
                   key={s.href}
                   href={s.href}
                   className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-staffing/10">
-                    <Icon size={24} className="text-staffing" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="green" />
                   <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
                     {s.title}
                   </h3>

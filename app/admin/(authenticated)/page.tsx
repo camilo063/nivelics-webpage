@@ -10,7 +10,8 @@ import {
 } from "@/lib/db/schema/admin";
 import { eq, count, isNull, and, desc } from "drizzle-orm";
 import Link from "next/link";
-import { FileText, Award, Languages, Rocket, Plus, ExternalLink } from "lucide-react";
+import { Plus, ExternalLink } from "lucide-react";
+import { GeoIcon } from "@/lib/icons/geometric";
 
 async function getDashboardStats() {
   if (!db) {
@@ -81,7 +82,7 @@ export default async function AdminDashboard() {
   const cards = [
     {
       title: "Blog",
-      icon: FileText,
+      icon: "file-text",
       value: stats.blog.total,
       detail: `${stats.blog.published} pub / ${stats.blog.draft} borr`,
       href: "/admin/blog",
@@ -89,7 +90,7 @@ export default async function AdminDashboard() {
     },
     {
       title: "Casos de Éxito",
-      icon: Award,
+      icon: "award",
       value: stats.casos.total,
       detail: `${stats.casos.published} publicados`,
       href: "/admin/casos",
@@ -97,7 +98,7 @@ export default async function AdminDashboard() {
     },
     {
       title: "Traducciones EN",
-      icon: Languages,
+      icon: "languages",
       value: `${stats.translationPending}`,
       detail: "pendientes",
       href: "/admin/traducciones/estado",
@@ -105,7 +106,7 @@ export default async function AdminDashboard() {
     },
     {
       title: "Landing Pages",
-      icon: Rocket,
+      icon: "rocket",
       value: stats.landings.total,
       detail: `${stats.landings.published} activas`,
       href: "/admin/landing-pages",
@@ -132,23 +133,20 @@ export default async function AdminDashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {cards.map((card) => {
-          const Icon = card.icon;
-          return (
-            <Link
-              key={card.href}
-              href={card.href}
-              className="group rounded-xl border border-border bg-bg-surface p-6 transition-all hover:border-border-hover hover:shadow-lg hover:shadow-primary/5"
-            >
-              <div className="flex items-center justify-between">
-                <Icon className={`h-5 w-5 ${card.color}`} />
-                <span className="text-2xl font-bold">{card.value}</span>
-              </div>
-              <h3 className="mt-3 text-sm font-medium text-text-100">{card.title}</h3>
-              <p className="text-xs text-text-40">{card.detail}</p>
-            </Link>
-          );
-        })}
+        {cards.map((card) => (
+          <Link
+            key={card.href}
+            href={card.href}
+            className="group rounded-xl border border-border bg-bg-surface p-6 transition-all hover:border-border-hover hover:shadow-lg hover:shadow-primary/5"
+          >
+            <div className="flex items-center justify-between">
+              <GeoIcon name={card.icon} size={18} color="cyan" />
+              <span className="text-2xl font-bold">{card.value}</span>
+            </div>
+            <h3 className="mt-3 text-sm font-medium text-text-100">{card.title}</h3>
+            <p className="text-xs text-text-40">{card.detail}</p>
+          </Link>
+        ))}
       </div>
 
       {/* Quick Actions */}

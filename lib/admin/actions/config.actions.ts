@@ -18,6 +18,14 @@ export async function updateSiteConfig(input: {
   siteNameEn?: string;
   taglineEs?: string;
   taglineEn?: string;
+  logoUrl?: string;
+  logoWidth?: number | null;
+  logoHeight?: number | null;
+  logoAltEs?: string;
+  logoAltEn?: string;
+  logoTitleEs?: string;
+  logoTitleEn?: string;
+  faviconUrl?: string;
   defaultOgImage?: string;
   phoneWhatsapp?: string;
   emailContact?: string;
@@ -58,4 +66,7 @@ export async function updateSiteConfig(input: {
   revalidatePath("/llms.txt");
   revalidatePath("/llms-full.txt");
   revalidatePath("/robots.txt");
+  // Revalidate layouts that consume logo / global site config
+  revalidatePath("/", "layout");
+  revalidatePath("/en", "layout");
 }

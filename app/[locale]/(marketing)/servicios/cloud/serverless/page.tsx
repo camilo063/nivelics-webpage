@@ -4,6 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: Zap,
+    icon: "zap",
     title: "Event-driven architecture",
     description:
       "Arquitecturas reactivas que procesan eventos en tiempo real con Lambda, Cloud Functions y Azure Functions.",
   },
   {
-    icon: Scaling,
+    icon: "scaling",
     title: "Auto-scaling nativo",
     description:
       "Escalamiento autom\u00e1tico de cero a millones de requests sin configuraci\u00f3n manual ni gesti\u00f3n de servidores.",
   },
   {
-    icon: DollarSign,
+    icon: "dollar-sign",
     title: "Costos basados en uso real",
     description:
       "Paga solo por el tiempo de ejecuci\u00f3n que consumes. Sin servidores idle, sin costos fijos innecesarios.",
@@ -120,6 +121,7 @@ export default async function ServerlessPage() {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Cloud \u00b7 Serverless"
         h1={cms?.title || "Paga solo lo que usas,"}
         h1Accent="escala sin l\u00edmites"
@@ -159,18 +161,15 @@ export default async function ServerlessPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cloud/10">
-                    <Icon size={24} className="text-cloud" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#00D4FF"
+              />
+            ))}
           </div>
         </div>
       </section>

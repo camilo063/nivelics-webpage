@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { PortalEffect } from "@/components/ui/portal-effect";
 
 interface CTABannerProps {
   title?: string;
@@ -8,6 +8,9 @@ interface CTABannerProps {
   buttonText?: string;
   buttonHref?: string;
   className?: string;
+  locale?: string;
+  eyebrow?: string;
+  trustLine?: string;
 }
 
 export function CTABanner({
@@ -16,19 +19,129 @@ export function CTABanner({
   buttonText = "Agenda una reunión",
   buttonHref = "/contacto",
   className,
+  locale = "es",
+  eyebrow,
+  trustLine,
 }: CTABannerProps) {
+  const resolvedEyebrow = eyebrow ?? (locale === "en" ? "FREE DIAGNOSTIC" : "DIAGNÓSTICO GRATUITO");
+  const resolvedTrust =
+    trustLine ??
+    (locale === "en"
+      ? "No RFP · No decks · 24h response"
+      : "Sin RFP · Sin presentaciones · Respuesta en 24h");
+
   return (
-    <section className={cn("relative overflow-hidden", className)}>
-      <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark opacity-10" />
-      <div className="relative mx-auto max-w-[1280px] px-6 py-16 text-center md:px-20 md:py-24">
-        <h2 className="text-3xl font-bold text-text-100 md:text-4xl">{title}</h2>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-text-70">{description}</p>
-        <div className="mt-8">
-          <Button asChild variant="cta" size="lg">
-            <Link href={buttonHref}>{buttonText}</Link>
-          </Button>
+    <section
+      aria-labelledby="cta-portal-title"
+      className={cn("relative flex items-center overflow-hidden", className)}
+      style={{ background: "#080d1a", minHeight: "360px" }}
+    >
+      <PortalEffect />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 top-0 h-px"
+        style={{
+          background: "linear-gradient(to right, transparent, rgba(0,212,255,0.35), transparent)",
+          zIndex: 1,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 bottom-0 h-px"
+        style={{
+          background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)",
+          zIndex: 1,
+        }}
+      />
+
+      <div
+        className="relative"
+        style={{
+          zIndex: 10,
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "80px 24px",
+          width: "100%",
+        }}
+      >
+        <div
+          className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-[5px]"
+          style={{
+            borderColor: "rgba(0,212,255,0.25)",
+            background: "rgba(0,212,255,0.06)",
+          }}
+        >
+          <span className="cta-portal-dot" aria-hidden="true" />
+          <span
+            className="text-[11px] font-semibold uppercase tracking-[0.09em]"
+            style={{ color: "#00D4FF" }}
+          >
+            {resolvedEyebrow}
+          </span>
+        </div>
+
+        <h2
+          id="cta-portal-title"
+          className="font-bold text-white"
+          style={{
+            fontSize: "clamp(28px, 4vw, 48px)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.025em",
+            margin: "0 0 16px",
+            maxWidth: "640px",
+          }}
+        >
+          {title}
+        </h2>
+
+        <p
+          className="text-[15px] leading-[1.65]"
+          style={{
+            color: "rgba(255,255,255,0.5)",
+            margin: "0 0 40px",
+            maxWidth: "480px",
+          }}
+        >
+          {description}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-5">
+          <Link
+            href={buttonHref}
+            className="inline-flex items-center gap-2 rounded-full font-semibold transition-all duration-150 hover:scale-[1.02]"
+            style={{
+              background: "#00D4FF",
+              color: "#000000",
+              letterSpacing: "-0.01em",
+              height: "48px",
+              padding: "0 28px",
+              fontSize: "15px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {buttonText}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path
+                d="M3 7h8M8 4l3 3-3 3"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+
+          <span
+            className="text-xs"
+            style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.01em" }}
+          >
+            {resolvedTrust}
+          </span>
         </div>
       </div>
     </section>
   );
 }
+
+export { CTABanner as CtaFinal };

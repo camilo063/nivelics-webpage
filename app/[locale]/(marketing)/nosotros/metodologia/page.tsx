@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { GitBranch, Users, Target, RefreshCw, CheckCircle, Calendar } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
 
 const ROLES = [
   {
-    icon: Target,
+    icon: "target",
     title: "Product Owner",
     description:
       "Representa la voz del cliente y del negocio. Define prioridades del backlog y asegura que cada sprint entregue el máximo valor.",
   },
   {
-    icon: Users,
+    icon: "users",
     title: "Scrum Master / Delivery Manager",
     description:
       "Facilita las ceremonias, remueve impedimentos y garantiza que el equipo mantenga el foco. En Nivelics, este rol evoluciona a Delivery Manager con responsabilidad end-to-end.",
   },
   {
-    icon: GitBranch,
+    icon: "git-branch",
     title: "Equipo de Desarrollo",
     description:
       "Ingenieros multidisciplinarios (frontend, backend, QA, DevOps) que se auto-organizan para cumplir los objetivos del sprint.",
@@ -43,25 +43,25 @@ const ROLES = [
 
 const EVENTS = [
   {
-    icon: Calendar,
+    icon: "calendar",
     title: "Sprint Planning",
     description:
       "Al inicio de cada sprint (2 semanas), el equipo selecciona las historias de usuario prioritarias y define el alcance del sprint.",
   },
   {
-    icon: RefreshCw,
+    icon: "refresh-cw",
     title: "Daily Scrum",
     description:
       "Reunión diaria de 15 minutos donde cada miembro comparte avances, bloqueos y plan del día. Transparencia total con el cliente.",
   },
   {
-    icon: CheckCircle,
+    icon: "check-circle",
     title: "Sprint Review",
     description:
       "Demo al final del sprint donde presentamos el incremento funcional al cliente. Feedback en tiempo real para ajustar dirección.",
   },
   {
-    icon: Target,
+    icon: "target",
     title: "Sprint Retrospective",
     description:
       "El equipo reflexiona sobre el proceso: qué funcionó, qué mejorar y qué acciones tomar. Mejora continua garantizada.",
@@ -105,18 +105,15 @@ export default function MetodologiaPage() {
             agilidad.
           </p>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {ROLES.map((role) => {
-              const Icon = role.icon;
-              return (
-                <div key={role.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon size={24} className="text-primary" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{role.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{role.description}</p>
+            {ROLES.map((role) => (
+              <div key={role.title} className="glass glow-hover rounded-xl p-6">
+                <div className="mb-4">
+                  <GeoIconBox name={role.icon} size={22} color="cyan" />
                 </div>
-              );
-            })}
+                <h3 className="text-lg font-semibold text-text-100">{role.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-70">{role.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -130,18 +127,15 @@ export default function MetodologiaPage() {
             mejora continua.
           </p>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {EVENTS.map((event) => {
-              const Icon = event.icon;
-              return (
-                <div key={event.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon size={24} className="text-primary" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{event.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{event.description}</p>
+            {EVENTS.map((event) => (
+              <div key={event.title} className="glass glow-hover rounded-xl p-6">
+                <div className="mb-4">
+                  <GeoIconBox name={event.icon} size={22} color="cyan" />
                 </div>
-              );
-            })}
+                <h3 className="text-lg font-semibold text-text-100">{event.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-70">{event.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -152,8 +146,8 @@ export default function MetodologiaPage() {
           <h2 className="text-3xl font-bold text-text-100">Nuestro diferenciador</h2>
           <div className="mt-8 glass rounded-xl p-8 md:p-12">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <CheckCircle size={24} className="text-primary" aria-hidden="true" />
+              <div className="shrink-0">
+                <GeoIconBox name="tri-check" size={22} color="green" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-text-100">

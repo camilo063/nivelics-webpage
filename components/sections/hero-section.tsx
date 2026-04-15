@@ -12,11 +12,20 @@ export function HeroSection() {
       style={{ background: "var(--grad-hero)" }}
     >
       {/* Grid pattern */}
-      <div className="grid-pattern absolute inset-0" />
+      <div
+        aria-hidden="true"
+        className="grid-pattern absolute inset-0 pointer-events-none select-none"
+      />
 
       {/* Glow orbs */}
-      <div className="absolute left-1/4 top-1/3 h-96 w-96 rounded-full bg-primary/5 blur-[120px]" />
-      <div className="absolute right-1/4 bottom-1/3 h-72 w-72 rounded-full bg-ia/5 blur-[100px]" />
+      <div
+        aria-hidden="true"
+        className="absolute left-1/4 top-1/3 h-96 w-96 rounded-full bg-primary/5 blur-[120px] pointer-events-none select-none"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute right-1/4 bottom-1/3 h-72 w-72 rounded-full bg-ia/5 blur-[100px] pointer-events-none select-none"
+      />
 
       <div className="relative mx-auto flex max-w-[1280px] flex-col items-center justify-center px-6 pt-32 pb-24 text-center md:px-20 md:pt-40 md:pb-32">
         {/* Badge */}

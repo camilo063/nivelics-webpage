@@ -57,6 +57,6 @@ export async function updateHomeContent(input: HomeContentInput) {
   });
 
   revalidatePath("/admin/home");
-  await revalidatePublicPages(["/"]);
+  await revalidatePublicPages(["/", "/industrias"]);
   return record;
 }

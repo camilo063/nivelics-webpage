@@ -210,6 +210,30 @@ export const servicios = pgTable("servicios", {
   seoDescriptionEs: text("seo_description_es"),
   seoDescriptionEn: text("seo_description_en"),
   schemaServiceJson: jsonb("schema_service_json"),
+  // ─── HUB-ONLY FIELDS (service_type = 'hub') ───
+  hubMetrics:
+    jsonb("hub_metrics").$type<Array<{ value: string; labelEs: string; labelEn: string }>>(),
+  frameworkTitleEs: text("framework_title_es"),
+  frameworkTitleEn: text("framework_title_en"),
+  frameworkSubtitleEs: text("framework_subtitle_es"),
+  frameworkSubtitleEn: text("framework_subtitle_en"),
+  frameworkPillars: jsonb("framework_pillars").$type<
+    Array<{
+      letter: string;
+      colorClass: string;
+      borderClass: string;
+      titleEs: string;
+      titleEn: string;
+      descEs: string;
+      descEn: string;
+    }>
+  >(),
+  sectorsTitleEs: text("sectors_title_es"),
+  sectorsTitleEn: text("sectors_title_en"),
+  sectors:
+    jsonb("sectors").$type<
+      Array<{ slug: string; icon: string; labelEs: string; labelEn: string }>
+    >(),
   sortOrder: integer("sort_order").default(0).notNull(),
   status: contentStatusEnum("status").default("draft").notNull(),
   translationStatusEn: translationStatusEnum("translation_status_en").default("pending").notNull(),
@@ -240,6 +264,8 @@ export const industrias = pgTable("industrias", {
       titleEn: string;
       descEs: string;
       descEn: string;
+      statEs?: string;
+      statEn?: string;
     }>
   >(),
   solutions: jsonb("solutions").$type<
@@ -260,6 +286,52 @@ export const industrias = pgTable("industrias", {
       descEn: string;
     }>
   >(),
+  // ─── RICH EXPERTISE FIELDS ───
+  metrics: jsonb("metrics").$type<Array<{ value: string; labelEs: string; labelEn: string }>>(),
+  statHighlights:
+    jsonb("stat_highlights").$type<
+      Array<{ value: string; labelEs: string; labelEn: string; source?: string }>
+    >(),
+  regulations:
+    jsonb("regulations").$type<
+      Array<{ code: string; nameEs: string; nameEn: string; descEs?: string; descEn?: string }>
+    >(),
+  useCases: jsonb("use_cases").$type<
+    Array<{
+      icon: string;
+      titleEs: string;
+      titleEn: string;
+      descEs: string;
+      descEn: string;
+      outcomeEs?: string;
+      outcomeEn?: string;
+    }>
+  >(),
+  playbook:
+    jsonb("playbook").$type<
+      Array<{ number: string; titleEs: string; titleEn: string; descEs: string; descEn: string }>
+    >(),
+  industryFaqs:
+    jsonb("industry_faqs").$type<
+      Array<{ questionEs: string; questionEn: string; answerEs: string; answerEn: string }>
+    >(),
+  techStack: jsonb("tech_stack").$type<
+    Array<{
+      label: string;
+      category: "cloud" | "data" | "ai" | "frontend" | "backend" | "security" | "other";
+    }>
+  >(),
+  servicesHighlight: jsonb("services_highlight").$type<string[]>(),
+  relatedCaseSlugs: jsonb("related_case_slugs").$type<string[]>(),
+  ctaTitleEs: text("cta_title_es"),
+  ctaTitleEn: text("cta_title_en"),
+  ctaPrimaryTextEs: varchar("cta_primary_text_es", { length: 255 }),
+  ctaPrimaryTextEn: varchar("cta_primary_text_en", { length: 255 }),
+  ctaPrimaryUrl: varchar("cta_primary_url", { length: 500 }),
+  hubIntroTitleEs: text("hub_intro_title_es"),
+  hubIntroTitleEn: text("hub_intro_title_en"),
+  hubIntroSubtitleEs: text("hub_intro_subtitle_es"),
+  hubIntroSubtitleEn: text("hub_intro_subtitle_en"),
   ctaTextEs: varchar("cta_text_es", { length: 255 }),
   ctaTextEn: varchar("cta_text_en", { length: 255 }),
   seoTitleEs: varchar("seo_title_es", { length: 255 }),
@@ -405,6 +477,39 @@ export const homeContent = pgTable("home_content", {
   finalCtaTitleEn: text("final_cta_title_en"),
   finalCtaCopyEs: text("final_cta_copy_es"),
   finalCtaCopyEn: text("final_cta_copy_en"),
+  // ─── HUB DE INDUSTRIAS (/industrias) ───
+  industriasHubTitleEs: text("industrias_hub_title_es"),
+  industriasHubTitleEn: text("industrias_hub_title_en"),
+  industriasHubSubtitleEs: text("industrias_hub_subtitle_es"),
+  industriasHubSubtitleEn: text("industrias_hub_subtitle_en"),
+  industriasHubStatEs: text("industrias_hub_stat_es"),
+  industriasHubStatEn: text("industrias_hub_stat_en"),
+  // ─── SECCIÓN "AÑOS DE EXPERIENCIA" (debajo de las cards de /industrias) ───
+  industriasSectionTitleEs: text("industrias_section_title_es"),
+  industriasSectionTitleEn: text("industrias_section_title_en"),
+  industriasSectionSubtitleEs: text("industrias_section_subtitle_es"),
+  industriasSectionSubtitleEn: text("industrias_section_subtitle_en"),
+  industriasSectionMetrics: jsonb("industrias_section_metrics").$type<
+    Array<{ value: string; labelEs: string; labelEn: string }>
+  >(),
+  // ─── PROCESS SECTION ───
+  processSectionTitleEs: text("process_section_title_es"),
+  processSectionTitleEn: text("process_section_title_en"),
+  processSectionSubtitleEs: text("process_section_subtitle_es"),
+  processSectionSubtitleEn: text("process_section_subtitle_en"),
+  processSteps: jsonb("process_steps").$type<
+    Array<{
+      number: string;
+      icon: string;
+      titleEs: string;
+      titleEn: string;
+      descEs: string;
+      descEn: string;
+      durationEs: string;
+      durationEn: string;
+    }>
+  >(),
+  translationStatusEn: translationStatusEnum("translation_status_en").default("pending").notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
@@ -416,6 +521,14 @@ export const siteConfig = pgTable("site_config", {
   siteNameEn: varchar("site_name_en", { length: 255 }),
   taglineEs: text("tagline_es"),
   taglineEn: text("tagline_en"),
+  logoUrl: text("logo_url"),
+  logoWidth: integer("logo_width"),
+  logoHeight: integer("logo_height"),
+  logoAltEs: text("logo_alt_es").default("Nivelics"),
+  logoAltEn: text("logo_alt_en").default("Nivelics"),
+  logoTitleEs: text("logo_title_es"),
+  logoTitleEn: text("logo_title_en"),
+  faviconUrl: text("favicon_url"),
   defaultOgImage: text("default_og_image"),
   phoneWhatsapp: varchar("phone_whatsapp", { length: 50 }),
   emailContact: varchar("email_contact", { length: 255 }),
@@ -510,3 +623,91 @@ export const leads = pgTable("leads", {
   mensaje: text("mensaje"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+// ─── PRODUCTOS (SaaS propios de Nivelics) ────────────────
+
+export const productos = pgTable("productos", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  slugEs: varchar("slug_es", { length: 100 }).notNull().unique(),
+  slugEn: varchar("slug_en", { length: 100 }).notNull().unique(),
+
+  name: varchar("name", { length: 100 }).notNull(),
+  taglineEs: varchar("tagline_es", { length: 200 }).notNull(),
+  taglineEn: varchar("tagline_en", { length: 200 }).notNull(),
+  descriptionEs: text("description_es").notNull(),
+  descriptionEn: text("description_en").notNull(),
+
+  externalUrl: varchar("external_url", { length: 300 }).notNull(),
+  externalCtaEs: varchar("external_cta_es", { length: 100 }).default("Ver producto").notNull(),
+  externalCtaEn: varchar("external_cta_en", { length: 100 }).default("View product").notNull(),
+
+  icpEs: varchar("icp_es", { length: 300 }).notNull(),
+  icpEn: varchar("icp_en", { length: 300 }).notNull(),
+  categoryEs: varchar("category_es", { length: 100 }).notNull(),
+  categoryEn: varchar("category_en", { length: 100 }).notNull(),
+
+  pricingFrom: integer("pricing_from"),
+  pricingCurrency: varchar("pricing_currency", { length: 10 }).default("USD"),
+  pricingLabelEs: varchar("pricing_label_es", { length: 100 }),
+  pricingLabelEn: varchar("pricing_label_en", { length: 100 }),
+  pricingNoteEs: varchar("pricing_note_es", { length: 200 }),
+  pricingNoteEn: varchar("pricing_note_en", { length: 200 }),
+
+  metrics: jsonb("metrics").$type<
+    Array<{
+      value: string;
+      labelEs: string;
+      labelEn: string;
+    }>
+  >(),
+
+  features: jsonb("features").$type<
+    Array<{
+      icon: string;
+      titleEs: string;
+      titleEn: string;
+      descriptionEs: string;
+      descriptionEn: string;
+    }>
+  >(),
+
+  comparisonTable: jsonb("comparison_table").$type<{
+    headersEs: string[];
+    headersEn: string[];
+    rows: Array<{
+      featureEs: string;
+      featureEn: string;
+      isNivelicsProduct: boolean;
+      values: string[];
+    }>;
+  }>(),
+
+  faqs: jsonb("faqs").$type<
+    Array<{
+      questionEs: string;
+      questionEn: string;
+      answerEs: string;
+      answerEn: string;
+    }>
+  >(),
+
+  accentColor: varchar("accent_color", { length: 20 }).default("cyan").notNull(),
+  heroEffect: varchar("hero_effect", { length: 20 }).default("particles").notNull(),
+  ogImage: varchar("og_image", { length: 500 }),
+
+  seoTitleEs: varchar("seo_title_es", { length: 100 }).notNull(),
+  seoTitleEn: varchar("seo_title_en", { length: 100 }).notNull(),
+  seoDescriptionEs: varchar("seo_description_es", { length: 200 }).notNull(),
+  seoDescriptionEn: varchar("seo_description_en", { length: 200 }).notNull(),
+  schemaCategory: varchar("schema_category", { length: 100 }).default("BusinessApplication"),
+
+  status: contentStatusEnum("status").default("draft").notNull(),
+  translationStatusEn: translationStatusEnum("translation_status_en").default("pending").notNull(),
+  sortOrder: integer("sort_order").default(0).notNull(),
+  publishedAt: timestamp("published_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type Producto = typeof productos.$inferSelect;
+export type NuevoProducto = typeof productos.$inferInsert;

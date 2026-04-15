@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { db } from "@/lib/db";
 import { landingPages } from "@/lib/db/schema/admin";
 import { eq, and } from "drizzle-orm";
+import { getAllProductos } from "@/lib/cms/productos";
 
 export const revalidate = 3600;
 
@@ -29,8 +30,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "weekly" as const,
   }));
 
+  const productos = await getAllProductos();
+  const productosEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/productos`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/productos`,
+          en: `${baseUrl}/en/products`,
+          "x-default": `${baseUrl}/productos`,
+        },
+      },
+    },
+    ...productos.map((p) => ({
+      url: `${baseUrl}/productos/${p.slugEs}`,
+      lastModified: p.updatedAt ?? now,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/productos/${p.slugEs}`,
+          en: `${baseUrl}/en/products/${p.slugEn}`,
+          "x-default": `${baseUrl}/productos/${p.slugEs}`,
+        },
+      },
+    })),
+  ];
+
   return [
     ...lpEntries,
+    ...productosEntries,
     // HOME
     {
       url: baseUrl,

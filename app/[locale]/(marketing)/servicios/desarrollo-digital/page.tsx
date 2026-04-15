@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Smartphone, Globe, ShoppingCart, Bot, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
@@ -42,28 +43,28 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const SUB_SERVICES = [
   {
-    icon: Bot,
+    icon: "bot",
     title: "Sitios Web Agentic-First",
     description:
       "Sitios navegables por personas Y por IA, agentes y LLMs. Multi-idioma, Schema.org completo, Core Web Vitals ≥95 y llms.txt.",
     href: "/servicios/desarrollo-digital/sitios-web-agentic",
   },
   {
-    icon: Smartphone,
+    icon: "smartphone",
     title: "Apps Móviles",
     description:
       "Apps nativas y cross-platform con React Native, Flutter, Swift y Kotlin. De la idea al App Store.",
     href: "/servicios/desarrollo-digital/apps-moviles",
   },
   {
-    icon: Globe,
+    icon: "globe",
     title: "Plataformas Web",
     description:
       "Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna y escalable.",
     href: "/servicios/desarrollo-digital/plataformas-web",
   },
   {
-    icon: ShoppingCart,
+    icon: "shopping-cart",
     title: "E-commerce",
     description:
       "Tiendas digitales B2B y B2C con catálogo, pricing dinámico, pasarelas de pago e integración ERP.",
@@ -101,6 +102,7 @@ export default async function DesarrolloDigitalPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="diagonal"
         badge="Desarrollo Digital"
         h1={cms?.title || "Del concepto"}
         h1Accent="a producción"
@@ -172,16 +174,14 @@ export default async function DesarrolloDigitalPage() {
           <h2 className="text-3xl font-bold text-text-100">Soluciones especializadas</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {SUB_SERVICES.map((s) => {
-              const Icon = s.icon;
+              const iconName = s.icon;
               return (
                 <Link
                   key={s.href}
                   href={s.href}
                   className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dev/10">
-                    <Icon size={24} className="text-dev" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="amber" />
                   <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
                     {s.title}
                   </h3>

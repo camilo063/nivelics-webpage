@@ -1,5 +1,6 @@
 import { DollarSign, TrendingDown, PieChart, Eye, BarChart, Settings } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
@@ -8,32 +9,32 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 
 const PILLARS = [
   {
-    icon: Eye,
+    icon: "eye",
     title: "Visibility",
     description: "Real-time dashboards of consumption by team, service and environment.",
   },
   {
-    icon: TrendingDown,
+    icon: "trending-down",
     title: "Optimization",
     description: "Rightsizing, reserved instances, spot fleet and orphaned resource elimination.",
   },
   {
-    icon: PieChart,
+    icon: "pie-chart",
     title: "Cost Allocation",
     description: "Tagging strategy, showback/chargeback and unit economics per product.",
   },
   {
-    icon: BarChart,
+    icon: "bar-chart",
     title: "Forecasting",
     description: "Cost projection with predictive models and anomaly alerts.",
   },
   {
-    icon: Settings,
+    icon: "settings",
     title: "Governance",
     description: "Automated policies, budgets and expensive resource approval workflows.",
   },
   {
-    icon: DollarSign,
+    icon: "dollar-sign",
     title: "FinOps Culture",
     description: "Team training, FinOps ceremonies and efficiency metrics.",
   },
@@ -122,12 +123,10 @@ export function FinOpsContentEn() {
           <h2 className="text-3xl font-bold text-text-100">FinOps Pillars</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((pillar) => {
-              const Icon = pillar.icon;
+              const iconName = pillar.icon;
               return (
                 <div key={pillar.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-finops/10">
-                    <Icon size={24} className="text-finops" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="cyan" />
                   <h3 className="text-lg font-semibold text-text-100">{pillar.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">{pillar.description}</p>
                 </div>

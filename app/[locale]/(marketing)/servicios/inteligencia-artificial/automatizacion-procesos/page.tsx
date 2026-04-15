@@ -109,6 +109,7 @@ export default async function AutomatizacionProcesosPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="IA · Automatización"
         h1={cms?.title || "Procesos que tardaban horas,"}
         h1Accent="ahora en segundos"

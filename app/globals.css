@@ -97,6 +97,104 @@ body {
   background-size: 60px 60px;
 }
 
+/* Dot grid decorativo para hero */
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 45%, black 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 55% at 50% 45%, black 35%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Máscara del HeroGraph para que no se filtre bajo el nav */
+.hero-graph-canvas {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(0, 0, 0, 0.5) 80px,
+    black 140px,
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(0, 0, 0, 0.5) 80px,
+    black 140px,
+    black 100%
+  );
+}
+
+/* Radar concéntrico — hero /servicios */
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(1.15);
+  }
+}
+.servicios-radar-ring {
+  animation-name: pulse-ring;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  transform: translateY(-50%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .servicios-radar-ring {
+    animation: none !important;
+    opacity: 0.15 !important;
+  }
+}
+
+/* CTA Portal — dot pulse */
+@keyframes cta-portal-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+.cta-portal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00d4ff;
+  flex-shrink: 0;
+  animation: cta-portal-dot-pulse 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-portal-dot {
+    animation: none;
+  }
+}
+
+/* Marquee logos clientes — 3 copias, desplazamiento -33.333% */
+@keyframes nivelics-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+.client-logos-marquee__track {
+  animation: nivelics-marquee-scroll 30s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .client-logos-marquee__track {
+    animation: none;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -116,4 +214,16 @@ body {
 ::selection {
   background: rgba(0, 212, 255, 0.3);
   color: var(--text-100);
+}
+
+/* prefers-reduced-motion override para efectos decorativos de hero */
+@media (prefers-reduced-motion: reduce) {
+  .hero-effect-dots,
+  .hero-effect-diagonal,
+  .hero-effect-particles,
+  .hero-effect-hex,
+  .hero-effect-grid,
+  .hero-effect-radar {
+    opacity: 0 !important;
+  }
 }

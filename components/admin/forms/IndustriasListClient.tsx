@@ -6,6 +6,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { TranslationBadge } from "@/components/admin/ui/BilingualEditor";
 import { deleteIndustria } from "@/lib/admin/actions/industrias.actions";
 import { useToast } from "@/components/admin/ui/Toast";
+import { IndustriaIcon } from "@/lib/utils/industria-icon";
 
 interface IndustriaItem {
   id: string;
@@ -61,7 +62,9 @@ export function IndustriasListClient({ industrias }: { industrias: IndustriaItem
           <div className="p-5 space-y-3">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
-                {industria.icon && <span className="text-2xl">{industria.icon}</span>}
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <IndustriaIcon name={industria.icon} className="h-5 w-5" />
+                </span>
                 <div>
                   <h3 className="font-semibold text-text-100">{industria.nameEs}</h3>
                   {industria.nameEn && <p className="text-xs text-text-40">{industria.nameEn}</p>}

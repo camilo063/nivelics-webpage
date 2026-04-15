@@ -8,6 +8,7 @@ import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: Code,
+    icon: "code",
     title: "Full-stack engineers certificados",
     description:
       "Desarrolladores senior con experiencia en React, Node.js, Python, Java, Go y las tecnologías que tu proyecto necesita.",
   },
   {
-    icon: Rocket,
+    icon: "rocket",
     title: "Integración en 5 días hábiles",
     description:
       "Tu nuevo ingeniero está trabajando con tu equipo en menos de una semana, con onboarding y alineación cultural incluidos.",
   },
   {
-    icon: DollarSign,
+    icon: "dollar-sign",
     title: "Ahorro hasta 40% vs USA",
     description:
       "Talento senior bilingüe en zona horaria compatible con Estados Unidos a una fracción del costo de contratar localmente.",
@@ -127,6 +128,7 @@ export default async function DesarrolloSoftwarePage() {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Staff Aug · Desarrollo"
         h1={cms?.title || "Desarrolladores validados"}
         h1Accent="en 5 días hábiles"
@@ -162,18 +164,15 @@ export default async function DesarrolloSoftwarePage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-staffing/10">
-                    <Icon size={24} className="text-staffing" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#4ade80"
+              />
+            ))}
           </div>
         </div>
       </section>

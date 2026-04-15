@@ -37,6 +37,8 @@ export interface CMSPainPoint {
   titleEn: string;
   descEs: string;
   descEn: string;
+  statEs?: string;
+  statEn?: string;
 }
 
 export interface CMSDifferentiator {
@@ -44,6 +46,90 @@ export interface CMSDifferentiator {
   titleEn: string;
   descEs: string;
   descEn: string;
+}
+
+// ─── Hub de Servicios ───────────────────────────────────
+
+export interface CMSHubMetric {
+  value: string;
+  labelEs: string;
+  labelEn: string;
+}
+
+export interface CMSFrameworkPillar {
+  letter: string;
+  colorClass: string;
+  borderClass: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+}
+
+export interface CMSSector {
+  slug: string;
+  icon: string;
+  labelEs: string;
+  labelEn: string;
+}
+
+// ─── Industrias — contenido rico ────────────────────────
+
+export interface CMSIndustriaMetric {
+  value: string;
+  labelEs: string;
+  labelEn: string;
+}
+
+export interface CMSStatHighlight {
+  value: string;
+  labelEs: string;
+  labelEn: string;
+  source?: string;
+}
+
+export interface CMSRegulation {
+  code: string;
+  nameEs: string;
+  nameEn: string;
+  descEs?: string;
+  descEn?: string;
+}
+
+export interface CMSUseCase {
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+  outcomeEs?: string;
+  outcomeEn?: string;
+}
+
+export interface CMSPlaybookStep {
+  number: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+}
+
+export interface CMSTechTag {
+  label: string;
+  category: "cloud" | "data" | "ai" | "frontend" | "backend" | "security" | "other";
+}
+
+// ─── Home — proceso en 3 pasos ──────────────────────────
+
+export interface CMSProcessStepHome {
+  number: string;
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+  durationEs: string;
+  durationEn: string;
 }
 
 // ─── Mapped types (locale-resolved) ─────────────────────
@@ -70,6 +156,19 @@ export interface MappedServicio {
   coverImage: string | null;
   seoTitle: string;
   seoDescription: string;
+  // Hub-only
+  hubMetrics: Array<{ value: string; label: string }>;
+  frameworkTitle: string;
+  frameworkSubtitle: string;
+  frameworkPillars: Array<{
+    letter: string;
+    colorClass: string;
+    borderClass: string;
+    title: string;
+    desc: string;
+  }>;
+  sectorsTitle: string;
+  sectors: Array<{ slug: string; icon: string; label: string }>;
 }
 
 export interface MappedIndustria {
@@ -80,12 +179,27 @@ export interface MappedIndustria {
   name: string;
   heroTitle: string;
   heroSubtitle: string;
-  painPoints: Array<{ icon: string; title: string; desc: string }>;
+  painPoints: Array<{ icon: string; title: string; desc: string; stat?: string }>;
   solutions: Array<{ icon: string; title: string; desc: string }>;
   differentiators: Array<{ title: string; desc: string }>;
   ctaText: string;
   seoTitle: string;
   seoDescription: string;
+  // Rich expertise fields
+  metrics: Array<{ value: string; label: string }>;
+  statHighlights: Array<{ value: string; label: string; source?: string }>;
+  regulations: Array<{ code: string; name: string; desc?: string }>;
+  useCases: Array<{ icon: string; title: string; desc: string; outcome?: string }>;
+  playbook: Array<{ number: string; title: string; desc: string }>;
+  industryFaqs: Array<{ question: string; answer: string }>;
+  techStack: Array<{ label: string; category: string }>;
+  servicesHighlight: string[];
+  relatedCaseSlugs: string[];
+  ctaTitle: string;
+  ctaPrimaryText: string;
+  ctaPrimaryUrl: string | null;
+  hubIntroTitle: string;
+  hubIntroSubtitle: string;
 }
 
 export interface MappedCasoExito {
@@ -138,6 +252,16 @@ export interface MappedHomeContent {
   faqs: Array<{ question: string; answer: string }>;
   finalCtaTitle: string;
   finalCtaCopy: string;
+  // Process section
+  processSectionTitle: string;
+  processSectionSubtitle: string;
+  processSteps: Array<{
+    number: string;
+    icon: string;
+    title: string;
+    desc: string;
+    duration: string;
+  }>;
 }
 
 export interface MappedTeamMember {

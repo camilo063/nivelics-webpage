@@ -4,6 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { HeroSplit } from "@/components/sections/hero-split";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: ShoppingCart,
+    icon: "shopping-cart",
     title: "Catalogo y pricing dinamico",
     description:
       "Gestion avanzada de catalogo con variantes, precios por segmento, descuentos programados y reglas de pricing dinamico.",
   },
   {
-    icon: CreditCard,
+    icon: "credit-card",
     title: "Pasarelas de pago integradas",
     description:
       "Integracion con Stripe, MercadoPago, PayU y pasarelas locales para pagos seguros con multiples metodos de pago.",
   },
   {
-    icon: PackageCheck,
+    icon: "package-check",
     title: "Integracion ERP y logistica",
     description:
       "Conexion con SAP, Oracle, Odoo y sistemas de logistica para sincronizacion de inventario, ordenes y fulfillment.",
@@ -119,6 +120,7 @@ export default async function EcommercePage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="Desarrollo Digital &middot; E-commerce"
         h1={cms?.title || "Tu tienda online"}
         h1Accent="sin comisiones"
@@ -197,18 +199,15 @@ export default async function EcommercePage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dev/10">
-                    <Icon size={24} className="text-dev" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#fbbf24"
+              />
+            ))}
           </div>
         </div>
       </section>

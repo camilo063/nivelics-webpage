@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MessageCircle, Mail, Clock, HelpCircle } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale } from "next-intl/server";
@@ -52,7 +53,7 @@ const FAQ_ITEMS = [
 // LEGACY FALLBACK
 const CHANNELS = [
   {
-    icon: MessageCircle,
+    icon: "message-circle",
     title: "WhatsApp",
     description: "Respuesta rápida para consultas y soporte.",
     contact: "+57 310-3926621",
@@ -60,7 +61,7 @@ const CHANNELS = [
     linkText: "Enviar mensaje",
   },
   {
-    icon: Mail,
+    icon: "mail",
     title: "Email",
     description: "Para solicitudes formales y documentación.",
     contact: "contacto@nivelics.com",
@@ -109,13 +110,11 @@ export default async function SoportePage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="grid gap-6 md:grid-cols-2">
             {CHANNELS.map((channel) => {
-              const Icon = channel.icon;
+              const iconName = channel.icon;
               return (
                 <div key={channel.title} className="glass glow-hover rounded-xl p-8">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <Icon size={24} className="text-primary" aria-hidden="true" />
-                    </div>
+                    <GeoIconBox name={iconName} size={20} color="cyan" />
                     <div>
                       <h2 className="text-xl font-semibold text-text-100">{channel.title}</h2>
                       <p className="mt-1 text-sm text-text-70">{channel.description}</p>

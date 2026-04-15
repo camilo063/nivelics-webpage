@@ -107,6 +107,10 @@ export function Breadcrumb() {
   const segments = pathname.split("/").filter(Boolean);
   if (segments.length === 0) return null;
 
+  // Ocultar breadcrumb en páginas de subservicio (donde ya aparece SiblingServicesNav).
+  // Path pattern: /servicios/{hub}/{subservice}
+  if (segments[0] === "servicios" && segments.length >= 3) return null;
+
   const crumbs: BreadcrumbItem[] = segments.map((segment, i) => {
     const key = SLUG_TO_KEY[segment];
     const label = key
@@ -144,16 +148,16 @@ export function Breadcrumb() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       <nav
-        aria-label="Ruta de navegación"
+        aria-label="Breadcrumb"
         role="navigation"
-        className="mx-auto max-w-[1280px] px-6 pt-2 pb-0 md:px-20"
+        className="mx-auto max-w-[1280px] px-6 pt-3 pb-3 md:px-20 mb-6"
       >
         {/* Desktop */}
-        <ol className="flex items-center gap-1.5 text-xs text-text-40 max-md:hidden">
+        <ol className="flex items-center gap-1.5 max-md:hidden">
           <li className="shrink-0">
             <Link
               href="/"
-              className="transition-colors hover:text-primary"
+              className="text-xs text-white/35 transition-colors duration-150 hover:text-white/60 font-medium"
               aria-label={`${t("home")}`}
             >
               {t("home")}
@@ -163,17 +167,17 @@ export function Breadcrumb() {
             const isLast = i === crumbs.length - 1;
             return (
               <li key={crumb.href} className="flex items-center gap-1.5 shrink-0">
-                <span aria-hidden="true" className="text-text-40/40">
-                  ›
+                <span aria-hidden="true" className="text-white/20 text-xs select-none">
+                  /
                 </span>
                 {isLast ? (
-                  <span className="text-text-70" aria-current="page">
+                  <span className="text-xs text-white/70 font-medium" aria-current="page">
                     {crumb.label}
                   </span>
                 ) : (
                   <Link
                     href={crumb.href}
-                    className="transition-colors hover:text-primary"
+                    className="text-xs text-white/35 transition-colors duration-150 hover:text-white/60 font-medium"
                     aria-label={`Ir a ${crumb.label}`}
                   >
                     {crumb.label}
@@ -185,33 +189,39 @@ export function Breadcrumb() {
         </ol>
 
         {/* Mobile */}
-        <ol className="flex items-center gap-1.5 text-xs text-text-40 md:hidden">
+        <ol className="flex items-center gap-1.5 md:hidden">
           <li className="shrink-0">
-            <Link href="/" className="transition-colors hover:text-primary">
+            <Link
+              href="/"
+              className="text-xs text-white/35 transition-colors hover:text-white/60 font-medium"
+            >
               {t("home")}
             </Link>
           </li>
           {showCollapsed && (
             <li className="flex items-center gap-1.5 shrink-0">
-              <span aria-hidden="true" className="text-text-40/40">
-                ›
+              <span aria-hidden="true" className="text-white/20 text-xs select-none">
+                /
               </span>
-              <span className="text-text-40">…</span>
+              <span className="text-xs text-white/35">…</span>
             </li>
           )}
           {mobileCrumbs.map((crumb, i) => {
             const isLast = i === mobileCrumbs.length - 1;
             return (
               <li key={crumb.href} className="flex items-center gap-1.5 shrink-0">
-                <span aria-hidden="true" className="text-text-40/40">
-                  ›
+                <span aria-hidden="true" className="text-white/20 text-xs select-none">
+                  /
                 </span>
                 {isLast ? (
-                  <span className="text-text-70" aria-current="page">
+                  <span className="text-xs text-white/70 font-medium" aria-current="page">
                     {crumb.label}
                   </span>
                 ) : (
-                  <Link href={crumb.href} className="transition-colors hover:text-primary">
+                  <Link
+                    href={crumb.href}
+                    className="text-xs text-white/35 transition-colors hover:text-white/60 font-medium"
+                  >
                     {crumb.label}
                   </Link>
                 )}

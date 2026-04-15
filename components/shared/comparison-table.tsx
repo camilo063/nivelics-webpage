@@ -31,28 +31,133 @@ export function ComparisonTable({
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
         <h2 className="text-2xl font-bold text-text-100 md:text-3xl">{title}</h2>
-        <div className="mt-8 overflow-x-auto rounded-xl border border-border">
+        <div className="mt-8 overflow-x-auto rounded-xl border border-white/10">
           <table className="w-full min-w-[600px] text-left text-sm">
             <thead>
-              <tr className="border-b border-border bg-bg-surface">
-                <th className="px-5 py-4 font-semibold text-text-40 w-[28%]">Criterio</th>
-                <th className="px-5 py-4 font-semibold text-text-40">{alternativeLabel}</th>
-                {hasExtra && <th className="px-5 py-4 font-semibold text-text-40">{extraLabel}</th>}
-                <th className="px-5 py-4 font-semibold text-primary bg-primary/5">
+              <tr>
+                <th
+                  style={{
+                    padding: "10px 14px",
+                    background: "rgba(255,255,255,0.04)",
+                    color: "rgba(255,255,255,0.55)",
+                    fontWeight: 500,
+                    fontSize: "11px",
+                    letterSpacing: ".05em",
+                    textTransform: "uppercase",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
+                    textAlign: "left",
+                    width: "28%",
+                  }}
+                >
+                  Criterio
+                </th>
+                <th
+                  style={{
+                    padding: "10px 14px",
+                    background: "rgba(255,255,255,0.025)",
+                    color: "rgba(255,255,255,0.40)",
+                    fontWeight: 400,
+                    fontSize: "11px",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
+                    textAlign: "left",
+                  }}
+                >
+                  {alternativeLabel}
+                </th>
+                {hasExtra && (
+                  <th
+                    style={{
+                      padding: "10px 14px",
+                      background: "rgba(255,255,255,0.025)",
+                      color: "rgba(255,255,255,0.40)",
+                      fontWeight: 400,
+                      fontSize: "11px",
+                      borderBottom: "1px solid rgba(255,255,255,0.08)",
+                      textAlign: "left",
+                    }}
+                  >
+                    {extraLabel}
+                  </th>
+                )}
+                <th
+                  style={{
+                    padding: "10px 14px",
+                    background: "rgba(0,212,255,0.07)",
+                    color: "#00D4FF",
+                    fontWeight: 600,
+                    fontSize: "11px",
+                    letterSpacing: ".04em",
+                    borderBottom: "2px solid rgba(0,212,255,0.3)",
+                    borderTop: "1px solid rgba(0,212,255,0.2)",
+                    borderLeft: "2px solid rgba(0,212,255,0.3)",
+                    textAlign: "left",
+                  }}
+                >
                   <span className="flex items-center gap-2">
-                    <Check size={16} className="text-staffing" />
+                    <Check size={14} />
                     {nivelicsLabel}
                   </span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
-              {rows.map((row) => (
-                <tr key={row.criterion} className="transition-colors hover:bg-bg-surface/50">
-                  <td className="px-5 py-4 font-medium text-text-100">{row.criterion}</td>
-                  <td className="px-5 py-4 text-text-40">{row.alternative}</td>
-                  {hasExtra && <td className="px-5 py-4 text-text-40">{row.extra}</td>}
-                  <td className={cn("px-5 py-4 text-text-100 bg-primary/[0.03]")}>
+            <tbody>
+              {rows.map((row, i) => (
+                <tr
+                  key={row.criterion}
+                  className={cn(
+                    "transition-colors",
+                    i % 2 === 0 ? "bg-white/[0.015]" : "bg-transparent",
+                  )}
+                >
+                  <td
+                    style={{
+                      padding: "9px 14px",
+                      color: "rgba(255,255,255,0.65)",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      borderBottom: ".5px solid rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    {row.criterion}
+                  </td>
+                  <td
+                    style={{
+                      padding: "9px 14px",
+                      color: "rgba(255,255,255,0.40)",
+                      fontSize: "13px",
+                      borderBottom: ".5px solid rgba(255,255,255,0.06)",
+                      textDecoration: "line-through",
+                      textDecorationColor: "rgba(239,68,68,0.5)",
+                    }}
+                  >
+                    {row.alternative}
+                  </td>
+                  {hasExtra && (
+                    <td
+                      style={{
+                        padding: "9px 14px",
+                        color: "rgba(255,255,255,0.40)",
+                        fontSize: "13px",
+                        borderBottom: ".5px solid rgba(255,255,255,0.06)",
+                        textDecoration: "line-through",
+                        textDecorationColor: "rgba(239,68,68,0.5)",
+                      }}
+                    >
+                      {row.extra}
+                    </td>
+                  )}
+                  <td
+                    style={{
+                      padding: "9px 14px",
+                      color: "rgba(255,255,255,0.92)",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      borderBottom: ".5px solid rgba(0,212,255,0.08)",
+                      background: "rgba(0,212,255,0.05)",
+                      borderLeft: "2px solid rgba(0,212,255,0.3)",
+                    }}
+                  >
+                    <span style={{ color: "#4ade80", marginRight: "6px" }}>✓</span>
                     {row.nivelics}
                   </td>
                 </tr>

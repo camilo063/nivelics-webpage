@@ -4,6 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: Cloud,
+    icon: "cloud",
     title: "Arquitectura multi-cloud",
     description:
       "Dise\u00f1amos arquitecturas que aprovechan lo mejor de AWS, GCP y Azure, evitando vendor lock-in y optimizando costos.",
   },
   {
-    icon: FileCode,
+    icon: "file-code",
     title: "IaC con Terraform/Pulumi",
     description:
       "Infraestructura como c\u00f3digo versionada, reproducible y auditada con Terraform, Pulumi o CloudFormation.",
   },
   {
-    icon: ShieldCheck,
+    icon: "shield-check",
     title: "Alta disponibilidad y disaster recovery",
     description:
       "Arquitecturas multi-AZ y multi-regi\u00f3n con RPO/RTO definidos, failover autom\u00e1tico y planes de recuperaci\u00f3n probados.",
@@ -120,6 +121,7 @@ export default async function InfraestructuraPage() {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Cloud \u00b7 Infraestructura"
         h1={cms?.title || "Tu infra cloud"}
         h1Accent="siempre operando"
@@ -192,18 +194,15 @@ export default async function InfraestructuraPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cloud/10">
-                    <Icon size={24} className="text-cloud" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#00D4FF"
+              />
+            ))}
           </div>
         </div>
       </section>

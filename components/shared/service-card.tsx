@@ -25,7 +25,7 @@ export function ServiceCard({ service, index = 0, className }: ServiceCardProps)
       <Link
         href={service.href}
         className={cn(
-          "group glass glow-hover block rounded-xl p-6 transition-all duration-300",
+          "group glass glow-hover block rounded-xl p-6 transition-all duration-200 ease-out hover:-translate-y-1",
           className,
         )}
       >

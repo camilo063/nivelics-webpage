@@ -14,6 +14,23 @@ const faqItemSchema = z.object({
   answerEn: z.string().optional().default(""),
 });
 
+const industriasSectionMetricSchema = z.object({
+  value: z.string().optional().default(""),
+  labelEs: z.string().optional().default(""),
+  labelEn: z.string().optional().default(""),
+});
+
+const processStepSchema = z.object({
+  number: z.string().optional().default(""),
+  icon: z.string().optional().default(""),
+  titleEs: z.string().optional().default(""),
+  titleEn: z.string().optional().default(""),
+  descEs: z.string().optional().default(""),
+  descEn: z.string().optional().default(""),
+  durationEs: z.string().optional().default(""),
+  durationEn: z.string().optional().default(""),
+});
+
 export const homeContentSchema = z.object({
   heroBadgeEs: z.string().optional().default(""),
   heroBadgeEn: z.string().optional().default(""),
@@ -37,6 +54,22 @@ export const homeContentSchema = z.object({
   finalCtaTitleEn: z.string().optional().default(""),
   finalCtaCopyEs: z.string().optional().default(""),
   finalCtaCopyEn: z.string().optional().default(""),
+  processSectionTitleEs: z.string().optional().default(""),
+  processSectionTitleEn: z.string().optional().default(""),
+  processSectionSubtitleEs: z.string().optional().default(""),
+  processSectionSubtitleEn: z.string().optional().default(""),
+  processSteps: z.array(processStepSchema).optional().default([]),
+  industriasHubTitleEs: z.string().optional().default(""),
+  industriasHubTitleEn: z.string().optional().default(""),
+  industriasHubSubtitleEs: z.string().optional().default(""),
+  industriasHubSubtitleEn: z.string().optional().default(""),
+  industriasHubStatEs: z.string().optional().default(""),
+  industriasHubStatEn: z.string().optional().default(""),
+  industriasSectionTitleEs: z.string().optional().default(""),
+  industriasSectionTitleEn: z.string().optional().default(""),
+  industriasSectionSubtitleEs: z.string().optional().default(""),
+  industriasSectionSubtitleEn: z.string().optional().default(""),
+  industriasSectionMetrics: z.array(industriasSectionMetricSchema).optional().default([]),
 });
 
 export type HomeContentInput = z.infer<typeof homeContentSchema>;

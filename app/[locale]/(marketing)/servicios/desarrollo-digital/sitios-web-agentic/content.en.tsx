@@ -15,6 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
@@ -25,48 +26,48 @@ import { getFAQSchema } from "@/lib/schema/faq";
 
 const INCLUDED_ITEMS = [
   {
-    icon: Globe,
+    icon: "globe",
     title: "Technical multi-language (i18n)",
     description:
       "Architecture from first commit, semantic routes per language, hreflang, x-default, og:locale.",
   },
   {
-    icon: LinkIcon,
+    icon: "link-icon",
     title: "URL architecture without errors",
     description: "No 404s, documented 301 redirects, canonical tags, no duplicate content.",
   },
   {
-    icon: Zap,
+    icon: "zap",
     title: "Performance that Google rewards",
     description: "LCP < 2s, CLS = 0, INP < 150ms, WebP/AVIF, hosted fonts.",
   },
   {
-    icon: Code2,
+    icon: "code2",
     title: "Structured data for machines",
     description: "JSON-LD server-side, Organization, Service, BreadcrumbList, FAQPage.",
   },
   {
-    icon: FileText,
+    icon: "file-text",
     title: "The robots.txt of LLMs",
     description: "llms.txt standard, bilingual, with ES/EN URL pairs.",
   },
   {
-    icon: Shield,
+    icon: "shield",
     title: "Granular access for AI bots",
     description: "robots.txt configured for GPTBot, Claude-Web, PerplexityBot etc.",
   },
   {
-    icon: Menu,
+    icon: "menu",
     title: "Navigation that agents read",
     description: "aria-labels, data-attributes, SiteNavigationElement Schema.org.",
   },
   {
-    icon: ChevronsRight,
+    icon: "chevrons-right",
     title: "Breadcrumbs for humans and crawlers",
     description: "BreadcrumbList JSON-LD, translated labels.",
   },
   {
-    icon: Layers,
+    icon: "layers",
     title: "Strict semantic HTML",
     description: "H1\u2192H2\u2192H3 hierarchy, one H1 per page, content in text not images.",
   },
@@ -300,12 +301,10 @@ export function AgenticContentEn() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {INCLUDED_ITEMS.map((item) => {
-              const Icon = item.icon;
+              const iconName = item.icon;
               return (
                 <div key={item.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dev/10">
-                    <Icon size={24} className="text-dev" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="amber" />
                   <h3 className="text-lg font-semibold text-text-100">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">{item.description}</p>
                 </div>

@@ -8,6 +8,7 @@ import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: TestTube,
+    icon: "test-tube",
     title: "Testing automatizado E2E",
     description:
       "Frameworks de testing end-to-end con Cypress, Playwright y Selenium para validar flujos completos de usuario de forma automatizada.",
   },
   {
-    icon: ShieldAlert,
+    icon: "shield-alert",
     title: "Pentesting y auditoría de seguridad",
     description:
       "Pruebas de penetración, análisis de vulnerabilidades y auditorías de seguridad para proteger tu aplicación y datos.",
   },
   {
-    icon: GitMerge,
+    icon: "git-merge",
     title: "Integración en pipelines CI/CD",
     description:
       "Tests automáticos integrados en tus pipelines de CI/CD para detectar bugs y vulnerabilidades antes de cada despliegue.",
@@ -151,6 +152,7 @@ export default async function QASeguridadPage() {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Staff Aug · QA & Seguridad"
         h1={cms?.title || "QA que previene"}
         h1Accent="antes de producción"
@@ -192,18 +194,15 @@ export default async function QASeguridadPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-staffing/10">
-                    <Icon size={24} className="text-staffing" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#4ade80"
+              />
+            ))}
           </div>
         </div>
       </section>
