@@ -69,6 +69,7 @@ async function main() {
   const db = drizzle(sqlClient, { schema: { servicios } });
 
   const all = await db.select().from(servicios);
+  let updated = 0;
 
   for (const svc of all) {
     const slug = (svc as any).slugEs as string;
