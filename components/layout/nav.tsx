@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
@@ -376,9 +377,29 @@ function getEnUrl(path: string): string {
 
 /* ── Nav ── */
 
-export function Nav() {
+interface NavProps {
+  logoUrl?: string | null;
+  logoAlt?: string;
+  logoTitle?: string;
+  logo?: React.ReactNode;
+}
+
+export function Nav({
+  logoUrl = null,
+  logoAlt = "Nivelics",
+  logoTitle = "Nivelics",
+  logo,
+}: NavProps = {}) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 10);
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
   const locale = useLocale();
   const t = useTranslations("nav");
   const tIa = useTranslations("navServicesIa");
@@ -439,15 +460,46 @@ export function Nav() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass">
+    <header
+      suppressHydrationWarning
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-colors duration-200",
+        scrolled || mobileOpen ? "bg-[#0A0A0F] border-b border-white/[0.06]" : "bg-transparent",
+      )}
+    >
       <nav
         className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-6 md:px-20"
         aria-label="Navegación principal"
         itemScope
         itemType="https://schema.org/SiteNavigationElement"
       >
-        <Link href="/" className="text-xl font-bold text-text-100 tracking-tight" itemProp="url">
-          <span itemProp="name">{SITE.name}</span>
+        <Link
+          href={locale === "en" ? "/en" : "/"}
+          className="flex items-center text-xl font-bold text-text-100 tracking-tight"
+          itemProp="url"
+          aria-label={logoAlt}
+          title={logoTitle}
+        >
+          {logo ??
+            (logoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoUrl}
+                alt={logoAlt}
+                title={logoTitle}
+                height={80}
+                style={{
+                  height: "80px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
+                loading="eager"
+                fetchPriority="high"
+                itemProp="name"
+              />
+            ) : (
+              <span itemProp="name">{SITE.name}</span>
+            ))}
         </Link>
 
         {/* ── Desktop ── */}
@@ -476,6 +528,19 @@ export function Nav() {
               />
             </Link>
           </div>
+
+          {/* Productos */}
+          <Link
+            href="/productos"
+            data-nav-category="productos"
+            data-nav-level="hub"
+            className={cn(
+              "text-sm font-medium transition-colors",
+              isActive("/productos") ? "text-primary" : "text-text-70 hover:text-text-100",
+            )}
+          >
+            Productos
+          </Link>
 
           {/* Industrias */}
           <div
@@ -579,9 +644,9 @@ export function Nav() {
       <AnimatePresence>
         {serviciosPanel.open && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={serviciosEnter}
@@ -589,9 +654,15 @@ export function Nav() {
             onClick={handlePanelClick}
           >
             <div
-              className="border-y border-white/[0.06]"
+              className="relative border-y border-white/[0.06]"
               style={{ background: "rgba(10,10,15,0.97)", backdropFilter: "blur(20px)" }}
             >
+              {/* Puente invisible para cubrir gap entre nav y panel */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 right-0"
+                style={{ top: "-8px", height: "8px" }}
+              />
               <div className="mx-auto max-w-[1200px] grid grid-cols-4 gap-6 px-6 py-7">
                 {SERVICES_COLUMNS.map((col) => {
                   const Icon = col.icon;
@@ -687,9 +758,9 @@ export function Nav() {
       <AnimatePresence>
         {industriasPanel.open && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={industriasEnter}
@@ -697,9 +768,15 @@ export function Nav() {
             onClick={handlePanelClick}
           >
             <div
-              className="border-y border-white/[0.06]"
+              className="relative border-y border-white/[0.06]"
               style={{ background: "rgba(10,10,15,0.97)", backdropFilter: "blur(20px)" }}
             >
+              {/* Puente invisible para cubrir gap entre nav y panel */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 right-0"
+                style={{ top: "-8px", height: "8px" }}
+              />
               <nav
                 className="mx-auto max-w-[720px] px-6 py-7"
                 aria-label="Navegación por industrias"
@@ -775,9 +852,9 @@ export function Nav() {
       <AnimatePresence>
         {nosotrosPanel.open && (
           <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={nosotrosEnter}
@@ -785,9 +862,15 @@ export function Nav() {
             onClick={handlePanelClick}
           >
             <div
-              className="border-y border-white/[0.06]"
+              className="relative border-y border-white/[0.06]"
               style={{ background: "rgba(10,10,15,0.97)", backdropFilter: "blur(20px)" }}
             >
+              {/* Puente invisible para cubrir gap entre nav y panel */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 right-0"
+                style={{ top: "-8px", height: "8px" }}
+              />
               <nav
                 className="mx-auto max-w-[640px] px-6 py-7"
                 aria-label="Navegación sección Nosotros"
@@ -978,6 +1061,15 @@ export function Nav() {
                   );
                 })}
               </MobileAccordion>
+
+              {/* Productos */}
+              <Link
+                href="/productos"
+                onClick={close}
+                className="block rounded-lg px-3 py-2 text-sm font-medium text-text-70 hover:text-text-100"
+              >
+                Productos
+              </Link>
 
               {/* Industrias */}
               <MobileAccordion title="Industrias">

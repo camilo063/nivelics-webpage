@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Heart, Zap, Eye, MessageCircle } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { ApplyForm } from "./apply-form";
@@ -34,25 +35,25 @@ export async function generateMetadata(): Promise<Metadata> {
 // LEGACY FALLBACK
 const CULTURE_VALUES = [
   {
-    icon: MessageCircle,
+    icon: "message-circle",
     title: "Directo",
     description:
       "Comunicación clara y sin rodeos. Decimos lo que pensamos con respeto y esperamos lo mismo de vuelta.",
   },
   {
-    icon: Heart,
+    icon: "heart",
     title: "Humano",
     description:
       "Las personas primero. Entendemos que detrás de cada línea de código hay alguien con vida, metas y contexto.",
   },
   {
-    icon: Zap,
+    icon: "zap",
     title: "Ambicioso",
     description:
       "Buscamos impacto real. No nos conformamos con cumplir: queremos superar expectativas y crecer juntos.",
   },
   {
-    icon: Eye,
+    icon: "eye",
     title: "Honesto",
     description:
       "Transparencia en todo: desde el estado del proyecto hasta las oportunidades de crecimiento dentro del equipo.",
@@ -99,12 +100,10 @@ export default async function TrabajaConNosotrosPage() {
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {CULTURE_VALUES.map((value) => {
-              const Icon = value.icon;
+              const iconName = value.icon;
               return (
                 <div key={value.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon size={24} className="text-primary" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="cyan" />
                   <h3 className="text-lg font-semibold text-text-100">{value.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">{value.description}</p>
                 </div>

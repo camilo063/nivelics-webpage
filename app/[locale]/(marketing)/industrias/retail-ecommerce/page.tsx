@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Layers, Sparkles, Truck } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
+import { HeroEffect } from "@/components/ui/hero-effect";
 import { CTABanner, ServiceBadge } from "@/components/shared";
+import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
@@ -34,19 +36,19 @@ export async function generateMetadata(): Promise<Metadata> {
 // LEGACY FALLBACK
 const CHALLENGES = [
   {
-    icon: Layers,
+    icon: "layers",
     title: "Omnicanalidad",
     description:
       "Integrar tiendas físicas, e-commerce, marketplace y apps móviles en una experiencia de compra unificada y sin fricciones.",
   },
   {
-    icon: Sparkles,
+    icon: "sparkles",
     title: "Personalización",
     description:
       "Ofrecer recomendaciones de producto, precios dinámicos y experiencias únicas basadas en el comportamiento de cada cliente.",
   },
   {
-    icon: Truck,
+    icon: "truck",
     title: "Logística last-mile",
     description:
       "Optimizar la última milla de entrega con visibilidad en tiempo real, rutas inteligentes y gestión eficiente de devoluciones.",
@@ -110,8 +112,12 @@ export default async function RetailEcommercePage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
+        <HeroEffect kind="hex" opacity={0.9} />
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"
+          style={{ zIndex: 1 }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
             {ind?.heroTitle || "IA \u00B7 Cloud \u00B7 Staffing para Retail y E-commerce"}
           </h1>
@@ -130,15 +136,11 @@ export default async function RetailEcommercePage() {
           </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {challenges.map((ch) => {
-              const Icon = "icon" in ch && typeof ch.icon !== "string" ? ch.icon : null;
+              const iconName = "icon" in ch && typeof ch.icon === "string" ? ch.icon : undefined;
               return (
                 <div key={ch.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    {Icon ? (
-                      <Icon size={24} className="text-primary" aria-hidden="true" />
-                    ) : (
-                      <Layers size={24} className="text-primary" aria-hidden="true" />
-                    )}
+                  <div className="mb-4">
+                    <GeoIconBox name={iconName} size={22} color="amber" />
                   </div>
                   <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">
@@ -176,7 +178,10 @@ export default async function RetailEcommercePage() {
         </div>
       </section>
 
-      <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Retail y E-commerce"} />
+      {ind && <IndustriaRichSections industria={ind} locale={locale} />}
+      {!ind?.ctaTitle && (
+        <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Retail y E-commerce"} />
+      )}
     </PageWrapper>
   );
 }

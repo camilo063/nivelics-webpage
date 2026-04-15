@@ -104,6 +104,7 @@ export default async function AgentesIAPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="Inteligencia Artificial · Agentes"
         h1={cms?.title || "Agentes IA que trabajan"}
         h1Accent="mientras tu duermes"

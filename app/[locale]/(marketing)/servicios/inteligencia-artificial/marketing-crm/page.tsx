@@ -107,6 +107,7 @@ export default async function MarketingCRMPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="IA · Marketing"
         h1={cms?.title || "Marketing personalizado"}
         h1Accent="a escala real"

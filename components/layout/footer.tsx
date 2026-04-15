@@ -4,7 +4,21 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { SITE } from "@/lib/constants";
 
-export function Footer() {
+interface FooterProps {
+  logoUrl?: string | null;
+  logoAlt?: string;
+  logoTitle?: string;
+  logoWidth?: number | null;
+  logoHeight?: number | null;
+}
+
+export function Footer({
+  logoUrl = null,
+  logoAlt = "Nivelics",
+  logoTitle = "Nivelics",
+  logoWidth = null,
+  logoHeight = null,
+}: FooterProps = {}) {
   const t = useTranslations("footer");
 
   return (
@@ -13,8 +27,30 @@ export function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="text-xl font-bold text-text-100 tracking-tight">
-              {SITE.name}
+            <Link
+              href="/"
+              className="flex items-center text-xl font-bold text-text-100 tracking-tight"
+              aria-label={logoAlt}
+              title={logoTitle}
+            >
+              {logoUrl && logoWidth && logoHeight ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logoUrl}
+                  alt={logoAlt}
+                  title={logoTitle}
+                  width={logoWidth}
+                  height={logoHeight}
+                  style={{
+                    height: "28px",
+                    width: "auto",
+                    objectFit: "contain",
+                  }}
+                  loading="lazy"
+                />
+              ) : (
+                SITE.name
+              )}
             </Link>
             <p className="text-sm leading-relaxed text-text-70 whitespace-pre-line">
               {t("tagline")}
@@ -98,6 +134,44 @@ export function Footer() {
                   className="text-sm text-text-70 transition-colors hover:text-primary"
                 >
                   {t("digitalDevelopment")}
+                </Link>
+              </li>
+            </ul>
+
+            <p className="mt-6 text-sm font-semibold uppercase tracking-wider text-text-40">
+              Productos
+            </p>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/productos"
+                  className="text-sm text-text-70 transition-colors hover:text-primary"
+                >
+                  Todos los productos
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/productos/paywl"
+                  className="text-sm text-text-70 transition-colors hover:text-primary"
+                >
+                  PAYWL
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/productos/niveleads"
+                  className="text-sm text-text-70 transition-colors hover:text-primary"
+                >
+                  Niveleads
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/productos/hirely"
+                  className="text-sm text-text-70 transition-colors hover:text-primary"
+                >
+                  Hirely
                 </Link>
               </li>
             </ul>

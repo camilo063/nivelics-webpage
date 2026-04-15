@@ -107,6 +107,7 @@ export default async function GestionContenidoPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="IA · Contenido"
         h1={cms?.title || "10x más contenido,"}
         h1Accent="el mismo equipo"

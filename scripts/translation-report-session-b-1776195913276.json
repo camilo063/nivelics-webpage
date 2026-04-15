@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-04-14T18:23:15.695Z",
+  "completedAt": "2026-04-14T19:45:13.268Z",
+  "sections": {
+    "industrias": {
+      "rows": 6,
+      "fieldsTranslated": 344,
+      "errors": []
+    },
+    "servicios_hub": {
+      "rows": 5,
+      "fieldsTranslated": 0,
+      "errors": []
+    },
+    "home_content": {
+      "rows": 1,
+      "fieldsTranslated": 9,
+      "errors": []
+    }
+  },
+  "skipped": []
+}

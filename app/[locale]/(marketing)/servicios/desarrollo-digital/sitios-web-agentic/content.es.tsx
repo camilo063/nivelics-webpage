@@ -15,6 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
@@ -29,19 +30,19 @@ import { getFAQSchema } from "@/lib/schema/faq";
 
 const PAIN_CARDS = [
   {
-    icon: Search,
+    icon: "search",
     title: "Google ya no muestra solo links",
     description:
       "AI Overviews responden directamente en los resultados de búsqueda. Si tu sitio no tiene datos estructurados y HTML semántico, Google no te cita — cita a tu competencia.",
   },
   {
-    icon: Bot,
+    icon: "bot",
     title: "Los agentes IA ya toman decisiones",
     description:
       "ChatGPT Operator, Claude Computer Use y otros agentes navegan sitios web para completar tareas. Si tu sitio no es crawleable por máquinas, esos agentes no pueden interactuar con tu negocio.",
   },
   {
-    icon: Brain,
+    icon: "brain",
     title: "ChatGPT y Claude recomiendan empresas",
     description:
       'Cuando alguien pregunta "¿quién desarrolla apps en Colombia?", los LLMs recomiendan empresas cuyo sitio entienden bien. Schema.org, llms.txt y HTML semántico determinan si apareces o no.',
@@ -50,63 +51,63 @@ const PAIN_CARDS = [
 
 const CAPABILITIES = [
   {
-    icon: Globe,
+    icon: "globe",
     title: "Multi-idioma nativo",
     description:
       "Arquitectura i18n con español en la raíz e inglés en /en/. Cada página tiene su equivalente traducido con hreflang verificado automáticamente.",
     tech: "next-intl + hreflang",
   },
   {
-    icon: LinkIcon,
+    icon: "link-icon",
     title: "URLs semánticas",
     description:
       "Estructura de URLs definida antes de escribir una sola línea de código. Jerarquía clara: /servicios/desarrollo-digital/plataformas-web.",
     tech: "App Router",
   },
   {
-    icon: Zap,
+    icon: "zap",
     title: "Core Web Vitals ≥95",
     description:
       "Performance diseñada desde la arquitectura, no parcheada después. Server Components, lazy loading estratégico y zero layout shift.",
     tech: "Next.js RSC",
   },
   {
-    icon: Code2,
+    icon: "code2",
     title: "Schema.org completo",
     description:
       "JSON-LD server-side en cada página: Organization, Service, BreadcrumbList, FAQPage y más. No plugins genéricos — esquemas escritos a mano.",
     tech: "JSON-LD SSR",
   },
   {
-    icon: FileText,
+    icon: "file-text",
     title: "llms.txt implementado",
     description:
       "Archivo en la raíz del dominio que indica a los LLMs qué hace tu empresa, qué servicios ofreces y cómo contactarte. Bilingüe.",
     tech: "llms.txt spec",
   },
   {
-    icon: Shield,
+    icon: "shield",
     title: "robots.txt optimizado",
     description:
       "Configuración que permite el crawl de buscadores y agentes IA, bloquea rutas internas y apunta al sitemap XML correcto.",
     tech: "robots.txt + sitemap",
   },
   {
-    icon: Menu,
+    icon: "menu",
     title: "Mega menú semántico",
     description:
       "Navegación con <nav>, roles ARIA y estructura jerárquica que los crawlers y agentes entienden sin ejecutar JavaScript.",
     tech: "SSR + ARIA",
   },
   {
-    icon: ChevronsRight,
+    icon: "chevrons-right",
     title: "Breadcrumbs en todas las páginas",
     description:
       "BreadcrumbList con JSON-LD renderizado server-side. Google los muestra directamente en los resultados de búsqueda.",
     tech: "BreadcrumbList SSR",
   },
   {
-    icon: Layers,
+    icon: "layers",
     title: "HTML semántico",
     description:
       "Uso correcto de <main>, <article>, <section>, <header>, <footer>, headings jerárquicos y landmarks ARIA en todo el sitio.",
@@ -319,12 +320,10 @@ export function AgenticContentEs() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {PAIN_CARDS.map((card) => {
-              const Icon = card.icon;
+              const iconName = card.icon;
               return (
                 <div key={card.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dev/10">
-                    <Icon size={24} className="text-dev" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="amber" />
                   <h3 className="text-lg font-semibold text-text-100">{card.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">{card.description}</p>
                 </div>
@@ -351,12 +350,10 @@ export function AgenticContentEs() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {CAPABILITIES.map((cap) => {
-              const Icon = cap.icon;
+              const iconName = cap.icon;
               return (
                 <div key={cap.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dev/10">
-                    <Icon size={24} className="text-dev" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="amber" />
                   <h3 className="text-lg font-semibold text-text-100">{cap.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">{cap.description}</p>
                   <span className="mt-3 inline-block rounded-full bg-dev/10 px-3 py-1 font-mono text-xs font-medium text-dev">

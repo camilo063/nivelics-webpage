@@ -108,6 +108,7 @@ export default async function AgentesComerciales() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="IA · Ventas"
         h1={cms?.title || "Tu equipo comercial"}
         h1Accent="que nunca descansa"

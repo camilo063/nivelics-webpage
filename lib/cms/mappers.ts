@@ -6,6 +6,16 @@ import type {
   CMSFAQ,
   CMSPainPoint,
   CMSDifferentiator,
+  CMSHubMetric,
+  CMSFrameworkPillar,
+  CMSSector,
+  CMSIndustriaMetric,
+  CMSStatHighlight,
+  CMSRegulation,
+  CMSUseCase,
+  CMSPlaybookStep,
+  CMSTechTag,
+  CMSProcessStepHome,
   MappedServicio,
   MappedIndustria,
   MappedCasoExito,
@@ -49,6 +59,27 @@ export function mapServicio(data: Record<string, unknown>, locale: Locale): Mapp
     answer: pick(locale, f.answerEs, f.answerEn),
   }));
 
+  const hubMetrics = ((data.hubMetrics as CMSHubMetric[] | null) || []).map((m) => ({
+    value: m.value,
+    label: pick(locale, m.labelEs, m.labelEn),
+  }));
+
+  const frameworkPillars = ((data.frameworkPillars as CMSFrameworkPillar[] | null) || []).map(
+    (p) => ({
+      letter: p.letter,
+      colorClass: p.colorClass,
+      borderClass: p.borderClass,
+      title: pick(locale, p.titleEs, p.titleEn),
+      desc: pick(locale, p.descEs, p.descEn),
+    }),
+  );
+
+  const sectors = ((data.sectors as CMSSector[] | null) || []).map((s) => ({
+    slug: s.slug,
+    icon: s.icon,
+    label: pick(locale, s.labelEs, s.labelEn),
+  }));
+
   return {
     id: data.id as string,
     slug: (data.slugEs as string) || "",
@@ -74,6 +105,14 @@ export function mapServicio(data: Record<string, unknown>, locale: Locale): Mapp
     seoTitle: pick(locale, data.seoTitleEs as string, data.seoTitleEn as string) || "",
     seoDescription:
       pick(locale, data.seoDescriptionEs as string, data.seoDescriptionEn as string) || "",
+    hubMetrics,
+    frameworkTitle:
+      pick(locale, data.frameworkTitleEs as string, data.frameworkTitleEn as string) || "",
+    frameworkSubtitle:
+      pick(locale, data.frameworkSubtitleEs as string, data.frameworkSubtitleEn as string) || "",
+    frameworkPillars,
+    sectorsTitle: pick(locale, data.sectorsTitleEs as string, data.sectorsTitleEn as string) || "",
+    sectors,
   };
 }
 
@@ -86,6 +125,7 @@ export function mapIndustria(data: Record<string, unknown>, locale: Locale): Map
     icon: p.icon,
     title: pick(locale, p.titleEs, p.titleEn),
     desc: pick(locale, p.descEs, p.descEn),
+    stat: p.statEs || p.statEn ? pick(locale, p.statEs ?? "", p.statEn ?? "") : undefined,
   }));
 
   const solutions = ((data.solutions as CMSPainPoint[] | null) || []).map((s) => ({
@@ -97,6 +137,47 @@ export function mapIndustria(data: Record<string, unknown>, locale: Locale): Map
   const differentiators = ((data.differentiators as CMSDifferentiator[] | null) || []).map((d) => ({
     title: pick(locale, d.titleEs, d.titleEn),
     desc: pick(locale, d.descEs, d.descEn),
+  }));
+
+  const metrics = ((data.metrics as CMSIndustriaMetric[] | null) || []).map((m) => ({
+    value: m.value,
+    label: pick(locale, m.labelEs, m.labelEn),
+  }));
+
+  const statHighlights = ((data.statHighlights as CMSStatHighlight[] | null) || []).map((s) => ({
+    value: s.value,
+    label: pick(locale, s.labelEs, s.labelEn),
+    source: s.source,
+  }));
+
+  const regulations = ((data.regulations as CMSRegulation[] | null) || []).map((r) => ({
+    code: r.code,
+    name: pick(locale, r.nameEs, r.nameEn),
+    desc: r.descEs || r.descEn ? pick(locale, r.descEs ?? "", r.descEn ?? "") : undefined,
+  }));
+
+  const useCases = ((data.useCases as CMSUseCase[] | null) || []).map((u) => ({
+    icon: u.icon,
+    title: pick(locale, u.titleEs, u.titleEn),
+    desc: pick(locale, u.descEs, u.descEn),
+    outcome:
+      u.outcomeEs || u.outcomeEn ? pick(locale, u.outcomeEs ?? "", u.outcomeEn ?? "") : undefined,
+  }));
+
+  const playbook = ((data.playbook as CMSPlaybookStep[] | null) || []).map((p) => ({
+    number: p.number,
+    title: pick(locale, p.titleEs, p.titleEn),
+    desc: pick(locale, p.descEs, p.descEn),
+  }));
+
+  const industryFaqs = ((data.industryFaqs as CMSFAQ[] | null) || []).map((f) => ({
+    question: pick(locale, f.questionEs, f.questionEn),
+    answer: pick(locale, f.answerEs, f.answerEn),
+  }));
+
+  const techStack = ((data.techStack as CMSTechTag[] | null) || []).map((t) => ({
+    label: t.label,
+    category: t.category,
   }));
 
   return {
@@ -114,6 +195,23 @@ export function mapIndustria(data: Record<string, unknown>, locale: Locale): Map
     seoTitle: pick(locale, data.seoTitleEs as string, data.seoTitleEn as string) || "",
     seoDescription:
       pick(locale, data.seoDescriptionEs as string, data.seoDescriptionEn as string) || "",
+    metrics,
+    statHighlights,
+    regulations,
+    useCases,
+    playbook,
+    industryFaqs,
+    techStack,
+    servicesHighlight: (data.servicesHighlight as string[]) || [],
+    relatedCaseSlugs: (data.relatedCaseSlugs as string[]) || [],
+    ctaTitle: pick(locale, data.ctaTitleEs as string, data.ctaTitleEn as string) || "",
+    ctaPrimaryText:
+      pick(locale, data.ctaPrimaryTextEs as string, data.ctaPrimaryTextEn as string) || "",
+    ctaPrimaryUrl: (data.ctaPrimaryUrl as string) || null,
+    hubIntroTitle:
+      pick(locale, data.hubIntroTitleEs as string, data.hubIntroTitleEn as string) || "",
+    hubIntroSubtitle:
+      pick(locale, data.hubIntroSubtitleEs as string, data.hubIntroSubtitleEn as string) || "",
   };
 }
 
@@ -194,6 +292,14 @@ export function mapHomeContent(data: Record<string, unknown>, locale: Locale): M
     answer: pick(locale, f.answerEs, f.answerEn),
   }));
 
+  const processSteps = ((data.processSteps as CMSProcessStepHome[] | null) || []).map((s) => ({
+    number: s.number,
+    icon: s.icon,
+    title: pick(locale, s.titleEs, s.titleEn),
+    desc: pick(locale, s.descEs, s.descEn),
+    duration: pick(locale, s.durationEs, s.durationEn),
+  }));
+
   return {
     heroBadge: pick(locale, data.heroBadgeEs as string, data.heroBadgeEn as string) || "",
     heroTitle: pick(locale, data.heroTitleEs as string, data.heroTitleEn as string) || "",
@@ -213,6 +319,16 @@ export function mapHomeContent(data: Record<string, unknown>, locale: Locale): M
     finalCtaTitle:
       pick(locale, data.finalCtaTitleEs as string, data.finalCtaTitleEn as string) || "",
     finalCtaCopy: pick(locale, data.finalCtaCopyEs as string, data.finalCtaCopyEn as string) || "",
+    processSectionTitle:
+      pick(locale, data.processSectionTitleEs as string, data.processSectionTitleEn as string) ||
+      "",
+    processSectionSubtitle:
+      pick(
+        locale,
+        data.processSectionSubtitleEs as string,
+        data.processSectionSubtitleEn as string,
+      ) || "",
+    processSteps,
   };
 }
 

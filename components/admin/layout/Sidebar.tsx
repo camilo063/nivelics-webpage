@@ -18,6 +18,8 @@ import {
   UserCog,
   Image,
   CheckSquare,
+  Palette,
+  Package,
 } from "lucide-react";
 
 const NAV_SECTIONS = [
@@ -30,6 +32,7 @@ const NAV_SECTIONS = [
     items: [
       { href: "/admin/blog", label: "Blog", icon: FileText },
       { href: "/admin/casos", label: "Casos de Éxito", icon: Award },
+      { href: "/admin/productos", label: "Productos SaaS", icon: Package },
       { href: "/admin/servicios", label: "Servicios", icon: Briefcase },
       { href: "/admin/industrias", label: "Industrias", icon: Factory },
       { href: "/admin/landing-pages", label: "Landing Pages", icon: Rocket },
@@ -54,6 +57,7 @@ const NAV_SECTIONS = [
     label: null,
     items: [
       { href: "/admin/media", label: "Media", icon: Image },
+      { href: "/admin/design-system", label: "Design System", icon: Palette },
       { href: "/admin/seo", label: "SEO", icon: Globe },
       { href: "/admin/configuracion", label: "Configuración", icon: Settings },
       { href: "/admin/configuracion/usuarios", label: "Usuarios", icon: UserCog },

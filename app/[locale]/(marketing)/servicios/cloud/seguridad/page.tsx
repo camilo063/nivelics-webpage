@@ -4,6 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: Shield,
+    icon: "shield",
     title: "Compliance SOC2 e ISO27001",
     description:
       "Implementaci\u00f3n de controles y procesos para cumplir con SOC2, ISO27001 y otras normativas regulatorias del sector.",
   },
   {
-    icon: KeyRound,
+    icon: "key-round",
     title: "IAM y Zero Trust",
     description:
       "Gesti\u00f3n de identidades con principio de m\u00ednimo privilegio, MFA, SSO y arquitectura Zero Trust en toda tu infraestructura.",
   },
   {
-    icon: Activity,
+    icon: "activity",
     title: "Monitoreo y respuesta a incidentes",
     description:
       "Detecci\u00f3n de amenazas en tiempo real, alertas automatizadas y playbooks de respuesta a incidentes de seguridad.",
@@ -120,6 +121,7 @@ export default async function SeguridadCloudPage() {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Cloud \u00b7 Seguridad"
         h1={cms?.title || "Seguridad cloud"}
         h1Accent="sin excusas"
@@ -196,18 +198,15 @@ export default async function SeguridadCloudPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cloud/10">
-                    <Icon size={24} className="text-cloud" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#00D4FF"
+              />
+            ))}
           </div>
         </div>
       </section>

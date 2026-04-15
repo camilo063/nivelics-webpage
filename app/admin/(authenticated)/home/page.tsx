@@ -47,6 +47,37 @@ export default async function HomePage() {
                 finalCtaTitleEn: content.finalCtaTitleEn || "",
                 finalCtaCopyEs: content.finalCtaCopyEs || "",
                 finalCtaCopyEn: content.finalCtaCopyEn || "",
+                processSectionTitleEs: content.processSectionTitleEs || "",
+                processSectionTitleEn: content.processSectionTitleEn || "",
+                processSectionSubtitleEs: content.processSectionSubtitleEs || "",
+                processSectionSubtitleEn: content.processSectionSubtitleEn || "",
+                processSteps:
+                  (content.processSteps as Array<{
+                    number: string;
+                    icon: string;
+                    titleEs: string;
+                    titleEn: string;
+                    descEs: string;
+                    descEn: string;
+                    durationEs: string;
+                    durationEn: string;
+                  }>) || [],
+                industriasHubTitleEs: content.industriasHubTitleEs || "",
+                industriasHubTitleEn: content.industriasHubTitleEn || "",
+                industriasHubSubtitleEs: content.industriasHubSubtitleEs || "",
+                industriasHubSubtitleEn: content.industriasHubSubtitleEn || "",
+                industriasHubStatEs: content.industriasHubStatEs || "",
+                industriasHubStatEn: content.industriasHubStatEn || "",
+                industriasSectionTitleEs: content.industriasSectionTitleEs || "",
+                industriasSectionTitleEn: content.industriasSectionTitleEn || "",
+                industriasSectionSubtitleEs: content.industriasSectionSubtitleEs || "",
+                industriasSectionSubtitleEn: content.industriasSectionSubtitleEn || "",
+                industriasSectionMetrics:
+                  (content.industriasSectionMetrics as Array<{
+                    value: string;
+                    labelEs: string;
+                    labelEn: string;
+                  }>) || [],
               }
             : undefined
         }

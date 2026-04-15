@@ -3,9 +3,19 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BilingualField } from "@/components/admin/ui/BilingualEditor";
+import { GeoIconPicker } from "@/components/admin/ui/GeoIconPicker";
 import { ImageUploader } from "@/components/admin/ui/ImageUploader";
 import { updateServicio } from "@/lib/admin/actions/servicios.actions";
-import { Plus, X, ChevronUp, ChevronDown, Search } from "lucide-react";
+import type { IconColor } from "@/lib/icons/geometric";
+import { Plus, X, ChevronUp, ChevronDown, Search, Trash2 } from "lucide-react";
+
+const SERVICIO_ACCENT_TO_ICON_COLOR: Record<ServicioData["accentColor"], IconColor> = {
+  ia: "violet",
+  cloud: "cyan",
+  staffing: "green",
+  finops: "amber",
+  dev: "amber",
+};
 
 // ─── Types ───────────────────────────────────────────────
 
@@ -40,6 +50,29 @@ interface FAQ {
   answerEn: string;
 }
 
+interface HubMetric {
+  value: string;
+  labelEs: string;
+  labelEn: string;
+}
+
+interface FrameworkPillar {
+  letter: string;
+  colorClass: string;
+  borderClass: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+}
+
+interface Sector {
+  slug: string;
+  icon: string;
+  labelEs: string;
+  labelEn: string;
+}
+
 interface ServicioData {
   slugEs: string;
   titleEs: string;
@@ -67,6 +100,16 @@ interface ServicioData {
   seoDescriptionEn: string;
   translationStatusEn: "complete" | "partial" | "pending" | "auto";
   status: "draft" | "published" | "scheduled" | "archived";
+  serviceType: "hub" | "sub";
+  hubMetrics: HubMetric[];
+  frameworkTitleEs: string;
+  frameworkTitleEn: string;
+  frameworkSubtitleEs: string;
+  frameworkSubtitleEn: string;
+  frameworkPillars: FrameworkPillar[];
+  sectorsTitleEs: string;
+  sectorsTitleEn: string;
+  sectors: Sector[];
 }
 
 const defaultServicio: ServicioData = {
@@ -96,11 +139,21 @@ const defaultServicio: ServicioData = {
   seoDescriptionEn: "",
   translationStatusEn: "pending",
   status: "published",
+  serviceType: "sub",
+  hubMetrics: [],
+  frameworkTitleEs: "",
+  frameworkTitleEn: "",
+  frameworkSubtitleEs: "",
+  frameworkSubtitleEn: "",
+  frameworkPillars: [],
+  sectorsTitleEs: "",
+  sectorsTitleEn: "",
+  sectors: [],
 };
 
 // ─── Constants ───────────────────────────────────────────
 
-const TABS = [
+const BASE_TABS = [
   { key: "contenido", label: "Contenido" },
   { key: "beneficios", label: "Beneficios" },
   { key: "proceso", label: "Proceso" },
@@ -109,7 +162,9 @@ const TABS = [
   { key: "ctas-seo", label: "CTAs y SEO" },
 ] as const;
 
-type TabKey = (typeof TABS)[number]["key"];
+const HUB_TAB = { key: "hub", label: "Hub: I+C+S" } as const;
+
+type TabKey = "contenido" | "beneficios" | "proceso" | "metricas" | "faqs" | "ctas-seo" | "hub";
 
 const accentOptions = [
   { value: "ia", label: "IA", color: "bg-purple-500" },
@@ -304,7 +359,14 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
 
         {/* Tab bar */}
         <div className="flex gap-1 rounded-lg border border-border bg-bg-elevated p-1 overflow-x-auto">
-          {TABS.map((tab) => (
+          {(() => {
+            const isRootHub = servicio.slugEs === "servicios";
+            const tabs = servicio.serviceType === "hub" ? [...BASE_TABS, HUB_TAB] : BASE_TABS;
+            const visible = isRootHub
+              ? tabs.filter((t) => !["beneficios", "proceso", "faqs"].includes(t.key))
+              : tabs;
+            return visible;
+          })().map((tab) => (
             <button
               key={tab.key}
               type="button"
@@ -401,12 +463,10 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-text-70">Icono</label>
-                <input
-                  type="text"
-                  value={servicio.icon}
-                  onChange={(e) => update("icon", e.target.value)}
-                  className={inputClass}
-                  placeholder="Nombre del icono (ej: brain, cloud, users)"
+                <GeoIconPicker
+                  value={servicio.icon ?? ""}
+                  onChange={(name) => update("icon", name)}
+                  color={SERVICIO_ACCENT_TO_ICON_COLOR[servicio.accentColor]}
                 />
               </div>
             </div>
@@ -473,12 +533,10 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-medium text-text-70">Icono</label>
-                    <input
-                      type="text"
-                      value={benefit.icon}
-                      onChange={(e) => updateBenefit(index, "icon", e.target.value)}
-                      className={inputClass}
-                      placeholder="Nombre del icono"
+                    <GeoIconPicker
+                      value={benefit.icon ?? ""}
+                      onChange={(name) => updateBenefit(index, "icon", name)}
+                      color={SERVICIO_ACCENT_TO_ICON_COLOR[servicio.accentColor]}
                     />
                   </div>
                   <BilingualField
@@ -886,6 +944,244 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* ─── Hub: I+C+S (only visible for service_type='hub') ─── */}
+          {activeTab === "hub" && servicio.serviceType === "hub" && (
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-sm font-semibold text-text-100">
+                  Métricas del portafolio (max 4)
+                </h3>
+                {servicio.hubMetrics.map((m, idx) => (
+                  <div
+                    key={idx}
+                    className="grid grid-cols-[120px_1fr_auto] gap-3 items-start border-b border-border pb-4 last:border-0"
+                  >
+                    <div>
+                      <label className="mb-1 block text-xs text-text-40">Valor</label>
+                      <input
+                        value={m.value}
+                        onChange={(e) => {
+                          const arr = [...servicio.hubMetrics];
+                          arr[idx] = { ...arr[idx], value: e.target.value };
+                          update("hubMetrics", arr);
+                        }}
+                        placeholder="19+"
+                        className={inputClass}
+                      />
+                    </div>
+                    <BilingualField
+                      labelEs="Etiqueta ES"
+                      labelEn="Label EN"
+                      valueEs={m.labelEs}
+                      valueEn={m.labelEn}
+                      onChangeEs={(v) => {
+                        const arr = [...servicio.hubMetrics];
+                        arr[idx] = { ...arr[idx], labelEs: v };
+                        update("hubMetrics", arr);
+                      }}
+                      onChangeEn={(v) => {
+                        const arr = [...servicio.hubMetrics];
+                        arr[idx] = { ...arr[idx], labelEn: v };
+                        update("hubMetrics", arr);
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        update(
+                          "hubMetrics",
+                          servicio.hubMetrics.filter((_, i) => i !== idx),
+                        )
+                      }
+                      className="mt-7 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                ))}
+                {servicio.hubMetrics.length < 4 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update("hubMetrics", [
+                        ...servicio.hubMetrics,
+                        { value: "", labelEs: "", labelEn: "" },
+                      ])
+                    }
+                    className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10"
+                  >
+                    <Plus className="h-4 w-4" /> Agregar métrica
+                  </button>
+                )}
+              </div>
+
+              <div className="border-t border-border pt-6 space-y-4">
+                <h3 className="text-sm font-semibold text-text-100">Sección marco I+C+S</h3>
+                <BilingualField
+                  labelEs="Título"
+                  labelEn="Title"
+                  valueEs={servicio.frameworkTitleEs}
+                  valueEn={servicio.frameworkTitleEn}
+                  onChangeEs={(v) => update("frameworkTitleEs", v)}
+                  onChangeEn={(v) => update("frameworkTitleEn", v)}
+                />
+                <BilingualField
+                  labelEs="Subtítulo"
+                  labelEn="Subtitle"
+                  valueEs={servicio.frameworkSubtitleEs}
+                  valueEn={servicio.frameworkSubtitleEn}
+                  onChangeEs={(v) => update("frameworkSubtitleEs", v)}
+                  onChangeEn={(v) => update("frameworkSubtitleEn", v)}
+                  multiline
+                  rows={2}
+                />
+              </div>
+
+              <div className="border-t border-border pt-6 space-y-4">
+                <h3 className="text-sm font-semibold text-text-100">
+                  Pilares I · C · S (editables pero no se agregan/eliminan)
+                </h3>
+                {servicio.frameworkPillars.map((p, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl border border-border bg-bg-elevated p-5 space-y-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 text-lg font-bold text-primary`}
+                      >
+                        {p.letter || "?"}
+                      </span>
+                      <span className="text-xs text-text-40">Pilar {idx + 1}</span>
+                    </div>
+                    <BilingualField
+                      labelEs="Título"
+                      labelEn="Title"
+                      valueEs={p.titleEs}
+                      valueEn={p.titleEn}
+                      onChangeEs={(v) => {
+                        const arr = [...servicio.frameworkPillars];
+                        arr[idx] = { ...arr[idx], titleEs: v };
+                        update("frameworkPillars", arr);
+                      }}
+                      onChangeEn={(v) => {
+                        const arr = [...servicio.frameworkPillars];
+                        arr[idx] = { ...arr[idx], titleEn: v };
+                        update("frameworkPillars", arr);
+                      }}
+                    />
+                    <BilingualField
+                      labelEs="Descripción"
+                      labelEn="Description"
+                      valueEs={p.descEs}
+                      valueEn={p.descEn}
+                      onChangeEs={(v) => {
+                        const arr = [...servicio.frameworkPillars];
+                        arr[idx] = { ...arr[idx], descEs: v };
+                        update("frameworkPillars", arr);
+                      }}
+                      onChangeEn={(v) => {
+                        const arr = [...servicio.frameworkPillars];
+                        arr[idx] = { ...arr[idx], descEn: v };
+                        update("frameworkPillars", arr);
+                      }}
+                      multiline
+                      rows={3}
+                    />
+                  </div>
+                ))}
+                {servicio.frameworkPillars.length === 0 && (
+                  <p className="text-sm text-text-40">
+                    No hay pilares. Corre el seed (scripts/seed-servicios-hub.ts) para crearlos.
+                  </p>
+                )}
+              </div>
+
+              <div className="border-t border-border pt-6 space-y-4">
+                <h3 className="text-sm font-semibold text-text-100">Sectores (chips)</h3>
+                <BilingualField
+                  labelEs="Título de sección"
+                  labelEn="Section title"
+                  valueEs={servicio.sectorsTitleEs}
+                  valueEn={servicio.sectorsTitleEn}
+                  onChangeEs={(v) => update("sectorsTitleEs", v)}
+                  onChangeEn={(v) => update("sectorsTitleEn", v)}
+                />
+                {servicio.sectors.map((s, idx) => (
+                  <div
+                    key={idx}
+                    className="grid grid-cols-[100px_60px_1fr_auto] gap-3 items-start border-b border-border pb-3 last:border-0"
+                  >
+                    <div>
+                      <label className="mb-1 block text-xs text-text-40">Slug</label>
+                      <input
+                        value={s.slug}
+                        onChange={(e) => {
+                          const arr = [...servicio.sectors];
+                          arr[idx] = { ...arr[idx], slug: e.target.value };
+                          update("sectors", arr);
+                        }}
+                        className={inputClass}
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs text-text-40">Icono</label>
+                      <GeoIconPicker
+                        value={s.icon ?? ""}
+                        onChange={(name) => {
+                          const arr = [...servicio.sectors];
+                          arr[idx] = { ...arr[idx], icon: name };
+                          update("sectors", arr);
+                        }}
+                        color={SERVICIO_ACCENT_TO_ICON_COLOR[servicio.accentColor]}
+                      />
+                    </div>
+                    <BilingualField
+                      labelEs="Label ES"
+                      labelEn="Label EN"
+                      valueEs={s.labelEs}
+                      valueEn={s.labelEn}
+                      onChangeEs={(v) => {
+                        const arr = [...servicio.sectors];
+                        arr[idx] = { ...arr[idx], labelEs: v };
+                        update("sectors", arr);
+                      }}
+                      onChangeEn={(v) => {
+                        const arr = [...servicio.sectors];
+                        arr[idx] = { ...arr[idx], labelEn: v };
+                        update("sectors", arr);
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        update(
+                          "sectors",
+                          servicio.sectors.filter((_, i) => i !== idx),
+                        )
+                      }
+                      className="mt-7 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() =>
+                    update("sectors", [
+                      ...servicio.sectors,
+                      { slug: "", icon: "", labelEs: "", labelEn: "" },
+                    ])
+                  }
+                  className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10"
+                >
+                  <Plus className="h-4 w-4" /> Agregar sector
+                </button>
               </div>
             </div>
           )}

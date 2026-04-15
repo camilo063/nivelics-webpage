@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { ClipboardCheck, ShieldCheck, Gauge } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -37,19 +37,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: ClipboardCheck,
+    icon: "clipboard-check",
     title: "Assessment y estrategia de migraci\u00f3n",
     description:
       "Evaluamos tu infraestructura actual, definimos la estrategia de migraci\u00f3n (rehost, replatform, refactor) y el roadmap paso a paso.",
   },
   {
-    icon: ShieldCheck,
+    icon: "shield-check",
     title: "Zero downtime con rollback",
     description:
       "Migraci\u00f3n sin interrupciones con plan de rollback probado, validaci\u00f3n continua y cutover controlado para cero impacto en tu operaci\u00f3n.",
   },
   {
-    icon: Gauge,
+    icon: "gauge",
     title: "Optimizaci\u00f3n post-migraci\u00f3n",
     description:
       "Rightsizing, reserved instances y monitoreo de costos desde el primer d\u00eda en AWS para maximizar tu inversi\u00f3n en la nube.",
@@ -120,6 +120,7 @@ export default async function MigracionAWSPage() {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Cloud \u00b7 AWS Migration"
         h1={cms?.title || "Migra a AWS"}
         h1Accent="sin downtime"
@@ -196,18 +197,15 @@ export default async function MigracionAWSPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cloud/10">
-                    <Icon size={24} className="text-cloud" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#00D4FF"
+              />
+            ))}
           </div>
         </div>
       </section>

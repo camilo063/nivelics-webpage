@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HeroEffect, type HeroEffectKind } from "@/components/ui/hero-effect";
 
 interface HeroSplitProps {
   badge?: string;
@@ -14,6 +15,8 @@ interface HeroSplitProps {
   rightPanel: React.ReactNode;
   dataSection?: string;
   ariaLabel?: string;
+  heroEffect?: HeroEffectKind;
+  heroEffectOpacity?: number;
 }
 
 export function HeroSplit({
@@ -28,26 +31,47 @@ export function HeroSplit({
   rightPanel,
   dataSection,
   ariaLabel,
+  heroEffect = "none",
+  heroEffectOpacity,
 }: HeroSplitProps) {
+  const defaultOpacity =
+    heroEffect === "diagonal"
+      ? 0.9
+      : heroEffect === "particles"
+        ? 0.85
+        : heroEffect === "hex"
+          ? 0.9
+          : heroEffect === "grid"
+            ? 0.85
+            : heroEffect === "radar"
+              ? 0.9
+              : 1;
   return (
     <section
-      className="relative overflow-hidden py-16 md:py-24"
+      className="relative overflow-hidden pt-10 pb-14 md:pt-10 md:pb-14"
       data-section={dataSection ?? "hero"}
       aria-label={ariaLabel}
       itemScope
       itemType="https://schema.org/Service"
     >
+      <HeroEffect kind={heroEffect} opacity={heroEffectOpacity ?? defaultOpacity} />
       <div
+        aria-hidden="true"
         className="absolute inset-0"
-        style={{ background: `linear-gradient(135deg, ${accentColor}08 0%, transparent 60%)` }}
+        style={{
+          background: `linear-gradient(135deg, ${accentColor}08 0%, transparent 60%)`,
+          zIndex: 1,
+          pointerEvents: "none",
+          userSelect: "none",
+        }}
       />
-      <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
         <div className="grid gap-10 lg:grid-cols-[55%_45%] items-center">
           {/* Left column */}
           <div>
             {badge && (
               <span
-                className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-6"
+                className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider mb-4"
                 style={{
                   background: `${accentColor}15`,
                   color: accentColor,
@@ -72,7 +96,7 @@ export function HeroSplit({
               )}
             </h1>
             <p
-              className="mt-5 max-w-xl text-lg leading-relaxed text-text-70"
+              className="mt-4 max-w-xl text-lg leading-relaxed text-text-70"
               itemProp="description"
             >
               {subtitle}
@@ -92,7 +116,7 @@ export function HeroSplit({
                 ))}
               </ul>
             )}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="cta" size="lg">
                 <Link href={ctaPrimary.url}>{ctaPrimary.text}</Link>
               </Button>

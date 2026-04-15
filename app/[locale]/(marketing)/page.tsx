@@ -22,12 +22,28 @@ import {
 } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { Button } from "@/components/ui/button";
+import { GeoIcon, type IconColor } from "@/lib/icons/geometric";
+
+function hexToIconColor(hex: string): IconColor {
+  const h = hex.toLowerCase();
+  if (h.includes("d4ff") || h.includes("06b6d4") || h.includes("3b82f6")) return "cyan";
+  if (h.includes("8b5cf6") || h.includes("a78bfa")) return "violet";
+  if (h.includes("10b981") || h.includes("4ade80")) return "green";
+  if (h.includes("fbbf24") || h.includes("f59e0b")) return "amber";
+  if (h.includes("ef4444") || h.includes("f87171")) return "red";
+  return "cyan";
+}
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getWebSiteSchema } from "@/lib/schema/website";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { AmericaMapWrapper } from "@/components/sections/america-map-wrapper";
+import { ProductosHomeStrip } from "@/components/sections/home/ProductosHomeStrip";
+import { getAllProductos, mapProducto } from "@/lib/cms/productos";
+import { ClientLogosMarquee } from "@/components/sections/client-logos-marquee";
+import { ProcessSteps } from "@/components/sections/process-steps";
+import { HeroGraph } from "@/components/ui/hero-graph";
 import { getLocale } from "next-intl/server";
 import { getHomeContent, getAllCasosExito, getHubServicios } from "@/lib/cms";
 import { mapHomeContent, mapServicio, mapCasoExito } from "@/lib/cms";
@@ -91,7 +107,7 @@ const HOME_FAQS = [
 // LEGACY FALLBACK
 const SERVICES = [
   {
-    icon: Brain,
+    icon: "brain",
     badge: "I — IA",
     color: "#8B5CF6",
     title: "Agentes e IA aplicada",
@@ -101,7 +117,7 @@ const SERVICES = [
     url: "/servicios/inteligencia-artificial",
   },
   {
-    icon: Cloud,
+    icon: "cloud",
     badge: "C — Cloud",
     color: "#3B82F6",
     title: "Cloud con gobierno y FinOps",
@@ -111,7 +127,7 @@ const SERVICES = [
     url: "/servicios/cloud",
   },
   {
-    icon: Users,
+    icon: "users",
     badge: "S — Staffing",
     color: "#10B981",
     title: "Talento tech en 5 días",
@@ -121,7 +137,7 @@ const SERVICES = [
     url: "/servicios/staff-augmentation",
   },
   {
-    icon: Code2,
+    icon: "code2",
     badge: "Dev",
     color: "#06B6D4",
     title: "Del concepto a producción",
@@ -210,37 +226,37 @@ const INDUSTRIES = [
   {
     name: "Fintech",
     desc: "Banca digital, pagos y regulación",
-    icon: TrendingUp,
+    icon: "trending-up",
     url: "/industrias/fintech",
   },
   {
     name: "Medios y Entretenimiento",
     desc: "Plataformas de contenido y streaming",
-    icon: PlayCircle,
+    icon: "play-circle",
     url: "/industrias/medios-entretenimiento",
   },
   {
     name: "Salud",
     desc: "HealthTech con compliance regulatorio",
-    icon: HeartPulse,
+    icon: "heart-pulse",
     url: "/industrias/salud",
   },
   {
     name: "Retail y E-commerce",
     desc: "Omnicanalidad y última milla digital",
-    icon: ShoppingBag,
+    icon: "shopping-bag",
     url: "/industrias/retail-ecommerce",
   },
   {
     name: "Logística",
     desc: "Supply chain y trazabilidad en tiempo real",
-    icon: Truck,
+    icon: "truck",
     url: "/industrias/logistica",
   },
   {
     name: "Manufactura",
     desc: "Industria 4.0 y automatización de planta",
-    icon: Factory,
+    icon: "factory",
     url: "/industrias/manufactura",
   },
 ];
@@ -249,6 +265,9 @@ export default async function HomePage() {
   const locale = (await getLocale()) as Locale;
   const homeRaw = await getHomeContent();
   const home = homeRaw ? mapHomeContent(homeRaw as Record<string, unknown>, locale) : null;
+
+  const productosRaw = await getAllProductos();
+  const productos = productosRaw.map((p) => mapProducto(p, locale));
 
   // Use DB FAQs if available, otherwise legacy fallback
   const faqsToShow = home?.faqs.length ? home.faqs : HOME_FAQS;
@@ -284,13 +303,15 @@ export default async function HomePage() {
 
       {/* ═══ 1. HERO ═══ */}
       <section
-        className="relative overflow-hidden pt-20 pb-14 md:pt-24 md:pb-16"
+        className="relative overflow-hidden pt-20 pb-14 md:pt-24 md:pb-16 min-h-[520px] lg:min-h-[600px]"
         style={{ background: "var(--grad-hero)" }}
         data-section="hero"
       >
         <div className="grid-pattern absolute inset-0" />
+        <div aria-hidden="true" className="dot-grid" />
+        <HeroGraph />
         <div className="absolute left-1/4 top-1/3 h-72 w-72 rounded-full bg-primary/5 blur-[100px]" />
-        <div className="relative mx-auto max-w-[1280px] px-6 text-center md:px-20">
+        <div className="relative z-10 mx-auto max-w-[1280px] px-6 text-center md:px-20">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary">
             {home?.heroBadge || "IA · Cloud · Staffing Premium"}
           </span>
@@ -320,6 +341,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ═══ 1.5 LOGO BAR CLIENTES ═══ */}
+      <ClientLogosMarquee />
+
       {/* ═══ 2. MARCO I+C+S ═══ */}
       <section
         className="py-10 md:py-14"
@@ -335,16 +359,15 @@ export default async function HomePage() {
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SERVICES.map((s) => {
-              const Icon = s.icon;
               return (
                 <Link
                   key={s.url}
                   href={s.url}
-                  className="group glass glow-hover rounded-xl p-5 block cursor-pointer"
+                  className="group glass glow-hover rounded-xl p-5 block cursor-pointer transition-transform duration-200 ease-out hover:-translate-y-1"
                   style={{ borderLeft: `3px solid ${s.color}` }}
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <Icon size={20} style={{ color: s.color }} aria-hidden="true" />
+                    <GeoIcon name={s.icon} size={18} color={hexToIconColor(s.color)} />
                     <span
                       className="text-[10px] font-semibold uppercase tracking-wider"
                       style={{ color: s.color }}
@@ -389,7 +412,7 @@ export default async function HomePage() {
               <Link
                 key={c.client}
                 href={c.href}
-                className="group flex flex-col justify-between rounded-xl bg-[rgba(255,255,255,0.03)] border border-white/[0.08] p-5 min-h-[160px] transition-all hover:border-white/20 hover:bg-white/[0.06] hover:-translate-y-0.5"
+                className="group flex flex-col justify-between rounded-xl bg-[rgba(255,255,255,0.03)] border border-white/[0.08] p-5 min-h-[160px] transition-all duration-200 ease-out hover:border-white/20 hover:bg-white/[0.06] hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between text-[11px] text-text-40">
@@ -426,6 +449,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ═══ 5b. PRODUCTOS SAAS STRIP ═══ */}
+      <ProductosHomeStrip productos={productos} locale={locale} />
 
       {/* ═══ 6. MAPA AMÉRICA ═══ */}
       <section
@@ -501,14 +527,15 @@ export default async function HomePage() {
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {INDUSTRIES.map((ind) => {
-              const Icon = ind.icon;
               return (
                 <Link
                   key={ind.url}
                   href={ind.url}
-                  className="flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-5 py-4 transition-all hover:bg-white/[0.06] hover:border-white/15 group"
+                  className="flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-5 py-4 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white/[0.06] hover:border-white/15 group"
                 >
-                  <Icon size={20} className="shrink-0 text-finops" aria-hidden="true" />
+                  <span className="shrink-0">
+                    <GeoIcon name={ind.icon} size={18} color="amber" />
+                  </span>
                   <div className="flex-1">
                     <span className="text-sm font-medium text-white group-hover:text-primary transition-colors">
                       {ind.name}
@@ -537,46 +564,57 @@ export default async function HomePage() {
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
               {
-                icon: Layers,
+                icon: "layers",
                 color: "#06B6D4",
                 title: "Los 3 pilares en un solo aliado",
                 copy: "No somos una agencia de diseño, ni una consultora de infraestructura, ni una bolsa de empleo. Somos los tres — integrados.",
               },
               {
-                icon: BarChart2,
+                icon: "bar-chart2",
                 color: "#8B5CF6",
                 title: "Resultados, no presentaciones",
                 copy: "Cada proyecto tiene KPIs definidos antes de empezar. Si no se mide, no existe.",
               },
               {
-                icon: Zap,
+                icon: "zap",
                 color: "#F59E0B",
                 title: "Candidatos en 5 días. Agentes en 8 semanas.",
                 copy: "El tiempo de integración que prometemos está en el contrato — no en el pitch.",
               },
               {
-                icon: Globe,
+                icon: "globe",
                 color: "#10B981",
                 title: "LATAM que opera como global",
                 copy: "Sede en Bogotá y Miami. Equipos bilingües. Proyectos en 7 países. Great Place to Work 2022.",
               },
-            ].map((d) => {
-              const Icon = d.icon;
-              return (
-                <div
-                  key={d.title}
-                  className="rounded-xl p-5 bg-white/[0.02]"
-                  style={{ borderLeft: `3px solid ${d.color}` }}
-                >
-                  <Icon size={20} style={{ color: d.color }} aria-hidden="true" className="mb-3" />
-                  <h3 className="text-sm font-semibold text-text-100">{d.title}</h3>
-                  <p className="mt-1.5 text-[13px] text-text-70 leading-relaxed">{d.copy}</p>
-                </div>
-              );
-            })}
+            ].map((d) => (
+              <div
+                key={d.title}
+                className="rounded-xl p-5 bg-white/[0.02]"
+                style={{ borderLeft: `3px solid ${d.color}` }}
+              >
+                <span className="mb-3 inline-block">
+                  <GeoIcon name={d.icon} size={18} color={hexToIconColor(d.color)} />
+                </span>
+                <h3 className="text-sm font-semibold text-text-100">{d.title}</h3>
+                <p className="mt-1.5 text-[13px] text-text-70 leading-relaxed">{d.copy}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* ═══ 8.5 PROCESO EN 3 PASOS ═══ */}
+      {home?.processSteps?.length ? (
+        <ProcessSteps
+          title={home.processSectionTitle || "Cómo trabajamos"}
+          subtitle={
+            home.processSectionSubtitle ||
+            "Sin RFPs, sin presentaciones de 60 slides. Solo resultados."
+          }
+          steps={home.processSteps}
+        />
+      ) : null}
 
       {/* ═══ 9. FAQ ═══ */}
       <FAQAccordion title="Preguntas frecuentes" faqs={faqsToShow} schemaEnabled />

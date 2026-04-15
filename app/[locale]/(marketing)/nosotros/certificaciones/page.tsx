@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Award, Building2, Globe } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
@@ -26,19 +26,19 @@ export const metadata: Metadata = {
 // LEGACY FALLBACK
 const CERTIFICATIONS = [
   {
-    icon: Award,
+    icon: "award",
     title: "Great Place to Work Colombia 2022",
     description:
       "Nivelics fue certificada como Great Place to Work en Colombia en 2022, reconociendo nuestra cultura organizacional basada en la confianza, el respeto y el desarrollo profesional de nuestro equipo. Esta certificación refleja el compromiso con crear un entorno de trabajo donde el talento tech pueda crecer y entregar su mejor trabajo.",
   },
   {
-    icon: Building2,
+    icon: "building2",
     title: "Miembro ANDI",
     description:
       "Somos miembros activos de la Asociación Nacional de Empresarios de Colombia (ANDI), la agremiación empresarial más importante del país. Esta membresía nos conecta con el ecosistema empresarial colombiano y nos permite participar en iniciativas de transformación digital a nivel nacional.",
   },
   {
-    icon: Globe,
+    icon: "globe",
     title: "Nivelics LLC — Presencia USA",
     description:
       "A través de Nivelics LLC, nuestra entidad en Estados Unidos con sede en Miami, Florida, atendemos clientes en el mercado norteamericano. Esta presencia nos permite operar como nearshore partner para empresas de USA y Canadá, combinando la calidad del talento latinoamericano con la cercanía geográfica y cultural.",
@@ -103,8 +103,8 @@ export default async function CertificacionesPage() {
               ? dbMapped.map((cert) => (
                   <div key={cert.title} className="glass glow-hover rounded-xl p-8 md:p-10">
                     <div className="flex items-start gap-6">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                        <Award size={28} className="text-primary" aria-hidden="true" />
+                      <div className="shrink-0">
+                        <GeoIconBox name="hex-check" size={26} color="cyan" />
                       </div>
                       <div>
                         <h2 className="text-xl font-semibold text-text-100">{cert.title}</h2>
@@ -114,12 +114,11 @@ export default async function CertificacionesPage() {
                   </div>
                 ))
               : CERTIFICATIONS.map((cert) => {
-                  const Icon = cert.icon;
                   return (
                     <div key={cert.title} className="glass glow-hover rounded-xl p-8 md:p-10">
                       <div className="flex items-start gap-6">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                          <Icon size={28} className="text-primary" aria-hidden="true" />
+                        <div className="shrink-0">
+                          <GeoIconBox name={cert.icon} size={26} color="cyan" />
                         </div>
                         <div>
                           <h2 className="text-xl font-semibold text-text-100">{cert.title}</h2>

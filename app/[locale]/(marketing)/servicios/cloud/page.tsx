@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DollarSign, Cloud, Server, Shield, Zap, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -40,35 +41,35 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const SUB_SERVICES = [
   {
-    icon: DollarSign,
+    icon: "dollar-sign",
     title: "FinOps",
     description:
       "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento.",
     href: "/servicios/cloud/finops",
   },
   {
-    icon: Cloud,
+    icon: "cloud",
     title: "Migración a AWS",
     description:
       "Migración de workloads on-premise a la nube con zero downtime y estrategia de rollback.",
     href: "/servicios/cloud/migracion-aws",
   },
   {
-    icon: Server,
+    icon: "server",
     title: "Infraestructura Cloud",
     description:
       "Diseño e implementación de arquitecturas en AWS, Azure y GCP con alta disponibilidad.",
     href: "/servicios/cloud/infraestructura",
   },
   {
-    icon: Shield,
+    icon: "shield",
     title: "Seguridad Cloud",
     description:
       "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end.",
     href: "/servicios/cloud/seguridad",
   },
   {
-    icon: Zap,
+    icon: "zap",
     title: "Serverless",
     description:
       "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por lo que usas.",
@@ -129,6 +130,7 @@ export default async function CloudPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="diagonal"
         badge="Cloud · AWS · GCP · Azure"
         h1={cms?.title || "Cloud con gobierno real"}
         h1Accent="y 40% menos de costos"
@@ -184,16 +186,14 @@ export default async function CloudPage() {
           <h2 className="text-3xl font-bold text-text-100">Soluciones Cloud especializadas</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {SUB_SERVICES.map((s) => {
-              const Icon = s.icon;
+              const iconName = s.icon;
               return (
                 <Link
                   key={s.href}
                   href={s.href}
                   className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cloud/10">
-                    <Icon size={24} className="text-blue-400" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="cyan" />
                   <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
                     {s.title}
                   </h3>

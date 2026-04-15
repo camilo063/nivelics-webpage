@@ -3,6 +3,54 @@ import { notFound } from "next/navigation";
 import { getIndustria } from "@/lib/admin/actions/industrias.actions";
 import IndustriaForm from "@/components/admin/forms/IndustriaForm";
 
+type PainPointRaw = {
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+  statEs?: string;
+  statEn?: string;
+};
+type SimpleItem = {
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+};
+type DiffItem = { titleEs: string; titleEn: string; descEs: string; descEn: string };
+type MetricItem = { value: string; labelEs: string; labelEn: string };
+type StatItem = { value: string; labelEs: string; labelEn: string; source?: string };
+type RegulationItem = {
+  code: string;
+  nameEs: string;
+  nameEn: string;
+  descEs?: string;
+  descEn?: string;
+};
+type UseCaseItem = {
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+  outcomeEs?: string;
+  outcomeEn?: string;
+};
+type PlaybookItem = {
+  number: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+};
+type FaqItem = { questionEs: string; questionEn: string; answerEs: string; answerEn: string };
+type TechItem = {
+  label: string;
+  category: "cloud" | "data" | "ai" | "frontend" | "backend" | "security" | "other";
+};
+
 export default async function EditIndustriaPage({ params }: { params: Promise<{ slug: string }> }) {
   await connection();
   const { slug } = await params;
@@ -22,30 +70,10 @@ export default async function EditIndustriaPage({ params }: { params: Promise<{ 
           heroTitleEn: industria.heroTitleEn || "",
           heroSubtitleEs: industria.heroSubtitleEs || "",
           heroSubtitleEn: industria.heroSubtitleEn || "",
-          painPoints:
-            (industria.painPoints as Array<{
-              icon: string;
-              titleEs: string;
-              titleEn: string;
-              descEs: string;
-              descEn: string;
-            }>) || [],
-          solutions:
-            (industria.solutions as Array<{
-              icon: string;
-              titleEs: string;
-              titleEn: string;
-              descEs: string;
-              descEn: string;
-            }>) || [],
+          painPoints: (industria.painPoints as PainPointRaw[]) || [],
+          solutions: (industria.solutions as SimpleItem[]) || [],
           casoDestacadoId: industria.casoDestacadoId || "",
-          differentiators:
-            (industria.differentiators as Array<{
-              titleEs: string;
-              titleEn: string;
-              descEs: string;
-              descEn: string;
-            }>) || [],
+          differentiators: (industria.differentiators as DiffItem[]) || [],
           ctaTextEs: industria.ctaTextEs || "",
           ctaTextEn: industria.ctaTextEn || "",
           seoTitleEs: industria.seoTitleEs || "",
@@ -60,6 +88,25 @@ export default async function EditIndustriaPage({ params }: { params: Promise<{ 
             | "pending"
             | "auto",
           status: industria.status as "draft" | "published" | "scheduled" | "archived",
+          // Rich fields
+          metrics: (industria.metrics as MetricItem[]) || [],
+          statHighlights: (industria.statHighlights as StatItem[]) || [],
+          regulations: (industria.regulations as RegulationItem[]) || [],
+          useCases: (industria.useCases as UseCaseItem[]) || [],
+          playbook: (industria.playbook as PlaybookItem[]) || [],
+          industryFaqs: (industria.industryFaqs as FaqItem[]) || [],
+          techStack: (industria.techStack as TechItem[]) || [],
+          servicesHighlight: (industria.servicesHighlight as string[]) || [],
+          relatedCaseSlugs: (industria.relatedCaseSlugs as string[]) || [],
+          ctaTitleEs: industria.ctaTitleEs || "",
+          ctaTitleEn: industria.ctaTitleEn || "",
+          ctaPrimaryTextEs: industria.ctaPrimaryTextEs || "",
+          ctaPrimaryTextEn: industria.ctaPrimaryTextEn || "",
+          ctaPrimaryUrl: industria.ctaPrimaryUrl || "",
+          hubIntroTitleEs: industria.hubIntroTitleEs || "",
+          hubIntroTitleEn: industria.hubIntroTitleEn || "",
+          hubIntroSubtitleEs: industria.hubIntroSubtitleEs || "",
+          hubIntroSubtitleEn: industria.hubIntroSubtitleEn || "",
         }}
       />
     </div>

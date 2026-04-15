@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MapPin, Calendar, Target, Heart } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { PageWrapper } from "@/components/layout";
 import { MetricCard, CTABanner } from "@/components/shared";
 import { Button } from "@/components/ui/button";
@@ -30,17 +31,17 @@ export const metadata: Metadata = {
 
 const VALUES = [
   {
-    icon: Target,
+    icon: "target",
     title: "Impacto Medible",
     description: "Cada proyecto tiene KPIs claros. Si no se puede medir, no se puede mejorar.",
   },
   {
-    icon: Heart,
+    icon: "heart",
     title: "Partnerships, no Proveedores",
     description: "Nos involucramos en el resultado de negocio, no solo en la entrega técnica.",
   },
   {
-    icon: Calendar,
+    icon: "calendar",
     title: "Compromiso con la Entrega",
     description: "Deadlines son sagrados. Planeamos con buffer y comunicamos con transparencia.",
   },
@@ -140,18 +141,15 @@ export default async function NosotrosPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Nuestros Valores</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {VALUES.map((v) => {
-              const Icon = v.icon;
-              return (
-                <div key={v.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon size={24} className="text-primary" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{v.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{v.description}</p>
+            {VALUES.map((v) => (
+              <div key={v.title} className="glass glow-hover rounded-xl p-6">
+                <div className="mb-4">
+                  <GeoIconBox name={v.icon} size={22} color="cyan" />
                 </div>
-              );
-            })}
+                <h3 className="text-lg font-semibold text-text-100">{v.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-70">{v.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

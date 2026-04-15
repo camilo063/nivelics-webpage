@@ -4,6 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { BenefitCard } from "@/components/shared/benefit-card";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { HeroSplit } from "@/components/sections/hero-split";
@@ -37,19 +38,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const BENEFITS = [
   {
-    icon: Globe,
+    icon: "globe",
     title: "React y Next.js",
     description:
       "Desarrollo frontend con React y Next.js para aplicaciones web rapidas, SEO-friendly y con excelente experiencia de usuario.",
   },
   {
-    icon: Network,
+    icon: "network",
     title: "APIs RESTful y GraphQL",
     description:
       "Backend robusto con APIs RESTful y GraphQL disenadas para escalabilidad, seguridad y facilidad de integracion.",
   },
   {
-    icon: CloudCog,
+    icon: "cloud-cog",
     title: "Arquitectura serverless",
     description:
       "Despliegue en arquitecturas serverless que escalan automaticamente y eliminan la gestion de infraestructura.",
@@ -119,6 +120,7 @@ export default async function PlataformasWebPage() {
 
       {/* Hero */}
       <HeroSplit
+        heroEffect="particles"
         badge="Desarrollo Digital &middot; Plataformas Web"
         h1={cms?.title || "Plataforma web"}
         h1Accent="sin limites de escala"
@@ -193,18 +195,15 @@ export default async function PlataformasWebPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <div key={b.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-dev/10">
-                    <Icon size={24} className="text-dev" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-100">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.description}</p>
-                </div>
-              );
-            })}
+            {BENEFITS.map((b) => (
+              <BenefitCard
+                key={b.title}
+                title={b.title}
+                description={b.description}
+                icon={b.icon}
+                accentColor="#fbbf24"
+              />
+            ))}
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { DollarSign, TrendingDown, PieChart, Eye, BarChart, Settings } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { HeroSplit } from "@/components/sections/hero-split";
@@ -50,33 +50,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 const PILLARS = [
   {
-    icon: Eye,
+    icon: "dia-search",
     title: "Visibilidad",
     description: "Dashboards en tiempo real de consumo por equipo, servicio y ambiente.",
   },
   {
-    icon: TrendingDown,
+    icon: "hex-chart",
     title: "Optimizaci\u00f3n",
     description:
       "Rightsizing, reserved instances, spot fleet y eliminaci\u00f3n de recursos hu\u00e9rfanos.",
   },
   {
-    icon: PieChart,
+    icon: "dia-trend",
     title: "Asignaci\u00f3n de Costos",
     description: "Tagging strategy, showback/chargeback y unit economics por producto.",
   },
   {
-    icon: BarChart,
+    icon: "oct-monitor",
     title: "Forecasting",
     description: "Proyecci\u00f3n de costos con modelos predictivos y alertas de anomal\u00edas.",
   },
   {
-    icon: Settings,
+    icon: "dia-flow",
     title: "Gobernanza",
     description: "Pol\u00edticas automatizadas, budgets y aprobaci\u00f3n de recursos costosos.",
   },
   {
-    icon: DollarSign,
+    icon: "dia-target",
     title: "Cultura FinOps",
     description: "Capacitaci\u00f3n de equipos, ceremonias FinOps y m\u00e9tricas de eficiencia.",
   },
@@ -152,6 +152,7 @@ export default async function FinOpsPage({ params }: PageProps) {
       />
 
       <HeroSplit
+        heroEffect="particles"
         badge="Cloud \u00b7 FinOps"
         h1={cms?.title || "Optimiza tu inversi\u00f3n en cloud"}
         h1Accent="hasta un 40%"
@@ -200,12 +201,10 @@ export default async function FinOpsPage({ params }: PageProps) {
           <h2 className="text-3xl font-bold text-text-100">Pilares FinOps</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((pillar) => {
-              const Icon = pillar.icon;
+              const iconName = pillar.icon;
               return (
                 <div key={pillar.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-finops/10">
-                    <Icon size={24} className="text-finops" aria-hidden="true" />
-                  </div>
+                  <GeoIconBox name={iconName} size={20} color="cyan" />
                   <h3 className="text-lg font-semibold text-text-100">{pillar.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">{pillar.description}</p>
                 </div>

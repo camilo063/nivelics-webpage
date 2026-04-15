@@ -31,6 +31,29 @@ const faqSchema = z.object({
   answerEn: z.string().optional().default(""),
 });
 
+const hubMetricSchema = z.object({
+  value: z.string().optional().default(""),
+  labelEs: z.string().optional().default(""),
+  labelEn: z.string().optional().default(""),
+});
+
+const frameworkPillarSchema = z.object({
+  letter: z.string().optional().default(""),
+  colorClass: z.string().optional().default(""),
+  borderClass: z.string().optional().default(""),
+  titleEs: z.string().optional().default(""),
+  titleEn: z.string().optional().default(""),
+  descEs: z.string().optional().default(""),
+  descEn: z.string().optional().default(""),
+});
+
+const sectorSchema = z.object({
+  slug: z.string().optional().default(""),
+  icon: z.string().optional().default(""),
+  labelEs: z.string().optional().default(""),
+  labelEn: z.string().optional().default(""),
+});
+
 export const servicioSchema = z.object({
   titleEs: z.string().min(1, "El título en español es requerido"),
   titleEn: z.string().optional().default(""),
@@ -60,6 +83,16 @@ export const servicioSchema = z.object({
     .optional()
     .default("pending"),
   status: z.enum(["draft", "published", "scheduled", "archived"]).optional().default("published"),
+  // Hub-only fields (service_type === 'hub')
+  hubMetrics: z.array(hubMetricSchema).optional().default([]),
+  frameworkTitleEs: z.string().optional().default(""),
+  frameworkTitleEn: z.string().optional().default(""),
+  frameworkSubtitleEs: z.string().optional().default(""),
+  frameworkSubtitleEn: z.string().optional().default(""),
+  frameworkPillars: z.array(frameworkPillarSchema).optional().default([]),
+  sectorsTitleEs: z.string().optional().default(""),
+  sectorsTitleEn: z.string().optional().default(""),
+  sectors: z.array(sectorSchema).optional().default([]),
 });
 
 export type ServicioInput = z.infer<typeof servicioSchema>;

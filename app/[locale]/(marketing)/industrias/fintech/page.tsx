@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { ShieldCheck, Server, Users } from "lucide-react";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { PageWrapper } from "@/components/layout";
+import { HeroEffect } from "@/components/ui/hero-effect";
 import { CTABanner, ServiceBadge } from "@/components/shared";
+import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
@@ -34,19 +36,19 @@ export async function generateMetadata(): Promise<Metadata> {
 // LEGACY FALLBACK
 const CHALLENGES = [
   {
-    icon: ShieldCheck,
+    icon: "shield-check",
     title: "Compliance regulatorio",
     description:
       "Normativas cambiantes y requisitos de cumplimiento que demandan arquitecturas seguras, auditables y adaptables en tiempo récord.",
   },
   {
-    icon: Server,
+    icon: "server",
     title: "Escalabilidad de infraestructura",
     description:
       "Picos de transacciones impredecibles que requieren infraestructura elástica sin comprometer latencia ni disponibilidad.",
   },
   {
-    icon: Users,
+    icon: "users",
     title: "Experiencia del usuario",
     description:
       "Usuarios digitales que exigen interfaces intuitivas, onboarding sin fricción y respuestas en milisegundos.",
@@ -111,8 +113,12 @@ export default async function FintechPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
+        <HeroEffect kind="hex" opacity={0.9} />
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"
+          style={{ zIndex: 1 }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
             {ind?.heroTitle || "Transformación Digital para Fintech"}
           </h1>
@@ -129,15 +135,11 @@ export default async function FintechPage() {
           <h2 className="text-3xl font-bold text-text-100">Los 3 retos tech de Fintech</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {challenges.map((ch) => {
-              const Icon = "icon" in ch && typeof ch.icon !== "string" ? ch.icon : null;
+              const iconName = "icon" in ch && typeof ch.icon === "string" ? ch.icon : undefined;
               return (
                 <div key={ch.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    {Icon ? (
-                      <Icon size={24} className="text-primary" aria-hidden="true" />
-                    ) : (
-                      <ShieldCheck size={24} className="text-primary" aria-hidden="true" />
-                    )}
+                  <div className="mb-4">
+                    <GeoIconBox name={iconName} size={22} color="green" />
                   </div>
                   <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">
@@ -175,7 +177,8 @@ export default async function FintechPage() {
         </div>
       </section>
 
-      <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Fintech"} />
+      {ind && <IndustriaRichSections industria={ind} locale={locale} />}
+      {!ind?.ctaTitle && <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Fintech"} />}
     </PageWrapper>
   );
 }

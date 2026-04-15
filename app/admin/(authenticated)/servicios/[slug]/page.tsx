@@ -76,6 +76,36 @@ export default async function EditarServicioPage({
             | "pending"
             | "auto",
           status: servicio.status as "draft" | "published" | "scheduled" | "archived",
+          serviceType: servicio.serviceType as "hub" | "sub",
+          hubMetrics:
+            (servicio.hubMetrics as Array<{
+              value: string;
+              labelEs: string;
+              labelEn: string;
+            }>) || [],
+          frameworkTitleEs: servicio.frameworkTitleEs || "",
+          frameworkTitleEn: servicio.frameworkTitleEn || "",
+          frameworkSubtitleEs: servicio.frameworkSubtitleEs || "",
+          frameworkSubtitleEn: servicio.frameworkSubtitleEn || "",
+          frameworkPillars:
+            (servicio.frameworkPillars as Array<{
+              letter: string;
+              colorClass: string;
+              borderClass: string;
+              titleEs: string;
+              titleEn: string;
+              descEs: string;
+              descEn: string;
+            }>) || [],
+          sectorsTitleEs: servicio.sectorsTitleEs || "",
+          sectorsTitleEn: servicio.sectorsTitleEn || "",
+          sectors:
+            (servicio.sectors as Array<{
+              slug: string;
+              icon: string;
+              labelEs: string;
+              labelEn: string;
+            }>) || [],
         }}
       />
     </div>

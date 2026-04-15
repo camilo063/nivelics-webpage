@@ -14,6 +14,7 @@ import {
   deleteCertificacion,
 } from "@/lib/admin/actions/nosotros.actions";
 import { ImageUploader } from "@/components/admin/ui/ImageUploader";
+import { GeoIconPicker } from "@/components/admin/ui/GeoIconPicker";
 import { Plus, Pencil, Trash2, Star, Save, X } from "lucide-react";
 
 // ─── Types ──────────────────────────────────────────────
@@ -802,11 +803,10 @@ export default function NosotrosClient({
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
                   <label className="mb-2 block text-sm font-medium text-text-70">Icono</label>
-                  <input
-                    type="text"
-                    value={historiaForm.icon}
-                    onChange={(e) => setHistoriaForm((p) => ({ ...p, icon: e.target.value }))}
-                    className={inputClass}
+                  <GeoIconPicker
+                    value={historiaForm.icon ?? ""}
+                    onChange={(name) => setHistoriaForm((p) => ({ ...p, icon: name }))}
+                    color="cyan"
                   />
                 </div>
                 <div>

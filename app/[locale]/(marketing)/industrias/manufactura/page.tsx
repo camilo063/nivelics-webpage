@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Cpu, Wrench, ScanLine } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
+import { GeoIconBox } from "@/lib/icons/geometric";
+import { HeroEffect } from "@/components/ui/hero-effect";
 import { CTABanner, ServiceBadge } from "@/components/shared";
+import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
@@ -34,19 +36,19 @@ export async function generateMetadata(): Promise<Metadata> {
 // LEGACY FALLBACK
 const CHALLENGES = [
   {
-    icon: Cpu,
+    icon: "cpu",
     title: "IoT y sensores",
     description:
       "Conectar miles de sensores en planta para recolectar datos en tiempo real y alimentar dashboards de producción.",
   },
   {
-    icon: Wrench,
+    icon: "wrench",
     title: "Mantenimiento predictivo",
     description:
       "Anticipar fallas en equipos antes de que ocurran para reducir tiempos de inactividad y costos de reparación no planificada.",
   },
   {
-    icon: ScanLine,
+    icon: "scan-line",
     title: "Calidad automatizada",
     description:
       "Detectar defectos de producción en línea con visión por computadora y controles de calidad automatizados en tiempo real.",
@@ -110,8 +112,12 @@ export default async function ManufacturaPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-        <div className="relative mx-auto max-w-[1280px] px-6 md:px-20">
+        <HeroEffect kind="hex" opacity={0.9} />
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"
+          style={{ zIndex: 1 }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
             {ind?.heroTitle || "Industria 4.0: IA y Cloud para Manufactura"}
           </h1>
@@ -128,15 +134,11 @@ export default async function ManufacturaPage() {
           <h2 className="text-3xl font-bold text-text-100">Los 3 retos tech de Manufactura</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {challenges.map((ch) => {
-              const Icon = "icon" in ch && typeof ch.icon !== "string" ? ch.icon : null;
+              const iconName = "icon" in ch && typeof ch.icon === "string" ? ch.icon : undefined;
               return (
                 <div key={ch.title} className="glass glow-hover rounded-xl p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    {Icon ? (
-                      <Icon size={24} className="text-primary" aria-hidden="true" />
-                    ) : (
-                      <Cpu size={24} className="text-primary" aria-hidden="true" />
-                    )}
+                  <div className="mb-4">
+                    <GeoIconBox name={iconName} size={22} color="amber" />
                   </div>
                   <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">
@@ -174,7 +176,10 @@ export default async function ManufacturaPage() {
         </div>
       </section>
 
-      <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Manufactura"} />
+      {ind && <IndustriaRichSections industria={ind} locale={locale} />}
+      {!ind?.ctaTitle && (
+        <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Manufactura"} />
+      )}
     </PageWrapper>
   );
 }
