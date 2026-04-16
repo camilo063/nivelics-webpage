@@ -1,7 +1,7 @@
 export function getOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     "@id": "https://www.nivelics.com/#organization",
     name: "Nivelics SAS",
     alternateName: "Nivelics",
@@ -56,5 +56,13 @@ export function getOrganizationSchema() {
       "GCP",
       "Azure",
     ],
+    serviceType: [
+      "Inteligencia Artificial aplicada",
+      "Cloud Computing",
+      "Staff Augmentation",
+      "Desarrollo de Software",
+      "Transformación Digital",
+    ],
+    slogan: "Transforma más rápido.",
   };
 }

@@ -306,6 +306,37 @@ const PLAIN_LINKS = [
   { label: "Blog", href: "/blog" },
 ] as const;
 
+// Productos SaaS (3 fijos — coinciden con DB: PAYWL, Niveleads, Hirely)
+const PRODUCTOS_ITEMS = [
+  {
+    slug: "paywl",
+    name: "PAYWL",
+    category: "Medios · LATAM",
+    tagline: "Motor de paywall para medios digitales",
+    pricingEs: "Desde $450/mes",
+    pricingEn: "From $450/month",
+    accent: "#00D4FF",
+  },
+  {
+    slug: "niveleads",
+    name: "Niveleads",
+    category: "Ventas B2B · IA",
+    tagline: "Lead scoring con IA. Setup en 24h.",
+    pricingEs: "Desde $99/mes",
+    pricingEn: "From $99/month",
+    accent: "#1D9E75",
+  },
+  {
+    slug: "hirely",
+    name: "Hirely",
+    category: "RRHH · IA",
+    tagline: "ATS con Claude AI, voz, firma digital",
+    pricingEs: "Demo gratis",
+    pricingEn: "Free demo",
+    accent: "#a78bfa",
+  },
+] as const;
+
 /* ── Hover panel logic ── */
 
 function useHoverPanel() {
@@ -411,12 +442,14 @@ export function Nav({
   const serviciosPanel = useHoverPanel();
   const industriasPanel = useHoverPanel();
   const nosotrosPanel = useHoverPanel();
+  const productosPanel = useHoverPanel();
 
   // Close all panels (on link click)
   const closeAll = () => {
     serviciosPanel.setOpen(false);
     industriasPanel.setOpen(false);
     nosotrosPanel.setOpen(false);
+    productosPanel.setOpen(false);
   };
 
   // Event delegation: close panels when any link inside is clicked
@@ -431,17 +464,26 @@ export function Nav({
   const serviciosEnter = () => {
     industriasPanel.setOpen(false);
     nosotrosPanel.setOpen(false);
+    productosPanel.setOpen(false);
     serviciosPanel.enter();
   };
   const industriasEnter = () => {
     serviciosPanel.setOpen(false);
     nosotrosPanel.setOpen(false);
+    productosPanel.setOpen(false);
     industriasPanel.enter();
   };
   const nosotrosEnter = () => {
     serviciosPanel.setOpen(false);
     industriasPanel.setOpen(false);
+    productosPanel.setOpen(false);
     nosotrosPanel.enter();
+  };
+  const productosEnter = () => {
+    serviciosPanel.setOpen(false);
+    industriasPanel.setOpen(false);
+    nosotrosPanel.setOpen(false);
+    productosPanel.enter();
   };
 
   // Close all panels on route change
@@ -530,17 +572,29 @@ export function Nav({
           </div>
 
           {/* Productos */}
-          <Link
-            href="/productos"
-            data-nav-category="productos"
-            data-nav-level="hub"
-            className={cn(
-              "text-sm font-medium transition-colors",
-              isActive("/productos") ? "text-primary" : "text-text-70 hover:text-text-100",
-            )}
+          <div
+            className="relative"
+            onMouseEnter={productosEnter}
+            onMouseLeave={productosPanel.leave}
           >
-            Productos
-          </Link>
+            <Link
+              href="/productos"
+              aria-haspopup="true"
+              aria-expanded={productosPanel.open}
+              data-nav-category="productos"
+              data-nav-level="hub"
+              className={cn(
+                "inline-flex items-center gap-1 text-sm font-medium transition-colors",
+                isActive("/productos") ? "text-primary" : "text-text-70 hover:text-text-100",
+              )}
+            >
+              {locale === "en" ? "Products" : "Productos"}
+              <ChevronDown
+                size={14}
+                className={cn("transition-transform", productosPanel.open && "rotate-180")}
+              />
+            </Link>
+          </div>
 
           {/* Industrias */}
           <div
@@ -848,6 +902,173 @@ export function Nav({
         )}
       </AnimatePresence>
 
+      {/* ── Desktop: Productos Panel ── */}
+      <AnimatePresence>
+        {productosPanel.open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
+            onMouseEnter={productosEnter}
+            onMouseLeave={productosPanel.leave}
+            onClick={handlePanelClick}
+          >
+            <div
+              className="relative border-y border-white/[0.06]"
+              style={{ background: "rgba(10,10,15,0.97)", backdropFilter: "blur(20px)" }}
+            >
+              <div
+                aria-hidden="true"
+                className="absolute left-0 right-0"
+                style={{ top: "-8px", height: "8px" }}
+              />
+              <nav
+                className="mx-auto max-w-[720px] px-6 py-7"
+                aria-label={locale === "en" ? "Products navigation" : "Navegación por productos"}
+                itemScope
+                itemType="https://schema.org/SiteNavigationElement"
+              >
+                <p
+                  className="mb-4 text-[11px] font-medium uppercase tracking-[0.08em]"
+                  style={{ color: "rgba(0,212,255,0.75)" }}
+                >
+                  {locale === "en"
+                    ? "Nivelics proprietary software"
+                    : "Software propio de Nivelics"}
+                </p>
+                <ul className="grid grid-cols-3 gap-3">
+                  {PRODUCTOS_ITEMS.map((p) => {
+                    const href = `/productos/${p.slug}`;
+                    const pricing = locale === "en" ? p.pricingEn : p.pricingEs;
+                    return (
+                      <li key={p.slug}>
+                        <Link
+                          href={href}
+                          itemProp="url"
+                          data-nav-category="productos"
+                          data-nav-product={p.slug}
+                          className="flex flex-col gap-1.5 rounded-lg p-3.5 transition-all duration-150 cursor-pointer bg-white/[0.02] hover:bg-white/[0.06]"
+                          style={{
+                            borderTop: `2px solid ${p.accent}`,
+                            border: `1px solid rgba(255,255,255,0.07)`,
+                            borderTopColor: p.accent,
+                            borderTopWidth: "2px",
+                          }}
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 flex-shrink-0" aria-hidden="true">
+                              {p.name === "PAYWL" && (
+                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
+                                  <rect
+                                    x="3"
+                                    y="11"
+                                    width="18"
+                                    height="11"
+                                    rx="2"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                  />
+                                  <path
+                                    d="M7 11V7a5 5 0 0 1 10 0v4"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                  />
+                                </svg>
+                              )}
+                              {p.name === "Niveleads" && (
+                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
+                                  <path
+                                    d="M3 3h18v4H3z"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                    strokeLinejoin="round"
+                                  />
+                                  <path
+                                    d="M3 10h11v4H3z"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                    strokeLinejoin="round"
+                                  />
+                                  <circle
+                                    cx="18"
+                                    cy="17"
+                                    r="4"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                  />
+                                  <path
+                                    d="M16 17l1.5 1.5L20 15"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              )}
+                              {p.name === "Hirely" && (
+                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
+                                  <circle cx="9" cy="7" r="4" stroke={p.accent} strokeWidth="1.5" />
+                                  <path
+                                    d="M3 21v-2a4 4 0 0 1 4-4h4"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                  />
+                                  <path
+                                    d="M16 11l2 2 4-4"
+                                    stroke={p.accent}
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              )}
+                            </div>
+                            <span className="text-[13px] font-semibold text-white" itemProp="name">
+                              {p.name}
+                            </span>
+                          </div>
+                          <span
+                            className="text-[10px] uppercase font-semibold tracking-wider"
+                            style={{ color: p.accent, opacity: 0.9 }}
+                          >
+                            {p.category}
+                          </span>
+                          <span
+                            className="text-[11px] leading-snug"
+                            style={{ color: "rgba(255,255,255,0.45)" }}
+                          >
+                            {p.tagline}
+                          </span>
+                          <span
+                            className="mt-auto text-[11px] font-medium"
+                            style={{ color: p.accent }}
+                          >
+                            {pricing}
+                          </span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className="mt-4 border-t border-white/[0.06] pt-3 text-right">
+                  <Link
+                    href="/productos"
+                    className="text-xs font-medium transition-colors hover:brightness-125"
+                    style={{ color: "#00D4FF" }}
+                  >
+                    {locale === "en" ? "See all products →" : "Ver todos los productos →"}
+                  </Link>
+                </div>
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ── Desktop: Nosotros Panel ── */}
       <AnimatePresence>
         {nosotrosPanel.open && (
@@ -1063,13 +1284,29 @@ export function Nav({
               </MobileAccordion>
 
               {/* Productos */}
-              <Link
-                href="/productos"
-                onClick={close}
-                className="block rounded-lg px-3 py-2 text-sm font-medium text-text-70 hover:text-text-100"
-              >
-                Productos
-              </Link>
+              <MobileAccordion title={locale === "en" ? "Products" : "Productos"}>
+                <Link
+                  href="/productos"
+                  onClick={close}
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-primary"
+                >
+                  {locale === "en" ? "All products" : "Todos los productos"}
+                </Link>
+                {PRODUCTOS_ITEMS.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/productos/${p.slug}`}
+                    onClick={close}
+                    className="flex items-start gap-3 rounded-lg px-3 py-2.5 text-text-70"
+                    style={{ borderLeft: `2px solid ${p.accent}` }}
+                  >
+                    <div>
+                      <span className="block text-sm font-medium text-text-100">{p.name}</span>
+                      <span className="block text-[11px] text-text-40">{p.category}</span>
+                    </div>
+                  </Link>
+                ))}
+              </MobileAccordion>
 
               {/* Industrias */}
               <MobileAccordion title="Industrias">

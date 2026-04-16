@@ -457,7 +457,7 @@ export default function ProductoForm({ initialData }: Props) {
                     arr[idx] = { ...arr[idx], icon: name };
                     up("features", arr);
                   }}
-                  color="cyan"
+                  accentColor={data.accentColor as "cyan" | "teal" | "violet"}
                 />
               </div>
               <BilingualField

@@ -47,6 +47,12 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       { userAgent: "Gemini", allow: "/" },
       { userAgent: "cohere-ai", allow: "/" },
       { userAgent: "YouBot", allow: "/", crawlDelay: 2 },
+      { userAgent: "Applebot-Extended", allow: "/" },
+      { userAgent: "AI2Bot", allow: "/", crawlDelay: 2 },
+
+      // AI bots — blocked (no commercial value)
+      { userAgent: "Bytespider", disallow: "/" },
+      { userAgent: "CCBot", disallow: "/" },
 
       // SEO analysis
       { userAgent: "AhrefsBot", allow: "/", crawlDelay: 3 },
