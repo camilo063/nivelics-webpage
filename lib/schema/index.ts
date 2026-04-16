@@ -5,3 +5,4 @@ export { getFAQSchema, HOME_FAQ } from "./faq";
 export { getBreadcrumbSchema } from "./breadcrumb";
 export { getPersonSchema, TEAM_MEMBERS } from "./person";
 export { getCreativeWorkSchema } from "./creative-work";
+export { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "./industria";

@@ -1,82 +1,114 @@
 "use client";
-import { useState } from "react";
-import { ICON_MAP, GeoIcon, type IconColor } from "@/lib/icons/geometric";
 
-interface Props {
+import { useMemo, useState } from "react";
+import { GeoIcon, ICON_MAP, type IconColor } from "@/lib/icons/geometric";
+
+const FAMILIAS: Record<string, string> = {
+  hex: "Hexágono",
+  dia: "Diamante",
+  tri: "Triángulo",
+  oct: "Octágono",
+  arc: "Círculo",
+};
+
+type Accent = "cyan" | "teal" | "violet";
+
+interface GeoIconPickerProps {
   value: string;
-  onChange: (name: string) => void;
+  onChange: (icon: string) => void;
+  /** Accent del producto — se usa para previsualizar el ícono con su color real */
+  accentColor?: Accent;
+  /** Variante legacy — compatibilidad con llamadas existentes que pasan color directo */
   color?: IconColor;
 }
 
-const FAMILIES = [
-  { prefix: "hex", label: "Hexágono", desc: "Cloud · Infra · Datos", color: "cyan" as IconColor },
-  { prefix: "dia", label: "Diamante", desc: "IA · Analytics · SEO", color: "violet" as IconColor },
-  {
-    prefix: "tri",
-    label: "Triángulo",
-    desc: "Staffing · Deploy · Growth",
-    color: "green" as IconColor,
-  },
-  {
-    prefix: "oct",
-    label: "Octágono",
-    desc: "Seguridad · Dev · Compliance",
-    color: "amber" as IconColor,
-  },
-  { prefix: "arc", label: "Arco", desc: "Streaming · Live · Real-time", color: "red" as IconColor },
-];
+const ACCENT_TO_ICON: Record<Accent, IconColor> = {
+  cyan: "cyan",
+  teal: "green",
+  violet: "violet",
+};
 
-export function GeoIconPicker({ value, onChange, color }: Props) {
-  const [activeFamily, setActiveFamily] = useState(
-    FAMILIES.find((f) => value?.startsWith(f.prefix))?.prefix ?? "hex",
+export function GeoIconPicker({ value, onChange, accentColor, color }: GeoIconPickerProps) {
+  const [search, setSearch] = useState("");
+
+  const iconColor: IconColor = color ?? (accentColor ? ACCENT_TO_ICON[accentColor] : "cyan");
+
+  const allIcons = useMemo(() => Object.keys(ICON_MAP), []);
+
+  const filtered = useMemo(
+    () => allIcons.filter((name) => name.toLowerCase().includes(search.toLowerCase())),
+    [allIcons, search],
   );
 
-  const visibleIcons = Object.keys(ICON_MAP).filter((k) => k.startsWith(activeFamily));
-  const currentFamily = FAMILIES.find((f) => f.prefix === activeFamily)!;
+  const grouped = useMemo(() => {
+    const groups: Record<string, string[]> = {};
+    for (const name of filtered) {
+      const familia = name.split("-")[0];
+      if (!groups[familia]) groups[familia] = [];
+      groups[familia].push(name);
+    }
+    return groups;
+  }, [filtered]);
 
   return (
-    <div className="border border-white/10 rounded-xl p-4 bg-white/[0.02]">
-      <div className="flex gap-2 mb-4 flex-wrap">
-        {FAMILIES.map((f) => (
-          <button
-            key={f.prefix}
-            type="button"
-            onClick={() => setActiveFamily(f.prefix)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              activeFamily === f.prefix
-                ? "bg-white/10 text-white"
-                : "text-white/40 hover:text-white/70"
-            }`}
-          >
-            {f.label}
-            <span className="ml-1 text-white/30">{f.desc}</span>
-          </button>
-        ))}
-      </div>
+    <div className="flex flex-col gap-3">
+      <input
+        type="text"
+        placeholder="Buscar ícono..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="w-full rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-gray-300 placeholder-gray-600 outline-none focus:border-cyan-500/40"
+      />
 
-      <div className="grid grid-cols-6 gap-2">
-        {visibleIcons.map((iconName) => (
-          <button
-            key={iconName}
-            type="button"
-            title={iconName}
-            onClick={() => onChange(iconName)}
-            className={`flex flex-col items-center gap-1.5 p-2 rounded-lg transition-all ${
-              value === iconName ? "bg-white/10 ring-1 ring-cyan-400/40" : "hover:bg-white/[0.05]"
-            }`}
-          >
-            <GeoIcon name={iconName} size={22} color={color ?? currentFamily.color} />
-            <span className="text-[9px] text-white/30 text-center leading-tight">
-              {iconName.split("-")[1]}
-            </span>
-          </button>
+      <div className="max-h-72 overflow-y-auto pr-1 flex flex-col gap-4">
+        {Object.entries(grouped).map(([familia, iconos]) => (
+          <div key={familia}>
+            <div className="text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-2">
+              {FAMILIAS[familia] ?? familia}
+            </div>
+            <div className="grid grid-cols-5 gap-2 sm:grid-cols-6 md:grid-cols-7">
+              {iconos.map((iconName) => {
+                const selected = value === iconName;
+                return (
+                  <button
+                    key={iconName}
+                    type="button"
+                    onClick={() => onChange(iconName)}
+                    title={iconName}
+                    className={[
+                      "flex flex-col items-center gap-1.5 p-2 rounded-lg border transition-all cursor-pointer",
+                      selected
+                        ? "bg-cyan-500/10 border-cyan-500/40 ring-1 ring-cyan-500/30"
+                        : "bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.14]",
+                    ].join(" ")}
+                  >
+                    <div className="w-7 h-7 flex items-center justify-center">
+                      <GeoIcon name={iconName} size={22} color={iconColor} />
+                    </div>
+                    <span className="text-[8px] text-gray-500 text-center leading-tight line-clamp-2 w-full">
+                      {iconName.replace(`${familia}-`, "")}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         ))}
+
+        {filtered.length === 0 && (
+          <div className="text-sm text-gray-600 text-center py-6">
+            Sin resultados para &quot;{search}&quot;
+          </div>
+        )}
       </div>
 
       {value && (
-        <div className="mt-3 pt-3 border-t border-white/10 flex items-center gap-2">
-          <GeoIcon name={value} size={18} color={color ?? currentFamily.color} />
-          <span className="text-xs text-white/40 font-mono">{value}</span>
+        <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-cyan-500/[0.06] border border-cyan-500/20">
+          <GeoIcon name={value} size={20} color={iconColor} />
+          <div>
+            <div className="text-xs font-medium text-cyan-400">{value}</div>
+            <div className="text-[10px] text-gray-500">ícono seleccionado</div>
+          </div>
         </div>
       )}
     </div>

@@ -61,6 +61,10 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  other: {
+    llms: "/llms.txt",
+    "llms-full": "/llms-full.txt",
+  },
 };
 
 interface LocaleLayoutProps {

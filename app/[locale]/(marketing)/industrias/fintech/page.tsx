@@ -6,6 +6,7 @@ import { CTABanner, ServiceBadge } from "@/components/shared";
 import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale } from "next-intl/server";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   return {
-    title: ind?.seoTitle || "IA y Cloud para Fintech | Nivelics",
+    title: ind?.seoTitle || "IA y Cloud para Fintech",
     description:
       ind?.seoDescription ||
       "Soluciones de inteligencia artificial, cloud e ingeniería para empresas fintech. Compliance, escalabilidad y experiencia de usuario.",
@@ -99,6 +100,7 @@ export default async function FintechPage() {
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Fintech", url: "/industrias/fintech" },
   ]);
+  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["fintech"]);
 
   return (
     <PageWrapper>
@@ -109,6 +111,10 @@ export default async function FintechPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
       {/* Hero */}

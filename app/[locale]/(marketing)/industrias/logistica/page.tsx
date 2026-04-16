@@ -6,6 +6,7 @@ import { CTABanner, ServiceBadge } from "@/components/shared";
 import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale } from "next-intl/server";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   return {
-    title: ind?.seoTitle || "Tecnología para Logística y Transporte | Nivelics",
+    title: ind?.seoTitle || "Tecnología para Logística y Transporte",
     description:
       ind?.seoDescription ||
       "Soluciones de trazabilidad, optimización de rutas y automatización de warehouse para empresas de logística y transporte.",
@@ -98,6 +99,7 @@ export default async function LogisticaPage() {
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Logística", url: "/industrias/logistica" },
   ]);
+  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["logistica"]);
 
   return (
     <PageWrapper>
@@ -108,6 +110,10 @@ export default async function LogisticaPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
       {/* Hero */}

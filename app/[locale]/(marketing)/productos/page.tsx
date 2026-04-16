@@ -39,6 +39,12 @@ export default async function ProductosHubPage() {
   const baseUrl = "https://www.nivelics.com";
   const hubUrl = isEn ? `${baseUrl}/en/products` : `${baseUrl}/productos`;
 
+  const pricingMap: Record<string, { price: string; category: string }> = {
+    PAYWL: { price: "450", category: "BusinessApplication" },
+    Niveleads: { price: "99", category: "BusinessApplication" },
+    Hirely: { price: "0", category: "WebApplication" },
+  };
+
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -50,12 +56,25 @@ export default async function ProductosHubPage() {
     author: { "@id": `${baseUrl}/#organization` },
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: products.map((p, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        url: `${hubUrl}/${p.slug}`,
-        name: p.name,
-      })),
+      numberOfItems: products.length,
+      itemListElement: products.map((p, i) => {
+        const pm = pricingMap[p.name] ?? { price: "0", category: "WebApplication" };
+        return {
+          "@type": "ListItem",
+          position: i + 1,
+          item: {
+            "@type": "SoftwareApplication",
+            name: p.name,
+            url: `${hubUrl}/${p.slug}`,
+            applicationCategory: pm.category,
+            offers: {
+              "@type": "Offer",
+              price: pm.price,
+              priceCurrency: "USD",
+            },
+          },
+        };
+      }),
     },
   };
 

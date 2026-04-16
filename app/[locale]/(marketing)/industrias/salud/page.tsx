@@ -6,6 +6,7 @@ import { CTABanner, ServiceBadge } from "@/components/shared";
 import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale } from "next-intl/server";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   return {
-    title: ind?.seoTitle || "Transformación Digital en Salud | Nivelics",
+    title: ind?.seoTitle || "Transformación Digital en Salud",
     description:
       ind?.seoDescription ||
       "Soluciones de interoperabilidad, telemedicina y gestión de datos clínicos para el sector salud.",
@@ -98,6 +99,7 @@ export default async function SaludPage() {
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Salud", url: "/industrias/salud" },
   ]);
+  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["salud"]);
 
   return (
     <PageWrapper>
@@ -108,6 +110,10 @@ export default async function SaludPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
       {/* Hero */}
