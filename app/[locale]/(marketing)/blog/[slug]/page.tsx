@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
@@ -230,16 +231,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
   const post = POSTS[slug];
 
   if (!post) {
-    return (
-      <PageWrapper>
-        <div className="mx-auto max-w-[1280px] px-6 py-24 text-center md:px-20">
-          <h1 className="text-3xl font-bold text-text-100">Post no encontrado</h1>
-          <Button asChild variant="outline" className="mt-8">
-            <Link href="/blog">Volver al blog</Link>
-          </Button>
-        </div>
-      </PageWrapper>
-    );
+    notFound();
   }
 
   const breadcrumb = getBreadcrumbSchema([

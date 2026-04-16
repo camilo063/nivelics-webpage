@@ -5,3 +5,4 @@ export { TestimonialsSection } from "./testimonials-section";
 export { ImpactSection } from "./impact-section";
 export { ClientLogosSection } from "./client-logos-section";
 export { IndustriesSection } from "./industries-section";
+export { SitemapMap } from "./sitemap-map";

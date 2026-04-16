@@ -216,6 +216,27 @@ body {
   color: var(--text-100);
 }
 
+/* 404 grid layout — sidebar + sitemap (dos columnas en desktop) */
+.notfound-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  background: #0d1117;
+}
+@media (min-width: 768px) {
+  .notfound-grid {
+    grid-template-columns: 5fr 7fr;
+    min-height: calc(100vh - 4rem);
+  }
+}
+
+/* Pills del mapa del sitio (404) — accent dinámico por producto */
+.sitemap-pill[data-accent]:hover {
+  color: var(--pill-accent, var(--text-100)) !important;
+  border-color: color-mix(in srgb, var(--pill-accent, white) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--pill-accent, white) 10%, transparent) !important;
+}
+
 /* prefers-reduced-motion override para efectos decorativos de hero */
 @media (prefers-reduced-motion: reduce) {
   .hero-effect-dots,
