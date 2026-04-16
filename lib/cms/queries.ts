@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { db } from "@/lib/db";
 import {
   servicios,
@@ -187,11 +188,13 @@ export async function getNavConfigPublic() {
 
 // ─── CONFIG ────────────────────────────────────────────
 
-export async function getSiteConfigPublic() {
+// Request-level memoization: multiple calls within the same render tree
+// (e.g. marketing layout + llms.txt route on the same request) hit the DB once.
+export const getSiteConfigPublic = cache(async () => {
   if (!db) return null;
   const result = await db.select().from(siteConfig).where(eq(siteConfig.id, "main")).limit(1);
   return result[0] || null;
-}
+});
 
 // ─── PÁGINAS GENERALES ─────────────────────────────────
 
