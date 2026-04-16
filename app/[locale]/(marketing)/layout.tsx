@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { Nav, Footer } from "@/components/layout";
 import { WhatsAppFAB } from "@/components/shared";
 import { TranslationBanner } from "@/components/shared/translation-banner";
-import { getSiteConfig } from "@/lib/admin/actions/config.actions";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
 import { SITE } from "@/lib/constants";
 import { NAV_DEFAULTS } from "@/lib/constants/nav";
 
@@ -12,7 +13,7 @@ interface MarketingLayoutProps {
 
 export default async function MarketingLayout({ children, params }: MarketingLayoutProps) {
   const { locale } = await params;
-  const config = await getSiteConfig().catch(() => null);
+  const config = await getSiteConfigPublic().catch(() => null);
   const logoUrl = config?.logoUrl ?? null;
   const logoNaturalWidth = config?.logoWidth ?? null;
   const logoNaturalHeight = config?.logoHeight ?? null;
@@ -25,16 +26,15 @@ export default async function MarketingLayout({ children, params }: MarketingLay
 
   const logoSlot =
     logoUrl && logoNaturalWidth && logoNaturalHeight ? (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <Image
         src={logoUrl}
         alt={logoAlt}
         title={logoTitle}
         width={logoNaturalWidth}
         height={logoNaturalHeight}
         style={{ height: "80px", width: "auto", objectFit: "contain" }}
-        loading="eager"
-        fetchPriority="high"
+        priority
+        sizes="(max-width: 768px) 160px, 240px"
         itemProp="name"
       />
     ) : (

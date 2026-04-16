@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Node {
   x: number;
@@ -13,17 +13,44 @@ interface Node {
 
 export function HeroGraph() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Mount gated to idle time so the canvas never competes with LCP on mobile.
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    // Defer mount until the browser is idle — the canvas is purely decorative
+    // (aria-hidden) so delaying it by a few hundred ms has no UX cost and
+    // protects LCP on slower devices.
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout?: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    let idleId: number | null = null;
+    let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
+    if (typeof w.requestIdleCallback === "function") {
+      idleId = w.requestIdleCallback(() => setReady(true), { timeout: 2000 });
+    } else {
+      fallbackTimer = setTimeout(() => setReady(true), 800);
+    }
+    return () => {
+      if (idleId != null && typeof w.cancelIdleCallback === "function") {
+        w.cancelIdleCallback(idleId);
+      }
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationId = 0;
-    let initTimer: ReturnType<typeof setTimeout> | null = null;
     let nodes: Node[] = [];
-    const NODE_COUNT = 32;
+    // Fewer nodes on mobile — O(n²) per frame so 16 ≈ 120 pair checks vs 32 ≈ 496.
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const NODE_COUNT = isMobile ? 16 : 32;
     const MAX_DISTANCE = 140;
     const ACCENT = { r: 0, g: 212, b: 255 };
 
@@ -118,17 +145,21 @@ export function HeroGraph() {
     };
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // On mobile OR with reduced-motion: single static draw, no rAF loop.
+    // Saves the O(n²) per-frame work that would otherwise hog the main thread.
+    const shouldAnimate = !motionQuery.matches && !isMobile;
+
     const start = () => {
       cancelAnimationFrame(animationId);
       resize();
-      if (motionQuery.matches) {
-        drawStatic();
-      } else {
+      if (shouldAnimate) {
         draw();
+      } else {
+        drawStatic();
       }
     };
 
-    initTimer = setTimeout(start, 50);
+    start();
 
     const resizeObserver = new ResizeObserver(() => start());
     resizeObserver.observe(canvas);
@@ -136,13 +167,32 @@ export function HeroGraph() {
     const onMotionChange = () => start();
     motionQuery.addEventListener("change", onMotionChange);
 
+    // Pause animation when the canvas leaves the viewport.
+    let io: IntersectionObserver | null = null;
+    if (shouldAnimate && typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              if (!animationId) draw();
+            } else {
+              cancelAnimationFrame(animationId);
+              animationId = 0;
+            }
+          }
+        },
+        { threshold: 0 },
+      );
+      io.observe(canvas);
+    }
+
     return () => {
-      if (initTimer) clearTimeout(initTimer);
       cancelAnimationFrame(animationId);
       resizeObserver.disconnect();
       motionQuery.removeEventListener("change", onMotionChange);
+      if (io) io.disconnect();
     };
-  }, []);
+  }, [ready]);
 
   return (
     <canvas
@@ -154,10 +204,12 @@ export function HeroGraph() {
         inset: 0,
         width: "100%",
         height: "100%",
-        opacity: 0.55,
+        opacity: ready ? 0.55 : 0,
+        transition: "opacity 300ms ease-out",
         pointerEvents: "none",
         userSelect: "none",
         zIndex: 1,
+        contentVisibility: "auto",
       }}
     />
   );
