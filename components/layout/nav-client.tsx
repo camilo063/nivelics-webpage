@@ -181,10 +181,12 @@ function MobileAccordion({ title, children }: { title: string; children: React.R
 /* ── Language switch helpers ── */
 
 function getEsUrl(path: string): string {
-  return path || "/";
+  const stripped = path.replace(/^\/en(\/|$)/, "/");
+  return stripped || "/";
 }
 
 function getEnUrl(path: string): string {
+  if (path.startsWith("/en")) return path;
   return path === "/" ? "/en" : "/en" + path;
 }
 
