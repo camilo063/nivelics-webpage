@@ -17,6 +17,8 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -81,6 +83,7 @@ const SUB_SERVICES = [
 export default async function IAPage() {
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("inteligencia-artificial", locale);
+  const uiLabels = await getAllUiLabels();
   const serviceSchema = getServiceSchema({
     name: "Inteligencia Artificial Aplicada",
     description:
@@ -323,7 +326,7 @@ export default async function IAPage() {
 
       {/* FAQ */}
       <FAQAccordion
-        title="Preguntas frecuentes sobre IA"
+        title={uiLabel(uiLabels, "servicio.ia_faqs_title", locale)}
         schemaEnabled
         faqs={
           cms?.faqs?.length

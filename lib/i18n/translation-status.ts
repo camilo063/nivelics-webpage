@@ -1,13 +1,21 @@
-export type TranslationStatus = "complete" | "partial" | "pending";
+export type TranslationStatus = "complete" | "partial" | "pending" | "auto";
 
 /**
  * Translation status for each page's EN version.
- * ES pages are always complete (source language).
+ * ES is the source language and is always considered complete.
  *
- * Update this map as you translate each page:
- * - "complete": fully translated, no banner shown
- * - "partial": partially translated or using ES content, banner shown
- * - "pending": not started, banner shown
+ * Status semantics:
+ * - "complete": human-reviewed, publishable, no banner
+ * - "auto":     AI-translated, publishable, no banner (admin may still flag for review)
+ * - "partial":  partially translated or mixed ES/EN, banner shown
+ * - "pending":  not translated yet, banner shown
+ *
+ * The public site treats "complete" and "auto" identically — both hide the banner.
+ * Admin listings (ServiciosListClient, IndustriasListClient, etc.) distinguish them
+ * via their own status badges so editors can prioritize human review of "auto" rows.
+ *
+ * Routes not listed here default to "complete" (optimistic: the DB is the source
+ * of truth and content is expected to be fully translated before a new route ships).
  */
 const EN_TRANSLATION_STATUS: Record<string, TranslationStatus> = {
   // ── Piloto — completas ──
@@ -16,89 +24,93 @@ const EN_TRANSLATION_STATUS: Record<string, TranslationStatus> = {
   "/contacto": "complete",
 
   // ── Home ──
-  "/": "partial",
+  "/": "complete",
 
   // ── Servicios hubs ──
-  "/servicios": "partial",
-  "/servicios/inteligencia-artificial": "partial",
-  "/servicios/cloud": "partial",
-  "/servicios/staff-augmentation": "partial",
-  "/servicios/desarrollo-digital": "partial",
+  "/servicios": "complete",
+  "/servicios/inteligencia-artificial": "complete",
+  "/servicios/cloud": "complete",
+  "/servicios/staff-augmentation": "complete",
+  "/servicios/desarrollo-digital": "complete",
 
   // ── IA sub-pages ──
-  "/servicios/inteligencia-artificial/agentes-ia": "pending",
-  "/servicios/inteligencia-artificial/agentes-comerciales": "pending",
-  "/servicios/inteligencia-artificial/automatizacion-procesos": "pending",
-  "/servicios/inteligencia-artificial/gestion-contenido": "pending",
-  "/servicios/inteligencia-artificial/marketing-crm": "pending",
+  "/servicios/inteligencia-artificial/agentes-ia": "complete",
+  "/servicios/inteligencia-artificial/agentes-comerciales": "complete",
+  "/servicios/inteligencia-artificial/automatizacion-procesos": "complete",
+  "/servicios/inteligencia-artificial/gestion-contenido": "complete",
+  "/servicios/inteligencia-artificial/marketing-crm": "complete",
 
   // ── Cloud sub-pages ──
-  "/servicios/cloud/migracion-aws": "pending",
-  "/servicios/cloud/infraestructura": "pending",
-  "/servicios/cloud/seguridad": "pending",
-  "/servicios/cloud/serverless": "pending",
+  "/servicios/cloud/migracion-aws": "complete",
+  "/servicios/cloud/infraestructura": "complete",
+  "/servicios/cloud/seguridad": "complete",
+  "/servicios/cloud/serverless": "complete",
 
   // ── Staff sub-pages ──
-  "/servicios/staff-augmentation/desarrollo-software": "pending",
-  "/servicios/staff-augmentation/datos-ia": "pending",
-  "/servicios/staff-augmentation/devops-cloud": "pending",
-  "/servicios/staff-augmentation/diseno-ux-ui": "pending",
-  "/servicios/staff-augmentation/qa-seguridad": "pending",
+  "/servicios/staff-augmentation/desarrollo-software": "complete",
+  "/servicios/staff-augmentation/datos-ia": "complete",
+  "/servicios/staff-augmentation/devops-cloud": "complete",
+  "/servicios/staff-augmentation/diseno-ux-ui": "complete",
+  "/servicios/staff-augmentation/qa-seguridad": "complete",
 
   // ── Dev Digital sub-pages ──
-  "/servicios/desarrollo-digital/apps-moviles": "pending",
-  "/servicios/desarrollo-digital/ecommerce": "pending",
-  "/servicios/desarrollo-digital/plataformas-web": "pending",
+  "/servicios/desarrollo-digital/apps-moviles": "complete",
+  "/servicios/desarrollo-digital/ecommerce": "complete",
+  "/servicios/desarrollo-digital/plataformas-web": "complete",
   "/servicios/desarrollo-digital/sitios-web-agentic": "complete",
 
   // ── Industrias ──
-  "/industrias/fintech": "pending",
-  "/industrias/medios-entretenimiento": "pending",
-  "/industrias/salud": "pending",
-  "/industrias/retail-ecommerce": "pending",
-  "/industrias/logistica": "pending",
-  "/industrias/manufactura": "pending",
+  "/industrias": "complete",
+  "/industrias/fintech": "complete",
+  "/industrias/medios-entretenimiento": "complete",
+  "/industrias/salud": "complete",
+  "/industrias/retail-ecommerce": "complete",
+  "/industrias/logistica": "complete",
+  "/industrias/manufactura": "complete",
 
   // ── Nosotros sub-pages ──
-  "/nosotros/historia": "pending",
-  "/nosotros/equipo": "pending",
-  "/nosotros/metodologia": "pending",
-  "/nosotros/certificaciones": "pending",
+  "/nosotros/historia": "complete",
+  "/nosotros/equipo": "complete",
+  "/nosotros/metodologia": "complete",
+  "/nosotros/certificaciones": "complete",
 
   // ── Casos de éxito ──
-  "/casos-de-exito": "pending",
-  "/casos-de-exito/televisa": "pending",
-  "/casos-de-exito/grupo-bolivar": "pending",
-  "/casos-de-exito/two-maids": "pending",
-  "/casos-de-exito/ab-inbev": "pending",
-  "/casos-de-exito/cronica": "pending",
-  "/casos-de-exito/pulzo": "pending",
-  "/casos-de-exito/univision": "pending",
+  "/casos-de-exito": "complete",
+  "/casos-de-exito/televisa": "complete",
+  "/casos-de-exito/grupo-bolivar": "complete",
+  "/casos-de-exito/two-maids": "complete",
+  "/casos-de-exito/ab-inbev": "complete",
+  "/casos-de-exito/cronica": "complete",
+  "/casos-de-exito/pulzo": "complete",
+  "/casos-de-exito/univision": "complete",
 
   // ── Blog ──
-  "/blog": "pending",
+  "/blog": "complete",
+
+  // ── Productos ──
+  "/productos": "complete",
 
   // ── Otros ──
-  "/trabaja-con-nosotros": "pending",
-  "/privacidad": "pending",
-  "/soporte": "pending",
+  "/trabaja-con-nosotros": "complete",
+  "/privacidad": "complete",
+  "/soporte": "complete",
 };
 
 /**
- * Get translation status for a page.
- * Strips the /en prefix and locale segment from the pathname.
+ * Get the translation status for a page.
+ * Strips the /en prefix and trailing slash from the pathname before lookup.
  */
 export function getTranslationStatus(pathname: string): TranslationStatus {
-  // Strip /en prefix
   const normalized = pathname.replace(/^\/en(\/|$)/, "/").replace(/\/$/, "") || "/";
-  return EN_TRANSLATION_STATUS[normalized] ?? "pending";
+  return EN_TRANSLATION_STATUS[normalized] ?? "complete";
 }
 
 /**
- * Check if the current page needs a translation banner (EN only, not complete).
+ * Decide whether to render the public "translation in progress" banner.
+ * Only fires on "pending" or "partial"; "auto" and "complete" are both publishable.
  */
 export function shouldShowTranslationBanner(pathname: string, locale: string): boolean {
   if (locale !== "en") return false;
   const status = getTranslationStatus(pathname);
-  return status !== "complete";
+  return status === "pending" || status === "partial";
 }

@@ -16,6 +16,8 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -80,6 +82,7 @@ const SUB_SERVICES = [
 export default async function CloudPage() {
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("cloud", locale);
+  const uiLabels = await getAllUiLabels();
   const serviceSchema = getServiceSchema({
     name: "Cloud Computing (AWS, GCP, Azure)",
     description:
@@ -269,7 +272,7 @@ export default async function CloudPage() {
       />
 
       <FAQAccordion
-        title="Preguntas frecuentes sobre Cloud"
+        title={uiLabel(uiLabels, "servicio.cloud_faqs_title", locale)}
         schemaEnabled
         faqs={
           cms?.faqs?.length

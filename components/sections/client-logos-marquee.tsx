@@ -56,12 +56,17 @@ function LogoItem({ name, abbr }: { name: string; abbr: string }) {
   );
 }
 
-export function ClientLogosMarquee() {
+interface ClientLogosMarqueeProps {
+  title?: string;
+}
+
+export function ClientLogosMarquee({ title }: ClientLogosMarqueeProps = {}) {
   const triple = [...CLIENTS, ...CLIENTS, ...CLIENTS];
+  const heading = title || "Empresas en LATAM y USA que ya transformaron con Nivelics";
 
   return (
     <section
-      aria-label="Empresas que confían en Nivelics"
+      aria-label={heading}
       style={{
         padding: "24px 0",
         borderTop: "1px solid rgba(255,255,255,0.06)",
@@ -84,7 +89,7 @@ export function ClientLogosMarquee() {
           marginTop: 0,
         }}
       >
-        Empresas en LATAM y USA que ya transformaron con Nivelics
+        {heading}
       </p>
 
       <div style={{ overflow: "hidden" }}>

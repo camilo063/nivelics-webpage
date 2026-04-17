@@ -6,11 +6,19 @@ import { accentHex } from "@/lib/cms/productos";
 interface Props {
   productos: MappedProducto[];
   locale: "es" | "en";
+  title?: string;
+  cta?: string;
 }
 
-export function ProductosHomeStrip({ productos, locale }: Props) {
+export function ProductosHomeStrip({ productos, locale, title, cta }: Props) {
   const isEn = locale === "en";
   if (!productos.length) return null;
+
+  const heading = title || (isEn ? "Our own software" : "Software propio");
+  const headline = isEn
+    ? "What we built for ourselves. Available for you."
+    : "Lo que construimos para nosotros. Disponible para ti.";
+  const ctaLabel = cta || (isEn ? "See all products" : "Ver todos los productos");
 
   return (
     <section
@@ -22,18 +30,14 @@ export function ProductosHomeStrip({ productos, locale }: Props) {
         <div className="grid gap-10 lg:grid-cols-[1fr_2fr] items-start">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wider text-primary mb-3">
-              {isEn ? "Our own software" : "Software propio"}
+              {heading}
             </p>
-            <h2 className="text-2xl font-bold text-white md:text-3xl leading-tight">
-              {isEn
-                ? "What we built for ourselves. Available for you."
-                : "Lo que construimos para nosotros. Disponible para ti."}
-            </h2>
+            <h2 className="text-2xl font-bold text-white md:text-3xl leading-tight">{headline}</h2>
             <Link
               href="/productos"
               className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:brightness-125"
             >
-              {isEn ? "See all products" : "Ver todos los productos"}
+              {ctaLabel}
               <ArrowRight size={14} />
             </Link>
           </div>

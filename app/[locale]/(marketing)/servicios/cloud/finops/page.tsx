@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
@@ -11,20 +10,16 @@ import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
-import { FinOpsContentEn } from "./content.en";
+import { getLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
 
-interface PageProps {
-  params: Promise<{ locale: string }>;
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
-  const cms = await getServicioData("finops", locale as Locale);
+  const cms = await getServicioData("finops", locale);
 
   return {
     title:
@@ -36,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       cms?.seoDescription ||
       (isEn
         ? "Real-time cloud financial governance. Automated anomaly alerts and up to 40% savings in 90 days. AWS, GCP and Azure."
-        : "Optimizaci\u00f3n y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento."),
+        : "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento."),
     alternates: {
       canonical: "https://www.nivelics.com/servicios/cloud/finops",
       languages: {
@@ -48,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const PILLARS = [
+const PILLARS_ES = [
   {
     icon: "dia-search",
     title: "Visibilidad",
@@ -56,51 +51,82 @@ const PILLARS = [
   },
   {
     icon: "hex-chart",
-    title: "Optimizaci\u00f3n",
-    description:
-      "Rightsizing, reserved instances, spot fleet y eliminaci\u00f3n de recursos hu\u00e9rfanos.",
+    title: "Optimización",
+    description: "Rightsizing, reserved instances, spot fleet y eliminación de recursos huérfanos.",
   },
   {
     icon: "dia-trend",
-    title: "Asignaci\u00f3n de Costos",
+    title: "Asignación de Costos",
     description: "Tagging strategy, showback/chargeback y unit economics por producto.",
   },
   {
     icon: "oct-monitor",
     title: "Forecasting",
-    description: "Proyecci\u00f3n de costos con modelos predictivos y alertas de anomal\u00edas.",
+    description: "Proyección de costos con modelos predictivos y alertas de anomalías.",
   },
   {
     icon: "dia-flow",
     title: "Gobernanza",
-    description: "Pol\u00edticas automatizadas, budgets y aprobaci\u00f3n de recursos costosos.",
+    description: "Políticas automatizadas, budgets y aprobación de recursos costosos.",
   },
   {
     icon: "dia-target",
     title: "Cultura FinOps",
-    description: "Capacitaci\u00f3n de equipos, ceremonias FinOps y m\u00e9tricas de eficiencia.",
+    description: "Capacitación de equipos, ceremonias FinOps y métricas de eficiencia.",
   },
 ];
 
-export default async function FinOpsPage({ params }: PageProps) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const cms = await getServicioData("finops", locale as Locale);
+const PILLARS_EN = [
+  {
+    icon: "dia-search",
+    title: "Visibility",
+    description: "Real-time dashboards of consumption by team, service and environment.",
+  },
+  {
+    icon: "hex-chart",
+    title: "Optimization",
+    description: "Rightsizing, reserved instances, spot fleet and orphaned resource elimination.",
+  },
+  {
+    icon: "dia-trend",
+    title: "Cost Allocation",
+    description: "Tagging strategy, showback/chargeback and unit economics per product.",
+  },
+  {
+    icon: "oct-monitor",
+    title: "Forecasting",
+    description: "Cost projection with predictive models and anomaly alerts.",
+  },
+  {
+    icon: "dia-flow",
+    title: "Governance",
+    description: "Automated policies, budgets and expensive resource approval workflows.",
+  },
+  {
+    icon: "dia-target",
+    title: "FinOps Culture",
+    description: "Team training, FinOps ceremonies and efficiency metrics.",
+  },
+];
 
-  if (locale === "en") {
-    return <FinOpsContentEn />;
-  }
+export default async function FinOpsPage() {
+  const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
+  const cms = await getServicioData("finops", locale);
+
+  const pillars = isEn ? PILLARS_EN : PILLARS_ES;
 
   const serviceSchema = getServiceSchema({
-    name: "FinOps \u2014 Optimizaci\u00f3n Financiera Cloud",
-    description:
-      "Optimizaci\u00f3n y gobernanza financiera de la nube. Ahorro t\u00edpico 30-40% en gasto cloud.",
+    name: isEn ? "FinOps — Cloud Financial Optimization" : "FinOps — Optimización Financiera Cloud",
+    description: isEn
+      ? "Cloud financial governance and optimization. Typical 30-40% savings in cloud spend."
+      : "Optimización y gobernanza financiera de la nube. Ahorro típico 30-40% en gasto cloud.",
     url: "/servicios/cloud/finops",
     serviceType: "FinOps Consulting",
   });
   const breadcrumb = getBreadcrumbSchema([
-    { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
+    { name: isEn ? "Home" : "Inicio", url: "/" },
+    { name: isEn ? "Services" : "Servicios", url: "/servicios" },
     { name: "Cloud", url: "/servicios/cloud" },
     { name: "FinOps", url: "/servicios/cloud/finops" },
   ]);
@@ -153,20 +179,38 @@ export default async function FinOpsPage({ params }: PageProps) {
 
       <HeroSplit
         heroEffect="particles"
-        badge="Cloud \u00b7 FinOps"
-        h1={cms?.title || "Optimiza tu inversi\u00f3n en cloud"}
-        h1Accent="hasta un 40%"
+        badge="Cloud · FinOps"
+        h1={
+          cms?.title || (isEn ? "Optimize your cloud investment" : "Optimiza tu inversión en cloud")
+        }
+        h1Accent={isEn ? "by up to 40%" : "hasta un 40%"}
         subtitle={
           cms?.subtitle ||
-          "Implementamos pr\u00e1cticas FinOps para que cada d\u00f3lar en la nube genere valor medible para tu negocio."
+          (isEn
+            ? "We implement FinOps practices so every dollar in the cloud generates measurable value for your business."
+            : "Implementamos prácticas FinOps para que cada dólar en la nube genere valor medible para tu negocio.")
         }
-        bullets={[
-          "Dashboards de gasto en tiempo real",
-          "Alertas autom\u00e1ticas de anomal\u00edas",
-          "Ahorro t\u00edpico del 30-40% en 90 d\u00edas",
-        ]}
-        ctaPrimary={{ text: "Solicitar assessment gratuito", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver metodolog\u00eda", url: "#pilares" }}
+        bullets={
+          isEn
+            ? [
+                "Real-time spend dashboards",
+                "Automated anomaly alerts",
+                "Typical 30-40% savings in 90 days",
+              ]
+            : [
+                "Dashboards de gasto en tiempo real",
+                "Alertas automáticas de anomalías",
+                "Ahorro típico del 30-40% en 90 días",
+              ]
+        }
+        ctaPrimary={{
+          text: isEn ? "Request free assessment" : "Solicitar assessment gratuito",
+          url: "/contacto",
+        }}
+        ctaSecondary={{
+          text: isEn ? "View methodology" : "Ver metodología",
+          url: "#pilares",
+        }}
         accentColor="#3B82F6"
         rightPanel={<HeroCalculator type="cloud" accentColor="#3B82F6" />}
       />
@@ -175,83 +219,108 @@ export default async function FinOpsPage({ params }: PageProps) {
         metrics={
           cms?.metrics?.length
             ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
-            : /* LEGACY FALLBACK */ [
-                {
-                  value: "40%",
-                  label: "Reducci\u00f3n de factura",
-                  sublabel: "Promedio en 90 d\u00edas",
-                },
-                {
-                  value: "5x",
-                  label: "ROI del proyecto",
-                  sublabel: "Retorno sobre inversi\u00f3n",
-                },
-                { value: "2", label: "Semanas a primer ahorro", sublabel: "Quick wins inmediatos" },
-                {
-                  value: "30%",
-                  label: "Recursos hu\u00e9rfanos",
-                  sublabel: "Eliminados en auditor\u00eda",
-                },
-              ]
+            : isEn
+              ? [
+                  { value: "40%", label: "Bill reduction", sublabel: "Average in 90 days" },
+                  { value: "5x", label: "Project ROI", sublabel: "Return on investment" },
+                  { value: "2", label: "Weeks to first savings", sublabel: "Immediate quick wins" },
+                  { value: "30%", label: "Orphaned resources", sublabel: "Eliminated in audit" },
+                ]
+              : [
+                  { value: "40%", label: "Reducción de factura", sublabel: "Promedio en 90 días" },
+                  { value: "5x", label: "ROI del proyecto", sublabel: "Retorno sobre inversión" },
+                  {
+                    value: "2",
+                    label: "Semanas a primer ahorro",
+                    sublabel: "Quick wins inmediatos",
+                  },
+                  {
+                    value: "30%",
+                    label: "Recursos huérfanos",
+                    sublabel: "Eliminados en auditoría",
+                  },
+                ]
         }
       />
 
       <section id="pilares" className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Pilares FinOps</h2>
+          <h2 className="text-3xl font-bold text-text-100">
+            {isEn ? "FinOps Pillars" : "Pilares FinOps"}
+          </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {PILLARS.map((pillar) => {
-              const iconName = pillar.icon;
-              return (
-                <div key={pillar.title} className="glass glow-hover rounded-xl p-6">
-                  <GeoIconBox name={iconName} size={20} color="cyan" />
-                  <h3 className="text-lg font-semibold text-text-100">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{pillar.description}</p>
-                </div>
-              );
-            })}
+            {pillars.map((pillar) => (
+              <div key={pillar.title} className="glass glow-hover rounded-xl p-6">
+                <GeoIconBox name={pillar.icon} size={20} color="cyan" />
+                <h3 className="text-lg font-semibold text-text-100">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-70">{pillar.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Nuestro proceso FinOps en 6 semanas</h2>
+          <h2 className="text-3xl font-bold text-text-100">
+            {isEn ? "Our FinOps process in 6 weeks" : "Nuestro proceso FinOps en 6 semanas"}
+          </h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             <div className="glass glow-hover rounded-xl p-6 border-t-2 border-finops">
-              <span className="font-mono text-sm font-bold text-finops">Semana 1-2</span>
+              <span className="font-mono text-sm font-bold text-finops">
+                {isEn ? "Week 1-2" : "Semana 1-2"}
+              </span>
               <h3 className="mt-2 text-lg font-semibold text-text-100">Discovery</h3>
               <p className="mt-2 text-sm text-text-70">
-                Mapa de gasto actual, identificaci\u00f3n de desperdicio, benchmark contra mejores
-                pr\u00e1cticas del mercado.
+                {isEn
+                  ? "Current spend mapping, waste identification, benchmark against industry best practices."
+                  : "Mapa de gasto actual, identificación de desperdicio, benchmark contra mejores prácticas del mercado."}
               </p>
             </div>
             <div className="glass glow-hover rounded-xl p-6 border-t-2 border-finops">
-              <span className="font-mono text-sm font-bold text-finops">Semana 3-4</span>
+              <span className="font-mono text-sm font-bold text-finops">
+                {isEn ? "Week 3-4" : "Semana 3-4"}
+              </span>
               <h3 className="mt-2 text-lg font-semibold text-text-100">Quick Wins</h3>
               <p className="mt-2 text-sm text-text-70">
-                Primeros ahorros implementados: rightsizing, reserved instances, eliminaci\u00f3n de
-                recursos hu\u00e9rfanos.
+                {isEn
+                  ? "First savings implemented: rightsizing, reserved instances, orphaned resource elimination."
+                  : "Primeros ahorros implementados: rightsizing, reserved instances, eliminación de recursos huérfanos."}
               </p>
             </div>
             <div className="glass glow-hover rounded-xl p-6 border-t-2 border-finops">
-              <span className="font-mono text-sm font-bold text-finops">Semana 5-6</span>
-              <h3 className="mt-2 text-lg font-semibold text-text-100">Gobierno</h3>
+              <span className="font-mono text-sm font-bold text-finops">
+                {isEn ? "Week 5-6" : "Semana 5-6"}
+              </span>
+              <h3 className="mt-2 text-lg font-semibold text-text-100">
+                {isEn ? "Governance" : "Gobierno"}
+              </h3>
               <p className="mt-2 text-sm text-text-70">
-                Pol\u00edticas automatizadas, alertas de anomal\u00edas, dashboards de gobierno y
-                handoff al equipo interno.
+                {isEn
+                  ? "Automated policies, anomaly alerts, governance dashboards and handoff to internal team."
+                  : "Políticas automatizadas, alertas de anomalías, dashboards de gobierno y handoff al equipo interno."}
               </p>
             </div>
           </div>
 
-          <h2 className="mt-16 text-3xl font-bold text-text-100">Resultados t\u00edpicos</h2>
+          <h2 className="mt-16 text-3xl font-bold text-text-100">
+            {isEn ? "Typical Results" : "Resultados típicos"}
+          </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { value: "30-40%", label: "Reducci\u00f3n de factura cloud" },
-              { value: "2-3 sem", label: "Tiempo a primeros ahorros" },
-              { value: "5x-10x", label: "ROI del proyecto" },
-              { value: "15-30%", label: "Recursos hu\u00e9rfanos eliminados" },
-            ].map((r) => (
+            {(isEn
+              ? [
+                  { value: "30-40%", label: "Cloud bill reduction" },
+                  { value: "2-3 wk", label: "Time to first savings" },
+                  { value: "5x-10x", label: "Project ROI" },
+                  { value: "15-30%", label: "Orphaned resources eliminated" },
+                ]
+              : [
+                  { value: "30-40%", label: "Reducción de factura cloud" },
+                  { value: "2-3 sem", label: "Tiempo a primeros ahorros" },
+                  { value: "5x-10x", label: "ROI del proyecto" },
+                  { value: "15-30%", label: "Recursos huérfanos eliminados" },
+                ]
+            ).map((r) => (
               <div key={r.label} className="glass rounded-xl p-6 text-center">
                 <div className="font-mono text-3xl font-bold text-primary">{r.value}</div>
                 <p className="mt-2 text-sm text-text-70">{r.label}</p>
@@ -262,61 +331,114 @@ export default async function FinOpsPage({ params }: PageProps) {
       </section>
 
       <ComparisonTable
-        title="\u00bfPor qu\u00e9 FinOps con Nivelics vs. seguir sin gobierno cloud?"
-        alternativeLabel="Sin FinOps"
+        title={
+          isEn
+            ? "Why FinOps with Nivelics vs. no cloud governance?"
+            : "¿Por qué FinOps con Nivelics vs. seguir sin gobierno cloud?"
+        }
+        alternativeLabel={isEn ? "Without FinOps" : "Sin FinOps"}
         nivelicsLabel="Nivelics FinOps"
-        rows={[
-          {
-            criterion: "Visibilidad del gasto",
-            alternative: "Factura mensual dif\u00edcil de interpretar",
-            nivelics: "Dashboard en tiempo real por equipo y proyecto",
-          },
-          {
-            criterion: "Reducci\u00f3n de costos",
-            alternative: "0% \u2014 el gasto sigue creciendo",
-            nivelics: "30\u201340% en los primeros 90 d\u00edas",
-          },
-          {
-            criterion: "Arquitecturas hu\u00e9rfanas",
-            alternative: "Frecuentes \u2014 nadie las detecta",
-            nivelics: "Eliminadas en auditor\u00eda inicial",
-          },
-          {
-            criterion: "Alertas de anomal\u00edas",
-            alternative: "Manuales o inexistentes",
-            nivelics: "Automatizadas con umbrales configurados",
-          },
-          {
-            criterion: "Rightsizing de recursos",
-            alternative: "Nunca se ejecuta",
-            nivelics: "Revisi\u00f3n mes a mes incluida",
-          },
-          {
-            criterion: "Gobierno multi-cuenta",
-            alternative: "Sin estructura de tagging ni budgets",
-            nivelics: "Tagging, policies y budgets configurados",
-          },
-          {
-            criterion: "Tiempo hasta primer ahorro",
-            alternative: "N/A",
-            nivelics: "Semana 2 del engagement",
-          },
-          {
-            criterion: "Modelo comercial",
-            alternative: "N/A",
-            nivelics: "Fee fijo + success fee sobre ahorro real",
-          },
-        ]}
+        rows={
+          isEn
+            ? [
+                {
+                  criterion: "Spend visibility",
+                  alternative: "Monthly bill hard to interpret",
+                  nivelics: "Real-time dashboard by team and project",
+                },
+                {
+                  criterion: "Cost reduction",
+                  alternative: "0% — spend keeps growing",
+                  nivelics: "30–40% in the first 90 days",
+                },
+                {
+                  criterion: "Orphaned architectures",
+                  alternative: "Frequent — nobody detects them",
+                  nivelics: "Eliminated in initial audit",
+                },
+                {
+                  criterion: "Anomaly alerts",
+                  alternative: "Manual or nonexistent",
+                  nivelics: "Automated with configured thresholds",
+                },
+                {
+                  criterion: "Resource rightsizing",
+                  alternative: "Never executed",
+                  nivelics: "Monthly review included",
+                },
+                {
+                  criterion: "Multi-account governance",
+                  alternative: "No tagging structure or budgets",
+                  nivelics: "Tagging, policies and budgets configured",
+                },
+                {
+                  criterion: "Time to first savings",
+                  alternative: "N/A",
+                  nivelics: "Week 2 of the engagement",
+                },
+                {
+                  criterion: "Commercial model",
+                  alternative: "N/A",
+                  nivelics: "Fixed fee + success fee on real savings",
+                },
+              ]
+            : [
+                {
+                  criterion: "Visibilidad del gasto",
+                  alternative: "Factura mensual difícil de interpretar",
+                  nivelics: "Dashboard en tiempo real por equipo y proyecto",
+                },
+                {
+                  criterion: "Reducción de costos",
+                  alternative: "0% — el gasto sigue creciendo",
+                  nivelics: "30–40% en los primeros 90 días",
+                },
+                {
+                  criterion: "Arquitecturas huérfanas",
+                  alternative: "Frecuentes — nadie las detecta",
+                  nivelics: "Eliminadas en auditoría inicial",
+                },
+                {
+                  criterion: "Alertas de anomalías",
+                  alternative: "Manuales o inexistentes",
+                  nivelics: "Automatizadas con umbrales configurados",
+                },
+                {
+                  criterion: "Rightsizing de recursos",
+                  alternative: "Nunca se ejecuta",
+                  nivelics: "Revisión mes a mes incluida",
+                },
+                {
+                  criterion: "Gobierno multi-cuenta",
+                  alternative: "Sin estructura de tagging ni budgets",
+                  nivelics: "Tagging, policies y budgets configurados",
+                },
+                {
+                  criterion: "Tiempo hasta primer ahorro",
+                  alternative: "N/A",
+                  nivelics: "Semana 2 del engagement",
+                },
+                {
+                  criterion: "Modelo comercial",
+                  alternative: "N/A",
+                  nivelics: "Fee fijo + success fee sobre ahorro real",
+                },
+              ]
+        }
       />
 
       <CTABanner
-        title="\u00bfCu\u00e1nto podr\u00edas ahorrar en cloud?"
-        description="Te hacemos un assessment gratuito de tu gasto actual y te mostramos oportunidades de ahorro."
-        buttonText="Solicitar assessment"
+        title={isEn ? "How much could you save on cloud?" : "¿Cuánto podrías ahorrar en cloud?"}
+        description={
+          isEn
+            ? "We'll do a free assessment of your current spend and show you savings opportunities."
+            : "Te hacemos un assessment gratuito de tu gasto actual y te mostramos oportunidades de ahorro."
+        }
+        buttonText={isEn ? "Request assessment" : "Solicitar assessment"}
       />
 
       <StickyMobileCta
-        text="Solicitar auditor\u00eda \u2192"
+        text={isEn ? "Request audit →" : "Solicitar auditoría →"}
         url="/contacto"
         accentColor="#3B82F6"
       />

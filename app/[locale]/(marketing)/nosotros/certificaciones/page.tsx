@@ -4,7 +4,7 @@ import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
-import { getCertificacionesPublic } from "@/lib/cms";
+import { getCertificacionesPublic, pickLocale } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -53,14 +53,12 @@ export default async function CertificacionesPage() {
   const dbMapped = dbCerts.length
     ? dbCerts.map((c) => {
         const data = c as Record<string, unknown>;
-        const title =
-          locale === "en"
-            ? (data.nameEn as string) || (data.nameEs as string) || ""
-            : (data.nameEs as string) || "";
-        const description =
-          locale === "en"
-            ? (data.descriptionEn as string) || (data.descriptionEs as string) || ""
-            : (data.descriptionEs as string) || "";
+        const title = pickLocale(locale, data.nameEs as string, data.nameEn as string);
+        const description = pickLocale(
+          locale,
+          data.descriptionEs as string,
+          data.descriptionEn as string,
+        );
         return { title, description };
       })
     : null;

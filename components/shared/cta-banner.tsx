@@ -19,16 +19,16 @@ export function CTABanner({
   buttonText = "Agenda una reunión",
   buttonHref = "/contacto",
   className,
-  locale = "es",
+  locale: _locale = "es",
   eyebrow,
   trustLine,
 }: CTABannerProps) {
-  const resolvedEyebrow = eyebrow ?? (locale === "en" ? "FREE DIAGNOSTIC" : "DIAGNÓSTICO GRATUITO");
-  const resolvedTrust =
-    trustLine ??
-    (locale === "en"
-      ? "No RFP · No decks · 24h response"
-      : "Sin RFP · Sin presentaciones · Respuesta en 24h");
+  // `eyebrow` and `trustLine` are rendered only when the caller provides them.
+  // Callers that want bilingual defaults should pass the resolved values from
+  // ui_labels (keys: cta_banner.default_eyebrow / .default_trust).
+  void _locale;
+  const resolvedEyebrow = eyebrow;
+  const resolvedTrust = trustLine;
 
   return (
     <section
@@ -65,21 +65,23 @@ export function CTABanner({
           width: "100%",
         }}
       >
-        <div
-          className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-[5px]"
-          style={{
-            borderColor: "rgba(0,212,255,0.25)",
-            background: "rgba(0,212,255,0.06)",
-          }}
-        >
-          <span className="cta-portal-dot" aria-hidden="true" />
-          <span
-            className="text-[11px] font-semibold uppercase tracking-[0.09em]"
-            style={{ color: "#00D4FF" }}
+        {resolvedEyebrow ? (
+          <div
+            className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-[5px]"
+            style={{
+              borderColor: "rgba(0,212,255,0.25)",
+              background: "rgba(0,212,255,0.06)",
+            }}
           >
-            {resolvedEyebrow}
-          </span>
-        </div>
+            <span className="cta-portal-dot" aria-hidden="true" />
+            <span
+              className="text-[11px] font-semibold uppercase tracking-[0.09em]"
+              style={{ color: "#00D4FF" }}
+            >
+              {resolvedEyebrow}
+            </span>
+          </div>
+        ) : null}
 
         <h2
           id="cta-portal-title"
@@ -132,12 +134,14 @@ export function CTABanner({
             </svg>
           </Link>
 
-          <span
-            className="text-xs"
-            style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.01em" }}
-          >
-            {resolvedTrust}
-          </span>
+          {resolvedTrust ? (
+            <span
+              className="text-xs"
+              style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.01em" }}
+            >
+              {resolvedTrust}
+            </span>
+          ) : null}
         </div>
       </div>
     </section>

@@ -244,14 +244,57 @@ export interface MappedHomeContent {
   heroTitle: string;
   heroSubtitle: string;
   heroCtaPrimary: string;
+  heroCtaPrimaryUrl: string;
   heroCtaSecondary: string;
+  heroCtaSecondaryUrl: string;
   heroImage: string | null;
   metrics: Array<{ value: string; unit: string; label: string }>;
+  // Trust bar
+  trustBarTitle: string;
+  trustBarLogos: string[];
+  // Pillars section
   servicesSectionTitle: string;
+  pillarsSubtitle: string;
+  // Cases section
   casesSectionTitle: string;
+  casesSectionSubtitle: string;
+  casesSectionFooter: string;
+  casesSectionCta: string;
+  // Products strip
+  productsStripTitle: string;
+  productsStripCta: string;
+  // Map section
+  mapTitle: string;
+  mapSubtitle: string;
+  mapMetrics: Array<{
+    value: string;
+    label: string;
+    sublabel: string;
+  }>;
+  // Why us
+  whyUsTitle: string;
+  whyUsSubtitle: string;
+  whyUsItems: Array<{
+    icon: string;
+    color: string;
+    title: string;
+    copy: string;
+  }>;
+  // FAQs
+  faqsTitle: string;
   faqs: Array<{ question: string; answer: string }>;
+  // Final CTA
   finalCtaTitle: string;
   finalCtaCopy: string;
+  finalCtaBullets: string[];
+  finalCtaPrimary: string;
+  finalCtaPrimaryUrl: string;
+  finalCtaSecondary: string;
+  finalCtaSecondaryUrl: string;
+  finalCtaFinePrint: string;
+  // Industrias section on home
+  industriasSectionTitle: string;
+  industriasSectionSubtitle: string;
   // Process section
   processSectionTitle: string;
   processSectionSubtitle: string;
