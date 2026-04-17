@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/lib/i18n/routing";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { AnalyticsScripts, AnalyticsNoscript } from "@/components/layout/analytics-scripts";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,6 +83,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const config = await getSiteConfigPublic().catch(() => null);
+  const gaId = config?.googleAnalyticsId ?? null;
+  const gtmId = config?.googleTagManagerId ?? null;
 
   return (
     <html
@@ -91,8 +96,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         {/* Pre-warm the jsdelivr connection before the América map fetches its GeoJSON. */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <AnalyticsScripts gaId={gaId} gtmId={gtmId} />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <AnalyticsNoscript gtmId={gtmId} />
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
