@@ -20,6 +20,7 @@ import {
   CheckSquare,
   Palette,
   Package,
+  Tags,
 } from "lucide-react";
 
 const NAV_SECTIONS = [
@@ -44,6 +45,7 @@ const NAV_SECTIONS = [
       { href: "/admin/home", label: "Home", icon: Home },
       { href: "/admin/nosotros", label: "Nosotros", icon: Users },
       { href: "/admin/navegacion", label: "Navegación", icon: Navigation },
+      { href: "/admin/ui-labels", label: "Labels de UI", icon: Tags },
     ],
   },
   {

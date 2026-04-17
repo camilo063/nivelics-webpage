@@ -108,8 +108,14 @@ export const casosExito = pgTable("casos_exito", {
   slug: varchar("slug", { length: 255 }).unique().notNull(),
   clientName: varchar("client_name", { length: 255 }).notNull(),
   clientLogo: text("client_logo"),
+  /** @deprecated Use clientCountryEs/clientCountryEn. Kept for backward-compat. */
   clientCountry: varchar("client_country", { length: 100 }),
+  clientCountryEs: varchar("client_country_es", { length: 100 }),
+  clientCountryEn: varchar("client_country_en", { length: 100 }),
+  /** @deprecated Use clientSectorEs/clientSectorEn. Kept for backward-compat. */
   clientSector: varchar("client_sector", { length: 100 }),
+  clientSectorEs: varchar("client_sector_es", { length: 100 }),
+  clientSectorEn: varchar("client_sector_en", { length: 100 }),
   titleEs: varchar("title_es", { length: 500 }).notNull(),
   titleEn: varchar("title_en", { length: 500 }),
   challengeEs: text("challenge_es"),
@@ -130,7 +136,10 @@ export const casosExito = pgTable("casos_exito", {
   testimonialQuoteEs: text("testimonial_quote_es"),
   testimonialQuoteEn: text("testimonial_quote_en"),
   testimonialAuthor: varchar("testimonial_author", { length: 255 }),
+  /** @deprecated Use testimonialRoleEs/testimonialRoleEn. Kept for backward-compat. */
   testimonialRole: varchar("testimonial_role", { length: 255 }),
+  testimonialRoleEs: varchar("testimonial_role_es", { length: 255 }),
+  testimonialRoleEn: varchar("testimonial_role_en", { length: 255 }),
   coverImage: text("cover_image"),
   gallery: jsonb("gallery").$type<string[]>().default([]),
   servicesUsed: jsonb("services_used").$type<string[]>().default([]),
@@ -452,6 +461,8 @@ export const homeContent = pgTable("home_content", {
   heroCtaSecondaryEs: varchar("hero_cta_secondary_es", { length: 255 }),
   heroCtaSecondaryEn: varchar("hero_cta_secondary_en", { length: 255 }),
   heroImage: text("hero_image"),
+  heroCtaPrimaryUrl: varchar("hero_cta_primary_url", { length: 500 }),
+  heroCtaSecondaryUrl: varchar("hero_cta_secondary_url", { length: 500 }),
   metrics: jsonb("metrics").$type<
     Array<{
       value: string;
@@ -460,11 +471,58 @@ export const homeContent = pgTable("home_content", {
       labelEn: string;
     }>
   >(),
+  // ─── TRUST BAR (client logos marquee) ───
   trustBarLogos: jsonb("trust_bar_logos").$type<string[]>(),
+  trustBarTitleEs: text("trust_bar_title_es"),
+  trustBarTitleEn: text("trust_bar_title_en"),
+  // ─── PILLARS SECTION (I+C+S) ───
   servicesSectionTitleEs: varchar("services_section_title_es", { length: 500 }),
   servicesSectionTitleEn: varchar("services_section_title_en", { length: 500 }),
+  pillarsSubtitleEs: text("pillars_subtitle_es"),
+  pillarsSubtitleEn: text("pillars_subtitle_en"),
+  // ─── CASES SECTION ───
   casesSectionTitleEs: varchar("cases_section_title_es", { length: 500 }),
   casesSectionTitleEn: varchar("cases_section_title_en", { length: 500 }),
+  casesSectionSubtitleEs: text("cases_section_subtitle_es"),
+  casesSectionSubtitleEn: text("cases_section_subtitle_en"),
+  casesSectionFooterEs: text("cases_section_footer_es"),
+  casesSectionFooterEn: text("cases_section_footer_en"),
+  casesSectionCtaEs: varchar("cases_section_cta_es", { length: 255 }),
+  casesSectionCtaEn: varchar("cases_section_cta_en", { length: 255 }),
+  // ─── PRODUCTS STRIP ───
+  productsStripTitleEs: text("products_strip_title_es"),
+  productsStripTitleEn: text("products_strip_title_en"),
+  productsStripCtaEs: varchar("products_strip_cta_es", { length: 255 }),
+  productsStripCtaEn: varchar("products_strip_cta_en", { length: 255 }),
+  // ─── MAP SECTION ("13 años. 7 países.") ───
+  mapTitleEs: text("map_title_es"),
+  mapTitleEn: text("map_title_en"),
+  mapSubtitleEs: text("map_subtitle_es"),
+  mapSubtitleEn: text("map_subtitle_en"),
+  mapMetrics: jsonb("map_metrics").$type<
+    Array<{
+      value: string;
+      labelEs: string;
+      labelEn: string;
+      sublabelEs?: string;
+      sublabelEn?: string;
+    }>
+  >(),
+  // ─── WHY US SECTION ("¿Por qué Nivelics?") ───
+  whyUsTitleEs: text("why_us_title_es"),
+  whyUsTitleEn: text("why_us_title_en"),
+  whyUsSubtitleEs: text("why_us_subtitle_es"),
+  whyUsSubtitleEn: text("why_us_subtitle_en"),
+  whyUsItems: jsonb("why_us_items").$type<
+    Array<{
+      icon: string;
+      color: string;
+      titleEs: string;
+      titleEn: string;
+      copyEs: string;
+      copyEn: string;
+    }>
+  >(),
   faqs: jsonb("faqs").$type<
     Array<{
       questionEs: string;
@@ -473,10 +531,23 @@ export const homeContent = pgTable("home_content", {
       answerEn: string;
     }>
   >(),
+  // ─── FAQs SECTION (wrapper around existing `faqs` jsonb) ───
+  faqsTitleEs: text("faqs_title_es"),
+  faqsTitleEn: text("faqs_title_en"),
+  // ─── FINAL CTA ───
   finalCtaTitleEs: text("final_cta_title_es"),
   finalCtaTitleEn: text("final_cta_title_en"),
   finalCtaCopyEs: text("final_cta_copy_es"),
   finalCtaCopyEn: text("final_cta_copy_en"),
+  finalCtaBullets: jsonb("final_cta_bullets").$type<Array<{ textEs: string; textEn: string }>>(),
+  finalCtaPrimaryEs: varchar("final_cta_primary_es", { length: 255 }),
+  finalCtaPrimaryEn: varchar("final_cta_primary_en", { length: 255 }),
+  finalCtaPrimaryUrl: varchar("final_cta_primary_url", { length: 500 }),
+  finalCtaSecondaryEs: varchar("final_cta_secondary_es", { length: 255 }),
+  finalCtaSecondaryEn: varchar("final_cta_secondary_en", { length: 255 }),
+  finalCtaSecondaryUrl: varchar("final_cta_secondary_url", { length: 500 }),
+  finalCtaFinePrintEs: text("final_cta_fine_print_es"),
+  finalCtaFinePrintEn: text("final_cta_fine_print_en"),
   // ─── HUB DE INDUSTRIAS (/industrias) ───
   industriasHubTitleEs: text("industrias_hub_title_es"),
   industriasHubTitleEn: text("industrias_hub_title_en"),
@@ -576,6 +647,18 @@ export const media = pgTable("media", {
   height: integer("height"),
   uploadedBy: uuid("uploaded_by").references(() => adminUsers.id),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// ─── UI LABELS (reusable bilingual strings across pages) ────
+
+export const uiLabels = pgTable("ui_labels", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  key: varchar("key", { length: 120 }).unique().notNull(),
+  labelEs: text("label_es").notNull(),
+  labelEn: text("label_en").notNull(),
+  category: varchar("category", { length: 50 }),
+  description: text("description"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 // ─── ACTIVITY LOG ────────────────────────────────────────

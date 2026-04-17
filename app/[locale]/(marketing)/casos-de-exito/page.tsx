@@ -4,7 +4,8 @@ import { ServiceBadge, CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getLocale } from "next-intl/server";
-import { getAllCasosExito, mapCasoExito } from "@/lib/cms";
+import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { getAllCasosExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -70,6 +71,7 @@ const CASES = [
 export default async function CasosDeExitoPage() {
   const locale = (await getLocale()) as Locale;
   const rawCases = await getAllCasosExito();
+  const uiLabels = await getAllUiLabels();
   const dbCases = rawCases.length
     ? rawCases.map((c) => mapCasoExito(c as Record<string, unknown>, locale))
     : null;
@@ -129,10 +131,11 @@ export default async function CasosDeExitoPage() {
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h1 className="text-4xl font-bold text-text-100 md:text-5xl">Casos de Éxito</h1>
+          <h1 className="text-4xl font-bold text-text-100 md:text-5xl">
+            {uiLabel(uiLabels, "caso.list_title", locale)}
+          </h1>
           <p className="mt-4 max-w-2xl text-lg text-text-70">
-            Resultados concretos que demuestran el impacto de nuestras soluciones en empresas
-            reales.
+            {uiLabel(uiLabels, "caso.list_subtitle", locale)}
           </p>
         </div>
       </section>
@@ -153,19 +156,19 @@ export default async function CasosDeExitoPage() {
                     <div className="mt-6 grid gap-6 md:grid-cols-3">
                       <div>
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                          Desafío
+                          {uiLabel(uiLabels, "caso.list_challenge_label", locale)}
                         </h3>
                         <p className="mt-2 text-sm text-text-70">{c.challenge}</p>
                       </div>
                       <div>
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                          Solución
+                          {uiLabel(uiLabels, "caso.list_solution_label", locale)}
                         </h3>
                         <p className="mt-2 text-sm text-text-70">{c.solution}</p>
                       </div>
                       <div>
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                          Resultados
+                          {uiLabel(uiLabels, "caso.list_results_label", locale)}
                         </h3>
                         <ul className="mt-2 space-y-1">
                           {c.metrics.map((m) => (
@@ -195,19 +198,19 @@ export default async function CasosDeExitoPage() {
                     <div className="mt-6 grid gap-6 md:grid-cols-3">
                       <div>
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                          Desafío
+                          {uiLabel(uiLabels, "caso.list_challenge_label", locale)}
                         </h3>
                         <p className="mt-2 text-sm text-text-70">{c.challenge}</p>
                       </div>
                       <div>
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                          Solución
+                          {uiLabel(uiLabels, "caso.list_solution_label", locale)}
                         </h3>
                         <p className="mt-2 text-sm text-text-70">{c.solution}</p>
                       </div>
                       <div>
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-text-40">
-                          Resultados
+                          {uiLabel(uiLabels, "caso.list_results_label", locale)}
                         </h3>
                         <ul className="mt-2 space-y-1">
                           {c.results.map((r) => (
@@ -225,8 +228,8 @@ export default async function CasosDeExitoPage() {
       </section>
 
       <CTABanner
-        title="¿Quieres ser el próximo caso de éxito?"
-        description="Cuéntanos tu desafío y diseñemos juntos la solución."
+        title={uiLabel(uiLabels, "caso.list_cta_banner_title", locale)}
+        description={uiLabel(uiLabels, "caso.cta_banner_description", locale)}
       />
     </PageWrapper>
   );

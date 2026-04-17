@@ -6,7 +6,8 @@ import { CTABanner, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
-import { getCasoExito, mapCasoExito } from "@/lib/cms";
+import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -43,6 +44,7 @@ export default async function CronicaPage() {
   const locale = (await getLocale()) as Locale;
   const raw = await getCasoExito("cronica");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
+  const uiLabels = await getAllUiLabels();
 
   const results = caso?.metrics?.length
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
@@ -65,7 +67,7 @@ export default async function CronicaPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <Button asChild variant="ghost" size="sm" className="mb-8">
             <Link href="/casos-de-exito">
-              <ArrowLeft size={14} /> Todos los casos
+              <ArrowLeft size={14} /> {uiLabel(uiLabels, "caso.back_to_list", locale)}
             </Link>
           </Button>
 
@@ -87,14 +89,18 @@ export default async function CronicaPage() {
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="grid gap-12 md:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-bold text-text-100">El Reto</h2>
+              <h2 className="text-2xl font-bold text-text-100">
+                {uiLabel(uiLabels, "caso.challenge_label", locale)}
+              </h2>
               <p className="mt-4 text-text-70 leading-relaxed">
                 {caso?.challenge ||
                   "Crónica, uno de los medios más reconocidos de Argentina, necesitaba modernizar su plataforma digital para competir en la era del contenido personalizado."}
               </p>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-text-100">La Solución</h2>
+              <h2 className="text-2xl font-bold text-text-100">
+                {uiLabel(uiLabels, "caso.solution_label", locale)}
+              </h2>
               <p className="mt-4 text-text-70 leading-relaxed">
                 {caso?.solution ||
                   "Rediseño completo del portal de noticias con arquitectura moderna, personalización de contenido con IA y optimización de procesos editoriales."}
@@ -103,7 +109,9 @@ export default async function CronicaPage() {
           </div>
 
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-text-100">Resultados</h2>
+            <h2 className="text-2xl font-bold text-text-100">
+              {uiLabel(uiLabels, "caso.results_label", locale)}
+            </h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-3">
               {results.map((r) => (
                 <div key={r.label} className="glass rounded-xl p-6 text-center">
@@ -129,7 +137,9 @@ export default async function CronicaPage() {
           )}
 
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-text-100">Servicios utilizados</h2>
+            <h2 className="text-2xl font-bold text-text-100">
+              {uiLabel(uiLabels, "caso.services_used_label", locale)}
+            </h2>
             <div className="mt-4 flex flex-wrap gap-2">
               <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
               <ServiceBadge variant="ia">IA</ServiceBadge>
@@ -139,8 +149,8 @@ export default async function CronicaPage() {
       </section>
 
       <CTABanner
-        title="¿Tu empresa podría ser el próximo caso?"
-        description="Cuéntanos tu desafío y diseñemos juntos la solución."
+        title={uiLabel(uiLabels, "caso.cta_banner_title", locale)}
+        description={uiLabel(uiLabels, "caso.cta_banner_description", locale)}
       />
     </PageWrapper>
   );

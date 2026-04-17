@@ -236,13 +236,22 @@ export function mapCasoExito(data: Record<string, unknown>, locale: Locale): Map
       label: pick(locale, data.metric3LabelEs as string, data.metric3LabelEn as string) || "",
     });
 
+  // Resolve bilingual country/sector/role, falling back to the legacy monolingual
+  // column when the *_es pair is still empty (during the transition window).
+  const countryEs = (data.clientCountryEs as string) || (data.clientCountry as string) || "";
+  const countryEn = (data.clientCountryEn as string) || "";
+  const sectorEs = (data.clientSectorEs as string) || (data.clientSector as string) || "";
+  const sectorEn = (data.clientSectorEn as string) || "";
+  const roleEs = (data.testimonialRoleEs as string) || (data.testimonialRole as string) || "";
+  const roleEn = (data.testimonialRoleEn as string) || "";
+
   return {
     id: data.id as string,
     slug: (data.slug as string) || "",
     clientName: (data.clientName as string) || "",
     clientLogo: (data.clientLogo as string) || null,
-    clientCountry: (data.clientCountry as string) || null,
-    clientSector: (data.clientSector as string) || null,
+    clientCountry: pick(locale, countryEs, countryEn) || null,
+    clientSector: pick(locale, sectorEs, sectorEn) || null,
     title: pick(locale, data.titleEs as string, data.titleEn as string) || "",
     challenge: pick(locale, data.challengeEs as string, data.challengeEn as string) || "",
     solution: pick(locale, data.solutionEs as string, data.solutionEn as string) || "",
@@ -251,7 +260,7 @@ export function mapCasoExito(data: Record<string, unknown>, locale: Locale): Map
     testimonialQuote:
       pick(locale, data.testimonialQuoteEs as string, data.testimonialQuoteEn as string) || "",
     testimonialAuthor: (data.testimonialAuthor as string) || null,
-    testimonialRole: (data.testimonialRole as string) || null,
+    testimonialRole: pick(locale, roleEs, roleEn) || null,
     coverImage: (data.coverImage as string) || null,
     servicesUsed: (data.servicesUsed as string[]) || [],
     featured: (data.featured as boolean) || false,
@@ -300,25 +309,115 @@ export function mapHomeContent(data: Record<string, unknown>, locale: Locale): M
     duration: pick(locale, s.durationEs, s.durationEn),
   }));
 
+  const mapMetricsRaw =
+    (data.mapMetrics as Array<{
+      value: string;
+      labelEs: string;
+      labelEn: string;
+      sublabelEs?: string;
+      sublabelEn?: string;
+    }> | null) || [];
+  const mapMetrics = mapMetricsRaw.map((m) => ({
+    value: m.value,
+    label: pick(locale, m.labelEs, m.labelEn),
+    sublabel: pick(locale, m.sublabelEs ?? "", m.sublabelEn ?? ""),
+  }));
+
+  const whyUsItemsRaw =
+    (data.whyUsItems as Array<{
+      icon: string;
+      color: string;
+      titleEs: string;
+      titleEn: string;
+      copyEs: string;
+      copyEn: string;
+    }> | null) || [];
+  const whyUsItems = whyUsItemsRaw.map((w) => ({
+    icon: w.icon,
+    color: w.color,
+    title: pick(locale, w.titleEs, w.titleEn),
+    copy: pick(locale, w.copyEs, w.copyEn),
+  }));
+
+  const finalCtaBulletsRaw =
+    (data.finalCtaBullets as Array<{ textEs: string; textEn: string }> | null) || [];
+  const finalCtaBullets = finalCtaBulletsRaw.map((b) => pick(locale, b.textEs, b.textEn));
+
   return {
     heroBadge: pick(locale, data.heroBadgeEs as string, data.heroBadgeEn as string) || "",
     heroTitle: pick(locale, data.heroTitleEs as string, data.heroTitleEn as string) || "",
     heroSubtitle: pick(locale, data.heroSubtitleEs as string, data.heroSubtitleEn as string) || "",
     heroCtaPrimary:
       pick(locale, data.heroCtaPrimaryEs as string, data.heroCtaPrimaryEn as string) || "",
+    heroCtaPrimaryUrl: (data.heroCtaPrimaryUrl as string) || "/contacto",
     heroCtaSecondary:
       pick(locale, data.heroCtaSecondaryEs as string, data.heroCtaSecondaryEn as string) || "",
+    heroCtaSecondaryUrl: (data.heroCtaSecondaryUrl as string) || "",
     heroImage: (data.heroImage as string) || null,
     metrics,
+
+    trustBarTitle:
+      pick(locale, data.trustBarTitleEs as string, data.trustBarTitleEn as string) || "",
+    trustBarLogos: (data.trustBarLogos as string[] | null) || [],
+
     servicesSectionTitle:
       pick(locale, data.servicesSectionTitleEs as string, data.servicesSectionTitleEn as string) ||
       "",
+    pillarsSubtitle:
+      pick(locale, data.pillarsSubtitleEs as string, data.pillarsSubtitleEn as string) || "",
+
     casesSectionTitle:
       pick(locale, data.casesSectionTitleEs as string, data.casesSectionTitleEn as string) || "",
+    casesSectionSubtitle:
+      pick(locale, data.casesSectionSubtitleEs as string, data.casesSectionSubtitleEn as string) ||
+      "",
+    casesSectionFooter:
+      pick(locale, data.casesSectionFooterEs as string, data.casesSectionFooterEn as string) || "",
+    casesSectionCta:
+      pick(locale, data.casesSectionCtaEs as string, data.casesSectionCtaEn as string) || "",
+
+    productsStripTitle:
+      pick(locale, data.productsStripTitleEs as string, data.productsStripTitleEn as string) || "",
+    productsStripCta:
+      pick(locale, data.productsStripCtaEs as string, data.productsStripCtaEn as string) || "",
+
+    mapTitle: pick(locale, data.mapTitleEs as string, data.mapTitleEn as string) || "",
+    mapSubtitle: pick(locale, data.mapSubtitleEs as string, data.mapSubtitleEn as string) || "",
+    mapMetrics,
+
+    whyUsTitle: pick(locale, data.whyUsTitleEs as string, data.whyUsTitleEn as string) || "",
+    whyUsSubtitle:
+      pick(locale, data.whyUsSubtitleEs as string, data.whyUsSubtitleEn as string) || "",
+    whyUsItems,
+
+    faqsTitle: pick(locale, data.faqsTitleEs as string, data.faqsTitleEn as string) || "",
     faqs,
+
     finalCtaTitle:
       pick(locale, data.finalCtaTitleEs as string, data.finalCtaTitleEn as string) || "",
     finalCtaCopy: pick(locale, data.finalCtaCopyEs as string, data.finalCtaCopyEn as string) || "",
+    finalCtaBullets,
+    finalCtaPrimary:
+      pick(locale, data.finalCtaPrimaryEs as string, data.finalCtaPrimaryEn as string) || "",
+    finalCtaPrimaryUrl: (data.finalCtaPrimaryUrl as string) || "/contacto",
+    finalCtaSecondary:
+      pick(locale, data.finalCtaSecondaryEs as string, data.finalCtaSecondaryEn as string) || "",
+    finalCtaSecondaryUrl: (data.finalCtaSecondaryUrl as string) || "",
+    finalCtaFinePrint:
+      pick(locale, data.finalCtaFinePrintEs as string, data.finalCtaFinePrintEn as string) || "",
+
+    industriasSectionTitle:
+      pick(
+        locale,
+        data.industriasSectionTitleEs as string,
+        data.industriasSectionTitleEn as string,
+      ) || "",
+    industriasSectionSubtitle:
+      pick(
+        locale,
+        data.industriasSectionSubtitleEs as string,
+        data.industriasSectionSubtitleEn as string,
+      ) || "",
     processSectionTitle:
       pick(locale, data.processSectionTitleEs as string, data.processSectionTitleEn as string) ||
       "",

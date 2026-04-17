@@ -18,6 +18,8 @@ import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { getLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -75,6 +77,7 @@ const SUB_SERVICES = [
 export default async function DesarrolloDigitalPage() {
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("desarrollo-digital", locale);
+  const uiLabels = await getAllUiLabels();
   const serviceSchema = getServiceSchema({
     name: "Desarrollo Digital",
     description:
@@ -223,7 +226,7 @@ export default async function DesarrolloDigitalPage() {
 
       {/* Process */}
       <ProcessTimeline
-        title="Cómo trabajamos en cada proyecto"
+        title={uiLabel(uiLabels, "servicio.dev_process_title", locale)}
         accentColor="#06B6D4"
         steps={[
           {
@@ -316,7 +319,7 @@ export default async function DesarrolloDigitalPage() {
 
       {/* FAQ */}
       <FAQAccordion
-        title="Preguntas frecuentes"
+        title={uiLabel(uiLabels, "servicio.dev_faqs_title", locale)}
         schemaEnabled
         faqs={
           cms?.faqs?.length

@@ -39,7 +39,30 @@ interface ProcessStepItem {
   durationEn: string;
 }
 
+interface MapMetricItem {
+  value: string;
+  labelEs: string;
+  labelEn: string;
+  sublabelEs: string;
+  sublabelEn: string;
+}
+
+interface WhyUsItem {
+  icon: string;
+  color: string;
+  titleEs: string;
+  titleEn: string;
+  copyEs: string;
+  copyEn: string;
+}
+
+interface FinalCtaBulletItem {
+  textEs: string;
+  textEn: string;
+}
+
 interface HomeData {
+  // Hero
   heroBadgeEs: string;
   heroBadgeEn: string;
   heroTitleEs: string;
@@ -48,25 +71,72 @@ interface HomeData {
   heroSubtitleEn: string;
   heroCtaPrimaryEs: string;
   heroCtaPrimaryEn: string;
+  heroCtaPrimaryUrl: string;
   heroCtaSecondaryEs: string;
   heroCtaSecondaryEn: string;
+  heroCtaSecondaryUrl: string;
   heroImage: string;
+  // Metrics + trust
   metrics: MetricItem[];
   trustBarLogos: string[];
+  trustBarTitleEs: string;
+  trustBarTitleEn: string;
+  // Pillars
   servicesSectionTitleEs: string;
   servicesSectionTitleEn: string;
+  pillarsSubtitleEs: string;
+  pillarsSubtitleEn: string;
+  // Cases
   casesSectionTitleEs: string;
   casesSectionTitleEn: string;
+  casesSectionSubtitleEs: string;
+  casesSectionSubtitleEn: string;
+  casesSectionFooterEs: string;
+  casesSectionFooterEn: string;
+  casesSectionCtaEs: string;
+  casesSectionCtaEn: string;
+  // Products strip
+  productsStripTitleEs: string;
+  productsStripTitleEn: string;
+  productsStripCtaEs: string;
+  productsStripCtaEn: string;
+  // Map
+  mapTitleEs: string;
+  mapTitleEn: string;
+  mapSubtitleEs: string;
+  mapSubtitleEn: string;
+  mapMetrics: MapMetricItem[];
+  // Why Us
+  whyUsTitleEs: string;
+  whyUsTitleEn: string;
+  whyUsSubtitleEs: string;
+  whyUsSubtitleEn: string;
+  whyUsItems: WhyUsItem[];
+  // FAQs
+  faqsTitleEs: string;
+  faqsTitleEn: string;
   faqs: FaqItem[];
+  // Final CTA
   finalCtaTitleEs: string;
   finalCtaTitleEn: string;
   finalCtaCopyEs: string;
   finalCtaCopyEn: string;
+  finalCtaBullets: FinalCtaBulletItem[];
+  finalCtaPrimaryEs: string;
+  finalCtaPrimaryEn: string;
+  finalCtaPrimaryUrl: string;
+  finalCtaSecondaryEs: string;
+  finalCtaSecondaryEn: string;
+  finalCtaSecondaryUrl: string;
+  finalCtaFinePrintEs: string;
+  finalCtaFinePrintEn: string;
+  // Process
   processSectionTitleEs: string;
   processSectionTitleEn: string;
   processSectionSubtitleEs: string;
   processSectionSubtitleEn: string;
   processSteps: ProcessStepItem[];
+  // Hub Industrias
   industriasHubTitleEs: string;
   industriasHubTitleEn: string;
   industriasHubSubtitleEs: string;
@@ -89,20 +159,57 @@ const defaultHome: HomeData = {
   heroSubtitleEn: "",
   heroCtaPrimaryEs: "",
   heroCtaPrimaryEn: "",
+  heroCtaPrimaryUrl: "",
   heroCtaSecondaryEs: "",
   heroCtaSecondaryEn: "",
+  heroCtaSecondaryUrl: "",
   heroImage: "",
   metrics: [],
   trustBarLogos: [],
+  trustBarTitleEs: "",
+  trustBarTitleEn: "",
   servicesSectionTitleEs: "",
   servicesSectionTitleEn: "",
+  pillarsSubtitleEs: "",
+  pillarsSubtitleEn: "",
   casesSectionTitleEs: "",
   casesSectionTitleEn: "",
+  casesSectionSubtitleEs: "",
+  casesSectionSubtitleEn: "",
+  casesSectionFooterEs: "",
+  casesSectionFooterEn: "",
+  casesSectionCtaEs: "",
+  casesSectionCtaEn: "",
+  productsStripTitleEs: "",
+  productsStripTitleEn: "",
+  productsStripCtaEs: "",
+  productsStripCtaEn: "",
+  mapTitleEs: "",
+  mapTitleEn: "",
+  mapSubtitleEs: "",
+  mapSubtitleEn: "",
+  mapMetrics: [],
+  whyUsTitleEs: "",
+  whyUsTitleEn: "",
+  whyUsSubtitleEs: "",
+  whyUsSubtitleEn: "",
+  whyUsItems: [],
+  faqsTitleEs: "",
+  faqsTitleEn: "",
   faqs: [],
   finalCtaTitleEs: "",
   finalCtaTitleEn: "",
   finalCtaCopyEs: "",
   finalCtaCopyEn: "",
+  finalCtaBullets: [],
+  finalCtaPrimaryEs: "",
+  finalCtaPrimaryEn: "",
+  finalCtaPrimaryUrl: "",
+  finalCtaSecondaryEs: "",
+  finalCtaSecondaryEn: "",
+  finalCtaSecondaryUrl: "",
+  finalCtaFinePrintEs: "",
+  finalCtaFinePrintEn: "",
   processSectionTitleEs: "",
   processSectionTitleEn: "",
   processSectionSubtitleEs: "",
@@ -126,6 +233,8 @@ type TabKey =
   | "metricas"
   | "trust"
   | "secciones"
+  | "mapa"
+  | "why-us"
   | "proceso"
   | "faqs"
   | "cta"
@@ -136,6 +245,8 @@ const tabs: Array<{ key: TabKey; label: string }> = [
   { key: "metricas", label: "Métricas" },
   { key: "trust", label: "Trust Bar" },
   { key: "secciones", label: "Secciones" },
+  { key: "mapa", label: "Mapa" },
+  { key: "why-us", label: "¿Por qué?" },
   { key: "proceso", label: "Proceso" },
   { key: "faqs", label: "FAQs" },
   { key: "cta", label: "CTA Final" },
@@ -245,6 +356,19 @@ export default function HomeForm({ initialData }: HomeFormProps) {
               onChangeEn={(v) => update("heroCtaPrimaryEn", v)}
             />
 
+            <div>
+              <label className="mb-2 block text-sm font-medium text-text-70">
+                URL del CTA Primario
+              </label>
+              <input
+                type="text"
+                value={data.heroCtaPrimaryUrl}
+                onChange={(e) => update("heroCtaPrimaryUrl", e.target.value)}
+                placeholder="/contacto"
+                className={inputClass}
+              />
+            </div>
+
             <BilingualField
               labelEs="CTA Secundario ES"
               labelEn="Secondary CTA EN"
@@ -253,6 +377,19 @@ export default function HomeForm({ initialData }: HomeFormProps) {
               onChangeEs={(v) => update("heroCtaSecondaryEs", v)}
               onChangeEn={(v) => update("heroCtaSecondaryEn", v)}
             />
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-text-70">
+                URL del CTA Secundario
+              </label>
+              <input
+                type="text"
+                value={data.heroCtaSecondaryUrl}
+                onChange={(e) => update("heroCtaSecondaryUrl", e.target.value)}
+                placeholder="https://wa.me/..."
+                className={inputClass}
+              />
+            </div>
 
             <div>
               <ImageUploader
@@ -370,6 +507,19 @@ export default function HomeForm({ initialData }: HomeFormProps) {
         {/* Tab: Trust Bar */}
         {activeTab === "trust" && (
           <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Encabezado Trust Bar</h3>
+              <BilingualField
+                labelEs="Título ES"
+                labelEn="Title EN"
+                valueEs={data.trustBarTitleEs}
+                valueEn={data.trustBarTitleEn}
+                onChangeEs={(v) => update("trustBarTitleEs", v)}
+                onChangeEn={(v) => update("trustBarTitleEn", v)}
+                placeholder="Empresas en LATAM y USA que ya transformaron con Nivelics"
+              />
+            </div>
+
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-semibold text-text-100">Trust Bar Logos (max 8)</h3>
               {data.trustBarLogos.length < 8 && (
@@ -424,32 +574,390 @@ export default function HomeForm({ initialData }: HomeFormProps) {
 
         {/* Tab: Secciones */}
         {activeTab === "secciones" && (
-          <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
-            <h3 className="text-sm font-semibold text-text-100">Títulos de secciones</h3>
+          <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">
+                Pillars (IA + Cloud + Staffing)
+              </h3>
+              <BilingualField
+                labelEs="Título pillars ES"
+                labelEn="Pillars title EN"
+                valueEs={data.servicesSectionTitleEs}
+                valueEn={data.servicesSectionTitleEn}
+                onChangeEs={(v) => update("servicesSectionTitleEs", v)}
+                onChangeEn={(v) => update("servicesSectionTitleEn", v)}
+              />
+              <BilingualField
+                labelEs="Subtítulo pillars ES"
+                labelEn="Pillars subtitle EN"
+                valueEs={data.pillarsSubtitleEs}
+                valueEn={data.pillarsSubtitleEn}
+                onChangeEs={(v) => update("pillarsSubtitleEs", v)}
+                onChangeEn={(v) => update("pillarsSubtitleEn", v)}
+                multiline
+                rows={2}
+              />
+            </div>
 
-            <BilingualField
-              labelEs="Título sección servicios ES"
-              labelEn="Services section title EN"
-              valueEs={data.servicesSectionTitleEs}
-              valueEn={data.servicesSectionTitleEn}
-              onChangeEs={(v) => update("servicesSectionTitleEs", v)}
-              onChangeEn={(v) => update("servicesSectionTitleEn", v)}
-            />
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Sección Casos de Éxito</h3>
+              <BilingualField
+                labelEs="Título casos ES"
+                labelEn="Cases title EN"
+                valueEs={data.casesSectionTitleEs}
+                valueEn={data.casesSectionTitleEn}
+                onChangeEs={(v) => update("casesSectionTitleEs", v)}
+                onChangeEn={(v) => update("casesSectionTitleEn", v)}
+              />
+              <BilingualField
+                labelEs="Subtítulo casos ES"
+                labelEn="Cases subtitle EN"
+                valueEs={data.casesSectionSubtitleEs}
+                valueEn={data.casesSectionSubtitleEn}
+                onChangeEs={(v) => update("casesSectionSubtitleEs", v)}
+                onChangeEn={(v) => update("casesSectionSubtitleEn", v)}
+                multiline
+                rows={2}
+              />
+              <BilingualField
+                labelEs="Pie (texto bajo grid) ES"
+                labelEn="Footer (below grid) EN"
+                valueEs={data.casesSectionFooterEs}
+                valueEn={data.casesSectionFooterEn}
+                onChangeEs={(v) => update("casesSectionFooterEs", v)}
+                onChangeEn={(v) => update("casesSectionFooterEn", v)}
+                placeholder="7 empresas. Resultados reales."
+              />
+              <BilingualField
+                labelEs="CTA 'Ver todos' ES"
+                labelEn="'See all' CTA EN"
+                valueEs={data.casesSectionCtaEs}
+                valueEn={data.casesSectionCtaEn}
+                onChangeEs={(v) => update("casesSectionCtaEs", v)}
+                onChangeEn={(v) => update("casesSectionCtaEn", v)}
+                placeholder="Ver todos los casos"
+              />
+            </div>
 
-            <BilingualField
-              labelEs="Título sección casos ES"
-              labelEn="Cases section title EN"
-              valueEs={data.casesSectionTitleEs}
-              valueEn={data.casesSectionTitleEn}
-              onChangeEs={(v) => update("casesSectionTitleEs", v)}
-              onChangeEn={(v) => update("casesSectionTitleEn", v)}
-            />
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Strip de Productos SaaS</h3>
+              <BilingualField
+                labelEs="Título strip ES"
+                labelEn="Strip title EN"
+                valueEs={data.productsStripTitleEs}
+                valueEn={data.productsStripTitleEn}
+                onChangeEs={(v) => update("productsStripTitleEs", v)}
+                onChangeEn={(v) => update("productsStripTitleEn", v)}
+                placeholder="Software propio de Nivelics"
+              />
+              <BilingualField
+                labelEs="CTA strip ES"
+                labelEn="Strip CTA EN"
+                valueEs={data.productsStripCtaEs}
+                valueEn={data.productsStripCtaEn}
+                onChangeEs={(v) => update("productsStripCtaEs", v)}
+                onChangeEn={(v) => update("productsStripCtaEn", v)}
+                placeholder="Ver todos los productos →"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Tab: Mapa */}
+        {activeTab === "mapa" && (
+          <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">
+                Sección Mapa (&ldquo;13 años. 7 países.&rdquo;)
+              </h3>
+              <BilingualField
+                labelEs="Título ES"
+                labelEn="Title EN"
+                valueEs={data.mapTitleEs}
+                valueEn={data.mapTitleEn}
+                onChangeEs={(v) => update("mapTitleEs", v)}
+                onChangeEn={(v) => update("mapTitleEn", v)}
+              />
+              <BilingualField
+                labelEs="Subtítulo ES"
+                labelEn="Subtitle EN"
+                valueEs={data.mapSubtitleEs}
+                valueEn={data.mapSubtitleEn}
+                onChangeEs={(v) => update("mapSubtitleEs", v)}
+                onChangeEn={(v) => update("mapSubtitleEn", v)}
+                multiline
+                rows={3}
+              />
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-text-100">Métricas del mapa (max 2)</h3>
+                {data.mapMetrics.length < 2 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update("mapMetrics", [
+                        ...data.mapMetrics,
+                        { value: "", labelEs: "", labelEn: "", sublabelEs: "", sublabelEn: "" },
+                      ])
+                    }
+                    className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10"
+                  >
+                    <Plus className="h-4 w-4" /> Agregar
+                  </button>
+                )}
+              </div>
+
+              {data.mapMetrics.map((m, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-border bg-bg-surface p-6 space-y-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-text-40">Métrica {idx + 1}</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        update(
+                          "mapMetrics",
+                          data.mapMetrics.filter((_, i) => i !== idx),
+                        )
+                      }
+                      className="text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-text-70">Valor</label>
+                    <input
+                      value={m.value}
+                      onChange={(e) => {
+                        const arr = [...data.mapMetrics];
+                        arr[idx] = { ...arr[idx], value: e.target.value };
+                        update("mapMetrics", arr);
+                      }}
+                      placeholder="13+"
+                      className={`${inputClass} font-mono`}
+                    />
+                  </div>
+                  <BilingualField
+                    labelEs="Etiqueta ES"
+                    labelEn="Label EN"
+                    valueEs={m.labelEs}
+                    valueEn={m.labelEn}
+                    onChangeEs={(v) => {
+                      const arr = [...data.mapMetrics];
+                      arr[idx] = { ...arr[idx], labelEs: v };
+                      update("mapMetrics", arr);
+                    }}
+                    onChangeEn={(v) => {
+                      const arr = [...data.mapMetrics];
+                      arr[idx] = { ...arr[idx], labelEn: v };
+                      update("mapMetrics", arr);
+                    }}
+                  />
+                  <BilingualField
+                    labelEs="Sub-etiqueta ES (opcional)"
+                    labelEn="Sublabel EN (optional)"
+                    valueEs={m.sublabelEs}
+                    valueEn={m.sublabelEn}
+                    onChangeEs={(v) => {
+                      const arr = [...data.mapMetrics];
+                      arr[idx] = { ...arr[idx], sublabelEs: v };
+                      update("mapMetrics", arr);
+                    }}
+                    onChangeEn={(v) => {
+                      const arr = [...data.mapMetrics];
+                      arr[idx] = { ...arr[idx], sublabelEn: v };
+                      update("mapMetrics", arr);
+                    }}
+                  />
+                </div>
+              ))}
+
+              {data.mapMetrics.length === 0 && (
+                <div className="rounded-xl border border-border bg-bg-surface p-8 text-center">
+                  <p className="text-text-40">No hay métricas configuradas</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Tab: Why Us */}
+        {activeTab === "why-us" && (
+          <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">
+                ¿Por qué Nivelics? — Encabezado
+              </h3>
+              <BilingualField
+                labelEs="Título ES"
+                labelEn="Title EN"
+                valueEs={data.whyUsTitleEs}
+                valueEn={data.whyUsTitleEn}
+                onChangeEs={(v) => update("whyUsTitleEs", v)}
+                onChangeEn={(v) => update("whyUsTitleEn", v)}
+              />
+              <BilingualField
+                labelEs="Subtítulo ES (opcional)"
+                labelEn="Subtitle EN (optional)"
+                valueEs={data.whyUsSubtitleEs}
+                valueEn={data.whyUsSubtitleEn}
+                onChangeEs={(v) => update("whyUsSubtitleEs", v)}
+                onChangeEn={(v) => update("whyUsSubtitleEn", v)}
+                multiline
+                rows={2}
+              />
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-text-100">
+                  Diferenciadores (recomendado: 4, max 6)
+                </h3>
+                {data.whyUsItems.length < 6 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update("whyUsItems", [
+                        ...data.whyUsItems,
+                        {
+                          icon: "layers",
+                          color: "#06B6D4",
+                          titleEs: "",
+                          titleEn: "",
+                          copyEs: "",
+                          copyEn: "",
+                        },
+                      ])
+                    }
+                    className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10"
+                  >
+                    <Plus className="h-4 w-4" /> Agregar diferenciador
+                  </button>
+                )}
+              </div>
+
+              {data.whyUsItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-border bg-bg-surface p-6 space-y-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-text-40">
+                      Diferenciador {idx + 1}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        update(
+                          "whyUsItems",
+                          data.whyUsItems.filter((_, i) => i !== idx),
+                        )
+                      }
+                      className="text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-text-70">Icono</label>
+                      <GeoIconPicker
+                        value={item.icon}
+                        onChange={(name) => {
+                          const arr = [...data.whyUsItems];
+                          arr[idx] = { ...arr[idx], icon: name };
+                          update("whyUsItems", arr);
+                        }}
+                        color="cyan"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-medium text-text-70">
+                        Color (hex)
+                      </label>
+                      <input
+                        type="text"
+                        value={item.color}
+                        onChange={(e) => {
+                          const arr = [...data.whyUsItems];
+                          arr[idx] = { ...arr[idx], color: e.target.value };
+                          update("whyUsItems", arr);
+                        }}
+                        placeholder="#06B6D4"
+                        className={`${inputClass} font-mono`}
+                      />
+                    </div>
+                  </div>
+
+                  <BilingualField
+                    labelEs="Título ES"
+                    labelEn="Title EN"
+                    valueEs={item.titleEs}
+                    valueEn={item.titleEn}
+                    onChangeEs={(v) => {
+                      const arr = [...data.whyUsItems];
+                      arr[idx] = { ...arr[idx], titleEs: v };
+                      update("whyUsItems", arr);
+                    }}
+                    onChangeEn={(v) => {
+                      const arr = [...data.whyUsItems];
+                      arr[idx] = { ...arr[idx], titleEn: v };
+                      update("whyUsItems", arr);
+                    }}
+                  />
+
+                  <BilingualField
+                    labelEs="Copy ES"
+                    labelEn="Copy EN"
+                    valueEs={item.copyEs}
+                    valueEn={item.copyEn}
+                    onChangeEs={(v) => {
+                      const arr = [...data.whyUsItems];
+                      arr[idx] = { ...arr[idx], copyEs: v };
+                      update("whyUsItems", arr);
+                    }}
+                    onChangeEn={(v) => {
+                      const arr = [...data.whyUsItems];
+                      arr[idx] = { ...arr[idx], copyEn: v };
+                      update("whyUsItems", arr);
+                    }}
+                    multiline
+                    rows={3}
+                  />
+                </div>
+              ))}
+
+              {data.whyUsItems.length === 0 && (
+                <div className="rounded-xl border border-border bg-bg-surface p-8 text-center">
+                  <p className="text-text-40">No hay diferenciadores configurados</p>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
         {/* Tab: FAQs */}
         {activeTab === "faqs" && (
           <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Título de sección FAQs</h3>
+              <BilingualField
+                labelEs="Título ES"
+                labelEn="Title EN"
+                valueEs={data.faqsTitleEs}
+                valueEn={data.faqsTitleEn}
+                onChangeEs={(v) => update("faqsTitleEs", v)}
+                onChangeEn={(v) => update("faqsTitleEn", v)}
+                placeholder="Preguntas frecuentes"
+              />
+            </div>
+
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-semibold text-text-100">FAQs (max 5)</h3>
               {data.faqs.length < 5 && (
@@ -868,28 +1376,152 @@ export default function HomeForm({ initialData }: HomeFormProps) {
 
         {/* Tab: CTA Final */}
         {activeTab === "cta" && (
-          <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
-            <h3 className="text-sm font-semibold text-text-100">CTA Final</h3>
+          <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">CTA Final — Encabezado</h3>
 
-            <BilingualField
-              labelEs="Título CTA ES"
-              labelEn="CTA Title EN"
-              valueEs={data.finalCtaTitleEs}
-              valueEn={data.finalCtaTitleEn}
-              onChangeEs={(v) => update("finalCtaTitleEs", v)}
-              onChangeEn={(v) => update("finalCtaTitleEn", v)}
-            />
+              <BilingualField
+                labelEs="Título CTA ES"
+                labelEn="CTA Title EN"
+                valueEs={data.finalCtaTitleEs}
+                valueEn={data.finalCtaTitleEn}
+                onChangeEs={(v) => update("finalCtaTitleEs", v)}
+                onChangeEn={(v) => update("finalCtaTitleEn", v)}
+              />
 
-            <BilingualField
-              labelEs="Copy CTA ES"
-              labelEn="CTA Copy EN"
-              valueEs={data.finalCtaCopyEs}
-              valueEn={data.finalCtaCopyEn}
-              onChangeEs={(v) => update("finalCtaCopyEs", v)}
-              onChangeEn={(v) => update("finalCtaCopyEn", v)}
-              multiline
-              rows={3}
-            />
+              <BilingualField
+                labelEs="Copy CTA ES"
+                labelEn="CTA Copy EN"
+                valueEs={data.finalCtaCopyEs}
+                valueEn={data.finalCtaCopyEn}
+                onChangeEs={(v) => update("finalCtaCopyEs", v)}
+                onChangeEn={(v) => update("finalCtaCopyEn", v)}
+                multiline
+                rows={3}
+              />
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-text-100">Bullets del CTA (max 5)</h3>
+                {data.finalCtaBullets.length < 5 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update("finalCtaBullets", [
+                        ...data.finalCtaBullets,
+                        { textEs: "", textEn: "" },
+                      ])
+                    }
+                    className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10"
+                  >
+                    <Plus className="h-4 w-4" /> Agregar bullet
+                  </button>
+                )}
+              </div>
+
+              {data.finalCtaBullets.map((b, idx) => (
+                <div
+                  key={idx}
+                  className="grid grid-cols-[1fr_1fr_auto] gap-3 p-3 rounded-lg border border-border bg-bg-elevated"
+                >
+                  <div>
+                    <label className="mb-1 block text-xs text-text-40">Texto ES</label>
+                    <input
+                      value={b.textEs}
+                      onChange={(e) => {
+                        const arr = [...data.finalCtaBullets];
+                        arr[idx] = { ...arr[idx], textEs: e.target.value };
+                        update("finalCtaBullets", arr);
+                      }}
+                      className={`${inputClass} text-sm`}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-xs text-text-40">Texto EN</label>
+                    <input
+                      value={b.textEn}
+                      onChange={(e) => {
+                        const arr = [...data.finalCtaBullets];
+                        arr[idx] = { ...arr[idx], textEn: e.target.value };
+                        update("finalCtaBullets", arr);
+                      }}
+                      className={`${inputClass} text-sm`}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update(
+                        "finalCtaBullets",
+                        data.finalCtaBullets.filter((_, i) => i !== idx),
+                      )
+                    }
+                    className="self-end text-red-400 hover:text-red-300 px-2 pb-3"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Botón Primario</h3>
+              <BilingualField
+                labelEs="Label primario ES"
+                labelEn="Primary label EN"
+                valueEs={data.finalCtaPrimaryEs}
+                valueEn={data.finalCtaPrimaryEn}
+                onChangeEs={(v) => update("finalCtaPrimaryEs", v)}
+                onChangeEn={(v) => update("finalCtaPrimaryEn", v)}
+              />
+              <div>
+                <label className="mb-2 block text-sm font-medium text-text-70">URL primaria</label>
+                <input
+                  value={data.finalCtaPrimaryUrl}
+                  onChange={(e) => update("finalCtaPrimaryUrl", e.target.value)}
+                  placeholder="/contacto"
+                  className={inputClass}
+                />
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Botón Secundario</h3>
+              <BilingualField
+                labelEs="Label secundario ES"
+                labelEn="Secondary label EN"
+                valueEs={data.finalCtaSecondaryEs}
+                valueEn={data.finalCtaSecondaryEn}
+                onChangeEs={(v) => update("finalCtaSecondaryEs", v)}
+                onChangeEn={(v) => update("finalCtaSecondaryEn", v)}
+              />
+              <div>
+                <label className="mb-2 block text-sm font-medium text-text-70">
+                  URL secundaria
+                </label>
+                <input
+                  value={data.finalCtaSecondaryUrl}
+                  onChange={(e) => update("finalCtaSecondaryUrl", e.target.value)}
+                  placeholder="https://wa.me/..."
+                  className={inputClass}
+                />
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
+              <h3 className="text-sm font-semibold text-text-100">Texto al pie (fine print)</h3>
+              <BilingualField
+                labelEs="Fine print ES"
+                labelEn="Fine print EN"
+                valueEs={data.finalCtaFinePrintEs}
+                valueEn={data.finalCtaFinePrintEn}
+                onChangeEs={(v) => update("finalCtaFinePrintEs", v)}
+                onChangeEn={(v) => update("finalCtaFinePrintEn", v)}
+                multiline
+                rows={2}
+              />
+            </div>
           </div>
         )}
       </div>

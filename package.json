@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
+    "check:locale-files": "! find app components lib -type f \\( -name '*.es.tsx' -o -name '*.en.tsx' -o -name '*.es.ts' -o -name '*.en.ts' \\) 2>/dev/null | grep -v node_modules | grep .",
     "test": "vitest",
     "format": "prettier --write .",
     "prepare": "husky"

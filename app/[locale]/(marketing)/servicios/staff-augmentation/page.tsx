@@ -17,6 +17,8 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -79,7 +81,10 @@ const SUB_SERVICES = [
 
 export default async function StaffAugmentationPage() {
   const locale = (await getLocale()) as Locale;
-  const cms = await getServicioData("staff-augmentation", locale);
+  const [cms, uiLabels] = await Promise.all([
+    getServicioData("staff-augmentation", locale),
+    getAllUiLabels(),
+  ]);
   const serviceSchema = getServiceSchema({
     name: "Staff Augmentation Premium",
     description:
@@ -144,8 +149,14 @@ export default async function StaffAugmentationPage() {
           "40% de ahorro vs. contratar en USA o Europa",
           "Garantía de reemplazo en menos de 10 días",
         ]}
-        ctaPrimary={{ text: "Ver perfiles disponibles", url: "#perfiles" }}
-        ctaSecondary={{ text: "Hablar por WhatsApp", url: "https://wa.me/573103926621" }}
+        ctaPrimary={{
+          text: uiLabel(uiLabels, "servicio.staffaug_cta_view_profiles", locale),
+          url: "#perfiles",
+        }}
+        ctaSecondary={{
+          text: uiLabel(uiLabels, "servicio.staffaug_cta_whatsapp", locale),
+          url: "https://wa.me/573103926621",
+        }}
         accentColor="#10B981"
         rightPanel={<HeroCalculator type="staff" accentColor="#10B981" />}
         dataSection="staff-augmentation-hero"
@@ -224,7 +235,7 @@ export default async function StaffAugmentationPage() {
 
       {/* 5. ComparisonTable */}
       <ComparisonTable
-        title="¿Por qué Nivelics vs. contratar directamente?"
+        title={uiLabel(uiLabels, "servicio.staffaug_why_title", locale)}
         alternativeLabel="Contratar directo en USA/Europa"
         nivelicsLabel="Nivelics Staff Augmentation"
         rows={[
@@ -367,7 +378,7 @@ export default async function StaffAugmentationPage() {
 
       {/* 9. FAQAccordion */}
       <FAQAccordion
-        title="Preguntas frecuentes sobre Staff Augmentation"
+        title={uiLabel(uiLabels, "servicio.staffaug_faqs_title", locale)}
         schemaEnabled
         faqs={
           cms?.faqs?.length

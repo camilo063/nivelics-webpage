@@ -1,8 +1,11 @@
 import Image from "next/image";
-import { Nav, Footer } from "@/components/layout";
+import { Nav } from "@/components/layout/nav";
+import { Footer } from "@/components/layout/footer";
 import { WhatsAppFAB } from "@/components/shared";
 import { TranslationBanner } from "@/components/shared/translation-banner";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { pickLocale } from "@/lib/cms/bilingual";
+import type { Locale } from "@/lib/cms/types";
 import { SITE } from "@/lib/constants";
 import { NAV_DEFAULTS } from "@/lib/constants/nav";
 
@@ -12,17 +15,18 @@ interface MarketingLayoutProps {
 }
 
 export default async function MarketingLayout({ children, params }: MarketingLayoutProps) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale: Locale = rawLocale === "en" ? "en" : "es";
   const config = await getSiteConfigPublic().catch(() => null);
   const logoUrl = config?.logoUrl ?? null;
   const logoNaturalWidth = config?.logoWidth ?? null;
   const logoNaturalHeight = config?.logoHeight ?? null;
   const logoAlt =
-    (locale === "en" ? config?.logoAltEn : config?.logoAltEs) ??
-    (locale === "en" ? NAV_DEFAULTS.logoAltEn : NAV_DEFAULTS.logoAltEs);
+    pickLocale(locale, config?.logoAltEs, config?.logoAltEn) ||
+    pickLocale(locale, NAV_DEFAULTS.logoAltEs, NAV_DEFAULTS.logoAltEn);
   const logoTitle =
-    (locale === "en" ? config?.logoTitleEn : config?.logoTitleEs) ??
-    (locale === "en" ? NAV_DEFAULTS.logoTitleEn : NAV_DEFAULTS.logoTitleEs);
+    pickLocale(locale, config?.logoTitleEs, config?.logoTitleEn) ||
+    pickLocale(locale, NAV_DEFAULTS.logoTitleEs, NAV_DEFAULTS.logoTitleEn);
 
   const logoSlot =
     logoUrl && logoNaturalWidth && logoNaturalHeight ? (
