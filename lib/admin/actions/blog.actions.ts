@@ -8,6 +8,11 @@ import { eq, desc, and, isNull, ilike, count, or } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { revalidatePublicPages } from "@/lib/admin/revalidate-public";
 
+function revalidateSitemaps() {
+  revalidatePath("/sitemap/es.xml");
+  revalidatePath("/sitemap/en.xml");
+}
+
 export async function getBlogPosts(options?: {
   page?: number;
   limit?: number;
@@ -96,6 +101,7 @@ export async function createBlogPost(input: BlogPostInput) {
 
   revalidatePath("/admin/blog");
   await revalidatePublicPages([`/blog/${parsed.slug}`, "/blog"]);
+  revalidateSitemaps();
   return post;
 }
 
@@ -129,6 +135,7 @@ export async function updateBlogPost(id: string, input: Partial<BlogPostInput>) 
   revalidatePath("/admin/blog");
   revalidatePath(`/admin/blog/${id}`);
   if (post?.slug) await revalidatePublicPages([`/blog/${post.slug}`, "/blog"]);
+  revalidateSitemaps();
   return post;
 }
 
@@ -147,6 +154,7 @@ export async function deleteBlogPost(id: string) {
   });
 
   revalidatePath("/admin/blog");
+  revalidateSitemaps();
 }
 
 export async function publishBlogPost(id: string) {
@@ -171,6 +179,7 @@ export async function publishBlogPost(id: string) {
   });
 
   revalidatePath("/admin/blog");
+  revalidateSitemaps();
 }
 
 export async function getBlogCategories() {
