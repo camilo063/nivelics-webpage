@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
-import { landingPages } from "@/lib/db/schema/admin";
-import { eq, and } from "drizzle-orm";
+import { landingPages, blogPosts } from "@/lib/db/schema/admin";
+import { eq, and, isNull } from "drizzle-orm";
 import { getAllProductos } from "@/lib/cms/productos";
 
 export const BASE = "https://www.nivelics.com";
@@ -330,6 +330,22 @@ const PRODUCTOS_FALLBACK = [
   { slugEs: "hirely", slugEn: "hirely", updatedAt: null as Date | null },
 ];
 
+async function getBlogPostsForSitemap() {
+  if (!db) return [];
+  try {
+    return await db
+      .select({
+        slug: blogPosts.slug,
+        updatedAt: blogPosts.updatedAt,
+        createdAt: blogPosts.createdAt,
+      })
+      .from(blogPosts)
+      .where(and(eq(blogPosts.status, "published"), isNull(blogPosts.deletedAt)));
+  } catch {
+    return [];
+  }
+}
+
 async function getProductosForSitemap() {
   try {
     const data = await getAllProductos();
@@ -346,17 +362,28 @@ async function getProductosForSitemap() {
 }
 
 export async function getAllSiteUrls(): Promise<SiteUrl[]> {
-  const landings = await getIndexableLandings();
-  const productos = await getProductosForSitemap();
+  const [landings, productos, posts] = await Promise.all([
+    getIndexableLandings(),
+    getProductosForSitemap(),
+    getBlogPostsForSitemap(),
+  ]);
 
   const lastProductoUpdate = productos.reduce((latest, p) => {
     const d = p.updatedAt ? new Date(p.updatedAt) : STATIC_LAST_MOD;
     return d > latest ? d : latest;
   }, STATIC_LAST_MOD);
 
+  const lastBlogUpdate = posts.reduce((latest, p) => {
+    const d = p.updatedAt ?? p.createdAt;
+    return d && d > latest ? d : latest;
+  }, STATIC_LAST_MOD);
+
   const urls = STATIC_URLS.map((u) => {
     if (u.es === "/productos") {
       return { ...u, lastModified: lastProductoUpdate };
+    }
+    if (u.es === "/blog") {
+      return { ...u, lastModified: lastBlogUpdate };
     }
     return u;
   });
@@ -376,6 +403,13 @@ export async function getAllSiteUrls(): Promise<SiteUrl[]> {
       priority: 0.85,
       changeFrequency: "monthly" as const,
       lastModified: p.updatedAt ? new Date(p.updatedAt) : undefined,
+    })),
+    ...posts.map((p) => ({
+      es: `/blog/${p.slug}`,
+      en: `/en/blog/${p.slug}`,
+      priority: 0.6,
+      changeFrequency: "monthly" as const,
+      lastModified: p.updatedAt ?? p.createdAt ?? undefined,
     })),
   ];
 }
