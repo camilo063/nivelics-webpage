@@ -108,3 +108,27 @@ row stops showing in the queue.
 - Landing pages additionally have a `noindex` boolean. When true, the slug
   is added to `robots.txt`'s `Disallow` rules via
   [app/robots.ts](../app/robots.ts).
+
+## Blog content format (HTML)
+
+`blog_posts.content_es` / `content_en` store **HTML** (produced by the Tiptap
+WYSIWYG editor in the admin). Rendering on the public site is handled by
+[`components/shared/ProseContent.tsx`](../components/shared/ProseContent.tsx),
+which:
+
+- Accepts either HTML or legacy markdown and converts markdown via `marked`
+  on the fly (server-side). This keeps backwards-compat while the DB migrates
+  organically through edits.
+- Wraps the content in Tailwind Typography classes (`@tailwindcss/typography`)
+  themed for the Nivelics dark-first design system.
+
+Admin edit flow uses [`components/admin/ui/TiptapEditor.tsx`](../components/admin/ui/TiptapEditor.tsx)
+(React + Tiptap v3 with StarterKit, Underline, Link, Image, Table, Placeholder,
+TextAlign extensions). The editor auto-parses markdown on initial load so
+previously-generated markdown posts show formatted, and every save writes
+canonical HTML.
+
+Schema.org `BlogPosting` is emitted per-post via
+[`lib/schema/blog-posting.ts`](../lib/schema/blog-posting.ts) from the detail
+route. `generateMetadata` covers OpenGraph (type=article), Twitter card, and
+hreflang alternates (ES/EN/x-default).

@@ -13,22 +13,31 @@ interface BlogPost {
   titleEn: string | null;
   status: "draft" | "published" | "scheduled" | "archived";
   translationStatusEn: "complete" | "partial" | "pending" | "auto";
+  categoryId: string | null;
   createdAt: Date;
   publishedAt: Date | null;
+}
+
+interface CategorySummary {
+  id: string;
+  nameEs: string;
+  color: string | null;
 }
 
 const statusLabels: Record<string, { label: string; class: string }> = {
   draft: { label: "Borrador", class: "bg-finops/10 text-finops" },
   published: { label: "Publicado", class: "bg-staffing/10 text-staffing" },
   scheduled: { label: "Programado", class: "bg-ia/10 text-ia" },
+  archived: { label: "Archivado", class: "bg-white/10 text-white/50" },
 };
 
 export function BlogListClient({
   initialPosts,
-  initialTotal,
+  categoryMap,
 }: {
   initialPosts: BlogPost[];
   initialTotal: number;
+  categoryMap: Record<string, CategorySummary>;
 }) {
   const router = useRouter();
 
@@ -43,19 +52,22 @@ export function BlogListClient({
       <table className="w-full table-fixed">
         <thead>
           <tr className="border-b border-border text-left">
-            <th className="w-[40%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
+            <th className="w-[32%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
               Título
+            </th>
+            <th className="w-[16%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
+              Categoría
             </th>
             <th className="w-[12%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
               Estado
             </th>
-            <th className="w-[16%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
+            <th className="w-[14%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
               Trad. EN
             </th>
-            <th className="w-[18%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
+            <th className="w-[14%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
               Fecha
             </th>
-            <th className="w-[14%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
+            <th className="w-[12%] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-40">
               Acciones
             </th>
           </tr>
@@ -63,8 +75,8 @@ export function BlogListClient({
         <tbody className="divide-y divide-border">
           {initialPosts.length === 0 ? (
             <tr>
-              <td colSpan={5} className="px-4 py-12 text-center text-text-40">
-                No hay artículos aún.{" "}
+              <td colSpan={6} className="px-4 py-12 text-center text-text-40">
+                No hay artículos que coincidan con los filtros.{" "}
                 <Link href="/admin/blog/nuevo" className="text-primary hover:underline">
                   Crear el primero
                 </Link>
@@ -73,6 +85,7 @@ export function BlogListClient({
           ) : (
             initialPosts.map((post) => {
               const statusInfo = statusLabels[post.status] || statusLabels.draft;
+              const category = post.categoryId ? categoryMap[post.categoryId] : null;
               return (
                 <tr key={post.id} className="hover:bg-bg-elevated/50 transition-colors">
                   <td className="px-4 py-4 overflow-hidden">
@@ -83,6 +96,22 @@ export function BlogListClient({
                       {post.titleEs}
                     </Link>
                     <p className="mt-0.5 truncate text-xs text-text-40 font-mono">/{post.slug}</p>
+                  </td>
+                  <td className="px-4 py-4">
+                    {category ? (
+                      <span
+                        className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 text-xs font-medium text-white/70"
+                        style={
+                          category.color
+                            ? { borderColor: `${category.color}40`, color: category.color }
+                            : undefined
+                        }
+                      >
+                        {category.nameEs}
+                      </span>
+                    ) : (
+                      <span className="text-xs text-text-40">Sin categoría</span>
+                    )}
                   </td>
                   <td className="px-4 py-4">
                     <span

@@ -135,19 +135,86 @@ export async function getBlogPost(slug: string) {
   return result[0] || null;
 }
 
-export async function getAllBlogPosts() {
+export const getAllBlogPosts = cache(async () => {
   if (!db) return [];
   return db
     .select()
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
     .orderBy(desc(blogPosts.publishedAt));
-}
+});
 
 export async function getBlogCategoriesPublic() {
   if (!db) return [];
   return db.select().from(blogCategories).orderBy(asc(blogCategories.nameEs));
 }
+
+export const getBlogCategoryBySlug = cache(async (slug: string) => {
+  if (!db) return null;
+  const result = await db
+    .select()
+    .from(blogCategories)
+    .where(eq(blogCategories.slug, slug))
+    .limit(1);
+  return result[0] || null;
+});
+
+// Categories that have at least one published, non-deleted post. Used to
+// render the filter rail in the blog home — empty categories never appear.
+export const getActiveBlogCategories = cache(async () => {
+  if (!db) return [];
+  return db
+    .selectDistinct({
+      id: blogCategories.id,
+      slug: blogCategories.slug,
+      nameEs: blogCategories.nameEs,
+      nameEn: blogCategories.nameEn,
+      color: blogCategories.color,
+      icon: blogCategories.icon,
+    })
+    .from(blogCategories)
+    .innerJoin(blogPosts, eq(blogPosts.categoryId, blogCategories.id))
+    .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
+    .orderBy(asc(blogCategories.nameEs));
+});
+
+export const getFeaturedBlogPost = cache(async () => {
+  if (!db) return null;
+  const result = await db
+    .select()
+    .from(blogPosts)
+    .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
+    .orderBy(desc(blogPosts.publishedAt))
+    .limit(1);
+  return result[0] || null;
+});
+
+export const getBlogPostsByCategory = cache(async (categoryId: string) => {
+  if (!db) return [];
+  return db
+    .select()
+    .from(blogPosts)
+    .where(
+      and(
+        eq(blogPosts.categoryId, categoryId),
+        isNull(blogPosts.deletedAt),
+        eq(blogPosts.status, "published"),
+      ),
+    )
+    .orderBy(desc(blogPosts.publishedAt));
+});
+
+// Proxy for "popular" while we don't track views: most recent posts. Replace
+// when a view-count column lands on blog_posts.
+export const getPopularBlogPosts = cache(async (limit = 5) => {
+  if (!db) return [];
+  return db
+    .select()
+    .from(blogPosts)
+    .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
+    .orderBy(desc(blogPosts.publishedAt))
+    .limit(limit);
+});
 
 // ─── HOME ──────────────────────────────────────────────
 

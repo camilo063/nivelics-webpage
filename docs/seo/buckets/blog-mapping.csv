@@ -1,0 +1,248 @@
+legacy_url,new_url,type,confidence,matched_db_slug,matched_title,jaccard
+/blog/soporte-de-drupal-que-pasa-cuando-el-soporte-a-mi-version-termina,/blog,hub,low,,"",
+/en/blog/automation-operational-efficiency,/en/blog,hub,low,,"",
+/blog/periodismo-movil-conoce-las-ventajas-que-aplica-en-tus-plataformas,/blog,hub,low,,"",
+/blog/como-hacer-una-estrategia-seo-para-tu-sitio-web,/blog,hub,low,,"",
+/blog/como-funciona-la-actualizacion-web,/blog,hub,low,,"",
+/blog/politica-privacidad,/blog,hub,low,,"",
+/blog/migracion-continua-navegando-los-desafios-y-beneficios-de-la-transicion-empresarial,/blog,hub,low,migracion-cloud-errores-comunes,"5 errores comunes en migraciones cloud (y cómo evitarlos)",0.1
+/blog/la-inteligencia-artificial-de-la-mano-con-la-ciberseguridad-mayor-seguridad-en-tus-sitios-web,/blog,hub,low,,"",
+/en/blog/enhance-your-ecommerce-by-applying-ux-design,/en/blog,hub,low,,"",
+/blog/mejora-tu-ecommerce-aplicando-ux-design,/blog,hub,low,,"",
+/blog/automatizacion-devops-herramientas,/blog,hub,low,,"",
+/blog/la-nube-como-ahorrar-dinero-y-tiempo-en-tu-negocio,/blog,hub,low,,"",
+/en/blog/cms-differences-word-press-drupal-and-strapi-for-media,/en/blog,hub,low,,"",
+/blog/desarrollo-web-desacoplado-beneficios-sobre-el-diseno-web-tradicional-o-monolitico,/blog,hub,low,,"",
+/en/blog/it-retraining-tech-adaptation,/en/blog,hub,low,,"",
+/en/blog/the-difference-between-web-mockups-and-wireframes,/en/blog,hub,low,,"",
+/en/blog/benefits-of-cloud-services-for-businesses,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.143
+/en/blog/virtual-and-augmented-reality-what-it-is-and-how-to-apply-it-to-my-business,/en/blog,hub,low,,"",
+/en/blog/chatbots-vs-ai-agents-customer-service,/en/blog,hub,low,,"",
+/en/blog/how-is-fintech-changing-the-financial-industry,/en/blog,hub,low,,"",
+/en/blog/discover-the-benefits-of-generative-ai-for-executive-boards,/en/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"How to implement generative AI in your company: practical guide 2026",0.1
+/en/blog/staff-augmentation-hand-in-hand-with-global-collaboration,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.333
+/en/blog/digital-strategies-sustainable-competitive-business-2024,/en/blog,hub,low,,"",
+/en/blog/maximizing-efficiency-with-staff-augmentation-a-complete-guide,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.286
+/en/blog/what-is-heuristic-evaluation-and-when-to-use-it,/en/blog,hub,low,,"",
+/en/blog/mobile-application-development-innovation-and-current-trends,/en/blog,hub,low,,"",
+/blog/beneficios-5g-y-conectividad-la-revolucion-de-la-comunicacion,/blog,hub,low,,"",
+/blog/staff-augmentation-vs-outsourcing-diferencias-y-beneficios,/blog/staff-augmentation-vs-outsourcing,rename,medium,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.6
+/blog/reentrenamiento-it-nuevas-tecnologias,/blog,hub,low,,"",
+/blog/wcag-que-es-y-como-sumar-mas-usuarios-en-tu-web,/blog,hub,low,,"",
+/en/blog/why-invest-in-an-online-store-or-ecommerce,/en/blog,hub,low,,"",
+/blog/que-es-una-evaluacion-heuristica-y-cuando-usarla,/blog,hub,low,,"",
+/blog/ejemplos-de-blogs-personales-y-temas-que-puedes-usar,/blog,hub,low,,"",
+/blog/estrategias-digitales-empresa-sostenible-competitiva-2024,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.125
+/blog/optimizacion-costos-aws-estrategias-facturacion-eficiente,/blog,hub,low,,"",
+/en/blog/how-to-know-if-your-web-development-is-successful,/en/blog,hub,low,,"",
+/blog/que-es-la-experiencia-inmersiva-y-cuales-son-sus-ventajas,/blog,hub,low,,"",
+/en/blog/personalizing-the-user-experience-a-key-to-your-websites-success,/en/blog,hub,low,,"",
+/en/blog/keys-to-a-successful-it-migration-strategies-and-best-practices,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.091
+/blog/tendencias-ux-ui-2025,/blog,hub,low,,"",
+/en/blog/benefits-of-deep-learning-uncovering-a-new-horizon-of-artificial-intelligence-2,/en/blog,hub,low,,"",
+/blog/nivelics-en-techla-media-preparandose-para-el-mercado-internacional,/blog,hub,low,,"",
+/en/blog/decoupled-web-development-benefits-over-traditional-or-monolithic-web-design,/en/blog,hub,low,,"",
+/en/blog/secure-development-building-robust-apps,/en/blog,hub,low,,"",
+/blog/innovaciones-desarrollo-software-Nivelics,/blog,hub,low,,"",
+/en/blog/what-is-agile-and-how-are-devops-implemented-in-reengineering,/en/blog,hub,low,,"",
+/blog/monitoreo-administracion-aws-infraestructura-rendimiento-seguridad,/blog,hub,low,,"",
+/en/blog/gcp-vs-aws,/en/blog,hub,low,,"",
+/en/blog/artificial-intelligence-in-tandem-with-cybersecurity-enhanced-security-for-your-websites,/en/blog,hub,low,,"",
+/blog/chatbot-con-ia-tips-para-utilizar-el-chat-y-sus-beneficios,/blog,hub,low,,"",
+/blog/inteligencia-artificial-para-potenciar-su-estrategia-de-marketing-digital,/blog,hub,low,,"",
+/blog/tecnologia-y-medio-ambiente,/blog,hub,low,,"",
+/blog/nivelics-en-pronetwork-agencia-dedicada-al-desarrollo-digital,/blog,hub,low,,"",
+/en/blog/main-changes-of-ga4-with-google-universal-analytics,/en/blog,hub,low,,"",
+/blog/vulnerabilidades-criticas-2024,/blog,hub,low,,"",
+/blog/que-es-la-automatizacion-de-pruebas-de-software,/blog,hub,low,,"",
+/en/blog/security-testing-on-websites-discover-the-benefits-identify-vulnerabilities-and-protect-your-company-and-customers-information,/en/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"How to implement generative AI in your company: practical guide 2026",0.063
+/blog/estrategias-de-marketing-digital-y-redes-sociales-en-campanas-politicas,/blog,hub,low,,"",
+/blog/que-son-servicios-cloud,/blog,hub,low,migracion-cloud-errores-comunes,"5 errores comunes en migraciones cloud (y cómo evitarlos)",0.2
+/blog/la-importancia-del-diseño-web-en-la-experiencia-de-usuario,/blog,hub,low,,"",
+/en/blog/benefits-of-multiplatform-development-optimizing-success-in-your-apps,/en/blog,hub,low,finops-guia-completa,"FinOps: The Complete Guide to Optimizing Your Cloud Investment",0.091
+/blog/cuales-son-los-ciberataques-mas-frecuentes-en-los-sitios-web,/blog,hub,low,,"",
+/blog/que-es-la-busqueda-semantica-y-para-que-sirve,/blog,hub,low,,"",
+/en/blog/valuable-employees-how-to-identify-and-strengthen-them,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.1
+/blog/la-nube-la-clave-para-el-exito-empresarial-en-el-siglo-XXI,/blog,hub,low,,"",
+/blog/ciberseguridad-para-ecommerce,/blog,hub,low,,"",
+/blog/transformacion-digital-sostenible,/blog,hub,low,,"",
+/blog/beneficios-del-desarrollo-en-multiplataforma-optimiza-el-exito-en-tus-apps,/blog,hub,low,,"",
+/blog/staffing-it-latinoamericano-talento-y-especializacion-a-un-mejor-costo,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.091
+/en/blog/artificial-intelligence-benefits-in-media,/en/blog,hub,low,,"",
+/en/blog/ux-ui-trends-2025,/en/blog,hub,low,,"",
+/blog/gestion-eficiente-google-cloud-platform-console,/blog,hub,low,migracion-cloud-errores-comunes,"5 errores comunes en migraciones cloud (y cómo evitarlos)",0.111
+/blog/almacenamiento-nube-aplicaciones-web,/blog,hub,low,,"",
+/en/blog/artificial-intelligence-to-boost-your-digital-marketing-strategy,/en/blog,hub,low,,"",
+/blog/google-bard-conoce-las-principales-diferencias-con-chat-gpt,/blog,hub,low,,"",
+/blog/posicionamiento-seo-para-universidades-llega-al-top-de-los-motores-de-busqueda,/blog,hub,low,,"",
+/en/blog/technology-and-environment,/en/blog,hub,low,,"",
+/blog/revoluciona-estrategia-comercial-ia,/blog,hub,low,,"",
+/blog/que-es-staff-augmentation-y-como-puede-ayudarte-en-tu-compania,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.333
+/en/blog/fintech-vs-traditional-banks-which-is-the-best-option,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.091
+/en/blog/ai-chatbot-tips-for-using-chat-and-its-benefits,/en/blog,hub,low,,"",
+/blog/ciberseguridad-como-hacer-una-auditoria-en-tu-sitio-nivelics,/blog,hub,low,,"",
+/blog/ux-design-para-medios-de-comunicacion-conoce-sus-beneficios,/blog,hub,low,,"",
+/blog/generacion-contenido-IA,/blog,hub,low,,"",
+/blog/monitoreo-proactivo-aws-sistemas-optimizados-seguros,/blog,hub,low,,"",
+/blog/como-influye-la-ia-en-la-ciberseguridad,/blog,hub,low,,"",
+/blog/por-que-invertir-en-una-tienda-virtual-o-ecommerce,/blog,hub,low,,"",
+/blog/que-es-agil-y-como-se-implementa-los-devops-en-la-reingenieria,/blog,hub,low,,"",
+/en/blog/the-importance-of-data-science-for-your-website,/en/blog,hub,low,,"",
+/blog/ia-automatizacion-procesos-de-negocio,/blog,hub,low,,"",
+/en/blog/drupal-10-vs-drupal-9-comparison,/en/blog,hub,low,,"",
+/blog/como-las-fintech-esta-cambiando-la-industria-financiera,/blog,hub,low,,"",
+/blog/react-o-angular-diferencias-y-beneficios-segun-tus-necesidades,/blog,hub,low,,"",
+/blog/la-importancia-de-hacer-seo-en-tu-sitio-web,/blog,hub,low,,"",
+/blog/estrategias-de-ciberseguridad-en-aws-protegiendo-tus-activos-digitales,/blog,hub,low,,"",
+/en/blog/strategic-talent-acquisition-keys-to-business-success,/en/blog,hub,low,,"",
+/blog/desarrollo-de-aplicaciones-moviles-innovacion-y-tendencias-actuales,/blog,hub,low,,"",
+/blog/aws-que-es-y-como-aplicarla-a-tu-agencia-digital,/blog,hub,low,,"",
+/blog/testing-automatizado-vs-manual,/blog,hub,low,,"",
+/blog/staff-augmentation-de-la-mano-de-la-colaboracion-global,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.333
+/en/blog/revolutionize-sales-strategy-ai,/en/blog,hub,low,,"",
+/blog/desarrollo-agil-desafios-y-beneficios-de-aplicarlos-a-tu-web,/blog,hub,low,,"",
+/en/blog/5g-benefits-and-connectivity-the-revolution-of-communication,/en/blog,hub,low,,"",
+/en/blog/staff-augmentation-vs-traditional-hiring-difference-and-impact,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.286
+/en/blog/benefits-of-machine-learning,/en/blog,hub,low,,"",
+/en/blog/discover-the-benefits-of-end-to-end-automation,/en/blog,hub,low,,"",
+/blog/gcp-vs-aws,/blog,hub,low,,"",
+/blog/la-importancia-del-data-science-en-tu-sitio-web,/blog,hub,low,,"",
+/en/blog/digital-marketing-strategies-and-social-media-in-political-campaigns,/en/blog,hub,low,,"",
+/en/blog/seo-content-digital-marketing-nivelics,/en/blog,hub,low,,"",
+/blog/contenido-generado-por-usuarios-potencia-el-seo-de-tu-sitio-web,/blog,hub,low,,"",
+/en/blog/aws-what-it-is-and-how-to-apply-it-to-your-digital-agency,/en/blog,hub,low,,"",
+/blog/automatizacion-eficiencia-operativa,/blog,hub,low,,"",
+/blog/optimizacion-aws-experiencia-cliente,/blog,hub,low,,"",
+/en/blog/the-cloud-the-key-to-business-buccess-in-the-21st-century,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.111
+/en/blog/mobile-journalism-understand-the-advantages-for-your-platforms,/en/blog,hub,low,,"",
+/en/blog/agile-development-challenges-and-benefits-of-applying-them-to-your-website,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.083
+/blog/beneficios-del-machine-learning,/blog,hub,low,,"",
+/blog/automatizacion-de-infraestructura-optimizando-tu-entorno-tecnologico,/blog,hub,low,,"",
+/blog/ia-orientado-a-la-automatizacion-de-procesos-transformando-la-eficiencia-empresarial,/blog,hub,low,,"",
+/blog/personalizacion-de-la-experiencia-del-usuario-una-clave-para-el-exito-de-tu-web,/blog,hub,low,,"",
+/en/blog/generative-ai-in-colombia-nivelics,/en/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"How to implement generative AI in your company: practical guide 2026",0.125
+/en/blog/what-is-software-test-automation,/en/blog,hub,low,,"",
+/en/blog/user-generated-content-boosts-your-websites-seo,/en/blog,hub,low,,"",
+/blog/optimizacion-en-la-nube-estrategia-esencial-futuro-empresarial,/blog,hub,low,,"",
+/en/blog/ai-content-generation,/en/blog,hub,low,,"",
+/blog/innovacion-en-desarrollo-web-creando-sitios-de-alto-impacto,/blog,hub,low,,"",
+/en/blog/what-is-immersive-experience-and-what-are-its-advantages,/en/blog,hub,low,,"",
+/blog/diferencia-entre-mockups-web-y-wireframes,/blog,hub,low,,"",
+/en/blog/innovation-in-web-development-creating-high-impact-sites,/en/blog,hub,low,,"",
+/en/blog/personal-blog-examples-and-themes-you-can-use,/en/blog,hub,low,,"",
+/blog/seo-para-medios-de-comunicacion,/blog,hub,low,,"",
+/blog/desarrollo-seguro-construyendo-aplicaciones-robustas,/blog,hub,low,,"",
+/en/blog/efficient-management-google-cloud-platform-console,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.111
+/en/blog/cloud-storage-web-applications,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.143
+/blog/busqueda-visual-gana-trafico-a-tu-sitio-web-posicionando-tus-imagenes,/blog,hub,low,,"",
+/blog/por-que-las-soluciones-tecnologicas-son-importantes-en-la-transformacion-y-evolucion-de-las-empresas-en-colombia,/blog,hub,low,,"",
+/blog/beneficios-de-los-servicios-en-la-nube-para-las-empresas,/blog,hub,low,,"",
+/blog/soluciones-tecnologicas-a-la-medida,/blog,hub,low,,"",
+/en/blog/what-are-the-most-frequent-cyber-attacks-on-websites,/en/blog,hub,low,,"",
+/en/blog/ai-automation-business-processes,/en/blog,hub,low,,"",
+/blog/fintech-vs-bancos-tradicionales-cual-es-la-mejor-opcion,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.2
+/blog/inteligencia-artificial-beneficios-en-medios-de-comunicacion,/blog,hub,low,,"",
+/en/blog/the-best-web-hosting-in-colombia,/en/blog,hub,low,,"",
+/blog/realidad-virtual-y-aumentada-que-es-y-aplicarlo-a-mi-empresa,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.143
+/blog/pruebas-unitarias-con-inteligencia-artificial,/blog,hub,low,,"",
+/en/blog/how-aI-is-revolutionizing-decision-making,/en/blog,hub,low,,"",
+/blog/soluciones-escalables-en-la-nube-creciendo-con-tu-empresa,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.143
+/en/blog/what-is-devops,/en/blog,hub,low,,"",
+/en/blog/what-is-staff-augmentation-and-how-can-it-help-your-company,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.333
+/en/blog/google-bard-understand-the-main-differences-with-chat-gpt,/en/blog,hub,low,,"",
+/en/blog/unit-testing-with-artificial-intelligence,/en/blog,hub,low,,"",
+/en/blog/what-are-cloud-services,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.2
+/en/blog/top-tech-trends-businesses-2024,/en/blog,hub,low,,"",
+/blog/ia-generativa-en-colombia-nivelics,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.2
+/blog/maximizando-la-eficiencia-con-staff-augmentation-una-guia-completa,/blog,hub,low,finops-guia-completa,"FinOps: la guía completa para optimizar tu inversión cloud",0.286
+/en/blog/why-technology-solutions-are-important-in-the-transformation-and-evolution-of-companies-in-colombia,/en/blog,hub,low,,"",
+/en/blog/ia-driven-process-automation-transforming-business-efficiency,/en/blog,hub,low,,"",
+/en/blog/critical-vulnerabilities-2024,/en/blog,hub,low,,"",
+/blog/staff-augmentation-vs-outsourcing-en-colombia,/blog/staff-augmentation-vs-outsourcing,rename,high,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.75
+/blog/beneficios-del-aprendizaje-profundo-descubriendo-un-nuevo-horizonte-de-la-inteligencia-artificial,/blog,hub,low,,"",
+/blog/impacto-inteligencia-artificial-empresas,/blog,hub,low,,"",
+/blog/descubre-los-beneficios-de-la-ia-generativa-para-consejos-directivos,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.143
+/en/blog/continuous-migration-navigating-the-challenges-and-benefits-of-business-transition,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.083
+/blog/super-apps-revolucion-aplicaciones,/blog,hub,low,,"",
+/en/blog/ux-design-for-media-know-its-benefits,/en/blog,hub,low,,"",
+/blog/pruebas-de-seguridad-en-los-sitios-web-descubre-los-beneficios,/blog,hub,low,,"",
+/blog/empleados-de-valor-como-identificarlos-y-fortalecer,/blog,hub,low,,"",
+/blog/como-la-ia-esta-revolucionando-la-toma-de-decisiones,/blog,hub,low,,"",
+/en/blog/revolutionize-your-mobile-applications-with-the-power-of-progressive-web-apps,/en/blog,hub,low,,"",
+/blog/que-es-devops,/blog,hub,low,,"",
+/blog/principales-cambios-de-ga4-con-google-universal-analytics,/blog,hub,low,,"",
+/blog/claves-para-una-exitosa-migracion-it-estrategias-y-mejores-practicas,/blog,hub,low,migracion-cloud-errores-comunes,"5 errores comunes en migraciones cloud (y cómo evitarlos)",0.111
+/en/blog/devops-automation-tools,/en/blog,hub,low,,"",
+/blog/marketing-politico-una-ficha-clave-en-el-exito-de-su-campana,/blog,hub,low,,"",
+/en/blog/latin-american-it-staffing-talent-and-specialization-at-a-better-cost,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.083
+/blog/ciberseguridad-era-digital-proteger-empresa,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.143
+/blog/busqueda-por-voz-que-es-y-como-lograr-aparecer-en-estos-resultados,/blog,hub,low,,"",
+/en/blog/women-in-technology-transforming-history-and-the-world,/en/blog,hub,low,,"",
+/blog/mujeres-en-la-tecnologia-que-transforman-la-historia-y-el-mundo,/blog,hub,low,,"",
+/blog/agilizando-proyectos-it-con-celulas-de-trabajo-eficientes,/blog,hub,low,,"",
+/en/blog/implementation-of-scrum-an-efficient-mindset-change-1,/en/blog,hub,low,,"",
+/blog/transformando-educacion-aprendizaje-google-workspace,/blog,hub,low,,"",
+/blog/descubre-los-beneficios-de-la-automatizacion-end-to-end,/blog,hub,low,,"",
+/blog/implementacion-de-scrum-un-cambio-de-mentalidad-eficiente,/blog,hub,low,,"",
+/blog/drupal-10-vs-drupal-9-comparacion,/blog,hub,low,,"",
+/blog/diferencias-de-los-cms-wordpress-drupal-y-strapi-para-medios-de-comunicacion,/blog,hub,low,,"",
+/blog/staff-augmentation-vs-contratacion-tradicional-diferencia-y-efecto,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.286
+/blog/tendencias-tecnologicas-empresas-2024,/blog,hub,low,,"",
+/en/blog/impact-artificial-intelligence-businesses,/en/blog,hub,low,,"",
+/en/blog/tailored-technological-solutions,/en/blog,hub,low,,"",
+/en/blog/react-or-angular-differences-and-benefits-according-to-your-needs,/en/blog,hub,low,,"",
+/en/blog/cybersecurity-digital-age-protect-business,/en/blog,hub,low,,"",
+/en/blog/the-importance-of-seo-on-your-website,/en/blog,hub,low,,"",
+/blog/estrategias-seo-nivelics,/blog,hub,low,,"",
+/blog/great-place-to-work,/blog,hub,low,,"",
+/en/blog/voice-search-what-is-it-and-how-to-appear-in-these-results,/en/blog,hub,low,,"",
+/en/blog/nivelics-at-la-7-em-expansion-in-latin-america-with-startup-mexico,/en/blog,hub,low,,"",
+/en/blog/streamlining-it-projects-with-efficient-work-cells,/en/blog,hub,low,,"",
+/blog/mejores-practicas-ciberseguridad-empresas,/blog,hub,low,,"",
+/en/blog/proactive-monitoring-aws-optimized-secure,/en/blog,hub,low,,"",
+/blog/que-es-una-landing-page-y-cuando-usarla,/blog,hub,low,,"",
+/en/blog/cybersecurity-for-e-commerce,/en/blog,hub,low,,"",
+/blog/garantizar-exito-proyecto-software-garantia-calidad,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.091
+/en/blog/aws-cost-optimization-efficient-billing,/en/blog,hub,low,,"",
+/blog/revoluciona-tus-aplicaciones-moviles-con-el-poder-de-las-progressive-web-apps,/blog,hub,low,,"",
+/blog/desarrollo-apps-conectar-digital,/blog,hub,low,,"",
+/blog/que-es-rpa-y-sus-beneficios,/blog,hub,low,,"",
+/en/blog/transforming-education-learning-google-workspace,/en/blog,hub,low,,"",
+/en/blog/generative-ai-content-creation-businesses,/en/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"How to implement generative AI in your company: practical guide 2026",0.111
+/en/blog/visual-search-gain-traffic-to-your-website-by-positioning-your-images,/en/blog,hub,low,,"",
+/en/blog/the-importance-of-web-design-in-user-experience,/en/blog,hub,low,,"",
+/blog/nivelics-soluciones-digitales-a-la-medida,/blog,hub,low,,"",
+/blog/blog-personal-como-aplicar-ux-y-sus-beneficios,/blog,hub,low,,"",
+/en/blog/ what-is-rpa-and-Its-benefits,/en/blog,hub,low,,"",
+/blog/talent-acquisition-estrategico-claves-para-el-exito-empresarial,/blog,hub,low,,"",
+/en/blog/nivelics-on-techla-media-preparing-for-the-international-market,/en/blog,hub,low,,"",
+/blog/como-saber-si-tu-desarrollo-web-es-exitoso,/blog,hub,low,,"",
+/en/blog/cybersecurity-audits-protect-your-website-from-cyberthreats,/en/blog,hub,low,,"",
+/en/blog/tips-to-improve-ux-on-mobile-devices,/en/blog,hub,low,,"",
+/en/blog/staff-augmentation-vs-outsourcing-differences-and-benefits,/en/blog/staff-augmentation-vs-outsourcing,rename,medium,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.6
+/blog/contenido-seo-marketing-digital-nivelics,/blog,hub,low,,"",
+/blog/guia-completa-migrar-nube,/blog,hub,low,finops-guia-completa,"FinOps: la guía completa para optimizar tu inversión cloud",0.4
+/en/blog/ensure-success-software-project-quality-assurance,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.091
+/en/blog/drupal-support-what-happens-when-support-for-my-version-ends,/en/blog,hub,low,,"",
+/blog/nivelics-en-la-7-em-expansion-en-america-latina-con-startup-mexico,/blog,hub,low,,"",
+/en/blog/how-does-artificial-intelligence-influence-cybersecurity,/en/blog,hub,low,,"",
+/blog/tips-para-mejorar-ux-en-dispositivos-moviles,/blog,hub,low,,"",
+/blog/ia-generativa-creacion-contenido-empresas,/blog,hub,low,como-implementar-ia-generativa-en-tu-empresa,"Cómo implementar IA generativa en tu empresa: guía práctica 2026",0.167
+/en/blog/privacy-policy,/en/blog,hub,low,,"",
+/en/blog/complete-guide-cloud-migration,/en/blog,hub,low,finops-guia-completa,"FinOps: The Complete Guide to Optimizing Your Cloud Investment",0.429
+/en/blog/the-cloud-how-to-save-money-and-time-in-your-business,/en/blog,hub,low,migracion-cloud-errores-comunes,"5 Common Cloud Migration Mistakes (and How to Avoid Them)",0.125
+/blog/actualizar-wordpress-core-plugins-seguridad,/blog,hub,low,,"",
+/en/blog/political-marketing-a-key-piece-in-the-success-of-your-campaign,/en/blog,hub,low,,"",
+/en/blog/sustainable-digital-transformation,/en/blog,hub,low,,"",
+/en/blog/great-place-to-work,/en/blog,hub,low,,"",
+/en/blog/how-to-create-an-seo-strategy-for-your-website,/en/blog,hub,low,,"",
+/blog/chatbots-vs-agentes-ia-atencion-cliente,/blog,hub,low,,"",
+/blog/la-importancia-del-diseno-web-en-la-experiencia-de-usuario,/blog,hub,low,,"",
+/en/blog/reasons-choose-staff-augmentation-nivelics,/en/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: Which Is Better for Your Project?",0.333
+/blog/la-importancia-de-optimizar-nuestros-sitios-web,/blog,hub,low,finops-guia-completa,"FinOps: la guía completa para optimizar tu inversión cloud",0.1
+/en/blog/innovations-software-development-Nivelics,/en/blog,hub,low,,"",
+/en/blog/automated-vs-manual-testing,/en/blog,hub,low,,"",
+/blog/razones-elegir-staff-augmentation-nivelics,/blog,hub,low,staff-augmentation-vs-outsourcing,"Staff Augmentation vs Outsourcing: ¿cuál es mejor para tu proyecto?",0.333
+/blog/talento-it-a-la-medida-como-elegir-el-it-staffing-adecuado,/blog,hub,low,,"",
+/en/blog/super-apps-market-revolution,/en/blog,hub,low,,"",
+/en/blog/seo-positioning-for-universities-reach-the-top-of-search-engines,/en/blog,hub,low,,"",

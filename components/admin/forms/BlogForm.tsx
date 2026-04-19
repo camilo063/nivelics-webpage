@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BilingualEditor, BilingualField } from "@/components/admin/ui/BilingualEditor";
 import { SlugInput } from "@/components/admin/ui/SlugInput";
 import { PublishControls } from "@/components/admin/ui/PublishControls";
 import { ImageUploader } from "@/components/admin/ui/ImageUploader";
+import { TiptapEditor } from "@/components/admin/ui/TiptapEditor";
+import { Bot, Sparkles } from "lucide-react";
 import { createBlogPost, updateBlogPost, deleteBlogPost } from "@/lib/admin/actions/blog.actions";
 
 interface BlogPostData {
@@ -55,12 +57,19 @@ const defaultPost: BlogPostData = {
   categoryId: null,
 };
 
+interface CategoryOption {
+  id: string;
+  slug: string;
+  nameEs: string;
+}
+
 interface BlogFormProps {
   initialData?: Partial<BlogPostData> & { id?: string };
   isNew?: boolean;
+  categories?: CategoryOption[];
 }
 
-export default function BlogForm({ initialData, isNew = true }: BlogFormProps) {
+export default function BlogForm({ initialData, isNew = true, categories = [] }: BlogFormProps) {
   const router = useRouter();
   const [post, setPost] = useState<BlogPostData>({
     ...defaultPost,
@@ -74,6 +83,64 @@ export default function BlogForm({ initialData, isNew = true }: BlogFormProps) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [translatingField, setTranslatingField] = useState<string | null>(null);
+  const [suggesting, setSuggesting] = useState(false);
+  const [suggestedByAi, setSuggestedByAi] = useState(false);
+  const autoSuggestTriedRef = useRef(false);
+
+  async function suggestCategory(options?: { silentAuto?: boolean }): Promise<void> {
+    if (!post.titleEs.trim()) return;
+    if (categories.length === 0) return;
+    setSuggesting(true);
+    try {
+      const res = await fetch("/api/admin/categorize", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: post.titleEs,
+          excerpt: post.excerptEs,
+          content: post.contentEs,
+        }),
+      });
+      const data = (await res.json()) as {
+        categoryId?: string;
+        categoryName?: string;
+        confidence?: string;
+        error?: string;
+      };
+      if (!res.ok || !data.categoryId) return;
+
+      if (
+        !options?.silentAuto &&
+        post.categoryId &&
+        post.categoryId !== data.categoryId &&
+        !confirm(`¿Cambiar categoría a "${data.categoryName}"?`)
+      ) {
+        return;
+      }
+
+      // In silent-auto mode, never overwrite a category the user already picked.
+      if (options?.silentAuto && post.categoryId) return;
+
+      update("categoryId", data.categoryId);
+      setSuggestedByAi(true);
+    } catch {
+      // silent fail — user can retry
+    } finally {
+      setSuggesting(false);
+    }
+  }
+
+  // Auto-suggest once on new posts when title and excerpt are populated and
+  // no category has been chosen yet. Runs at most once per mount.
+  useEffect(() => {
+    if (!isNew) return;
+    if (autoSuggestTriedRef.current) return;
+    if (post.categoryId) return;
+    if (!post.titleEs.trim() || !post.excerptEs.trim()) return;
+    autoSuggestTriedRef.current = true;
+    void suggestCategory({ silentAuto: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [post.titleEs, post.excerptEs, isNew]);
 
   function update<K extends keyof BlogPostData>(key: K, value: BlogPostData[K]) {
     setPost((prev) => ({ ...prev, [key]: value }));
@@ -216,32 +283,56 @@ export default function BlogForm({ initialData, isNew = true }: BlogFormProps) {
                 </div>
               )}
 
-              {/* Content */}
+              {/* Content — WYSIWYG editor */}
               {activeTab === "side-by-side" ? (
-                <BilingualField
-                  labelEs="Contenido"
-                  labelEn="Content"
-                  valueEs={post.contentEs}
-                  valueEn={post.contentEn}
-                  onChangeEs={(v) => update("contentEs", v)}
-                  onChangeEn={(v) => update("contentEn", v)}
-                  multiline
-                  rows={12}
-                  onTranslate={() => translateField("contentEs", "contentEn")}
-                  translating={translatingField === "contentEs"}
-                />
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-text-70">Contenido</label>
+                    <TiptapEditor
+                      value={post.contentEs}
+                      onChange={(v) => update("contentEs", v)}
+                      placeholder="Escribe el contenido en español…"
+                      ariaLabel="Contenido en español"
+                    />
+                  </div>
+                  <div>
+                    <div className="mb-2 flex items-center justify-between">
+                      <label className="text-sm font-medium text-text-70">Content</label>
+                      {post.contentEs && (
+                        <button
+                          type="button"
+                          onClick={() => translateField("contentEs", "contentEn")}
+                          disabled={translatingField === "contentEs"}
+                          className="flex items-center gap-1.5 rounded-md bg-ia/10 px-2.5 py-1 text-xs font-medium text-ia hover:bg-ia/20 transition-colors disabled:opacity-50"
+                        >
+                          <Bot className="h-3.5 w-3.5" />
+                          {translatingField === "contentEs" ? "Traduciendo..." : "Auto-traducir"}
+                        </button>
+                      )}
+                    </div>
+                    <TiptapEditor
+                      value={post.contentEn}
+                      onChange={(v) => update("contentEn", v)}
+                      placeholder="Write the content in English…"
+                      ariaLabel="Content in English"
+                    />
+                  </div>
+                </div>
               ) : (
                 <div>
                   <label className="mb-2 block text-sm font-medium text-text-70">
                     {activeTab === "es" ? "Contenido" : "Content"}
                   </label>
-                  <textarea
+                  <TiptapEditor
+                    key={activeTab}
                     value={activeTab === "es" ? post.contentEs : post.contentEn}
-                    onChange={(e) =>
-                      update(activeTab === "es" ? "contentEs" : "contentEn", e.target.value)
+                    onChange={(v) => update(activeTab === "es" ? "contentEs" : "contentEn", v)}
+                    placeholder={
+                      activeTab === "es"
+                        ? "Escribe el contenido en español…"
+                        : "Write the content in English…"
                     }
-                    rows={12}
-                    className="w-full rounded-lg border border-border bg-bg-elevated px-4 py-3 text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none font-mono text-sm"
+                    ariaLabel={activeTab === "es" ? "Contenido en español" : "Content in English"}
                   />
                 </div>
               )}
@@ -354,6 +445,43 @@ export default function BlogForm({ initialData, isNew = true }: BlogFormProps) {
             />
             <span className="text-sm text-text-40">minutos</span>
           </div>
+        </div>
+
+        {/* Category */}
+        <div className="rounded-xl border border-border bg-bg-surface p-5 space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-sm font-semibold text-text-100">Categoría</h3>
+            {suggestedByAi && post.categoryId ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-ia/10 px-2 py-0.5 text-[10px] font-medium text-ia">
+                <Sparkles className="h-3 w-3" />
+                Sugerido por IA
+              </span>
+            ) : null}
+          </div>
+          <select
+            value={post.categoryId || ""}
+            onChange={(e) => {
+              update("categoryId", e.target.value || null);
+              setSuggestedByAi(false);
+            }}
+            className="w-full rounded-lg border border-border bg-bg-elevated px-4 py-2.5 text-sm text-text-100 focus:border-primary focus:outline-none"
+          >
+            <option value="">Sin categoría</option>
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.nameEs}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={() => void suggestCategory()}
+            disabled={suggesting || !post.titleEs.trim() || categories.length === 0}
+            className="flex w-full items-center justify-center gap-1.5 rounded-md bg-ia/10 px-2.5 py-1.5 text-xs font-medium text-ia hover:bg-ia/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            {suggesting ? "Analizando..." : "Sugerir con IA"}
+          </button>
         </div>
 
         {/* Tags */}
