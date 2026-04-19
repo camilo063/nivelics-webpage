@@ -283,6 +283,9 @@ export function mapBlogPost(data: Record<string, unknown>, locale: Locale): Mapp
     tags: (data.tags as string[]) || [],
     readingTimeMinutes: (data.readingTimeMinutes as number) || null,
     publishedAt: (data.publishedAt as Date) || null,
+    createdAt: (data.createdAt as Date) || null,
+    updatedAt: (data.updatedAt as Date) || null,
+    categoryId: (data.categoryId as string) || null,
     seoTitle: pick(locale, data.seoTitleEs as string, data.seoTitleEn as string) || "",
     seoDescription:
       pick(locale, data.seoDescriptionEs as string, data.seoDescriptionEn as string) || "",

@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { blogPosts, blogCategories, adminActivityLog } from "@/lib/db/schema/admin";
 import { blogPostSchema, type BlogPostInput } from "@/lib/admin/validations/blog.schema";
 import { getAdminSession } from "@/lib/admin/session";
-import { eq, desc, and, isNull, ilike, count } from "drizzle-orm";
+import { eq, desc, and, isNull, ilike, count, or } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { revalidatePublicPages } from "@/lib/admin/revalidate-public";
 
@@ -13,6 +13,7 @@ export async function getBlogPosts(options?: {
   limit?: number;
   status?: string;
   search?: string;
+  categoryId?: string;
 }) {
   if (!db) return { posts: [], total: 0 };
 
@@ -23,11 +24,19 @@ export async function getBlogPosts(options?: {
   const conditions = [isNull(blogPosts.deletedAt)];
 
   if (options?.status && options.status !== "all") {
-    conditions.push(eq(blogPosts.status, options.status as "draft" | "published" | "scheduled"));
+    conditions.push(
+      eq(blogPosts.status, options.status as "draft" | "published" | "scheduled" | "archived"),
+    );
+  }
+
+  if (options?.categoryId && options.categoryId !== "all") {
+    conditions.push(eq(blogPosts.categoryId, options.categoryId));
   }
 
   if (options?.search) {
-    conditions.push(ilike(blogPosts.titleEs, `%${options.search}%`));
+    const term = `%${options.search}%`;
+    const searchClause = or(ilike(blogPosts.titleEs, term), ilike(blogPosts.slug, term));
+    if (searchClause) conditions.push(searchClause);
   }
 
   const [posts, totalResult] = await Promise.all([

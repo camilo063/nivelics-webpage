@@ -235,6 +235,9 @@ export interface MappedBlogPost {
   tags: string[];
   readingTimeMinutes: number | null;
   publishedAt: Date | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  categoryId: string | null;
   seoTitle: string;
   seoDescription: string;
 }
