@@ -11,7 +11,7 @@ import { getWebSiteSchema } from "@/lib/schema/website";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { AmericaMapWrapper } from "@/components/sections/america-map-wrapper";
 import { ProductosHomeStrip } from "@/components/sections/home/ProductosHomeStrip";
-import { getAllProductos, mapProducto } from "@/lib/cms/productos";
+import { getAllProductosHub, mapProductoCard } from "@/lib/cms/productos";
 import { ClientLogosMarquee } from "@/components/sections/client-logos-marquee";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { HeroGraph } from "@/components/ui/hero-graph";
@@ -128,7 +128,7 @@ export default async function HomePage() {
   // Fetch everything from DB in parallel
   const [homeRaw, productosRaw, casosRaw, hubsRaw, industriasRaw, uiLabels] = await Promise.all([
     getHomeContent(),
-    getAllProductos(),
+    getAllProductosHub(),
     getAllCasosExito(),
     getHubServicios(),
     getAllIndustrias(),
@@ -147,7 +147,7 @@ export default async function HomePage() {
     );
   }
 
-  const productos = productosRaw.map((p) => mapProducto(p, locale));
+  const productos = productosRaw.map((p) => mapProductoCard(p, locale));
   const casosAll = casosRaw.map((c) => mapCasoExito(c as Record<string, unknown>, locale));
   const casos = casosAll.filter((c) => c.featured).length
     ? casosAll.filter((c) => c.featured).slice(0, 7)

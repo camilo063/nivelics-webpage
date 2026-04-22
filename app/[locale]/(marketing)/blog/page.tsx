@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale } from "next-intl/server";
 import {
-  getAllBlogPosts,
+  getAllBlogPostsLight,
   getFeaturedBlogPost,
   getPopularBlogPosts,
   getActiveBlogCategories,
@@ -140,7 +140,7 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
     : null;
 
   const [rawAll, rawFeatured, rawPopular, rawCategories] = await Promise.all([
-    activeCategory ? getBlogPostsByCategory(activeCategory.id) : getAllBlogPosts(),
+    activeCategory ? getBlogPostsByCategory(activeCategory.id) : getAllBlogPostsLight(),
     activeCategory ? Promise.resolve(null) : getFeaturedBlogPost(),
     getPopularBlogPosts(5),
     getActiveBlogCategories(),

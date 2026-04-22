@@ -11,7 +11,7 @@ export async function GET() {
       return new NextResponse(config.llmsFullTxtContent, {
         headers: {
           "Content-Type": "text/plain; charset=utf-8",
-          "Cache-Control": "public, max-age=86400, s-maxage=86400",
+          "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
         },
       });
     }
@@ -23,7 +23,7 @@ export async function GET() {
   return new NextResponse(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=86400, s-maxage=86400",
+      "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
     },
   });
 }

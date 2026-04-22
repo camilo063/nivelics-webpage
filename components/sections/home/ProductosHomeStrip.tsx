@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import type { MappedProducto } from "@/lib/cms/productos";
+import type { MappedProductoCard } from "@/lib/cms/productos";
 import { accentHex } from "@/lib/cms/productos";
 
 interface Props {
-  productos: MappedProducto[];
+  productos: MappedProductoCard[];
   locale: "es" | "en";
   title?: string;
   cta?: string;
