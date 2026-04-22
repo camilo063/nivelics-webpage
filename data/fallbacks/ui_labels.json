@@ -1,0 +1,416 @@
+[
+  {
+    "id": "9d8b9dc2-e7b5-47db-aac3-f4733986d95a",
+    "key": "caso.solution_label",
+    "labelEs": "La Solución",
+    "labelEn": "The Solution",
+    "category": "caso",
+    "description": "Heading above the 'solution' paragraph on case detail pages.",
+    "updatedAt": "2026-04-16T21:03:53.678Z"
+  },
+  {
+    "id": "678f4bea-641a-4b66-9313-29c33ae58f45",
+    "key": "caso.results_label",
+    "labelEs": "Resultados",
+    "labelEn": "Results",
+    "category": "caso",
+    "description": "Heading above the results grid on case detail pages.",
+    "updatedAt": "2026-04-16T21:03:53.831Z"
+  },
+  {
+    "id": "75f10ec2-1bdc-466d-a51b-f485ec3e5a7f",
+    "key": "caso.services_used_label",
+    "labelEs": "Servicios utilizados",
+    "labelEn": "Services used",
+    "category": "caso",
+    "description": "Heading above the services badges at the bottom of case detail pages.",
+    "updatedAt": "2026-04-16T21:03:53.984Z"
+  },
+  {
+    "id": "fe0bcb6d-db93-47c6-9cdc-e4f5ae0e6cc8",
+    "key": "caso.cta_banner_title",
+    "labelEs": "¿Tu empresa podría ser el próximo caso?",
+    "labelEn": "Could your company be the next case?",
+    "category": "caso",
+    "description": "Shared CTA banner title on every case detail page.",
+    "updatedAt": "2026-04-16T21:03:54.138Z"
+  },
+  {
+    "id": "407cad2d-74ea-4cf3-8a89-315f4c651b18",
+    "key": "caso.cta_banner_description",
+    "labelEs": "Cuéntanos tu desafío y diseñemos juntos la solución.",
+    "labelEn": "Tell us your challenge and we'll design the solution together.",
+    "category": "caso",
+    "description": "Shared CTA banner description on every case detail page.",
+    "updatedAt": "2026-04-16T21:03:54.288Z"
+  },
+  {
+    "id": "a502c5d1-1b8c-4eb5-8d98-fbee784faa13",
+    "key": "caso.list_title",
+    "labelEs": "Casos de Éxito",
+    "labelEn": "Case Studies",
+    "category": "caso",
+    "description": "H1 on the case studies list page.",
+    "updatedAt": "2026-04-16T21:03:54.441Z"
+  },
+  {
+    "id": "01770ab1-b588-4427-a5a2-d8e404487e3f",
+    "key": "caso.list_subtitle",
+    "labelEs": "Resultados concretos que demuestran el impacto de nuestras soluciones en empresas reales.",
+    "labelEn": "Concrete results showing the impact of our solutions on real companies.",
+    "category": "caso",
+    "description": "Intro paragraph on the case studies list page.",
+    "updatedAt": "2026-04-16T21:03:54.595Z"
+  },
+  {
+    "id": "52244aa0-8daf-4651-a039-f4865ddd94c9",
+    "key": "caso.list_challenge_label",
+    "labelEs": "Desafío",
+    "labelEn": "Challenge",
+    "category": "caso",
+    "description": "Column heading inside each card on the case studies list.",
+    "updatedAt": "2026-04-16T21:03:54.762Z"
+  },
+  {
+    "id": "e281a35f-bb3f-4eb9-a2f4-132e52c9b3b1",
+    "key": "caso.list_solution_label",
+    "labelEs": "Solución",
+    "labelEn": "Solution",
+    "category": "caso",
+    "description": "Column heading inside each card on the case studies list.",
+    "updatedAt": "2026-04-16T21:03:54.923Z"
+  },
+  {
+    "id": "ceab481e-b763-40b1-945f-c18d7efb168c",
+    "key": "caso.list_results_label",
+    "labelEs": "Resultados",
+    "labelEn": "Results",
+    "category": "caso",
+    "description": "Column heading inside each card on the case studies list.",
+    "updatedAt": "2026-04-16T21:03:55.081Z"
+  },
+  {
+    "id": "7ce065c6-62b4-4f0e-8400-393e252a4ee3",
+    "key": "caso.list_cta_banner_title",
+    "labelEs": "¿Quieres ser el próximo caso de éxito?",
+    "labelEn": "Want to be the next success story?",
+    "category": "caso",
+    "description": "CTA banner title on the case studies list page.",
+    "updatedAt": "2026-04-16T21:03:55.236Z"
+  },
+  {
+    "id": "829067a2-c104-42f9-9c56-3afae86b8ade",
+    "key": "nav.all_services",
+    "labelEs": "Ver todos los servicios",
+    "labelEn": "All services",
+    "category": "nav",
+    "description": "Link at the top of the Services mega-menu mobile accordion.",
+    "updatedAt": "2026-04-16T21:03:55.393Z"
+  },
+  {
+    "id": "d00472c5-a3bb-47ab-9334-4dcaaf65a56a",
+    "key": "nav.all_products",
+    "labelEs": "Todos los productos",
+    "labelEn": "All products",
+    "category": "nav",
+    "description": "Link at the top of the Products mega-menu mobile accordion.",
+    "updatedAt": "2026-04-16T21:03:55.544Z"
+  },
+  {
+    "id": "fcc679cb-be72-4992-a15b-c87075f7f216",
+    "key": "nav.about_nivelics",
+    "labelEs": "Sobre Nivelics",
+    "labelEn": "About Nivelics",
+    "category": "nav",
+    "description": "Link at the top of the About mega-menu mobile accordion.",
+    "updatedAt": "2026-04-16T21:03:55.699Z"
+  },
+  {
+    "id": "3ba84be8-23f7-4639-9fec-956d405e35b5",
+    "key": "nav.aria_main",
+    "labelEs": "Navegación principal",
+    "labelEn": "Main navigation",
+    "category": "nav",
+    "description": "aria-label on the top-level <nav>.",
+    "updatedAt": "2026-04-16T21:03:55.861Z"
+  },
+  {
+    "id": "09d66d65-c2f9-42e7-a790-960064e5b0dc",
+    "key": "nav.aria_industries",
+    "labelEs": "Navegación por industrias",
+    "labelEn": "Industries navigation",
+    "category": "nav",
+    "description": "aria-label on the Industries mega-menu panel.",
+    "updatedAt": "2026-04-16T21:03:56.012Z"
+  },
+  {
+    "id": "60aaa381-6a15-4592-95ea-611fec8b124d",
+    "key": "nav.aria_products",
+    "labelEs": "Navegación por productos",
+    "labelEn": "Products navigation",
+    "category": "nav",
+    "description": "aria-label on the Products mega-menu panel.",
+    "updatedAt": "2026-04-16T21:03:56.168Z"
+  },
+  {
+    "id": "8add9456-e5a5-4f98-8e85-f521d27ba93f",
+    "key": "nav.aria_about",
+    "labelEs": "Navegación sección Nosotros",
+    "labelEn": "About navigation",
+    "category": "nav",
+    "description": "aria-label on the About mega-menu panel.",
+    "updatedAt": "2026-04-16T21:03:56.322Z"
+  },
+  {
+    "id": "f4395a07-faec-471d-90ee-842427e2790b",
+    "key": "nav.aria_close_menu",
+    "labelEs": "Cerrar menú",
+    "labelEn": "Close menu",
+    "category": "nav",
+    "description": "aria-label on the mobile menu close button.",
+    "updatedAt": "2026-04-16T21:03:56.478Z"
+  },
+  {
+    "id": "0d032bc9-61a8-4441-ac4d-89efa63f0553",
+    "key": "nav.aria_open_menu",
+    "labelEs": "Abrir menú",
+    "labelEn": "Open menu",
+    "category": "nav",
+    "description": "aria-label on the mobile menu open button.",
+    "updatedAt": "2026-04-16T21:03:56.693Z"
+  },
+  {
+    "id": "76db8428-30f0-469e-97c5-ed7e1fe8b09e",
+    "key": "ui.view",
+    "labelEs": "Ver",
+    "labelEn": "View",
+    "category": "ui_generic",
+    "description": "Short 'view' link on cards (home cases grid etc.).",
+    "updatedAt": "2026-04-16T21:03:56.845Z"
+  },
+  {
+    "id": "53d42db8-98f7-4435-b223-d167dd5d7d4f",
+    "key": "ui.see_all_cases",
+    "labelEs": "Ver todos los casos",
+    "labelEn": "See all case studies",
+    "category": "ui_generic",
+    "description": "Default CTA label when home 'See all cases' button has no DB override.",
+    "updatedAt": "2026-04-16T21:03:56.995Z"
+  },
+  {
+    "id": "e3aebb60-d0b1-4ca1-b516-5cd2f8f0b48d",
+    "key": "ui.faqs_title",
+    "labelEs": "Preguntas frecuentes",
+    "labelEn": "Frequently Asked Questions",
+    "category": "ui_generic",
+    "description": "Default FAQ section title when no DB override is provided.",
+    "updatedAt": "2026-04-16T21:03:57.147Z"
+  },
+  {
+    "id": "a4a0fbb7-4642-40b8-bb41-8a3d7172bdfd",
+    "key": "home.badge_ia",
+    "labelEs": "I — IA",
+    "labelEn": "I — AI",
+    "category": "ui_generic",
+    "description": "Badge label on the IA pillar card on the home pillars section.",
+    "updatedAt": "2026-04-16T21:03:57.297Z"
+  },
+  {
+    "id": "d1a1ecb3-c088-4255-b0be-12c8d3e45640",
+    "key": "servicio.staffaug_faqs_title",
+    "labelEs": "Preguntas frecuentes sobre Staff Augmentation",
+    "labelEn": "Frequently Asked Questions about Staff Augmentation",
+    "category": "servicio",
+    "description": "FAQ section title on the /servicios/staff-augmentation hub page.",
+    "updatedAt": "2026-04-16T21:03:58.701Z"
+  },
+  {
+    "id": "b01135de-ea46-4c41-9716-9c4c39c6bbf3",
+    "key": "servicio.dev_faqs_title",
+    "labelEs": "Preguntas frecuentes",
+    "labelEn": "Frequently Asked Questions",
+    "category": "servicio",
+    "description": "FAQ section title on the /servicios/desarrollo-digital hub page.",
+    "updatedAt": "2026-04-16T21:03:58.859Z"
+  },
+  {
+    "id": "a170ce9b-ec49-4323-9a9a-6237627e3e8d",
+    "key": "servicio.dev_process_title",
+    "labelEs": "Cómo trabajamos en cada proyecto",
+    "labelEn": "How we work on every project",
+    "category": "servicio",
+    "description": "Process section title on the /servicios/desarrollo-digital hub page.",
+    "updatedAt": "2026-04-16T21:03:59.013Z"
+  },
+  {
+    "id": "9747603d-6783-4239-971e-c0a18d9ec600",
+    "key": "servicio.staffaug_why_title",
+    "labelEs": "¿Por qué Nivelics vs. contratar directamente?",
+    "labelEn": "Why Nivelics vs. hiring directly?",
+    "category": "servicio",
+    "description": "'Why us' heading on the /servicios/staff-augmentation hub page.",
+    "updatedAt": "2026-04-16T21:03:59.168Z"
+  },
+  {
+    "id": "6f586a77-4ce8-4ec5-b335-21fb19461104",
+    "key": "servicio.staffaug_cta_view_profiles",
+    "labelEs": "Ver perfiles disponibles",
+    "labelEn": "View available profiles",
+    "category": "servicio",
+    "description": "Primary hero CTA on /servicios/staff-augmentation.",
+    "updatedAt": "2026-04-16T21:03:59.321Z"
+  },
+  {
+    "id": "3f6661ef-64e5-4b35-ad6b-c4ea502beedb",
+    "key": "servicio.staffaug_cta_whatsapp",
+    "labelEs": "Hablar por WhatsApp",
+    "labelEn": "Chat on WhatsApp",
+    "category": "servicio",
+    "description": "Secondary hero CTA on /servicios/staff-augmentation.",
+    "updatedAt": "2026-04-16T21:03:59.480Z"
+  },
+  {
+    "id": "8a3521af-b3c7-4801-955a-5afa1c5999fa",
+    "key": "footer.default_copyright",
+    "labelEs": "Todos los derechos reservados.",
+    "labelEn": "All rights reserved.",
+    "category": "footer",
+    "description": "Fallback copyright only used if navConfig.footer is missing.",
+    "updatedAt": "2026-04-16T21:03:59.785Z"
+  },
+  {
+    "id": "a3487ec2-61b5-4b6b-ad48-0f79f00cb5c7",
+    "key": "footer.default_contact_title",
+    "labelEs": "Contacto",
+    "labelEn": "Contact",
+    "category": "footer",
+    "description": "Fallback 'Contact' column title when no DB override exists.",
+    "updatedAt": "2026-04-16T21:03:59.938Z"
+  },
+  {
+    "id": "109c46eb-4bcf-4f7f-8332-20be91e22513",
+    "key": "caso.back_to_list",
+    "labelEs": "Todos los casos",
+    "labelEn": "All case studies",
+    "category": "caso",
+    "description": "Back link at the top of every case-study detail page.",
+    "updatedAt": "2026-04-16T21:03:53.314Z"
+  },
+  {
+    "id": "d8d3f3d9-9490-44bd-b183-6b924d1df9c0",
+    "key": "caso.challenge_label",
+    "labelEs": "El Reto",
+    "labelEn": "The Challenge",
+    "category": "caso",
+    "description": "Heading above the 'challenge' paragraph on case detail pages.",
+    "updatedAt": "2026-04-16T21:03:53.521Z"
+  },
+  {
+    "id": "5ecbe79c-77a5-4cc1-b13f-250db0362479",
+    "key": "footer.default_support",
+    "labelEs": "Soporte",
+    "labelEn": "Support",
+    "category": "footer",
+    "description": "Fallback 'Support' link label when no DB override exists.",
+    "updatedAt": "2026-04-16T21:04:00.102Z"
+  },
+  {
+    "id": "317e9284-e831-448a-8e20-c568b80500f6",
+    "key": "cta_banner.default_eyebrow",
+    "labelEs": "DIAGNÓSTICO GRATUITO",
+    "labelEn": "FREE DIAGNOSTIC",
+    "category": "ui_generic",
+    "description": "Default eyebrow label on the shared CTABanner component.",
+    "updatedAt": "2026-04-16T21:04:00.259Z"
+  },
+  {
+    "id": "40871ff2-0ae4-4db0-868c-79d24100459e",
+    "key": "cta_banner.default_button",
+    "labelEs": "Agenda tu diagnóstico",
+    "labelEn": "Book your assessment",
+    "category": "ui_generic",
+    "description": "Default button label on the shared CTABanner component.",
+    "updatedAt": "2026-04-16T21:04:00.411Z"
+  },
+  {
+    "id": "5448c512-d524-4c60-aa80-12c73b2c9f4e",
+    "key": "home.badge_cloud",
+    "labelEs": "C — Cloud",
+    "labelEn": "C — Cloud",
+    "category": "ui_generic",
+    "description": "Badge label on the Cloud pillar card (same in both languages).",
+    "updatedAt": "2026-04-16T21:03:57.453Z"
+  },
+  {
+    "id": "8383466d-0fa1-4ae2-afee-c7d851367fec",
+    "key": "home.badge_staffing",
+    "labelEs": "S — Staffing",
+    "labelEn": "S — Staffing",
+    "category": "ui_generic",
+    "description": "Badge label on the Staffing pillar card.",
+    "updatedAt": "2026-04-16T21:03:57.604Z"
+  },
+  {
+    "id": "945e0fc9-cbe8-4a09-b204-d55ecd107ce6",
+    "key": "home.badge_dev",
+    "labelEs": "Dev",
+    "labelEn": "Dev",
+    "category": "ui_generic",
+    "description": "Badge label on the Digital Development pillar card.",
+    "updatedAt": "2026-04-16T21:03:57.758Z"
+  },
+  {
+    "id": "0b267c12-5442-4de6-ae42-5d051fceef32",
+    "key": "servicio.ia_faqs_title",
+    "labelEs": "Preguntas frecuentes sobre IA",
+    "labelEn": "Frequently Asked Questions about AI",
+    "category": "servicio",
+    "description": "FAQ section title on the /servicios/inteligencia-artificial hub page.",
+    "updatedAt": "2026-04-16T21:03:58.540Z"
+  },
+  {
+    "id": "c1c17250-144c-467e-bc3d-d61de5420d92",
+    "key": "seo.home_default_title",
+    "labelEs": "Transformación Digital IA · Cloud · Staffing | Nivelics Colombia",
+    "labelEn": "Digital Transformation AI · Cloud · Staffing | Nivelics",
+    "category": "seo",
+    "description": "Fallback SEO title for the home page when no DB content exists.",
+    "updatedAt": "2026-04-16T21:03:57.912Z"
+  },
+  {
+    "id": "d86627c9-da27-41c7-8c83-342d1a656818",
+    "key": "seo.home_brand_suffix",
+    "labelEs": " | Nivelics Colombia",
+    "labelEn": " | Nivelics",
+    "category": "seo",
+    "description": "Suffix appended after the hero title in the home page metadata.",
+    "updatedAt": "2026-04-16T21:03:58.151Z"
+  },
+  {
+    "id": "3c84a69d-2944-4b57-bc24-6d8ef44f8a6c",
+    "key": "seo.home_default_description",
+    "labelEs": "Empresa colombiana de transformación digital B2B. IA aplicada, Cloud (AWS, GCP, Azure) y Staff Augmentation premium para LATAM y USA. Desde 2012.",
+    "labelEn": "Colombian B2B digital transformation company. Applied AI, Cloud (AWS, GCP, Azure) and premium Staff Augmentation for LATAM and USA. Since 2012.",
+    "category": "seo",
+    "description": "Fallback SEO description for the home page when no DB content exists.",
+    "updatedAt": "2026-04-16T21:03:58.230Z"
+  },
+  {
+    "id": "a0dc3118-c552-44be-b1ea-1664c028bbd5",
+    "key": "servicio.cloud_faqs_title",
+    "labelEs": "Preguntas frecuentes sobre Cloud",
+    "labelEn": "Frequently Asked Questions about Cloud",
+    "category": "servicio",
+    "description": "FAQ section title on the /servicios/cloud hub page.",
+    "updatedAt": "2026-04-16T21:03:58.387Z"
+  },
+  {
+    "id": "a9bdf309-dfb2-44a3-8332-5f5a4adb4dc8",
+    "key": "footer.default_brand_tagline",
+    "labelEs": "Transformación digital B2B. IA, Cloud & Staffing Premium.",
+    "labelEn": "B2B digital transformation. AI, Cloud & Premium Staffing.",
+    "category": "footer",
+    "description": "Fallback brand tagline only used if navConfig.footer is missing.",
+    "updatedAt": "2026-04-16T21:03:59.634Z"
+  }
+]

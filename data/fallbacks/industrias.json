@@ -1,0 +1,1969 @@
+[
+  {
+    "id": "0457f3f4-0efd-4838-b30e-16cdb7e4cd0d",
+    "slugEs": "logistica",
+    "slugEn": "logistics",
+    "icon": "truck",
+    "accentColor": "finops",
+    "nameEs": "Logística",
+    "nameEn": "Logistics",
+    "heroTitleEs": "Transformación Digital en Logística",
+    "heroTitleEn": "Digital Transformation in Logistics",
+    "heroSubtitleEs": "Trazabilidad total, rutas inteligentes y almacenes automatizados con IA, cloud y talento especializado.",
+    "heroSubtitleEn": "Full traceability, intelligent routing and automated warehouses with AI, cloud and specialized talent.",
+    "painPoints": [
+      {
+        "icon": "hex-nodes",
+        "descEn": "The customer expects to know where their package is by the minute. That means events from the driver's device, logistics partner API, and consolidation with business rules, all under a sub-second SLA.",
+        "descEs": "El cliente espera saber dónde está su paquete al minuto. Eso implica eventos desde el dispositivo del conductor, API del socio logístico y consolidación con reglas de negocio, todo bajo un SLA sub-segundo.",
+        "titleEn": "End-to-end real-time traceability",
+        "titleEs": "Trazabilidad de extremo a extremo en tiempo real"
+      },
+      {
+        "icon": "oct-monitor",
+        "descEn": "Delivery windows, vehicle capacity, urban traffic, hazardous zones, loading schedules. A real VRP isn't solved with Google Maps — it requires optimization with OR-tools or equivalent.",
+        "descEs": "Ventanas de entrega, capacidad del vehículo, tráfico urbano, zonas peligrosas, horarios de carga. Un VRP real no se resuelve con Google Maps — requiere optimización con OR-tools o equivalente.",
+        "titleEn": "Routing with real constraints",
+        "titleEs": "Ruteo con restricciones reales"
+      },
+      {
+        "icon": "tri-growth",
+        "descEn": "Incorrect picking, warehouses with phantom inventory, and duplicate shipping labels stem from disjointed systems. Event sourcing and continuous reconciliation are table stakes.",
+        "descEs": "El picking erróneo, la bodega con inventario fantasma y las guías duplicadas viven en la junta de sistemas heterogéneos. Event sourcing y conciliación continua son tabla.",
+        "titleEn": "WMS that talks to OMS, TMS and ERP without breaking",
+        "titleEs": "WMS que hable con OMS, TMS y ERP sin romper"
+      },
+      {
+        "icon": "dia-search",
+        "descEn": "Stock-out in Bogotá while surplus in Medellín. Requires forecasting by SKU × zone with weekly retraining and detection of short-tail vs. long-tail products.",
+        "descEs": "Stock-out en Bogotá mientras sobra en Medellín. Requiere forecasting por SKU × zona con reentrenamiento semanal y detección de productos con cola corta vs. larga.",
+        "titleEn": "Demand forecasting by zone, not global",
+        "titleEs": "Predicción de demanda por zona, no global"
+      },
+      {
+        "icon": "hex-time",
+        "descEn": "Drivers and warehouse workers operate on unstable 3G. Apps must work offline-first, sync when possible, and never lose scan data.",
+        "descEs": "Conductores y bodegueros trabajan con 3G inestable. Las apps tienen que funcionar offline-first, sincronizar cuando pueden y nunca perder datos de escaneo.",
+        "titleEn": "Mobile operation apps with low connectivity",
+        "titleEs": "Apps para operación móvil con baja conectividad"
+      }
+    ],
+    "solutions": [
+      {
+        "icon": "brain",
+        "descEn": "Demand prediction, route optimization with ML and computer vision.",
+        "descEs": "Predicción de demanda, optimización de rutas con ML y visión por computadora.",
+        "titleEn": "AI for Logistics",
+        "titleEs": "IA para Logística"
+      },
+      {
+        "icon": "cloud",
+        "descEn": "Cloud IoT platforms for real-time tracking and operational dashboards.",
+        "descEs": "Plataformas IoT en la nube para tracking en tiempo real y dashboards operativos.",
+        "titleEn": "Cloud for Logistics",
+        "titleEs": "Cloud para Logística"
+      },
+      {
+        "icon": "users",
+        "descEn": "Engineers with experience in TMS, WMS and IoT integrations.",
+        "descEs": "Ingenieros con experiencia en TMS, WMS e integraciones IoT.",
+        "titleEn": "Staffing for Logistics",
+        "titleEs": "Staffing para Logística"
+      }
+    ],
+    "casoDestacadoId": null,
+    "differentiators": null,
+    "metrics": [
+      {
+        "value": "25%",
+        "labelEn": "Average reduction in cost per delivery",
+        "labelEs": "Reducción promedio en costo por entrega"
+      },
+      {
+        "value": "95%",
+        "labelEn": "On-time delivery on completed projects",
+        "labelEs": "On-time delivery en proyectos entregados"
+      },
+      {
+        "value": "<2s",
+        "labelEn": "Tracking update on end client",
+        "labelEs": "Actualización de tracking en cliente final"
+      },
+      {
+        "value": "30%",
+        "labelEn": "Increased driver productivity through optimized routing",
+        "labelEs": "Aumento en productividad del conductor con mejor ruteo"
+      }
+    ],
+    "statHighlights": [
+      {
+        "value": "US$12.4T",
+        "source": "Armstrong & Associates",
+        "labelEn": "Global Logistics Costs in 2024",
+        "labelEs": "Costos logísticos globales en 2024"
+      },
+      {
+        "value": "53%",
+        "source": "DHL LATAM Logistics Outlook 2024",
+        "labelEn": "logistics operators in LATAM plan to invest in AI within 2 years",
+        "labelEs": "De operadores logísticos en LATAM planean invertir en IA en 2 años"
+      },
+      {
+        "value": "28%",
+        "source": "McKinsey Last-Mile Delivery Study",
+        "labelEn": "Fuel savings with dynamic vs. static routing",
+        "labelEs": "Ahorro en combustible con ruteo dinámico vs. estático"
+      }
+    ],
+    "regulations": [
+      {
+        "code": "DIAN",
+        "descEn": "Issuance, validation, and storage of transport documents.",
+        "descEs": "Emisión, validación y almacenamiento de documentos de transporte.",
+        "nameEn": "Electronic invoicing and delivery notes",
+        "nameEs": "Facturación y remisiones electrónicas"
+      },
+      {
+        "code": "ISO 9001",
+        "descEn": "Applicable for operators that export or serve corporate clients.",
+        "descEs": "Aplicable para operadores que exportan o sirven clientes corporativos.",
+        "nameEn": "Logistics Quality Management",
+        "nameEs": "Gestión de calidad logística"
+      },
+      {
+        "code": "Mintransporte",
+        "descEn": "Vehicle and driver registration, licensing, and compliance.",
+        "descEs": "Registro, permisos y compliance de vehículos y conductores.",
+        "nameEn": "Cargo transportation regulations",
+        "nameEs": "Normativa de transporte de carga"
+      },
+      {
+        "code": "Habeas Data",
+        "descEn": "Consent, retention, and deletion rights.",
+        "descEs": "Consentimiento, retención y derechos de supresión.",
+        "nameEn": "Recipient and driver data",
+        "nameEs": "Datos de destinatarios y conductores"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "tri-deploy",
+        "descEn": "Driver device events, logistics partners, and IoT sensors consolidated into a single timeline. Public API for corporate client integrations.",
+        "descEs": "Eventos de dispositivos de conductor, socios logísticos y sensores IoT consolidados en un timeline único. API pública para integraciones de cliente corporativo.",
+        "titleEn": "End-to-end traceability platform",
+        "titleEs": "Plataforma de trazabilidad end-to-end",
+        "outcomeEn": "Sub-2s visibility from pickup to confirmed delivery.",
+        "outcomeEs": "Visibilidad sub-2s desde pickup hasta entrega confirmada."
+      },
+      {
+        "icon": "hex-nodes",
+        "descEn": "Multi-constraint optimization (capacity, time windows, zones, restocking) with periodic reoptimization throughout the day. Integration with urban traffic data.",
+        "descEs": "Optimización multi-restricción (capacidad, ventanas, zonas, reabastecimiento) con reoptimización periódica durante el día. Integración con datos de tráfico urbano.",
+        "titleEn": "VRP Router with OR-Tools and Live Traffic",
+        "titleEs": "Ruteador VRP con OR-tools y tráfico en vivo",
+        "outcomeEn": "-28% fuel and +22% deliveries per route.",
+        "outcomeEs": "-28% en combustible y +22% en entregas por ruta."
+      },
+      {
+        "icon": "dia-trend",
+        "descEn": "Route-optimized picking in warehouse, automatic recount by ABC classification, continuous reconciliation against ERP with discrepancy dashboard.",
+        "descEs": "Picking guiado por ruta óptima en bodega, reconteo automático por ABC, reconciliación continua contra ERP con dashboard de discrepancias.",
+        "titleEn": "Cloud WMS with real-time reconciliation",
+        "titleEs": "WMS cloud con conciliación en tiempo real",
+        "outcomeEn": "60% reduction in phantom inventory.",
+        "outcomeEs": "Reducción 60% en inventario fantasma."
+      },
+      {
+        "icon": "hex-time",
+        "descEn": "Time series with causal factors (promotions, events, weather), short/long tail detection, warehouse-level replenishment recommendations.",
+        "descEs": "Series temporales con causales (promociones, eventos, clima), detección de cola corta/larga, recomendaciones de reposición por bodega.",
+        "titleEn": "SKU × zone forecasting with weekly retraining",
+        "titleEs": "Forecasting por SKU × zona con reentrenamiento semanal",
+        "outcomeEn": "-35% in stock-outs in historically problematic zones.",
+        "outcomeEs": "-35% en stock-outs en zonas históricamente problemáticas."
+      }
+    ],
+    "playbook": [
+      {
+        "descEn": "We map physical flow (warehouse → last mile) and digital (WMS, TMS, OMS, ERP). We identify where time or margin is lost.",
+        "descEs": "Levantamos flujo físico (bodega → última milla) y digital (WMS, TMS, OMS, ERP). Identificamos dónde se pierde tiempo o margen.",
+        "number": "01",
+        "titleEn": "Flow mapping and pain points",
+        "titleEs": "Mapeo de flujos y puntos de dolor"
+      },
+      {
+        "descEn": "Event sourcing of movements, single timeline per tracking number, actionable observability of failed messages.",
+        "descEs": "Event sourcing de movimientos, timeline único por guía, observabilidad de mensajes fallidos accionable.",
+        "number": "02",
+        "titleEn": "Event-driven architecture with traceability",
+        "titleEs": "Arquitectura event-driven con trazabilidad"
+      },
+      {
+        "descEn": "Pilot in one city or warehouse, measure against baseline, adjust with operations before rollout.",
+        "descEs": "Piloto en una ciudad o bodega, medición contra baseline, ajuste con operaciones antes de rollout.",
+        "number": "03",
+        "titleEn": "Routing and forecasting with operational validation",
+        "titleEs": "Ruteo y forecasting con validación operativa"
+      },
+      {
+        "descEn": "Driver and warehouse app with deferred sync, never lose data. Live monitoring dashboards.",
+        "descEs": "App de conductor y bodeguero con sync diferido, nunca pierden datos. Dashboards de monitoreo en vivo.",
+        "number": "04",
+        "titleEn": "Mobile offline-first apps and operations",
+        "titleEs": "Apps móviles offline-first y operación"
+      }
+    ],
+    "industryFaqs": [
+      {
+        "answerEn": "Yes. We use Google OR-tools and commercial alternatives depending on volume. We model real constraints (capacity, time windows, restricted zones, intermediate refueling) and reoptimize throughout the day with traffic data.",
+        "answerEs": "Sí. Usamos OR-tools de Google y alternativas comerciales según volumen. Modelamos restricciones reales (capacidad, ventanas, zonas prohibidas, reabastecimiento intermedio) y reoptimizamos a lo largo del día con datos de tráfico.",
+        "questionEn": "Do you have experience with VRP and route optimization?",
+        "questionEs": "¿Tienen experiencia con VRP y optimización de rutas?"
+      },
+      {
+        "answerEn": "Yes. Whatever you have — SAP TM, Manhattan, Oracle, proprietary — we integrate via REST/SOAP or with middleware if it doesn't expose an API. Anti-corruption layer pattern always, to avoid coupling release cycles.",
+        "answerEs": "Sí. Lo que sea que tengas — SAP TM, Manhattan, Oracle, propietario — lo integramos vía REST/SOAP o con middleware si no expone API. Patrón anti-corruption layer siempre, para no acoplar ritmos de release.",
+        "questionEn": "Can you integrate with our current TMS or WMS?",
+        "questionEs": "¿Pueden integrar con nuestro TMS o WMS actual?"
+      },
+      {
+        "answerEn": "Offline-first with deferred sync. Critical operations (scanning, delivery photo, signature) are stored locally and synchronized when network is available. Divergence monitoring between device and server to alert discrepancies.",
+        "answerEs": "Offline-first con sync diferido. Las operaciones críticas (escaneo, foto de entrega, firma) se almacenan local y se sincronizan cuando hay red. Monitoreo de divergencia entre dispositivo y servidor para alertar discrepancias.",
+        "questionEn": "How do they handle mobile apps in areas with poor connectivity?",
+        "questionEs": "¿Cómo manejan apps móviles en zonas con mala conectividad?"
+      },
+      {
+        "answerEn": "Yes. Models by SKU × geographic zone, with causal variables (promotions, weather, events). Weekly retraining and detection of short-tail vs. long-tail products to avoid overfitting.",
+        "answerEs": "Sí. Modelos por SKU × zona geográfica, con variables causales (promociones, clima, eventos). Reentrenamiento semanal y detección de productos cola-corta vs. cola-larga para no sobre-ajustar.",
+        "questionEn": "Do you do demand forecasting by zone?",
+        "questionEs": "¿Hacen forecasting de demanda por zona?"
+      },
+      {
+        "answerEn": "Target sub-2 seconds from the moment the event fires on the driver's device until it's reflected in the client's public API. With graceful degradation (eventual consistency) if a partner's backend fails.",
+        "answerEs": "Target sub-2 segundos desde que el evento se dispara en el dispositivo del conductor hasta que se refleja en la API pública del cliente. Con degradación graciosa (eventual consistency) si el backend de un socio falla.",
+        "questionEn": "What SLA do you operate for end-customer tracking?",
+        "questionEs": "¿Qué SLA operan en tracking al cliente final?"
+      }
+    ],
+    "techStack": [
+      {
+        "label": "AWS / GCP",
+        "category": "cloud"
+      },
+      {
+        "label": "Kafka",
+        "category": "data"
+      },
+      {
+        "label": "PostgreSQL + PostGIS",
+        "category": "data"
+      },
+      {
+        "label": "ClickHouse",
+        "category": "data"
+      },
+      {
+        "label": "Node.js / Go",
+        "category": "backend"
+      },
+      {
+        "label": "React Native",
+        "category": "frontend"
+      },
+      {
+        "label": "OR-tools",
+        "category": "ai"
+      },
+      {
+        "label": "Python / ML",
+        "category": "ai"
+      },
+      {
+        "label": "Mapbox / HERE",
+        "category": "other"
+      },
+      {
+        "label": "Redis",
+        "category": "backend"
+      },
+      {
+        "label": "Kubernetes",
+        "category": "cloud"
+      },
+      {
+        "label": "Datadog",
+        "category": "other"
+      }
+    ],
+    "servicesHighlight": ["ia", "desarrollo-digital", "cloud", "staffing"],
+    "relatedCaseSlugs": null,
+    "ctaTitleEs": "¿Buscas optimizar última milla o trazabilidad sin reemplazar todo?",
+    "ctaTitleEn": "Looking to optimize last-mile or traceability without replacing everything?",
+    "ctaPrimaryTextEs": "Hablar con un especialista en logística",
+    "ctaPrimaryTextEn": "Speak with a logistics specialist",
+    "ctaPrimaryUrl": "/contacto?industria=logistica",
+    "hubIntroTitleEs": "Trazabilidad, ruteo y WMS que reducen costo por envío",
+    "hubIntroTitleEn": "Traceability, routing, and WMS that reduce cost per shipment",
+    "hubIntroSubtitleEs": "Integración con tu TMS/WMS/ERP existente. Optimización con OR-tools, ML y apps offline-first para la operación.",
+    "hubIntroSubtitleEn": "Integration with your existing TMS/WMS/ERP. Optimization with OR-tools, ML, and offline-first apps for operations.",
+    "ctaTextEs": "Hablemos de tu proyecto en Logística",
+    "ctaTextEn": "Let’s talk about your Logistics project",
+    "seoTitleEs": "Tecnología para Logística y Transporte",
+    "seoTitleEn": "Technology for Logistics & Transportation",
+    "seoDescriptionEs": "Soluciones de trazabilidad, optimización de rutas y automatización de warehouse.",
+    "seoDescriptionEn": "Traceability, route optimization and warehouse automation solutions.",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "createdAt": "2026-04-09T01:55:40.316Z",
+    "updatedAt": "2026-04-14T18:50:10.716Z",
+    "deletedAt": null
+  },
+  {
+    "id": "b3567877-87e3-45ff-a763-4c6d7a2f4ca4",
+    "slugEs": "manufactura",
+    "slugEn": "manufacturing",
+    "icon": "factory",
+    "accentColor": "cloud",
+    "nameEs": "Manufactura",
+    "nameEn": "Manufacturing",
+    "heroTitleEs": "Industria 4.0: IA y Cloud para Manufactura",
+    "heroTitleEn": "Industry 4.0: AI & Cloud for Manufacturing",
+    "heroSubtitleEs": "Conectamos sensores, predecimos fallas y automatizamos calidad para llevar tu planta al siguiente nivel.",
+    "heroSubtitleEn": "We connect sensors, predict failures and automate quality to take your plant to the next level.",
+    "painPoints": [
+      {
+        "icon": "oct-monitor",
+        "descEn": "Production lines were designed without the cloud in mind. Unifying plant floor data with ERP/MES requires industrial gateways, OPC-UA/MQTT protocols, and segmented networking per IEC 62443.",
+        "descEs": "Las líneas de producción fueron diseñadas sin pensar en la nube. Unificar datos de planta con ERP/MES exige gateways industriales, protocolos OPC-UA/MQTT y red segmentada según IEC 62443.",
+        "titleEn": "OT systems (PLC, SCADA) isolated from the IT world",
+        "titleEs": "Sistemas OT (PLC, SCADA) aislados del mundo IT"
+      },
+      {
+        "icon": "oct-cube",
+        "descEn": "A minute of downtime on a critical line can cost tens of thousands of dollars. Reactive maintenance doesn't scale; predictive maintenance requires sensors, historization, and models trained on plant-specific data.",
+        "descEs": "Un minuto de paro en una línea crítica puede costar decenas de miles de dólares. El mantenimiento reactivo no escala; el predictivo requiere sensores, historización y modelos entrenados con datos de la planta específica.",
+        "statEn": "Unplanned downtime costs global industry US$50B+ annually (IDC).",
+        "statEs": "El downtime no planeado cuesta a la industria global US$50B+ anuales (IDC).",
+        "titleEn": "Unplanned downtime eating into profitability",
+        "titleEs": "Paradas no planeadas que se comen la utilidad"
+      },
+      {
+        "icon": "oct-shield",
+        "descEn": "Pharmaceutical, food, automotive: all need to know which raw material batch went into which final product. Requires integration between receiving, production, and packaging without paper.",
+        "descEs": "Farmacéutico, alimentos, automotriz: todos necesitan saber qué lote de materia prima entró a qué producto final. Exige integración entre recepción, producción y empaque sin papel.",
+        "titleEn": "Lot-to-lot traceability for quality and regulatory compliance",
+        "titleEs": "Trazabilidad lote-a-lote para calidad y regulación"
+      },
+      {
+        "icon": "dia-pulse",
+        "descEn": "100% inline inspection requires industrial cameras, vision models trained on local defects, and fast feedback to the operator. These aren't POCs — they're production processes with SLAs.",
+        "descEs": "Inspección 100% en línea requiere cámaras industriales, modelos de visión entrenados con defectos locales y feedback rápido al operador. No son POCs — son procesos en producción con SLAs.",
+        "titleEn": "Quality control with vision and ML",
+        "titleEs": "Control de calidad con visión y ML"
+      },
+      {
+        "icon": "hex-check",
+        "descEn": "Consumption, temperature, pressure, and performance data combined to optimize setpoints. 3–5% gains are real but only with a stable data pipeline and model governance.",
+        "descEs": "Datos de consumo, temperatura, presión y rendimiento combinados para optimizar setpoints. Los gains de 3–5% son reales pero solo con data pipeline estable y gobernanza de modelos.",
+        "titleEn": "Production and energy consumption optimization",
+        "titleEs": "Optimización de producción y consumo energético"
+      }
+    ],
+    "solutions": [
+      {
+        "icon": "brain",
+        "descEn": "Predictive maintenance models, computer vision and process optimization.",
+        "descEs": "Modelos de mantenimiento predictivo, visión por computadora y optimización de procesos.",
+        "titleEn": "AI for Manufacturing",
+        "titleEs": "IA para Manufactura"
+      },
+      {
+        "icon": "cloud",
+        "descEn": "IoT platforms, digital twins and real-time production dashboards.",
+        "descEs": "Plataformas IoT, digital twins y dashboards de producción en tiempo real.",
+        "titleEn": "Cloud for Manufacturing",
+        "titleEs": "Cloud para Manufactura"
+      },
+      {
+        "icon": "users",
+        "descEn": "Engineers with experience in industrial IoT and SCADA/MES integrations.",
+        "descEs": "Ingenieros con experiencia en IoT industrial e integraciones SCADA/MES.",
+        "titleEn": "Staffing for Manufacturing",
+        "titleEs": "Staffing para Manufactura"
+      }
+    ],
+    "casoDestacadoId": null,
+    "differentiators": null,
+    "metrics": [
+      {
+        "value": "15–30%",
+        "labelEn": "Reduction in unplanned downtime",
+        "labelEs": "Reducción en downtime no planeado"
+      },
+      {
+        "value": "24/7",
+        "labelEn": "Real-time production line dashboards",
+        "labelEs": "Dashboards de línea en tiempo real"
+      },
+      {
+        "value": "<5s",
+        "labelEn": "Plant event → dashboard latency",
+        "labelEs": "Latencia eventos planta → dashboard"
+      },
+      {
+        "value": "99.5%",
+        "labelEn": "MES cloud platform uptime",
+        "labelEs": "Uptime plataforma MES cloud"
+      }
+    ],
+    "statHighlights": [
+      {
+        "value": "US$4.4T",
+        "source": "Fortune Business Insights",
+        "labelEn": "Global investment in Industry 4.0 by 2030",
+        "labelEs": "Inversión global en Industria 4.0 para 2030"
+      },
+      {
+        "value": "82%",
+        "source": "Deloitte Manufacturing Outlook 2024",
+        "labelEn": "Manufacturers adopting AI report operational improvement",
+        "labelEs": "De manufactureros que adoptan IA reportan mejora operativa"
+      },
+      {
+        "value": "30%",
+        "source": "McKinsey Global Manufacturing Index",
+        "labelEn": "Waste reduction through vision inspection + ML",
+        "labelEs": "Reducción en desperdicio con inspección por visión + ML"
+      }
+    ],
+    "regulations": [
+      {
+        "code": "IEC 62443",
+        "descEn": "Network segmentation, zone-based access control, and defense-in-depth.",
+        "descEs": "Segmentación de red, control de acceso por zona y defense-in-depth.",
+        "nameEn": "Industrial OT systems cybersecurity",
+        "nameEs": "Ciberseguridad de sistemas OT industriales"
+      },
+      {
+        "code": "ISO 9001",
+        "descEn": "Document traceability, non-conformity management, continuous improvement.",
+        "descEs": "Trazabilidad documental, control de no conformidades, mejora continua.",
+        "nameEn": "Quality management",
+        "nameEs": "Gestión de calidad"
+      },
+      {
+        "code": "GMP",
+        "descEn": "Process documentation, equipment qualification, batch traceability.",
+        "descEs": "Documentación de procesos, cualificación de equipos, trazabilidad de lotes.",
+        "nameEn": "Good Manufacturing Practices (pharma / food)",
+        "nameEs": "Buenas Prácticas de Manufactura (farma / alimentos)"
+      },
+      {
+        "code": "FDA 21 CFR Part 11",
+        "descEn": "Required for manufacturers exporting pharma and medical devices to the USA.",
+        "descEs": "Obligatorio para manufactureros que exportan a USA en farma y dispositivos.",
+        "nameEn": "Electronic records and signatures",
+        "nameEs": "Registros y firmas electrónicas"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "dia-pulse",
+        "descEn": "We connect PLCs via OPC-UA/Modbus/MQTT, normalize data with edge computing, and push it to cloud-based Time Series DBs with zone-based retention and IEC 62443 compliance.",
+        "descEs": "Conectamos PLCs vía OPC-UA/Modbus/MQTT, normalizamos datos con edge computing y los llevamos a Time Series DB en cloud con retención por zona y conformidad con IEC 62443.",
+        "titleEn": "IIoT gateway + cloud historization",
+        "titleEs": "IIoT gateway + historización en cloud",
+        "outcomeEn": "24/7 plant KPI visibility without touching your existing SCADA.",
+        "outcomeEs": "Visibilidad 24/7 de KPIs de planta sin tocar el SCADA existente."
+      },
+      {
+        "icon": "oct-monitor",
+        "descEn": "Models trained on proprietary data from each motor, pump, or press. We detect drift in signals 7–30 days before failure.",
+        "descEs": "Modelos entrenados con datos propios de cada motor, bomba o prensa. Detectamos drift en señales antes de falla con 7–30 días de antelación.",
+        "titleEn": "Predictive maintenance by critical asset",
+        "titleEs": "Mantenimiento predictivo por activo crítico",
+        "outcomeEn": "22% reduction in unplanned downtime hours on pilot lines.",
+        "outcomeEs": "Reducción 22% en horas de paro no planeado en líneas piloto."
+      },
+      {
+        "icon": "tri-alert",
+        "descEn": "Industrial cameras on the line, models trained on product-specific defects, operator feedback in under 300ms, monthly retraining loop.",
+        "descEs": "Cámaras industriales sobre la línea, modelos entrenados con defectos específicos del producto, feedback al operador en menos de 300ms, bucle de reentrenamiento mensual.",
+        "titleEn": "Custom vision inspection models",
+        "titleEs": "Inspección por visión con modelos custom",
+        "outcomeEn": "95%+ critical defect detection, 3× faster than human inspection.",
+        "outcomeEs": "95%+ de detección de defectos críticos, 3× más rápido que inspección humana."
+      },
+      {
+        "icon": "hex-check",
+        "descEn": "From raw material receipt to final packaging, every movement is recorded with QR/RFID. Query by batch in < 2 seconds for audits and recalls.",
+        "descEs": "Desde recepción de materia prima hasta empaque final, cada movimiento se registra con QR/RFID. Consulta por lote en < 2 segundos para auditorías y retiros.",
+        "titleEn": "End-to-end lot traceability",
+        "titleEs": "Trazabilidad de lote end-to-end",
+        "outcomeEn": "Audit response time reduced from days to minutes.",
+        "outcomeEs": "Tiempo de respuesta a auditoría reducido de días a minutos."
+      }
+    ],
+    "playbook": [
+      {
+        "descEn": "We identify critical assets, current measurement, data silos, and the 2–3 use cases with highest return.",
+        "descEs": "Identificamos activos críticos, medición actual, silos de datos y los 2–3 casos de uso con mayor retorno.",
+        "number": "01",
+        "titleEn": "Plant and objectives assessment",
+        "titleEs": "Assessment de planta y objetivos"
+      },
+      {
+        "descEn": "Edge for resilience and latency, cloud for historization and ML. Network segmentation per IEC 62443 always.",
+        "descEs": "Edge para resiliencia y latencia, cloud para historización y ML. Segmentación de red según IEC 62443 siempre.",
+        "number": "02",
+        "titleEn": "Hybrid edge + cloud architecture",
+        "titleEs": "Arquitectura híbrida edge + cloud"
+      },
+      {
+        "descEn": "One motor, one line, one cell. We measure against baseline and only then rollout. We avoid the big-bang that fails in manufacturing.",
+        "descEs": "Un motor, una línea, una celda. Medimos contra baseline y solo entonces rollout. Evitamos el big-bang que fracasa en manufactura.",
+        "number": "03",
+        "titleEn": "Measurable POC on one asset, then rollout",
+        "titleEs": "POC medible en un activo, luego rollout"
+      },
+      {
+        "descEn": "Runbooks, maintenance team training, and model delivery with retraining protocol. Your team operates.",
+        "descEs": "Runbooks, capacitación a mantenimiento y entrega del modelo con protocolo de reentrenamiento. Tu equipo opera.",
+        "number": "04",
+        "titleEn": "Knowledge transfer and operations",
+        "titleEs": "Transferencia de conocimiento y operación"
+      }
+    ],
+    "industryFaqs": [
+      {
+        "answerEn": "Yes. OPC-UA, Modbus, MQTT, and specific connectors to Siemens, Rockwell, Schneider, Wonderware, and Ignition. Anti-corruption layer pattern to avoid affecting the original PLC/SCADA while respecting IEC 62443.",
+        "answerEs": "Sí. OPC-UA, Modbus, MQTT, y conectores específicos a Siemens, Rockwell, Schneider, Wonderware e Ignition. Patrón anti-corruption layer para no afectar el PLC/SCADA original y respetando IEC 62443.",
+        "questionEn": "Can you integrate with our existing SCADA/MES?",
+        "questionEs": "¿Pueden integrarse con nuestro SCADA/MES existente?"
+      },
+      {
+        "answerEn": "Network segmentation by Purdue zone, gateways with protocol whitelisting, access logging, and security testing specific to industrial environments. We sign NDAs and comply with IEC 62443 applicable to the project scope.",
+        "answerEs": "Segmentación de red por zona Purdue, gateways con lista blanca de protocolos, logging de accesos y pruebas de seguridad específicas para entornos industriales. Firmamos NDAs y cumplimos IEC 62443 aplicable al scope del proyecto.",
+        "questionEn": "What do you guarantee on OT cybersecurity?",
+        "questionEs": "¿Qué garantizan sobre ciberseguridad OT?"
+      },
+      {
+        "answerEn": "8–12 weeks for the first critical asset, assuming the necessary sensors are installed or can be installed within the first 2 weeks. The first month is data pipeline and baseline; from month 2 onward is modeling and iteration with the maintenance team.",
+        "answerEs": "8–12 semanas para el primer activo crítico, asumiendo que los sensores necesarios están instalados o se pueden instalar en las primeras 2 semanas. El primer mes es data pipeline y baseline; del mes 2 en adelante es modelado e iteración con el equipo de mantenimiento.",
+        "questionEn": "How long does it take to deliver a predictive maintenance pilot?",
+        "questionEs": "¿Cuánto tardan en entregar un piloto de mantenimiento predictivo?"
+      },
+      {
+        "answerEn": "With your plant's data. Pre-trained generic models fail because each asset has specific signal signatures. What we do reuse are proven architectures and validation protocols.",
+        "answerEs": "Con datos de tu planta. Los modelos genéricos pre-entrenados fallan porque cada activo tiene firmas de señal específicas. Lo que sí reusamos son arquitecturas probadas y protocolos de validación.",
+        "questionEn": "Do they train models with plant data or use generic models?",
+        "questionEs": "¿Entrenan modelos con datos de planta o usan modelos genéricos?"
+      },
+      {
+        "answerEn": "Yes. We have worked with clients in food and pharmaceutical. We implemented auditable records, electronic signatures, procedure version control, and the reports required by applicable regulations.",
+        "answerEs": "Sí. Hemos trabajado con clientes en alimentos y farmacéuticos. Implementamos registros auditables, firmas electrónicas, control de versiones de procedimientos y los reportes exigidos por la normativa aplicable.",
+        "questionEn": "Do you handle traceability under GMP or FDA 21 CFR Part 11?",
+        "questionEs": "¿Manejan trazabilidad bajo GMP o FDA 21 CFR Part 11?"
+      }
+    ],
+    "techStack": [
+      {
+        "label": "AWS IoT Greengrass",
+        "category": "cloud"
+      },
+      {
+        "label": "Azure IoT Hub",
+        "category": "cloud"
+      },
+      {
+        "label": "InfluxDB / TimescaleDB",
+        "category": "data"
+      },
+      {
+        "label": "Kafka / MQTT",
+        "category": "data"
+      },
+      {
+        "label": "OPC-UA",
+        "category": "other"
+      },
+      {
+        "label": "Python / PyTorch",
+        "category": "ai"
+      },
+      {
+        "label": "OpenCV",
+        "category": "ai"
+      },
+      {
+        "label": "Node.js / Go",
+        "category": "backend"
+      },
+      {
+        "label": "PostgreSQL",
+        "category": "backend"
+      },
+      {
+        "label": "Grafana",
+        "category": "other"
+      },
+      {
+        "label": "Ignition / Wonderware",
+        "category": "other"
+      },
+      {
+        "label": "Kubernetes",
+        "category": "cloud"
+      }
+    ],
+    "servicesHighlight": ["ia", "cloud", "desarrollo-digital", "staffing"],
+    "relatedCaseSlugs": null,
+    "ctaTitleEs": "¿Quieres reducir downtime y llevar tu planta a Industria 4.0?",
+    "ctaTitleEn": "Want to reduce downtime and bring your plant to Industry 4.0?",
+    "ctaPrimaryTextEs": "Hablar con un especialista en manufactura",
+    "ctaPrimaryTextEn": "Speak with a manufacturing specialist",
+    "ctaPrimaryUrl": "/contacto?industria=manufactura",
+    "hubIntroTitleEs": "Industria 4.0 con compliance OT y ROI medible",
+    "hubIntroTitleEn": "Industry 4.0 with OT compliance and measurable ROI",
+    "hubIntroSubtitleEs": "IIoT, mantenimiento predictivo y visión por computador integrados con tu SCADA/MES existente. Respetando IEC 62443.",
+    "hubIntroSubtitleEn": "IIoT, predictive maintenance, and computer vision integrated with your existing SCADA/MES. Compliant with IEC 62443.",
+    "ctaTextEs": "Hablemos de tu proyecto en Manufactura",
+    "ctaTextEn": "Let’s talk about your Manufacturing project",
+    "seoTitleEs": "Industria 4.0 y Manufactura Inteligente",
+    "seoTitleEn": "Industry 4.0 & Smart Manufacturing",
+    "seoDescriptionEs": "Soluciones de IoT, mantenimiento predictivo y calidad automatizada.",
+    "seoDescriptionEn": "IoT, predictive maintenance and automated quality solutions.",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "createdAt": "2026-04-09T01:55:40.481Z",
+    "updatedAt": "2026-04-14T19:16:24.838Z",
+    "deletedAt": null
+  },
+  {
+    "id": "d31c451e-33e3-4f43-afc2-e0e5b798de6f",
+    "slugEs": "retail-ecommerce",
+    "slugEn": "retail-ecommerce",
+    "icon": "shopping-bag",
+    "accentColor": "staffing",
+    "nameEs": "Retail y E-commerce",
+    "nameEn": "Retail & E-commerce",
+    "heroTitleEs": "IA · Cloud · Staffing para Retail y E-commerce",
+    "heroTitleEn": "AI · Cloud · Staffing for Retail & E-commerce",
+    "heroSubtitleEs": "Conectamos cada canal de venta, personalizamos la experiencia de compra y optimizamos la última milla.",
+    "heroSubtitleEn": "We connect every sales channel, personalize the shopping experience and optimize the last mile.",
+    "painPoints": [
+      {
+        "icon": "hex-plus",
+        "descEn": "Unified inventory, shared purchase history between store and web, click-and-collect that works Saturday at 6pm. Not a slogan — it's a data and orchestration problem.",
+        "descEs": "Inventario unificado, historial de compras compartido entre tienda y web, click-and-collect que funciona el sábado a las 6pm. No es un slogan — es un problema de datos y orquestación.",
+        "statEn": "73% of customers expect a consistent experience across channels (McKinsey).",
+        "statEs": "El 73% de clientes espera una experiencia consistente entre canales (McKinsey).",
+        "titleEn": "Omnichannel experience the customer actually feels",
+        "titleEs": "Experiencia omnicanal que el cliente realmente siente"
+      },
+      {
+        "icon": "tri-growth",
+        "descEn": "The best routers fail if stock per store is outdated or if delivery promises ignore actual logistics cutoff times. Demand inventory streaming and continuous simulation.",
+        "descEs": "Los mejores ruteadores fallan si el stock por tienda está desactualizado o si la promesa de entrega no considera el corte logístico real. Exige streaming de inventario y simulación continua.",
+        "titleEn": "Urban last mile in 2 hours",
+        "titleEs": "Última milla urbana en 2 horas"
+      },
+      {
+        "icon": "dia-trend",
+        "descEn": "Recommending what they already bought kills conversion. Recommending without regional stock context frustrates. The recommender must know catalog, inventory, and customer moment.",
+        "descEs": "Recomendar lo que ya compró mata conversión. Recomendar sin contexto de stock regional frustra. El recomendador tiene que conocer catálogo, inventario y momento del cliente.",
+        "titleEn": "Personalization that doesn't violate purchase intent",
+        "titleEs": "Personalización que no viola la intención de compra"
+      },
+      {
+        "icon": "oct-cube",
+        "descEn": "Each additional regional payment method (PSE, Nequi, Pix, OXXO) increases conversion but adds technical friction. Integration must not degrade Core Web Vitals or bloat the bundle.",
+        "descEs": "Cada método de pago regional extra (PSE, Nequi, Pix, OXXO) sube conversión pero agrega fricción técnica. Hay que integrar sin degradar Core Web Vitals ni inflar el bundle.",
+        "statEn": "69.8% of carts are abandoned at checkout, mostly due to friction.",
+        "statEs": "El 69.8% de los carritos se abandonan en el checkout, la mayoría por fricción.",
+        "titleEn": "Checkout that doesn't lose carts at the final step",
+        "titleEs": "Checkout que no pierde carros en el último paso"
+      },
+      {
+        "icon": "hex-nodes",
+        "descEn": "Retail operates on 3–8% margins. Every point of inefficiency in cloud, logistics, or advertising eats into profit. A unified data warehouse is no longer optional.",
+        "descEs": "El retail opera con 3–8% de margen. Cada punto de ineficiencia en cloud, logística o publicidad se come utilidad. Data warehouse unificado deja de ser opcional.",
+        "titleEn": "Low-margin operation that lives on data",
+        "titleEs": "Operación con margen pequeño que vive del dato"
+      }
+    ],
+    "solutions": [
+      {
+        "icon": "brain",
+        "descEn": "Recommendation engines, demand prediction, dynamic pricing and chatbots with generative AI.",
+        "descEs": "Motores de recomendación, predicción de demanda, pricing dinámico y chatbots con IA generativa.",
+        "titleEn": "AI for Retail",
+        "titleEs": "IA para Retail"
+      },
+      {
+        "icon": "cloud",
+        "descEn": "Elastic architectures for sales peaks, CDN for catalogs and microservices.",
+        "descEs": "Arquitecturas elásticas para picos de venta, CDN para catálogos y microservicios.",
+        "titleEn": "Cloud for Retail",
+        "titleEs": "Cloud para Retail"
+      },
+      {
+        "icon": "users",
+        "descEn": "Developers with experience in e-commerce platforms and ERP/POS integrations.",
+        "descEs": "Desarrolladores con experiencia en plataformas e-commerce e integraciones ERP/POS.",
+        "titleEn": "Staffing for Retail",
+        "titleEs": "Staffing para Retail"
+      }
+    ],
+    "casoDestacadoId": null,
+    "differentiators": null,
+    "metrics": [
+      {
+        "value": "35%",
+        "labelEn": "Average conversion increase with optimized checkout",
+        "labelEs": "Aumento promedio en conversión con checkout optimizado"
+      },
+      {
+        "value": "<200ms",
+        "labelEn": "Catalog query latency with > 1M SKUs",
+        "labelEs": "Latencia consulta catálogo con > 1M SKUs"
+      },
+      {
+        "value": "99.9%",
+        "labelEn": "Uptime during peak season (Black Friday / Hot Sale)",
+        "labelEs": "Uptime en temporada alta (Black Friday / Hot Sale)"
+      },
+      {
+        "value": "25%",
+        "labelEn": "Logistics cost reduction through optimized routing",
+        "labelEs": "Reducción costo logístico con ruteo optimizado"
+      }
+    ],
+    "statHighlights": [
+      {
+        "value": "US$85B",
+        "source": "Statista Market Insights",
+        "labelEn": "E-commerce in LATAM in 2024",
+        "labelEs": "E-commerce en LATAM en 2024"
+      },
+      {
+        "value": "22%",
+        "source": "Americas Market Intelligence",
+        "labelEn": "Annual e-commerce growth in LATAM (2x USA)",
+        "labelEs": "Crecimiento anual de e-commerce en LATAM (2x USA)"
+      },
+      {
+        "value": "57%",
+        "source": "EBANX Beyond Borders Report 2024",
+        "labelEn": "2 out of 3 online purchases in LATAM are paid with alternative methods (non-card)",
+        "labelEs": "De compras online en LATAM se pagan con métodos alternativos (no tarjeta)"
+      }
+    ],
+    "regulations": [
+      {
+        "code": "PCI-DSS",
+        "descEn": "Applicable if you process payments on-site; avoidable with PSP redirect/iframes.",
+        "descEs": "Aplicable si procesas pagos on-site; evitable con redirect/iframes de PSPs.",
+        "nameEn": "Payment Card Industry Data Security Standard",
+        "nameEs": "Estándar de seguridad de datos de tarjetas"
+      },
+      {
+        "code": "Estatuto del Consumidor",
+        "descEn": "Right of withdrawal, clear return policy, non-deceptive advertising.",
+        "descEs": "Derecho de retracto, política clara de devoluciones, publicidad no engañosa.",
+        "nameEn": "Law 1480 Colombia",
+        "nameEs": "Ley 1480 Colombia"
+      },
+      {
+        "code": "Habeas Data",
+        "descEn": "Marketing consent, right to erasure, accountable to SIC.",
+        "descEs": "Consentimiento para marketing, derecho a supresión, responsable ante SIC.",
+        "nameEn": "Customer data processing",
+        "nameEs": "Tratamiento de datos de clientes"
+      },
+      {
+        "code": "Factura Electrónica",
+        "descEn": "Issuance, validation, and storage per local regulations.",
+        "descEs": "Emisión, validación y almacenamiento según normativa local.",
+        "nameEn": "DIAN (Colombia), SAT (Mexico), AFIP (Argentina)",
+        "nameEs": "DIAN (Colombia), SAT (México), AFIP (Argentina)"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "hex-plus",
+        "descEn": "Next.js frontend with SSG + ISR, catalog served from ElasticSearch, CDN-optimized images, checkout with regional payment methods (PSE, Nequi, Pix, OXXO, credit card).",
+        "descEs": "Frontend en Next.js con SSG + ISR, catálogo servido desde ElasticSearch, imagen optimizada por CDN, checkout con métodos de pago regionales (PSE, Nequi, Pix, OXXO, tarjeta).",
+        "titleEn": "Headless e-commerce with 1M+ SKU catalog",
+        "titleEs": "E-commerce headless con catálogo de 1M+ SKUs",
+        "outcomeEn": "35% increase in conversion and Core Web Vitals in the green on 95% of URLs.",
+        "outcomeEs": "35% de incremento en conversión y Core Web Vitals en verde en el 95% de URLs."
+      },
+      {
+        "icon": "tri-rocket",
+        "descEn": "A real endpoint for stock across stores, warehouses, and dark stores. Distributed reservations with compensation, delivery promise simulation before confirming purchase.",
+        "descEs": "Un endpoint de verdad para stock entre tiendas, bodegas y dark stores. Reservas distribuidas con compensación, simulación de promesa de entrega antes de confirmar compra.",
+        "titleEn": "OMS Orchestrator with Unified Inventory",
+        "titleEs": "Orquestador OMS con inventario unificado",
+        "outcomeEn": "40% reduction in cancellations due to out-of-stock.",
+        "outcomeEs": "Reducción 40% en cancelaciones por falta de stock."
+      },
+      {
+        "icon": "dia-pulse",
+        "descEn": "Catalog embeddings on pgvector, ranking that considers regional inventory and purchase recency. Ongoing A/B test against editorial baseline.",
+        "descEs": "Embeddings de catálogo sobre pgvector, ranking que considera inventario por región y recencia de compra. A/B test permanente contra baseline editorial.",
+        "titleEn": "Contextual recommender (customer + inventory + seasonality)",
+        "titleEs": "Recomendador contextual (cliente + stock + estacionalidad)",
+        "outcomeEn": "AOV (average order value) +18% in tested segments.",
+        "outcomeEs": "AOV (ticket promedio) +18% en los segmentos testeados."
+      },
+      {
+        "icon": "hex-migrate",
+        "descEn": "Responds to order status inquiries, manages returns, executes scoped refunds with handoff to human agent. Integrated with ERP, carrier, and PSP.",
+        "descEs": "Responde estado de pedido, gestiona devoluciones, ejecuta reembolsos acotados con handoff a humano. Integrado con ERP, transportadora y PSP.",
+        "titleEn": "AI Agent for post-sales support",
+        "titleEs": "Agente IA para atención post-venta",
+        "outcomeEn": "68% first-contact resolution, 50% reduction in escalated tickets.",
+        "outcomeEs": "Resolución en primer contacto 68%, reducción 50% en tickets escalados."
+      }
+    ],
+    "playbook": [
+      {
+        "descEn": "We identify where money is lost: checkout, outdated inventory, logistics, customer service. We prioritize by measurable impact on margin.",
+        "descEs": "Identificamos dónde se pierde plata: checkout, stock desactualizado, logística, atención. Priorizamos por impacto medible en margen.",
+        "number": "01",
+        "titleEn": "Channel mapping, inventory and leak points",
+        "titleEs": "Mapeo de canales, inventario y puntos de fuga"
+      },
+      {
+        "descEn": "Decoupled frontend, catalog and inventory as single source of truth, asynchronous messaging for OMS, WMS and ERP.",
+        "descEs": "Frontend desacoplado, catálogo e inventario como fuente única, mensajería asíncrona para OMS, WMS y ERP.",
+        "number": "02",
+        "titleEn": "Headless + event-driven architecture",
+        "titleEs": "Arquitectura headless + event-driven"
+      },
+      {
+        "descEn": "First web, then mobile, then store. Each channel enters with conversion dashboards and error rates visible to the business.",
+        "descEs": "Primero web, luego mobile, luego tienda. Cada canal entra con dashboards de conversión y error rates visibles para el negocio.",
+        "number": "03",
+        "titleEn": "Go-live by channel with exhaustive monitoring",
+        "titleEs": "Go-live por canal con monitoreo exhaustivo"
+      },
+      {
+        "descEn": "Monthly cost-per-transaction review, experimentation based on business hypotheses, not UX intuition.",
+        "descEs": "Revisión mensual de costo por transacción, experimentación sobre hipótesis de negocio, no sobre intuición de UX.",
+        "number": "04",
+        "titleEn": "Continuous optimization with FinOps + AB testing",
+        "titleEs": "Optimización continua con FinOps + AB testing"
+      }
+    ],
+    "industryFaqs": [
+      {
+        "answerEn": "All four. We choose based on volume, catalog complexity, and customization depth. For catalogs under 50K SKUs with few custom flows, SaaS platforms. For retail with proprietary OMS and multi-country operations, custom headless on Next.js + ElasticSearch.",
+        "answerEs": "Los cuatro. Elegimos según volumen, complejidad de catálogo y profundidad de customización. Para catálogos de < 50K SKUs y pocos flujos custom, plataformas SaaS. Para retail con OMS propio y operación multi-país, headless custom sobre Next.js + ElasticSearch.",
+        "questionEn": "Do you implement on Shopify, VTEX, Magento, or custom headless?",
+        "questionEs": "¿Implementan sobre Shopify, VTEX, Magento o headless custom?"
+      },
+      {
+        "answerEn": "Yes. We integrate with the dominant gateways in each market (PayU, ePayco, Wompi, EBANX, MercadoPago, Stripe). We validate conversion by method and optimize the presentation order at checkout.",
+        "answerEs": "Sí. Integramos con las pasarelas dominantes en cada mercado (PayU, ePayco, Wompi, EBANX, MercadoPago, Stripe). Validamos conversión por método y optimizamos el orden de presentación en el checkout.",
+        "questionEn": "Do you handle regional payment methods (PSE, Nequi, Pix, OXXO)?",
+        "questionEs": "¿Manejan métodos de pago regionales (PSE, Nequi, Pix, OXXO)?"
+      },
+      {
+        "answerEn": "Pre-warm infrastructure 2 weeks ahead, circuit breakers between critical services, virtual queueing if load exceeds threshold, dashboards with drilldown by country and channel. We monitor live with the client during the event.",
+        "answerEs": "Pre-warm de infra 2 semanas antes, circuit breakers entre servicios críticos, queueing virtual si la carga supera umbral, dashboards con drilldown por país y canal. Monitoreamos en vivo con el cliente durante el evento.",
+        "questionEn": "How do you handle Black Friday or Hot Sale traffic spikes?",
+        "questionEs": "¿Cómo manejan picos de Black Friday o Hot Sale?"
+      },
+      {
+        "answerEn": "Yes. We use middleware or direct REST/SOAP integrations depending on the ERP. The pattern is always an anti-corruption layer to prevent coupling the frontend to the ERP's release cadence.",
+        "answerEs": "Sí. Usamos middleware o integraciones directas vía REST/SOAP según el ERP. El patrón es siempre anti-corruption layer para no acoplar el frontend al ritmo de releases del ERP.",
+        "questionEn": "Can you integrate with our ERP (SAP, Oracle, Dynamics)?",
+        "questionEs": "¿Pueden integrarse con nuestro ERP (SAP, Oracle, Dynamics)?"
+      },
+      {
+        "answerEn": "First operational version in 3–4 months. Includes catalog, checkout, PSP integration, and base OMS. The following 2 months are dedicated to conversion fine-tuning and onboarding the second country.",
+        "answerEs": "Primera versión operativa en 3–4 meses. Incluye catálogo, checkout, integración con PSP y OMS base. Los siguientes 2 meses se dedican a ajuste fino de conversión y onboarding del segundo país.",
+        "questionEn": "How long does it take to launch a headless e-commerce with multi-country operations?",
+        "questionEs": "¿Cuánto tardan en lanzar un e-commerce headless con operación multi-país?"
+      }
+    ],
+    "techStack": [
+      {
+        "label": "Next.js",
+        "category": "frontend"
+      },
+      {
+        "label": "React Native",
+        "category": "frontend"
+      },
+      {
+        "label": "Node.js / NestJS",
+        "category": "backend"
+      },
+      {
+        "label": "ElasticSearch",
+        "category": "data"
+      },
+      {
+        "label": "PostgreSQL",
+        "category": "backend"
+      },
+      {
+        "label": "Redis",
+        "category": "backend"
+      },
+      {
+        "label": "Kafka",
+        "category": "data"
+      },
+      {
+        "label": "AWS / GCP",
+        "category": "cloud"
+      },
+      {
+        "label": "VTEX / Shopify",
+        "category": "other"
+      },
+      {
+        "label": "Stripe / EBANX / Wompi",
+        "category": "other"
+      },
+      {
+        "label": "Snowflake / BigQuery",
+        "category": "data"
+      },
+      {
+        "label": "Segment",
+        "category": "data"
+      },
+      {
+        "label": "Python / ML",
+        "category": "ai"
+      }
+    ],
+    "servicesHighlight": ["desarrollo-digital", "ia", "cloud", "staffing"],
+    "relatedCaseSlugs": null,
+    "ctaTitleEs": "¿Tu e-commerce puede soportar el próximo Hot Sale sin caerse?",
+    "ctaTitleEn": "Can your e-commerce handle the next Hot Sale without crashing?",
+    "ctaPrimaryTextEs": "Hablar con un especialista en retail",
+    "ctaPrimaryTextEn": "Speak with a retail specialist",
+    "ctaPrimaryUrl": "/contacto?industria=retail",
+    "hubIntroTitleEs": "E-commerce, omnicanalidad y última milla que mueven el margen",
+    "hubIntroTitleEn": "E-commerce, omnichannel, and last-mile operations that drive margin",
+    "hubIntroSubtitleEs": "Arquitecturas headless, OMS real y personalización que respeta stock regional. Para retailers que viven de puntos de conversión.",
+    "hubIntroSubtitleEn": "Headless architectures, real OMS, and personalization that respects regional stock. For retailers who live on conversion points.",
+    "ctaTextEs": "Hablemos de tu proyecto en Retail y E-commerce",
+    "ctaTextEn": "Let’s talk about your Retail & E-commerce project",
+    "seoTitleEs": "Soluciones Tech para Retail y E-commerce",
+    "seoTitleEn": "Tech Solutions for Retail & E-commerce",
+    "seoDescriptionEs": "Soluciones de omnicanalidad, personalización y logística last-mile.",
+    "seoDescriptionEn": "Omnichannel, personalization and last-mile logistics solutions.",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "createdAt": "2026-04-09T01:55:40.153Z",
+    "updatedAt": "2026-04-14T19:03:24.042Z",
+    "deletedAt": null
+  },
+  {
+    "id": "3c6c168e-e6ea-42b0-9a63-57ac73da93a5",
+    "slugEs": "salud",
+    "slugEn": "healthcare",
+    "icon": "heart-pulse",
+    "accentColor": "cloud",
+    "nameEs": "Salud",
+    "nameEn": "Healthcare",
+    "heroTitleEs": "Tecnología para el Sector Salud",
+    "heroTitleEn": "Technology for Healthcare",
+    "heroSubtitleEs": "Conectamos sistemas, habilitamos telemedicina y transformamos datos clínicos en mejores resultados para pacientes.",
+    "heroSubtitleEn": "We connect systems, enable telemedicine and transform clinical data into better patient outcomes.",
+    "painPoints": [
+      {
+        "icon": "oct-shield",
+        "descEn": "HIPAA, HITECH, and local regulations require encryption at rest and in transit, complete traceability, and signed BAAs with every cloud provider that touches PHI.",
+        "descEs": "HIPAA, HITECH y normativas locales obligan a cifrado en reposo y tránsito, trazabilidad completa y BAA firmados con cada proveedor cloud que toque PHI.",
+        "statEn": "The average cost of a healthcare breach is US$10.9M — the highest of any industry.",
+        "statEs": "El costo promedio de una brecha en salud es US$10.9M — el más alto de cualquier industria.",
+        "titleEn": "Clinical data that cannot leave the perimeter",
+        "titleEs": "Datos clínicos que no pueden salirse del perímetro"
+      },
+      {
+        "icon": "hex-check",
+        "descEn": "Proprietary HIS, LIS, RIS, PACS, EMR at each clinic. Integrating without losing semantics requires HL7/FHIR, standard terminologies (LOINC, SNOMED), and message observability.",
+        "descEs": "HIS, LIS, RIS, PACS, EMR propios de cada clínica. Integrar sin perder semántica exige HL7/FHIR, terminologías estándar (LOINC, SNOMED) y observabilidad de mensajes.",
+        "titleEn": "True interoperability across heterogeneous systems",
+        "titleEs": "Interoperabilidad real entre sistemas heterogéneos"
+      },
+      {
+        "icon": "dia-search",
+        "descEn": "If digital lookup adds more than 60 seconds to the physician's time, it gets abandoned. Interfaces must be operable in 1–2 clicks, with fallback to paper when the network fails.",
+        "descEs": "Si la consulta digital agrega más de 60 segundos al tiempo del médico, se abandona. Las interfaces deben ser operables en 1–2 clics, con fallback a papel cuando falla la red.",
+        "titleEn": "Clinical workflows that tolerate no friction",
+        "titleEs": "Flujos clínicos que no toleran fricción"
+      },
+      {
+        "icon": "hex-nodes",
+        "descEn": "Triage, image reading, or deterioration prediction must have publishable metrics (sensitivity, specificity), physician validation protocol, and drift governance.",
+        "descEs": "Triaje, lectura de imagen o predicción de deterioro deben tener métricas publicables (sensibilidad, especificidad), protocolo de validación con médicos y gobernanza de drift.",
+        "titleEn": "AI models with clinical validation, not marketing",
+        "titleEs": "Modelos de IA con validación clínica, no marketing"
+      },
+      {
+        "icon": "oct-monitor",
+        "descEn": "Rural areas, hotels, homes. Adaptive video call, fallback to chat + photo, offline-first sync for field medical records.",
+        "descEs": "Zonas rurales, hoteles, casas. Videollamada adaptativa, fallback a chat + foto, sincronización offline-first para historia clínica del terreno.",
+        "titleEn": "Telemedicine that survives weak connections",
+        "titleEs": "Telemedicina que sobrevive a conexiones débiles"
+      }
+    ],
+    "solutions": [
+      {
+        "icon": "brain",
+        "descEn": "Predictive models for early diagnosis, NLP for clinical records and virtual assistants.",
+        "descEs": "Modelos predictivos para diagnóstico temprano, NLP para historias clínicas y asistentes virtuales.",
+        "titleEn": "AI for Healthcare",
+        "titleEs": "IA para Salud"
+      },
+      {
+        "icon": "cloud",
+        "descEn": "HIPAA-compliant infrastructure with high availability and HL7/FHIR architectures.",
+        "descEs": "Infraestructura HIPAA-compliant con alta disponibilidad y arquitecturas HL7/FHIR.",
+        "titleEn": "Cloud for Healthcare",
+        "titleEs": "Cloud para Salud"
+      },
+      {
+        "icon": "users",
+        "descEn": "Engineers with experience in healthtech and clinical systems integrations.",
+        "descEs": "Ingenieros con experiencia en healthtech e integraciones de sistemas clínicos.",
+        "titleEn": "Staffing for Healthcare",
+        "titleEs": "Staffing para Salud"
+      }
+    ],
+    "casoDestacadoId": null,
+    "differentiators": null,
+    "metrics": [
+      {
+        "value": "100%",
+        "labelEn": "Auditable logging in projects with PHI",
+        "labelEs": "Logging auditable en proyectos con PHI"
+      },
+      {
+        "value": "HIPAA",
+        "labelEn": "Current BAA with cloud providers",
+        "labelEs": "BAA vigente con proveedores cloud"
+      },
+      {
+        "value": "<500ms",
+        "labelEn": "Latency in FHIR server queries",
+        "labelEs": "Latencia en consultas a FHIR server"
+      },
+      {
+        "value": "0",
+        "labelEn": "Data exposure incidents in 13 years",
+        "labelEs": "Incidentes de exposición de datos en 13 años"
+      }
+    ],
+    "statHighlights": [
+      {
+        "value": "67%",
+        "source": "Frost & Sullivan Healthcare 2024",
+        "labelEn": "of healthcare institutions in LATAM plan to adopt AI within 2 years",
+        "labelEs": "De instituciones de salud en LATAM planean adoptar IA en 2 años"
+      },
+      {
+        "value": "US$1.5T",
+        "source": "Grand View Research",
+        "labelEn": "Global digital health spending by 2027",
+        "labelEs": "Gasto global en salud digital para 2027"
+      },
+      {
+        "value": "30%",
+        "source": "JAMA Network Open, 2023",
+        "labelEn": "Reduction in consultation times with AI-assisted triage",
+        "labelEs": "Reducción en tiempos de consulta con triaje asistido por IA"
+      }
+    ],
+    "regulations": [
+      {
+        "code": "HIPAA",
+        "descEn": "Mandatory BAA, AES-256 encryption, immutable audit trails, and right-to-access.",
+        "descEs": "BAA obligatorio, cifrado AES-256, audit trails inmutables y right-to-access.",
+        "nameEn": "Health Insurance Portability and Accountability Act (USA)",
+        "nameEs": "Health Insurance Portability and Accountability Act (USA)"
+      },
+      {
+        "code": "HITECH",
+        "descEn": "60-day breach notification, additional controls over vendors.",
+        "descEs": "Breach notification en 60 días, controles adicionales sobre proveedores.",
+        "nameEn": "Health Information Technology for Economic and Clinical Health",
+        "nameEs": "Health Information Technology for Economic and Clinical Health"
+      },
+      {
+        "code": "ISO 27799",
+        "descEn": "Information security management specifically for clinical data.",
+        "descEs": "Gestión de seguridad de información específicamente para datos clínicos.",
+        "nameEn": "Information Security in Healthcare",
+        "nameEs": "Information security in health"
+      },
+      {
+        "code": "Ley 1581",
+        "descEn": "Express and informed consent, enhanced protection for sensitive categories.",
+        "descEs": "Consentimiento expreso e informado, protección reforzada por categoría sensible.",
+        "nameEn": "Habeas Data Colombia — sensitive health data",
+        "nameEs": "Habeas Data Colombia — datos sensibles de salud"
+      },
+      {
+        "code": "HL7 FHIR",
+        "descEn": "Clinical information exchange standard. Foundation for true interoperability.",
+        "descEs": "Estándar de intercambio de información clínica. Base para interoperabilidad real.",
+        "nameEn": "Fast Healthcare Interoperability Resources",
+        "nameEs": "Fast Healthcare Interoperability Resources"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "arc-person",
+        "descEn": "EHR designed with physicians, not product managers. Fast order entry, specialty-specific templates, PACS integration and lab results in the same view.",
+        "descEs": "EMR diseñado con médicos, no con product managers. Orden de entrada rápida, plantillas por especialidad, integración con PACS y resultados de laboratorio en la misma vista.",
+        "titleEn": "Electronic health record with clinical workflow",
+        "titleEs": "Historia clínica electrónica con workflow clínico",
+        "outcomeEn": "40% reduction in clinical documentation time.",
+        "outcomeEs": "Reducción 40% en tiempo de documentación clínica."
+      },
+      {
+        "icon": "dia-light",
+        "descEn": "Video consultation with adaptive bitrate, fallback to chat + files, deferred clinical history sync. Works on unstable 3G connections.",
+        "descEs": "Videoconsulta con adaptación de bitrate, fallback a chat + archivos, sync diferido de historia clínica. Funciona en conexiones de 3G inestable.",
+        "titleEn": "Telemedicine platform with offline-first capability",
+        "titleEs": "Plataforma de telemedicina con offline-first",
+        "outcomeEn": "Query completed successfully in 94% of attempts, even in areas with limited connectivity.",
+        "outcomeEs": "Consulta completada exitosa en 94% de los intentos, incluso en zonas con conectividad limitada."
+      },
+      {
+        "icon": "hex-nodes",
+        "descEn": "Classification model trained on local case histories, not imported datasets. Blind validation with medical committee before production. Monthly drift governance.",
+        "descEs": "Modelo de clasificación entrenado con historias locales, no datasets importados. Validación ciega con comité médico antes de producción. Gobernanza de drift mensual.",
+        "titleEn": "AI-assisted triage with validation protocol",
+        "titleEs": "Triaje asistido por IA con protocolo de validación",
+        "outcomeEn": "Triage prioritization consistent with medical judgment in 91% of cases.",
+        "outcomeEs": "Priorización de urgencias consistente con el juicio médico en 91% de casos."
+      },
+      {
+        "icon": "dia-pulse",
+        "descEn": "Gateway that translates messages between legacy HIS and modern platforms. Queue with retries, terminology mapping, and failed message dashboard for the clinical team.",
+        "descEs": "Gateway que traduce mensajes entre HIS legacy y plataformas modernas. Cola con retries, mapeo de terminologías y dashboard de mensajes fallidos para el equipo clínico.",
+        "titleEn": "HL7/FHIR Interoperability Engine",
+        "titleEs": "Motor de interoperabilidad HL7/FHIR",
+        "outcomeEn": "Integration of 12 heterogeneous hospital systems into a single clinical timeline.",
+        "outcomeEs": "Integración 12 sistemas hospitalarios heterogéneos en un solo timeline clínico."
+      }
+    ],
+    "playbook": [
+      {
+        "descEn": "We map actual clinical workflows and applicable HIPAA/HITECH obligations. We don't design technology in the abstract.",
+        "descEs": "Mapeamos flujos clínicos reales y obligaciones de HIPAA/HITECH aplicables. No diseñamos tecnología en abstracto.",
+        "number": "01",
+        "titleEn": "Regulatory and clinical assessment",
+        "titleEs": "Diagnóstico regulatorio y clínico"
+      },
+      {
+        "descEn": "Network segmentation, managed encryption, BAA with providers, and immutable logging from sprint one.",
+        "descEs": "Segmentación de redes, cifrado gestionado, BAA con proveedores y logging inmutable desde el primer sprint.",
+        "number": "02",
+        "titleEn": "Architecture with privacy by design",
+        "titleEs": "Arquitectura con privacidad por diseño"
+      },
+      {
+        "descEn": "Every clinical feature goes through a medical committee. Without user buy-in, it doesn't go to production.",
+        "descEs": "Cada feature clínica pasa por un comité médico. Sin buy-in de los usuarios, no va a producción.",
+        "number": "03",
+        "titleEn": "Validation with real physicians, not demos",
+        "titleEs": "Validación con médicos reales, no demos"
+      },
+      {
+        "descEn": "Drift monitoring, quarterly permission audits, incident reporting per HITECH.",
+        "descEs": "Monitoreo de drift, auditorías trimestrales de permisos, reporte de incidentes según HITECH.",
+        "number": "04",
+        "titleEn": "Data and model governance post-go-live",
+        "titleEs": "Gobernanza de datos y modelos post-go-live"
+      }
+    ],
+    "industryFaqs": [
+      {
+        "answerEn": "Yes. We sign BAAs with US clients and use HIPAA-eligible cloud services (AWS, GCP, Azure). Staff assigned to PHI projects receive documented HIPAA training.",
+        "answerEs": "Sí. Firmamos BAA con clientes en USA y usamos servicios cloud con HIPAA-eligibility (AWS, GCP, Azure). Los perfiles asignados a proyectos con PHI reciben entrenamiento HIPAA documentado.",
+        "questionEn": "Do you operate under HIPAA in the USA?",
+        "questionEs": "¿Operan bajo HIPAA en USA?"
+      },
+      {
+        "answerEn": "Yes. We implement FHIR gateways to integrate third-party HIS, LIS, and EMR systems. We handle Patient, Encounter, Observation, DiagnosticReport resources and extend them when local terminologies require it.",
+        "answerEs": "Sí. Implementamos gateways FHIR para integrar HIS, LIS y EMR de terceros. Manejamos recursos Patient, Encounter, Observation, DiagnosticReport y los extendemos cuando las terminologías locales lo requieren.",
+        "questionEn": "Do you have experience with HL7 and FHIR?",
+        "questionEs": "¿Tienen experiencia con HL7 y FHIR?"
+      },
+      {
+        "answerEn": "3-phase protocol: (1) retrospective validation against physician-labeled dataset, (2) shadow mode in production without affecting clinical decisions, (3) service-by-service rollout with medical committee reviewing monthly metrics. Drift monitoring required.",
+        "answerEs": "Protocolo de 3 fases: (1) validación retrospectiva contra dataset etiquetado por médicos, (2) shadow mode en producción sin tocar decisión clínica, (3) rollout por servicio con comité médico revisando métricas mensuales. Drift monitoring obligatorio.",
+        "questionEn": "How do you validate clinical AI models before production?",
+        "questionEs": "¿Cómo validan modelos de IA clínica antes de producción?"
+      },
+      {
+        "answerEn": "Yes. We use an anti-corruption layer with asynchronous messaging to avoid touching the original HIS. Failed messages land in an actionable dashboard for the clinical team — nothing gets lost silently.",
+        "answerEs": "Sí. Usamos anti-corruption layer con mensajería asíncrona para no tocar el HIS original. Los mensajes fallidos quedan en dashboard accionable por el equipo clínico, no se pierden silenciosamente.",
+        "questionEn": "Can you integrate new platforms with our legacy HIS?",
+        "questionEs": "¿Pueden integrar nuevas plataformas con nuestro HIS legacy?"
+      },
+      {
+        "answerEn": "Contractual: AES-256 encryption at rest and TLS 1.3 in transit, immutable audit trail, access revocation within 24h upon profile termination, quarterly penetration testing. In 13 years we have not had a single clinical data exposure incident.",
+        "answerEs": "Contractual: cifrado AES-256 en reposo y TLS 1.3 en tránsito, audit trail inmutable, revocación de accesos en 24h al terminar un perfil, penetration test trimestral. En 13 años no hemos tenido un solo incidente de exposición de datos clínicos.",
+        "questionEn": "What guarantees do you offer on sensitive data?",
+        "questionEs": "¿Qué garantías ofrecen sobre datos sensibles?"
+      }
+    ],
+    "techStack": [
+      {
+        "label": "AWS HIPAA-eligible",
+        "category": "cloud"
+      },
+      {
+        "label": "GCP Healthcare API",
+        "category": "cloud"
+      },
+      {
+        "label": "FHIR Server (HAPI)",
+        "category": "data"
+      },
+      {
+        "label": "PostgreSQL",
+        "category": "backend"
+      },
+      {
+        "label": "Kafka",
+        "category": "data"
+      },
+      {
+        "label": "Next.js",
+        "category": "frontend"
+      },
+      {
+        "label": "React Native",
+        "category": "frontend"
+      },
+      {
+        "label": "Node.js / NestJS",
+        "category": "backend"
+      },
+      {
+        "label": "Python / PyTorch",
+        "category": "ai"
+      },
+      {
+        "label": "WebRTC",
+        "category": "other"
+      },
+      {
+        "label": "HashiCorp Vault",
+        "category": "security"
+      },
+      {
+        "label": "AWS KMS",
+        "category": "security"
+      }
+    ],
+    "servicesHighlight": ["ia", "cloud", "desarrollo-digital", "staffing"],
+    "relatedCaseSlugs": null,
+    "ctaTitleEs": "¿Tu organización de salud necesita transformar sin arriesgar compliance?",
+    "ctaTitleEn": "Does your healthcare organization need to transform without risking compliance?",
+    "ctaPrimaryTextEs": "Hablar con un especialista en salud",
+    "ctaPrimaryTextEn": "Speak with a healthcare specialist",
+    "ctaPrimaryUrl": "/contacto?industria=salud",
+    "hubIntroTitleEs": "HealthTech con compliance real y validación clínica",
+    "hubIntroTitleEn": "HealthTech with real compliance and clinical validation",
+    "hubIntroSubtitleEs": "HIPAA, HL7/FHIR, telemedicina y triaje con IA. 0 incidentes de exposición de datos en 13 años.",
+    "hubIntroSubtitleEn": "HIPAA, HL7/FHIR, telemedicine and AI-powered triage. 0 data exposure incidents in 13 years.",
+    "ctaTextEs": "Hablemos de tu proyecto en Salud",
+    "ctaTextEn": "Let’s talk about your Healthcare project",
+    "seoTitleEs": "Transformación Digital en Salud",
+    "seoTitleEn": "Digital Transformation in Healthcare",
+    "seoDescriptionEs": "Soluciones de interoperabilidad, telemedicina y gestión de datos clínicos.",
+    "seoDescriptionEn": "Interoperability, telemedicine and clinical data management solutions.",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "createdAt": "2026-04-09T01:55:39.991Z",
+    "updatedAt": "2026-04-14T19:42:50.291Z",
+    "deletedAt": null
+  },
+  {
+    "id": "858e1e15-3668-444e-8224-c84f98676732",
+    "slugEs": "medios-entretenimiento",
+    "slugEn": "media-entertainment",
+    "icon": "play-circle",
+    "accentColor": "dev",
+    "nameEs": "Medios y Entretenimiento",
+    "nameEn": "Media & Entertainment",
+    "heroTitleEs": "IA · Cloud · Staffing para Medios y Entretenimiento",
+    "heroTitleEn": "AI · Cloud · Staffing for Media & Entertainment",
+    "heroSubtitleEs": "Potenciamos plataformas de contenido digital con tecnología que escala, personaliza y monetiza como Televisa/N+, Pulzo, Univision y Crónica.",
+    "heroSubtitleEn": "We power digital content platforms with technology that scales, personalizes and monetizes — like Televisa/N+, Pulzo, Univision and Crónica.",
+    "painPoints": [
+      {
+        "icon": "arc-live",
+        "descEn": "A match, a premiere, or breaking news can generate 50× normal traffic in minutes. Infrastructure must scale frictionlessly without surprising you with the bill.",
+        "descEs": "Un partido, un estreno o una noticia explosiva puede generar 50× el tráfico habitual en minutos. La infraestructura debe escalar sin fricción y sin sorprenderte con la factura.",
+        "statEn": "A trending topic can generate up to 50× normal traffic in < 10 minutes.",
+        "statEs": "Un trending topic puede generar hasta 50× el tráfico habitual en < 10 minutos.",
+        "titleEn": "Live launches with millions of concurrent users",
+        "titleEs": "Lanzamientos en vivo con millones concurrentes"
+      },
+      {
+        "icon": "hex-chart",
+        "descEn": "Traditional CPM is eroding. Subscriptions, memberships, contextual ad-tech, and affiliate commerce require unified user data and continuous A/B testing.",
+        "descEs": "El CPM tradicional se erosiona. Suscripciones, membresías, ad-tech contextual y comercio afiliado requieren data unificada del usuario y A/B testing continuo.",
+        "titleEn": "Monetization beyond pre-roll",
+        "titleEs": "Monetización más allá del pre-roll"
+      },
+      {
+        "icon": "arc-doc",
+        "descEn": "Ingest, adaptive transcoding, multi-platform DRM, automatic subtitles, and SEO metadata. All with sub-hour publishing SLA for news media.",
+        "descEs": "Ingest, transcoding adaptativo, DRM multi-plataforma, subtítulos automáticos y metadatos SEO. Todo con SLA de publicación sub-hora para medios noticiosos.",
+        "titleEn": "VOD + live content pipeline",
+        "titleEs": "Pipeline de contenido VOD + live"
+      },
+      {
+        "icon": "dia-pulse",
+        "descEn": "Content recommendation engine, automatic summarization, copyright detection, and real-time comment moderation. Not optional features—table stakes.",
+        "descEs": "Recomendador de contenido, resumen automático, detección de copyright y moderación de comentarios en tiempo real. No son features opcionales, son tabla mínima.",
+        "titleEn": "AI for curation, personalization and moderation",
+        "titleEs": "IA para curación, personalización y moderación"
+      },
+      {
+        "icon": "dia-search",
+        "descEn": "Millions of URLs, deep pagination, critical image for LCP, NewsArticle schema. A Core Web Vitals regression costs real organic traffic.",
+        "descEs": "Millones de URLs, paginación profunda, imagen crítica para LCP, schema de NewsArticle. Una regresión de Core Web Vitals cuesta tráfico orgánico real.",
+        "titleEn": "Technical SEO for high-traffic portals",
+        "titleEs": "SEO técnico para portales de alto tráfico"
+      }
+    ],
+    "solutions": [
+      {
+        "icon": "brain",
+        "descEn": "Recommendation engines, automatic content classification and audience analytics.",
+        "descEs": "Motores de recomendación, clasificación automática de contenido y analítica de audiencia.",
+        "titleEn": "AI for Media",
+        "titleEs": "IA para Medios"
+      },
+      {
+        "icon": "cloud",
+        "descEn": "Global CDN, elastic transcoding and serverless architectures for millions of streams.",
+        "descEs": "CDN global, transcodificación elástica y arquitecturas serverless para millones de streams.",
+        "titleEn": "Cloud for Media",
+        "titleEs": "Cloud para Medios"
+      },
+      {
+        "icon": "users",
+        "descEn": "Teams with experience in editorial platforms, headless CMS and digital video stacks.",
+        "descEs": "Equipos con experiencia en plataformas editoriales, CMS headless y stacks de video digital.",
+        "titleEn": "Staffing for Media",
+        "titleEs": "Staffing para Medios"
+      }
+    ],
+    "casoDestacadoId": null,
+    "differentiators": null,
+    "metrics": [
+      {
+        "value": "10M+",
+        "labelEn": "Active users on delivered platforms",
+        "labelEs": "Usuarios activos en plataformas entregadas"
+      },
+      {
+        "value": "50×",
+        "labelEn": "Traffic spikes absorbed without degradation",
+        "labelEs": "Picos de tráfico absorbidos sin degradación"
+      },
+      {
+        "value": "<2s",
+        "labelEn": "Time to first frame in live streaming",
+        "labelEs": "Tiempo a primer frame en live streaming"
+      },
+      {
+        "value": "7 países",
+        "labelEn": "With media platforms in production",
+        "labelEs": "Con plataformas de medios en producción"
+      }
+    ],
+    "statHighlights": [
+      {
+        "value": "73%",
+        "source": "Dataxis LATAM Report 2024",
+        "labelEn": "of video consumption in LATAM is via OTT streaming",
+        "labelEs": "Del consumo de video en LATAM es via streaming OTT"
+      },
+      {
+        "value": "3.2×",
+        "source": "Nivelics benchmark con clientes en medios",
+        "labelEn": "Higher retention with personalized recommender vs. static grid",
+        "labelEs": "Más retención con recomendador personalizado vs. parrilla estática"
+      },
+      {
+        "value": "40%",
+        "source": "IAB LATAM 2024",
+        "labelEn": "Digital ad inventory goes unfilled due to lack of unified data",
+        "labelEs": "Del inventario publicitario digital no se llena por falta de data unificada"
+      }
+    ],
+    "regulations": [
+      {
+        "code": "COPPA",
+        "descEn": "Required for any content directed at children under 13.",
+        "descEs": "Requerido para cualquier contenido dirigido a menores de 13 años.",
+        "nameEn": "Children's Online Privacy Protection Act (USA)",
+        "nameEs": "Children's Online Privacy Protection Act (USA)"
+      },
+      {
+        "code": "DRM",
+        "descEn": "Multi-platform digital rights management. Required for licensed catalog.",
+        "descEs": "Gestión de derechos digitales multi-plataforma. Obligatorio para catálogo con licencias.",
+        "nameEn": "Widevine / FairPlay / PlayReady",
+        "nameEs": "Widevine / FairPlay / PlayReady"
+      },
+      {
+        "code": "GDPR",
+        "descEn": "Applies to European audience. CMP and opt-out flows documented.",
+        "descEs": "Aplica para audiencia europea. CMP y flujos de opt-out documentados.",
+        "nameEn": "Cookie and data consent",
+        "nameEs": "Consentimiento de cookies y datos"
+      },
+      {
+        "code": "Habeas Data",
+        "descEn": "Processing of registered user data and consumption preferences.",
+        "descEs": "Tratamiento de datos de usuarios registrados y preferencias de consumo.",
+        "nameEn": "Colombia / LATAM",
+        "nameEs": "Colombia / LATAM"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "arc-live",
+        "descEn": "Multi-format ingest, transcoding with HLS/DASH packaging, DRM, geo-distributed CDN, iOS/Android/Smart TV apps, and unified analytics. Launch in 6 months.",
+        "descEs": "Ingest multi-formato, transcoding con packaging HLS/DASH, DRM, CDN geo-distribuida, apps para iOS/Android/Smart TV y analytics unificado. Lanzamiento en 6 meses.",
+        "titleEn": "OTT streaming platform from scratch",
+        "titleEs": "Plataforma de streaming OTT desde cero",
+        "outcomeEn": "Televisa/N+ Case: millions of active users, 99.95% SLA.",
+        "outcomeEs": "Caso Televisa/N+: millones de usuarios activos, SLA 99.95%."
+      },
+      {
+        "icon": "dia-search",
+        "descEn": "Sub-hour publishing, NewsArticle schema, green Core Web Vitals, pagination optimized for crawlers. AMP integration and multi-region CDN.",
+        "descEs": "Publicación sub-hora, schema NewsArticle, Core Web Vitals en verde, paginación optimizada para crawlers. Integración con AMP y CDN multi-región.",
+        "titleEn": "News portal with world-class SEO",
+        "titleEs": "Portal de noticias con SEO de clase mundial",
+        "outcomeEn": "Pulzo/Crónica case: millions of monthly visits with elastic infrastructure.",
+        "outcomeEs": "Caso Pulzo/Crónica: millones de visitas mensuales con infra elástica."
+      },
+      {
+        "icon": "dia-pulse",
+        "descEn": "Embedding model on consumption history and content metadata. Continuous A/B testing against editorial grid.",
+        "descEs": "Modelo de embeddings sobre historial de consumo y metadata de contenido. A/B test continuo contra parrilla editorial.",
+        "titleEn": "Hybrid recommender (collaborative + content-based)",
+        "titleEs": "Recomendador híbrido (collaborative + content-based)",
+        "outcomeEn": "2.3× increase in minutes consumed per session.",
+        "outcomeEs": "2.3× incremento en minutos consumidos por sesión."
+      },
+      {
+        "icon": "arc-broadcast",
+        "descEn": "Pre-warm infrastructure 30min before the event, circuit breakers between services, per-tenant monitoring. Manual rollback always available.",
+        "descEs": "Pre-warm de infra 30min antes del evento, circuit breakers entre servicios, monitoreo por tenant. Rollback manual siempre disponible.",
+        "titleEn": "Live event infrastructure with aggressive auto-scaling",
+        "titleEs": "Live event infrastructure con auto-scale agresivo",
+        "outcomeEn": "0 downtime in large-scale event broadcasts.",
+        "outcomeEs": "0 downtime en transmisiones de eventos masivos."
+      }
+    ],
+    "playbook": [
+      {
+        "descEn": "We understand your content grid, your current audience, and the devices they use. We prioritize features by retention impact.",
+        "descEs": "Entendemos tu parrilla, tu audiencia actual y los dispositivos donde viven. Priorizamos features por impacto en retención.",
+        "number": "01",
+        "titleEn": "Catalog, audience, and channel analysis",
+        "titleEs": "Análisis de catálogo, audiencia y canales"
+      },
+      {
+        "descEn": "Multi-region CDN, asynchronous messaging, tiered caching, and observability from day 1.",
+        "descEs": "CDN multi-región, mensajería asíncrona, caché por tier y observabilidad desde el día 1.",
+        "number": "02",
+        "titleEn": "Event-driven architecture ready for spikes",
+        "titleEs": "Arquitectura event-driven lista para picos"
+      },
+      {
+        "descEn": "First the player and catalog, then recommender, then ad-tech. Each module goes to production with feature flag.",
+        "descEs": "Primero el player y el catálogo, luego recomendador, luego ad-tech. Cada módulo entra a producción con feature flag.",
+        "number": "03",
+        "titleEn": "Modular delivery with biweekly demos",
+        "titleEs": "Entrega modular con demos quincenales"
+      },
+      {
+        "descEn": "Active user cost is documented and optimized month over month. Your team receives ready-to-use runbooks and dashboards.",
+        "descEs": "El costo por usuario activo se documenta y se optimiza mes a mes. Tu equipo recibe runbooks y dashboards listos.",
+        "number": "04",
+        "titleEn": "Operations with FinOps and handover to your team",
+        "titleEs": "Operación con FinOps y handover a tu equipo"
+      }
+    ],
+    "industryFaqs": [
+      {
+        "answerEn": "Yes. We built Televisa's N+ (Mexico) from the ground up, operating with millions of active users. We also operate infrastructure for Univision (USA), Pulzo (Colombia), and Crónica (Colombia).",
+        "answerEs": "Sí. Construimos N+ de Televisa (México) desde cero, operando con millones de usuarios activos. También operamos infraestructura para Univision (USA), Pulzo (Colombia) y Crónica (Colombia).",
+        "questionEn": "Have they delivered streaming platforms with millions of users?",
+        "questionEs": "¿Han entregado plataformas de streaming con millones de usuarios?"
+      },
+      {
+        "answerEn": "3 to 6 months depending on scope. The first sprint delivers a functional headless CMS with sub-hour publishing. Subsequent sprints add personalization, paywall, or ad-tech based on priorities.",
+        "answerEs": "Entre 3 y 6 meses según alcance. El primer sprint entrega un CMS headless funcional con publicación sub-hora. Los siguientes sprints agregan personalización, paywall o ad-tech según prioridades.",
+        "questionEn": "How long does it take to launch a high-traffic news portal?",
+        "questionEs": "¿Cuánto tardan en lanzar un portal de noticias de alto tráfico?"
+      },
+      {
+        "answerEn": "Yes. We package with Widevine (Android/Web), FairPlay (Apple), and PlayReady (Smart TV). We integrate with regional and global DRM providers and manage output protection policies.",
+        "answerEs": "Sí. Empaquetamos con Widevine (Android/Web), FairPlay (Apple) y PlayReady (Smart TV). Integramos con proveedores de DRM regionales y globales, y gestionamos las políticas de output protection.",
+        "questionEn": "Can you handle DRM across all platforms?",
+        "questionEs": "¿Pueden manejar DRM en todas las plataformas?"
+      },
+      {
+        "answerEn": "Critical image LCP, selective lazy loading, top-100 route prerender, and region-based CDN. We audit every sprint with Lighthouse on representative routes; regressions break the pipeline.",
+        "answerEs": "LCP de imagen crítica, lazy loading selectivo, prerender de rutas top-100 y CDN por región. Auditamos cada sprint con Lighthouse en rutas representativas; regresiones rompen el pipeline.",
+        "questionEn": "How do you optimize Core Web Vitals in portals with millions of URLs?",
+        "questionEs": "¿Cómo optimizan Core Web Vitals en portales con millones de URLs?"
+      },
+      {
+        "answerEn": "Python + PyTorch for training, embeddings served by pgvector or Pinecone, real-time ranking with FastAPI. Drift monitoring and A/B testing against editorial lineup.",
+        "answerEs": "Python + PyTorch para entrenamiento, embeddings servidos por pgvector o Pinecone, ranking en tiempo real con FastAPI. Monitoreo de drift y A/B testing contra parrilla editorial.",
+        "questionEn": "What stack do you use for content recommendation engines?",
+        "questionEs": "¿Qué stack usan para recomendadores de contenido?"
+      }
+    ],
+    "techStack": [
+      {
+        "label": "AWS MediaConvert",
+        "category": "cloud"
+      },
+      {
+        "label": "CloudFront",
+        "category": "cloud"
+      },
+      {
+        "label": "Kafka",
+        "category": "data"
+      },
+      {
+        "label": "Next.js",
+        "category": "frontend"
+      },
+      {
+        "label": "React Native",
+        "category": "frontend"
+      },
+      {
+        "label": "Node.js",
+        "category": "backend"
+      },
+      {
+        "label": "PostgreSQL",
+        "category": "backend"
+      },
+      {
+        "label": "Redis",
+        "category": "backend"
+      },
+      {
+        "label": "ElasticSearch",
+        "category": "data"
+      },
+      {
+        "label": "PyTorch",
+        "category": "ai"
+      },
+      {
+        "label": "pgvector",
+        "category": "ai"
+      },
+      {
+        "label": "Widevine / FairPlay",
+        "category": "security"
+      },
+      {
+        "label": "Datadog",
+        "category": "other"
+      }
+    ],
+    "servicesHighlight": ["desarrollo-digital", "cloud", "ia", "staffing"],
+    "relatedCaseSlugs": null,
+    "ctaTitleEs": "¿Necesitas una plataforma que aguante el próximo evento en vivo?",
+    "ctaTitleEn": "Need a platform that can handle the next live event?",
+    "ctaPrimaryTextEs": "Hablar con un especialista en medios",
+    "ctaPrimaryTextEn": "Speak with a media specialist",
+    "ctaPrimaryUrl": "/contacto?industria=medios",
+    "hubIntroTitleEs": "Streaming, noticias y ad-tech que escalan con el trending topic",
+    "hubIntroTitleEn": "Streaming, news, and ad-tech that scale with trending topics",
+    "hubIntroSubtitleEs": "Operamos plataformas de medios en 7 países. Televisa, Univision, Pulzo y Crónica confían en nosotros.",
+    "hubIntroSubtitleEn": "We operate media platforms in 7 countries. Televisa, Univision, Pulzo, and Crónica trust us.",
+    "ctaTextEs": "Hablemos de tu proyecto en Medios y Entretenimiento",
+    "ctaTextEn": "Let’s talk about your Media & Entertainment project",
+    "seoTitleEs": "Tecnología para Medios y Entretenimiento",
+    "seoTitleEn": "Technology for Media & Entertainment",
+    "seoDescriptionEs": "Soluciones de streaming, personalización de contenido y monetización digital.",
+    "seoDescriptionEn": "Streaming, content personalization and digital monetization solutions.",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "createdAt": "2026-04-09T01:55:39.826Z",
+    "updatedAt": "2026-04-14T19:29:24.022Z",
+    "deletedAt": null
+  },
+  {
+    "id": "e5f3ab84-fb44-4177-bd3e-3293534611ae",
+    "slugEs": "fintech",
+    "slugEn": "fintech",
+    "icon": "trending-up",
+    "accentColor": "ia",
+    "nameEs": "Fintech",
+    "nameEn": "Fintech",
+    "heroTitleEs": "Transformación Digital para Fintech",
+    "heroTitleEn": "Digital Transformation for Fintech",
+    "heroSubtitleEs": "Combinamos inteligencia artificial, infraestructura cloud y talento especializado para que tu fintech escale con confianza.",
+    "heroSubtitleEn": "We combine artificial intelligence, cloud infrastructure and specialized talent so your fintech scales with confidence.",
+    "painPoints": [
+      {
+        "icon": "hex-check",
+        "descEn": "PCI-DSS, Open Banking, SARLAFT, Habeas Data. Every regulatory change forces updates to infrastructure, data flows, and access controls. A single audit finding can delay a launch 90 days.",
+        "descEs": "PCI-DSS, Open Banking, SARLAFT, Habeas Data. Cada reforma obliga a tocar infraestructura, flujos de datos y controles de acceso. Un solo hallazgo de auditoría puede bloquear un lanzamiento 90 días.",
+        "statEn": "73% of fintechs in LATAM cite compliance as the #1 barrier to growth.",
+        "statEs": "73% de las fintechs en LATAM citan compliance como el freno #1 al crecimiento.",
+        "titleEn": "Financial regulation that changes every quarter",
+        "titleEs": "Regulación financiera que cambia cada trimestre"
+      },
+      {
+        "icon": "oct-scan",
+        "descEn": "Fraud patterns mutate within weeks. Static rules fail; slow models block good users. Sub-100ms scoring with auditable human fallback is required.",
+        "descEs": "Los patrones de fraude mutan en semanas. Reglas estáticas fallan; los modelos lentos bloquean buenos usuarios. Se necesita scoring sub-100ms con fallback humano auditable.",
+        "statEn": "Digital payment fraud grew 28% YoY in 2024 (source: Chainalysis, Felaban).",
+        "statEs": "El fraude en pagos digitales creció 28% YoY en 2024 (fuente: Chainalysis, Felaban).",
+        "titleEn": "Real-time fraud detection with zero user friction",
+        "titleEs": "Fraude en tiempo real sin fricción al usuario"
+      },
+      {
+        "icon": "oct-cube",
+        "descEn": "5–10× load concentrated in 2 hours. Takes down critical endpoints, triggers cloud cost spikes, and generates timeouts that translate into abandonment. Scaling ahead of time is not a cost-effective option.",
+        "descEs": "5–10× de carga concentrados en 2 horas. Tumba endpoints críticos, dispara costos cloud y genera timeouts que se traducen en abandono. Escalar por adelantado no es una opción rentable.",
+        "titleEn": "Transaction spikes on payroll days and month-end closings",
+        "titleEs": "Picos de transacciones en días de nómina y cierres"
+      },
+      {
+        "icon": "oct-shield",
+        "descEn": "The mainframe or banking monolith remains the system of record. Modernizing on top—without a big-bang migration—requires anti-corruption layers, event streaming, and strict data governance.",
+        "descEs": "El mainframe o el monolito bancario sigue siendo el sistema de verdad. Modernizar encima —sin migrar en big-bang— exige anti-corruption layers, event streaming y gobierno de datos estricto.",
+        "titleEn": "Legacy core that cannot be shut down",
+        "titleEs": "Core legacy que no se puede apagar"
+      },
+      {
+        "icon": "hex-nodes",
+        "descEn": "Each additional verification step costs 10–15% conversion. Liveness, document OCR, bureau validation, and AML must occur in <90 seconds without compromising compliance.",
+        "descEs": "Cada paso extra de verificación cuesta 10–15% de conversión. Liveness, OCR de documento, validación de bureau y AML deben ocurrir en < 90 segundos sin ceder compliance.",
+        "statEn": "Only 45% of users who start a digital account onboarding complete it.",
+        "statEs": "Solo el 45% de usuarios que inicia un onboarding de cuenta digital lo completa.",
+        "titleEn": "KYC Onboarding That Converts",
+        "titleEs": "Onboarding KYC que convierte"
+      }
+    ],
+    "solutions": [
+      {
+        "icon": "brain",
+        "descEn": "Credit scoring models, real-time fraud detection and virtual assistants.",
+        "descEs": "Modelos de scoring crediticio, detección de fraude en tiempo real y asistentes virtuales.",
+        "titleEn": "AI for Fintech",
+        "titleEs": "IA para Fintech"
+      },
+      {
+        "icon": "cloud",
+        "descEn": "Serverless and multi-AZ architectures that scale automatically, meeting PCI-DSS standards.",
+        "descEs": "Arquitecturas serverless y multi-AZ que escalan automáticamente, cumpliendo estándares PCI-DSS.",
+        "titleEn": "Cloud for Fintech",
+        "titleEs": "Cloud para Fintech"
+      },
+      {
+        "icon": "users",
+        "descEn": "Senior engineers with digital banking and payments experience, integrated in under 10 days.",
+        "descEs": "Ingenieros senior con experiencia en banca digital y pagos, integrados en menos de 10 días.",
+        "titleEn": "Staffing for Fintech",
+        "titleEs": "Staffing para Fintech"
+      }
+    ],
+    "casoDestacadoId": null,
+    "differentiators": null,
+    "metrics": [
+      {
+        "value": "99.95%",
+        "labelEn": "Uptime in delivered payment systems",
+        "labelEs": "Uptime en sistemas de pago entregados"
+      },
+      {
+        "value": "<100ms",
+        "labelEn": "Fraud scoring latency",
+        "labelEs": "Latencia scoring de fraude"
+      },
+      {
+        "value": "40%",
+        "labelEn": "Cloud cost reduction through FinOps",
+        "labelEs": "Reducción costo cloud por FinOps"
+      },
+      {
+        "value": "5 días",
+        "labelEn": "To the first senior engineer integrated",
+        "labelEs": "Al primer ingeniero senior integrado"
+      }
+    ],
+    "statHighlights": [
+      {
+        "value": "US$156B",
+        "source": "Americas Market Intelligence, 2024",
+        "labelEn": "Annual digital payment volume in LATAM",
+        "labelEs": "Volumen anual de pagos digitales en LATAM"
+      },
+      {
+        "value": "68%",
+        "source": "Felaban LATAM Survey 2024",
+        "labelEn": "Banks in LATAM with generative AI initiatives in production",
+        "labelEs": "De bancos en LATAM con iniciativas de IA generativa en producción"
+      },
+      {
+        "value": "1 de 3",
+        "source": "Finnovista Fintech Radar 2024",
+        "labelEn": "Regional fintech shuts down due to technical scalability issues",
+        "labelEs": "Fintechs regionales cierra por problemas de escalabilidad técnica"
+      }
+    ],
+    "regulations": [
+      {
+        "code": "PCI-DSS",
+        "descEn": "Mandatory standard for any system handling card data. Requires network segmentation, immutable logging, and tokenization.",
+        "descEs": "Estándar obligatorio para cualquier sistema que toque datos de tarjeta. Exige segmentación de red, logging inmutable y tokenización.",
+        "nameEn": "Payment Card Industry Data Security Standard",
+        "nameEs": "Payment Card Industry Data Security Standard"
+      },
+      {
+        "code": "SARLAFT",
+        "descEn": "Anti-money laundering and terrorism financing prevention. Reporting to UIAF and continuous transaction monitoring.",
+        "descEs": "Prevención de lavado de activos y financiación del terrorismo. Reportería a UIAF y monitoreo continuo de transacciones.",
+        "nameEn": "Anti-Money Laundering and Counter-Terrorism Financing Risk Management System",
+        "nameEs": "Sistema de Administración de Riesgo de LA/FT"
+      },
+      {
+        "code": "Ley 1581",
+        "descEn": "Consent, right to deletion, and incident reporting to the SIC.",
+        "descEs": "Consentimiento, derecho de supresión y reporte de incidentes a la SIC.",
+        "nameEn": "Habeas Data Colombia",
+        "nameEs": "Habeas Data Colombia"
+      },
+      {
+        "code": "SOC 2 Type II",
+        "descEn": "Annual audit of security, availability, and confidentiality controls.",
+        "descEs": "Auditoría anual de controles de seguridad, disponibilidad y confidencialidad.",
+        "nameEn": "Service Organization Control 2",
+        "nameEs": "Service Organization Control 2"
+      },
+      {
+        "code": "Open Banking",
+        "descEn": "Standardized APIs to share financial data with customer authorization.",
+        "descEs": "APIs estandarizadas para compartir datos financieros con autorización del cliente.",
+        "nameEn": "Circular 004 Banco de la República",
+        "nameEs": "Circular 004 Banco de la República"
+      },
+      {
+        "code": "Circular 007",
+        "descEn": "Financial Superintendency: cyber-risk management, incident reporting within 24h.",
+        "descEs": "Superintendencia Financiera: gestión de ciber-riesgos, reporte de incidentes en 24h.",
+        "nameEn": "SFC Cybersecurity",
+        "nameEs": "Ciberseguridad SFC"
+      }
+    ],
+    "useCases": [
+      {
+        "icon": "oct-scan",
+        "descEn": "Models that use digital behavior, utility payment history, and open banking signals to assess risk for customers without traditional credit history.",
+        "descEs": "Modelos que usan comportamiento digital, histórico de pagos de servicios y señales open banking para evaluar riesgo de clientes sin historial bancario tradicional.",
+        "titleEn": "Alternative Scoring with Non-Traditional Data",
+        "titleEs": "Scoring alternativo con datos no tradicionales",
+        "outcomeEn": "2.3× higher approval rate in underbanked segments while maintaining controlled delinquency rate.",
+        "outcomeEs": "Aprobación 2.3× mayor en segmentos sub-bancarizados manteniendo tasa de mora controlada."
+      },
+      {
+        "icon": "hex-nodes",
+        "descEn": "Real-time feature pipeline on Kafka, model served in <80ms, rules engine editable by the fraud team without redeploy.",
+        "descEs": "Pipeline de features en tiempo real sobre Kafka, modelo servido en < 80ms, motor de reglas editable por el equipo de fraude sin redeploy.",
+        "titleEn": "Fraud detection with gradient boosting + rules",
+        "titleEs": "Detección de fraude con gradient boosting + reglas",
+        "outcomeEn": "38% fewer false positives, without increasing chargebacks.",
+        "outcomeEs": "38% menos falsos positivos, sin aumentar chargebacks."
+      },
+      {
+        "icon": "oct-cube",
+        "descEn": "Anti-corruption layer between the legacy core and new microservices. Modules are decommissioned month by month, never in a big-bang.",
+        "descEs": "Anti-corruption layer entre el core antiguo y los nuevos microservicios. Se van apagando módulos mes a mes, nunca en big-bang.",
+        "titleEn": "Legacy core migration with strangler pattern",
+        "titleEs": "Migración de core legacy con strangler pattern",
+        "outcomeEn": "3 digital products launched in parallel without touching a single line of the original core.",
+        "outcomeEs": "3 productos digitales lanzados en paralelo sin tocar una línea del core original."
+      },
+      {
+        "icon": "hex-check",
+        "descEn": "Liveness with regional provider, on-device OCR, parallel bureau validation, and AML with restrictive list screening. Drop-offs monitored by step.",
+        "descEs": "Liveness con proveedor regional, OCR on-device, validación bureau en paralelo y AML con screening a listas restrictivas. Abandonos monitoreados por paso.",
+        "titleEn": "Digital onboarding in 90 seconds",
+        "titleEs": "Onboarding digital en 90 segundos",
+        "outcomeEn": "From 45% to 71% completion rate in account opening.",
+        "outcomeEs": "De 45% a 71% de completion rate en apertura de cuenta."
+      }
+    ],
+    "playbook": [
+      {
+        "descEn": "We map current controls against regulatory requirements. Output: prioritized remediation plan.",
+        "descEs": "Mapeamos controles actuales vs. lo que exige tu regulador. Salida: plan priorizado de remediación.",
+        "number": "01",
+        "titleEn": "Regulatory and risk assessment",
+        "titleEs": "Assessment regulatorio y de riesgo"
+      },
+      {
+        "descEn": "Immutable logging, tokenization, and network segmentation are designed from day 1. Not bolted on later.",
+        "descEs": "Logging inmutable, tokenización y segmentación de red se diseñan desde el día 1. No se pega después.",
+        "number": "02",
+        "titleEn": "Event-driven architecture with embedded compliance",
+        "titleEs": "Arquitectura event-driven con compliance embebido"
+      },
+      {
+        "descEn": "Each sprint produces something auditable. You never see a big-bang; you can always stop without losing your investment.",
+        "descEs": "Cada sprint produce algo auditable. Nunca ves un big-bang; siempre puedes frenar sin perder inversión.",
+        "number": "03",
+        "titleEn": "Incremental delivery with biweekly demos",
+        "titleEs": "Entrega incremental con demos quincenales"
+      },
+      {
+        "descEn": "We transfer runbooks, dashboards, and ownership to your team. The code is 100% yours.",
+        "descEs": "Transferimos runbooks, dashboards y ownership a tu equipo. El código es 100% tuyo.",
+        "number": "04",
+        "titleEn": "Operations with FinOps and real handover",
+        "titleEs": "Operación con FinOps y handover real"
+      }
+    ],
+    "industryFaqs": [
+      {
+        "answerEn": "Yes. The teams we assign to PCI projects work in isolated environments with access controls and code review according to the client's scope. We participate in SOC 2 Type II renewal audits with our banking clients.",
+        "answerEs": "Sí. Los equipos que asignamos a proyectos PCI trabajan en ambientes aislados con controles de acceso y revisión de código según el scope del cliente. Participamos en auditorías de renovación SOC 2 Type II con nuestros clientes bancarios.",
+        "questionEn": "Can Nivelics operate under PCI-DSS and SOC 2?",
+        "questionEs": "¿Nivelics puede operar bajo PCI-DSS y SOC 2?"
+      },
+      {
+        "answerEn": "We present candidates within 5 business days. For profiles touching core banking systems we require proven experience in Java/Spring, Kafka and transactional databases. Full integration into the client's team takes 6–10 days.",
+        "answerEs": "Presentamos candidatos en 5 días hábiles. Para perfiles que tocan core bancario exigimos experiencia comprobable en Java/Spring, Kafka y bases de datos transaccionales. La integración completa al equipo del cliente toma 6–10 días.",
+        "questionEn": "How long does it take to integrate a senior profile for a core banking system?",
+        "questionEs": "¿Cuánto demoran en integrar un perfil senior para un core financiero?"
+      },
+      {
+        "answerEn": "Yes. We have implemented Open Banking APIs under Circular 004 in Colombia and equivalent standards in Mexico and Chile. We know the consent flows, revocation timelines, and electronic signature requirements.",
+        "answerEs": "Sí. Hemos implementado APIs de Open Banking bajo la Circular 004 en Colombia y estándares equivalentes en México y Chile. Conocemos los flujos de consentimiento, los plazos de revocación y los requisitos de firma electrónica.",
+        "questionEn": "Do you have experience with Open Banking in LATAM?",
+        "questionEs": "¿Tienen experiencia con Open Banking en LATAM?"
+      },
+      {
+        "answerEn": "Yes, we use the strangler pattern with an anti-corruption layer. Our most recent reference is Grupo Bolívar: 3 digital products launched without touching the original core. Shutdowns are gradual and always with rollback capability.",
+        "answerEs": "Sí, usamos strangler pattern con una capa anti-corrupción. Nuestra referencia más reciente es Grupo Bolívar: 3 productos digitales lanzados sin tocar el core original. Los apagados son graduales y siempre con rollback posible.",
+        "questionEn": "Can you migrate a core banking system without shutting down the existing one?",
+        "questionEs": "¿Pueden migrar un core bancario sin apagar el existente?"
+      },
+      {
+        "answerEn": "Three options: (1) Monthly Staff Augmentation per engineer, (2) Fixed-price project with closed scope, (3) Fee + success based on measurable KPIs (cloud savings, onboarding conversion, fraud reduction). We choose with the client based on the shared risk that makes sense.",
+        "answerEs": "Tres opciones: (1) Staff Augmentation mensual por ingeniero, (2) Proyecto a precio fijo con alcance cerrado, (3) Fee + success sobre KPIs medibles (ahorro cloud, conversión de onboarding, reducción de fraude). Elegimos con el cliente según el riesgo compartido que tenga sentido.",
+        "questionEn": "What engagement models do you offer for fintechs?",
+        "questionEs": "¿Qué modelos de contratación manejan para fintechs?"
+      }
+    ],
+    "techStack": [
+      {
+        "label": "AWS",
+        "category": "cloud"
+      },
+      {
+        "label": "GCP",
+        "category": "cloud"
+      },
+      {
+        "label": "Terraform",
+        "category": "cloud"
+      },
+      {
+        "label": "Kafka",
+        "category": "data"
+      },
+      {
+        "label": "PostgreSQL",
+        "category": "backend"
+      },
+      {
+        "label": "Redis",
+        "category": "backend"
+      },
+      {
+        "label": "Kubernetes",
+        "category": "cloud"
+      },
+      {
+        "label": "Java / Spring",
+        "category": "backend"
+      },
+      {
+        "label": "Node.js",
+        "category": "backend"
+      },
+      {
+        "label": "React Native",
+        "category": "frontend"
+      },
+      {
+        "label": "Python / FastAPI",
+        "category": "ai"
+      },
+      {
+        "label": "Snowflake",
+        "category": "data"
+      },
+      {
+        "label": "HashiCorp Vault",
+        "category": "security"
+      },
+      {
+        "label": "Datadog",
+        "category": "other"
+      }
+    ],
+    "servicesHighlight": ["ia", "cloud", "staffing", "desarrollo-digital"],
+    "relatedCaseSlugs": null,
+    "ctaTitleEs": "¿Tu fintech necesita escalar sin perder compliance?",
+    "ctaTitleEn": "Does your fintech need to scale without losing compliance?",
+    "ctaPrimaryTextEs": "Hablar con un especialista Fintech",
+    "ctaPrimaryTextEn": "Speak with a Fintech specialist",
+    "ctaPrimaryUrl": "/contacto?industria=fintech",
+    "hubIntroTitleEs": "Compliance, escalabilidad y fraude en tiempo real",
+    "hubIntroTitleEn": "Compliance, scalability and real-time fraud",
+    "hubIntroSubtitleEs": "13 años entregando tecnología para bancos, neobancos y plataformas de pago en LATAM y USA.",
+    "hubIntroSubtitleEn": "13 years delivering technology for banks, neobanks, and payment platforms in LATAM and USA.",
+    "ctaTextEs": "Hablemos de tu proyecto en Fintech",
+    "ctaTextEn": "Let’s talk about your Fintech project",
+    "seoTitleEs": "IA y Cloud para Fintech",
+    "seoTitleEn": "AI & Cloud for Fintech",
+    "seoDescriptionEs": "Soluciones de inteligencia artificial, cloud e ingeniería para empresas fintech.",
+    "seoDescriptionEn": "Artificial intelligence, cloud and engineering solutions for fintech companies.",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "createdAt": "2026-04-09T01:55:39.655Z",
+    "updatedAt": "2026-04-14T18:37:23.356Z",
+    "deletedAt": null
+  }
+]

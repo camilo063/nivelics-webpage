@@ -1,0 +1,56 @@
+[
+  {
+    "id": "655da248-38c1-4976-b155-d1f93a39e81f",
+    "slug": "desarrollo",
+    "nameEs": "Desarrollo",
+    "nameEn": "Development",
+    "color": null,
+    "icon": null,
+    "createdAt": "2026-04-17T22:42:57.710Z"
+  },
+  {
+    "id": "5d5d275c-078c-40a7-b143-518d04e51a7e",
+    "slug": "inteligencia-artificial",
+    "nameEs": "Inteligencia Artificial",
+    "nameEn": "Artificial Intelligence",
+    "color": null,
+    "icon": null,
+    "createdAt": "2026-04-17T22:42:58.124Z"
+  },
+  {
+    "id": "21492d76-2b22-493e-9383-79e6002cc024",
+    "slug": "cloud",
+    "nameEs": "Cloud",
+    "nameEn": "Cloud",
+    "color": null,
+    "icon": null,
+    "createdAt": "2026-04-17T22:42:58.711Z"
+  },
+  {
+    "id": "31ca8370-cd38-4348-ad5e-563defc9cfc7",
+    "slug": "ciberseguridad",
+    "nameEs": "Ciberseguridad",
+    "nameEn": "Cybersecurity",
+    "color": null,
+    "icon": null,
+    "createdAt": "2026-04-17T22:42:59.388Z"
+  },
+  {
+    "id": "f23d0e8d-afeb-4832-8c40-003df08f8139",
+    "slug": "staff-augmentation",
+    "nameEs": "Staff Augmentation",
+    "nameEn": "Staff Augmentation",
+    "color": null,
+    "icon": null,
+    "createdAt": "2026-04-17T22:42:59.884Z"
+  },
+  {
+    "id": "2c7cf0d7-32d0-42a6-ae0b-e03e8b7a677d",
+    "slug": "industrias",
+    "nameEs": "Industrias",
+    "nameEn": "Industries",
+    "color": null,
+    "icon": null,
+    "createdAt": "2026-04-17T22:43:00.130Z"
+  }
+]

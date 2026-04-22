@@ -1,0 +1,38 @@
+[
+  {
+    "id": "a672c56e-ebd7-4815-be3e-09479eea545f",
+    "nameEs": "Great Place to Work Colombia 2022",
+    "nameEn": "Great Place to Work Colombia 2022",
+    "issuer": "Great Place to Work",
+    "year": 2022,
+    "logo": null,
+    "certificateUrl": null,
+    "descriptionEs": "Nivelics fue certificada como Great Place to Work en Colombia en 2022, reconociendo nuestra cultura organizacional basada en la confianza, el respeto y el desarrollo profesional de nuestro equipo.",
+    "descriptionEn": "Nivelics was certified as a Great Place to Work in Colombia in 2022, recognizing our organizational culture based on trust, respect and the professional development of our team.",
+    "sortOrder": 1
+  },
+  {
+    "id": "7bad7821-e828-4e3d-b03b-045ebc8d9629",
+    "nameEs": "Miembro ANDI",
+    "nameEn": "ANDI Member",
+    "issuer": "ANDI",
+    "year": null,
+    "logo": null,
+    "certificateUrl": null,
+    "descriptionEs": "Somos miembros activos de la Asociación Nacional de Empresarios de Colombia (ANDI), la agremiación empresarial más importante del país.",
+    "descriptionEn": "We are active members of the National Association of Colombian Entrepreneurs (ANDI), the country's most important business association.",
+    "sortOrder": 2
+  },
+  {
+    "id": "b7ee18cb-021c-42f8-a43b-e321142f946c",
+    "nameEs": "Nivelics LLC — Presencia USA",
+    "nameEn": "Nivelics LLC — USA Presence",
+    "issuer": "Nivelics LLC",
+    "year": null,
+    "logo": null,
+    "certificateUrl": null,
+    "descriptionEs": "A través de Nivelics LLC, nuestra entidad en Estados Unidos con sede en Miami, Florida, atendemos clientes en el mercado norteamericano.",
+    "descriptionEn": "Through Nivelics LLC, our US entity headquartered in Miami, Florida, we serve clients in the North American market.",
+    "sortOrder": 3
+  }
+]
