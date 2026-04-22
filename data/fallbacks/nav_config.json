@@ -1,0 +1,603 @@
+[
+  {
+    "id": "main",
+    "megaMenu": [
+      {
+        "kind": "columns",
+        "items": [],
+        "columns": [
+          {
+            "url": "/servicios/inteligencia-artificial",
+            "icon": "brain",
+            "color": "#8B5CF6",
+            "items": [
+              {
+                "url": "/servicios/inteligencia-artificial/agentes-ia",
+                "labelEn": "AI Agents",
+                "labelEs": "Agentes IA",
+                "ariaLabelEn": "AI Agents — autonomous agents with LLMs for sales, support and operations automation",
+                "ariaLabelEs": "Agentes IA — agentes autónomos con LLMs para automatización de ventas, soporte y operaciones",
+                "descriptionEn": "LLMs that execute real tasks",
+                "descriptionEs": "LLMs que ejecutan tareas reales"
+              },
+              {
+                "url": "/servicios/inteligencia-artificial/agentes-comerciales",
+                "labelEn": "Sales Agents",
+                "labelEs": "Agentes Comerciales",
+                "ariaLabelEn": "Sales Agents — AI that qualifies leads and scales sales opportunities",
+                "ariaLabelEs": "Agentes Comerciales — IA que califica leads y escala oportunidades de venta",
+                "descriptionEn": "Automate your sales pipeline",
+                "descriptionEs": "Automatiza tu proceso de ventas"
+              },
+              {
+                "url": "/servicios/inteligencia-artificial/automatizacion-procesos",
+                "labelEn": "Process Automation",
+                "labelEs": "Automatización de Procesos",
+                "ariaLabelEn": "Process Automation — RPA and AI to eliminate manual work in finance, HR and logistics",
+                "ariaLabelEs": "Automatización de Procesos — RPA e IA para eliminar trabajo manual en finanzas, RRHH y logística",
+                "descriptionEn": "Eliminate repetitive manual work",
+                "descriptionEs": "Elimina trabajo manual repetitivo"
+              },
+              {
+                "url": "/servicios/inteligencia-artificial/gestion-contenido",
+                "labelEn": "Content Management",
+                "labelEs": "Gestión de Contenido",
+                "ariaLabelEn": "Content Management — SEO content generation and optimization at scale with AI",
+                "ariaLabelEs": "Gestión de Contenido — generación y optimización de contenido SEO a escala con IA",
+                "descriptionEn": "SEO and content at scale with AI",
+                "descriptionEs": "SEO y contenido a escala con IA"
+              },
+              {
+                "url": "/servicios/inteligencia-artificial/marketing-crm",
+                "labelEn": "Marketing & CRM",
+                "labelEs": "Marketing y CRM",
+                "ariaLabelEn": "Marketing & CRM — smart segmentation and campaign personalization integrated with your CRM",
+                "ariaLabelEs": "Marketing y CRM — segmentación inteligente y personalización de campañas integrada con tu CRM",
+                "descriptionEn": "Qualified leads on autopilot",
+                "descriptionEs": "Prospectos calificados automáticamente"
+              }
+            ],
+            "titleEn": "Artificial Intelligence",
+            "titleEs": "Inteligencia Artificial",
+            "metricValue": "50%",
+            "footerLinkEn": "See all Artificial Intelligence →",
+            "footerLinkEs": "Ver todo Inteligencia Artificial →",
+            "descriptionEn": "Agents, automation and RAG applied to your business",
+            "descriptionEs": "Agentes, automatización y RAG aplicado al negocio",
+            "metricLabelEn": "operating cost reduction",
+            "metricLabelEs": "reducción de costos operativos"
+          },
+          {
+            "url": "/servicios/cloud",
+            "icon": "cloud",
+            "color": "#3B82F6",
+            "items": [
+              {
+                "url": "/servicios/cloud/finops",
+                "labelEn": "FinOps",
+                "labelEs": "FinOps",
+                "ariaLabelEn": "FinOps — cloud financial optimization and governance on AWS, GCP and Azure",
+                "ariaLabelEs": "FinOps — optimización y gobernanza financiera cloud en AWS, GCP y Azure",
+                "descriptionEn": "Cloud financial governance and optimization",
+                "descriptionEs": "Gobierno y optimización financiera cloud"
+              },
+              {
+                "url": "/servicios/cloud/migracion-aws",
+                "labelEn": "AWS Migration",
+                "labelEs": "Migración a AWS",
+                "ariaLabelEn": "AWS Migration — cloud migration with zero downtime and guaranteed rollback",
+                "ariaLabelEs": "Migración a AWS — migración cloud con zero downtime y rollback garantizado",
+                "descriptionEn": "Zero downtime, guaranteed rollback",
+                "descriptionEs": "Zero downtime, rollback garantizado"
+              },
+              {
+                "url": "/servicios/cloud/infraestructura",
+                "labelEn": "Infrastructure",
+                "labelEs": "Infraestructura",
+                "ariaLabelEn": "Cloud Infrastructure — multi-cloud architecture with Terraform, CDK and observability",
+                "ariaLabelEs": "Infraestructura Cloud — arquitectura multi-cloud con Terraform, CDK y observabilidad",
+                "descriptionEn": "Multi-cloud with IaC and observability",
+                "descriptionEs": "Multi-cloud con IaC y observabilidad"
+              },
+              {
+                "url": "/servicios/cloud/seguridad",
+                "labelEn": "Cloud Security",
+                "labelEs": "Seguridad Cloud",
+                "ariaLabelEn": "Cloud Security — SOC2 and ISO27001 compliance, IAM and end-to-end encryption",
+                "ariaLabelEs": "Seguridad Cloud — compliance SOC2, ISO27001, IAM y cifrado end-to-end",
+                "descriptionEn": "SOC2, ISO27001 and real hardening",
+                "descriptionEs": "SOC2, ISO27001 y hardening real"
+              },
+              {
+                "url": "/servicios/cloud/serverless",
+                "labelEn": "Serverless",
+                "labelEs": "Serverless",
+                "ariaLabelEn": "Serverless — event-driven architectures with Lambda and Cloud Functions",
+                "ariaLabelEs": "Serverless — arquitecturas event-driven con Lambda y Cloud Functions",
+                "descriptionEn": "Pay-per-use, automatic scaling",
+                "descriptionEs": "Pay-per-use, escala automática"
+              }
+            ],
+            "titleEn": "Cloud",
+            "titleEs": "Cloud",
+            "metricValue": "40%",
+            "footerLinkEn": "See all Cloud →",
+            "footerLinkEs": "Ver todo Cloud →",
+            "descriptionEn": "AWS, GCP, Azure with real governance and FinOps",
+            "descriptionEs": "AWS, GCP, Azure con gobierno y FinOps real",
+            "metricLabelEn": "average cloud spend reduction",
+            "metricLabelEs": "reducción gasto cloud promedio"
+          },
+          {
+            "url": "/servicios/staff-augmentation",
+            "icon": "users",
+            "color": "#10B981",
+            "items": [
+              {
+                "url": "/servicios/staff-augmentation/desarrollo-software",
+                "labelEn": "Software Development",
+                "labelEs": "Desarrollo de Software",
+                "ariaLabelEn": "Software Development — senior engineers in React, Node.js, Python, Java, Go",
+                "ariaLabelEs": "Desarrollo de Software — ingenieros senior React, Node.js, Python, Java, Go",
+                "descriptionEn": "Backend, frontend, mobile, full-stack",
+                "descriptionEs": "Backend, frontend, mobile, full-stack"
+              },
+              {
+                "url": "/servicios/staff-augmentation/datos-ia",
+                "labelEn": "Data & AI",
+                "labelEs": "Datos e IA",
+                "ariaLabelEn": "Data & AI — Data Scientists, Data Engineers and ML Engineers",
+                "ariaLabelEs": "Datos e IA — Data Scientists, Data Engineers y ML Engineers",
+                "descriptionEn": "Data engineers, scientists and ML experts",
+                "descriptionEs": "Data engineers, scientists y ML experts"
+              },
+              {
+                "url": "/servicios/staff-augmentation/devops-cloud",
+                "labelEn": "DevOps & Cloud",
+                "labelEs": "DevOps & Cloud",
+                "ariaLabelEn": "DevOps & Cloud — Cloud Architects and DevOps Engineers certified on AWS, GCP, Azure",
+                "ariaLabelEs": "DevOps y Cloud — Cloud Architects y DevOps Engineers certificados AWS, GCP, Azure",
+                "descriptionEn": "SRE, cloud architects, infrastructure",
+                "descriptionEs": "SRE, cloud architects, infraestructura"
+              },
+              {
+                "url": "/servicios/staff-augmentation/diseno-ux-ui",
+                "labelEn": "UX/UI Design",
+                "labelEs": "Diseño UX/UI",
+                "ariaLabelEn": "UX/UI Design — senior Product Designers with design systems experience",
+                "ariaLabelEs": "Diseño UX/UI — Product Designers senior con experiencia en design systems",
+                "descriptionEn": "Product designers and UX researchers",
+                "descriptionEs": "Product designers y UX researchers"
+              },
+              {
+                "url": "/servicios/staff-augmentation/qa-seguridad",
+                "labelEn": "QA & Security",
+                "labelEs": "QA & Seguridad",
+                "ariaLabelEn": "QA & Security — QA Engineers, SDET and cybersecurity specialists",
+                "ariaLabelEs": "QA y Seguridad — QA Engineers, SDET y especialistas en ciberseguridad",
+                "descriptionEn": "Testers, pentesters and analysts",
+                "descriptionEs": "Testers, pentesters y analistas"
+              }
+            ],
+            "titleEn": "Staff Augmentation",
+            "titleEs": "Staff Augmentation",
+            "metricValue": "40%",
+            "footerLinkEn": "See all Staff Augmentation →",
+            "footerLinkEs": "Ver todo Staff Augmentation →",
+            "descriptionEn": "Validated Colombian tech talent for your team",
+            "descriptionEs": "Talento tech colombiano validado para tu equipo",
+            "metricLabelEn": "savings vs. hiring in USA or Europe",
+            "metricLabelEs": "ahorro vs. contratar en USA o Europa"
+          },
+          {
+            "url": "/servicios/desarrollo-digital",
+            "icon": "code2",
+            "color": "#06B6D4",
+            "items": [
+              {
+                "url": "/servicios/desarrollo-digital/sitios-web-agentic",
+                "labelEn": "Agentic-First Websites",
+                "labelEs": "Sitios Web Agentic-First",
+                "ariaLabelEn": "Agentic-First Websites — sites optimized for indexing by LLMs, AI agents and Google SGE",
+                "ariaLabelEs": "Sitios Web Agentic-First — sitios optimizados para indexación por LLMs, agentes IA y Google SGE",
+                "descriptionEn": "Sites navigable by AI, agents and LLMs",
+                "descriptionEs": "Sitios navegables por IA, agentes y LLMs"
+              },
+              {
+                "url": "/servicios/desarrollo-digital/apps-moviles",
+                "labelEn": "Mobile Apps",
+                "labelEs": "Apps Móviles",
+                "ariaLabelEn": "Mobile Apps — native and cross-platform development with React Native and Flutter",
+                "ariaLabelEs": "Apps Móviles — desarrollo nativo y cross-platform con React Native y Flutter",
+                "descriptionEn": "iOS, Android, Flutter, React Native",
+                "descriptionEs": "iOS, Android, Flutter, React Native"
+              },
+              {
+                "url": "/servicios/desarrollo-digital/ecommerce",
+                "labelEn": "E-commerce",
+                "labelEs": "E-commerce",
+                "ariaLabelEn": "E-commerce — custom B2B and B2C platforms without per-transaction fees",
+                "ariaLabelEs": "E-commerce — plataformas B2B y B2C a medida sin comisiones por transacción",
+                "descriptionEn": "Owned platforms without commissions",
+                "descriptionEs": "Plataformas propias sin comisiones"
+              },
+              {
+                "url": "/servicios/desarrollo-digital/plataformas-web",
+                "labelEn": "Web Platforms",
+                "labelEs": "Plataformas Web",
+                "ariaLabelEn": "Web Platforms — scalable architecture with Next.js, React, Node.js",
+                "ariaLabelEs": "Plataformas Web — arquitectura escalable con Next.js, React, Node.js",
+                "descriptionEn": "Scalable architecture from day one",
+                "descriptionEs": "Arquitectura escalable desde el día 1"
+              }
+            ],
+            "titleEn": "Digital Development",
+            "titleEs": "Desarrollo Digital",
+            "metricValue": "13",
+            "footerLinkEn": "See all Digital Development →",
+            "footerLinkEs": "Ver todo Desarrollo Digital →",
+            "descriptionEn": "From concept to production. Measurable sprints",
+            "descriptionEs": "Del concepto a producción. Sprints medibles",
+            "metricLabelEn": "years of projects across LATAM and USA",
+            "metricLabelEs": "años de proyectos en LATAM y USA"
+          }
+        ],
+        "titleEn": "Services",
+        "titleEs": "Servicios",
+        "triggerUrl": "/servicios"
+      },
+      {
+        "kind": "products",
+        "items": [
+          {
+            "url": "/productos/paywl",
+            "icon": "paywl",
+            "badgeEn": "Media · LATAM",
+            "badgeEs": "Medios · LATAM",
+            "labelEn": "PAYWL",
+            "labelEs": "PAYWL",
+            "ariaLabelEn": "PAYWL — paywall engine for digital media. From $450/month",
+            "ariaLabelEs": "PAYWL — motor de paywall para medios digitales. Desde $450/mes",
+            "descriptionEn": "Paywall engine for digital media",
+            "descriptionEs": "Motor de paywall para medios digitales"
+          },
+          {
+            "url": "/productos/niveleads",
+            "icon": "niveleads",
+            "badgeEn": "B2B Sales · AI",
+            "badgeEs": "Ventas B2B · IA",
+            "labelEn": "Niveleads",
+            "labelEs": "Niveleads",
+            "ariaLabelEn": "Niveleads — AI lead scoring, 24h setup. From $99/month",
+            "ariaLabelEs": "Niveleads — lead scoring con IA, setup en 24h. Desde $99/mes",
+            "descriptionEn": "AI lead scoring. 24h setup.",
+            "descriptionEs": "Lead scoring con IA. Setup en 24h."
+          },
+          {
+            "url": "/productos/hirely",
+            "icon": "hirely",
+            "badgeEn": "HR · AI",
+            "badgeEs": "RRHH · IA",
+            "labelEn": "Hirely",
+            "labelEs": "Hirely",
+            "ariaLabelEn": "Hirely — ATS with Claude AI, voice and digital signature. Free demo",
+            "ariaLabelEs": "Hirely — ATS con Claude AI, voz y firma digital. Demo gratis",
+            "descriptionEn": "ATS with Claude AI, voice, digital signature",
+            "descriptionEs": "ATS con Claude AI, voz, firma digital"
+          }
+        ],
+        "titleEn": "Products",
+        "titleEs": "Productos",
+        "triggerUrl": "/productos",
+        "footerLinkEn": "See all products →",
+        "footerLinkEs": "Ver todos los productos →",
+        "footerLinkUrl": "/productos",
+        "footerLinkColor": "#00D4FF",
+        "headerCaptionEn": "Nivelics proprietary software",
+        "headerCaptionEs": "Software propio de Nivelics"
+      },
+      {
+        "kind": "grid",
+        "items": [
+          {
+            "url": "/industrias/fintech",
+            "icon": "trending-up",
+            "labelEn": "Fintech",
+            "labelEs": "Fintech",
+            "ariaLabelEn": "Fintech — AI, Cloud and tech talent for digital banking and payments",
+            "ariaLabelEs": "Fintech — soluciones de IA, Cloud y talento tech para banca digital y pagos",
+            "descriptionEn": "Digital banking, payments and regtech",
+            "descriptionEs": "Banca digital, pagos y regulación tech"
+          },
+          {
+            "url": "/industrias/medios-entretenimiento",
+            "icon": "play-circle",
+            "labelEn": "Media & Entertainment",
+            "labelEs": "Medios y Entretenimiento",
+            "ariaLabelEn": "Media & Entertainment — technology for digital platforms, streaming and content",
+            "ariaLabelEs": "Medios y Entretenimiento — tecnología para plataformas digitales, streaming y contenido",
+            "descriptionEn": "Content and digital streaming platforms",
+            "descriptionEs": "Plataformas de contenido y streaming digital"
+          },
+          {
+            "url": "/industrias/salud",
+            "icon": "heart-pulse",
+            "labelEn": "Healthcare",
+            "labelEs": "Salud",
+            "ariaLabelEn": "Healthcare — tech solutions for healthtech with HIPAA and local regulatory compliance",
+            "ariaLabelEs": "Salud — soluciones tech para healthtech con cumplimiento regulatorio HIPAA y locales",
+            "descriptionEn": "HealthTech with regulatory compliance",
+            "descriptionEs": "HealthTech con cumplimiento regulatorio"
+          },
+          {
+            "url": "/industrias/retail-ecommerce",
+            "icon": "shopping-bag",
+            "labelEn": "Retail & E-commerce",
+            "labelEs": "Retail y E-commerce",
+            "ariaLabelEn": "Retail & E-commerce — technology for omnichannel, shopping experience and logistics",
+            "ariaLabelEs": "Retail y E-commerce — tecnología para omnicanalidad, experiencia de compra y logística",
+            "descriptionEn": "Omnichannel and digital last mile",
+            "descriptionEs": "Omnicanalidad y última milla digital"
+          },
+          {
+            "url": "/industrias/logistica",
+            "icon": "truck",
+            "labelEn": "Logistics",
+            "labelEs": "Logística",
+            "ariaLabelEn": "Logistics — technology for supply chain, traceability and operations automation",
+            "ariaLabelEs": "Logística — tecnología para supply chain, trazabilidad y automatización de operaciones",
+            "descriptionEn": "Supply chain and real-time traceability",
+            "descriptionEs": "Supply chain y trazabilidad en tiempo real"
+          },
+          {
+            "url": "/industrias/manufactura",
+            "icon": "factory",
+            "labelEn": "Manufacturing",
+            "labelEs": "Manufactura",
+            "ariaLabelEn": "Manufacturing — Industry 4.0 solutions, process automation and plant digitalization",
+            "ariaLabelEs": "Manufactura — soluciones de Industria 4.0, automatización de procesos y digitalización de planta",
+            "descriptionEn": "Industry 4.0 and plant automation",
+            "descriptionEs": "Industria 4.0 y automatización de planta"
+          }
+        ],
+        "titleEn": "Industries",
+        "titleEs": "Industrias",
+        "triggerUrl": "/industrias/fintech",
+        "accentColor": "#F59E0B",
+        "footerLinkEn": "See all industries →",
+        "footerLinkEs": "Ver todas las industrias →",
+        "footerLinkUrl": "/industrias/fintech",
+        "footerLinkColor": "#F59E0B",
+        "headerCaptionEn": "Industries we serve",
+        "headerCaptionEs": "Industrias que atendemos"
+      },
+      {
+        "kind": "nosotros",
+        "items": [
+          {
+            "url": "/nosotros/historia",
+            "icon": "clock",
+            "labelEn": "Our story",
+            "labelEs": "Historia",
+            "ariaLabelEn": "About Nivelics — founded in 2012, projects in 7 countries",
+            "ariaLabelEs": "Historia de Nivelics — fundada en 2012, proyectos en 7 países",
+            "descriptionEn": "13 years building technology across LATAM",
+            "descriptionEs": "13 años construyendo tecnología en LATAM"
+          },
+          {
+            "url": "/nosotros/equipo",
+            "icon": "users",
+            "labelEn": "Team",
+            "labelEs": "Equipo",
+            "ariaLabelEn": "Nivelics leadership team — Camilo Villanueva, Jonathan Olarte and leaders",
+            "ariaLabelEs": "Equipo directivo de Nivelics — Camilo Villanueva, Jonathan Olarte y líderes",
+            "descriptionEn": "CEO, CTO and the team behind the projects",
+            "descriptionEs": "CEO, CTO y el equipo detrás de los proyectos"
+          },
+          {
+            "url": "/nosotros/metodologia",
+            "icon": "git-branch",
+            "labelEn": "Methodology",
+            "labelEs": "Metodología",
+            "ariaLabelEn": "Nivelics work methodology — agile, sprints, delivery manager",
+            "ariaLabelEs": "Metodología de trabajo de Nivelics — agile, sprints, delivery manager",
+            "descriptionEn": "How we work: sprints, deliveries and governance",
+            "descriptionEs": "Cómo trabajamos: sprints, entregas y gobierno"
+          },
+          {
+            "url": "/nosotros/certificaciones",
+            "icon": "award",
+            "labelEn": "Certifications",
+            "labelEs": "Certificaciones",
+            "ariaLabelEn": "Nivelics certifications — Great Place to Work Colombia 2022, ANDI, AWS",
+            "ariaLabelEs": "Certificaciones de Nivelics — Great Place to Work Colombia 2022, ANDI, AWS",
+            "descriptionEn": "Great Place to Work 2022 · ANDI · AWS Partner",
+            "descriptionEs": "Great Place to Work 2022 · ANDI · AWS Partner"
+          }
+        ],
+        "titleEn": "About",
+        "titleEs": "Nosotros",
+        "triggerUrl": "/nosotros",
+        "accentColor": "#6366F1",
+        "credentials": {
+          "ctaUrl": "/nosotros",
+          "awardName": "Great Place to Work",
+          "ctaTextEn": "Our story →",
+          "ctaTextEs": "Conoce nuestra historia →",
+          "metricValue1": "13",
+          "metricValue2": "7+",
+          "awardCaptionEn": "Colombia · 2022",
+          "awardCaptionEs": "Colombia · 2022",
+          "metricLabelEn1": "years of experience",
+          "metricLabelEn2": "countries with active projects",
+          "metricLabelEs1": "años de experiencia",
+          "metricLabelEs2": "países con proyectos activos",
+          "footerCaptionEn": "Colombian company · Miami office",
+          "footerCaptionEs": "Empresa colombiana · Sede en Miami"
+        },
+        "headerCaptionEn": "The company behind the projects",
+        "headerCaptionEs": "La empresa detrás de los proyectos"
+      },
+      {
+        "kind": "simple",
+        "items": [],
+        "titleEn": "Case Studies",
+        "titleEs": "Casos de Éxito",
+        "triggerUrl": "/casos-de-exito"
+      },
+      {
+        "kind": "simple",
+        "items": [],
+        "titleEn": "Blog",
+        "titleEs": "Blog",
+        "triggerUrl": "/blog"
+      }
+    ],
+    "footer": {
+      "columns": [
+        {
+          "links": [
+            {
+              "url": "/servicios/inteligencia-artificial",
+              "labelEn": "Artificial Intelligence",
+              "labelEs": "Inteligencia Artificial"
+            },
+            {
+              "url": "/servicios/cloud",
+              "labelEn": "Cloud",
+              "labelEs": "Cloud"
+            },
+            {
+              "url": "/servicios/staff-augmentation",
+              "labelEn": "Staff Augmentation",
+              "labelEs": "Staff Augmentation"
+            },
+            {
+              "url": "/servicios/desarrollo-digital",
+              "labelEn": "Digital Development",
+              "labelEs": "Desarrollo Digital"
+            }
+          ],
+          "titleEn": "Services",
+          "titleEs": "Servicios"
+        },
+        {
+          "links": [
+            {
+              "url": "/productos",
+              "labelEn": "All products",
+              "labelEs": "Todos los productos"
+            },
+            {
+              "url": "/productos/paywl",
+              "labelEn": "PAYWL",
+              "labelEs": "PAYWL"
+            },
+            {
+              "url": "/productos/niveleads",
+              "labelEn": "Niveleads",
+              "labelEs": "Niveleads"
+            },
+            {
+              "url": "/productos/hirely",
+              "labelEn": "Hirely",
+              "labelEs": "Hirely"
+            }
+          ],
+          "titleEn": "Products",
+          "titleEs": "Productos"
+        },
+        {
+          "links": [
+            {
+              "url": "/industrias/fintech",
+              "labelEn": "Fintech",
+              "labelEs": "Fintech"
+            },
+            {
+              "url": "/industrias/medios-entretenimiento",
+              "labelEn": "Media & Entertainment",
+              "labelEs": "Medios y Entretenimiento"
+            },
+            {
+              "url": "/industrias/salud",
+              "labelEn": "Healthcare",
+              "labelEs": "Salud"
+            },
+            {
+              "url": "/industrias/retail-ecommerce",
+              "labelEn": "Retail & E-commerce",
+              "labelEs": "Retail y E-commerce"
+            },
+            {
+              "url": "/industrias/logistica",
+              "labelEn": "Logistics",
+              "labelEs": "Logística"
+            },
+            {
+              "url": "/industrias/manufactura",
+              "labelEn": "Manufacturing",
+              "labelEs": "Manufactura"
+            }
+          ],
+          "titleEn": "Industries",
+          "titleEs": "Industrias"
+        },
+        {
+          "links": [
+            {
+              "url": "/nosotros",
+              "labelEn": "About",
+              "labelEs": "Nosotros"
+            },
+            {
+              "url": "/casos-de-exito",
+              "labelEn": "Case Studies",
+              "labelEs": "Casos de Éxito"
+            },
+            {
+              "url": "/blog",
+              "labelEn": "Blog",
+              "labelEs": "Blog"
+            },
+            {
+              "url": "/trabaja-con-nosotros",
+              "labelEn": "Careers",
+              "labelEs": "Trabaja con nosotros"
+            }
+          ],
+          "titleEn": "Company",
+          "titleEs": "Empresa"
+        }
+      ],
+      "legalLinks": [
+        {
+          "url": "/privacidad",
+          "labelEn": "Privacy Policy",
+          "labelEs": "Política de Privacidad"
+        },
+        {
+          "url": "/soporte",
+          "labelEn": "Support",
+          "labelEs": "Soporte"
+        }
+      ],
+      "copyrightEn": "All rights reserved.",
+      "copyrightEs": "Todos los derechos reservados.",
+      "contactEmail": "contacto@nivelics.com",
+      "brandTaglineEn": "B2B digital transformation. Applied AI, Cloud with real governance, and Premium Staff Augmentation.",
+      "brandTaglineEs": "Transformación digital B2B. IA aplicada, Cloud con gobierno y Staff Augmentation premium.",
+      "socialLinkedin": "https://www.linkedin.com/company/nivelics",
+      "socialInstagram": "https://www.instagram.com/nivelics",
+      "contactSupportUrl": "/soporte",
+      "contactWhatsappUrl": "https://wa.me/573103926621",
+      "contactColumnTitleEn": "Contact",
+      "contactColumnTitleEs": "Contacto",
+      "contactSupportLabelEn": "Support",
+      "contactSupportLabelEs": "Soporte",
+      "contactWhatsappLabelEn": "WhatsApp",
+      "contactWhatsappLabelEs": "WhatsApp"
+    },
+    "updatedAt": "2026-04-16T17:07:57.803Z"
+  }
+]

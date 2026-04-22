@@ -15,11 +15,39 @@ import {
   pagesGeneral,
 } from "@/lib/db/schema/admin";
 import { eq, and, isNull, desc, asc } from "drizzle-orm";
+import {
+  SITE_CONFIG_FB,
+  NAV_CONFIG_FB,
+  HOME_CONTENT_FB,
+  SERVICIOS_FB,
+  INDUSTRIAS_FB,
+  CASOS_EXITO_FB,
+  BLOG_CATEGORIES_FB,
+  BLOG_POSTS_FB,
+  TEAM_MEMBERS_FB,
+  HISTORIA_ITEMS_FB,
+  CERTIFICACIONES_FB,
+  PAGES_GENERAL_FB,
+} from "./fallbacks-data";
+
+function byPublishedDesc<T extends { publishedAt: Date | null; createdAt?: Date | null }>(
+  a: T,
+  b: T,
+): number {
+  const ta = a.publishedAt?.getTime() ?? a.createdAt?.getTime() ?? 0;
+  const tb = b.publishedAt?.getTime() ?? b.createdAt?.getTime() ?? 0;
+  return tb - ta;
+}
 
 // ─── SERVICIOS ─────────────────────────────────────────
 
 export const getServicio = cache(async (slugEs: string) => {
-  if (!db) return null;
+  if (!db) {
+    return (
+      SERVICIOS_FB.find((r) => r.slugEs === slugEs && !r.deletedAt && r.status === "published") ??
+      null
+    );
+  }
   const result = await db
     .select()
     .from(servicios)
@@ -35,7 +63,11 @@ export const getServicio = cache(async (slugEs: string) => {
 });
 
 export const getAllServicios = cache(async () => {
-  if (!db) return [];
+  if (!db) {
+    return SERVICIOS_FB.filter((r) => !r.deletedAt && r.status === "published").sort(
+      (a, b) => a.sortOrder - b.sortOrder,
+    );
+  }
   return db
     .select()
     .from(servicios)
@@ -44,7 +76,11 @@ export const getAllServicios = cache(async () => {
 });
 
 export const getServiciosByParent = cache(async (parentId: string) => {
-  if (!db) return [];
+  if (!db) {
+    return SERVICIOS_FB.filter(
+      (r) => r.parentId === parentId && !r.deletedAt && r.status === "published",
+    ).sort((a, b) => a.sortOrder - b.sortOrder);
+  }
   return db
     .select()
     .from(servicios)
@@ -59,7 +95,11 @@ export const getServiciosByParent = cache(async (parentId: string) => {
 });
 
 export const getHubServicios = cache(async () => {
-  if (!db) return [];
+  if (!db) {
+    return SERVICIOS_FB.filter(
+      (r) => r.serviceType === "hub" && !r.deletedAt && r.status === "published",
+    ).sort((a, b) => a.sortOrder - b.sortOrder);
+  }
   return db
     .select()
     .from(servicios)
@@ -76,7 +116,9 @@ export const getHubServicios = cache(async () => {
 // ─── INDUSTRIAS ────────────────────────────────────────
 
 export const getIndustria = cache(async (slugEs: string) => {
-  if (!db) return null;
+  if (!db) {
+    return INDUSTRIAS_FB.find((r) => r.slugEs === slugEs && !r.deletedAt) ?? null;
+  }
   const result = await db
     .select()
     .from(industrias)
@@ -86,7 +128,11 @@ export const getIndustria = cache(async (slugEs: string) => {
 });
 
 export const getAllIndustrias = cache(async () => {
-  if (!db) return [];
+  if (!db) {
+    return INDUSTRIAS_FB.filter((r) => !r.deletedAt).sort((a, b) =>
+      a.nameEs.localeCompare(b.nameEs),
+    );
+  }
   return db
     .select()
     .from(industrias)
@@ -97,7 +143,12 @@ export const getAllIndustrias = cache(async () => {
 // ─── CASOS DE ÉXITO ───────────────────────────────────
 
 export const getCasoExito = cache(async (slug: string) => {
-  if (!db) return null;
+  if (!db) {
+    return (
+      CASOS_EXITO_FB.find((r) => r.slug === slug && !r.deletedAt && r.status === "published") ??
+      null
+    );
+  }
   const result = await db
     .select()
     .from(casosExito)
@@ -113,7 +164,11 @@ export const getCasoExito = cache(async (slug: string) => {
 });
 
 export const getAllCasosExito = cache(async () => {
-  if (!db) return [];
+  if (!db) {
+    return CASOS_EXITO_FB.filter((r) => !r.deletedAt && r.status === "published").sort(
+      (a, b) => (b.createdAt?.getTime() ?? 0) - (a.createdAt?.getTime() ?? 0),
+    );
+  }
   return db
     .select()
     .from(casosExito)
@@ -148,8 +203,18 @@ const blogListingColumns = {
   updatedAt: blogPosts.updatedAt,
 };
 
+function publishedBlogPosts() {
+  return BLOG_POSTS_FB.filter((r) => !r.deletedAt && r.status === "published").sort(
+    byPublishedDesc,
+  );
+}
+
 export const getBlogPost = cache(async (slug: string) => {
-  if (!db) return null;
+  if (!db) {
+    return (
+      BLOG_POSTS_FB.find((r) => r.slug === slug && !r.deletedAt && r.status === "published") ?? null
+    );
+  }
   const result = await db
     .select()
     .from(blogPosts)
@@ -161,7 +226,7 @@ export const getBlogPost = cache(async (slug: string) => {
 });
 
 export const getAllBlogPosts = cache(async () => {
-  if (!db) return [];
+  if (!db) return publishedBlogPosts();
   return db
     .select()
     .from(blogPosts)
@@ -173,7 +238,7 @@ export const getAllBlogPosts = cache(async () => {
 // omits contentEs + contentEn (the two biggest columns) to reduce egress.
 // Use getBlogPost(slug) when you need the full post body.
 export const getAllBlogPostsLight = cache(async () => {
-  if (!db) return [];
+  if (!db) return publishedBlogPosts();
   const rows = await db
     .select(blogListingColumns)
     .from(blogPosts)
@@ -183,12 +248,12 @@ export const getAllBlogPostsLight = cache(async () => {
 });
 
 export const getBlogCategoriesPublic = cache(async () => {
-  if (!db) return [];
+  if (!db) return [...BLOG_CATEGORIES_FB].sort((a, b) => a.nameEs.localeCompare(b.nameEs));
   return db.select().from(blogCategories).orderBy(asc(blogCategories.nameEs));
 });
 
 export const getBlogCategoryBySlug = cache(async (slug: string) => {
-  if (!db) return null;
+  if (!db) return BLOG_CATEGORIES_FB.find((c) => c.slug === slug) ?? null;
   const result = await db
     .select()
     .from(blogCategories)
@@ -200,7 +265,19 @@ export const getBlogCategoryBySlug = cache(async (slug: string) => {
 // Categories that have at least one published, non-deleted post. Used to
 // render the filter rail in the blog home — empty categories never appear.
 export const getActiveBlogCategories = cache(async () => {
-  if (!db) return [];
+  if (!db) {
+    const activeIds = new Set(publishedBlogPosts().map((p) => p.categoryId));
+    return BLOG_CATEGORIES_FB.filter((c) => activeIds.has(c.id))
+      .map(({ id, slug, nameEs, nameEn, color, icon }) => ({
+        id,
+        slug,
+        nameEs,
+        nameEn,
+        color,
+        icon,
+      }))
+      .sort((a, b) => a.nameEs.localeCompare(b.nameEs));
+  }
   return db
     .selectDistinct({
       id: blogCategories.id,
@@ -217,7 +294,7 @@ export const getActiveBlogCategories = cache(async () => {
 });
 
 export const getFeaturedBlogPost = cache(async () => {
-  if (!db) return null;
+  if (!db) return publishedBlogPosts()[0] ?? null;
   const result = await db
     .select()
     .from(blogPosts)
@@ -229,7 +306,7 @@ export const getFeaturedBlogPost = cache(async () => {
 
 // Light variant used by category pages — same shape as getAllBlogPostsLight.
 export const getBlogPostsByCategory = cache(async (categoryId: string) => {
-  if (!db) return [];
+  if (!db) return publishedBlogPosts().filter((p) => p.categoryId === categoryId);
   const rows = await db
     .select(blogListingColumns)
     .from(blogPosts)
@@ -247,7 +324,7 @@ export const getBlogPostsByCategory = cache(async (categoryId: string) => {
 // Proxy for "popular" while we don't track views: most recent posts. Replace
 // when a view-count column lands on blog_posts.
 export const getPopularBlogPosts = cache(async (limit = 5) => {
-  if (!db) return [];
+  if (!db) return publishedBlogPosts().slice(0, limit);
   const rows = await db
     .select(blogListingColumns)
     .from(blogPosts)
@@ -262,7 +339,7 @@ export const getPopularBlogPosts = cache(async (limit = 5) => {
 // Request-level memoization: home page calls this twice per request
 // (generateMetadata + HomePage). With cache() that collapses to 1 query.
 export const getHomeContent = cache(async () => {
-  if (!db) return null;
+  if (!db) return HOME_CONTENT_FB.find((r) => r.id === "main") ?? HOME_CONTENT_FB[0] ?? null;
   const result = await db.select().from(homeContent).where(eq(homeContent.id, "main")).limit(1);
   return result[0] || null;
 });
@@ -270,7 +347,11 @@ export const getHomeContent = cache(async () => {
 // ─── NOSOTROS ──────────────────────────────────────────
 
 export const getTeamMembers = cache(async () => {
-  if (!db) return [];
+  if (!db) {
+    return TEAM_MEMBERS_FB.filter((r) => r.status === "published").sort(
+      (a, b) => a.sortOrder - b.sortOrder,
+    );
+  }
   return db
     .select()
     .from(teamMembers)
@@ -279,12 +360,12 @@ export const getTeamMembers = cache(async () => {
 });
 
 export const getHistoriaItems = cache(async () => {
-  if (!db) return [];
+  if (!db) return [...HISTORIA_ITEMS_FB].sort((a, b) => a.sortOrder - b.sortOrder);
   return db.select().from(historiaItems).orderBy(asc(historiaItems.sortOrder));
 });
 
 export const getCertificacionesPublic = cache(async () => {
-  if (!db) return [];
+  if (!db) return [...CERTIFICACIONES_FB].sort((a, b) => a.sortOrder - b.sortOrder);
   return db.select().from(certificaciones).orderBy(asc(certificaciones.sortOrder));
 });
 
@@ -293,7 +374,7 @@ export const getCertificacionesPublic = cache(async () => {
 // Request-level memoization: nav + footer both call this in the same render.
 // Without cache(), that's 2 queries per request against nav_config.
 export const getNavConfigPublic = cache(async () => {
-  if (!db) return null;
+  if (!db) return NAV_CONFIG_FB.find((r) => r.id === "main") ?? NAV_CONFIG_FB[0] ?? null;
   const result = await db.select().from(navConfig).where(eq(navConfig.id, "main")).limit(1);
   return result[0] || null;
 });
@@ -303,7 +384,7 @@ export const getNavConfigPublic = cache(async () => {
 // Request-level memoization: multiple calls within the same render tree
 // (e.g. marketing layout + llms.txt route on the same request) hit the DB once.
 export const getSiteConfigPublic = cache(async () => {
-  if (!db) return null;
+  if (!db) return SITE_CONFIG_FB.find((r) => r.id === "main") ?? SITE_CONFIG_FB[0] ?? null;
   const result = await db.select().from(siteConfig).where(eq(siteConfig.id, "main")).limit(1);
   return result[0] || null;
 });
@@ -311,7 +392,7 @@ export const getSiteConfigPublic = cache(async () => {
 // ─── PÁGINAS GENERALES ─────────────────────────────────
 
 export const getPageGeneral = cache(async (pageType: string) => {
-  if (!db) return null;
+  if (!db) return PAGES_GENERAL_FB.find((r) => r.pageType === pageType) ?? null;
   const result = await db
     .select()
     .from(pagesGeneral)
