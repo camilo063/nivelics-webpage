@@ -1,0 +1,246 @@
+[
+  {
+    "id": "main",
+    "heroBadgeEs": "IA · Cloud · Staffing Premium",
+    "heroBadgeEn": "AI · Cloud · Premium Staffing",
+    "heroTitleEs": "Transforma más rápido.",
+    "heroTitleEn": "Transform faster.",
+    "heroSubtitleEs": "Empresa colombiana de transformación digital B2B. IA aplicada, Cloud (AWS, GCP, Azure) y Staff Augmentation premium para empresas en LATAM y USA. Desde 2012.",
+    "heroSubtitleEn": "Colombian B2B digital transformation company. Applied AI, Cloud (AWS, GCP, Azure) and premium Staff Augmentation for companies in LATAM and USA. Since 2012.",
+    "heroCtaPrimaryEs": "Agenda tu diagnóstico",
+    "heroCtaPrimaryEn": "Book your assessment",
+    "heroCtaSecondaryEs": "Hablar por WhatsApp",
+    "heroCtaSecondaryEn": "Chat on WhatsApp",
+    "heroImage": null,
+    "heroCtaPrimaryUrl": "/contacto",
+    "heroCtaSecondaryUrl": "https://wa.me/573103926621?text=Hola%2C%20quiero%20información%20sobre%20Nivelics",
+    "metrics": [
+      {
+        "unit": "",
+        "value": "13+",
+        "labelEn": "Years — Founded in 2012",
+        "labelEs": "Años — Fundados en 2012"
+      },
+      {
+        "unit": "",
+        "value": "7+",
+        "labelEn": "Countries — Colombia, USA, Mexico and more",
+        "labelEs": "Países — Colombia, USA, México y más"
+      },
+      {
+        "unit": "",
+        "value": "40%",
+        "labelEn": "Savings vs. hiring in USA or Europe",
+        "labelEs": "Ahorro vs. contratar en USA o Europa"
+      },
+      {
+        "unit": "",
+        "value": "50+",
+        "labelEn": "Projects delivered in LATAM and USA",
+        "labelEs": "Proyectos entregados en LATAM y USA"
+      }
+    ],
+    "trustBarLogos": null,
+    "trustBarTitleEs": "Empresas en LATAM y USA que ya transformaron con Nivelics",
+    "trustBarTitleEn": "Companies across LATAM and USA already transformed with Nivelics",
+    "servicesSectionTitleEs": "IA + Cloud + Staffing — los tres pilares integrados",
+    "servicesSectionTitleEn": "AI + Cloud + Staffing — the three integrated pillars",
+    "pillarsSubtitleEs": "La mayoría ataca estos retos por separado. Nosotros los conectamos en un solo aliado.",
+    "pillarsSubtitleEn": "Most tackle these challenges in silos. We connect them under a single partner.",
+    "casesSectionTitleEs": "Resultados reales en 7 países",
+    "casesSectionTitleEn": "Real results across 7 countries",
+    "casesSectionSubtitleEs": "Empresas en medios, fintech, retail y servicios que eligieron Nivelics para transformar su tecnología.",
+    "casesSectionSubtitleEn": "Companies in media, fintech, retail and services that chose Nivelics to transform their technology.",
+    "casesSectionFooterEs": "7 empresas. Resultados reales.",
+    "casesSectionFooterEn": "7 companies. Real results.",
+    "casesSectionCtaEs": "Ver todos los casos",
+    "casesSectionCtaEn": "See all case studies",
+    "productsStripTitleEs": "Software propio de Nivelics",
+    "productsStripTitleEn": "Nivelics proprietary software",
+    "productsStripCtaEs": "Ver todos los productos →",
+    "productsStripCtaEn": "See all products →",
+    "mapTitleEs": "13 años. 7 países. Un solo aliado.",
+    "mapTitleEn": "13 years. 7 countries. One partner.",
+    "mapSubtitleEs": "Proyectos activos en Colombia, USA, México, El Salvador, Panamá, Ecuador, Perú y Argentina.",
+    "mapSubtitleEn": "Active projects in Colombia, USA, Mexico, El Salvador, Panama, Ecuador, Peru and Argentina.",
+    "mapMetrics": [
+      {
+        "value": "13+",
+        "labelEn": "Years",
+        "labelEs": "Años",
+        "sublabelEn": "Founded in 2012",
+        "sublabelEs": "Fundados en 2012"
+      },
+      {
+        "value": "7+",
+        "labelEn": "Countries",
+        "labelEs": "Países",
+        "sublabelEn": "LATAM and USA",
+        "sublabelEs": "LATAM y USA"
+      }
+    ],
+    "whyUsTitleEs": "¿Por qué Nivelics?",
+    "whyUsTitleEn": "Why Nivelics?",
+    "whyUsSubtitleEs": null,
+    "whyUsSubtitleEn": null,
+    "whyUsItems": [
+      {
+        "icon": "layers",
+        "color": "#06B6D4",
+        "copyEn": "We're not a design agency, an infrastructure consultancy, or a staffing board. We're all three — integrated.",
+        "copyEs": "No somos una agencia de diseño, ni una consultora de infraestructura, ni una bolsa de empleo. Somos los tres — integrados.",
+        "titleEn": "All 3 pillars under one partner",
+        "titleEs": "Los 3 pilares en un solo aliado"
+      },
+      {
+        "icon": "bar-chart2",
+        "color": "#8B5CF6",
+        "copyEn": "Every project has KPIs defined before kickoff. If it isn't measured, it doesn't exist.",
+        "copyEs": "Cada proyecto tiene KPIs definidos antes de empezar. Si no se mide, no existe.",
+        "titleEn": "Results, not slides",
+        "titleEs": "Resultados, no presentaciones"
+      },
+      {
+        "icon": "zap",
+        "color": "#F59E0B",
+        "copyEn": "The ramp-up timeline we promise is in the contract — not in the pitch.",
+        "copyEs": "El tiempo de integración que prometemos está en el contrato — no en el pitch.",
+        "titleEn": "Candidates in 5 days. Agents in 8 weeks.",
+        "titleEs": "Candidatos en 5 días. Agentes en 8 semanas."
+      },
+      {
+        "icon": "globe",
+        "color": "#10B981",
+        "copyEn": "HQ in Bogotá and Miami. Bilingual teams. Projects in 7 countries. Great Place to Work 2022.",
+        "copyEs": "Sede en Bogotá y Miami. Equipos bilingües. Proyectos en 7 países. Great Place to Work 2022.",
+        "titleEn": "LATAM that operates like a global team",
+        "titleEs": "LATAM que opera como global"
+      }
+    ],
+    "faqs": [
+      {
+        "answerEn": "Nivelics is a Colombian digital transformation company founded in 2012, headquartered in Bogotá and Miami. We offer three integrated service lines: Applied AI (agents, automation, RAG), Cloud with real governance (AWS, GCP, Azure, FinOps) and premium Staff Augmentation (bilingual tech talent integrated in 5 business days). We operate in 7+ countries across LATAM and USA.",
+        "answerEs": "Nivelics es una empresa colombiana de transformación digital fundada en 2012 con sede en Bogotá y Miami. Ofrecemos tres líneas de servicio integradas: IA aplicada (agentes, automatización, RAG), Cloud con gobierno real (AWS, GCP, Azure, FinOps) y Staff Augmentation premium (talento tech bilingüe integrado en 5 días hábiles). Operamos en 7+ países de LATAM y USA.",
+        "questionEn": "What is Nivelics and what services do you offer?",
+        "questionEs": "¿Qué es Nivelics y qué servicios ofrece?"
+      },
+      {
+        "answerEn": "We present the first candidates within 5 business days. Full integration into the client’s team takes 6 to 10 business days. We offer a free replacement guarantee in under 10 days if the profile doesn’t meet expectations.",
+        "answerEs": "Presentamos los primeros candidatos en máximo 5 días hábiles. La integración completa al equipo del cliente tarda entre 6 y 10 días hábiles. Ofrecemos garantía de reemplazo sin costo en menos de 10 días si el perfil no cumple las expectativas.",
+        "questionEn": "How quickly can Nivelics integrate a tech profile?",
+        "questionEs": "¿En cuánto tiempo puede Nivelics integrar un perfil tech?"
+      },
+      {
+        "answerEn": "Pricing varies by service. Staff Augmentation uses a monthly per-resource model, with average savings of 40% vs. hiring in USA or Europe. Cloud and FinOps use a fixed fee plus success fee on actual savings. Applied AI varies based on agent complexity. The initial assessment is always free with no commitment.",
+        "answerEs": "Los precios varían según el servicio. Staff Augmentation tiene un modelo mensual por recurso, con un ahorro promedio del 40% vs. contratar en USA o Europa. Cloud y FinOps tienen modelos de fee fijo más success fee sobre el ahorro logrado. IA aplicada varía según la complejidad del agente. El diagnóstico inicial siempre es gratuito y sin compromiso.",
+        "questionEn": "How much does it cost to work with Nivelics?",
+        "questionEs": "¿Cuánto cuesta trabajar con Nivelics?"
+      },
+      {
+        "answerEn": "Nivelics is headquartered in Bogotá, Colombia with an office in Miami, Florida (Nivelics LLC). We have delivered projects in Colombia, USA, Mexico, El Salvador, Panama, Ecuador, Peru and Argentina.",
+        "answerEs": "Nivelics tiene sede principal en Bogotá, Colombia y oficina en Miami, Florida (Nivelics LLC). Hemos entregado proyectos en Colombia, USA, México, El Salvador, Panamá, Ecuador, Perú y Argentina.",
+        "questionEn": "In which countries does Nivelics operate?",
+        "questionEs": "¿En qué países opera Nivelics?"
+      },
+      {
+        "answerEn": "Three things: first, we integrate all three pillars (AI, Cloud and Staffing) in one partner. Second, real speed: 5 days for candidates, 8 weeks for an AI agent in production. Third, results in the contract: our SLAs and delivery metrics are written down, not just promised in presentations.",
+        "answerEs": "Tres cosas: primero, integramos los tres pilares (IA, Cloud y Staffing) en un solo aliado. Segundo, velocidad real: 5 días para candidatos, 8 semanas para un agente IA en producción. Tercero, resultados en contrato: nuestros SLAs y métricas de entrega están escritos, no prometidos en presentaciones.",
+        "questionEn": "What makes Nivelics different from other tech consultancies?",
+        "questionEs": "¿Qué diferencia a Nivelics de otras consultoras tech?"
+      }
+    ],
+    "faqsTitleEs": "Preguntas frecuentes",
+    "faqsTitleEn": "Frequently Asked Questions",
+    "finalCtaTitleEs": "¿Listo para transformar más rápido?",
+    "finalCtaTitleEn": "Ready to transform faster?",
+    "finalCtaCopyEs": "Diagnóstico gratuito en 30 minutos. Sin RFP, sin presentaciones largas. Solo cuéntanos tu reto.",
+    "finalCtaCopyEn": "Free 30-minute assessment. No RFP, no lengthy presentations. Just tell us your challenge.",
+    "finalCtaBullets": [
+      {
+        "textEn": "We reply in under 24 hours",
+        "textEs": "Respondemos en menos de 24 horas"
+      },
+      {
+        "textEn": "No commitment — the assessment is free",
+        "textEs": "Sin compromiso — el diagnóstico es gratuito"
+      },
+      {
+        "textEn": "We speak Spanish and English",
+        "textEs": "Hablamos español e inglés"
+      }
+    ],
+    "finalCtaPrimaryEs": "Agenda tu diagnóstico",
+    "finalCtaPrimaryEn": "Book your assessment",
+    "finalCtaPrimaryUrl": "/contacto",
+    "finalCtaSecondaryEs": "Hablar por WhatsApp",
+    "finalCtaSecondaryEn": "Chat on WhatsApp",
+    "finalCtaSecondaryUrl": "https://wa.me/573103926621",
+    "finalCtaFinePrintEs": "Respondemos en menos de 24 horas. Sin ventas agresivas.",
+    "finalCtaFinePrintEn": "We reply in under 24 hours. No aggressive sales.",
+    "industriasHubTitleEs": "Tecnología que entiende tu industria",
+    "industriasHubTitleEn": "Technology that understands your industry",
+    "industriasHubSubtitleEs": "Cada sector tiene sus propias reglas, regulación y comportamientos de usuario. Traemos el expertise de dominio para que no gastes los primeros 3 meses explicándonos tu negocio.",
+    "industriasHubSubtitleEn": "Each sector has its own rules, regulations and user behaviors. We bring domain expertise so you don't spend the first 3 months explaining your business to us.",
+    "industriasHubStatEs": "13 años entregando tecnología en los sectores más exigentes de LATAM y USA",
+    "industriasHubStatEn": "13 years delivering technology in the most demanding sectors in LATAM and USA",
+    "industriasSectionTitleEs": "13 años entregando tecnología en los sectores más exigentes",
+    "industriasSectionTitleEn": "13 years delivering technology in the most demanding sectors",
+    "industriasSectionSubtitleEs": "Integramos IA, Cloud y Staff Augmentation en un solo aliado con cuenta de resultados. Sin slides genéricos — profundidad de dominio y contratos con SLAs.",
+    "industriasSectionSubtitleEn": "We integrate AI, Cloud and Staff Augmentation in a single partner with accountability. No generic decks — domain depth and SLA-backed contracts.",
+    "industriasSectionMetrics": [
+      {
+        "value": "7",
+        "labelEn": "Countries with active projects",
+        "labelEs": "Países con proyectos activos"
+      },
+      {
+        "value": "40%",
+        "labelEn": "Average cloud cost reduction",
+        "labelEs": "Reducción promedio en costos cloud"
+      },
+      {
+        "value": "5 días",
+        "labelEn": "To first Staff Augmentation candidate",
+        "labelEs": "Al primer candidato en Staff Augmentation"
+      }
+    ],
+    "processSectionTitleEs": "Cómo trabajamos",
+    "processSectionTitleEn": "How We Work",
+    "processSectionSubtitleEs": "Sin RFPs, sin presentaciones de 60 slides. Solo resultados.",
+    "processSectionSubtitleEn": "No RFPs, no 60-slide presentations. Just results.",
+    "processSteps": [
+      {
+        "icon": "calendar",
+        "descEn": "In 30 minutes we understand your challenge. No commitment and no RFP.",
+        "descEs": "En 30 minutos entendemos tu reto. Sin compromiso y sin RFP.",
+        "number": "01",
+        "titleEn": "Free diagnostic",
+        "titleEs": "Diagnóstico gratuito",
+        "durationEn": "30 min",
+        "durationEs": "30 min"
+      },
+      {
+        "icon": "code",
+        "descEn": "Scope, team, timeline, and fixed price. No surprises and no fine print.",
+        "descEs": "Alcance, equipo, cronograma y precio fijo. Sin sorpresas y sin letra pequeña.",
+        "number": "02",
+        "titleEn": "Proposal in 48h",
+        "titleEs": "Propuesta en 48h",
+        "durationEn": "48 hours",
+        "durationEs": "48 horas"
+      },
+      {
+        "icon": "rocket",
+        "descEn": "Biweekly demos in production. The code is 100% yours from sprint 1.",
+        "descEs": "Demos quincenales en producción. El código es 100% tuyo desde el sprint 1.",
+        "number": "03",
+        "titleEn": "First deliverable in 2 weeks",
+        "titleEs": "Primer entregable en 2 semanas",
+        "durationEn": "2 weeks",
+        "durationEs": "2 semanas"
+      }
+    ],
+    "translationStatusEn": "complete",
+    "updatedAt": "2026-04-15T01:30:02.875Z"
+  }
+]

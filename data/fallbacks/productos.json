@@ -1,0 +1,355 @@
+[
+  {
+    "id": "39ead6b9-58af-4b50-b03f-7f813286401e",
+    "slugEs": "paywl",
+    "slugEn": "paywl",
+    "name": "PAYWL",
+    "taglineEs": "Motor de paywall para medios digitales en LATAM",
+    "taglineEn": "Paywall engine for digital media in LATAM",
+    "descriptionEs": "Convierte tu audiencia en suscriptores sin depender de tu CMS. Arquitectura desacoplada con API REST, reglas de acceso configurables sin código, pasarelas locales (MercadoPago, PSE, Wompi) y datos 100% tuyos en AWS. La alternativa LATAM-first a Piano.io a 1/7 del precio.",
+    "descriptionEn": "Convert your audience into subscribers without depending on your CMS. Decoupled architecture with REST API, no-code access rules, local payment gateways (MercadoPago, PSE, Wompi) and 100% your data on AWS. The LATAM-first alternative to Piano.io at 1/7 the price.",
+    "externalUrl": "https://paywl.io",
+    "externalCtaEs": "Ir a paywl.io",
+    "externalCtaEn": "Go to paywl.io",
+    "icpEs": "Medios digitales LATAM con 100K–5M page views/mes",
+    "icpEn": "LATAM digital media with 100K–5M page views/month",
+    "categoryEs": "Medios · LATAM",
+    "categoryEn": "Media · LATAM",
+    "pricingFrom": 450,
+    "pricingCurrency": "USD",
+    "pricingLabelEs": "Desde $450/mes",
+    "pricingLabelEn": "From $450/month",
+    "pricingNoteEs": "Piloto gratuito de 90 días para medios elegibles",
+    "pricingNoteEn": "90-day free pilot for eligible media companies",
+    "metrics": [
+      {
+        "value": "$450",
+        "labelEn": "vs $3,000 Piano.io",
+        "labelEs": "vs $3,000 de Piano.io"
+      },
+      {
+        "value": "<2 meses",
+        "labelEn": "implementation",
+        "labelEs": "implementación"
+      },
+      {
+        "value": "5",
+        "labelEn": "wall types",
+        "labelEs": "tipos de muro"
+      },
+      {
+        "value": "100%",
+        "labelEn": "your data",
+        "labelEs": "datos tuyos"
+      }
+    ],
+    "features": [
+      {
+        "icon": "oct-lock",
+        "titleEn": "No-code rules",
+        "titleEs": "Reglas sin código",
+        "descriptionEn": "Configure who can read what, in how much time and under what conditions — without touching a line of code. The Editor-in-Chief does it from their phone.",
+        "descriptionEs": "Configura quién puede leer qué, en cuánto tiempo y bajo qué condiciones — sin tocar una línea de código. El Editor Jefe lo hace desde el celular."
+      },
+      {
+        "icon": "hex-chart",
+        "titleEn": "Native LATAM gateways",
+        "titleEs": "Pasarelas LATAM nativas",
+        "descriptionEn": "MercadoPago, PSE, Wompi. Over 70% of digital transactions in LATAM use local gateways. Piano.io only has Stripe.",
+        "descriptionEs": "MercadoPago, PSE, Wompi. Más del 70% de las transacciones digitales en LATAM usan pasarelas locales. Piano.io solo tiene Stripe."
+      },
+      {
+        "icon": "oct-cube",
+        "titleEn": "100% your data on AWS",
+        "titleEs": "Datos 100% tuyos en AWS",
+        "descriptionEn": "Dedicated AWS infrastructure. Export in CSV or JSON at any time with no extra charges.",
+        "descriptionEs": "Infraestructura dedicada en AWS. Exporta en CSV o JSON en cualquier momento sin cargos adicionales."
+      },
+      {
+        "icon": "tri-person",
+        "titleEn": "Paid audience CRM",
+        "titleEs": "CRM de audiencia de pago",
+        "descriptionEn": "Subscriptions, payment history, renewal alerts and access management integrated with your local payment gateway.",
+        "descriptionEs": "Suscripciones, historial de pagos, alertas de renovación y gestión de acceso integrada con tu pasarela de pagos local."
+      }
+    ],
+    "comparisonTable": {
+      "rows": [
+        {
+          "values": ["$10k-$25k", "~$3,000", "Solo Stripe", "No"],
+          "featureEn": "Piano.io",
+          "featureEs": "Piano.io",
+          "isNivelicsProduct": false
+        },
+        {
+          "values": ["$0-$2,500", "$800", "Solo Stripe", "No"],
+          "featureEn": "Pelcro",
+          "featureEs": "Pelcro",
+          "isNivelicsProduct": false
+        },
+        {
+          "values": ["~$5,000", "~$1,500", "Internacional", "No"],
+          "featureEn": "Evolok",
+          "featureEs": "Evolok",
+          "isNivelicsProduct": false
+        },
+        {
+          "values": ["$0 (Piloto)", "$450-$850", "MP, PSE, Wompi", "100%"],
+          "featureEn": "PAYWL (Nivelics)",
+          "featureEs": "PAYWL (Nivelics)",
+          "isNivelicsProduct": true
+        }
+      ],
+      "headersEn": ["Provider", "Setup", "Monthly fee", "LATAM Gateway", "Your data"],
+      "headersEs": ["Proveedor", "Setup", "Mensualidad", "Pasarela LATAM", "Datos propios"]
+    },
+    "faqs": [
+      {
+        "answerEn": "No. PAYWL is completely independent of your CMS. It integrates via REST API in less than 2 months without modifying your existing infrastructure.",
+        "answerEs": "No. PAYWL es completamente independiente de tu CMS. Se integra mediante API REST en menos de 2 meses sin modificar tu infraestructura existente.",
+        "questionEn": "Do I need to change my current CMS to use PAYWL?",
+        "questionEs": "¿Necesito cambiar mi CMS actual para usar PAYWL?"
+      },
+      {
+        "answerEn": "MercadoPago, PSE, Wompi, Nequi and more. If you use a different gateway, we can integrate it. The Enterprise plan includes unlimited gateways via API/SDK.",
+        "answerEs": "MercadoPago, PSE, Wompi, Nequi y más. Si usas una pasarela diferente, podemos integrarla. El plan Enterprise incluye pasarelas ilimitadas vía API/SDK.",
+        "questionEn": "What payment gateways does PAYWL support in LATAM?",
+        "questionEs": "¿Qué pasarelas de pago soporta PAYWL en LATAM?"
+      },
+      {
+        "answerEn": "We deliver your complete subscriber history in standard formats (CSV, JSON) with no extra charges or complicated processes.",
+        "answerEs": "Te entregamos todo tu historial de suscriptores en formatos estándar (CSV, JSON) sin cargos adicionales ni procesos complicados.",
+        "questionEn": "What happens to my data if I decide to switch platforms?",
+        "questionEs": "¿Qué pasa con mis datos si decido cambiar de plataforma?"
+      }
+    ],
+    "accentColor": "cyan",
+    "heroEffect": "particles",
+    "ogImage": null,
+    "seoTitleEs": "PAYWL — Motor de paywall para medios LATAM",
+    "seoTitleEn": "PAYWL — Paywall engine for LATAM media",
+    "seoDescriptionEs": "Motor de paywall SaaS para medios en LATAM. MercadoPago, PSE, Wompi. Desde $450/mes. Alternativa a Piano.io con datos 100% tuyos.",
+    "seoDescriptionEn": "SaaS paywall engine for LATAM media. MercadoPago, PSE, Wompi. From $450/month. Alternative to Piano.io with 100% your data.",
+    "schemaCategory": "BusinessApplication",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "sortOrder": 1,
+    "publishedAt": "2026-04-15T22:42:24.860Z",
+    "createdAt": "2026-04-15T22:42:26.562Z",
+    "updatedAt": "2026-04-15T22:42:26.562Z"
+  },
+  {
+    "id": "e6cdb9d7-b49a-4cda-9024-475a29217704",
+    "slugEs": "hirely",
+    "slugEn": "hirely",
+    "name": "Hirely",
+    "taglineEs": "Reclutamiento inteligente del CV al contrato firmado",
+    "taglineEn": "Intelligent recruitment from CV to signed contract",
+    "descriptionEs": "Automatiza todo el ciclo de selección: parsing de CV con Claude AI, entrevistas por voz con IA, evaluaciones técnicas, firma digital con SignWell y onboarding. 10 módulos, 7 fases completamente automatizadas.",
+    "descriptionEn": "Automates the entire recruitment cycle: CV parsing with Claude AI, AI voice interviews, technical assessments, digital signing with SignWell and onboarding. 10 modules, 7 fully automated phases.",
+    "externalUrl": "https://hirely-sepia.vercel.app",
+    "externalCtaEs": "Ver demo",
+    "externalCtaEn": "See demo",
+    "icpEs": "Equipos de RR.HH. y empresas colombianas que contratan perfiles tecnológicos",
+    "icpEn": "HR teams and Colombian companies hiring technology profiles",
+    "categoryEs": "Recursos Humanos · IA",
+    "categoryEn": "Human Resources · AI",
+    "pricingFrom": null,
+    "pricingCurrency": "USD",
+    "pricingLabelEs": "Demo gratis · Acceso anticipado",
+    "pricingLabelEn": "Free demo · Early access",
+    "pricingNoteEs": "Producto en fase de lanzamiento.",
+    "pricingNoteEn": "Product in launch phase.",
+    "metrics": [
+      {
+        "value": "10",
+        "labelEn": "integrated modules",
+        "labelEs": "módulos integrados"
+      },
+      {
+        "value": "7",
+        "labelEn": "automated phases",
+        "labelEs": "fases automatizadas"
+      },
+      {
+        "value": "90%",
+        "labelEn": "complete MVP",
+        "labelEs": "MVP completo"
+      },
+      {
+        "value": "Claude AI",
+        "labelEn": "CV parsing",
+        "labelEs": "parsing de CV"
+      }
+    ],
+    "features": [
+      {
+        "icon": "dia-pulse",
+        "titleEn": "CV parsing with Claude AI",
+        "titleEs": "CV parsing con Claude AI",
+        "descriptionEn": "Claude AI automatically extracts and structures information from each CV and assigns an ATS score in 6 objective dimensions from 0 to 100.",
+        "descriptionEs": "Claude AI extrae y estructura automáticamente la información de cada CV y asigna un puntaje ATS en 6 dimensiones objetivas de 0 a 100."
+      },
+      {
+        "icon": "arc-broadcast",
+        "titleEn": "AI voice interviews",
+        "titleEs": "Entrevistas por voz con IA",
+        "descriptionEn": "Voice agent automatically calls the candidate, conducts the interview and generates a 5-competency analysis with Claude AI.",
+        "descriptionEs": "Agente de voz llama automáticamente al candidato, conduce la entrevista y genera un análisis de 5 competencias con Claude AI."
+      },
+      {
+        "icon": "oct-code",
+        "titleEn": "Digital signing with SignWell",
+        "titleEs": "Firma digital con SignWell",
+        "descriptionEn": "3 Colombian contract types with dynamic variables. Bilateral electronic signing via SignWell with complete traceability and versioning.",
+        "descriptionEs": "3 tipos de contrato colombianos con variables dinámicas. Firma bilateral electrónica vía SignWell con trazabilidad y versionamiento completo."
+      },
+      {
+        "icon": "hex-chart",
+        "titleEn": "Objective final score from 4 sources",
+        "titleEs": "Score final objetivo de 4 fuentes",
+        "descriptionEn": "Weighted score: ATS (20%) + AI interview (30%) + technical assessment (30%) + human interview (20%). No subjectivity.",
+        "descriptionEs": "Score ponderado: ATS (20%) + entrevista IA (30%) + evaluación técnica (30%) + entrevista humana (20%). Sin subjetividad."
+      }
+    ],
+    "comparisonTable": null,
+    "faqs": [
+      {
+        "answerEn": "The contract system is optimized for Colombia. The ATS platform itself can be used in any Latin American country.",
+        "answerEs": "El sistema de contratos está optimizado para Colombia. La plataforma ATS en sí puede usarse en cualquier país latinoamericano.",
+        "questionEn": "Does Hirely work only for Colombian companies?",
+        "questionEs": "¿Hirely funciona solo para empresas colombianas?"
+      },
+      {
+        "answerEn": "The CV parsing, AI voice interview, technical assessment and final score phases are 100% automatic without human intervention.",
+        "answerEs": "Las fases de CV parsing, entrevista IA por voz, evaluación técnica y score final son 100% automáticas sin intervención humana.",
+        "questionEn": "How automated is the process really?",
+        "questionEs": "¿Qué tan automatizado está realmente el proceso?"
+      }
+    ],
+    "accentColor": "violet",
+    "heroEffect": "hex",
+    "ogImage": null,
+    "seoTitleEs": "Hirely — Reclutamiento inteligente con IA",
+    "seoTitleEn": "Hirely — Intelligent recruitment with AI",
+    "seoDescriptionEs": "ATS con Claude AI, entrevistas por voz, firma digital SignWell. Del CV al contrato firmado en un solo flujo automatizado.",
+    "seoDescriptionEn": "ATS with Claude AI, voice interviews, SignWell digital signing. From CV to signed contract in a single automated flow.",
+    "schemaCategory": "WebApplication",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "sortOrder": 3,
+    "publishedAt": "2026-04-15T22:42:24.860Z",
+    "createdAt": "2026-04-15T22:42:26.989Z",
+    "updatedAt": "2026-04-15T22:42:26.989Z"
+  },
+  {
+    "id": "4bb8638b-7e07-4286-bfca-de511b3cbc34",
+    "slugEs": "niveleads",
+    "slugEn": "niveleads",
+    "name": "Niveleads",
+    "taglineEs": "Lead scoring B2B con inteligencia artificial",
+    "taglineEn": "B2B lead scoring with artificial intelligence",
+    "descriptionEs": "Clasifica automáticamente cada prospecto como HOT, WARM o COLD usando inteligencia artificial. Secuencias de email multi-paso, enriquecimiento de datos, monitor de LinkedIn y pipeline configurable. Setup en menos de 24 horas, sin tarjeta de crédito.",
+    "descriptionEn": "Automatically classifies each prospect as HOT, WARM or COLD using artificial intelligence. Multi-step email sequences, data enrichment, LinkedIn monitor and configurable pipeline. Setup in less than 24 hours, no credit card required.",
+    "externalUrl": "https://leads.nivelics.com",
+    "externalCtaEs": "Ver demo gratis",
+    "externalCtaEn": "See free demo",
+    "icpEs": "Equipos de ventas B2B: SDRs, Account Executives y Revenue Operations",
+    "icpEn": "B2B sales teams: SDRs, Account Executives and Revenue Operations",
+    "categoryEs": "Ventas B2B · IA",
+    "categoryEn": "B2B Sales · AI",
+    "pricingFrom": 99,
+    "pricingCurrency": "USD",
+    "pricingLabelEs": "Desde $99/mes",
+    "pricingLabelEn": "From $99/month",
+    "pricingNoteEs": "Menos que 2 horas de un SDR por mes",
+    "pricingNoteEn": "Less than 2 hours of an SDR per month",
+    "metrics": [
+      {
+        "value": "+5,000",
+        "labelEn": "leads managed",
+        "labelEs": "leads gestionados"
+      },
+      {
+        "value": "9",
+        "labelEn": "data sources",
+        "labelEs": "fuentes de datos"
+      },
+      {
+        "value": "24h",
+        "labelEn": "average setup",
+        "labelEs": "setup promedio"
+      },
+      {
+        "value": "$99",
+        "labelEn": "from/month",
+        "labelEs": "desde/mes"
+      }
+    ],
+    "features": [
+      {
+        "icon": "dia-pulse",
+        "titleEn": "HOT/WARM/COLD AI scoring",
+        "titleEs": "Scoring HOT/WARM/COLD con IA",
+        "descriptionEn": "The score is calculated in real time considering role, industry, company, LinkedIn interactions, email opens and AI analysis.",
+        "descriptionEs": "El score se calcula en tiempo real considerando cargo, industria, empresa, interacciones en LinkedIn, apertura de emails y análisis de IA."
+      },
+      {
+        "icon": "dia-flow",
+        "titleEn": "Automated email sequences",
+        "titleEs": "Secuencias de email automatizadas",
+        "descriptionEn": "Create multi-step outreach flows with variable personalization. Automated outreach at the right moment with real-time tracking.",
+        "descriptionEs": "Crea flujos de outreach multi-paso con personalización por variables. Outreach automatizado al momento correcto con seguimiento en tiempo real."
+      },
+      {
+        "icon": "dia-search",
+        "titleEn": "Data enrichment",
+        "titleEs": "Enriquecimiento de datos",
+        "descriptionEn": "Automatically completes each lead profile: company, role, email, phone and more from 9 combined data sources.",
+        "descriptionEs": "Completa automáticamente el perfil de cada lead: empresa, cargo, email, teléfono y más desde 9 fuentes de datos combinadas."
+      },
+      {
+        "icon": "tri-growth",
+        "titleEn": "Configurable sales pipeline",
+        "titleEs": "Pipeline de ventas configurable",
+        "descriptionEn": "Manage each opportunity through configurable stages. Assign leads to sales reps and keep the entire team aligned.",
+        "descriptionEs": "Gestiona cada oportunidad a través de etapas configurables. Asigna leads a comerciales y mantén a todo el equipo alineado."
+      }
+    ],
+    "comparisonTable": null,
+    "faqs": [
+      {
+        "answerEn": "Yes. Niveleads allows importing from LinkedIn Sales Navigator, bulk CSV or direct connection with your CRM. The complete setup takes less than 24 hours.",
+        "answerEs": "Sí. Niveleads permite importar desde LinkedIn Sales Navigator, CSV masivo o conexión directa con tu CRM. El setup completo toma menos de 24 horas.",
+        "questionEn": "Can I import my leads from LinkedIn or a CRM?",
+        "questionEs": "¿Puedo importar mis leads desde LinkedIn o un CRM?"
+      },
+      {
+        "answerEn": "The base score uses AI to analyze behavioral signals. You can also configure your own rules from the dashboard — for example, giving more weight to a specific role or target industry.",
+        "answerEs": "El score base usa IA para analizar señales de comportamiento. Además, puedes configurar reglas propias desde el panel — por ejemplo, dar más peso a un cargo o industria objetivo.",
+        "questionEn": "How does AI scoring work?",
+        "questionEs": "¿Cómo funciona el scoring de IA?"
+      },
+      {
+        "answerEn": "Yes, the Growth and Enterprise plans include integrations with major CRMs. The Starter plan allows manual integration via CSV or webhook.",
+        "answerEs": "Sí, el plan Growth y Enterprise incluyen integraciones con los principales CRMs. El plan Starter permite integración manual vía CSV o webhook.",
+        "questionEn": "Does Niveleads integrate with my current CRM (Odoo, HubSpot, Salesforce)?",
+        "questionEs": "¿Niveleads se integra con mi CRM actual (Odoo, HubSpot, Salesforce)?"
+      }
+    ],
+    "accentColor": "teal",
+    "heroEffect": "grid",
+    "ogImage": null,
+    "seoTitleEs": "Niveleads — Lead scoring B2B con IA",
+    "seoTitleEn": "Niveleads — B2B lead scoring with AI",
+    "seoDescriptionEs": "Clasifica prospectos como HOT, WARM o COLD con IA. Secuencias email automatizadas. Setup en 24h. Desde $99/mes.",
+    "seoDescriptionEn": "Classify prospects as HOT, WARM or COLD with AI. Automated email sequences. Setup in 24h. From $99/month.",
+    "schemaCategory": "BusinessApplication",
+    "status": "published",
+    "translationStatusEn": "complete",
+    "sortOrder": 2,
+    "publishedAt": "2026-04-15T22:42:24.860Z",
+    "createdAt": "2026-04-15T22:42:26.821Z",
+    "updatedAt": "2026-04-15T22:42:26.821Z"
+  }
+]
