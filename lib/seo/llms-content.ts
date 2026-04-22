@@ -1,4 +1,4 @@
-import { getAllProductos } from "@/lib/cms/productos";
+import { getAllProductos, getAllProductosLlms, type ProductoLlmsRow } from "@/lib/cms/productos";
 import type { Producto } from "@/lib/db/schema/admin";
 
 export const BASE = "https://www.nivelics.com";
@@ -12,8 +12,17 @@ async function safeGetProductos(): Promise<Producto[]> {
   }
 }
 
+async function safeGetProductosLlms(): Promise<ProductoLlmsRow[]> {
+  try {
+    const data = await getAllProductosLlms();
+    return data ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function buildLlmsTxt(primary: "es" | "en"): Promise<string> {
-  const productos = await safeGetProductos();
+  const productos = await safeGetProductosLlms();
 
   if (primary === "en") {
     return buildEn(productos);
@@ -21,7 +30,7 @@ export async function buildLlmsTxt(primary: "es" | "en"): Promise<string> {
   return buildEs(productos);
 }
 
-function buildEs(productos: Producto[]): string {
+function buildEs(productos: ProductoLlmsRow[]): string {
   const today = new Date().toISOString().split("T")[0];
   const productosLines = productos.length
     ? productos
@@ -118,7 +127,7 @@ Diagnóstico gratuito de 30 minutos. Sin RFP, sin presentaciones largas. URL: /c
 `;
 }
 
-function buildEn(productos: Producto[]): string {
+function buildEn(productos: ProductoLlmsRow[]): string {
   const today = new Date().toISOString().split("T")[0];
   const productosLines = productos.length
     ? productos

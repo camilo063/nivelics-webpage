@@ -4,7 +4,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { getLocale } from "next-intl/server";
-import { getAllProductos, mapProducto, accentHex } from "@/lib/cms/productos";
+import { getAllProductosHub, mapProductoCard, accentHex } from "@/lib/cms/productos";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -33,8 +33,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ProductosHubPage() {
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
-  const all = await getAllProductos();
-  const products = all.map((p) => mapProducto(p, locale));
+  const all = await getAllProductosHub();
+  const products = all.map((p) => mapProductoCard(p, locale));
 
   const baseUrl = "https://www.nivelics.com";
   const hubUrl = isEn ? `${baseUrl}/en/products` : `${baseUrl}/productos`;

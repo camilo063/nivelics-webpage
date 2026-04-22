@@ -18,7 +18,7 @@ import { eq, and, isNull, desc, asc } from "drizzle-orm";
 
 // ─── SERVICIOS ─────────────────────────────────────────
 
-export async function getServicio(slugEs: string) {
+export const getServicio = cache(async (slugEs: string) => {
   if (!db) return null;
   const result = await db
     .select()
@@ -32,18 +32,18 @@ export async function getServicio(slugEs: string) {
     )
     .limit(1);
   return result[0] || null;
-}
+});
 
-export async function getAllServicios() {
+export const getAllServicios = cache(async () => {
   if (!db) return [];
   return db
     .select()
     .from(servicios)
     .where(and(isNull(servicios.deletedAt), eq(servicios.status, "published")))
     .orderBy(asc(servicios.sortOrder));
-}
+});
 
-export async function getServiciosByParent(parentId: string) {
+export const getServiciosByParent = cache(async (parentId: string) => {
   if (!db) return [];
   return db
     .select()
@@ -56,9 +56,9 @@ export async function getServiciosByParent(parentId: string) {
       ),
     )
     .orderBy(asc(servicios.sortOrder));
-}
+});
 
-export async function getHubServicios() {
+export const getHubServicios = cache(async () => {
   if (!db) return [];
   return db
     .select()
@@ -71,11 +71,11 @@ export async function getHubServicios() {
       ),
     )
     .orderBy(asc(servicios.sortOrder));
-}
+});
 
 // ─── INDUSTRIAS ────────────────────────────────────────
 
-export async function getIndustria(slugEs: string) {
+export const getIndustria = cache(async (slugEs: string) => {
   if (!db) return null;
   const result = await db
     .select()
@@ -83,20 +83,20 @@ export async function getIndustria(slugEs: string) {
     .where(and(eq(industrias.slugEs, slugEs), isNull(industrias.deletedAt)))
     .limit(1);
   return result[0] || null;
-}
+});
 
-export async function getAllIndustrias() {
+export const getAllIndustrias = cache(async () => {
   if (!db) return [];
   return db
     .select()
     .from(industrias)
     .where(isNull(industrias.deletedAt))
     .orderBy(asc(industrias.nameEs));
-}
+});
 
 // ─── CASOS DE ÉXITO ───────────────────────────────────
 
-export async function getCasoExito(slug: string) {
+export const getCasoExito = cache(async (slug: string) => {
   if (!db) return null;
   const result = await db
     .select()
@@ -110,20 +110,45 @@ export async function getCasoExito(slug: string) {
     )
     .limit(1);
   return result[0] || null;
-}
+});
 
-export async function getAllCasosExito() {
+export const getAllCasosExito = cache(async () => {
   if (!db) return [];
   return db
     .select()
     .from(casosExito)
     .where(and(isNull(casosExito.deletedAt), eq(casosExito.status, "published")))
     .orderBy(desc(casosExito.createdAt));
-}
+});
 
 // ─── BLOG ──────────────────────────────────────────────
 
-export async function getBlogPost(slug: string) {
+// Shared column set for blog listings — omits contentEs/contentEn (big TEXT fields).
+// Used by getAllBlogPostsLight, getBlogPostsByCategory, getPopularBlogPosts.
+const blogListingColumns = {
+  id: blogPosts.id,
+  slug: blogPosts.slug,
+  titleEs: blogPosts.titleEs,
+  titleEn: blogPosts.titleEn,
+  excerptEs: blogPosts.excerptEs,
+  excerptEn: blogPosts.excerptEn,
+  coverImage: blogPosts.coverImage,
+  coverImageAltEs: blogPosts.coverImageAltEs,
+  coverImageAltEn: blogPosts.coverImageAltEn,
+  tags: blogPosts.tags,
+  readingTimeMinutes: blogPosts.readingTimeMinutes,
+  categoryId: blogPosts.categoryId,
+  seoTitleEs: blogPosts.seoTitleEs,
+  seoTitleEn: blogPosts.seoTitleEn,
+  seoDescriptionEs: blogPosts.seoDescriptionEs,
+  seoDescriptionEn: blogPosts.seoDescriptionEn,
+  status: blogPosts.status,
+  publishedAt: blogPosts.publishedAt,
+  createdAt: blogPosts.createdAt,
+  updatedAt: blogPosts.updatedAt,
+};
+
+export const getBlogPost = cache(async (slug: string) => {
   if (!db) return null;
   const result = await db
     .select()
@@ -133,7 +158,7 @@ export async function getBlogPost(slug: string) {
     )
     .limit(1);
   return result[0] || null;
-}
+});
 
 export const getAllBlogPosts = cache(async () => {
   if (!db) return [];
@@ -144,10 +169,23 @@ export const getAllBlogPosts = cache(async () => {
     .orderBy(desc(blogPosts.publishedAt));
 });
 
-export async function getBlogCategoriesPublic() {
+// Lighter variant for blog listings / category pages / related-post rails:
+// omits contentEs + contentEn (the two biggest columns) to reduce egress.
+// Use getBlogPost(slug) when you need the full post body.
+export const getAllBlogPostsLight = cache(async () => {
+  if (!db) return [];
+  const rows = await db
+    .select(blogListingColumns)
+    .from(blogPosts)
+    .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
+    .orderBy(desc(blogPosts.publishedAt));
+  return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
+});
+
+export const getBlogCategoriesPublic = cache(async () => {
   if (!db) return [];
   return db.select().from(blogCategories).orderBy(asc(blogCategories.nameEs));
-}
+});
 
 export const getBlogCategoryBySlug = cache(async (slug: string) => {
   if (!db) return null;
@@ -189,10 +227,11 @@ export const getFeaturedBlogPost = cache(async () => {
   return result[0] || null;
 });
 
+// Light variant used by category pages — same shape as getAllBlogPostsLight.
 export const getBlogPostsByCategory = cache(async (categoryId: string) => {
   if (!db) return [];
-  return db
-    .select()
+  const rows = await db
+    .select(blogListingColumns)
     .from(blogPosts)
     .where(
       and(
@@ -202,56 +241,62 @@ export const getBlogPostsByCategory = cache(async (categoryId: string) => {
       ),
     )
     .orderBy(desc(blogPosts.publishedAt));
+  return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
 });
 
 // Proxy for "popular" while we don't track views: most recent posts. Replace
 // when a view-count column lands on blog_posts.
 export const getPopularBlogPosts = cache(async (limit = 5) => {
   if (!db) return [];
-  return db
-    .select()
+  const rows = await db
+    .select(blogListingColumns)
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
     .orderBy(desc(blogPosts.publishedAt))
     .limit(limit);
+  return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
 });
 
 // ─── HOME ──────────────────────────────────────────────
 
-export async function getHomeContent() {
+// Request-level memoization: home page calls this twice per request
+// (generateMetadata + HomePage). With cache() that collapses to 1 query.
+export const getHomeContent = cache(async () => {
   if (!db) return null;
   const result = await db.select().from(homeContent).where(eq(homeContent.id, "main")).limit(1);
   return result[0] || null;
-}
+});
 
 // ─── NOSOTROS ──────────────────────────────────────────
 
-export async function getTeamMembers() {
+export const getTeamMembers = cache(async () => {
   if (!db) return [];
   return db
     .select()
     .from(teamMembers)
     .where(eq(teamMembers.status, "published"))
     .orderBy(asc(teamMembers.sortOrder));
-}
+});
 
-export async function getHistoriaItems() {
+export const getHistoriaItems = cache(async () => {
   if (!db) return [];
   return db.select().from(historiaItems).orderBy(asc(historiaItems.sortOrder));
-}
+});
 
-export async function getCertificacionesPublic() {
+export const getCertificacionesPublic = cache(async () => {
   if (!db) return [];
   return db.select().from(certificaciones).orderBy(asc(certificaciones.sortOrder));
-}
+});
 
 // ─── NAV ───────────────────────────────────────────────
 
-export async function getNavConfigPublic() {
+// Request-level memoization: nav + footer both call this in the same render.
+// Without cache(), that's 2 queries per request against nav_config.
+export const getNavConfigPublic = cache(async () => {
   if (!db) return null;
   const result = await db.select().from(navConfig).where(eq(navConfig.id, "main")).limit(1);
   return result[0] || null;
-}
+});
 
 // ─── CONFIG ────────────────────────────────────────────
 
@@ -265,7 +310,7 @@ export const getSiteConfigPublic = cache(async () => {
 
 // ─── PÁGINAS GENERALES ─────────────────────────────────
 
-export async function getPageGeneral(pageType: string) {
+export const getPageGeneral = cache(async (pageType: string) => {
   if (!db) return null;
   const result = await db
     .select()
@@ -273,4 +318,4 @@ export async function getPageGeneral(pageType: string) {
     .where(eq(pagesGeneral.pageType, pageType as "contact" | "privacy" | "support" | "careers"))
     .limit(1);
   return result[0] || null;
-}
+});
