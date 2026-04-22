@@ -1,85 +1,78 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
+import { z } from "zod";
 import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema/admin";
+import { sendLeadEmail } from "@/lib/email/send";
+import { sendLeadConfirmation, detectLocaleFromReferrer } from "@/lib/email/send-confirmation";
 
-interface LeadInput {
-  nombre?: string;
-  empresa?: string;
-  email?: string;
-  servicio?: string;
-  fuente?: string;
-  mensaje?: string;
-}
-
-function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+const leadSchema = z.object({
+  nombre: z.string().trim().min(2, "Nombre requerido"),
+  empresa: z.string().trim().min(2, "Empresa requerida"),
+  email: z.string().trim().email("Email inválido"),
+  servicio: z.string().optional().nullable(),
+  fuente: z.string().min(1, "Fuente requerida"),
+  mensaje: z.string().optional().nullable(),
+  referrerUrl: z.string().url().optional(),
+});
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as LeadInput;
-    const { nombre, empresa, email, servicio, fuente, mensaje } = body;
+    const body = await request.json();
+    const parsed = leadSchema.safeParse(body);
+    if (!parsed.success) {
+      const firstError = parsed.error.issues[0]?.message ?? "Datos inválidos";
+      return NextResponse.json({ ok: false, error: firstError }, { status: 400 });
+    }
 
-    if (!nombre || typeof nombre !== "string" || nombre.trim().length < 2) {
-      return NextResponse.json({ ok: false, error: "Nombre requerido" }, { status: 400 });
-    }
-    if (!empresa || typeof empresa !== "string" || empresa.trim().length < 2) {
-      return NextResponse.json({ ok: false, error: "Empresa requerida" }, { status: 400 });
-    }
-    if (!email || !isValidEmail(email)) {
-      return NextResponse.json({ ok: false, error: "Email inválido" }, { status: 400 });
-    }
-    if (!fuente || typeof fuente !== "string") {
-      return NextResponse.json({ ok: false, error: "Fuente requerida" }, { status: 400 });
-    }
+    const { nombre, empresa, email, servicio, fuente, mensaje, referrerUrl } = parsed.data;
 
     if (!db) {
-      return NextResponse.json({ ok: false, error: "DB no configurada" }, { status: 500 });
+      console.error("[api/leads] DB not available");
+      return NextResponse.json({ ok: false, error: "DB no configurada" }, { status: 503 });
     }
 
     const [lead] = await db
       .insert(leads)
       .values({
-        nombre: nombre.trim(),
-        empresa: empresa.trim(),
-        email: email.trim().toLowerCase(),
-        servicio: servicio || null,
+        nombre,
+        empresa,
+        email: email.toLowerCase(),
+        servicio: servicio ?? null,
         fuente,
-        mensaje: mensaje || null,
+        mensaje: mensaje ?? null,
+        referrerUrl: referrerUrl ?? null,
       })
       .returning({ id: leads.id });
 
-    // Optional: send email via Resend
-    if (process.env.RESEND_API_KEY) {
-      try {
-        await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: "leads@nivelics.com",
-            to: process.env.LEADS_NOTIFICATION_EMAIL || "contacto@nivelics.com",
-            subject: `Nuevo lead: ${fuente} — ${nombre} (${empresa})`,
-            html: `
-              <h2>Nuevo lead desde landing page</h2>
-              <p><b>Fuente:</b> ${fuente}</p>
-              <p><b>Nombre:</b> ${nombre}</p>
-              <p><b>Empresa:</b> ${empresa}</p>
-              <p><b>Email:</b> ${email}</p>
-              <p><b>Servicio:</b> ${servicio || "-"}</p>
-              ${mensaje ? `<p><b>Mensaje:</b> ${mensaje}</p>` : ""}
-            `,
-          }),
-        });
-      } catch {
-        // Swallow — lead already saved
-      }
+    const mail = await sendLeadEmail({
+      fuente,
+      nombre,
+      email,
+      empresa,
+      servicio: servicio ?? null,
+      mensaje: mensaje ?? null,
+      referrerUrl: referrerUrl ?? null,
+    });
+
+    if (!mail.ok && !mail.skipped) {
+      console.error("[api/leads] Email delivery failed but lead saved:", mail.error);
     }
+
+    after(async () => {
+      const res = await sendLeadConfirmation({
+        to: email,
+        nombre,
+        locale: detectLocaleFromReferrer(referrerUrl),
+        servicio: servicio ?? null,
+      });
+      if (!res.sent && !res.skipped) {
+        console.error("[api/leads] Confirmation failed:", res.error);
+      }
+    });
 
     return NextResponse.json({ ok: true, id: lead.id, message: "Lead registrado" });
   } catch (e) {
+    console.error("[api/leads] Unhandled error:", e);
     return NextResponse.json(
       { ok: false, error: e instanceof Error ? e.message : "Error" },
       { status: 500 },
