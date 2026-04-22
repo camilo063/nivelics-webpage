@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
-import { WhatsAppFAB } from "@/components/shared";
+import { DaptaWidget } from "@/components/shared";
 import { TranslationBanner } from "@/components/shared/translation-banner";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
 import { pickLocale } from "@/lib/cms/bilingual";
@@ -59,7 +59,7 @@ export default async function MarketingLayout({ children, params }: MarketingLay
         logoWidth={logoNaturalWidth}
         logoHeight={logoNaturalHeight}
       />
-      <WhatsAppFAB />
+      <DaptaWidget />
     </>
   );
 }
