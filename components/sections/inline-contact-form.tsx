@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { deriveFromPath } from "@/lib/utils/from-service";
 
 interface InlineContactFormProps {
   title: string;
@@ -18,20 +19,37 @@ export function InlineContactForm({
   accentColor = "#00D4FF",
 }: InlineContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form));
     try {
+      const fromService =
+        typeof window !== "undefined" ? deriveFromPath(window.location.pathname) : "";
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, service: data.service || serviceDefault }),
+        body: JSON.stringify({
+          ...data,
+          service: data.service || serviceDefault,
+          referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
+          fromService: fromService || undefined,
+        }),
       });
-      if (res.ok) setSubmitted(true);
-    } catch {
-      /* silently fail */
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error ?? "Error al enviar el formulario");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error inesperado");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -131,9 +149,25 @@ export function InlineContactForm({
               placeholder="Cuéntanos sobre tu proyecto..."
             />
           </div>
+          {error && (
+            <div className="sm:col-span-2">
+              <p
+                className="rounded-lg border border-red-400/20 bg-red-400/5 px-4 py-3 text-sm text-red-400"
+                role="alert"
+              >
+                {error}
+              </p>
+            </div>
+          )}
           <div className="sm:col-span-2">
-            <Button type="submit" variant="cta" size="lg" className="w-full sm:w-auto">
-              Enviar mensaje
+            <Button
+              type="submit"
+              variant="cta"
+              size="lg"
+              className="w-full sm:w-auto"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Enviando..." : "Enviar mensaje"}
             </Button>
             <p className="mt-3 text-[12px] text-text-40">
               Respondemos en menos de 24 horas. Sin compromiso.

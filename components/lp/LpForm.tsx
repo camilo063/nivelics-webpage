@@ -63,7 +63,11 @@ export function LpForm({
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, fuente }),
+        body: JSON.stringify({
+          ...form,
+          fuente,
+          referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
+        }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || "Error al enviar");

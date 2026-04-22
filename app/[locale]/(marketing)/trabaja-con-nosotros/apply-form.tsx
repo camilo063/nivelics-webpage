@@ -27,7 +27,10 @@ export function ApplyForm() {
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
+        }),
       });
       if (!res.ok) {
         const body = await res.json();

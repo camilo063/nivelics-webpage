@@ -64,6 +64,20 @@
       "when": 1776372653965,
       "tag": "0008_misty_lionheart",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1776880407273,
+      "tag": "0009_nice_black_tarantula",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1776895729844,
+      "tag": "0010_lazy_blockbuster",
+      "breakpoints": true
     }
   ]
 }

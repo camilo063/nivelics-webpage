@@ -7,7 +7,9 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { deriveFromPath } from "@/lib/utils/from-service";
 
 const contactSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -29,6 +31,29 @@ interface ContactPageClientProps {
 export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClientProps) {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const [fromService, setFromService] = useState<string>("");
+
+  // Resolve origin on mount: explicit ?from=... wins; fallback to
+  // document.referrer pathname (same-origin only) so CTAs that haven't been
+  // updated with an explicit param still contribute attribution.
+  useEffect(() => {
+    const fromParam = searchParams.get("from");
+    if (fromParam) {
+      setFromService(fromParam);
+      return;
+    }
+    if (typeof document === "undefined" || !document.referrer) return;
+    try {
+      const ref = new URL(document.referrer);
+      if (ref.origin === window.location.origin) {
+        const derived = deriveFromPath(ref.pathname);
+        if (derived) setFromService(derived);
+      }
+    } catch {
+      // Invalid referrer URL — ignore, fromService stays empty.
+    }
+  }, [searchParams]);
 
   const {
     register,
@@ -44,7 +69,11 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
+          fromService: fromService || undefined,
+        }),
       });
       if (!res.ok) {
         const body = await res.json();
