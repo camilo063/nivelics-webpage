@@ -1,5 +1,21 @@
 # 06 — Workflows
 
+## Database environments
+
+Three independent Neon endpoints. Scripts in `scripts/` always read `.env.local`
+(production) — run them mindful of side effects.
+
+| Environment | Target                                  | Notes                                                                                   |
+| ----------- | --------------------------------------- | --------------------------------------------------------------------------------------- |
+| Local dev   | No Neon by default                      | `.env.development` sets `USE_DB_FALLBACKS=true`. Pages render degraded but don't crash. |
+| Local + DB  | Neon branch `staging`                   | `npm run dev:db` — inline overrides `USE_DB_FALLBACKS=false`.                           |
+| Preview     | Neon branch `staging`                   | Vercel `DATABASE_URL` scoped to Preview + Development points here.                      |
+| Production  | Neon branch `main` (pooler + pgbouncer) | Vercel `DATABASE_URL` scoped to Production.                                             |
+
+`npm run dev` is the default — it **does not** open a connection to Neon, which
+means zero dev-side egress. Use `npm run dev:db` only when you need to reproduce
+something against real data.
+
 ## Dev server
 
 ```
@@ -44,6 +60,8 @@ fail to connect to Neon because `DATABASE_URL` won't be loaded.
 
 | Script                                          | When to run                                                                                                                                                                                                                                                                         |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `verify-db-connection.ts`                       | Verify Neon connection (pooler endpoint, pgbouncer flag, SSL, connectivity)                                                                                                                                                                                                         |
+| `audit-db-queries.ts`                           | Report top queries by row volume (pg_stat_statements), table sizes, active connections                                                                                                                                                                                              |
 | `inspect-db.ts`                                 | Quick `SELECT *` dump of key tables — debugging only                                                                                                                                                                                                                                |
 | `db-report.ts`                                  | Structured report of row counts per table                                                                                                                                                                                                                                           |
 | `audit-completo.ts`                             | Full content audit (counts, missing translations, noindex flags)                                                                                                                                                                                                                    |
@@ -111,6 +129,46 @@ Before deploying:
      calls `revalidatePath()` for every public path that consumes the content.
 4. Translation queue at `/admin/traducciones` shows rows with pending/in-progress
    EN translations.
+
+## Neon monitoring and guardrails
+
+### Usage alerts (Neon Console → Settings → Billing → Usage alerts)
+
+Configure — these are manual, one-time setup:
+
+- Egress 70% of plan quota: early warning.
+- Egress 90% of plan quota: cut-over trigger (audit + pause heavy scripts).
+- Compute hours at 80%: ensures we don't blow the CU-hours budget.
+
+### Data API must remain OFF
+
+Neon exposes a `Data API` REST endpoint that allows direct SQL over HTTP,
+bypassing our app. We don't use it — every query goes through Drizzle via
+`@/lib/db`. Keep it disabled in Neon Console → Settings → Data API. If it gets
+enabled accidentally with public schema access, any authenticated user could
+issue arbitrary queries and generate uncontrolled egress.
+
+### Ad-hoc audit
+
+```
+node --env-file=.env.local --import tsx scripts/audit-db-queries.ts
+```
+
+Run monthly or when egress creeps up. Reports:
+
+- Top queries by rows returned (requires `pg_stat_statements` — default on Neon Launch).
+- Table sizes, including JSONB payloads.
+- Active/idle connections at runtime.
+
+### Connection check
+
+```
+node --env-file=.env.local --import tsx scripts/verify-db-connection.ts
+```
+
+Confirms the connection string uses the pooler endpoint (`-pooler`) and
+pgbouncer mode. Without these, Vercel serverless functions would open a fresh
+Postgres connection per request and exhaust Neon's connection limit.
 
 ## Debugging
 

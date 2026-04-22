@@ -144,6 +144,178 @@ export async function getAllProductos(): Promise<Producto[]> {
   }
 }
 
+export type ProductoSitemapRow = {
+  slugEs: string;
+  slugEn: string;
+  updatedAt: Date | null;
+  status: Producto["status"];
+};
+
+export async function getAllProductosSitemap(): Promise<ProductoSitemapRow[]> {
+  const fallback: ProductoSitemapRow[] = FALLBACK.map((p) => ({
+    slugEs: p.slugEs,
+    slugEn: p.slugEn,
+    updatedAt: p.updatedAt,
+    status: p.status,
+  }));
+  if (!db) return fallback;
+  try {
+    const data = await db
+      .select({
+        slugEs: productos.slugEs,
+        slugEn: productos.slugEn,
+        updatedAt: productos.updatedAt,
+        status: productos.status,
+      })
+      .from(productos)
+      .where(eq(productos.status, "published"))
+      .orderBy(asc(productos.sortOrder));
+    return data.length ? data : fallback;
+  } catch (e) {
+    console.error("[productos/sitemap] DB error, using fallback:", e);
+    return fallback;
+  }
+}
+
+export type ProductoHubRow = {
+  id: string;
+  slugEs: string;
+  slugEn: string;
+  name: string;
+  taglineEs: string;
+  taglineEn: string;
+  categoryEs: string;
+  categoryEn: string;
+  pricingLabelEs: string | null;
+  pricingLabelEn: string | null;
+  pricingNoteEs: string | null;
+  pricingNoteEn: string | null;
+  accentColor: string;
+  externalUrl: string;
+  sortOrder: number;
+  status: Producto["status"];
+};
+
+export async function getAllProductosHub(): Promise<ProductoHubRow[]> {
+  const fallback: ProductoHubRow[] = FALLBACK.map((p) => ({
+    id: p.id,
+    slugEs: p.slugEs,
+    slugEn: p.slugEn,
+    name: p.name,
+    taglineEs: p.taglineEs,
+    taglineEn: p.taglineEn,
+    categoryEs: p.categoryEs,
+    categoryEn: p.categoryEn,
+    pricingLabelEs: p.pricingLabelEs,
+    pricingLabelEn: p.pricingLabelEn,
+    pricingNoteEs: p.pricingNoteEs,
+    pricingNoteEn: p.pricingNoteEn,
+    accentColor: p.accentColor,
+    externalUrl: p.externalUrl,
+    sortOrder: p.sortOrder,
+    status: p.status,
+  }));
+  if (!db) return fallback;
+  try {
+    const data = await db
+      .select({
+        id: productos.id,
+        slugEs: productos.slugEs,
+        slugEn: productos.slugEn,
+        name: productos.name,
+        taglineEs: productos.taglineEs,
+        taglineEn: productos.taglineEn,
+        categoryEs: productos.categoryEs,
+        categoryEn: productos.categoryEn,
+        pricingLabelEs: productos.pricingLabelEs,
+        pricingLabelEn: productos.pricingLabelEn,
+        pricingNoteEs: productos.pricingNoteEs,
+        pricingNoteEn: productos.pricingNoteEn,
+        accentColor: productos.accentColor,
+        externalUrl: productos.externalUrl,
+        sortOrder: productos.sortOrder,
+        status: productos.status,
+      })
+      .from(productos)
+      .where(eq(productos.status, "published"))
+      .orderBy(asc(productos.sortOrder));
+    return data.length ? data : fallback;
+  } catch (e) {
+    console.error("[productos/hub] DB error, using fallback:", e);
+    return fallback;
+  }
+}
+
+export type MappedProductoCard = Pick<
+  MappedProducto,
+  | "id"
+  | "slug"
+  | "name"
+  | "tagline"
+  | "category"
+  | "pricingLabel"
+  | "pricingNote"
+  | "accentColor"
+  | "externalUrl"
+>;
+
+export function mapProductoCard(row: ProductoHubRow, locale: "es" | "en"): MappedProductoCard {
+  const en = locale === "en";
+  return {
+    id: row.id,
+    slug: en ? row.slugEn : row.slugEs,
+    name: row.name,
+    tagline: en ? row.taglineEn : row.taglineEs,
+    category: en ? row.categoryEn : row.categoryEs,
+    pricingLabel: en ? row.pricingLabelEn : row.pricingLabelEs,
+    pricingNote: en ? row.pricingNoteEn : row.pricingNoteEs,
+    accentColor: (row.accentColor ?? "cyan") as MappedProducto["accentColor"],
+    externalUrl: row.externalUrl,
+  };
+}
+
+export type ProductoLlmsRow = {
+  name: string;
+  slugEs: string;
+  slugEn: string;
+  taglineEs: string;
+  taglineEn: string;
+  pricingLabelEs: string | null;
+  pricingLabelEn: string | null;
+};
+
+export async function getAllProductosLlms(): Promise<ProductoLlmsRow[]> {
+  const fallback: ProductoLlmsRow[] = FALLBACK.map((p) => ({
+    name: p.name,
+    slugEs: p.slugEs,
+    slugEn: p.slugEn,
+    taglineEs: p.taglineEs,
+    taglineEn: p.taglineEn,
+    pricingLabelEs: p.pricingLabelEs,
+    pricingLabelEn: p.pricingLabelEn,
+  }));
+  if (!db) return fallback;
+  try {
+    const data = await db
+      .select({
+        name: productos.name,
+        slugEs: productos.slugEs,
+        slugEn: productos.slugEn,
+        taglineEs: productos.taglineEs,
+        taglineEn: productos.taglineEn,
+        pricingLabelEs: productos.pricingLabelEs,
+        pricingLabelEn: productos.pricingLabelEn,
+      })
+      .from(productos)
+      .where(eq(productos.status, "published"))
+      .orderBy(asc(productos.sortOrder));
+    return data.length ? data : fallback;
+  } catch (e) {
+    console.error("[productos/llms] DB error, using fallback:", e);
+    return fallback;
+  }
+}
+
 export async function getProductoBySlug(
   slug: string,
   locale: "es" | "en",

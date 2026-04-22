@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { landingPages, blogPosts } from "@/lib/db/schema/admin";
 import { eq, and, isNull } from "drizzle-orm";
-import { getAllProductos } from "@/lib/cms/productos";
+import { getAllProductosSitemap } from "@/lib/cms/productos";
 
 export const BASE = "https://www.nivelics.com";
 export const STATIC_LAST_MOD = new Date("2026-04-01");
@@ -348,7 +348,7 @@ async function getBlogPostsForSitemap() {
 
 async function getProductosForSitemap() {
   try {
-    const data = await getAllProductos();
+    const data = await getAllProductosSitemap();
     if (!data || data.length === 0) return PRODUCTOS_FALLBACK;
     return data.map((p) => ({
       slugEs: p.slugEs,

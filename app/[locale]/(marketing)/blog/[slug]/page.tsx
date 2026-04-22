@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getBlogPostingSchema } from "@/lib/schema/blog-posting";
 import { getLocale } from "next-intl/server";
-import { getBlogPost, getAllBlogPosts, mapBlogPost, getBlogCategoriesPublic } from "@/lib/cms";
+import { getBlogPost, getAllBlogPostsLight, mapBlogPost, getBlogCategoriesPublic } from "@/lib/cms";
 import type { Locale, MappedBlogPost } from "@/lib/cms";
 import { processBlogContent } from "@/lib/utils/blog";
 import { TableOfContents, TableOfContentsCollapsible } from "@/components/shared/TableOfContents";
@@ -117,7 +117,7 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  const dbPosts = await getAllBlogPosts();
+  const dbPosts = await getAllBlogPostsLight();
   if (dbPosts.length > 0) {
     return dbPosts.map((p) => ({ slug: (p as Record<string, unknown>).slug as string }));
   }
@@ -228,7 +228,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
     const mapped = mapBlogPost(dbPost as Record<string, unknown>, locale);
 
     const [allPostsRaw, categoriesRaw] = await Promise.all([
-      getAllBlogPosts(),
+      getAllBlogPostsLight(),
       getBlogCategoriesPublic(),
     ]);
 
