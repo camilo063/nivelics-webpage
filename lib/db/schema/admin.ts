@@ -698,12 +698,22 @@ export const casosExitoRelations = relations(casosExito, ({ one }) => ({
 export const leads = pgTable("leads", {
   id: uuid("id").primaryKey().defaultRandom(),
   nombre: varchar("nombre", { length: 255 }).notNull(),
-  empresa: varchar("empresa", { length: 255 }).notNull(),
+  // Nullable: job applications don't have a company.
+  empresa: varchar("empresa", { length: 255 }),
   email: varchar("email", { length: 255 }).notNull(),
   servicio: varchar("servicio", { length: 100 }),
+  // Origin tag: 'contact', 'careers', or an LP slug like 'lp-finops'.
   fuente: varchar("fuente", { length: 100 }).notNull(),
   status: varchar("status", { length: 50 }).default("nuevo").notNull(),
   mensaje: text("mensaje"),
+  // Absolute URL of the page where the lead was captured.
+  referrerUrl: varchar("referrer_url", { length: 500 }),
+  // Service/page slug the user was on when they clicked the contact CTA
+  // (e.g. 'cloud/finops', 'industria/fintech', 'producto/paywl', 'home').
+  // Populated from a ?from= query param or document.referrer. Only set for
+  // /api/contact leads — for /api/leads and /api/apply the `fuente` field
+  // already carries the origin.
+  fromService: varchar("from_service", { length: 200 }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

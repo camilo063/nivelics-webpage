@@ -1,16 +1,19 @@
-import { NextResponse, after } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
-import { contactSchema } from "@/lib/validations/contact";
 import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema/admin";
 import { sendLeadEmail } from "@/lib/email/send";
 import { sendLeadConfirmation, detectLocaleFromReferrer } from "@/lib/email/send-confirmation";
 
-const requestSchema = contactSchema.extend({
+const applySchema = z.object({
+  name: z.string().trim().min(2, "Nombre requerido"),
+  email: z.string().trim().email("Email inválido"),
+  role: z.string().trim().min(1, "Selecciona un rol"),
+  linkedin: z.string().trim().url("LinkedIn inválido").optional().or(z.literal("")),
+  message: z.string().trim().optional(),
   referrerUrl: z.string().url().optional(),
-  fromService: z.string().trim().max(200).optional(),
 });
 
 const ratelimit =
@@ -19,46 +22,37 @@ const ratelimit =
         redis: Redis.fromEnv(),
         limiter: Ratelimit.slidingWindow(3, "1 h"),
         analytics: true,
-        prefix: "nivelics:contact",
+        prefix: "nivelics:apply",
       })
     : null;
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     if (ratelimit) {
       const ip =
         request.headers.get("x-forwarded-for") ?? request.headers.get("x-real-ip") ?? "127.0.0.1";
-      const { success, limit, remaining } = await ratelimit.limit(ip);
-
+      const { success } = await ratelimit.limit(ip);
       if (!success) {
         return NextResponse.json(
           { error: "Demasiados intentos. Por favor intenta en 1 hora." },
-          {
-            status: 429,
-            headers: {
-              "X-RateLimit-Limit": String(limit),
-              "X-RateLimit-Remaining": String(remaining),
-            },
-          },
+          { status: 429 },
         );
       }
     }
 
     const body = await request.json();
-    const result = requestSchema.safeParse(body);
-
-    if (!result.success) {
+    const parsed = applySchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: "Datos inválidos", details: result.error.flatten().fieldErrors },
+        { error: "Datos inválidos", details: parsed.error.flatten().fieldErrors },
         { status: 400 },
       );
     }
 
-    const { name, email, company, service, message, referrerUrl, fromService } = result.data;
-    const origin = fromService?.trim() || null;
+    const { name, email, role, linkedin, message, referrerUrl } = parsed.data;
 
     if (!db) {
-      console.error("[api/contact] DB not available");
+      console.error("[api/apply] DB not available");
       return NextResponse.json({ error: "Servicio temporalmente no disponible" }, { status: 503 });
     }
 
@@ -66,52 +60,49 @@ export async function POST(request: Request) {
       .insert(leads)
       .values({
         nombre: name,
-        empresa: company,
+        empresa: null,
         email: email.toLowerCase(),
-        servicio: service,
-        fuente: "contact",
-        mensaje: message,
+        servicio: role,
+        fuente: "careers",
+        mensaje: message || null,
         referrerUrl: referrerUrl ?? null,
-        fromService: origin,
       })
       .returning({ id: leads.id });
 
     const mail = await sendLeadEmail({
-      fuente: "contact",
+      fuente: "careers",
       nombre: name,
       email,
-      empresa: company,
-      servicio: service,
-      mensaje: message,
+      empresa: null,
+      servicio: role,
+      mensaje: message || null,
       referrerUrl: referrerUrl ?? null,
-      fromService: origin,
+      extra: { LinkedIn: linkedin || null, Rol: role },
     });
 
     if (!mail.ok && !mail.skipped) {
-      console.error("[api/contact] Email delivery failed but lead saved:", mail.error);
+      console.error("[api/apply] Email delivery failed but lead saved:", mail.error);
     }
 
-    // Fire-and-forget confirmation email to the lead. `after()` keeps the
-    // serverless function alive just long enough for Resend to flush.
     after(async () => {
       const res = await sendLeadConfirmation({
         to: email,
         nombre: name,
         locale: detectLocaleFromReferrer(referrerUrl),
-        servicio: service,
+        servicio: role,
       });
       if (!res.sent && !res.skipped) {
-        console.error("[api/contact] Confirmation failed:", res.error);
+        console.error("[api/apply] Confirmation failed:", res.error);
       }
     });
 
     return NextResponse.json({
       success: true,
       id: lead.id,
-      message: "Mensaje recibido correctamente",
+      message: "Solicitud recibida",
     });
   } catch (e) {
-    console.error("[api/contact] Unhandled error:", e);
+    console.error("[api/apply] Unhandled error:", e);
     return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
   }
 }
