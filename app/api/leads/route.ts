@@ -4,6 +4,9 @@ import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema/admin";
 import { sendLeadEmail } from "@/lib/email/send";
 import { sendLeadConfirmation, detectLocaleFromReferrer } from "@/lib/email/send-confirmation";
+import { checkRateLimit, getRequestIp } from "@/lib/security/rate-limit";
+import { isHoneypotTriggered, isTimingSuspicious } from "@/lib/security/anti-bot";
+import { isLikelySpam } from "@/lib/security/spam-detection";
 
 const leadSchema = z.object({
   nombre: z.string().trim().min(2, "Nombre requerido"),
@@ -17,7 +20,38 @@ const leadSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const ip = getRequestIp(request);
+
+    // Capa 3 — burst rate limit (3 submits per minute per IP).
+    const burst = checkRateLimit(`leads:${ip}`, { max: 3, windowMs: 60_000 });
+    if (!burst.ok) {
+      return NextResponse.json(
+        { ok: false, error: "Demasiados intentos. Intenta en un minuto." },
+        { status: 429, headers: { "Retry-After": String(burst.retryAfter ?? 60) } },
+      );
+    }
+
+    const body = (await request.json()) as Record<string, unknown>;
+
+    // Capa 1 — honeypot. Fake-success for bots so they don't retry.
+    if (isHoneypotTriggered(body.website)) {
+      console.warn("[spam] honeypot triggered", { ip, route: "leads" });
+      return NextResponse.json({ ok: true, message: "Lead registrado" });
+    }
+
+    // Capa 2 — timing.
+    const timing = isTimingSuspicious(body._ts);
+    if (timing === "too_fast") {
+      console.warn("[spam] timing too_fast", { ip, route: "leads" });
+      return NextResponse.json({ ok: true, message: "Lead registrado" });
+    }
+    if (timing === "too_old") {
+      return NextResponse.json(
+        { ok: false, error: "Sesión expirada. Recarga la página e intenta de nuevo." },
+        { status: 400 },
+      );
+    }
+
     const parsed = leadSchema.safeParse(body);
     if (!parsed.success) {
       const firstError = parsed.error.issues[0]?.message ?? "Datos inválidos";
@@ -25,6 +59,17 @@ export async function POST(request: NextRequest) {
     }
 
     const { nombre, empresa, email, servicio, fuente, mensaje, referrerUrl } = parsed.data;
+
+    // Capa 4 — content heuristics.
+    const spamCheck = isLikelySpam({
+      name: nombre,
+      email,
+      company: empresa,
+      message: mensaje ?? "",
+    });
+    if (spamCheck.spam) {
+      console.warn("[spam] heuristic triggered", { reason: spamCheck.reason, ip, route: "leads" });
+    }
 
     if (!db) {
       console.error("[api/leads] DB not available");
@@ -41,8 +86,14 @@ export async function POST(request: NextRequest) {
         fuente,
         mensaje: mensaje ?? null,
         referrerUrl: referrerUrl ?? null,
+        isSpam: spamCheck.spam,
+        spamReason: spamCheck.reason ?? null,
       })
       .returning({ id: leads.id });
+
+    if (spamCheck.spam) {
+      return NextResponse.json({ ok: true, id: lead.id, message: "Lead registrado" });
+    }
 
     const mail = await sendLeadEmail({
       fuente,

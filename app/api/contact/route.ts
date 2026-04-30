@@ -7,6 +7,9 @@ import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema/admin";
 import { sendLeadEmail } from "@/lib/email/send";
 import { sendLeadConfirmation, detectLocaleFromReferrer } from "@/lib/email/send-confirmation";
+import { checkRateLimit, getRequestIp } from "@/lib/security/rate-limit";
+import { isHoneypotTriggered, isTimingSuspicious } from "@/lib/security/anti-bot";
+import { isLikelySpam } from "@/lib/security/spam-detection";
 
 const requestSchema = contactSchema.extend({
   referrerUrl: z.string().url().optional(),
@@ -25,11 +28,20 @@ const ratelimit =
 
 export async function POST(request: Request) {
   try {
-    if (ratelimit) {
-      const ip =
-        request.headers.get("x-forwarded-for") ?? request.headers.get("x-real-ip") ?? "127.0.0.1";
-      const { success, limit, remaining } = await ratelimit.limit(ip);
+    const ip = getRequestIp(request);
 
+    // Capa 3 (burst): 3 submits per minute per IP via in-memory bucket.
+    // Stacks on top of the 3/hour Upstash limit below.
+    const burst = checkRateLimit(`contact:${ip}`, { max: 3, windowMs: 60_000 });
+    if (!burst.ok) {
+      return NextResponse.json(
+        { error: "Demasiados intentos. Intenta en un minuto." },
+        { status: 429, headers: { "Retry-After": String(burst.retryAfter ?? 60) } },
+      );
+    }
+
+    if (ratelimit) {
+      const { success, limit, remaining } = await ratelimit.limit(ip);
       if (!success) {
         return NextResponse.json(
           { error: "Demasiados intentos. Por favor intenta en 1 hora." },
@@ -44,9 +56,29 @@ export async function POST(request: Request) {
       }
     }
 
-    const body = await request.json();
-    const result = requestSchema.safeParse(body);
+    const body = (await request.json()) as Record<string, unknown>;
 
+    // Capa 1 — honeypot. Bots fill every field; humans never see it.
+    // Return 200 so the bot considers the submission successful and stops retrying.
+    if (isHoneypotTriggered(body.website)) {
+      console.warn("[spam] honeypot triggered", { ip });
+      return NextResponse.json({ success: true, message: "Mensaje recibido correctamente" });
+    }
+
+    // Capa 2 — time-based check. Sub-3s submits are bots; >1h means stale token.
+    const timing = isTimingSuspicious(body._ts);
+    if (timing === "too_fast") {
+      console.warn("[spam] timing too_fast", { ip });
+      return NextResponse.json({ success: true, message: "Mensaje recibido correctamente" });
+    }
+    if (timing === "too_old") {
+      return NextResponse.json(
+        { error: "Sesión expirada. Recarga la página e intenta de nuevo." },
+        { status: 400 },
+      );
+    }
+
+    const result = requestSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json(
         { error: "Datos inválidos", details: result.error.flatten().fieldErrors },
@@ -56,6 +88,12 @@ export async function POST(request: Request) {
 
     const { name, email, company, service, message, referrerUrl, fromService } = result.data;
     const origin = fromService?.trim() || null;
+
+    // Capa 4 — content heuristics.
+    const spamCheck = isLikelySpam({ name, email, company, message });
+    if (spamCheck.spam) {
+      console.warn("[spam] heuristic triggered", { reason: spamCheck.reason, ip });
+    }
 
     if (!db) {
       console.error("[api/contact] DB not available");
@@ -73,8 +111,20 @@ export async function POST(request: Request) {
         mensaje: message,
         referrerUrl: referrerUrl ?? null,
         fromService: origin,
+        isSpam: spamCheck.spam,
+        spamReason: spamCheck.reason ?? null,
       })
       .returning({ id: leads.id });
+
+    // Skip notification + confirmation emails for spam leads — they still get
+    // logged in the DB so we can review false positives.
+    if (spamCheck.spam) {
+      return NextResponse.json({
+        success: true,
+        id: lead.id,
+        message: "Mensaje recibido correctamente",
+      });
+    }
 
     const mail = await sendLeadEmail({
       fuente: "contact",
@@ -91,8 +141,6 @@ export async function POST(request: Request) {
       console.error("[api/contact] Email delivery failed but lead saved:", mail.error);
     }
 
-    // Fire-and-forget confirmation email to the lead. `after()` keeps the
-    // serverless function alive just long enough for Resend to flush.
     after(async () => {
       const res = await sendLeadConfirmation({
         to: email,

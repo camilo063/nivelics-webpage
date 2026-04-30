@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deriveFromPath } from "@/lib/utils/from-service";
+import { HoneypotFields } from "@/components/security/honeypot-fields";
 
 interface InlineContactFormProps {
   title: string;
@@ -21,6 +22,7 @@ export function InlineContactForm({
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formTs] = useState<number>(() => Date.now());
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -39,6 +41,7 @@ export function InlineContactForm({
           service: data.service || serviceDefault,
           referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
           fromService: fromService || undefined,
+          _ts: Number(data._ts) || formTs,
         }),
       });
       if (!res.ok) {
@@ -73,6 +76,7 @@ export function InlineContactForm({
         <h2 className="text-2xl font-bold text-text-100 md:text-3xl">{title}</h2>
         <p className="mt-2 text-text-70">{subtitle}</p>
         <form onSubmit={handleSubmit} className="mt-8 grid gap-4 sm:grid-cols-2">
+          <HoneypotFields />
           <div>
             <label htmlFor="inline-name" className="block text-sm font-medium text-text-100 mb-1">
               Nombre

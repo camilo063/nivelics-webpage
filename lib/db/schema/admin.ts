@@ -714,6 +714,8 @@ export const leads = pgTable("leads", {
   // /api/contact leads — for /api/leads and /api/apply the `fuente` field
   // already carries the origin.
   fromService: varchar("from_service", { length: 200 }),
+  isSpam: boolean("is_spam").default(false).notNull(),
+  spamReason: varchar("spam_reason", { length: 50 }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

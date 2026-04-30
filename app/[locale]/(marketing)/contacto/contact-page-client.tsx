@@ -7,7 +7,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/constants";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { deriveFromPath } from "@/lib/utils/from-service";
 
@@ -33,6 +33,8 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const [fromService, setFromService] = useState<string>("");
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const [formTs] = useState<number>(() => Date.now());
 
   // Resolve origin on mount: explicit ?from=... wins; fallback to
   // document.referrer pathname (same-origin only) so CTAs that haven't been
@@ -73,6 +75,8 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
           ...data,
           referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
           fromService: fromService || undefined,
+          website: honeypotRef.current?.value ?? "",
+          _ts: formTs,
         }),
       });
       if (!res.ok) {
@@ -166,6 +170,30 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                   onSubmit={handleSubmit(onSubmit)}
                   className="space-y-6"
                 >
+                  <div
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      left: "-9999px",
+                      top: "auto",
+                      width: 1,
+                      height: 1,
+                      overflow: "hidden",
+                      opacity: 0,
+                    }}
+                  >
+                    <label>
+                      Website
+                      <input
+                        ref={honeypotRef}
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        defaultValue=""
+                      />
+                    </label>
+                  </div>
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-text-100">
                       Nombre completo
