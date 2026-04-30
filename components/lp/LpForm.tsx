@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Loader2, Check } from "lucide-react";
 
 interface LpFormProps {
@@ -53,6 +53,8 @@ export function LpForm({
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const [formTs] = useState<number>(() => Date.now());
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -67,6 +69,8 @@ export function LpForm({
           ...form,
           fuente,
           referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
+          website: honeypotRef.current?.value ?? "",
+          _ts: formTs,
         }),
       });
       const data = await res.json();
@@ -130,6 +134,30 @@ export function LpForm({
       {subtitle && <p className="mt-2 text-sm text-white/70">{subtitle}</p>}
 
       <form onSubmit={handleSubmit} className="mt-5 space-y-3" aria-label="Formulario de contacto">
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            top: "auto",
+            width: 1,
+            height: 1,
+            overflow: "hidden",
+            opacity: 0,
+          }}
+        >
+          <label>
+            Website
+            <input
+              ref={honeypotRef}
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              defaultValue=""
+            />
+          </label>
+        </div>
         <input
           type="text"
           value={form.nombre}
