@@ -7,7 +7,7 @@ import { ProseContent } from "@/components/shared/ProseContent";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getBlogPostingSchema } from "@/lib/schema/blog-posting";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getBlogPost, getAllBlogPostsLight, mapBlogPost, getBlogCategoriesPublic } from "@/lib/cms";
 import type { Locale, MappedBlogPost } from "@/lib/cms";
 import { processBlogContent } from "@/lib/utils/blog";
@@ -113,7 +113,7 @@ La nube requiere habilidades nuevas. Invierte en capacitación antes y durante l
 };
 
 interface BlogPostPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateStaticParams() {
@@ -150,7 +150,8 @@ function t(locale: Locale, es: string, en: string): string {
 }
 
 export async function generateMetadata(props: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await props.params;
+  const { slug, locale: __locale } = await props.params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const urls = buildAlternates(slug);
   const canonical = locale === "en" ? urls.en : urls.es;
@@ -220,7 +221,8 @@ export async function generateMetadata(props: BlogPostPageProps): Promise<Metada
 }
 
 export default async function BlogPostPage(props: BlogPostPageProps) {
-  const { slug } = await props.params;
+  const { slug, locale: __locale } = await props.params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
 
   const dbPost = await getBlogPost(slug);

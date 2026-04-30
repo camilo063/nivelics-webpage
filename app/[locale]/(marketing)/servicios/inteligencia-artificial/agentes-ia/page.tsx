@@ -10,13 +10,19 @@ import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("agentes-ia", locale);
   return {
@@ -35,7 +41,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function AgentesIAPage() {
+export default async function AgentesIAPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("agentes-ia", locale);
   const serviceSchema = getServiceSchema({

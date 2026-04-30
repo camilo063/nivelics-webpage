@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("privacy");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
@@ -28,7 +34,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function PrivacidadPage() {
+export default async function PrivacidadPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("privacy");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;

@@ -15,7 +15,7 @@ import { getAllProductosHub, mapProductoCard } from "@/lib/cms/productos";
 import { ClientLogosMarquee } from "@/components/sections/client-logos-marquee";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { HeroGraph } from "@/components/ui/hero-graph";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import {
   getHomeContent,
@@ -95,7 +95,13 @@ function badgeKey(slug: string | null | undefined): string | null {
 
 // ─── Metadata ──────────────────────────────────────────
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const [homeRaw, uiLabels] = await Promise.all([getHomeContent(), getAllUiLabels()]);
   const home = homeRaw ? mapHomeContent(homeRaw as Record<string, unknown>, locale) : null;
@@ -122,7 +128,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // ─── Home page ─────────────────────────────────────────
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
 
   // Fetch everything from DB in parallel

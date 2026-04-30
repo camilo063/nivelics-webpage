@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PageWrapper } from "@/components/layout";
 import { ServiceBadge } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { setRequestLocale } from "next-intl/server";
 
 const CATEGORIES: Record<string, { label: string; badge: string }> = {
   "inteligencia-artificial": { label: "Inteligencia Artificial", badge: "ia" },
@@ -55,11 +56,12 @@ export function generateStaticParams() {
 
 // Use async params per Next.js 16
 interface Props {
-  params: Promise<{ category: string }>;
+  params: Promise<{ category: string; locale: string }>;
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { category } = await props.params;
+  const { category, locale: __locale } = await props.params;
+  setRequestLocale(__locale);
   const cat = CATEGORIES[category];
   if (!cat) return { title: "Categoría no encontrada" };
   return {
@@ -70,7 +72,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function BlogCategoryPage(props: Props) {
-  const { category } = await props.params;
+  const { category, locale: __locale } = await props.params;
+  setRequestLocale(__locale);
   const cat = CATEGORIES[category];
   if (!cat) notFound();
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { setRequestLocale } from "next-intl/server";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { DaptaWidget } from "@/components/shared";
@@ -16,6 +17,7 @@ interface MarketingLayoutProps {
 
 export default async function MarketingLayout({ children, params }: MarketingLayoutProps) {
   const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
   const locale: Locale = rawLocale === "en" ? "en" : "es";
   const config = await getSiteConfigPublic().catch(() => null);
   const logoUrl = config?.logoUrl ?? null;

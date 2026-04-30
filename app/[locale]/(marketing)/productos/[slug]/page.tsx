@@ -6,7 +6,7 @@ import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { GeoIconBox, type IconColor } from "@/lib/icons/geometric";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllProductos, getProductoBySlug, mapProducto, accentHex } from "@/lib/cms/productos";
 import type { Locale } from "@/lib/cms";
 
@@ -20,10 +20,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
+  const { slug, locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const { slug } = await params;
   const raw = await getProductoBySlug(slug, locale);
   if (!raw) return {};
   const p = mapProducto(raw, locale);
@@ -70,11 +71,12 @@ const ACCENT_TO_ICON: Record<string, IconColor> = {
 export default async function ProductoDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { slug, locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
-  const { slug } = await params;
   const raw = await getProductoBySlug(slug, locale);
   if (!raw) notFound();
   const p = mapProducto(raw, locale);
