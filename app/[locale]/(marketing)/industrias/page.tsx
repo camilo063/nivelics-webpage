@@ -4,7 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { IndustriasHubExtras } from "@/components/sections/industrias-hub-extras";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllIndustrias, getHomeContent } from "@/lib/cms/queries";
 import { mapIndustria } from "@/lib/cms/mappers";
 import type { Locale } from "@/lib/cms/types";
@@ -23,7 +23,13 @@ const HUB_FALLBACK = {
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   return {
     title: "Industrias | IA, Cloud y Staffing por sector — Nivelics",
     description:
@@ -39,7 +45,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function IndustriasHubPage() {
+export default async function IndustriasHubPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
   const [raw, home] = await Promise.all([getAllIndustrias(), getHomeContent()]);

@@ -3,13 +3,19 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllProductosHub, mapProductoCard, accentHex } from "@/lib/cms/productos";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
   return {
@@ -30,7 +36,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ProductosHubPage() {
+export default async function ProductosHubPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
   const all = await getAllProductosHub();

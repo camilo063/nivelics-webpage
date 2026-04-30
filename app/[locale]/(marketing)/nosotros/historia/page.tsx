@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getHistoriaItems, mapHistoriaItem } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -80,7 +80,9 @@ const TIMELINE = [
   },
 ];
 
-export default async function HistoriaPage() {
+export default async function HistoriaPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const dbItems = await getHistoriaItems();
   const mappedItems = dbItems.length

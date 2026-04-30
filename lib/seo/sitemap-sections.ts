@@ -57,6 +57,17 @@ export async function getSitemapSections(): Promise<SitemapSection[]> {
     // fallback already applied
   }
 
+  return buildSections(productosLinks);
+}
+
+// Synchronous variant — uses the static productos fallback only. Use this
+// when you need the sitemap structure without a DB roundtrip (e.g. the
+// 404 page, where rendering must stay cheap and cacheable).
+export function getSitemapSectionsStatic(): SitemapSection[] {
+  return buildSections(PRODUCTOS_FALLBACK);
+}
+
+function buildSections(productosLinks: SitemapLink[]): SitemapSection[] {
   return [
     {
       id: "servicios",

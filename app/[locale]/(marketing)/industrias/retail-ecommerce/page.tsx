@@ -7,13 +7,19 @@ import { IndustriaRichSections } from "@/components/sections/industria-rich-sect
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getIndustria("retail-ecommerce");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
@@ -78,7 +84,13 @@ const SOLUTIONS = [
   },
 ];
 
-export default async function RetailEcommercePage() {
+export default async function RetailEcommercePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getIndustria("retail-ecommerce");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;

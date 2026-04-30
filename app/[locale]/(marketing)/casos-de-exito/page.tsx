@@ -3,7 +3,7 @@ import { PageWrapper } from "@/components/layout";
 import { ServiceBadge, CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getAllCasosExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -68,7 +68,13 @@ const CASES = [
   },
 ];
 
-export default async function CasosDeExitoPage() {
+export default async function CasosDeExitoPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const rawCases = await getAllCasosExito();
   const uiLabels = await getAllUiLabels();

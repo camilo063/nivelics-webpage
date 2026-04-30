@@ -9,7 +9,7 @@ import { METRICS, SITE } from "@/lib/constants";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getTeamMembers, mapTeamMember } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -47,7 +47,9 @@ const VALUES = [
   },
 ];
 
-export default async function NosotrosPage() {
+export default async function NosotrosPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const dbMembers = await getTeamMembers();
   const mappedMembers = dbMembers.length

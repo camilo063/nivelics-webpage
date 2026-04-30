@@ -10,13 +10,19 @@ import { ComparisonTable } from "@/components/shared/comparison-table";
 import { BenefitCard } from "@/components/shared/benefit-card";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("datos-ia", locale);
   return {
@@ -83,7 +89,9 @@ const DATA_ROLES = [
   },
 ];
 
-export default async function DatosIAPage() {
+export default async function DatosIAPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("datos-ia", locale);
   const serviceSchema = getServiceSchema({

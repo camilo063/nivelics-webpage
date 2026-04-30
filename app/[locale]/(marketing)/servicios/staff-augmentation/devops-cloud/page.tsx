@@ -11,13 +11,19 @@ import { ComparisonTable } from "@/components/shared/comparison-table";
 import { BenefitCard } from "@/components/shared/benefit-card";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("devops-cloud", locale);
   return {
@@ -84,7 +90,9 @@ const DEVOPS_ROLES = [
   },
 ];
 
-export default async function DevOpsCloudPage() {
+export default async function DevOpsCloudPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("devops-cloud", locale);
   const serviceSchema = getServiceSchema({

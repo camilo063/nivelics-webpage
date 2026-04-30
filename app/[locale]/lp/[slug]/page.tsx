@@ -5,6 +5,7 @@ import { landingPages } from "@/lib/db/schema/admin";
 import { eq, and, ne } from "drizzle-orm";
 import { BlocksRenderer, type LandingBlock } from "@/components/lp/BlockRenderer";
 import { LpWhatsApp } from "@/components/lp/LpWhatsApp";
+import { setRequestLocale } from "next-intl/server";
 
 export const revalidate = 300;
 
@@ -52,7 +53,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale: __locale } = await params;
+  setRequestLocale(__locale);
   const landing = await getLanding(slug);
   if (!landing) return {};
 
@@ -76,7 +78,8 @@ export default async function LandingPageDynamic({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale: __locale } = await params;
+  setRequestLocale(__locale);
   const landing = await getLanding(slug);
 
   if (!landing || landing.status === "draft" || landing.status === "archived") {

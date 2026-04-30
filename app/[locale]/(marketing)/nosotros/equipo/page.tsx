@@ -4,7 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getTeamMembers, mapTeamMember } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,7 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function EquipoPage() {
+export default async function EquipoPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const dbMembers = await getTeamMembers();
   const mappedMembers = dbMembers.length

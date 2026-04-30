@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import {
   getAllBlogPostsLight,
   getFeaturedBlogPost,
@@ -81,13 +81,17 @@ function blogHref(categorySlug: string | null, page: number): string {
 }
 
 export async function generateMetadata({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<SearchParams>;
 }): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const params = await searchParams;
-  const activeCategory = params.cat ? await getBlogCategoryBySlug(params.cat) : null;
+  const sp = await searchParams;
+  const activeCategory = sp.cat ? await getBlogCategoryBySlug(sp.cat) : null;
 
   const baseTitle = "Blog";
   const title = activeCategory
@@ -122,11 +126,19 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+export default async function BlogPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<SearchParams>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const params = await searchParams;
-  const categorySlug = params.cat ?? null;
-  const requestedPage = Math.max(1, parseInt(params.page || "1", 10) || 1);
+  const sp = await searchParams;
+  const categorySlug = sp.cat ?? null;
+  const requestedPage = Math.max(1, parseInt(sp.page || "1", 10) || 1);
 
   const activeCategoryRaw = categorySlug ? await getBlogCategoryBySlug(categorySlug) : null;
   const activeCategory: ActiveCategory | null = activeCategoryRaw

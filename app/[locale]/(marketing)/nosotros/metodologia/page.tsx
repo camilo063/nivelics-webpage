@@ -3,6 +3,7 @@ import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { setRequestLocale } from "next-intl/server";
 
 export const revalidate = 86400;
 
@@ -68,7 +69,9 @@ const EVENTS = [
   },
 ];
 
-export default function MetodologiaPage() {
+export default async function MetodologiaPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },

@@ -5,13 +5,19 @@ import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { ApplyForm } from "./apply-form";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("careers");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
@@ -60,7 +66,13 @@ const CULTURE_VALUES = [
   },
 ];
 
-export default async function TrabajaConNosotrosPage() {
+export default async function TrabajaConNosotrosPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("careers");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;

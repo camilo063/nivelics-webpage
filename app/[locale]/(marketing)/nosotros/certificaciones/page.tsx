@@ -3,7 +3,7 @@ import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getCertificacionesPublic, pickLocale } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -45,7 +45,13 @@ const CERTIFICATIONS = [
   },
 ];
 
-export default async function CertificacionesPage() {
+export default async function CertificacionesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const dbCerts = await getCertificacionesPublic();
 

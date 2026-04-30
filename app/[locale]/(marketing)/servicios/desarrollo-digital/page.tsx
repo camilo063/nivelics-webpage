@@ -16,7 +16,7 @@ import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { IndustryGrid } from "@/components/sections/industry-grid";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
@@ -24,7 +24,13 @@ import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("desarrollo-digital", locale);
   return {
@@ -74,7 +80,13 @@ const SUB_SERVICES = [
   },
 ];
 
-export default async function DesarrolloDigitalPage() {
+export default async function DesarrolloDigitalPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("desarrollo-digital", locale);
   const uiLabels = await getAllUiLabels();

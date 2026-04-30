@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { SitemapMap } from "@/components/sections/sitemap-map";
-import { getSitemapSections } from "@/lib/seo/sitemap-sections";
+import { getSitemapSectionsStatic } from "@/lib/seo/sitemap-sections";
 import type { Locale } from "@/lib/i18n/routing";
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default async function MarketingNotFound() {
   const locale = ((await getLocale()) as Locale) ?? "es";
   const en = locale === "en";
-  const sections = await getSitemapSections();
+  const sections = getSitemapSectionsStatic();
 
   const schema = {
     "@context": "https://schema.org",

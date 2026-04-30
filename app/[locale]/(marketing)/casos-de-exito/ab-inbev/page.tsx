@@ -5,14 +5,20 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getCasoExito("ab-inbev");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
@@ -40,7 +46,9 @@ const RESULTS = [
   { metric: "Mejorada", label: "Eficiencia operativa mejorada" },
 ];
 
-export default async function ABInBevPage() {
+export default async function ABInBevPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const raw = await getCasoExito("ab-inbev");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
