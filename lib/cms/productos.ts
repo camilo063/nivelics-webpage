@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { db } from "@/lib/db";
 import { productos, type Producto } from "@/lib/db/schema/admin";
 import { eq, asc } from "drizzle-orm";
@@ -9,7 +10,7 @@ const FALLBACK: Producto[] = [...PRODUCTOS_FB]
   .filter((p) => p.status === "published")
   .sort((a, b) => a.sortOrder - b.sortOrder);
 
-export async function getAllProductos(): Promise<Producto[]> {
+export const getAllProductos = cache(async (): Promise<Producto[]> => {
   if (!db) return FALLBACK;
   try {
     const data = await db
@@ -23,7 +24,7 @@ export async function getAllProductos(): Promise<Producto[]> {
     console.error("[productos] DB error, using fallback:", e);
     return FALLBACK;
   }
-}
+});
 
 export type ProductoSitemapRow = {
   slugEs: string;
@@ -77,7 +78,7 @@ export type ProductoHubRow = {
   status: Producto["status"];
 };
 
-export async function getAllProductosHub(): Promise<ProductoHubRow[]> {
+export const getAllProductosHub = cache(async (): Promise<ProductoHubRow[]> => {
   const fallback: ProductoHubRow[] = FALLBACK.map((p) => ({
     id: p.id,
     slugEs: p.slugEs,
@@ -125,7 +126,7 @@ export async function getAllProductosHub(): Promise<ProductoHubRow[]> {
     console.error("[productos/hub] DB error, using fallback:", e);
     return fallback;
   }
-}
+});
 
 export type MappedProductoCard = Pick<
   MappedProducto,
@@ -197,20 +198,19 @@ export async function getAllProductosLlms(): Promise<ProductoLlmsRow[]> {
   }
 }
 
-export async function getProductoBySlug(
-  slug: string,
-  locale: "es" | "en",
-): Promise<Producto | null> {
-  if (!db) return FALLBACK.find((p) => (locale === "en" ? p.slugEn : p.slugEs) === slug) ?? null;
-  try {
-    const field = locale === "en" ? productos.slugEn : productos.slugEs;
-    const res = await db.select().from(productos).where(eq(field, slug)).limit(1);
-    return res[0] ?? null;
-  } catch (e) {
-    console.error("[productos] DB error:", e);
-    return FALLBACK.find((p) => (locale === "en" ? p.slugEn : p.slugEs) === slug) ?? null;
-  }
-}
+export const getProductoBySlug = cache(
+  async (slug: string, locale: "es" | "en"): Promise<Producto | null> => {
+    if (!db) return FALLBACK.find((p) => (locale === "en" ? p.slugEn : p.slugEs) === slug) ?? null;
+    try {
+      const field = locale === "en" ? productos.slugEn : productos.slugEs;
+      const res = await db.select().from(productos).where(eq(field, slug)).limit(1);
+      return res[0] ?? null;
+    } catch (e) {
+      console.error("[productos] DB error:", e);
+      return FALLBACK.find((p) => (locale === "en" ? p.slugEn : p.slugEs) === slug) ?? null;
+    }
+  },
+);
 
 export type MappedProducto = {
   id: string;

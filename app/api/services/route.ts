@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 86400;
+
 const SERVICES = [
   {
     slug: "inteligencia-artificial",
@@ -85,9 +87,16 @@ const SERVICES = [
 ];
 
 export async function GET() {
-  return NextResponse.json({
-    company: "Nivelics SAS",
-    framework: "I+C+S (Inteligencia Artificial + Cloud + Staffing)",
-    services: SERVICES,
-  });
+  return NextResponse.json(
+    {
+      company: "Nivelics SAS",
+      framework: "I+C+S (Inteligencia Artificial + Cloud + Staffing)",
+      services: SERVICES,
+    },
+    {
+      headers: {
+        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
+      },
+    },
+  );
 }

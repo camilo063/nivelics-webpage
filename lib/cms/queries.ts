@@ -100,8 +100,26 @@ export const getHubServicios = cache(async () => {
       (r) => r.serviceType === "hub" && !r.deletedAt && r.status === "published",
     ).sort((a, b) => a.sortOrder - b.sortOrder);
   }
+  // Home only renders title/subtitle/icon/accentColor/metrics[0]/slug.
+  // Omit JSONB hub-only fields (frameworkPillars, sectors, hubMetrics) and
+  // detail-only fields (benefits, processSteps, faqs, schemaServiceJson, ctas).
   return db
-    .select()
+    .select({
+      id: servicios.id,
+      slugEs: servicios.slugEs,
+      slugEn: servicios.slugEn,
+      parentId: servicios.parentId,
+      serviceType: servicios.serviceType,
+      accentColor: servicios.accentColor,
+      icon: servicios.icon,
+      titleEs: servicios.titleEs,
+      titleEn: servicios.titleEn,
+      subtitleEs: servicios.subtitleEs,
+      subtitleEn: servicios.subtitleEn,
+      metrics: servicios.metrics,
+      sortOrder: servicios.sortOrder,
+      status: servicios.status,
+    })
     .from(servicios)
     .where(
       and(
@@ -133,8 +151,26 @@ export const getAllIndustrias = cache(async () => {
       a.nameEs.localeCompare(b.nameEs),
     );
   }
+  // Listings (home + hub) render name/slug/icon/heroTitle/heroSubtitle.
+  // Detail rich-section JSONB columns (painPoints/solutions/useCases/...)
+  // are loaded by getIndustria(slug) on the detail page.
   return db
-    .select()
+    .select({
+      id: industrias.id,
+      slugEs: industrias.slugEs,
+      slugEn: industrias.slugEn,
+      icon: industrias.icon,
+      accentColor: industrias.accentColor,
+      nameEs: industrias.nameEs,
+      nameEn: industrias.nameEn,
+      heroTitleEs: industrias.heroTitleEs,
+      heroTitleEn: industrias.heroTitleEn,
+      heroSubtitleEs: industrias.heroSubtitleEs,
+      heroSubtitleEn: industrias.heroSubtitleEn,
+      status: industrias.status,
+      createdAt: industrias.createdAt,
+      updatedAt: industrias.updatedAt,
+    })
     .from(industrias)
     .where(isNull(industrias.deletedAt))
     .orderBy(asc(industrias.nameEs));
@@ -169,8 +205,54 @@ export const getAllCasosExito = cache(async () => {
       (a, b) => (b.createdAt?.getTime() ?? 0) - (a.createdAt?.getTime() ?? 0),
     );
   }
+  // Omit `gallery` (jsonb array of URLs) — listings never render it.
   return db
-    .select()
+    .select({
+      id: casosExito.id,
+      slug: casosExito.slug,
+      clientName: casosExito.clientName,
+      clientLogo: casosExito.clientLogo,
+      clientCountry: casosExito.clientCountry,
+      clientCountryEs: casosExito.clientCountryEs,
+      clientCountryEn: casosExito.clientCountryEn,
+      clientSector: casosExito.clientSector,
+      clientSectorEs: casosExito.clientSectorEs,
+      clientSectorEn: casosExito.clientSectorEn,
+      titleEs: casosExito.titleEs,
+      titleEn: casosExito.titleEn,
+      challengeEs: casosExito.challengeEs,
+      challengeEn: casosExito.challengeEn,
+      solutionEs: casosExito.solutionEs,
+      solutionEn: casosExito.solutionEn,
+      resultsEs: casosExito.resultsEs,
+      resultsEn: casosExito.resultsEn,
+      metric1Value: casosExito.metric1Value,
+      metric1LabelEs: casosExito.metric1LabelEs,
+      metric1LabelEn: casosExito.metric1LabelEn,
+      metric2Value: casosExito.metric2Value,
+      metric2LabelEs: casosExito.metric2LabelEs,
+      metric2LabelEn: casosExito.metric2LabelEn,
+      metric3Value: casosExito.metric3Value,
+      metric3LabelEs: casosExito.metric3LabelEs,
+      metric3LabelEn: casosExito.metric3LabelEn,
+      testimonialQuoteEs: casosExito.testimonialQuoteEs,
+      testimonialQuoteEn: casosExito.testimonialQuoteEn,
+      testimonialAuthor: casosExito.testimonialAuthor,
+      testimonialRole: casosExito.testimonialRole,
+      testimonialRoleEs: casosExito.testimonialRoleEs,
+      testimonialRoleEn: casosExito.testimonialRoleEn,
+      coverImage: casosExito.coverImage,
+      servicesUsed: casosExito.servicesUsed,
+      featured: casosExito.featured,
+      seoTitleEs: casosExito.seoTitleEs,
+      seoTitleEn: casosExito.seoTitleEn,
+      seoDescriptionEs: casosExito.seoDescriptionEs,
+      seoDescriptionEn: casosExito.seoDescriptionEn,
+      status: casosExito.status,
+      publishedAt: casosExito.publishedAt,
+      createdAt: casosExito.createdAt,
+      updatedAt: casosExito.updatedAt,
+    })
     .from(casosExito)
     .where(and(isNull(casosExito.deletedAt), eq(casosExito.status, "published")))
     .orderBy(desc(casosExito.createdAt));
@@ -295,13 +377,15 @@ export const getActiveBlogCategories = cache(async () => {
 
 export const getFeaturedBlogPost = cache(async () => {
   if (!db) return publishedBlogPosts()[0] ?? null;
-  const result = await db
-    .select()
+  // Featured renders title/excerpt/coverImage — never the full content body.
+  const rows = await db
+    .select(blogListingColumns)
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
     .orderBy(desc(blogPosts.publishedAt))
     .limit(1);
-  return result[0] || null;
+  const r = rows[0];
+  return r ? { ...r, contentEs: "", contentEn: "" } : null;
 });
 
 // Light variant used by category pages — same shape as getAllBlogPostsLight.
@@ -383,9 +467,64 @@ export const getNavConfigPublic = cache(async () => {
 
 // Request-level memoization: multiple calls within the same render tree
 // (e.g. marketing layout + llms.txt route on the same request) hit the DB once.
+// Omits llmsTxtContent / llmsFullTxtContent — those are kilobytes of text only
+// the /llms.txt and /llms-full.txt routes read. Use getSiteConfigLlms() for those.
 export const getSiteConfigPublic = cache(async () => {
-  if (!db) return SITE_CONFIG_FB.find((r) => r.id === "main") ?? SITE_CONFIG_FB[0] ?? null;
-  const result = await db.select().from(siteConfig).where(eq(siteConfig.id, "main")).limit(1);
+  if (!db) {
+    const fb = SITE_CONFIG_FB.find((r) => r.id === "main") ?? SITE_CONFIG_FB[0] ?? null;
+    if (!fb) return null;
+    const { llmsTxtContent: _l1, llmsFullTxtContent: _l2, ...rest } = fb;
+    return rest;
+  }
+  const result = await db
+    .select({
+      id: siteConfig.id,
+      siteNameEs: siteConfig.siteNameEs,
+      siteNameEn: siteConfig.siteNameEn,
+      taglineEs: siteConfig.taglineEs,
+      taglineEn: siteConfig.taglineEn,
+      logoUrl: siteConfig.logoUrl,
+      logoWidth: siteConfig.logoWidth,
+      logoHeight: siteConfig.logoHeight,
+      logoAltEs: siteConfig.logoAltEs,
+      logoAltEn: siteConfig.logoAltEn,
+      logoTitleEs: siteConfig.logoTitleEs,
+      logoTitleEn: siteConfig.logoTitleEn,
+      faviconUrl: siteConfig.faviconUrl,
+      defaultOgImage: siteConfig.defaultOgImage,
+      phoneWhatsapp: siteConfig.phoneWhatsapp,
+      emailContact: siteConfig.emailContact,
+      addressBogota: siteConfig.addressBogota,
+      addressMiami: siteConfig.addressMiami,
+      linkedinUrl: siteConfig.linkedinUrl,
+      googleAnalyticsId: siteConfig.googleAnalyticsId,
+      googleTagManagerId: siteConfig.googleTagManagerId,
+      updatedAt: siteConfig.updatedAt,
+    })
+    .from(siteConfig)
+    .where(eq(siteConfig.id, "main"))
+    .limit(1);
+  return result[0] || null;
+});
+
+// Loaded only by /llms.txt and /llms-full.txt routes.
+export const getSiteConfigLlms = cache(async () => {
+  if (!db) {
+    const fb = SITE_CONFIG_FB.find((r) => r.id === "main") ?? SITE_CONFIG_FB[0] ?? null;
+    if (!fb) return null;
+    return {
+      llmsTxtContent: fb.llmsTxtContent,
+      llmsFullTxtContent: fb.llmsFullTxtContent,
+    };
+  }
+  const result = await db
+    .select({
+      llmsTxtContent: siteConfig.llmsTxtContent,
+      llmsFullTxtContent: siteConfig.llmsFullTxtContent,
+    })
+    .from(siteConfig)
+    .where(eq(siteConfig.id, "main"))
+    .limit(1);
   return result[0] || null;
 });
 

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Carnívoros — Menú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg-dark:#0c0908;
+--bg-card:#151110;
+--bg-card-hover:#1c1614;
+--fire:#c44a15;
+--fire-glow:rgba(196,74,21,.35);
+--fire-soft:#e8784a;
+--cream:#f5e6d0;
+--cream-muted:#a08870;
+--text-main:#ede0d0;
+--text-dim:#7a6a5a;
+--text-faint:#4a3e34;
+--gold:#d4a850;
+--wine:#7a2040;
+--wine-light:#a83050;
+--green-herb:#4a7a3a;
+--radius:10px;
+--font-display:'Cormorant Garamond',Georgia,serif;
+--font-body:'Outfit',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+background:var(--bg-dark);
+color:var(--text-main);
+font-family:var(--font-body);
+font-weight:300;
+line-height:1.6;
+min-height:100vh;
+overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── TEXTURE OVERLAY ── */
+body::before{
+content:'';
+position:fixed;inset:0;
+background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+pointer-events:none;z-index:9999;opacity:.4;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg-dark)}
+::-webkit-scrollbar-thumb{background:var(--fire);border-radius:2px}
+
+/* ── CONTAINER ── */
+.container{
+max-width:520px;
+margin:0 auto;
+padding:0;
+position:relative;
+}
+@media(min-width:768px){
+.container{max-width:600px}
+}
+@media(min-width:1024px){
+.container{max-width:640px}
+}
+
+/* ── HERO ── */
+.hero{
+position:relative;
+min-height:100vh;
+min-height:100dvh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+}
+.hero-bg{
+position:absolute;inset:0;
+background:
+  radial-gradient(ellipse 80% 50% at 50% 60%, rgba(196,74,21,.12), transparent 70%),
+  radial-gradient(ellipse 60% 40% at 50% 30%, rgba(30,18,12,.9), transparent),
+  var(--bg-dark);
+}
+.hero-embers{
+position:absolute;inset:0;overflow:hidden;
+}
+.ember{
+position:absolute;
+width:3px;height:3px;
+background:var(--fire-soft);
+border-radius:50%;
+opacity:0;
+animation:float-up linear infinite;
+}
+@keyframes float-up{
+0%{opacity:0;transform:translateY(0) scale(1)}
+10%{opacity:.8}
+90%{opacity:.2}
+100%{opacity:0;transform:translateY(-100vh) scale(.3)}
+}
+.hero-content{
+position:relative;z-index:2;
+display:flex;flex-direction:column;align-items:center;
+}
+.logo-ring{
+width:160px;height:160px;
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+position:relative;
+animation:pulse-glow 3s ease-in-out infinite alternate;
+}
+@keyframes pulse-glow{
+0%{filter:drop-shadow(0 0 20px rgba(196,74,21,.3))}
+100%{filter:drop-shadow(0 0 40px rgba(196,74,21,.5))}
+}
+.logo-ring img{
+width:150px;height:150px;
+border-radius:50%;
+object-fit:cover;
+}
+.hero-title{
+font-family:var(--font-display);
+font-size:clamp(2rem,6vw,3.2rem);
+font-weight:700;
+color:var(--cream);
+margin-top:24px;
+letter-spacing:3px;
+text-transform:uppercase;
+opacity:0;animation:fade-up .8s .4s forwards;
+}
+.hero-sub{
+font-size:13px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:var(--fire);
+margin-top:8px;
+font-weight:400;
+opacity:0;animation:fade-up .8s .6s forwards;
+}
+.hero-tagline{
+font-family:var(--font-display);
+font-style:italic;
+font-size:15px;
+color:var(--cream-muted);
+margin-top:20px;
+max-width:280px;
+opacity:0;animation:fade-up .8s .8s forwards;
+}
+.hero-scroll{
+position:absolute;
+bottom:32px;
+left:50%;transform:translateX(-50%);
+display:flex;flex-direction:column;align-items:center;gap:6px;
+opacity:0;animation:fade-up .8s 1.2s forwards;
+}
+.hero-scroll span{
+font-size:10px;letter-spacing:3px;text-transform:uppercase;
+color:var(--text-dim);
+}
+.scroll-line{
+width:1px;height:30px;
+background:linear-gradient(to bottom,var(--fire),transparent);
+animation:scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse{
+0%,100%{opacity:.3;height:20px}
+50%{opacity:1;height:30px}
+}
+@keyframes fade-up{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+/* ── STICKY NAV ── */
+.nav-wrap{
+position:sticky;top:0;z-index:100;
+background:rgba(12,9,8,.92);
+backdrop-filter:blur(16px);
+-webkit-backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(196,74,21,.15);
+transition:box-shadow .3s;
+}
+.nav-wrap.scrolled{
+box-shadow:0 4px 24px rgba(0,0,0,.5);
+}
+.nav-scroll{
+display:flex;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+scrollbar-width:none;
+padding:12px 16px;
+gap:6px;
+}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-btn{
+flex-shrink:0;
+padding:8px 16px;
+border-radius:24px;
+font-size:12px;
+font-weight:400;
+color:var(--text-dim);
+background:transparent;
+border:1px solid transparent;
+cursor:pointer;
+letter-spacing:.5px;
+white-space:nowrap;
+transition:all .3s;
+font-family:var(--font-body);
+}
+.nav-btn:hover,.nav-btn:active{
+color:var(--cream);
+background:rgba(196,74,21,.1);
+}
+.nav-btn.active{
+background:var(--fire);
+color:var(--cream);
+border-color:var(--fire);
+font-weight:500;
+}
+
+/* ── SECTIONS ── */
+.menu-section{
+padding:48px 20px 32px;
+}
+.section-header{
+text-align:center;
+margin-bottom:32px;
+opacity:0;
+transform:translateY(30px);
+}
+.section-header.visible{
+animation:fade-up .6s forwards;
+}
+.section-icon{
+font-size:24px;
+color:var(--fire);
+margin-bottom:8px;
+display:block;
+}
+.section-title{
+font-family:var(--font-display);
+font-size:clamp(1.6rem,5vw,2.2rem);
+font-weight:700;
+color:var(--cream);
+letter-spacing:2px;
+text-transform:uppercase;
+}
+.section-divider{
+display:flex;align-items:center;gap:12px;
+margin-top:12px;
+justify-content:center;
+}
+.section-line{
+width:60px;height:1px;
+background:linear-gradient(90deg,transparent,var(--fire),transparent);
+}
+.section-dot{
+width:5px;height:5px;
+background:var(--fire);
+border-radius:50%;
+}
+.section-subtitle{
+font-size:12px;
+color:var(--text-dim);
+margin-top:10px;
+letter-spacing:1px;
+font-weight:300;
+}
+
+/* ── MENU ITEMS ── */
+.menu-items{
+display:flex;flex-direction:column;
+gap:2px;
+}
+.menu-item{
+padding:16px 18px;
+background:var(--bg-card);
+border-radius:var(--radius);
+position:relative;
+overflow:hidden;
+opacity:0;
+transform:translateY(20px);
+transition:background .3s,transform .2s;
+}
+.menu-item.visible{
+animation:item-in .5s forwards;
+}
+.menu-item:active{
+transform:scale(.99);
+background:var(--bg-card-hover);
+}
+@keyframes item-in{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+.item-top{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:12px;
+}
+.item-name{
+font-size:15px;
+font-weight:500;
+color:var(--cream);
+letter-spacing:.3px;
+line-height:1.3;
+}
+.item-price{
+font-size:15px;
+font-weight:500;
+color:var(--fire);
+white-space:nowrap;
+flex-shrink:0;
+font-variant-numeric:tabular-nums;
+}
+.item-desc{
+font-size:12px;
+color:var(--text-dim);
+margin-top:5px;
+line-height:1.5;
+font-weight:300;
+}
+.item-weight{
+display:inline-block;
+font-size:10px;
+color:var(--cream-muted);
+background:rgba(196,74,21,.1);
+padding:2px 8px;
+border-radius:4px;
+margin-top:6px;
+font-weight:400;
+}
+.item-badge{
+display:inline-block;
+font-size:9px;
+font-weight:600;
+letter-spacing:.5px;
+padding:3px 8px;
+border-radius:4px;
+margin-left:8px;
+vertical-align:middle;
+text-transform:uppercase;
+}
+.badge-star{
+background:var(--fire);
+color:var(--cream);
+}
+.badge-new{
+background:var(--gold);
+color:#1a1210;
+}
+.badge-day{
+background:rgba(160,136,112,.15);
+color:var(--cream-muted);
+border:1px solid rgba(160,136,112,.2);
+}
+
+/* ── FEATURED CARD ── */
+.featured{
+background:linear-gradient(135deg,#1e1510,#181210);
+border:1px solid rgba(196,74,21,.4);
+border-radius:12px;
+padding:20px;
+margin-bottom:8px;
+position:relative;
+overflow:hidden;
+}
+.featured::before{
+content:'';position:absolute;
+top:-40%;right:-30%;
+width:200px;height:200px;
+background:radial-gradient(circle,rgba(196,74,21,.08),transparent 70%);
+pointer-events:none;
+}
+.featured-label{
+font-size:9px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:var(--fire);
+font-weight:600;
+margin-bottom:8px;
+}
+
+/* ── GARNISH NOTE ── */
+.garnish-note{
+margin-top:16px;
+padding:12px 16px;
+background:rgba(196,74,21,.06);
+border-left:2px solid var(--fire);
+border-radius:0 8px 8px 0;
+}
+.garnish-title{
+font-size:11px;
+color:var(--fire);
+font-weight:500;
+letter-spacing:.5px;
+}
+.garnish-list{
+font-size:11px;
+color:var(--text-dim);
+margin-top:4px;
+font-weight:300;
+}
+
+/* ── SUBCATEGORY ── */
+.subcategory{
+font-family:var(--font-display);
+font-size:16px;
+font-weight:600;
+color:var(--cream-muted);
+letter-spacing:1px;
+margin:24px 0 10px;
+padding-left:18px;
+border-left:2px solid var(--fire);
+}
+
+/* ── WINE SECTION ── */
+.wine-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+.wine-card{
+background:var(--bg-card);
+border-radius:var(--radius);
+padding:16px;
+text-align:center;
+position:relative;
+overflow:hidden;
+border:1px solid transparent;
+transition:border-color .3s, transform .2s;
+opacity:0;transform:translateY(20px);
+}
+.wine-card.visible{animation:item-in .5s forwards}
+.wine-card:active{transform:scale(.97)}
+.wine-type{
+font-size:9px;
+letter-spacing:2px;
+text-transform:uppercase;
+font-weight:500;
+margin-bottom:8px;
+}
+.wine-type.tinto{color:var(--wine-light)}
+.wine-type.blanco{color:var(--gold)}
+.wine-name{
+font-family:var(--font-display);
+font-size:16px;
+font-weight:600;
+color:var(--cream);
+line-height:1.3;
+margin-bottom:4px;
+}
+.wine-grape{
+font-size:11px;
+color:var(--text-dim);
+margin-bottom:10px;
+}
+.wine-prices{
+display:flex;
+justify-content:center;
+gap:12px;
+font-size:11px;
+}
+.wine-price-item{
+display:flex;flex-direction:column;align-items:center;
+}
+.wine-price-label{
+font-size:9px;color:var(--text-dim);letter-spacing:1px;
+text-transform:uppercase;
+}
+.wine-price-val{
+color:var(--fire);font-weight:500;margin-top:2px;
+}
+
+.wine-bottle-accent{
+position:absolute;
+top:8px;right:8px;
+width:20px;height:20px;
+opacity:.12;
+}
+.wine-bottle-accent.tinto svg{fill:var(--wine-light)}
+.wine-bottle-accent.blanco svg{fill:var(--gold)}
+
+/* ── DRINKS GRID ── */
+.drinks-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+.drink-card{
+background:var(--bg-card);
+border-radius:var(--radius);
+padding:14px;
+opacity:0;transform:translateY(20px);
+}
+.drink-card.visible{animation:item-in .5s forwards}
+.drink-name{
+font-size:13px;font-weight:500;color:var(--cream);
+}
+.drink-detail{
+font-size:11px;color:var(--text-dim);margin-top:3px;font-weight:300;
+}
+.drink-price{
+font-size:13px;font-weight:500;color:var(--fire);margin-top:6px;
+}
+
+/* ── ORIGIN SECTION ── */
+.origin-section{
+padding:64px 20px;
+text-align:center;
+position:relative;
+}
+.origin-section::before{
+content:'';position:absolute;inset:0;
+background:
+  radial-gradient(ellipse 80% 50% at 50% 50%,rgba(196,74,21,.06),transparent);
+pointer-events:none;
+}
+.origin-content{position:relative;z-index:1}
+.origin-icon{
+width:48px;height:48px;
+margin:0 auto 16px;
+border:1px solid var(--fire);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+}
+.origin-icon svg{width:24px;height:24px;fill:var(--fire)}
+.origin-title{
+font-family:var(--font-display);
+font-size:24px;
+font-weight:700;
+color:var(--cream);
+margin-bottom:12px;
+}
+.origin-text{
+font-size:13px;
+color:var(--cream-muted);
+max-width:360px;
+margin:0 auto;
+line-height:1.8;
+font-weight:300;
+}
+
+/* ── FOOTER ── */
+.footer{
+padding:40px 20px 32px;
+text-align:center;
+border-top:1px solid rgba(196,74,21,.1);
+}
+.footer-logo img{
+width:70px;height:70px;
+border-radius:50%;
+margin:0 auto 16px;
+opacity:.7;
+}
+.footer-social{
+display:flex;gap:16px;justify-content:center;margin:16px 0;
+}
+.footer-social a{
+width:36px;height:36px;
+border:1px solid var(--text-faint);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+transition:border-color .3s,color .3s;
+color:var(--text-dim);
+}
+.footer-social a:hover{
+border-color:var(--fire);color:var(--fire);
+}
+.footer-social svg{width:16px;height:16px;fill:currentColor}
+.footer-note{
+font-size:11px;
+color:var(--text-dim);
+max-width:320px;
+margin:0 auto;
+line-height:1.7;
+}
+.footer-legal{
+font-size:10px;
+color:var(--text-faint);
+margin-top:16px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes rotate-slow{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+
+/* ── DESKTOP ENHANCEMENTS ── */
+@media(min-width:768px){
+.menu-section{padding:64px 24px 40px}
+.menu-item{padding:18px 22px}
+.menu-item:hover{background:var(--bg-card-hover)}
+.wine-grid{gap:12px}
+.wine-card:hover{border-color:rgba(196,74,21,.3);transform:translateY(-2px)}
+}
+@media(min-width:1024px){
+body{display:flex;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-embers" id="embers"></div>
+  <div class="hero-content">
+    <div class="logo-ring">
+      <img src="data:image/jpeg;base64,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" alt="Carnívoros — Carne al Horno">
+    </div>
+    <h1 class="hero-title">Carnívoros</h1>
+    <p class="hero-sub">Carne al Horno</p>
+    <p class="hero-tagline">Del Rancho a tu mesa. Ganado Brangus criado en los Llanos Orientales.</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Explorar menú</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav-wrap" id="nav">
+  <div class="nav-scroll" id="navScroll">
+    <button class="nav-btn active" data-target="parrilla">Parrilla</button>
+    <button class="nav-btn" data-target="horno">Al Horno</button>
+    <button class="nav-btn" data-target="entradas">Entradas</button>
+    <button class="nav-btn" data-target="sopas">Sopas</button>
+    <button class="nav-btn" data-target="tradicion">Tradición</button>
+    <button class="nav-btn" data-target="pastas">Pastas y Arroz</button>
+    <button class="nav-btn" data-target="ensaladas">Ensaladas</button>
+    <button class="nav-btn" data-target="vinos">Vinos</button>
+    <button class="nav-btn" data-target="cervezas">Cervezas</button>
+    <button class="nav-btn" data-target="bebidas">Bebidas</button>
+    <button class="nav-btn" data-target="postres">Postres</button>
+  </div>
+</nav>
+
+<!-- ═══════ PARRILLA ═══════ -->
+<section class="menu-section" id="parrilla">
+  <div class="section-header">
+    <span class="section-icon">&#x1F525;</span>
+    <h2 class="section-title">Parrilla</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+    <p class="section-subtitle">Cortes de res Brangus a la brasa</p>
+  </div>
+  <div class="menu-items">
+    <div class="subcategory">Cortes de res con hueso</div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Tomahawk</span>
+        <span class="item-price">$150.000</span>
+      </div>
+      <div class="item-desc">Corte imponente y jugoso, cocción a la brasa</div>
+      <span class="item-weight">900gr</span>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Cowboy Steak</span>
+        <span class="item-price">$85.000</span>
+      </div>
+      <div class="item-desc">Corte robusto con hueso, intenso sabor</div>
+      <span class="item-weight">450gr</span>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">T-Bone</span>
+        <span class="item-price">$80.000</span>
+      </div>
+      <div class="item-desc">Dos cortes en uno: lomo y chatas</div>
+      <span class="item-weight">450gr</span>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Asado de Tira</span>
+        <span class="item-price">$80.000</span>
+      </div>
+      <div class="item-desc">Corte clásico argentino a la brasa</div>
+      <span class="item-weight">450gr</span>
+    </div>
+
+    <div class="subcategory">Cortes magros</div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Bife de Lomo Fino</span>
+        <span class="item-price">$85.000</span>
+      </div>
+      <div class="item-desc">Corte premium, tierno y delicado</div>
+      <span class="item-weight">400gr</span>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Vacío</span>
+        <span class="item-price">$85.000</span>
+      </div>
+      <div class="item-desc">Sabor intenso, textura única</div>
+      <span class="item-weight">350gr</span>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Entraña</span>
+        <span class="item-price">$85.000</span>
+      </div>
+      <div class="item-desc">Jugoso y lleno de carácter</div>
+      <span class="item-weight">350gr</span>
+    </div>
+
+    <div class="subcategory">Otros cortes</div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Costilla de Cerdo St. Louis BBQ</span>
+        <span class="item-price">$70.000</span>
+      </div>
+      <div class="item-desc">Cocción lenta, glaseado BBQ</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Asado de Tira de Cerdo</span>
+        <span class="item-price">$68.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Salmón Grillé</span>
+        <span class="item-price">$70.000</span>
+      </div>
+    </div>
+  </div>
+  <div class="garnish-note">
+    <div class="garnish-title">Acompañados de 2 guarniciones a elegir</div>
+    <div class="garnish-list">Vegetales a la brasa · Papa criolla · Papa salada · Papa francesa · Papa en casco · Arroz blanco · Ensalada · Pasta</div>
+  </div>
+</section>
+
+<!-- ═══════ CORTES AL HORNO ═══════ -->
+<section class="menu-section" id="horno">
+  <div class="section-header">
+    <span class="section-icon">&#x1F3DA;&#xFE0F;</span>
+    <h2 class="section-title">Cortes al Horno</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+    <p class="section-subtitle">Nuestra especialidad — cocción lenta</p>
+  </div>
+  <div class="menu-items">
+    <div class="featured menu-item">
+      <div class="featured-label">&#9733; Plato estrella</div>
+      <div class="item-top">
+        <span class="item-name">Costichis <span class="item-badge badge-star">Tulio Recomienda</span></span>
+        <span class="item-price">$49.900</span>
+      </div>
+      <div class="item-desc">Nuestro corte insignia — cocción lenta al horno de leña</div>
+    </div>
+    <div class="featured menu-item">
+      <div class="featured-label">Para compartir</div>
+      <div class="item-top">
+        <span class="item-name">Picadita Carnívoros</span>
+        <span class="item-price">$105.000</span>
+      </div>
+      <div class="item-desc">Cerdo con chicharrón, res, chorizo, envuelto, rellena, 2 arepas, papa criolla y plátano maduro</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Cerdo con Chicharrón</span>
+        <span class="item-price">$52.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Corte Mixto</span>
+        <span class="item-price">$55.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Corte Res Brangus <span class="item-badge badge-new">Del día</span></span>
+        <span class="item-price">$55.000</span>
+      </div>
+      <div class="item-desc">Reserve nuestro corte del día</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Costilla de Res</span>
+        <span class="item-price">$68.000</span>
+      </div>
+    </div>
+  </div>
+  <div class="garnish-note">
+    <div class="garnish-title">Acompañados de</div>
+    <div class="garnish-list">Papa criolla · Plátano · Arepa</div>
+  </div>
+</section>
+
+<!-- ═══════ ENTRADAS ═══════ -->
+<section class="menu-section" id="entradas">
+  <div class="section-header">
+    <span class="section-icon">&#x1F374;</span>
+    <h2 class="section-title">Entradas</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+  </div>
+  <div class="menu-items">
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Carpaccio de Lomo al Trapo</span>
+        <span class="item-price">$40.000</span>
+      </div>
+      <div class="item-desc">Lomo con queso Paipa, salsa césar, alcaparras y pan</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Tartar de Lomo</span>
+        <span class="item-price">$43.000</span>
+      </div>
+      <div class="item-desc">Tuétano rostizado terminado con aceite ahumado</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Provoleta al Horno</span>
+        <span class="item-price">$32.000</span>
+      </div>
+      <div class="item-desc">Fundida al horno brasa, con tomates asados y secos</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Ceviche de Chicharrón</span>
+        <span class="item-price">$27.000</span>
+      </div>
+      <div class="item-desc">Crocante en cítricos y vegetales</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Mix de Achuras</span>
+        <span class="item-price">$26.000</span>
+      </div>
+      <div class="item-desc">Chunchullo, riñón, molleja, rellena</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Chorizo de la Casa</span>
+        <span class="item-price">$19.000</span>
+      </div>
+      <div class="item-desc">Artesanal de cerdo</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Chunchullo</span>
+        <span class="item-price">$26.000</span>
+      </div>
+      <div class="item-desc">Con arepa blanca, limón y ají de la casa</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Rellena</span>
+        <span class="item-price">$22.000</span>
+      </div>
+      <div class="item-desc">Hecha en casa</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Empanadas de la Casa</span>
+        <span class="item-price">$20.000</span>
+      </div>
+      <div class="item-desc">Típicas colombianas</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Arepa Choclo</span>
+        <span class="item-price">$24.000</span>
+      </div>
+      <div class="item-desc">Con queso y suero costeño</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Envuelto de la Abuela</span>
+        <span class="item-price">$14.000</span>
+      </div>
+      <div class="item-desc">Tradicional de maíz, con uchuvas poché</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SOPAS ═══════ -->
+<section class="menu-section" id="sopas">
+  <div class="section-header">
+    <span class="section-icon">&#x1F372;</span>
+    <h2 class="section-title">Sopas</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+    <p class="section-subtitle">Sopas grandes con arroz, aguacate y arepa</p>
+  </div>
+  <div class="menu-items">
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Sancocho a la Leña <span class="item-badge badge-day">Vie · Sáb · Dom</span></span>
+        <span class="item-price">$45.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Mondongo <span class="item-badge badge-day">Mar · Jue</span></span>
+        <span class="item-price">$45.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Ajiaco <span class="item-badge badge-day">Lun · Mié</span></span>
+        <span class="item-price">$45.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Sopa Pequeña</span>
+        <span class="item-price">$20.000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TRADICIÓN ═══════ -->
+<section class="menu-section" id="tradicion">
+  <div class="section-header">
+    <span class="section-icon">&#x1F1E8;&#x1F1F4;</span>
+    <h2 class="section-title">Tradición y Sazón</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+    <p class="section-subtitle">Con arroz, papa y yuca</p>
+  </div>
+  <div class="menu-items">
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Lengua en Salsa Criolla</span>
+        <span class="item-price">$59.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Cola Guisada del Culto</span>
+        <span class="item-price">$59.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Sobrebarriga Campesina</span>
+        <span class="item-price">$59.000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PASTAS ═══════ -->
+<section class="menu-section" id="pastas">
+  <div class="section-header">
+    <span class="section-icon">&#x1F35D;</span>
+    <h2 class="section-title">Pastas y Arroz</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+  </div>
+  <div class="menu-items">
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Pasta Boloñesa</span>
+        <span class="item-price">$32.000</span>
+      </div>
+      <div class="item-desc">Tomate sanmarzano, carne angus al vino tinto</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Pasta Carbonara</span>
+        <span class="item-price">$32.000</span>
+      </div>
+      <div class="item-desc">Clásica de fondo, pero con chicharrón a leña</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Pasta Alfredo</span>
+        <span class="item-price">$32.000</span>
+      </div>
+      <div class="item-desc">Adición de salmón, baby beef o rib eye</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Arroz de Carne al Asador</span>
+        <span class="item-price">$42.000</span>
+      </div>
+      <div class="item-desc">Con arvejas, rabos de cebolla y setas, meloso y delicioso</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Arroz con Camarón y Chicharrón</span>
+        <span class="item-price">$42.000</span>
+      </div>
+      <div class="item-desc">Base de arroz de camarón, terminado con trozos de chicharrón crocante</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ENSALADAS ═══════ -->
+<section class="menu-section" id="ensaladas">
+  <div class="section-header">
+    <span class="section-icon">&#x1F957;</span>
+    <h2 class="section-title">Ensaladas</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+  </div>
+  <div class="menu-items">
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">César con Chicharrón</span>
+        <span class="item-price">$32.000</span>
+      </div>
+      <div class="item-desc">Con crotones de chicharrón</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Antipasto de Vegetales con Bife de Cadera</span>
+        <span class="item-price">$30.000</span>
+      </div>
+      <div class="item-desc">Asados en pesto con poleo, albahacón, orégano y bife de cadera</div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Ensalada Carnívoros</span>
+        <span class="item-price">$32.000</span>
+      </div>
+      <div class="item-desc">Con uchuvas y vinagreta de cilantro</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ VINOS ═══════ -->
+<section class="menu-section" id="vinos">
+  <div class="section-header">
+    <span class="section-icon">&#x1F377;</span>
+    <h2 class="section-title">Vinos</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+    <p class="section-subtitle">Copa y botella</p>
+  </div>
+
+  <div class="subcategory" style="border-left-color:var(--wine-light)">Tintos</div>
+  <div class="wine-grid">
+    <div class="wine-card">
+      <div class="wine-type tinto">Tinto</div>
+      <div class="wine-name">El Coto</div>
+      <div class="wine-grape">Tempranillo</div>
+      <div class="wine-prices">
+        <div class="wine-price-item"><span class="wine-price-label">Copa</span><span class="wine-price-val">$34.000</span></div>
+        <div class="wine-price-item"><span class="wine-price-label">Botella</span><span class="wine-price-val">$190.000</span></div>
+      </div>
+    </div>
+    <div class="wine-card">
+      <div class="wine-type tinto">Tinto</div>
+      <div class="wine-name">Trivento</div>
+      <div class="wine-grape">Malbec</div>
+      <div class="wine-prices">
+        <div class="wine-price-item"><span class="wine-price-label">Copa</span><span class="wine-price-val">$30.000</span></div>
+        <div class="wine-price-item"><span class="wine-price-label">Botella</span><span class="wine-price-val">$160.000</span></div>
+      </div>
+    </div>
+    <div class="wine-card">
+      <div class="wine-type tinto">Tinto</div>
+      <div class="wine-name">La Maldita</div>
+      <div class="wine-grape">Garnacha</div>
+      <div class="wine-prices">
+        <div class="wine-price-item"><span class="wine-price-label">Botella</span><span class="wine-price-val">$180.000</span></div>
+      </div>
+    </div>
+    <div class="wine-card">
+      <div class="wine-type tinto">Tinto</div>
+      <div class="wine-name">Terrazas de los Andes</div>
+      <div class="wine-grape">&nbsp;</div>
+      <div class="wine-prices">
+        <div class="wine-price-item"><span class="wine-price-label">Botella</span><span class="wine-price-val">$220.000</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subcategory" style="border-left-color:var(--gold);margin-top:32px">Blancos</div>
+  <div class="wine-grid">
+    <div class="wine-card">
+      <div class="wine-type blanco">Blanco</div>
+      <div class="wine-name">Trivento</div>
+      <div class="wine-grape">White Malbec</div>
+      <div class="wine-prices">
+        <div class="wine-price-item"><span class="wine-price-label">Botella</span><span class="wine-price-val">$160.000</span></div>
+      </div>
+    </div>
+    <div class="wine-card">
+      <div class="wine-type blanco">Blanco</div>
+      <div class="wine-name">Sangre de Toro</div>
+      <div class="wine-grape">Chardonnay 0% alcohol</div>
+      <div class="wine-prices">
+        <div class="wine-price-item"><span class="wine-price-label">Botella</span><span class="wine-price-val">$150.000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CERVEZAS ═══════ -->
+<section class="menu-section" id="cervezas">
+  <div class="section-header">
+    <span class="section-icon">&#x1F37A;</span>
+    <h2 class="section-title">Cervezas</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+  </div>
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Club Colombia</div>
+      <div class="drink-price">$15.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Corona</div>
+      <div class="drink-price">$15.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Stella Artois</div>
+      <div class="drink-price">$15.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Erdinger Weissbier</div>
+      <div class="drink-price">$22.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Erdinger Dunkel</div>
+      <div class="drink-price">$22.000</div>
+    </div>
+  </div>
+  <div class="subcategory" style="margin-top:24px">Draft</div>
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Club Colombia Dorada</div>
+      <div class="drink-price">$17.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">BBC Cajicá</div>
+      <div class="drink-price">$17.000</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ BEBIDAS ═══════ -->
+<section class="menu-section" id="bebidas">
+  <div class="section-header">
+    <span class="section-icon">&#x1F964;</span>
+    <h2 class="section-title">Bebidas</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+  </div>
+
+  <div class="subcategory">Con alcohol</div>
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Aperol</div>
+      <div class="drink-price">$26.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Vermouth Rosso</div>
+      <div class="drink-price">$26.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Campari</div>
+      <div class="drink-price">$26.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Sangría</div>
+      <div class="drink-price">$10.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Cola y Pola</div>
+      <div class="drink-price">$10.000</div>
+    </div>
+  </div>
+
+  <div class="subcategory" style="margin-top:24px">Para compartir</div>
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Jarra de Refajo</div>
+      <div class="drink-price">$30.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Jarra Sangría</div>
+      <div class="drink-price">$42.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Lulada Carnívoros</div>
+      <div class="drink-price">$120.000</div>
+    </div>
+  </div>
+
+  <div class="subcategory" style="margin-top:24px">Sin alcohol</div>
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Sodas</div>
+      <div class="drink-detail">Frutos rojos · Amarillos · Arándanos</div>
+      <div class="drink-price">$18.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Jugos Naturales</div>
+      <div class="drink-detail">Frutos amarillos · Rojos · Temporada</div>
+      <div class="drink-price">$12.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Limonadas</div>
+      <div class="drink-detail">Hierbabuena · Guandolo frappé</div>
+      <div class="drink-price">$12.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Jugos en Leche</div>
+      <div class="drink-price">$14.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Gaseosas</div>
+      <div class="drink-detail">Coca-Cola · Zero · Colombiana · Bretaña</div>
+      <div class="drink-price">$8.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Agua</div>
+      <div class="drink-detail">Con gas $8.000 · Sin gas $7.000</div>
+    </div>
+  </div>
+
+  <div class="subcategory" style="margin-top:24px">Bebidas calientes</div>
+  <div class="drinks-grid">
+    <div class="drink-card">
+      <div class="drink-name">Café Americano</div>
+      <div class="drink-price">$6.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Café Campesino</div>
+      <div class="drink-price">$8.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Cappuccino</div>
+      <div class="drink-price">$9.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Carajillo</div>
+      <div class="drink-price">$15.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Aromática de Frutas</div>
+      <div class="drink-price">$6.000</div>
+    </div>
+    <div class="drink-card">
+      <div class="drink-name">Agua de Panela</div>
+      <div class="drink-price">$8.000</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ POSTRES ═══════ -->
+<section class="menu-section" id="postres">
+  <div class="section-header">
+    <span class="section-icon">&#x1F370;</span>
+    <h2 class="section-title">Postres</h2>
+    <div class="section-divider"><span class="section-line"></span><span class="section-dot"></span><span class="section-line"></span></div>
+  </div>
+  <div class="menu-items">
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Cotiza con Helado</span>
+        <span class="item-price">$25.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Merengón Carnívoros</span>
+        <span class="item-price">$25.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Torta de la Casa</span>
+        <span class="item-price">$20.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Arroz de Leche</span>
+        <span class="item-price">$20.000</span>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="item-top">
+        <span class="item-name">Crepe de Banano y Toffee Quemado</span>
+        <span class="item-price">$20.000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ORIGIN ═══════ -->
+<section class="origin-section">
+  <div class="origin-content section-header">
+    <div class="origin-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </div>
+    <h3 class="origin-title">Nuestro Origen</h3>
+    <p class="origin-text">En Carnívoros, la trazabilidad comienza en el origen. Nuestro ganado Brangus nace y se cría en Rancho Carnívoros, nuestra finca ganadera en los Llanos Orientales. Así controlamos cada etapa del proceso y aseguramos cortes de calidad superior, sabor y consistencia en tu mesa.</p>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="data:image/jpeg;base64,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" alt="Carnívoros">
+  </div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/carnivoros_com/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/carnivoros_com" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+  <p class="footer-note">Todos nuestros precios incluyen impuestos.<br>La propina es voluntaria y sugerida, de acuerdo con su experiencia y satisfacción.</p>
+  <p class="footer-legal">@carnivoros_com</p>
+</footer>
+
+</div><!-- /container -->
+
+<script>
+// ── EMBER PARTICLES ──
+(function(){
+  const c=document.getElementById('embers');
+  for(let i=0;i<25;i++){
+    const e=document.createElement('div');
+    e.className='ember';
+    e.style.left=Math.random()*100+'%';
+    e.style.bottom='-10px';
+    e.style.animationDuration=(4+Math.random()*6)+'s';
+    e.style.animationDelay=Math.random()*8+'s';
+    e.style.width=e.style.height=(1+Math.random()*3)+'px';
+    c.appendChild(e);
+  }
+})();
+
+// ── STICKY NAV SCROLL SHADOW ──
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>100);
+},{passive:true});
+
+// ── NAV BUTTON CLICKS ──
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const t=document.getElementById(btn.dataset.target);
+    if(t){
+      const y=t.getBoundingClientRect().top+window.scrollY-60;
+      window.scrollTo({top:y,behavior:'smooth'});
+    }
+  });
+});
+
+// ── SCROLL SPY ──
+const sections=[...document.querySelectorAll('.menu-section')];
+const btns=[...document.querySelectorAll('.nav-btn')];
+const navS=document.getElementById('navScroll');
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      const st=window.scrollY+120;
+      let cur='';
+      sections.forEach(s=>{
+        if(s.offsetTop<=st) cur=s.id;
+      });
+      if(cur){
+        btns.forEach(b=>{
+          const isA=b.dataset.target===cur;
+          b.classList.toggle('active',isA);
+          if(isA) b.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+        });
+      }
+      ticking=false;
+    });
+    ticking=true;
+  }
+},{passive:true});
+
+// ── INTERSECTION OBSERVER ANIMATIONS ──
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), (e.target.classList.contains('menu-item')||e.target.classList.contains('wine-card')||e.target.classList.contains('drink-card'))? i*60 : 0);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('.section-header,.menu-item,.wine-card,.drink-card').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

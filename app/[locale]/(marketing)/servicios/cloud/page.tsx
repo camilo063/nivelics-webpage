@@ -89,8 +89,7 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const cms = await getServicioData("cloud", locale);
-  const uiLabels = await getAllUiLabels();
+  const [cms, uiLabels] = await Promise.all([getServicioData("cloud", locale), getAllUiLabels()]);
   const serviceSchema = getServiceSchema({
     name: "Cloud Computing (AWS, GCP, Azure)",
     description:

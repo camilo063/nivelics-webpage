@@ -88,8 +88,10 @@ export default async function DesarrolloDigitalPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const cms = await getServicioData("desarrollo-digital", locale);
-  const uiLabels = await getAllUiLabels();
+  const [cms, uiLabels] = await Promise.all([
+    getServicioData("desarrollo-digital", locale),
+    getAllUiLabels(),
+  ]);
   const serviceSchema = getServiceSchema({
     name: "Desarrollo Digital",
     description:
