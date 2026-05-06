@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 86400;
+
 const POSTS = [
   {
     slug: "como-implementar-ia-generativa-en-tu-empresa",
@@ -38,5 +40,12 @@ const POSTS = [
 ];
 
 export async function GET() {
-  return NextResponse.json({ posts: POSTS });
+  return NextResponse.json(
+    { posts: POSTS },
+    {
+      headers: {
+        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
+      },
+    },
+  );
 }

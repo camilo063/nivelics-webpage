@@ -76,8 +76,7 @@ export default async function CasosDeExitoPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const rawCases = await getAllCasosExito();
-  const uiLabels = await getAllUiLabels();
+  const [rawCases, uiLabels] = await Promise.all([getAllCasosExito(), getAllUiLabels()]);
   const dbCases = rawCases.length
     ? rawCases.map((c) => mapCasoExito(c as Record<string, unknown>, locale))
     : null;

@@ -90,8 +90,10 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const cms = await getServicioData("inteligencia-artificial", locale);
-  const uiLabels = await getAllUiLabels();
+  const [cms, uiLabels] = await Promise.all([
+    getServicioData("inteligencia-artificial", locale),
+    getAllUiLabels(),
+  ]);
   const serviceSchema = getServiceSchema({
     name: "Inteligencia Artificial Aplicada",
     description:

@@ -50,9 +50,8 @@ export default async function CronicaPage({ params }: { params: Promise<{ locale
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const raw = await getCasoExito("cronica");
+  const [raw, uiLabels] = await Promise.all([getCasoExito("cronica"), getAllUiLabels()]);
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
-  const uiLabels = await getAllUiLabels();
 
   const results = caso?.metrics?.length
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))

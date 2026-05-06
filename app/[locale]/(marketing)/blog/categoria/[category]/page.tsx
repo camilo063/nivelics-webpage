@@ -6,6 +6,8 @@ import { ServiceBadge } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { setRequestLocale } from "next-intl/server";
 
+export const revalidate = 3600;
+
 const CATEGORIES: Record<string, { label: string; badge: string }> = {
   "inteligencia-artificial": { label: "Inteligencia Artificial", badge: "ia" },
   cloud: { label: "Cloud", badge: "cloud" },

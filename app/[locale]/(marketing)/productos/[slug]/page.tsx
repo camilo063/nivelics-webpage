@@ -77,12 +77,11 @@ export default async function ProductoDetailPage({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
-  const raw = await getProductoBySlug(slug, locale);
+  const [raw, all] = await Promise.all([getProductoBySlug(slug, locale), getAllProductos()]);
   if (!raw) notFound();
   const p = mapProducto(raw, locale);
 
   // Cross-sell
-  const all = await getAllProductos();
   const others = all.filter((x) => x.id !== raw.id).map((x) => mapProducto(x, locale));
 
   const accent = accentHex(p.accentColor);

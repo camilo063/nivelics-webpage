@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { getSiteConfigLlms } from "@/lib/cms/queries";
 import { buildLlmsTxt } from "@/lib/seo/llms-content";
 
 export const revalidate = 86400;
@@ -7,7 +7,7 @@ export const revalidate = 86400;
 export async function GET() {
   // Si el admin configuró contenido custom, usarlo (permite override puntual).
   try {
-    const config = await getSiteConfigPublic();
+    const config = await getSiteConfigLlms();
     if (config?.llmsTxtContent && config.llmsTxtContent.trim().length > 0) {
       return new NextResponse(config.llmsTxtContent, {
         headers: {

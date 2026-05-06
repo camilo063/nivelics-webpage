@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { getSiteConfigLlms } from "@/lib/cms/queries";
 import { buildLlmsFullTxt } from "@/lib/seo/llms-content";
 
 export const revalidate = 86400;
 
 export async function GET() {
   try {
-    const config = await getSiteConfigPublic();
+    const config = await getSiteConfigLlms();
     if (config?.llmsFullTxtContent && config.llmsFullTxtContent.trim().length > 0) {
       return new NextResponse(config.llmsFullTxtContent, {
         headers: {
