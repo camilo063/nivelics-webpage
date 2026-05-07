@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { Shield, KeyRound, Activity } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
@@ -9,6 +10,11 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -72,6 +78,12 @@ export default async function SeguridadCloudPage({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("seguridad", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Solicitar auditoría", url: "/contacto" },
+    fallbackSecondary: { text: "Ver capas de seguridad", url: "#capas" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Seguridad Cloud",
     description:
@@ -146,8 +158,8 @@ export default async function SeguridadCloudPage({
           "Arquitectura Zero Trust implementada",
           "Detecci\u00f3n de amenazas en tiempo real",
         ]}
-        ctaPrimary={{ text: "Solicitar auditor\u00eda", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver capas de seguridad", url: "#capas" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#3B82F6"
         rightPanel={
           <HeroSelector
@@ -192,7 +204,12 @@ export default async function SeguridadCloudPage({
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 { value: "100%", label: "Cifrado", sublabel: "En tr\u00e1nsito y reposo" },
                 { value: "0", label: "Brechas", sublabel: "Tolerancia cero a incidentes" },
@@ -222,6 +239,21 @@ export default async function SeguridadCloudPage({
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#3B82F6"
+        titleEs="Por qu\u00e9 elegir Seguridad Cloud con Nivelics"
+        titleEn="Why choose Cloud Security with Nivelics"
+        locale={locale}
+      />
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#3B82F6"
+        titleEs="C\u00f3mo lo implementamos"
+        titleEn="How we deliver"
+        locale={locale}
+      />
 
       <ComparisonTable
         title="\u00bfPor qu\u00e9 seguridad cloud con Nivelics vs. sin programa formal?"

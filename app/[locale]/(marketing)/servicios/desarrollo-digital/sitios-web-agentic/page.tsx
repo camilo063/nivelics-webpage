@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, Bot, Brain, Check, ChevronsRight } from "lucide-react";
@@ -7,6 +8,11 @@ import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
@@ -370,6 +376,18 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
   const cms = await getServicioData("sitios-web-agentic", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: {
+      text: isEn ? "Schedule a free diagnosis" : "Agenda un diagnóstico gratuito",
+      url: "/contacto",
+    },
+    fallbackSecondary: {
+      text: isEn ? "See how we built this site" : "Ver cómo construimos este sitio",
+      url: isEn ? "#caso" : "#lo-que-ves",
+    },
+  });
 
   const painCards = isEn ? PAIN_CARDS_EN : PAIN_CARDS_ES;
   const capabilities = isEn ? CAPABILITIES_EN : CAPABILITIES_ES;
@@ -493,16 +511,16 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="/contacto"
+                href={ctaPrimary.url || "/contacto"}
                 className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-dark"
               >
-                Schedule a free diagnosis &rarr;
+                {ctaPrimary.text} &rarr;
               </Link>
               <a
-                href="#caso"
+                href={ctaSecondary?.url || "#caso"}
                 className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text-100 transition hover:bg-bg-surface"
               >
-                See how we built this site &darr;
+                {ctaSecondary?.text} &darr;
               </a>
             </div>
           </div>
@@ -547,16 +565,16 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
             {/* CTA buttons */}
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
-                href="/contacto"
+                href={ctaPrimary.url || "/contacto"}
                 className="inline-flex items-center rounded-lg bg-dev px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-dev/90"
               >
-                Agenda un diagnóstico gratuito &rarr;
+                {ctaPrimary.text} &rarr;
               </Link>
               <a
-                href="#lo-que-ves"
+                href={ctaSecondary?.url || "#lo-que-ves"}
                 className="inline-flex items-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text-100 transition-colors hover:bg-bg-surface"
               >
-                Ver cómo construimos este sitio &darr;
+                {ctaSecondary?.text} &darr;
               </a>
             </div>
           </div>
@@ -659,6 +677,21 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#06B6D4"
+        titleEs="Por qué Sitios Web Agentic con Nivelics"
+        titleEn="Why Agentic-First Websites with Nivelics"
+        locale={locale}
+      />
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#06B6D4"
+        titleEs="Cómo lo construimos"
+        titleEn="How we build it"
+        locale={locale}
+      />
 
       {/* ── SECTION 4: PROCESS TIMELINE ── */}
       <section className="bg-bg-surface py-16 md:py-24">

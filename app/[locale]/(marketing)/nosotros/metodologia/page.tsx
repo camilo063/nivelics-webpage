@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — no CMS table available for metodologia content; arrays serve as authoritative fallback. Migrate to a `pages_general` row with pageType='metodologia' to enable admin editing.
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   },
 };
 
-const ROLES = [
+const FALLBACK_ROLES = [
   {
     icon: "target",
     title: "Product Owner",
@@ -42,7 +43,7 @@ const ROLES = [
   },
 ];
 
-const EVENTS = [
+const FALLBACK_EVENTS = [
   {
     icon: "calendar",
     title: "Sprint Planning",
@@ -108,7 +109,7 @@ export default async function MetodologiaPage({ params }: { params: Promise<{ lo
             agilidad.
           </p>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {ROLES.map((role) => (
+            {FALLBACK_ROLES.map((role) => (
               <div key={role.title} className="glass glow-hover rounded-xl p-6">
                 <div className="mb-4">
                   <GeoIconBox name={role.icon} size={22} color="cyan" />
@@ -130,7 +131,7 @@ export default async function MetodologiaPage({ params }: { params: Promise<{ lo
             mejora continua.
           </p>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {EVENTS.map((event) => (
+            {FALLBACK_EVENTS.map((event) => (
               <div key={event.title} className="glass glow-hover rounded-xl p-6">
                 <div className="mb-4">
                   <GeoIconBox name={event.icon} size={22} color="cyan" />

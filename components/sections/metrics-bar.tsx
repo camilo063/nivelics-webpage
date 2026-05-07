@@ -8,17 +8,26 @@ interface MetricItem {
   value: string;
   label: string;
   sublabel: string;
+  unit?: string;
 }
 
 interface MetricsBarProps {
   metrics: MetricItem[];
 }
 
-function AnimatedValue({ value }: { value: string }) {
+function AnimatedValue({ value, unit }: { value: string; unit?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const numericPart = parseInt(value.replace(/[^0-9]/g, ""), 10);
-  const suffix = value.replace(/[0-9]/g, "");
+
+  // Parse the leading numeric portion of `value` so we can animate it.
+  // Anything else in `value` (e.g. "x" in "5x", "-8" in "6-8") is rendered
+  // verbatim after the count. The optional `unit` (e.g. "%") is appended last.
+  const match = value.match(/^(-?\d+(?:[.,]\d+)?)(.*)$/);
+  const numericText = match ? match[1].replace(",", ".") : "";
+  const numericPart = match ? parseFloat(numericText) : NaN;
+  const decimalPlaces = numericText.includes(".") ? numericText.split(".")[1].length : 0;
+  const valueSuffix = match ? match[2] : "";
+  const trailingUnit = unit ?? "";
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -29,11 +38,11 @@ function AnimatedValue({ value }: { value: string }) {
     let current = 0;
     const timer = setInterval(() => {
       current += increment;
-      if (current >= numericPart) {
+      if (Math.abs(current) >= Math.abs(numericPart)) {
         setCount(numericPart);
         clearInterval(timer);
       } else {
-        setCount(Math.floor(current));
+        setCount(current);
       }
     }, duration / steps);
     return () => clearInterval(timer);
@@ -43,14 +52,16 @@ function AnimatedValue({ value }: { value: string }) {
     return (
       <span ref={ref} className="font-mono text-4xl font-bold text-primary md:text-5xl">
         {value}
+        {trailingUnit}
       </span>
     );
   }
 
   return (
     <span ref={ref} className="font-mono text-4xl font-bold text-primary md:text-5xl">
-      {count}
-      {suffix}
+      {count.toFixed(decimalPlaces)}
+      {valueSuffix}
+      {trailingUnit}
     </span>
   );
 }
@@ -70,7 +81,7 @@ export function MetricsBar({ metrics }: MetricsBarProps) {
               key={`${m.label}-${i}`}
               className="rounded-xl border border-[rgba(0,212,255,0.15)] bg-[rgba(255,255,255,0.03)] p-6 text-center transition-all duration-200 hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.05)]"
             >
-              <AnimatedValue value={m.value} />
+              <AnimatedValue value={m.value} unit={m.unit} />
               <p className="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-white/60">
                 {m.label}
               </p>

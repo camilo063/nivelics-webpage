@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
@@ -8,6 +9,11 @@ import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { BenefitCard } from "@/components/shared/benefit-card";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -94,6 +100,12 @@ export default async function DatosIAPage({ params }: { params: Promise<{ locale
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("datos-ia", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Ver perfiles disponibles", url: "/contacto" },
+    fallbackSecondary: { text: "Conoce el proceso", url: "/servicios/staff-augmentation" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Datos e Inteligencia Artificial",
     description:
@@ -172,8 +184,8 @@ export default async function DatosIAPage({ params }: { params: Promise<{ locale
           "Ahorro de hasta 40% vs contratar en USA",
           "Garantía de reemplazo sin costo en 10 días",
         ]}
-        ctaPrimary={{ text: "Ver perfiles disponibles", url: "/contacto" }}
-        ctaSecondary={{ text: "Conoce el proceso", url: "/servicios/staff-augmentation" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#10B981"
         rightPanel={
           <HeroSelector
@@ -187,7 +199,12 @@ export default async function DatosIAPage({ params }: { params: Promise<{ locale
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 { value: "5", label: "Días hábiles", sublabel: "Hasta primer candidato" },
                 { value: "40%", label: "Ahorro promedio", sublabel: "vs contratar en USA" },
@@ -213,6 +230,21 @@ export default async function DatosIAPage({ params }: { params: Promise<{ locale
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#10B981"
+        titleEs="Por qué elegir Datos e IA con Nivelics"
+        titleEn="Why choose Data & AI with Nivelics"
+        locale={locale}
+      />
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#10B981"
+        titleEs="Cómo te entregamos talento"
+        titleEn="How we deliver talent"
+        locale={locale}
+      />
 
       <ComparisonTable
         title="¿Por qué Nivelics vs. contratar directamente?"

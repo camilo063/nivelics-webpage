@@ -1,8 +1,6 @@
+// CMS-connected: 2026-05-07 — sub-services, benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
-import Link from "next/link";
-import { DollarSign, Cloud, Server, Shield, Zap, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { GeoIconBox } from "@/lib/icons/geometric";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -11,11 +9,17 @@ import { TechStackGrid } from "@/components/sections/tech-stack-grid";
 import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  CmsSubServicesGrid,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
-import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
@@ -90,6 +94,19 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const [cms, uiLabels] = await Promise.all([getServicioData("cloud", locale), getAllUiLabels()]);
+  const subs = cms ? await getSubserviciosData(cms.id, locale) : [];
+  const cmsSubItems = subs.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+    subtitle: s.subtitle,
+    icon: s.icon,
+  }));
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Solicitar auditoría gratuita", url: "/contacto" },
+    fallbackSecondary: { text: "Ver caso de ahorro real", url: "/casos-de-exito" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Cloud Computing (AWS, GCP, Azure)",
     description:
@@ -153,8 +170,8 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
           "Migraciones con zero downtime garantizado",
           "SLA de uptime 99.9% en operación continua",
         ]}
-        ctaPrimary={{ text: "Solicitar auditoría gratuita", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver caso de ahorro real", url: "/casos-de-exito" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#3B82F6"
         rightPanel={<HeroCalculator type="cloud" accentColor="#3B82F6" />}
         dataSection="cloud-hero"
@@ -164,7 +181,12 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 {
                   value: "40%",
@@ -191,32 +213,20 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
       />
 
       {/* Sub-services */}
-      <section className="bg-bg-surface py-16 md:py-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Soluciones Cloud especializadas</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SUB_SERVICES.map((s) => {
-              const iconName = s.icon;
-              return (
-                <Link
-                  key={s.href}
-                  href={s.href}
-                  className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
-                >
-                  <GeoIconBox name={iconName} size={20} color="cyan" />
-                  <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{s.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                    Conocer más <ArrowRight size={14} />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <CmsSubServicesGrid
+        cmsItems={cmsSubItems}
+        fallback={SUB_SERVICES.map((s) => ({
+          icon: s.icon,
+          title: s.title,
+          description: s.description,
+          href: s.href,
+        }))}
+        parentSlug="cloud"
+        titleEs="Soluciones especializadas"
+        titleEn="Specialised solutions"
+        locale={locale}
+        iconColor="cyan"
+      />
 
       <ClientLogosBar
         title="Cloud gestionado para"
@@ -227,6 +237,15 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
           { name: "Pulzo", sector: "Medios digitales" },
           { name: "AB InBev-Bavaria", sector: "CPG" },
         ]}
+      />
+
+      {/* Benefits from CMS (renders only when admin has populated benefits) */}
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#3B82F6"
+        titleEs="Beneficios del enfoque Cloud"
+        titleEn="Benefits of the Cloud approach"
+        locale={locale}
       />
 
       <ProcessTimeline
@@ -264,6 +283,15 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
             deliverable: "Reporte mensual con ROI documentado",
           },
         ]}
+      />
+
+      {/* Process from CMS (renders only when admin has populated processSteps) */}
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#3B82F6"
+        titleEs="Cómo lo entregamos"
+        titleEn="How we deliver"
+        locale={locale}
       />
 
       <TechStackGrid
