@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
@@ -8,6 +9,11 @@ import { ComparisonTable } from "@/components/shared/comparison-table";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -52,6 +58,15 @@ export default async function AutomatizacionProcesosPage({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("automatizacion-procesos", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Agendar discovery", url: "/contacto" },
+    fallbackSecondary: {
+      text: "Ver todos los servicios IA",
+      url: "/servicios/inteligencia-artificial",
+    },
+  });
   const serviceSchema = getServiceSchema({
     name: "Automatización de Procesos con IA",
     description:
@@ -134,11 +149,8 @@ export default async function AutomatizacionProcesosPage({
           "Integración con sistemas legacy sin necesidad de reemplazarlos",
           "Log completo de cada ejecución para auditoría y compliance",
         ]}
-        ctaPrimary={{ text: "Agendar discovery", url: "/contacto" }}
-        ctaSecondary={{
-          text: "Ver todos los servicios IA",
-          url: "/servicios/inteligencia-artificial",
-        }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#8B5CF6"
         rightPanel={
           <HeroSelector
@@ -186,7 +198,12 @@ export default async function AutomatizacionProcesosPage({
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 {
                   value: "50%",
@@ -206,6 +223,24 @@ export default async function AutomatizacionProcesosPage({
                 },
               ]
         }
+      />
+
+      {/* Benefits from CMS (renders only when admin has populated benefits) */}
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#8B5CF6"
+        titleEs="Por qué elegir Automatización de Procesos con Nivelics"
+        titleEn="Why choose Process Automation with Nivelics"
+        locale={locale}
+      />
+
+      {/* Process from CMS (renders only when admin has populated processSteps) */}
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#8B5CF6"
+        titleEs="Proceso de implementación"
+        titleEn="Implementation process"
+        locale={locale}
       />
 
       {/* Comparison */}

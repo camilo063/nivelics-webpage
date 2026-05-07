@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { Zap, Scaling, DollarSign } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
@@ -9,6 +10,11 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -68,6 +74,12 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("serverless", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Hablar con un experto", url: "/contacto" },
+    fallbackSecondary: { text: "Ver beneficios", url: "#beneficios" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Soluciones Serverless",
     description:
@@ -142,8 +154,8 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
           "Pay-per-use real \u2014 sin servidores idle",
           "Cold starts gestionados con warm-up strategies",
         ]}
-        ctaPrimary={{ text: "Hablar con un experto", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver beneficios", url: "#beneficios" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#3B82F6"
         rightPanel={<HeroCalculator type="cloud" accentColor="#3B82F6" />}
       />
@@ -151,7 +163,12 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 {
                   value: "0",
@@ -181,6 +198,21 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#3B82F6"
+        titleEs="Por qu\u00e9 elegir Serverless con Nivelics"
+        titleEn="Why choose Serverless with Nivelics"
+        locale={locale}
+      />
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#3B82F6"
+        titleEs="C\u00f3mo lo implementamos"
+        titleEn="How we deliver"
+        locale={locale}
+      />
 
       <ComparisonTable
         title="\u00bfServerless con Nivelics vs. arquitectura tradicional?"

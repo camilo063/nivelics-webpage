@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { Smartphone, Repeat, MonitorSmartphone } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
@@ -11,6 +12,11 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale } from "@/lib/cms/types";
@@ -68,6 +74,12 @@ export default async function AppsMovilesPage({ params }: { params: Promise<{ lo
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("apps-moviles", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Cuentanos tu proyecto", url: "/contacto" },
+    fallbackSecondary: { text: "Ver casos de exito", url: "/casos-de-exito" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Desarrollo de Apps Moviles",
     description:
@@ -141,8 +153,8 @@ export default async function AppsMovilesPage({ params }: { params: Promise<{ lo
           "100% propiedad del codigo -- tuyo desde el dia uno",
           "QA integrado en cada sprint -- no al final del proyecto",
         ]}
-        ctaPrimary={{ text: "Cuentanos tu proyecto", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver casos de exito", url: "/casos-de-exito" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#06B6D4"
         rightPanel={
           <HeroSelector
@@ -184,7 +196,12 @@ export default async function AppsMovilesPage({ params }: { params: Promise<{ lo
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 {
                   value: "50+",
@@ -219,6 +236,21 @@ export default async function AppsMovilesPage({ params }: { params: Promise<{ lo
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#06B6D4"
+        titleEs="Por qué Apps Móviles con Nivelics"
+        titleEn="Why Mobile Apps with Nivelics"
+        locale={locale}
+      />
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#06B6D4"
+        titleEs="Cómo lo construimos"
+        titleEn="How we build it"
+        locale={locale}
+      />
 
       {/* Comparison Table */}
       <ComparisonTable

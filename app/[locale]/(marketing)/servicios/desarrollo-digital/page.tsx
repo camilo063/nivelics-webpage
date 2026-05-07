@@ -1,8 +1,6 @@
+// CMS-connected: 2026-05-07 — sub-services, benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Smartphone, Globe, ShoppingCart, Bot, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { GeoIconBox } from "@/lib/icons/geometric";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
@@ -16,8 +14,14 @@ import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { IndustryGrid } from "@/components/sections/industry-grid";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  CmsSubServicesGrid,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getLocale, setRequestLocale } from "next-intl/server";
-import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
@@ -92,6 +96,19 @@ export default async function DesarrolloDigitalPage({
     getServicioData("desarrollo-digital", locale),
     getAllUiLabels(),
   ]);
+  const subs = cms ? await getSubserviciosData(cms.id, locale) : [];
+  const cmsSubItems = subs.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+    subtitle: s.subtitle,
+    icon: s.icon,
+  }));
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Cuéntanos tu proyecto", url: "/contacto" },
+    fallbackSecondary: { text: "Ver casos de éxito", url: "/casos-de-exito" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Desarrollo Digital",
     description:
@@ -132,8 +149,8 @@ export default async function DesarrolloDigitalPage({
           "Código 100% tuyo desde el primer sprint",
           "QA integrado — no es un paso final, es parte del proceso",
         ]}
-        ctaPrimary={{ text: "Cuéntanos tu proyecto", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver casos de éxito", url: "/casos-de-exito" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#06B6D4"
         rightPanel={
           <HeroSelector
@@ -175,7 +192,12 @@ export default async function DesarrolloDigitalPage({
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 { value: "50+", label: "Proyectos entregados", sublabel: "en LATAM y USA" },
                 { value: "13+", label: "Años de experiencia", sublabel: "desde 2012" },
@@ -186,32 +208,20 @@ export default async function DesarrolloDigitalPage({
       />
 
       {/* Sub-services */}
-      <section className="bg-bg-surface py-16 md:py-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Soluciones especializadas</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SUB_SERVICES.map((s) => {
-              const iconName = s.icon;
-              return (
-                <Link
-                  key={s.href}
-                  href={s.href}
-                  className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
-                >
-                  <GeoIconBox name={iconName} size={20} color="amber" />
-                  <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{s.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                    Conocer más <ArrowRight size={14} />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <CmsSubServicesGrid
+        cmsItems={cmsSubItems}
+        fallback={SUB_SERVICES.map((s) => ({
+          icon: s.icon,
+          title: s.title,
+          description: s.description,
+          href: s.href,
+        }))}
+        parentSlug="desarrollo-digital"
+        titleEs="Soluciones especializadas"
+        titleEn="Specialised solutions"
+        locale={locale}
+        iconColor="cyan"
+      />
 
       {/* Client logos */}
       <ClientLogosBar
@@ -236,6 +246,15 @@ export default async function DesarrolloDigitalPage({
           { name: "E-commerce", items: ["Shopify", "WooCommerce", "Plataformas propias"] },
           { name: "Bases de datos", items: ["PostgreSQL", "MongoDB", "Redis", "Supabase"] },
         ]}
+      />
+
+      {/* Benefits from CMS (renders only when admin has populated benefits) */}
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#06B6D4"
+        titleEs="Beneficios del enfoque Desarrollo Digital"
+        titleEn="Benefits of the Digital Development approach"
+        locale={locale}
       />
 
       {/* Process */}
@@ -280,6 +299,15 @@ export default async function DesarrolloDigitalPage({
             deliverable: "SLA y roadmap",
           },
         ]}
+      />
+
+      {/* Process from CMS (renders only when admin has populated processSteps) */}
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#06B6D4"
+        titleEs="Cómo lo entregamos"
+        titleEn="How we deliver"
+        locale={locale}
       />
 
       {/* Case study */}

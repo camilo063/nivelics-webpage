@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { Cloud, FileCode, ShieldCheck } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
@@ -9,6 +10,11 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -72,6 +78,12 @@ export default async function InfraestructuraPage({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("infraestructura", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Solicitar diseño", url: "/contacto" },
+    fallbackSecondary: { text: "Ver beneficios", url: "#beneficios" },
+  });
   const serviceSchema = getServiceSchema({
     name: "Arquitectura e Infraestructura Cloud",
     description:
@@ -146,8 +158,8 @@ export default async function InfraestructuraPage({
           "IaC con Terraform, Pulumi o CDK",
           "SLA de disponibilidad garantizado",
         ]}
-        ctaPrimary={{ text: "Solicitar dise\u00f1o", url: "/contacto" }}
-        ctaSecondary={{ text: "Ver beneficios", url: "#beneficios" }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#3B82F6"
         rightPanel={
           <HeroSelector
@@ -192,7 +204,12 @@ export default async function InfraestructuraPage({
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 { value: "99.9%", label: "Disponibilidad", sublabel: "SLA garantizado" },
                 { value: "100%", label: "IaC", sublabel: "Infraestructura como c\u00f3digo" },
@@ -218,6 +235,21 @@ export default async function InfraestructuraPage({
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#3B82F6"
+        titleEs="Por qu\u00e9 elegir Infraestructura Cloud con Nivelics"
+        titleEn="Why choose Cloud Infrastructure with Nivelics"
+        locale={locale}
+      />
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#3B82F6"
+        titleEs="C\u00f3mo lo implementamos"
+        titleEn="How we deliver"
+        locale={locale}
+      />
 
       <ComparisonTable
         title="\u00bfPor qu\u00e9 infraestructura gestionada vs. equipo interno?"

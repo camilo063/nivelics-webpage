@@ -1,3 +1,4 @@
+// CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
@@ -7,6 +8,11 @@ import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
@@ -121,6 +127,12 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
   const cms = await getServicioData("finops", locale);
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: { text: "Solicitar assessment gratuito", url: "/contacto" },
+    fallbackSecondary: { text: "Ver metodología", url: "#pilares" },
+  });
 
   const pillars = isEn ? PILLARS_EN : PILLARS_ES;
 
@@ -211,14 +223,8 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
                 "Ahorro típico del 30-40% en 90 días",
               ]
         }
-        ctaPrimary={{
-          text: isEn ? "Request free assessment" : "Solicitar assessment gratuito",
-          url: "/contacto",
-        }}
-        ctaSecondary={{
-          text: isEn ? "View methodology" : "Ver metodología",
-          url: "#pilares",
-        }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#3B82F6"
         rightPanel={<HeroCalculator type="cloud" accentColor="#3B82F6" />}
       />
@@ -226,7 +232,12 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : isEn
               ? [
                   { value: "40%", label: "Bill reduction", sublabel: "Average in 90 days" },
@@ -267,6 +278,14 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
           </div>
         </div>
       </section>
+
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#3B82F6"
+        titleEs="Por qué elegir FinOps con Nivelics"
+        titleEn="Why choose FinOps with Nivelics"
+        locale={locale}
+      />
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
@@ -337,6 +356,14 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
           </div>
         </div>
       </section>
+
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#3B82F6"
+        titleEs="Cómo lo implementamos"
+        titleEn="How we deliver"
+        locale={locale}
+      />
 
       <ComparisonTable
         title={

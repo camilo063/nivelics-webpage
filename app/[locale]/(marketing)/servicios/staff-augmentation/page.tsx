@@ -1,8 +1,6 @@
+// CMS-connected: 2026-05-07 — sub-services, benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Code2, Palette, Cloud, Brain, ShieldCheck, ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { GeoIconBox } from "@/lib/icons/geometric";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
 import { ComparisonTable } from "@/components/shared/comparison-table";
@@ -12,11 +10,17 @@ import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import {
+  CmsServicioBenefits,
+  CmsServicioProcess,
+  CmsSubServicesGrid,
+  resolveServicioCtas,
+} from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
-import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
@@ -97,6 +101,25 @@ export default async function StaffAugmentationPage({
     getServicioData("staff-augmentation", locale),
     getAllUiLabels(),
   ]);
+  const subs = cms ? await getSubserviciosData(cms.id, locale) : [];
+  const cmsSubItems = subs.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+    subtitle: s.subtitle,
+    icon: s.icon,
+  }));
+  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
+    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
+    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
+    fallbackPrimary: {
+      text: uiLabel(uiLabels, "servicio.staffaug_cta_view_profiles", locale),
+      url: "#perfiles",
+    },
+    fallbackSecondary: {
+      text: uiLabel(uiLabels, "servicio.staffaug_cta_whatsapp", locale),
+      url: "https://wa.me/573103926621",
+    },
+  });
   const serviceSchema = getServiceSchema({
     name: "Staff Augmentation Premium",
     description:
@@ -161,14 +184,8 @@ export default async function StaffAugmentationPage({
           "40% de ahorro vs. contratar en USA o Europa",
           "Garantía de reemplazo en menos de 10 días",
         ]}
-        ctaPrimary={{
-          text: uiLabel(uiLabels, "servicio.staffaug_cta_view_profiles", locale),
-          url: "#perfiles",
-        }}
-        ctaSecondary={{
-          text: uiLabel(uiLabels, "servicio.staffaug_cta_whatsapp", locale),
-          url: "https://wa.me/573103926621",
-        }}
+        ctaPrimary={ctaPrimary}
+        ctaSecondary={ctaSecondary}
         accentColor="#10B981"
         rightPanel={<HeroCalculator type="staff" accentColor="#10B981" />}
         dataSection="staff-augmentation-hero"
@@ -179,7 +196,12 @@ export default async function StaffAugmentationPage({
       <MetricsBar
         metrics={
           cms?.metrics?.length
-            ? cms.metrics.map((m) => ({ value: m.value, label: m.label, sublabel: "" }))
+            ? cms.metrics.map((m) => ({
+                value: m.value,
+                label: m.label,
+                sublabel: "",
+                unit: m.unit,
+              }))
             : /* LEGACY FALLBACK */ [
                 {
                   value: "5",
@@ -206,32 +228,20 @@ export default async function StaffAugmentationPage({
       />
 
       {/* 3. Sub-services */}
-      <section className="bg-bg-surface py-16 md:py-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Perfiles especializados</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SUB_SERVICES.map((s) => {
-              const iconName = s.icon;
-              return (
-                <Link
-                  key={s.href}
-                  href={s.href}
-                  className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
-                >
-                  <GeoIconBox name={iconName} size={20} color="green" />
-                  <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{s.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                    Conocer más <ArrowRight size={14} />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <CmsSubServicesGrid
+        cmsItems={cmsSubItems}
+        fallback={SUB_SERVICES.map((s) => ({
+          icon: s.icon,
+          title: s.title,
+          description: s.description,
+          href: s.href,
+        }))}
+        parentSlug="staff-augmentation"
+        titleEs="Soluciones especializadas"
+        titleEn="Specialised solutions"
+        locale={locale}
+        iconColor="green"
+      />
 
       {/* 4. ClientLogosBar */}
       <ClientLogosBar
@@ -333,6 +343,15 @@ export default async function StaffAugmentationPage({
         </div>
       </section>
 
+      {/* Benefits from CMS (renders only when admin has populated benefits) */}
+      <CmsServicioBenefits
+        benefits={cms?.benefits}
+        accentColor="#10B981"
+        titleEs="Beneficios del enfoque Staff Augmentation"
+        titleEn="Benefits of the Staff Augmentation approach"
+        locale={locale}
+      />
+
       {/* 7. ProcessTimeline */}
       <ProcessTimeline
         title="Cómo funciona el proceso"
@@ -374,6 +393,15 @@ export default async function StaffAugmentationPage({
             deliverable: "Check-in y ajustes",
           },
         ]}
+      />
+
+      {/* Process from CMS (renders only when admin has populated processSteps) */}
+      <CmsServicioProcess
+        steps={cms?.processSteps}
+        accentColor="#10B981"
+        titleEs="Cómo lo entregamos"
+        titleEn="How we deliver"
+        locale={locale}
       />
 
       {/* 8. CaseStudyCard */}
