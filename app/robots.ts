@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { landingPages } from "@/lib/db/schema/admin";
 import { eq } from "drizzle-orm";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const SITE_URL = "https://www.nivelics.com";
 

@@ -9,7 +9,7 @@ import { setRequestLocale, getLocale } from "next-intl/server";
 import { getBlogCategoryBySlug, getBlogPostsByCategory, mapBlogPost } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const FALLBACK_CATEGORIES: Record<string, { label: string; badge: string }> = {
   "inteligencia-artificial": { label: "Inteligencia Artificial", badge: "ia" },

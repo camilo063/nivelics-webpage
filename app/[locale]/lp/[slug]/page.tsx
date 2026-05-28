@@ -7,7 +7,7 @@ import { BlocksRenderer, type LandingBlock } from "@/components/lp/BlockRenderer
 import { LpWhatsApp } from "@/components/lp/LpWhatsApp";
 import { setRequestLocale } from "next-intl/server";
 
-export const revalidate = 300;
+export const revalidate = 86400;
 
 const ACCENT_COLORS: Record<string, string> = {
   ia: "#8B5CF6",

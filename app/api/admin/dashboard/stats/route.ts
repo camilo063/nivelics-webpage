@@ -32,9 +32,16 @@ export async function GET(request: NextRequest) {
     db.select({ count: count() }).from(landingPages),
   ]);
 
-  return NextResponse.json({
-    blog: { total: blogTotal[0].count, published: blogPublished[0].count },
-    casos: { total: casosTotal[0].count, published: casosPublished[0].count },
-    landings: { total: landingsTotal[0].count },
-  });
+  return NextResponse.json(
+    {
+      blog: { total: blogTotal[0].count, published: blogPublished[0].count },
+      casos: { total: casosTotal[0].count, published: casosPublished[0].count },
+      landings: { total: landingsTotal[0].count },
+    },
+    {
+      headers: {
+        "Cache-Control": "private, s-maxage=60, stale-while-revalidate=300",
+      },
+    },
+  );
 }

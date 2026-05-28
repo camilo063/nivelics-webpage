@@ -10,7 +10,7 @@ import type { Locale } from "@/lib/cms/types";
 import { SITE } from "@/lib/constants";
 import { NAV_DEFAULTS } from "@/lib/constants/nav";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 interface MarketingLayoutProps {
   children: React.ReactNode;
