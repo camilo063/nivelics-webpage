@@ -17,7 +17,7 @@ import {
 } from "@/lib/cms";
 import type { Locale, MappedBlogPost } from "@/lib/cms";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 const POSTS_PER_PAGE = 12;
 // Hide the popular sidebar below this threshold — with fewer posts, the

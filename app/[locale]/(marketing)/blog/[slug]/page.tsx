@@ -16,7 +16,7 @@ import { ShareButtons } from "@/components/shared/ShareButtons";
 import { CTAContextual } from "@/components/shared/CTAContextual";
 import { RelatedPosts } from "@/components/shared/RelatedPosts";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 // LEGACY FALLBACK — used only when DB is unreachable.
 const POSTS: Record<string, { title: string; content: string; date: string; readTime: string }> = {
