@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="Benchmark editorial, roadmap y próximos pasos · CAMBIO Colombia · Nivelics">
+  <title>Estrategia · CAMBIO Colombia · Fase 1 · Nivelics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+  /* Gate v15: las páginas internas requieren sesión autenticada; si no existe, redirige a index.html antes de pintar. */
+  (function(){try{if(sessionStorage.getItem("cambio-reporte-auth")!=="ok")location.replace("index.html")}catch(e){location.replace("index.html")}})();
+  </script>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- ============= LOGO NIVELICS INLINE (definición SVG global) ============= -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="nivelics-logo" viewBox="0 0 300 80">
+        <!-- Isotipo N geométrico -->
+        <g class="logo-icon">
+          <path d="M 8 18 L 8 62 L 48 62 L 48 38 Z" class="logo-iso-dark"/>
+          <path d="M 8 18 L 48 18 L 48 62 L 28 62 Z" class="logo-iso-accent"/>
+        </g>
+        <!-- Wordmark -->
+        <text x="60" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-main">IVEL</text>
+        <text x="180" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-accent">ICS</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============= NAVEGACIÓN STICKY ============= -->
+  <nav class="nav-sticky" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="Inicio">
+        <svg class="nav-logo" viewBox="0 0 300 80" width="120" height="32"><use href="#nivelics-logo"/></svg>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir navegación" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-groups" id="nav-list">
+
+        <li class="nav-group">
+          <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="diagnostico" data-group="diagnostico">
+            Diagnóstico
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="diagnostico.html#contexto" class="submenu-link"><span class="sm-num">03</span> Alcance y Contexto</a>
+            <a href="diagnostico.html#tecnica" class="submenu-link"><span class="sm-num">04</span> Auditoría Técnica y WCAG</a>
+            <a href="diagnostico.html#inventario" class="submenu-link"><span class="sm-num">05</span> Inventario de Componentes</a>
+            <a href="diagnostico.html#heuristico" class="submenu-link"><span class="sm-num">06</span> Diagnóstico Heurístico</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="propuesta" data-group="propuesta">
+            Propuesta
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="propuesta.html#transformaciones" class="submenu-link"><span class="sm-num">07</span> Transformaciones CSS</a>
+            <a href="propuesta.html#abtesting" class="submenu-link"><span class="sm-num">08</span> A/B Testing Visual</a>
+            <a href="propuesta.html#analisis360" class="submenu-link"><span class="sm-num">09</span> Análisis 360° del Producto</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu nav-group-active">
+          <button class="nav-link nav-link-group active" data-page="estrategia" data-group="estrategia">
+            Estrategia
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="#benchmark" class="submenu-link"><span class="sm-num">10</span> Benchmark Editorial</a>
+            <a href="#roadmap" class="submenu-link"><span class="sm-num">11</span> Roadmap de Fases</a>
+            <a href="#rebranding" class="submenu-link"><span class="sm-num">12</span> Alineación Rebranding</a>
+            <a href="#proximos" class="submenu-link"><span class="sm-num">13</span> Próximos Pasos</a>
+          </div>
+        </li>
+
+        <li class="nav-group">
+          <a href="index.html#resumen" class="nav-link" data-page="resumen">Resumen Ejecutivo</a>
+        </li>
+
+        <li class="nav-group">
+          <a href="anexos.html" class="nav-link" data-page="anexos">Anexos</a>
+        </li>
+
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-pdf" id="btn-pdf">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>PDF</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-progress" id="nav-progress"></div>
+  </nav>
+
+  <main id="contenido">
+
+  <!-- ============= SECCIÓN 10: BENCHMARK EDITORIAL ============= -->
+  <section id="benchmark" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2 class="section-title">Benchmark Editorial</h2>
+        <p class="section-subtitle">CAMBIO frente a 8 referentes regionales y globales: qué hace cada uno y dónde está la oportunidad</p>
+      </div>
+
+      <div class="s10-lead">
+        <p>Este benchmark evalúa a CAMBIO contra 3 competidores directos colombianos (Semana, El Espectador, La Silla Vacía), 2 referentes hispanos/europeos (El País, Le Monde) y 3 referentes globales premium (NYT, The Economist, The New Yorker). El análisis cubre 8 dimensiones (home, artículo, paywall, tipografía, opinión, navegación, mobile, accesibilidad) y extrae los aprendizajes accionables — qué copiar de quién, y qué <em>no</em> copiar de nadie.</p>
+      </div>
+
+      <div class="s10-metodo">
+        <h4 class="s10-metodo-title">Nota metodológica</h4>
+        <div class="s10-metodo-grid">
+          <div class="s10-metodo-card s10-metodo-card--a">
+            <span class="s10-metodo-tag">Nivel A · Verificación directa</span>
+            <h5>CAMBIO Colombia (sujeto auditado)</h5>
+            <p>Inspección DOM en vivo con Puppeteer + DevTools sobre producción (mayo 2026). Cada afirmación referida a CAMBIO está respaldada por evidencia técnica y visual: capturas de pantalla en desktop (1440px) y mobile (375px), getComputedStyle de tipografías y colores, conteo de componentes DOM, y análisis de código fuente del repositorio. El proceso incluyó verificación de 10 hallazgos del benchmark preliminar contra el sitio real, con corrección de los que la inspección directa contradijo. Evidencia incluida en anexos.</p>
+          </div>
+          <div class="s10-metodo-card s10-metodo-card--b">
+            <span class="s10-metodo-tag">Nivel B · Análisis de referentes</span>
+            <h5>8 medios de referencia</h5>
+            <p>Combinación de (a) verificación de estructura pública navegable vía web_fetch + web_search y (b) inferencia profesional sobre dimensiones cuantitativas no auditables sin acceso autenticado. Las dimensiones marcadas como "estimadas" representan rangos defensibles basados en práctica editorial documentada, no mediciones exactas. El propósito del benchmark es estratégico — identificar patrones y oportunidades — no producir un ranking técnico cuantitativo entre referentes.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.1 PANEL DE MEDIOS ===== -->
+      <div class="s10-sub" id="s10-medios">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.1</span>
+          <h3 class="s10-sub-title">Los 9 medios evaluados</h3>
+        </div>
+
+        <div class="s10-media-grid">
+          <div class="s10-media-card s10-media-card--subject">
+            <div class="s10-media-flag">Sujeto de auditoría</div>
+            <h4 class="s10-media-name">CAMBIO Colombia</h4>
+            <p class="s10-media-url">cambiocolombia.com</p>
+            <p class="s10-media-role">Medio digital colombiano de política e investigación. Modelo freemium con paywall soft.</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--co">
+            <div class="s10-media-flag">Competencia directa CO</div>
+            <h4 class="s10-media-name">Semana</h4>
+            <p class="s10-media-url">semana.com</p>
+            <p class="s10-media-role">Mayor volumen de contenido colombiano. 30+ secciones. Plataforma Arc Publishing (Washington Post).</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--co">
+            <div class="s10-media-flag">Competencia directa CO</div>
+            <h4 class="s10-media-name">El Espectador</h4>
+            <p class="s10-media-url">elespectador.com</p>
+            <p class="s10-media-role">Diario tradicional adaptado a digital. Feature "Resume e infórmame rápido" con audio IA de Google.</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--co">
+            <div class="s10-media-flag">Competencia directa CO</div>
+            <h4 class="s10-media-name">La Silla Vacía</h4>
+            <p class="s10-media-url">lasillavacia.com</p>
+            <p class="s10-media-role">Competidor más relevante por posicionamiento. Rediseño Contra Studio (2018-2020). Mobile-first. Membership "Súper Amigos".</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--intl">
+            <div class="s10-media-flag">Referente hispano</div>
+            <h4 class="s10-media-name">El País</h4>
+            <p class="s10-media-url">elpais.com</p>
+            <p class="s10-media-role">Referente de densidad alta + jerarquía editorial. Color naranja para opinión. Tipografía serif custom.</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--intl">
+            <div class="s10-media-flag">Referente global</div>
+            <h4 class="s10-media-name">The New York Times</h4>
+            <p class="s10-media-url">nytimes.com</p>
+            <p class="s10-media-role">Referente global de jerarquía editorial, tipografía (Cheltenham + Imperial), paywall multi-producto y recirculación multi-capa.</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--intl">
+            <div class="s10-media-flag">Referente global premium</div>
+            <h4 class="s10-media-name">The Economist</h4>
+            <p class="s10-media-url">economist.com</p>
+            <p class="s10-media-role">Modelo semanario premium. Econ Neue icónica. Valor = perspectiva única, no volumen. Lock icon aspiracional.</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--intl">
+            <div class="s10-media-flag">Referente europeo</div>
+            <h4 class="s10-media-name">Le Monde</h4>
+            <p class="s10-media-url">lemonde.fr</p>
+            <p class="s10-media-role">Diario francés premium. Barra de accesibilidad visible. "En continu" como flujo editorial con timestamps.</p>
+          </div>
+
+          <div class="s10-media-card s10-media-card--intl">
+            <div class="s10-media-flag">Referente lectura larga</div>
+            <h4 class="s10-media-name">The New Yorker</h4>
+            <p class="s10-media-url">newyorker.com</p>
+            <p class="s10-media-role">Solo como referente de artículo y tratamiento autoral. Irvin display como fuente icónica. Ilustraciones editoriales comisionadas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.2 TABLAS COMPARATIVAS POR DIMENSIÓN ===== -->
+      <div class="s10-sub" id="s10-tablas">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.2</span>
+          <h3 class="s10-sub-title">Comparativa por dimensión</h3>
+        </div>
+
+        <p class="s10-table-intro">Las tablas muestran las dimensiones donde CAMBIO tiene brecha crítica frente al benchmark. El color rojo marca déficits de CAMBIO; verde, fortalezas relativas.</p>
+
+        <!-- TABLE: HOME / PORTADA -->
+        <div class="s10-dim-block">
+          <h4 class="s10-dim-title">
+            <span class="s10-dim-code">A</span>
+            Home / Portada
+          </h4>
+
+          <div class="s10-table-wrap">
+            <table class="s10-table">
+              <thead>
+                <tr>
+                  <th class="s10-th-dim">Dimensión</th>
+                  <th class="s10-th-cambio">CAMBIO</th>
+                  <th>Semana</th>
+                  <th>El Espectador</th>
+                  <th>La Silla Vacía</th>
+                  <th>El País</th>
+                  <th>NYT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="s10-td-label">Densidad ATF</td>
+                  <td class="s10-td-cambio s10-td--neutral">8-10 piezas (alta, sin jerarquía)</td>
+                  <td>4-6 con hero</td>
+                  <td>5-7 grid de diario</td>
+                  <td>3-5 baja deliberada</td>
+                  <td>6-8 alta con jerarquía</td>
+                  <td>3-5 editorial</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Pieza dominante</td>
+                  <td class="s10-td-cambio s10-td--neutral"><strong>Sí</strong>, pero relegada bajo strip "Al día"</td>
+                  <td>Sí, hero con lead</td>
+                  <td>Sí, hero editorial</td>
+                  <td>Sí, feature con ilustración</td>
+                  <td>Sí, hero serif</td>
+                  <td>Sí, hero cinematic</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Niveles jerarquía</td>
+                  <td class="s10-td-cambio s10-td--bad">2 niveles (planos)</td>
+                  <td>3-4 niveles</td>
+                  <td>3-4 niveles</td>
+                  <td>3 niveles</td>
+                  <td>4 niveles (maduro)</td>
+                  <td>4-5 (referente)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABLE: RECIRCULACIÓN -->
+        <div class="s10-dim-block">
+          <h4 class="s10-dim-title">
+            <span class="s10-dim-code">B</span>
+            Recirculación en artículo
+          </h4>
+
+          <div class="s10-table-wrap">
+            <table class="s10-table">
+              <thead>
+                <tr>
+                  <th class="s10-th-dim">Dimensión</th>
+                  <th class="s10-th-cambio">CAMBIO</th>
+                  <th>Semana</th>
+                  <th>El Espectador</th>
+                  <th>La Silla Vacía</th>
+                  <th>El País</th>
+                  <th>NYT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="s10-td-label">Hooks en artículo</td>
+                  <td class="s10-td-cambio s10-td--bad"><strong>NULO</strong> — cero recirculación</td>
+                  <td>Moderado + ads</td>
+                  <td>"Lea también:" inline</td>
+                  <td>Conversacional en narrativa</td>
+                  <td>"Más información:" discreto</td>
+                  <td>Contextual + sidebars</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Recirculación final</td>
+                  <td class="s10-td-cambio s10-td--bad">Cronológica genérica</td>
+                  <td>Mix crono + contextual</td>
+                  <td>Relacionados + más leídos</td>
+                  <td>Curado "Más de esta Silla"</td>
+                  <td>Editorial curado</td>
+                  <td>Multi-capa (4 tipos)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABLE: PAYWALL -->
+        <div class="s10-dim-block">
+          <h4 class="s10-dim-title">
+            <span class="s10-dim-code">C</span>
+            Paywall y suscripción
+          </h4>
+
+          <div class="s10-table-wrap">
+            <table class="s10-table">
+              <thead>
+                <tr>
+                  <th class="s10-th-dim">Dimensión</th>
+                  <th class="s10-th-cambio">CAMBIO</th>
+                  <th>El Espectador</th>
+                  <th>La Silla Vacía</th>
+                  <th>El País</th>
+                  <th>NYT</th>
+                  <th>The Economist</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="s10-td-label">Tratamiento visual</td>
+                  <td class="s10-td-cambio s10-td--neutral"><strong>CTA funcional</strong> — border rojo + botón amarillo, copy genérico</td>
+                  <td>Moderado-bueno</td>
+                  <td>Elegante post-rediseño</td>
+                  <td>Elegante / persuasivo</td>
+                  <td>Sofisticado</td>
+                  <td>Sofisticado</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Articulación de valor</td>
+                  <td class="s10-td-cambio s10-td--bad"><strong>Frase genérica</strong> — sin precio, beneficios ni social proof en el muro</td>
+                  <td>Valor + audio IA</td>
+                  <td>Comunidad "Súper Amigos"</td>
+                  <td>Prueba social + exclusividad</td>
+                  <td>Multi-producto bundle</td>
+                  <td>Historia de marca</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABLE: TIPOGRAFÍA -->
+        <div class="s10-dim-block">
+          <h4 class="s10-dim-title">
+            <span class="s10-dim-code">D</span>
+            Tipografía y sistema visual
+          </h4>
+
+          <div class="s10-table-wrap">
+            <table class="s10-table">
+              <thead>
+                <tr>
+                  <th class="s10-th-dim">Dimensión</th>
+                  <th class="s10-th-cambio">CAMBIO</th>
+                  <th>Semana</th>
+                  <th>La Silla Vacía</th>
+                  <th>El País</th>
+                  <th>NYT</th>
+                  <th>The Economist</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="s10-td-label">Familia titulares</td>
+                  <td class="s10-td-cambio s10-td--neutral">Mulish (UI) + Noto Serif (artículos)</td>
+                  <td>Serif bold</td>
+                  <td>Sans custom (Contra)</td>
+                  <td>Serif custom</td>
+                  <td>NYT Cheltenham</td>
+                  <td>Econ Neue (icónica)</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Pesos en uso</td>
+                  <td class="s10-td-cambio s10-td--bad">3-4 (limitado)</td>
+                  <td>4-5</td>
+                  <td>4-5</td>
+                  <td>6+</td>
+                  <td>7+ (referente)</td>
+                  <td>5+</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Escala tipográfica</td>
+                  <td class="s10-td-cambio s10-td--bad">4-5 tamaños</td>
+                  <td>6+</td>
+                  <td>6+</td>
+                  <td>8+</td>
+                  <td>10+ (referente)</td>
+                  <td>7+</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABLE: OPINIÓN -->
+        <div class="s10-dim-block">
+          <h4 class="s10-dim-title">
+            <span class="s10-dim-code">E</span>
+            Opinión y columnistas
+          </h4>
+
+          <div class="s10-table-wrap">
+            <table class="s10-table">
+              <thead>
+                <tr>
+                  <th class="s10-th-dim">Dimensión</th>
+                  <th class="s10-th-cambio">CAMBIO</th>
+                  <th>El Espectador</th>
+                  <th>La Silla Vacía</th>
+                  <th>El País</th>
+                  <th>NYT</th>
+                  <th>The New Yorker</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="s10-td-label">Presentación autor</td>
+                  <td class="s10-td-cambio s10-td--neutral">CardColumnist con gradient overlay + CardOpinion con foto circular. Diferenciación existe pero inconsistente en contextos mixtos</td>
+                  <td>Foto + bio + emails</td>
+                  <td>Autor como marca</td>
+                  <td>Foto grande + bio + archivo</td>
+                  <td>Author-first (referente)</td>
+                  <td>Referente global autoral</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Nombre vs. titular</td>
+                  <td class="s10-td-cambio s10-td--neutral">Autor prominente en secciones dedicadas, titular domina en sliders mixtos</td>
+                  <td>Equilibrado</td>
+                  <td>Autor compite</td>
+                  <td>Autor domina</td>
+                  <td>Autor ES marca</td>
+                  <td>Autor ES el producto</td>
+                </tr>
+                <tr>
+                  <td class="s10-td-label">Diferenciación visual</td>
+                  <td class="s10-td-cambio s10-td--neutral">Diferenciada en secciones dedicadas, uniforme en contextos mixtos</td>
+                  <td>Badge + tipografía</td>
+                  <td>Por tipo de contenido</td>
+                  <td>Serif + naranja (referente)</td>
+                  <td>Badge + layout + ilustraciones</td>
+                  <td>Todo es autoral</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.3 POSICIONAMIENTO CAMBIO ===== -->
+      <div class="s10-sub" id="s10-posicionamiento">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.3</span>
+          <h3 class="s10-sub-title">Posicionamiento de CAMBIO por dimensión</h3>
+        </div>
+
+        <p class="s10-pos-intro">Síntesis de dónde está CAMBIO hoy, contra quién se mide y cuál es la brecha. Las prioridades P0 son críticas para el refresh actual; P1 son altas; P2-P3 son oportunidades de fases futuras.</p>
+
+        <div class="s10-pos-grid">
+          <div class="s10-pos-card s10-pos-card--p0">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P0</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Jerarquía editorial</h4>
+            <p class="s10-pos-gap">Sin hero, 2 niveles planos, carrusel uniforme</p>
+            <p class="s10-pos-ref">Referentes: NYT (4-5 niveles), El País (4), El Espectador (3-4)</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p0">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P0</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Paywall UX</h4>
+            <p class="s10-pos-gap">CTA funcional (border rojo + botón amarillo), pero copy genérico sin propuesta de valor</p>
+            <p class="s10-pos-ref">Referentes: NYT (sofisticado), Economist (marca), LSV (comunidad)</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p1">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P1</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Tipografía editorial</h4>
+            <p class="s10-pos-gap">Sistema dual Mulish + Noto Serif. Serif fuerte en artículos, pero sans domina en home — pierde identidad en portada</p>
+            <p class="s10-pos-ref">Referentes: NYT Cheltenham (10+ tamaños), Economist Econ Neue</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p1">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P1</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Tratamiento columnistas</h4>
+            <p class="s10-pos-gap">Componentes diferenciados existen (CardColumnist, CardOpinion), pero en contextos mixtos la diferenciación se pierde</p>
+            <p class="s10-pos-ref">Referentes: El País (autor-marca), NYT (author-first)</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p1">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P1</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Recirculación</h4>
+            <p class="s10-pos-gap">Cero hooks en artículo, cronológica genérica al final</p>
+            <p class="s10-pos-ref">Referentes: NYT (multi-capa), El Espectador ("Lea también:" inline)</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p1">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P1</span>
+              <span class="s10-pos-level s10-pos-level--mid">MID</span>
+            </div>
+            <h4>Densidad organizada</h4>
+            <p class="s10-pos-gap">Densidad alta (correcto para CO), organización baja</p>
+            <p class="s10-pos-ref">Referentes: El País (densidad + jerarquía), El Espectador (grid)</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p2">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P2</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Diferenciación opinión/noticia</h4>
+            <p class="s10-pos-gap">Diferenciación existe a nivel componente; se pierde en sliders y contextos mixtos del home</p>
+            <p class="s10-pos-ref">Referentes: El País (serif + naranja), NYT (badge + layout)</p>
+          </div>
+
+          <div class="s10-pos-card s10-pos-card--p2">
+            <div class="s10-pos-header">
+              <span class="s10-pos-priority">P2</span>
+              <span class="s10-pos-level s10-pos-level--low">LOW</span>
+            </div>
+            <h4>Búsqueda</h4>
+            <p class="s10-pos-gap">Link plano a /buscar/, cero funcionalidad editorial</p>
+            <p class="s10-pos-ref">Referentes: NYT (autocompletado + trending), Le Monde (contextual)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VERIFICACIÓN BOX ===== -->
+      <div class="s10-sub" style="max-width: var(--container-narrow); margin: 0 auto var(--space-3xl);">
+        <div class="insight-box">
+          <span class="insight-tag">Proceso de verificación · Mayo 2026</span>
+          <h3 class="insight-title" style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin-bottom: var(--space-md); color: var(--text-on-dark);">Los hallazgos de este benchmark fueron verificados contra el sitio en producción</h3>
+          <div class="insight-body">
+            <p>Durante la elaboración de este benchmark, se ejecutó un proceso de verificación visual directa de los hallazgos preliminares sobre CAMBIO: inspección DOM con DevTools, captura de screenshots en ambos viewports, y extracción de computed styles en vivo. La inspección reveló que algunas hipótesis del análisis estructural inicial requerían precisión: la tipografía editorial Noto Serif, el sistema de cards diferenciadas para columnistas (CardColumnist, CardOpinion) y el sticky CTA en artículos premium son activos reales del producto que no habían sido reconocidos en la primera pasada. Las afirmaciones del benchmark que la verificación contradijo fueron corregidas. El reporte presentado refleja únicamente afirmaciones verificadas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.4 HALLAZGOS TRANSVERSALES ===== -->
+      <div class="s10-sub" id="s10-hallazgos">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.4</span>
+          <h3 class="s10-sub-title">6 patrones que todos los referentes tienen y CAMBIO no</h3>
+        </div>
+
+        <p class="s10-hallazgo-intro">Estos no son hallazgos aislados. Son patrones que los 7 referentes evaluados comparten sin excepción — independientemente de región, idioma o modelo de negocio. La ausencia en CAMBIO es estructural, no circunstancial.</p>
+
+        <div class="s10-hallazgo-list">
+
+          <div class="s10-hallazgo">
+            <div class="s10-hallazgo-num">01</div>
+            <div class="s10-hallazgo-body">
+              <h4>Hero editorial dominante</h4>
+              <p>Los 7 referentes tienen una pieza que domina visualmente el above the fold y establece la agenda del día o la semana. CAMBIO sí tiene pieza dominante editorial — pero la relega debajo de un strip de breaking news ("Al día"), fuera del ATF en la mayoría de viewports. El resultado es que <strong>la decisión editorial del día no es lo primero que ve el lector</strong>. No es que falte hero — es que el ATF prioriza flujo cronológico sobre curación editorial.</p>
+              <div class="s10-hallazgo-refs">
+                <span class="s10-ref-tag">NYT: hero cinematic</span>
+                <span class="s10-ref-tag">El País: hero serif</span>
+                <span class="s10-ref-tag">Semana: hero con lead</span>
+                <span class="s10-ref-tag">LSV: feature + ilustración</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="s10-hallazgo">
+            <div class="s10-hallazgo-num">02</div>
+            <div class="s10-hallazgo-body">
+              <h4>3 o más niveles de jerarquía visual</h4>
+              <p>Incluso La Silla Vacía con su densidad baja deliberada tiene 3 niveles claros. El País tiene 4. NYT tiene 4-5. CAMBIO tiene 2 niveles débiles (carrusel uniforme + pieza destacada debajo). Sin niveles, el lector no sabe qué importa.</p>
+              <div class="s10-hallazgo-refs">
+                <span class="s10-ref-tag">NYT: 4-5 niveles</span>
+                <span class="s10-ref-tag">El País: 4 niveles</span>
+                <span class="s10-ref-tag">CAMBIO: 2 niveles</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="s10-hallazgo">
+            <div class="s10-hallazgo-num">03</div>
+            <div class="s10-hallazgo-body">
+              <h4>Tipografía editorial con identidad de marca</h4>
+              <p>NYT tiene Cheltenham. The Economist tiene Econ Neue. El País tiene serif custom. La Silla Vacía tiene sistema unificado post-Contra Studio. CAMBIO usa un sistema dual: Mulish (sans-serif) para UI/navegación y <strong>Noto Serif para titulares y cuerpo de artículo</strong> (h1 a 48px, body a 18px/28px). El carácter editorial existe en la experiencia de lectura — la oportunidad es reforzarlo también en el home, donde domina Mulish y el sitio pierde identidad tipográfica.</p>
+              <div class="s10-hallazgo-refs">
+                <span class="s10-ref-tag">NYT: Cheltenham (Matthew Carter)</span>
+                <span class="s10-ref-tag">Economist: Econ Neue (icónica)</span>
+                <span class="s10-ref-tag">El País: serif custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="s10-hallazgo">
+            <div class="s10-hallazgo-num">04</div>
+            <div class="s10-hallazgo-body">
+              <h4>Paywall que articula VALOR, no solo bloquea</h4>
+              <p>NYT vende multi-producto. Economist vende perspectiva única. La Silla Vacía vende comunidad (Súper Amigos). El País vende prueba social. CAMBIO tiene un paywall con diseño funcional (border de marca rojo, CTA amarillo "Suscribirme"), pero el copy se limita a una frase genérica sin articular por qué vale la pena pagar. El diseño existe — falta la persuasión.</p>
+              <div class="s10-hallazgo-refs">
+                <span class="s10-ref-tag">NYT: bundle strategy</span>
+                <span class="s10-ref-tag">Economist: "analysis you won't find"</span>
+                <span class="s10-ref-tag">LSV: comunidad + participación</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="s10-hallazgo">
+            <div class="s10-hallazgo-num">05</div>
+            <div class="s10-hallazgo-body">
+              <h4>Recirculación contextual dentro del artículo</h4>
+              <p>El Espectador tiene "Lea también:" inline. La Silla Vacía integra hooks conversacionales en la narrativa. El País usa "Más información:" discreto. NYT tiene links contextuales + sidebars. CAMBIO tiene cero recirculación en artículo — el lector llega, lee, y no tiene por dónde seguir.</p>
+              <div class="s10-hallazgo-refs">
+                <span class="s10-ref-tag">El Espectador: "Lea también:" + emojis</span>
+                <span class="s10-ref-tag">LSV: hooks conversacionales</span>
+                <span class="s10-ref-tag">NYT: multi-capa</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="s10-hallazgo">
+            <div class="s10-hallazgo-num">06</div>
+            <div class="s10-hallazgo-body">
+              <h4>Diferenciación visual entre opinión y noticia</h4>
+              <p>El País usa tipografía serif + color naranja para opinión (referente hispano). NYT usa badges + layout diferenciado + ilustraciones vs. fotografía. El Espectador usa badge + tipografía. CAMBIO sí tiene componentes diferenciados para opinión (CardColumnist con foto gradient overlay, CardOpinion con foto circular) en sus secciones dedicadas. La oportunidad: en contextos mixtos (sliders del home, carrusel ATF), la diferenciación se pierde porque las cards comparten el mismo tratamiento visual.</p>
+              <div class="s10-hallazgo-refs">
+                <span class="s10-ref-tag">El País: serif + naranja</span>
+                <span class="s10-ref-tag">NYT: badge + layout</span>
+                <span class="s10-ref-tag">El Espectador: badge + tipografía</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== 10.5 DÓNDE CAMBIO ESTÁ BIEN ===== -->
+      <div class="s10-sub" id="s10-fortalezas">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.5</span>
+          <h3 class="s10-sub-title">Dónde CAMBIO está bien posicionado</h3>
+        </div>
+
+        <p class="s10-fortaleza-intro">El benchmark no es solo brechas. Hay activos reales que CAMBIO puede potenciar.</p>
+
+        <div class="s10-fortaleza-grid">
+          <div class="s10-fortaleza-card">
+            <span class="s10-fortaleza-check">✓</span>
+            <h4>Densidad informativa alta</h4>
+            <p>8-10 piezas above the fold es razonable para audiencia colombiana. El problema es la falta de organización, no la densidad. El País demuestra que densidad alta + jerarquía es viable.</p>
+          </div>
+
+          <div class="s10-fortaleza-card">
+            <span class="s10-fortaleza-check">✓</span>
+            <h4>"Los Danieles" como activo de marca</h4>
+            <p>Daniel Coronell y Daniel Samper Ospina son razones de suscripción verificables. La marca agrupadora existe y ya tiene componentes diferenciados (CardColumnist con gradient overlay, CardOpinion con foto circular). La oportunidad es reforzar esa diferenciación en contextos mixtos del home.</p>
+          </div>
+
+          <div class="s10-fortaleza-card">
+            <span class="s10-fortaleza-check">✓</span>
+            <h4>Cobertura temática competitiva</h4>
+            <p>25+ secciones cubriendo política, país, economía, deportes, cultura, internacional. La cobertura es comparable a Semana y El Espectador.</p>
+          </div>
+
+          <div class="s10-fortaleza-card">
+            <span class="s10-fortaleza-check">✓</span>
+            <h4>Estructura de metadata existente</h4>
+            <p>Secciones patrocinadas declaradas en navegación ("Patrocinado" con subsecciones). La estructura existe — falta la ejecución visual para diferenciarlas de contenido editorial.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.6 LA SILLA VACÍA: ANÁLISIS DE COMPETIDOR ===== -->
+      <div class="s10-sub" id="s10-lsv">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.6</span>
+          <h3 class="s10-sub-title">La Silla Vacía: el competidor más relevante</h3>
+        </div>
+
+        <p class="s10-lsv-intro">La Silla Vacía es el competidor más relevante para CAMBIO por audiencia, posicionamiento editorial y modelo de negocio. Su rediseño profesional con Contra Studio (2018-2020) y su modelo de membership establecen el listón del mercado colombiano.</p>
+
+        <div class="s10-lsv-grid">
+          <div class="s10-lsv-card">
+            <h4>Rediseño profesional</h4>
+            <p>Sistema de diseño unificado por Contra Studio para 10+ portales. Mobile-first con 80%+ del tráfico en móvil. Cada decisión de jerarquía y navegación fue diseñada para mobile primero.</p>
+            <span class="s10-lsv-impact">CAMBIO parece adaptado a mobile, no diseñado para mobile.</span>
+          </div>
+
+          <div class="s10-lsv-card">
+            <h4>"En Vivo" como liveblog editorial</h4>
+            <p>No es ticker de breaking news — es un flujo continuo de análisis con timestamps. Es el producto más diferenciado de LSV y directamente competitivo con el "panorama del día" de CAMBIO.</p>
+            <span class="s10-lsv-impact">CAMBIO tiene /vivo/ pero su tratamiento no es equivalente.</span>
+          </div>
+
+          <div class="s10-lsv-card">
+            <h4>Ilustraciones como identidad</h4>
+            <p>No depende de fotos de agencia (Reuters, Colprensa). Sus ilustraciones propias son la identidad visual del medio. CAMBIO depende de fotos genéricas de agencia.</p>
+            <span class="s10-lsv-impact">Copiar las ilustraciones de LSV sería imitación. CAMBIO necesita su propio lenguaje visual.</span>
+          </div>
+
+          <div class="s10-lsv-card">
+            <h4>Membership > Subscription</h4>
+            <p>Vende comunidad y participación (Súper Amigos) + productos premium presenciales (Programa de Inmersión Colombia). Modelo con mayor retención que el de acceso puro.</p>
+            <span class="s10-lsv-impact">CAMBIO vende acceso con un paywall débil. El modelo de membership es superior.</span>
+          </div>
+
+          <div class="s10-lsv-card">
+            <h4>Revenue diversificado</h4>
+            <p>Membership + programa presencial + publicidad + donaciones. CAMBIO aparenta depender de suscripción + publicidad — menor resiliencia ante pérdida de suscriptores.</p>
+            <span class="s10-lsv-impact">Oportunidad de fase futura: explorar eventos y programas como LSV.</span>
+          </div>
+
+          <div class="s10-lsv-card">
+            <h4>Fact-checking como producto</h4>
+            <p>"Detector de Mentiras" es un producto editorial con marca propia. En contexto electoral 2026, genera tráfico y credibilidad adicional. CAMBIO no tiene equivalente visible.</p>
+            <span class="s10-lsv-impact">No es alcance del refresh. Documentado como oportunidad editorial.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.7 ANTI-RECOMENDACIONES ===== -->
+      <div class="s10-sub" id="s10-no-copiar">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.7</span>
+          <h3 class="s10-sub-title">Qué NO copiar — anti-recomendaciones explícitas</h3>
+        </div>
+
+        <p class="s10-anti-intro">Tan importante como saber qué copiar es saber qué no copiar. Estos patrones funcionan para sus medios de origen pero no aplican a CAMBIO por contexto, audiencia o escala.</p>
+
+        <div class="s10-anti-grid">
+          <div class="s10-anti-card">
+            <span class="s10-anti-icon">✕</span>
+            <div class="s10-anti-body">
+              <h4>Densidad baja tipo NYT/Economist</h4>
+              <p>3-4 piezas above the fold funciona para audiencia anglo premium. Para audiencia colombiana que espera "panorama del día" denso, no aplica. CAMBIO necesita 6-10 piezas organizadas con jerarquía, no densidad baja con aire. Copiar la jerarquía del NYT, no su densidad.</p>
+            </div>
+          </div>
+
+          <div class="s10-anti-card">
+            <span class="s10-anti-icon">✕</span>
+            <div class="s10-anti-body">
+              <h4>Seudónimos tipo The Economist</h4>
+              <p>Bagehot, Charlemagne y Lexington son un modelo cultural anglosajón. En Colombia los columnistas son marcas personales con nombre y apellido. "Los Danieles" ya tiene la semilla correcta — potenciar la marca personal, no abstraerla en seudónimos.</p>
+            </div>
+          </div>
+
+          <div class="s10-anti-card">
+            <span class="s10-anti-icon">✕</span>
+            <div class="s10-anti-body">
+              <h4>Bundle multi-producto tipo NYT</h4>
+              <p>Games + Cooking + Wirecutter + The Athletic requiere un portfolio de productos que CAMBIO no tiene. Intentar replicar esto es un error estratégico. Enfocarse en profundizar el valor del contenido editorial core.</p>
+            </div>
+          </div>
+
+          <div class="s10-anti-card">
+            <span class="s10-anti-icon">✕</span>
+            <div class="s10-anti-body">
+              <h4>Ilustraciones tipo La Silla Vacía</h4>
+              <p>Las ilustraciones editoriales son la marca de La Silla Vacía. Copiarlas se percibe como imitación del competidor más cercano. Alternativa: lenguaje visual propio — tratamiento fotográfico editorial, fotomontajes (Yamith Mariño ya lo hace), microinteracciones.</p>
+            </div>
+          </div>
+
+          <div class="s10-anti-card">
+            <span class="s10-anti-icon">✕</span>
+            <div class="s10-anti-body">
+              <h4>Comentarios abiertos</h4>
+              <p>Comentarios sin moderación degradan la calidad percibida. Si se implementa engagement: modelo cerrado tipo "Súper Amigos" (LSV) o gated para suscriptores tipo "Suscríbete e inicia la conversación" (El Espectador).</p>
+            </div>
+          </div>
+
+          <div class="s10-anti-card">
+            <span class="s10-anti-icon">✕</span>
+            <div class="s10-anti-body">
+              <h4>Personalización algorítmica</h4>
+              <p>Requiere inversión en data engineering que no corresponde a esta fase. Curación editorial + newsletter segmentado es más eficiente, más creíble y más coherente con la propuesta de "excelencia periodística".</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 10.8 TOP 10 RECOMENDACIONES ===== -->
+      <div class="s10-sub" id="s10-recomendaciones">
+        <div class="s10-sub-header">
+          <span class="s10-sub-num">10.8</span>
+          <h3 class="s10-sub-title">Top 10 aprendizajes accionables del benchmark</h3>
+        </div>
+
+        <p class="s10-rec-intro">Priorizados por impacto × esfuerzo. Las primeras 7 son ejecutables dentro del alcance del refresh CSS o con ajustes menores. Las últimas 3 requieren backend.</p>
+
+        <div class="s10-rec-list">
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">01</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--critico">Crítico</span>
+                <span class="s10-rec-scope">CSS + HTML templates</span>
+              </div>
+              <h4>Hero editorial dominante en home</h4>
+              <p>Una pieza 2-3x el tamaño de cards estándar. Imagen grande + titular H1 + lead + sección + timestamp. La pieza que establece la agenda del día.</p>
+              <span class="s10-rec-ref">Referentes: El País, NYT, Semana</span>
+              <a href="propuesta.html#tx-01" class="s10-rec-tx">→ Ver transformación T01</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">02</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--critico">Crítico</span>
+                <span class="s10-rec-scope">CSS + copy</span>
+              </div>
+              <h4>Reforzar el copy del paywall CTA</h4>
+              <p>El diseño del paywall es funcional (CTA amarillo, border de marca). Lo que falta es el copy persuasivo: articulación de valor ("Accede a las investigaciones de Daniel Coronell"), precio visible, prueba social, trial. El diseño ya está — falta la conversión.</p>
+              <span class="s10-rec-ref">Referentes: NYT, Economist, La Silla Vacía</span>
+              <a href="propuesta.html#tx-31" class="s10-rec-tx">→ Ver transformación T31</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">03</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--alto">Alto</span>
+                <span class="s10-rec-scope">CSS + HTML templates</span>
+              </div>
+              <h4>3-4 niveles de jerarquía visual en home</h4>
+              <p>Hero > Destacado (imagen media) > Estándar (card) > Compacto (título + timestamp). Diferenciación por tamaño de imagen, tipografía y spacing.</p>
+              <span class="s10-rec-ref">Referentes: El País (4 niveles), NYT (4-5 niveles)</span>
+              <a href="propuesta.html#tx-01" class="s10-rec-tx">→ Ver transformaciones T01 + T16</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">04</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--alto">Alto</span>
+                <span class="s10-rec-scope">CSS only</span>
+              </div>
+              <h4>Reforzar diferenciación de opinión en contextos mixtos</h4>
+              <p>Los componentes dedicados (CardColumnist, CardOpinion) ya tienen tratamiento diferenciado. La oportunidad es extender esa diferenciación a los sliders mixtos del home y cualquier contexto donde opinión y noticia aparezcan juntas. Un lector debe distinguir opinión de noticia en 2 segundos en cualquier parte del sitio.</p>
+              <span class="s10-rec-ref">Referente hispano: El País (naranja para opinión)</span>
+              <a href="propuesta.html#tx-15" class="s10-rec-tx">→ Ver transformación T15</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">05</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--alto">Alto</span>
+                <span class="s10-rec-scope">CSS + HTML templates</span>
+              </div>
+              <h4>Tratamiento autor-marca para columnistas</h4>
+              <p>Foto grande + nombre prominente que compite con titular + link visible a archivo + bio mini. Los Danieles son razones de suscripción — tratarlos como tal.</p>
+              <span class="s10-rec-ref">Referentes: El País, NYT, The New Yorker</span>
+              <a href="propuesta.html#tx-03" class="s10-rec-tx">→ Ver transformación T03</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">06</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--alto">Alto</span>
+                <span class="s10-rec-scope">CSS only</span>
+              </div>
+              <h4>Badge "Suscriptores" aspiracional</h4>
+              <p>El badge actual tiene color rojo e ícono, pero su tamaño es pequeño y su posición en la card no capta la atención antes del clic. Hacerlo más prominente con posición superpuesta sobre la imagen (tipo lock icon del Economist) para que el usuario sepa que es premium antes de hacer clic.</p>
+              <span class="s10-rec-ref">Referentes: Economist (lock icon), El País</span>
+              <a href="propuesta.html#tx-02" class="s10-rec-tx">→ Ver transformación T02</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">07</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--medio">Medio-Alto</span>
+                <span class="s10-rec-scope">CSS only</span>
+              </div>
+              <h4>Etiquetar contenido patrocinado de forma inequívoca</h4>
+              <p>"Imaginar la democracia" y "Peso a peso, paso a paso" necesitan badge visual distinto de noticia. Color + border + disclaimer visible. La metadata ya existe — falta la ejecución visual.</p>
+              <span class="s10-rec-ref">Referentes: NYT ("Paid Post"), El País</span>
+              <a href="propuesta.html#tx-15" class="s10-rec-tx">→ Ver transformación T15</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card s10-rec-card--backend">
+            <div class="s10-rec-num">08</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--alto">Alto</span>
+                <span class="s10-rec-scope">Backend + frontend</span>
+              </div>
+              <h4>Recirculación contextual en artículo</h4>
+              <p>Hooks "Lea también:" entre párrafos con artículos temáticamente relacionados. Requiere queries de contenido relacionado en backend, no solo CSS.</p>
+              <span class="s10-rec-ref">Referentes: El Espectador, NYT, La Silla Vacía</span>
+              <a href="propuesta.html#tx-08" class="s10-rec-tx">→ Ver transformación T08</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">09</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--medio">Medio-Alto</span>
+                <span class="s10-rec-scope">CSS (font swap)</span>
+              </div>
+              <h4>Extender identidad tipográfica serif al home</h4>
+              <p>CAMBIO ya usa Noto Serif en titulares y cuerpo de artículo — el carácter editorial existe. La oportunidad CSS es extenderlo al home: aplicar Noto Serif a los titulares de la pieza dominante y las cards editoriales destacadas, reforzando la identidad que hoy solo se percibe dentro del artículo.</p>
+              <span class="s10-rec-ref">Referentes: NYT, Economist, El País</span>
+              <a href="propuesta.html#tx-01" class="s10-rec-tx">→ Ver transformación T01</a>
+            </div>
+          </div>
+
+          <div class="s10-rec-card">
+            <div class="s10-rec-num">10</div>
+            <div class="s10-rec-body">
+              <div class="s10-rec-meta">
+                <span class="s10-rec-impact s10-rec-impact--medio">Medio</span>
+                <span class="s10-rec-scope">CSS + editorial governance</span>
+              </div>
+              <h4>Complementar eyebrows con tipologías editoriales</h4>
+              <p>El strip "Al día" funciona como módulo de breaking news con cards etiquetadas por sección (Justicia, Poder, Economía). La etiqueta "Al día" es el título del módulo, no un tag repetido en cada card. La oportunidad real no es eliminar "Al día" sino complementar los eyebrows de sección existentes con tipologías editoriales más ricas: "Investigación", "Análisis", "Crónica", "Opinión".</p>
+              <span class="s10-rec-ref">Referentes: NYT, The Atlantic</span>
+              <a href="propuesta.html#tx-05" class="s10-rec-tx">→ Ver transformación T05</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== CIERRE SECCIÓN 10 ===== -->
+      <div class="section-cierre">
+        <h3 class="cierre-title" style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; margin-bottom: var(--space-xl); color: var(--text-primary);">Conclusión del benchmark</h3>
+
+        <div class="insight-box">
+          <p style="margin: 0 0 var(--space-md); font-weight: 500;">CAMBIO tiene los activos editoriales para competir — Los Danieles, cobertura temática amplia, tráfico real (835K usuarios/mes), tipografía editorial Noto Serif, componentes de opinión diferenciados. Lo que falta es <em>potenciar y hacer consistente</em> lo que ya existe.</p>
+          <p style="margin: 0;">El benchmark identifica oportunidades reales: promover la pieza dominante al ATF, reforzar el copy del paywall, implementar recirculación inline, y extender la diferenciación de opinión a contextos mixtos. La mayoría son resolubles con CSS + HTML templates dentro del alcance del refresh contratado. No es un problema de ausencia — es un problema de subexposición. Y eso es exactamente lo que este proyecto corrige.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= SECCIÓN 11: ROADMAP DE FASES ============= -->
+  <section id="roadmap" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-number">11</span>
+        <h2 class="section-title">Roadmap de Fases</h2>
+        <p class="section-subtitle">Qué se hace, cuándo, en qué orden y con qué dependencias durante las semanas que quedan del proyecto</p>
+      </div>
+
+      <div class="s11-lead">
+        <p>El proyecto completo está dimensionado en <strong>13 semanas</strong>. Las dos primeras se invirtieron en el diagnóstico estratégico que recoge este reporte. Quedan, por tanto, entre <strong>9 y 11 semanas</strong> para implementación, sincronización con el brand book y testing en cascada. Este roadmap no es una proyección optimista: es el cronograma operativo sobre el que Nivelics se compromete, con los puntos de control y las dependencias declarados de forma explícita. El principio de gestión es simple — <strong>las transformaciones que no dependen de terceros avanzan desde la semana 5; las que sí dependen se secuencian para no bloquear el sprint principal</strong>.</p>
+      </div>
+
+      <!-- 11.1 Timeline -->
+      <div class="s11-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">11.1</span> Timeline del proyecto completo</h3>
+        <p class="block-lead">Las 13 semanas distribuidas por flujo de trabajo. El diagnóstico está cerrado; la implementación y el testing se solapan en la segunda mitad del cronograma.</p>
+
+        <div class="rm-gantt-wrap" role="region" aria-label="Cronograma del proyecto por semanas" tabindex="0">
+          <table class="rm-gantt">
+            <caption class="sr-only">Cronograma de actividades del proyecto distribuidas en 13 semanas. El diagnóstico ocupa las semanas 1 a 2; la migración técnica y la coordinación con el brand book las semanas 3 a 4; la implementación CSS las semanas 5 a 10; el testing A/B las semanas 8 a 13; y el cierre la semana 13.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="rm-gantt-rowhead">Flujo de trabajo</th>
+                <th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th>
+                <th scope="col">S5</th><th scope="col">S6</th><th scope="col">S7</th><th scope="col">S8</th>
+                <th scope="col">S9</th><th scope="col">S10</th><th scope="col">S11</th><th scope="col">S12</th><th scope="col">S13</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="rm-gantt-rowhead">Diagnóstico estratégico <span class="rm-gantt-owner">este reporte</span></th>
+                <td class="rm-on rm-done" data-w="1"><span class="rm-bar-label">Completado</span></td>
+                <td class="rm-on rm-done" data-w="2"></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <th scope="row" class="rm-gantt-rowhead">Migración técnica legacy <span class="rm-gantt-owner">Nivelics · paralelo</span></th>
+                <td></td><td></td>
+                <td class="rm-on rm-mig" data-w="3"><span class="rm-bar-label">Eventos + Especiales → Next.js</span></td>
+                <td class="rm-on rm-mig" data-w="4"></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <th scope="row" class="rm-gantt-rowhead">Coordinación brand book <span class="rm-gantt-owner">dependencia externa</span></th>
+                <td></td><td></td>
+                <td class="rm-on rm-ext" data-w="3"><span class="rm-bar-label">Check-points</span></td>
+                <td class="rm-on rm-ext" data-w="4"></td>
+                <td class="rm-on rm-ext rm-ext-cont" data-w="5"></td><td class="rm-on rm-ext rm-ext-cont" data-w="6"></td><td class="rm-on rm-ext rm-ext-cont" data-w="7"></td><td class="rm-on rm-ext rm-ext-cont" data-w="8"></td>
+                <td></td><td></td><td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <th scope="row" class="rm-gantt-rowhead">Implementación CSS <span class="rm-gantt-owner">Nivelics · 31 transformaciones</span></th>
+                <td></td><td></td><td></td><td></td>
+                <td class="rm-on rm-impl" data-w="5"><span class="rm-bar-label">Sprint de implementación</span></td>
+                <td class="rm-on rm-impl" data-w="6"></td><td class="rm-on rm-impl" data-w="7"></td><td class="rm-on rm-impl" data-w="8"></td>
+                <td class="rm-on rm-impl" data-w="9"></td><td class="rm-on rm-impl" data-w="10"></td>
+                <td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <th scope="row" class="rm-gantt-rowhead">A/B testing en cascada <span class="rm-gantt-owner">Nivelics · 3 oleadas</span></th>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td class="rm-on rm-ab" data-w="8"><span class="rm-bar-label">3 oleadas · ver §11.4</span></td>
+                <td class="rm-on rm-ab" data-w="9"></td><td class="rm-on rm-ab" data-w="10"></td><td class="rm-on rm-ab" data-w="11"></td><td class="rm-on rm-ab" data-w="12"></td><td class="rm-on rm-ab" data-w="13"></td>
+              </tr>
+              <tr>
+                <th scope="row" class="rm-gantt-rowhead">Cierre y handoff <span class="rm-gantt-owner">Nivelics</span></th>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                <td class="rm-on rm-close" data-w="13"><span class="rm-bar-label">Retro</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rm-legend">
+          <span class="rm-legend-item"><span class="rm-swatch rm-sw-done"></span> Completado</span>
+          <span class="rm-legend-item"><span class="rm-swatch rm-sw-mig"></span> Migración técnica</span>
+          <span class="rm-legend-item"><span class="rm-swatch rm-sw-ext"></span> Dependencia externa</span>
+          <span class="rm-legend-item"><span class="rm-swatch rm-sw-impl"></span> Implementación CSS</span>
+          <span class="rm-legend-item"><span class="rm-swatch rm-sw-ab"></span> A/B testing</span>
+          <span class="rm-legend-item"><span class="rm-swatch rm-sw-close"></span> Cierre</span>
+        </div>
+      </div>
+
+      <!-- 11.2 Distribución del esfuerzo -->
+      <div class="s11-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">11.2</span> Distribución del esfuerzo de implementación</h3>
+        <p class="block-lead">Las <strong>31 transformaciones</strong> priorizadas en la Sección 7 se reparten en tres niveles de prioridad. La secuencia respeta dos restricciones reales: lo que aplica hoy sobre el Next.js actual se ejecuta primero, y lo que cae sobre código legacy (Eventos, Especiales) espera a la migración técnica.</p>
+
+        <div class="s11-effort">
+          <div class="s11-effort-row">
+            <div class="s11-effort-head">
+              <span class="s11-effort-p s11-p0">P0</span>
+              <span class="s11-effort-count">9</span>
+              <span class="s11-effort-when">Semanas 5–7</span>
+            </div>
+            <div class="s11-effort-body">
+              <div class="s11-effort-bar"><span class="s11-effort-fill s11-fill-p0" style="width:29%"></span></div>
+              <p>Quick wins de alto impacto y transformaciones que aplican de inmediato sobre el frontend actual: corrección de <em>target-size</em> en los dots del carrusel (74 nodos en un solo fix), contraste del badge de suscripción (2.87:1 → 7.2:1), jerarquía de la pieza dominante y CTA de suscripción en el header. Ninguna depende del brand book.</p>
+            </div>
+          </div>
+          <div class="s11-effort-row">
+            <div class="s11-effort-head">
+              <span class="s11-effort-p s11-p1">P1</span>
+              <span class="s11-effort-count">14</span>
+              <span class="s11-effort-when">Semanas 6–10</span>
+            </div>
+            <div class="s11-effort-body">
+              <div class="s11-effort-bar"><span class="s11-effort-fill s11-fill-p1" style="width:45%"></span></div>
+              <p>El grueso del engagement: cascada sobre <code>ContentSectionPage</code> (una inversión, seis secciones), tratamiento editorial de Poder, recirculación interna, eyebrows tipológicos, Los Danieles como puerta de entrada con captura de email, y refresh de la página de planes. Las que tocan paleta o tipografía se secuencian tras la entrega del brand book.</p>
+            </div>
+          </div>
+          <div class="s11-effort-row">
+            <div class="s11-effort-head">
+              <span class="s11-effort-p s11-p2">P2</span>
+              <span class="s11-effort-count">8</span>
+              <span class="s11-effort-when">Semanas 8–12</span>
+            </div>
+            <div class="s11-effort-body">
+              <div class="s11-effort-bar"><span class="s11-effort-fill s11-fill-p2" style="width:26%"></span></div>
+              <p>Transformaciones que dependen de la migración técnica: hub de Especiales con tipología visual y los despliegues de Eventos una vez migrados al stack unificado. Se ejecutan post-migración para no aplicar refresh sobre código que está a punto de reemplazarse.</p>
+            </div>
+          </div>
+        </div>
+        <p class="s11-note">Las semanas <strong>10–13</strong> no incorporan transformaciones nuevas: se dedican al refinamiento de las ya desplegadas según los datos que arrojen las oleadas de A/B testing. La optimización es iterativa, no una cuarta tanda de cambios.</p>
+      </div>
+
+      <!-- 11.3 Gestión de dependencias -->
+      <div class="s11-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">11.3</span> Gestión de dependencias</h3>
+        <p class="block-lead">Tres dependencias condicionan el cronograma. Dos son externas a Nivelics; las tres se gestionan de forma explícita, con mitigación declarada.</p>
+        <div class="s11-deps">
+          <div class="s11-dep-card" data-kind="external">
+            <span class="s11-dep-tag">Dependencia externa</span>
+            <h4>a · Brand book del rebranding</h4>
+            <p class="s11-dep-state"><strong>Estado:</strong> en curso por el proveedor de rebranding contratado por CAMBIO. Aún no entregado, sin fecha confirmada.</p>
+            <p class="s11-dep-risk"><strong>Riesgo:</strong> si se demora más allá de la semana 8, las transformaciones de paleta y sistema tipográfico se postergan.</p>
+            <p class="s11-dep-mit"><strong>Mitigación:</strong> las transformaciones P0 y la mayoría de P1 no dependen del brand book y avanzan en paralelo desde la semana 5.</p>
+          </div>
+          <div class="s11-dep-card" data-kind="parallel">
+            <span class="s11-dep-tag">Dependencia paralela</span>
+            <h4>b · Migración técnica legacy</h4>
+            <p class="s11-dep-state"><strong>Estado:</strong> en ejecución por Nivelics en proyecto paralelo. Eventos (WordPress 7.0) y Especiales legacy migran a Next.js. Producción en máximo 4 semanas.</p>
+            <p class="s11-dep-risk"><strong>Sincronización:</strong> los hallazgos focalizados sobre Eventos y Especiales se aplican post-migración (P2).</p>
+            <p class="s11-dep-mit"><strong>Mitigación:</strong> no bloquea el sprint principal — la implementación P0/P1 corre sobre el frontend ya unificado.</p>
+          </div>
+          <div class="s11-dep-card" data-kind="prereq">
+            <span class="s11-dep-tag">Prerrequisito</span>
+            <h4>c · Instrumentación de Analytics</h4>
+            <p class="s11-dep-state"><strong>Estado:</strong> parcial — hoy solo hay datos básicos del funnel.</p>
+            <p class="s11-dep-risk"><strong>Impacto:</strong> sin instrumentación completa, el A/B testing no es medible y las hipótesis de la Sección 7 no se pueden validar.</p>
+            <p class="s11-dep-mit"><strong>Acción:</strong> primera tarea del sprint de implementación (semana 5). No es opcional: es prerrequisito de todo lo que viene después.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11.4 A/B testing en cascada -->
+      <div class="s11-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">11.4</span> Plan de A/B testing en cascada</h3>
+        <p class="block-lead">Las <strong>3 oleadas</strong> y los <strong>14 experimentos</strong> definidos en la Sección 8 se ubican en las semanas finales. La capacidad estadística está acotada por el volumen real: <strong>2.5M usuarios en 3 meses</strong> (≈ 835k/mes, 72% mobile) permiten significancia rápida en KPIs intermedios, pero exigen un <strong>máximo de 2 experimentos simultáneos</strong> para no contaminar la lectura.</p>
+        <ol class="s11-waves">
+          <li class="s11-wave">
+            <span class="s11-wave-num">Oleada 1</span>
+            <div class="s11-wave-body">
+              <span class="s11-wave-when">Inicia semana 8 · 4 experimentos</span>
+              <p>Quick wins de jerarquía y CTAs: header con CTA de suscripción prominente, cards refrescadas vs. actuales, badge premium con color. Métricas intermedias (CTR, clics a planes) que alcanzan significancia en 1–2 semanas.</p>
+            </div>
+          </li>
+          <li class="s11-wave">
+            <span class="s11-wave-num">Oleada 2</span>
+            <div class="s11-wave-body">
+              <span class="s11-wave-when">Semanas 10–11</span>
+              <p>Cascada de <code>ContentSectionPage</code> y tratamiento editorial: pieza dominante con eyebrow, recirculación interna profunda, Los Danieles como puerta de entrada con captura de email inline.</p>
+            </div>
+          </li>
+          <li class="s11-wave">
+            <span class="s11-wave-num">Oleada 3</span>
+            <div class="s11-wave-body">
+              <span class="s11-wave-when">Semanas 12–13</span>
+              <p>Hub de Especiales con tipología visual, página de planes y refinamientos basados en lo aprendido en las dos oleadas anteriores. Cierra el ciclo de experimentación de la Fase 1.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- 11.5 Hitos verificables -->
+      <div class="s11-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">11.5</span> Hitos verificables</h3>
+        <p class="block-lead">Puntos de control concretos. Cada uno es comprobable de forma binaria — está o no está en producción.</p>
+        <ul class="s11-milestones">
+          <li class="s11-ms"><span class="s11-ms-week">Semana 4</span><span class="s11-ms-text">Migración técnica de Eventos y Especiales completada y deployada.</span></li>
+          <li class="s11-ms"><span class="s11-ms-week">Semana 5</span><span class="s11-ms-text">Instrumentación de Analytics del funnel activa.</span></li>
+          <li class="s11-ms"><span class="s11-ms-week">Semana 6</span><span class="s11-ms-text">Primeras 5 transformaciones P0 en producción.</span></li>
+          <li class="s11-ms"><span class="s11-ms-week">Semana 8</span><span class="s11-ms-text">Primera oleada de A/B testing lanzada.</span></li>
+          <li class="s11-ms"><span class="s11-ms-week">Semana 10</span><span class="s11-ms-text">50% de las transformaciones P0 + P1 implementadas.</span></li>
+          <li class="s11-ms"><span class="s11-ms-week">Semana 13</span><span class="s11-ms-text">100% de transformaciones P0 + P1 en producción; las 3 oleadas de A/B completas.</span></li>
+        </ul>
+      </div>
+
+      <!-- Cierre 11 -->
+      <div class="insight-box">
+        <span class="insight-tag">Compromiso de gestión</span>
+        <h3 class="insight-title">Las dependencias se gestionan, no se sufren</h3>
+        <div class="insight-body">
+          <p>Las dependencias externas (brand book) y paralelas (migración técnica) son gestionadas explícitamente por Nivelics. Cualquier desviación del cronograma se reporta semanalmente con un plan de mitigación, no como un hecho consumado.</p>
+          <p><strong>Compromiso concreto: el 100% de las transformaciones P0 estará en producción en la semana 8, con independencia del estado del brand book.</strong> Las que dependen de la identidad visual esperan; las que mueven la aguja del usuario, no.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= SECCIÓN 12: ALINEACIÓN CON REBRANDING ============= -->
+  <section id="rebranding" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-number">12</span>
+        <h2 class="section-title">Alineación con el Rebranding</h2>
+        <p class="section-subtitle">Cómo el refresh visual contratado se sincroniza con el proceso de marca que CAMBIO lleva en paralelo</p>
+      </div>
+
+      <div class="s12-lead">
+        <p>CAMBIO contrató en paralelo un proceso de rebranding con un tercero. Nivelics no redefine la marca: la ejecuta. Este reporte es un diagnóstico de producto digital; el brand book es la definición de identidad visual. Ambos deben converger en la implementación, y esa convergencia es una responsabilidad que Nivelics asume de forma explícita. Esta sección documenta cómo.</p>
+      </div>
+
+      <!-- 12.1 Contexto -->
+      <div class="s12-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">12.1</span> Contexto</h3>
+        <p>El proveedor de rebranding contratado por CAMBIO tiene como entregable el <strong>brand book</strong>: paleta de color, sistema tipográfico, iconografía y tono visual de la marca. El refresh CSS contratado a Nivelics se ejecuta <strong>sobre las definiciones del brand book una vez entregado</strong>. A la fecha de este reporte, el brand book está en desarrollo y aún no ha sido entregado por el cliente. El roadmap de la Sección 11 está construido teniendo esa dependencia en cuenta.</p>
+      </div>
+
+      <!-- 12.2 Gestión de la dependencia -->
+      <div class="s12-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">12.2</span> Cómo se gestiona la dependencia</h3>
+        <div class="s12-grid">
+          <div class="s12-pt"><span class="s12-pt-mark">a</span><p>Las transformaciones que <strong>no dependen</strong> del brand book —jerarquía, recirculación, sub-navegación temática, <em>target-size</em>, contraste— avanzan en paralelo desde la semana 5.</p></div>
+          <div class="s12-pt"><span class="s12-pt-mark">b</span><p>Las transformaciones que <strong>sí dependen</strong> del brand book —paleta de color, sistema tipográfico unificado, iconografía— esperan a su entrega antes de ejecutarse.</p></div>
+          <div class="s12-pt"><span class="s12-pt-mark">c</span><p>Nivelics mantiene una <strong>conversación quincenal</strong> con el equipo de rebranding para anticipar definiciones críticas y validar la coherencia entre el refresh CSS y el brand book.</p></div>
+          <div class="s12-pt"><span class="s12-pt-mark">d</span><p>Si el brand book se demora más allá de la <strong>semana 8</strong>, Nivelics escala con CAMBIO para definir un plan de contingencia: ejecutar el refresh con la paleta actual y aplicar el brand book como segunda capa cuando esté listo.</p></div>
+        </div>
+      </div>
+
+      <!-- 12.3 Riesgos -->
+      <div class="s12-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">12.3</span> Riesgos documentados</h3>
+        <div class="s12-risks">
+          <div class="s12-risk">
+            <h4>Riesgo de incoherencia</h4>
+            <p>El brand book puede definir tratamientos que contradigan el diagnóstico —por ejemplo, una sans pura donde el diagnóstico recomienda conservar la serif editorial para los titulares de artículo.</p>
+            <p class="s12-mit"><strong>Mitigación:</strong> check-point formal de revisión cruzada antes de cualquier ejecución que toque tipografía o color.</p>
+          </div>
+          <div class="s12-risk">
+            <h4>Riesgo de cronograma</h4>
+            <p>Si el brand book llega después de la semana 8, las transformaciones de paleta y tipografía se postergan y se comprime la ventana de implementación.</p>
+            <p class="s12-mit"><strong>Mitigación:</strong> priorizar las transformaciones independientes del brand book durante las semanas 5–7, de modo que el atraso no detenga el avance.</p>
+          </div>
+          <div class="s12-risk">
+            <h4>Riesgo de alcance</h4>
+            <p>El brand book puede contener definiciones que requieran cambios estructurales fuera del alcance de <em>CSS injection</em> contratado (por ejemplo, reorganización de markup o nuevos componentes).</p>
+            <p class="s12-mit"><strong>Mitigación:</strong> cualquier definición fuera de alcance se documenta como propuesta de Fase 2, con su propio <em>scope</em>, sin asumirla dentro de la Fase 1.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12.4 Compromisos -->
+      <div class="s12-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">12.4</span> Compromisos de Nivelics frente al rebranding</h3>
+        <ul class="s12-commits">
+          <li>Coordinación quincenal con el equipo de rebranding durante toda la implementación.</li>
+          <li>Validación cruzada del brand book con el diagnóstico antes de ejecutar transformaciones de identidad.</li>
+          <li>Documentación de cualquier conflicto encontrado, acompañada de una propuesta de resolución.</li>
+          <li>Comunicación proactiva a CAMBIO si el rebranding genera retraso en el cronograma del refresh.</li>
+          <li>Respeto absoluto del trabajo del equipo de rebranding: Nivelics ejecuta y optimiza, no redefine.</li>
+        </ul>
+      </div>
+
+      <!-- Cierre 12 -->
+      <div class="section-cierre">
+        <h3 class="cierre-title">Capa de ejecución, no de redefinición</h3>
+        <p class="s12-cierre-text">Nivelics opera como capa de ejecución y optimización sobre las definiciones del brand book. El éxito del refresh visual depende de la coherencia entre el diagnóstico estratégico de este reporte y la identidad que defina el rebranding. Gestionar esa coherencia es una responsabilidad explícita de Nivelics —no un supuesto que se da por sentado.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= SECCIÓN 13: PRÓXIMOS PASOS Y DECISIONES ============= -->
+  <section id="proximos" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-number">13</span>
+        <h2 class="section-title">Próximos Pasos y Decisiones</h2>
+        <p class="section-subtitle">Las 6 decisiones que el equipo CAMBIO necesita confirmar esta semana para arrancar el sprint de implementación</p>
+      </div>
+
+      <div class="s13-lead">
+        <p>El reporte termina aquí; el proyecto arranca esta semana. Esta sección no recapitula — define exactamente qué decisiones necesita tomar CAMBIO para que la implementación empiece sin fricción. Cada decisión incluye qué se decide, por qué importa, la recomendación de Nivelics y una fecha límite sugerida.</p>
+      </div>
+
+      <!-- 13.1 Decisiones -->
+      <div class="s13-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">13.1</span> Decisiones a confirmar esta semana</h3>
+        <div class="s13-decisions">
+          <article class="s13-dec">
+            <div class="s13-dec-head"><span class="s13-dec-letter">a</span><h4>Aprobación del alcance</h4><span class="s13-dec-due">Esta semana</span></div>
+            <p class="s13-dec-what">Confirmar que las 31 transformaciones priorizadas en la Sección 7 se aceptan tal cual.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> define el contenido exacto del sprint. Si CAMBIO quiere reordenar prioridades, este es el momento de hacerlo sin coste.</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> aprobar el set completo; las prioridades P0/P1/P2 ya están ordenadas por impacto y dependencia.</p>
+          </article>
+          <article class="s13-dec">
+            <div class="s13-dec-head"><span class="s13-dec-letter">b</span><h4>Autorización de acceso a GA4</h4><span class="s13-dec-due s13-due-urgent">Antes de semana 5</span></div>
+            <p class="s13-dec-what">Otorgar a Nivelics acceso a GA4 para instrumentar el funnel y medir los A/B tests.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> sin instrumentación, el sprint no puede iniciar correctamente y el A/B testing no es medible. Es el cuello de botella de todo lo demás.</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> tramitar el acceso esta misma semana; suele tardar más de lo esperado por temas de permisos internos.</p>
+          </article>
+          <article class="s13-dec">
+            <div class="s13-dec-head"><span class="s13-dec-letter">c</span><h4>Coordinación con el equipo de rebranding</h4><span class="s13-dec-due">Semana 1 del sprint</span></div>
+            <p class="s13-dec-what">Agendar la primera reunión de check-point con el proveedor de rebranding.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> habilita la validación cruzada temprana y reduce el riesgo de incoherencia entre diagnóstico y brand book.</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> primera reunión en la semana 1 del sprint, con cadencia quincenal a partir de ahí.</p>
+          </article>
+          <article class="s13-dec">
+            <div class="s13-dec-head"><span class="s13-dec-letter">d</span><h4>Herramienta de A/B testing</h4><span class="s13-dec-due">Antes de semana 8</span></div>
+            <p class="s13-dec-what">Confirmar la herramienta: GTM con variants custom, VWO, Optimizely u otra.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> determina cómo se montan y miden los experimentos de la primera oleada (semana 8).</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> dado el volumen verificado (2.5M usuarios / 3 meses, 72% mobile), GTM + variants cubre la primera oleada sin coste de licencia; reservar VWO/Optimizely para fases de mayor sofisticación.</p>
+          </article>
+          <article class="s13-dec">
+            <div class="s13-dec-head"><span class="s13-dec-letter">e</span><h4>Proceso de reporting</h4><span class="s13-dec-due">Semana 1 del sprint</span></div>
+            <p class="s13-dec-what">Definir cadencia de reportes e interlocutor único del lado CAMBIO.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> la transparencia semanal sobre avance y dependencias depende de tener un canal y un responsable claros.</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> reporte semanal con el equipo CAMBIO, mensual con dirección; un único interlocutor que centralice decisiones.</p>
+          </article>
+          <article class="s13-dec">
+            <div class="s13-dec-head"><span class="s13-dec-letter">f</span><h4>Alcance de Fase 2</h4><span class="s13-dec-due">Sin presión · tras Oleada 2</span></div>
+            <p class="s13-dec-what">Dejar la conversación de Fase 2 abierta, sin presionar la contratación.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> Fase 2 (paywall, planes, checkout) gana fuerza con los datos de las primeras oleadas. Decidir antes de tenerlos sería prematuro.</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> revisar la conversación después de la Oleada 2 del A/B testing, ya con evidencia sobre la mesa.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- 13.2 Día 1 -->
+      <div class="s13-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">13.2</span> Lo que arranca el día 1 del sprint</h3>
+        <ul class="s13-day1">
+          <li>Instrumentación de GA4 del funnel completo.</li>
+          <li>Setup de la herramienta de A/B testing elegida.</li>
+          <li>Kickoff con el equipo de rebranding (primera reunión de check-point).</li>
+          <li>Inicio de las primeras 5 transformaciones P0 que no dependen del brand book.</li>
+          <li>Auditoría inicial de performance en producción: baseline Lighthouse para trazar la mejora.</li>
+        </ul>
+      </div>
+
+      <!-- 13.3 Cómo medir el éxito -->
+      <div class="s13-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">13.3</span> Cómo se mide el éxito del proyecto</h3>
+        <p class="block-lead">El éxito de este refresh no es estético: es medible. Y se separa con honestidad entre lo que Nivelics compromete y lo que depende de fases futuras.</p>
+        <div class="s13-metrics">
+          <div class="s13-metric-col s13-metric-primary">
+            <h4>Primarias · comprometidas</h4>
+            <ul>
+              <li>100% de transformaciones P0 + P1 en producción.</li>
+              <li>Lighthouse Performance del home: <strong>13 → &gt; 75</strong>.</li>
+              <li>Lighthouse Best Practices del sitio: <strong>54 → &gt; 90</strong>.</li>
+              <li>Recirculación interna: <strong>17.8% → &gt; 25%</strong> (medible en GA4).</li>
+              <li>Al menos 3 oleadas de A/B testing completas.</li>
+            </ul>
+          </div>
+          <div class="s13-metric-col s13-metric-secondary">
+            <h4>Secundarias · orientativas</h4>
+            <ul>
+              <li>CTR promedio: cards refrescadas vs. actuales.</li>
+              <li>Tasa de hit-paywall post-instrumentación (baseline).</li>
+              <li>Capturas de email desde columnas individuales de Los Danieles.</li>
+            </ul>
+          </div>
+          <div class="s13-metric-col s13-metric-out">
+            <h4>Fuera de alcance · no comprometidas</h4>
+            <ul>
+              <li>Conversión a suscripción (depende de Fase 2 y decisiones editoriales).</li>
+              <li>Retención de suscriptores (no medible en Fase 1).</li>
+              <li>LTV (no medible en Fase 1).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13.4 Fases futuras -->
+      <div class="s13-block">
+        <h3 class="s11-sub"><span class="s11-sub-num">13.4</span> Fases futuras propuestas</h3>
+        <p class="block-lead">Documentadas como siguiente paso lógico, no como venta. Cada una se abre cuando hay evidencia que la justifique.</p>
+        <div class="s13-fases">
+          <div class="s13-fase">
+            <span class="s13-fase-tag">Fase 2 · propuesta</span>
+            <h4>Paywall persuasivo + Planes + Checkout</h4>
+            <p>Las tres apuestas grandes del análisis CRO. Conversación abierta después de la Oleada 2 del A/B testing, ya con datos de conversión sobre la mesa.</p>
+          </div>
+          <div class="s13-fase">
+            <span class="s13-fase-tag">Fase 3 · propuesta</span>
+            <h4>Performance profunda + Buscador + Refactor</h4>
+            <p>Optimización profunda del Home (13 → &gt; 90), buscador con autocompletado y refactor de los componentes técnicos pendientes documentados en el inventario.</p>
+          </div>
+          <div class="s13-fase">
+            <span class="s13-fase-tag">Fase 4 · propuesta</span>
+            <h4>Retainer de experimentación CRO</h4>
+            <p>Optimización continua basada en los aprendizajes de la Fase 1. Iteración sostenida sobre el funnel completo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cierre 13 y del reporte -->
+      <div class="insight-box s13-final">
+        <span class="insight-tag">Cierre del reporte</span>
+        <h3 class="insight-title">El reporte termina aquí. El proyecto arranca esta semana.</h3>
+        <div class="insight-body">
+          <p>Nivelics queda comprometido con cuatro cosas concretas:</p>
+          <ol class="s13-final-list">
+            <li>Ejecución del 100% de las transformaciones P0 + P1.</li>
+            <li>Instrumentación del funnel desde el día 1.</li>
+            <li>Gestión proactiva de las dependencias con rebranding y migración técnica.</li>
+            <li>Reportes semanales y transparentes de avance.</li>
+          </ol>
+          <p><strong>El éxito de este refresh visual no es estético — es medible. Y se mide en las métricas que acabamos de definir.</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============= FOOTER ============= -->
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="footer-logo" viewBox="0 0 300 80" width="160" height="42"><use href="#nivelics-logo"/></svg>
+        <p class="footer-tagline">Inteligencia Artificial · Cloud · Staffing Inteligente</p>
+      </div>
+      <div class="footer-meta">
+        <div class="footer-meta-block">
+          <span class="footer-label">Proyecto</span>
+          <span class="footer-value">CAMBIO Colombia · Fase 1</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Versión</span>
+          <span class="footer-value">1.0 · Mayo 2026</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Contacto</span>
+          <span class="footer-value">camilo@nivelics.com</span>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>Documento confidencial. Preparado por Nivelics para CAMBIO Colombia. Reproducción restringida.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

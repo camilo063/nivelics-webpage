@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="Diagnóstico técnico, WCAG, inventario y análisis heurístico · CAMBIO Colombia · Nivelics">
+  <title>Diagnóstico · CAMBIO Colombia · Fase 1 · Nivelics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+  /* Gate v15: las páginas internas requieren sesión autenticada; si no existe, redirige a index.html antes de pintar. */
+  (function(){try{if(sessionStorage.getItem("cambio-reporte-auth")!=="ok")location.replace("index.html")}catch(e){location.replace("index.html")}})();
+  </script>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- ============= LOGO NIVELICS INLINE (definición SVG global) ============= -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="nivelics-logo" viewBox="0 0 300 80">
+        <!-- Isotipo N geométrico -->
+        <g class="logo-icon">
+          <path d="M 8 18 L 8 62 L 48 62 L 48 38 Z" class="logo-iso-dark"/>
+          <path d="M 8 18 L 48 18 L 48 62 L 28 62 Z" class="logo-iso-accent"/>
+        </g>
+        <!-- Wordmark -->
+        <text x="60" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-main">IVEL</text>
+        <text x="180" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-accent">ICS</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============= NAVEGACIÓN STICKY ============= -->
+  <nav class="nav-sticky" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="Inicio">
+        <svg class="nav-logo" viewBox="0 0 300 80" width="120" height="32"><use href="#nivelics-logo"/></svg>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir navegación" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-groups" id="nav-list">
+
+        <li class="nav-group">
+          <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
+        </li>
+
+        <li class="nav-group has-submenu nav-group-active">
+          <button class="nav-link nav-link-group active" data-page="diagnostico" data-group="diagnostico">
+            Diagnóstico
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="#contexto" class="submenu-link"><span class="sm-num">03</span> Alcance y Contexto</a>
+            <a href="#tecnica" class="submenu-link"><span class="sm-num">04</span> Auditoría Técnica y WCAG</a>
+            <a href="#inventario" class="submenu-link"><span class="sm-num">05</span> Inventario de Componentes</a>
+            <a href="#heuristico" class="submenu-link"><span class="sm-num">06</span> Diagnóstico Heurístico</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="propuesta" data-group="propuesta">
+            Propuesta
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="propuesta.html#transformaciones" class="submenu-link"><span class="sm-num">07</span> Transformaciones CSS</a>
+            <a href="propuesta.html#abtesting" class="submenu-link"><span class="sm-num">08</span> A/B Testing Visual</a>
+            <a href="propuesta.html#analisis360" class="submenu-link"><span class="sm-num">09</span> Análisis 360° del Producto</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="estrategia" data-group="estrategia">
+            Estrategia
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="estrategia.html#benchmark" class="submenu-link"><span class="sm-num">10</span> Benchmark Editorial</a>
+            <a href="estrategia.html#roadmap" class="submenu-link"><span class="sm-num">11</span> Roadmap de Fases</a>
+            <a href="estrategia.html#rebranding" class="submenu-link"><span class="sm-num">12</span> Alineación Rebranding</a>
+            <a href="estrategia.html#proximos" class="submenu-link"><span class="sm-num">13</span> Próximos Pasos</a>
+          </div>
+        </li>
+
+        <li class="nav-group">
+          <a href="index.html#resumen" class="nav-link" data-page="resumen">Resumen Ejecutivo</a>
+        </li>
+
+        <li class="nav-group">
+          <a href="anexos.html" class="nav-link" data-page="anexos">Anexos</a>
+        </li>
+
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-pdf" id="btn-pdf">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>PDF</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-progress" id="nav-progress"></div>
+  </nav>
+
+  <main id="contenido">
+  <!-- ============= SECCIÓN 3: ALCANCE Y CONTEXTO ============= -->
+  <section id="contexto" class="section section-contexto">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Alcance y Contexto</h2>
+        <p class="section-subtitle">Encuadre del proyecto, metodología y dependencias críticas</p>
+      </div>
+
+      <div class="contexto-narrative">
+        <p class="narrative-lead">CAMBIO Colombia es un medio digital de noticias con modelo de suscripción. La propuesta inicial contempla un refresh visual mediante design injection: modificaciones de CSS y JavaScript no intrusivo sobre el CMS existente, sin tocar HTML estructural, URLs ni esquemas SEO.</p>
+        <p>Durante el diagnóstico encontramos oportunidades que exceden el refresh visual y que tienen impacto directo en el KPI principal del negocio (conversión a suscripción paga). Este reporte documenta ambos planos con claridad: <strong>lo que se ejecutará dentro del alcance</strong> y <strong>lo que se identifica como oportunidad para fases futuras</strong>.</p>
+      </div>
+
+      <!-- Tabla de Inclusiones y Exclusiones -->
+      <div class="alcance-tabla">
+
+        <div class="alcance-columna alcance-incluye">
+          <h3 class="alcance-col-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            Incluye este alcance
+          </h3>
+          <ul class="alcance-list">
+            <li>
+              <span class="item-cat">Refresh visual</span>
+              <span class="item-desc">Transformaciones CSS sobre bloques principales de Home, Sección, Artículo, Opinión, Poder y Buscador</span>
+            </li>
+            <li>
+              <span class="item-cat">A/B testing visual</span>
+              <span class="item-desc">Comparación de variantes refresh vs. control sobre bloques específicos para medir CTR y engagement</span>
+            </li>
+            <li>
+              <span class="item-cat">Tipografía</span>
+              <span class="item-desc">Sistema tipográfico renovado con jerarquía editorial clara</span>
+            </li>
+            <li>
+              <span class="item-cat">Cards y badges</span>
+              <span class="item-desc">Tratamiento visual de tarjetas de artículo y badges de suscripción</span>
+            </li>
+            <li>
+              <span class="item-cat">Header y navegación</span>
+              <span class="item-desc">Mejora del header sticky, navegación por secciones y menú móvil</span>
+            </li>
+            <li>
+              <span class="item-cat">Footer</span>
+              <span class="item-desc">Restructuración visual del footer y CTAs de suscripción</span>
+            </li>
+            <li>
+              <span class="item-cat">Opinión</span>
+              <span class="item-desc">Tratamiento visual de columnistas, marca personal de Los Danieles, captura de email post-lectura</span>
+            </li>
+            <li>
+              <span class="item-cat">Página de planes</span>
+              <span class="item-desc">Refresh visual de tarjetas de plan, jerarquía del plan recomendado</span>
+            </li>
+            <li>
+              <span class="item-cat">Accesibilidad CSS</span>
+              <span class="item-desc">Corrección de 11 hallazgos WCAG resolubles vía CSS</span>
+            </li>
+            <li>
+              <span class="item-cat">Modo oscuro</span>
+              <span class="item-desc">Opcional, sujeto a aprobación del cliente y a guía de marca</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="alcance-columna alcance-excluye">
+          <h3 class="alcance-col-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            No incluye este alcance
+          </h3>
+          <ul class="alcance-list">
+            <li>
+              <span class="item-cat">Estructura HTML</span>
+              <span class="item-desc">No se modifica el markup del CMS ni se crean nuevas plantillas</span>
+            </li>
+            <li>
+              <span class="item-cat">URLs y SEO</span>
+              <span class="item-desc">Cero cambios en rutas, sitemap o esquemas JSON-LD</span>
+            </li>
+            <li>
+              <span class="item-cat">Paywall behavior</span>
+              <span class="item-desc">La lógica de paywall metered o persuasivo es decisión editorial — Fase 2</span>
+            </li>
+            <li>
+              <span class="item-cat">Checkout funcional</span>
+              <span class="item-desc">Reducción de fricción del flujo de pago requiere coordinación con pasarela</span>
+            </li>
+            <li>
+              <span class="item-cat">Buscador inteligente</span>
+              <span class="item-desc">Autocompletado y filtros editoriales requieren backend — Fase 2/3</span>
+            </li>
+            <li>
+              <span class="item-cat">A/B test conversión a pago</span>
+              <span class="item-desc">Experimentación sobre paywall y precio requiere infraestructura — Fase 2/3</span>
+            </li>
+            <li>
+              <span class="item-cat">Backend y base de datos</span>
+              <span class="item-desc">Ninguna modificación a la lógica del servidor o estructura de datos</span>
+            </li>
+            <li>
+              <span class="item-cat">Performance deep dive</span>
+              <span class="item-desc">Optimización profunda de imágenes, render y JS — abordable en fase paralela</span>
+            </li>
+            <li>
+              <span class="item-cat">Migración técnica Eventos + Especiales legacy</span>
+              <span class="item-desc">Ejecutada por Nivelics en proyecto paralelo. Los hallazgos del refresh se aplican post-migración</span>
+            </li>
+            <li>
+              <span class="item-cat">Sesiones con usuarios</span>
+              <span class="item-desc">Tests cualitativos con suscriptores y prospects — fase independiente</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Dependencia crítica: Rebranding -->
+      <div class="dependencia-rebranding">
+        <div class="dep-tag">Dependencia crítica del proyecto</div>
+        <h3 class="dep-title">Coordinación con el proceso de rebranding en curso</h3>
+        <div class="dep-body">
+          <p>CAMBIO Colombia está adelantando un proceso de rebranding de marca con un proveedor externo. La ejecución del refresh visual de Fase 1 depende directamente de los entregables de ese proceso:</p>
+          <ul class="dep-checklist">
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Brand book final (paleta, tipografía, lineamientos)</span>
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Definición de tratamientos visuales (cards, iconografía, fotografía)</span>
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Logo, iconografía y elementos derivados en formato final</span>
+            </li>
+            <li>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Alineación entre dirección visual del rebranding y diagnóstico de este reporte</span>
+            </li>
+          </ul>
+          <p class="dep-note"><strong>Implicación práctica:</strong> el cronograma de implementación del refresh CSS depende de la entrega del brand book. Este reporte documenta el diagnóstico, hallazgos y propuesta de transformaciones; la ejecución visual se sincroniza con los tiempos del rebranding.</p>
+        </div>
+      </div>
+
+      <!-- Dependencia: Migración técnica en curso -->
+      <div class="dependencia-migracion">
+        <div class="dep-mig-tag">Gestión de dependencias · Proyecto paralelo Nivelics</div>
+        <h3 class="dep-mig-title">Sincronización con migración técnica en curso</h3>
+        <div class="dep-mig-body">
+          <p>Nivelics ejecuta en paralelo la migración técnica del subdominio <strong>Eventos</strong> (<code>eventos.cambiocolombia.com</code>, actualmente WordPress 7.0) y de las <strong>URLs legacy de Especiales</strong> (Bootstrap) al stack Next.js 16 del frontend principal. Producción estimada: <strong>máximo 4 semanas</strong>.</p>
+          <p>Esta migración garantiza que el código migrado mantiene la arquitectura Atomic Design del frontend principal, de modo que los tokens CSS y las transformaciones del refresh visual aplican uniformemente a todos los despliegues sin trabajo adicional de adaptación.</p>
+
+          <div class="dep-mig-timeline">
+            <div class="dep-mig-phase" data-status="active">
+              <span class="dep-mig-phase-label">Intervenible hoy</span>
+              <span class="dep-mig-phase-title">Especiales modernos</span>
+              <p class="dep-mig-phase-desc">Hub <code>/especiales</code> y especiales detalle ya en Next.js. Refresh CSS aplicable de inmediato.</p>
+            </div>
+            <div class="dep-mig-phase" data-status="running">
+              <span class="dep-mig-phase-label">En ejecución · 4 semanas</span>
+              <span class="dep-mig-phase-title">Migración técnica</span>
+              <p class="dep-mig-phase-desc">Eventos WordPress y Especiales legacy migran al stack unificado Next.js + Atomic Design.</p>
+            </div>
+            <div class="dep-mig-phase" data-status="synced">
+              <span class="dep-mig-phase-label">Post-migración</span>
+              <span class="dep-mig-phase-title">Refresh unificado</span>
+              <p class="dep-mig-phase-desc">Tokens y CSS del refresh aplican automáticamente al código migrado. Sin handoffs.</p>
+            </div>
+          </div>
+
+          <p class="dep-mig-risk"><strong>Riesgo gestionado:</strong> si la migración se atrasa, los hallazgos post-migración se aplicarán en cuanto el código esté disponible. Ambos proyectos (migración + refresh) los ejecuta el mismo equipo, lo que permite coordinar cronogramas sin intermediarios y garantizar coherencia arquitectónica.</p>
+        </div>
+      </div>
+      <div class="metodologia">
+        <h3 class="metod-title">Metodología aplicada</h3>
+        <div class="metod-grid">
+
+          <div class="metod-card">
+            <div class="metod-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+            </div>
+            <h4>Auditoría de código fuente</h4>
+            <p>Análisis estático del repositorio del CMS: Next.js 16, React 19, Tailwind v4, Atomic Design. Mapeo de 105 componentes con clasificación de intervención.</p>
+          </div>
+
+          <div class="metod-card">
+            <div class="metod-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <h4>Diagnóstico heurístico</h4>
+            <p>Aplicación de 6 frameworks: Nielsen, WCAG 2.2 (UX), NN/G News Sites, Baymard Subscription, Gestalt y heurísticas propias de medios digitales LATAM.</p>
+          </div>
+
+          <div class="metod-card">
+            <div class="metod-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+            </div>
+            <h4>Mediciones cuantitativas</h4>
+            <p>Lighthouse 13.3 y axe-core 4.11 vía Puppeteer sobre los 6 despliegues en desktop y mobile. Scripts reproducibles para futuras corridas.</p>
+          </div>
+
+          <div class="metod-card">
+            <div class="metod-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h4>Benchmark editorial</h4>
+            <p>Análisis verificado contra 8 referentes: Semana, El Espectador, La Silla Vacía, El País, NYT, The Economist, Le Monde, The New Yorker.</p>
+          </div>
+
+          <div class="metod-card">
+            <div class="metod-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h4>Análisis CRO del funnel</h4>
+            <p>Inventario de 32 bloques del funnel completo de conversión y formulación de 13 hipótesis priorizadas con ICE Score. Valor adicional al alcance.</p>
+          </div>
+
+          <div class="metod-card">
+            <div class="metod-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h4>Documentación reproducible</h4>
+            <p>Toda la auditoría se entrega con artefactos crudos: JSON de hallazgos, screenshots, reportes Lighthouse HTML, scripts de re-ejecución. Documentado para continuidad.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Despliegues auditados -->
+      <div class="despliegues">
+        <h3 class="despliegues-title">Despliegues auditados</h3>
+        <div class="despliegues-grid">
+          <div class="desp-item">
+            <span class="desp-num">01</span>
+            <div class="desp-content">
+              <span class="desp-name">Home</span>
+              <span class="desp-rationale">Portada principal · punto de entrada de la mayoría del tráfico</span>
+            </div>
+            <span class="desp-url">/</span>
+          </div>
+          <div class="desp-item">
+            <span class="desp-num">02</span>
+            <div class="desp-content">
+              <span class="desp-name">Sección Poder</span>
+              <span class="desp-rationale">Vertical editorial estratégica · stronghold de marca</span>
+            </div>
+            <span class="desp-url">/poder/</span>
+          </div>
+          <div class="desp-item">
+            <span class="desp-num">03</span>
+            <div class="desp-content">
+              <span class="desp-name">Artículo</span>
+              <span class="desp-rationale">Plantilla universal de lectura · momento del paywall</span>
+            </div>
+            <span class="desp-url">/[seccion]/[slug]</span>
+          </div>
+          <div class="desp-item">
+            <span class="desp-num">04</span>
+            <div class="desp-content">
+              <span class="desp-name">Opinión · Los Danieles</span>
+              <span class="desp-rationale">Tráfico cualificado · oportunidad de captura de email</span>
+            </div>
+            <span class="desp-url">/los-danieles/</span>
+          </div>
+          <div class="desp-item">
+            <span class="desp-num">05</span>
+            <div class="desp-content">
+              <span class="desp-name">Buscador</span>
+              <span class="desp-rationale">Punto de fricción documentado · oportunidad de mejora UX</span>
+            </div>
+            <span class="desp-url">/buscar</span>
+          </div>
+          <div class="desp-item">
+            <span class="desp-num">06</span>
+            <div class="desp-content">
+              <span class="desp-name">Página de planes</span>
+              <span class="desp-rationale">Cierre del funnel · refresh visual de tarjetas y CTA</span>
+            </div>
+            <span class="desp-url">/suscribirse</span>
+          </div>
+        </div>
+        <p class="despliegues-note"><strong>Nota sobre Especiales y Eventos:</strong> el hub de Especiales (<code>/especiales</code>) y los especiales modernos corren sobre el mismo Next.js 16 del frontend principal — son intervenibles vía CSS de inmediato. Solo URLs históricas como <code>/elecciones-colombia-2026</code> utilizan una plantilla legacy Bootstrap. El subdominio <code>eventos.cambiocolombia.com</code> es un sitio WordPress independiente. Tanto las URLs legacy de Especiales como Eventos están en proceso de migración al stack Next.js, ejecutada por Nivelics en proyecto paralelo (producción en 4 semanas). Los hallazgos del refresh se aplicarán al código migrado.</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- ============= SECCIÓN 4: AUDITORÍA TÉCNICA Y WCAG ============= -->
+  <section id="tecnica" class="section section-tecnica">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2 class="section-title">Auditoría Técnica y WCAG</h2>
+        <p class="section-subtitle">Resultados cuantitativos de Lighthouse, axe-core y revisión manual de accesibilidad</p>
+      </div>
+
+      <!-- Lead -->
+      <div class="audit-lead">
+        <p>Se ejecutaron mediciones automatizadas sobre los 6 despliegues principales del portal en producción (<strong>cambiocolombia.com</strong>) combinadas con una auditoría estática de código fuente del repositorio. El análisis cubrió 12 combinaciones (6 despliegues en 2 viewports: 1440px desktop y 375px mobile), más una revisión manual contra 13 criterios WCAG 2.2 AA.</p>
+        <p>Los resultados revelan un hallazgo positivo que no esperábamos: la <strong>accesibilidad general del sitio es significativamente mejor de lo estimado inicialmente</strong> (4 de 6 páginas alcanzan 100 en Lighthouse). Los problemas se concentran en tres focos: performance del Home, prácticas sistémicas (Best Practices) y un puñado de violaciones CSS corregibles que afectan a decenas de nodos simultáneamente.</p>
+        <div class="audit-tools">
+          <span class="audit-tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+            Lighthouse 13.3
+          </span>
+          <span class="audit-tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            axe-core 4.11
+          </span>
+          <span class="audit-tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+            Puppeteer 25 · Chrome headless
+          </span>
+          <span class="audit-tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Análisis estático · 13 criterios WCAG
+          </span>
+          <span class="audit-tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Fecha: 25 mayo 2026
+          </span>
+        </div>
+      </div>
+
+      <!-- Scorecard Lighthouse -->
+      <div class="lh-scorecard">
+        <h3 class="lh-scorecard-title">Scorecard Lighthouse — 6 despliegues principales</h3>
+        <div class="lh-table-wrap">
+          <table class="lh-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Despliegue</th>
+                <th scope="col">Performance</th>
+                <th scope="col">Accessibility</th>
+                <th scope="col">Best Practices</th>
+                <th scope="col">SEO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="lh-deploy-name">Home</span>
+                  <span class="lh-deploy-url">/</span>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="red" style="width:13%"></div></div>
+                    <span class="lh-score-num" data-level="red">13</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:93%"></div></div>
+                    <span class="lh-score-num" data-level="green">93</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:54%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">54</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="lh-deploy-name">Sección Poder</span>
+                  <span class="lh-deploy-url">/poder/</span>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:62%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">62</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:54%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">54</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="lh-deploy-name">Sección País</span>
+                  <span class="lh-deploy-url">/pais/</span>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:60%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">60</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:54%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">54</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="lh-deploy-name">Artículo</span>
+                  <span class="lh-deploy-url">/[seccion]/[slug]</span>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:63%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">63</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:96%"></div></div>
+                    <span class="lh-score-num" data-level="green">96</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:54%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">54</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="lh-deploy-name">Opinión · Los Danieles</span>
+                  <span class="lh-deploy-url">/los-danieles/</span>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:65%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">65</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:54%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">54</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="lh-deploy-name">Buscador</span>
+                  <span class="lh-deploy-url">/buscar</span>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:69%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">69</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="green" style="width:100%"></div></div>
+                    <span class="lh-score-num" data-level="green">100</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:54%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">54</span>
+                  </div>
+                </td>
+                <td class="lh-score-cell">
+                  <div class="lh-score-bar">
+                    <div class="lh-bar-track"><div class="lh-bar-fill" data-level="yellow" style="width:66%"></div></div>
+                    <span class="lh-score-num" data-level="yellow">66</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Banderas Rojas -->
+      <div class="banderas-rojas">
+        <span class="banderas-tag">Banderas rojas sistémicas</span>
+        <h3 class="banderas-title">Tres problemas que afectan a todo el portal, no solo a una página</h3>
+        <div class="banderas-grid">
+          <div class="bandera-card">
+            <div class="bandera-score">13</div>
+            <div class="bandera-metric">Performance · Home</div>
+            <p class="bandera-desc">Render bloqueado por JavaScript sin defer, imágenes pesadas sin lazy loading y CSS no crítico cargando en el head. Es pérdida silenciosa de tráfico. Fuera del alcance CSS pero exige atención prioritaria.</p>
+          </div>
+          <div class="bandera-card">
+            <div class="bandera-score">54</div>
+            <div class="bandera-metric">Best Practices · Todas las páginas</div>
+            <p class="bandera-desc">Score idéntico en los 6 despliegues sugiere un problema sistémico en la configuración del servidor o del framework: mixed content, deprecated APIs, errores de consola o falta de HTTPS en recursos secundarios.</p>
+          </div>
+          <div class="bandera-card">
+            <div class="bandera-score">66</div>
+            <div class="bandera-metric">SEO · Buscador</div>
+            <p class="bandera-desc">La ruta /buscar carece de meta description. Es un fix de 2 minutos que sube el score de SEO. Si el buscador es indexable, Google lo penaliza; si no lo es, el meta description igual importa para herramientas de auditoría interna.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla axe-core -->
+      <div class="axe-section">
+        <h3 class="axe-section-title">Violaciones axe-core — agregadas por regla</h3>
+        <p class="axe-section-desc">12 corridas (6 despliegues en 2 viewports). Se distingue entre violaciones del código del frontend propio y las generadas por iframes de terceros (Google Ad Manager).</p>
+
+        <!-- axe-core explainer -->
+        <div class="axe-explainer">
+          <div class="axe-explainer-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </div>
+          <div>
+            <strong>¿Qué es axe-core?</strong> Es el motor de testing de accesibilidad más utilizado en la industria, desarrollado por Deque Systems. Analiza el DOM renderizado de cada página y detecta violaciones automáticas contra criterios WCAG 2.2 (contraste, nombres accesibles, tamaños de toque, semántica HTML). Lo ejecutamos vía <code>@axe-core/puppeteer 4.11</code> sobre navegador real en dos viewports (1440px desktop + 375px mobile) para capturar violaciones que solo aparecen en ciertos breakpoints. Cada violación reportada por axe-core tiene evidencia concreta: selector CSS, nodo afectado y criterio WCAG específico que incumple.
+          </div>
+        </div>
+
+        <div class="axe-table-wrap">
+          <table class="axe-table" role="table">
+            <thead>
+              <tr>
+                <th scope="col">Impacto</th>
+                <th scope="col">Regla</th>
+                <th scope="col">Páginas</th>
+                <th scope="col">Nodos</th>
+                <th scope="col">Origen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- image-alt -->
+              <tr class="axe-row-trigger" data-detail="axe-detail-image-alt" aria-expanded="false">
+                <td><span class="axe-impact-badge axe-impact-critical">Critical</span></td>
+                <td><span class="axe-rule">image-alt</span> <svg class="axe-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></td>
+                <td>2</td>
+                <td><span class="axe-nodes">2</span></td>
+                <td><span class="axe-origin-badge axe-origin-thirdparty">GAM third-party</span></td>
+              </tr>
+              <tr class="axe-detail-row" id="axe-detail-image-alt">
+                <td colspan="5">
+                  <div class="axe-detail-panel">
+                    <div class="axe-detail-grid">
+                      <div class="axe-detail-block">
+                        <h5>Criterio WCAG</h5>
+                        <p>1.1.1 Non-text Content (Nivel A)</p>
+                        <h5>Páginas afectadas</h5>
+                        <ul>
+                          <li>Home (desktop + mobile)</li>
+                          <li>Secciones con banner GAM</li>
+                        </ul>
+                      </div>
+                      <div class="axe-detail-block">
+                        <h5>Elemento afectado</h5>
+                        <p>Imágenes dentro de iframes de Google Ad Manager (<code>#google_ads_iframe_/22739728759/UTOPIA_*</code>) sin atributo <code>alt</code>.</p>
+                        <div class="axe-detail-fix">
+                          <p><strong>Acción:</strong> violación de tercero (GAM). No es del frontend. Mitigación: configurar <code>AdBanner</code> para excluirse del tab order cuando esté vacío. Documentar como hallazgo externo.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- target-size -->
+              <tr class="axe-row-trigger" data-detail="axe-detail-target-size" aria-expanded="false">
+                <td><span class="axe-impact-badge axe-impact-serious">Serious</span></td>
+                <td><span class="axe-rule">target-size</span> <svg class="axe-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></td>
+                <td>2</td>
+                <td><span class="axe-nodes" style="color: var(--accent-danger); font-size: 18px;">74</span></td>
+                <td><span class="axe-origin-badge axe-origin-frontend">Frontend propio</span></td>
+              </tr>
+              <tr class="axe-detail-row" id="axe-detail-target-size">
+                <td colspan="5">
+                  <div class="axe-detail-panel">
+                    <div class="axe-detail-grid">
+                      <div class="axe-detail-block">
+                        <h5>Criterio WCAG</h5>
+                        <p>2.5.8 Target Size Minimum (Nivel AA)</p>
+                        <h5>Páginas afectadas</h5>
+                        <ul>
+                          <li>Home (mobile: 375px)</li>
+                          <li>Especiales Home (mobile: 375px)</li>
+                        </ul>
+                        <h5>Componentes afectados</h5>
+                        <ul>
+                          <li><code>FeaturedSlider</code></li>
+                          <li><code>NewsSlider</code></li>
+                          <li><code>ColumnistSlider</code></li>
+                          <li><code>OpinionSlider</code></li>
+                          <li><code>GallerySection</code></li>
+                          <li><code>SpecialsSection</code></li>
+                        </ul>
+                      </div>
+                      <div class="axe-detail-block">
+                        <h5>Elemento afectado</h5>
+                        <p>Botones de paginación (dots) de carruseles con tamaño de <strong>8×8 px</strong>. El mínimo WCAG AA es 24×24 px. Selector: <code>button[aria-label="Ir al video N"]</code> con clase <code>.bg-white</code>.</p>
+                        <div class="axe-detail-fix">
+                          <p><strong>Fix CSS-only:</strong> subir el dot a 24×24 px manteniendo el ícono visual pequeño dentro de un wrapper con padding clickeable. Un solo cambio en el CSS de los dots propaga a los 6 componentes de carrusel. Esfuerzo: S.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- link-name -->
+              <tr class="axe-row-trigger" data-detail="axe-detail-link-name" aria-expanded="false">
+                <td><span class="axe-impact-badge axe-impact-serious">Serious</span></td>
+                <td><span class="axe-rule">link-name</span> <svg class="axe-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></td>
+                <td>7</td>
+                <td><span class="axe-nodes">10</span></td>
+                <td><span class="axe-origin-badge axe-origin-mixed">Mixto</span></td>
+              </tr>
+              <tr class="axe-detail-row" id="axe-detail-link-name">
+                <td colspan="5">
+                  <div class="axe-detail-panel">
+                    <div class="axe-detail-grid">
+                      <div class="axe-detail-block">
+                        <h5>Criterio WCAG</h5>
+                        <p>4.1.2 Name, Role, Value (Nivel A)</p>
+                        <h5>Páginas afectadas</h5>
+                        <ul>
+                          <li>Home (desktop + mobile) — SpecialsBanner</li>
+                          <li>Secciones Poder, País, Economía, etc. — SpecialsBanner</li>
+                          <li>Páginas con GAM AdBanner (iframes)</li>
+                        </ul>
+                      </div>
+                      <div class="axe-detail-block">
+                        <h5>Elemento afectado</h5>
+                        <p><strong>SpecialsBanner:</strong> enlace <code>&lt;a class="block hover:opacity-85"&gt;</code> que contiene solo una imagen sin <code>alt</code> descriptivo. 2 ocurrencias por viewport en Home.</p>
+                        <p><strong>GAM iframes:</strong> 6-8 nodos restantes son links dentro de iframes de terceros.</p>
+                        <div class="axe-detail-fix">
+                          <p><strong>Fix frontend:</strong> agregar <code>aria-label="Ir al especial [nombre]"</code> al enlace del SpecialsBanner, o asegurar que la imagen interna tenga <code>alt</code> descriptivo. Los nodos GAM son de tercero.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- aria-command-name -->
+              <tr class="axe-row-trigger" data-detail="axe-detail-aria-command" aria-expanded="false">
+                <td><span class="axe-impact-badge axe-impact-serious">Serious</span></td>
+                <td><span class="axe-rule">aria-command-name</span> <svg class="axe-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></td>
+                <td>4</td>
+                <td><span class="axe-nodes">6</span></td>
+                <td><span class="axe-origin-badge axe-origin-thirdparty">GAM third-party</span></td>
+              </tr>
+              <tr class="axe-detail-row" id="axe-detail-aria-command">
+                <td colspan="5">
+                  <div class="axe-detail-panel">
+                    <div class="axe-detail-grid">
+                      <div class="axe-detail-block">
+                        <h5>Criterio WCAG</h5>
+                        <p>4.1.2 Name, Role, Value (Nivel A)</p>
+                        <h5>Páginas afectadas</h5>
+                        <ul>
+                          <li>Home, Sección País, Sección Poder, Artículo</li>
+                        </ul>
+                      </div>
+                      <div class="axe-detail-block">
+                        <h5>Elemento afectado</h5>
+                        <p>Botón de cierre de anuncios GAM dentro de iframes (<code>role="button"</code> sin nombre accesible). 6 nodos en 4 páginas.</p>
+                        <div class="axe-detail-fix">
+                          <p><strong>Acción:</strong> violación de tercero (Google Ad Manager). No es del frontend de CAMBIO. Documentar como hallazgo externo en reporte de cumplimiento.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- color-contrast -->
+              <tr class="axe-row-trigger" data-detail="axe-detail-color-contrast" aria-expanded="false">
+                <td><span class="axe-impact-badge axe-impact-serious">Serious</span></td>
+                <td><span class="axe-rule">color-contrast</span> <svg class="axe-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></td>
+                <td>5</td>
+                <td><span class="axe-nodes">5</span></td>
+                <td><span class="axe-origin-badge axe-origin-frontend">Frontend propio</span></td>
+              </tr>
+              <tr class="axe-detail-row" id="axe-detail-color-contrast">
+                <td colspan="5">
+                  <div class="axe-detail-panel">
+                    <div class="axe-detail-grid">
+                      <div class="axe-detail-block">
+                        <h5>Criterio WCAG</h5>
+                        <p>1.4.3 Contrast Minimum (Nivel AA)</p>
+                        <h5>Páginas afectadas</h5>
+                        <ul>
+                          <li>Artículo — badge <code>--color-successful</code></li>
+                          <li>Home — <code>text-white/50</code></li>
+                          <li>Especiales Home — <code>text-white/50</code></li>
+                        </ul>
+                      </div>
+                      <div class="axe-detail-block">
+                        <h5>Dos violaciones distintas</h5>
+                        <p><strong>Badge verde:</strong> <code>#ffffff</code> sobre <code>#27ae60</code> a 12px bold = <strong>2.87:1</strong> (mínimo 4.5:1). Selector: <code>.bg-[var(--color-successful)]</code>.</p>
+                        <p><strong>text-white/50:</strong> <code>#999999</code> sobre <code>#333333</code> a 14px = <strong>4.43:1</strong> (falla AA por margen).</p>
+                        <div class="axe-detail-fix">
+                          <p><strong>Fix CSS-only:</strong> (1) Cambiar verde de fondo a <code>#1e8a4e</code> ≈ 5.8:1 o forzar texto oscuro <code>#1a1a1a</code> en bold ≈ 7:1. (2) Subir opacidad de <code>/50</code> a <code>/70</code> → <code>#b3b3b3</code> ≈ 5.95:1. Esfuerzo: S.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- html-has-lang -->
+              <tr class="axe-row-trigger" data-detail="axe-detail-html-lang" aria-expanded="false">
+                <td><span class="axe-impact-badge axe-impact-serious">Serious</span></td>
+                <td><span class="axe-rule">html-has-lang</span> <svg class="axe-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></td>
+                <td>1</td>
+                <td><span class="axe-nodes">1</span></td>
+                <td><span class="axe-origin-badge axe-origin-frontend">Frontend propio</span></td>
+              </tr>
+              <tr class="axe-detail-row" id="axe-detail-html-lang">
+                <td colspan="5">
+                  <div class="axe-detail-panel">
+                    <div class="axe-detail-grid">
+                      <div class="axe-detail-block">
+                        <h5>Criterio WCAG</h5>
+                        <p>3.1.1 Language of Page (Nivel A)</p>
+                        <h5>Página afectada</h5>
+                        <ul>
+                          <li><code>/elecciones-colombia-2026</code> (URL legacy Bootstrap)</li>
+                        </ul>
+                      </div>
+                      <div class="axe-detail-block">
+                        <h5>Elemento afectado</h5>
+                        <p>El elemento <code>&lt;html&gt;</code> no tiene atributo <code>lang="es"</code>. Confirma con dato cuantitativo la deuda técnica de la plantilla legacy.</p>
+                        <div class="axe-detail-fix">
+                          <p><strong>Fix post-migración:</strong> la URL legacy será migrada al stack Next.js en las próximas 4 semanas, que incluye <code>lang="es"</code> por defecto. Mitigación temporal: inyectar <code>&lt;script&gt;document.documentElement.lang="es"&lt;/script&gt;</code> en el head.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Insight ROI box -->
+      <div class="insight-box">
+        <span class="insight-tag">Insight de ROI directo</span>
+        <h3 class="insight-title">Una intervención en ContentSectionPage propaga mejoras a 6 secciones simultáneamente</h3>
+        <div class="insight-body">
+          <p>Las secciones Poder, País, Economía, Justicia, Empresas, Cultura y Deportes comparten la misma plantilla ContentSectionPage. Cualquier mejora CSS aplicada a esta plantilla se propaga automáticamente a las 6 verticales del portal sin esfuerzo adicional de desarrollo.</p>
+          <p>Poder y País ya obtienen Accessibility 100/100 y 0 violaciones del frontend en axe-core. Esto confirma que la plantilla base está bien construida y que las intervenciones de este alcance (tipografía, jerarquía, eyebrow editorial, tratamiento de cards) se aplican una vez y benefician todo el producto.</p>
+          <div class="insight-sections">
+            <span class="insight-section-tag">Poder</span>
+            <span class="insight-section-tag">País</span>
+            <span class="insight-section-tag">Economía</span>
+            <span class="insight-section-tag">Justicia</span>
+            <span class="insight-section-tag">Empresas</span>
+            <span class="insight-section-tag">Cultura</span>
+            <span class="insight-section-tag">Deportes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Wins -->
+      <div class="quickwins">
+        <h3 class="quickwins-title">Quick wins CSS-only de accesibilidad</h3>
+        <p class="quickwins-desc">Cuatro correcciones de alto impacto que resuelven la mayoría de las violaciones detectadas por axe-core. Esfuerzo total estimado: 1 día de un desarrollador senior.</p>
+        <div class="quickwins-grid">
+
+          <div class="qw-card">
+            <div class="qw-header">
+              <span class="qw-rule">target-size · 74 nodos</span>
+              <span class="qw-effort">CSS-only · 30 min</span>
+            </div>
+            <h4 class="qw-title">Carousel dots de 8px deben subir a 24px mínimo</h4>
+            <p class="qw-body">Los botones de paginación de carruseles (FeaturedSlider, NewsSlider, ColumnistSlider, OpinionSlider, GallerySection, SpecialsSection) miden <strong>8×8 px</strong> cuando WCAG 2.5.8 AA exige mínimo 24×24 px. Un único fix CSS resuelve 74 nodos en todas las páginas.</p>
+            <div class="qw-fix"><strong>Fix:</strong> Subir el dot a 24×24 px manteniendo el ícono visual pequeño dentro de un wrapper con padding clickeable.</div>
+          </div>
+
+          <div class="qw-card">
+            <div class="qw-header">
+              <span class="qw-rule">color-contrast · Badge verde</span>
+              <span class="qw-effort">CSS-only · 15 min</span>
+            </div>
+            <h4 class="qw-title">Badge "Suscriptores" blanco sobre verde tiene ratio 2.87:1</h4>
+            <p class="qw-body">El badge <code>--color-successful</code> en artículos usa <strong>#ffffff</strong> sobre <strong>#27ae60</strong> a 12px bold, con ratio de contraste <strong>2.87:1</strong> (mínimo exigido: 4.5:1). Afecta a todos los artículos del sitio.</p>
+            <div class="qw-fix"><strong>Fix:</strong> Cambiar verde de fondo a <code>#1e8a4e</code> (ratio 5.8:1) o forzar texto oscuro <code>#1a1a1a</code> con bold (ratio ~7:1).</div>
+          </div>
+
+          <div class="qw-card">
+            <div class="qw-header">
+              <span class="qw-rule">color-contrast · text-white/50</span>
+              <span class="qw-effort">CSS-only · 15 min</span>
+            </div>
+            <h4 class="qw-title">Texto con opacidad 50% roza el límite de contraste</h4>
+            <p class="qw-body"><strong>#999999</strong> sobre <strong>#333333</strong> a 14px genera ratio <strong>4.43:1</strong> que falla AA por un margen mínimo. Presente en Home y Especiales en textos secundarios de cards.</p>
+            <div class="qw-fix"><strong>Fix:</strong> Subir opacidad a <code>/70</code> (aprox. <code>#b3b3b3</code>) para alcanzar ratio 5.95:1.</div>
+          </div>
+
+          <div class="qw-card">
+            <div class="qw-header">
+              <span class="qw-rule">link-name · SpecialsBanner</span>
+              <span class="qw-effort">CSS+attr · 15 min</span>
+            </div>
+            <h4 class="qw-title">Links de SpecialsBanner envuelven imagen sin texto accesible</h4>
+            <p class="qw-body">El componente SpecialsBanner en Home usa un <code>&lt;a&gt;</code> que envuelve una imagen sin <code>alt</code> descriptivo ni <code>aria-label</code>. Lectores de pantalla no pueden anunciar el destino del enlace. 2 ocurrencias por viewport.</p>
+            <div class="qw-fix"><strong>Fix:</strong> Agregar <code>aria-label="Ir al especial [título]"</code> al enlace o asegurar <code>alt</code> descriptivo en la imagen interna.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Fortalezas -->
+      <div class="fortalezas">
+        <h3 class="fortalezas-title">Fortalezas detectadas — lo que el equipo ya hace bien</h3>
+        <div class="fortalezas-grid">
+          <div class="fortaleza-card">
+            <div class="fortaleza-component">Search</div>
+            <p class="fortaleza-desc">Implementación de libro: role="search", aria-label, label sr-only asociada al input via htmlFor. Patrón replicable en otros componentes del sitio.</p>
+          </div>
+          <div class="fortaleza-card">
+            <div class="fortaleza-component">PaywallBlock</div>
+            <p class="fortaleza-desc">Correctamente marcado como role="region" con aria-labelledby="paywall-heading". Estructura semántica sólida.</p>
+          </div>
+          <div class="fortaleza-card">
+            <div class="fortaleza-component">ContentShare</div>
+            <p class="fortaleza-desc">Feedback con role="alert" y aria-live="polite". Patrón ejemplar que debería replicarse en otros feedbacks del sitio.</p>
+          </div>
+          <div class="fortaleza-card">
+            <div class="fortaleza-component">HamburgerMenu</div>
+            <p class="fortaleza-desc">Implementa aria-expanded, aria-modal="true" y cierre con Escape. Funcionalidad correcta a pesar del bug de id duplicado documentado.</p>
+          </div>
+          <div class="fortaleza-card">
+            <div class="fortaleza-component">ArticleJsonLd</div>
+            <p class="fortaleza-desc">Schema.org NewsArticle y OpinionNewsArticle completo. Mejora SEO y accesibilidad indirecta. Bien implementado.</p>
+          </div>
+          <div class="fortaleza-card">
+            <div class="fortaleza-component">Sección Poder · a11y 100</div>
+            <p class="fortaleza-desc">lang="es-CO" correcto, h1 visible, main presente, 5 navs diferenciados. Cero violaciones del frontend en ambos viewports. Referente interno.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deuda técnica: URLs legacy Especiales -->
+      <div class="deuda-section">
+        <span class="deuda-tag">Deuda técnica focalizada · Aplicable post-migración</span>
+        <h3 class="deuda-title">URLs legacy de Especiales (solo rutas históricas)</h3>
+        <div class="deuda-body">
+          <p><strong>Corrección metodológica:</strong> la auditoría complementaria confirmó que el hub de Especiales (<code>/especiales</code>) y los especiales modernos (<code>/especiales/[slug]</code>) corren sobre el <strong>mismo Next.js 16 del frontend principal</strong>, con Lighthouse Accessibility 100/100 y cero violaciones axe-core del frontend. La deuda legacy Bootstrap se limita a URLs históricas específicas como <code>/elecciones-colombia-2026</code>, que es la <strong>única página sin atributo <code>lang</code> en el elemento html</strong>.</p>
+          <p>Estas URLs legacy están en proceso de migración al stack Next.js, ejecutada por Nivelics en proyecto paralelo (producción en 4 semanas). Los hallazgos del refresh se aplicarán automáticamente al código migrado, manteniendo coherencia con el frontend principal.</p>
+          <div class="deuda-scores">
+            <div class="deuda-score-chip"><span class="ds-label">Perf</span> <span class="ds-val" style="color: var(--accent-warning)">64</span></div>
+            <div class="deuda-score-chip"><span class="ds-label">A11y</span> <span class="ds-val" style="color: var(--accent-warning)">89</span></div>
+            <div class="deuda-score-chip"><span class="ds-label">BP</span> <span class="ds-val" style="color: var(--accent-warning)">54</span></div>
+            <div class="deuda-score-chip"><span class="ds-label">SEO</span> <span class="ds-val" style="color: var(--accent-success)">100</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acordeón de 11 hallazgos WCAG -->
+      <div class="wcag-accordion">
+        <h3 class="wcag-acc-title">11 hallazgos WCAG individuales</h3>
+        <p class="wcag-acc-desc">Cada hallazgo documentado con criterio violado, evidencia, fix recomendado y clasificación de intervención. Todos caen dentro del alcance CSS-only o CSS+microJS.</p>
+
+        <!-- A-articulo-01 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-articulo-01</span>
+            <span class="wcag-acc-name">Bug literal 'img.caption' en GalleryBlock</span>
+            <span class="wcag-acc-severity severity-critica">Crítica</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">1.3.1 Información y relaciones (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Despliegue</span><span class="wcag-detail-value">Artículo (GalleryBlock)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Valor actual</span><span class="wcag-detail-value"><code>'img.caption'</code> string literal renderizado en pantalla</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Valor requerido</span><span class="wcag-detail-value"><code>{img.caption}</code> expresión JSX que resuelve el caption real</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> En <code>GalleryBlock.client.tsx:115</code>, cambiar <code>'img.caption'</code> por <code>{img.caption}</code>. Es un hotfix que debería publicarse inmediatamente si está en producción.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-transversal-02 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-transversal-02</span>
+            <span class="wcag-acc-name">text-gray-400 sobre blanco: contraste 2.85:1</span>
+            <span class="wcag-acc-severity severity-seria">Seria</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">1.4.3 Contraste mínimo (AA)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Nodos afectados</span><span class="wcag-detail-value">16 ocurrencias en todo el sitio</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Valor actual</span><span class="wcag-detail-value"><code>#a3a3a3</code> sobre <code>#ffffff</code> = 2.85:1</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Valor requerido</span><span class="wcag-detail-value">4.5:1 para texto normal, 3:1 para texto grande</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Reemplazar <code>text-gray-400</code> por <code>text-gray-500</code> (#737373 = 4.74:1). Para metadata muy secundaria, usar <code>text-gray-600</code> (#525252 = 8.59:1). Esfuerzo: S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-transversal-04 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-transversal-04</span>
+            <span class="wcag-acc-name">Sin skip link ni landmark main en Home</span>
+            <span class="wcag-acc-severity severity-seria">Seria</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">2.4.1 Saltar bloques (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Despliegue</span><span class="wcag-detail-value">Home (ContentHome) — transversal</span></div>
+              <div class="wcag-detail-full"><span class="wcag-detail-label">Descripción</span><span class="wcag-detail-value">No existe un enlace "Ir al contenido" ni un elemento main que permita a usuarios de teclado y lectores de pantalla saltar la navegación repetitiva.</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Agregar skip link en <code>layout.tsx</code> + envolver páginas en <code>&lt;main id="contenido"&gt;</code>. Intervención CSS+microJS, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-transversal-01 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-transversal-01</span>
+            <span class="wcag-acc-name">id duplicado en HamburgerMenu (mobile)</span>
+            <span class="wcag-acc-severity severity-seria">Seria</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">4.1.1 Parsing (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Despliegue</span><span class="wcag-detail-value">Mobile (todos)</span></div>
+              <div class="wcag-detail-full"><span class="wcag-detail-label">Descripción</span><span class="wcag-detail-value">El trigger y el panel comparten <code>id="hamburger-menu"</code>. Esto rompe la asociación <code>aria-controls</code> y puede confundir a lectores de pantalla.</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Renombrar id del dialog a <code>"hamburger-menu-panel"</code> y actualizar <code>aria-controls</code>. Esfuerzo: S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-home-01 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-home-01</span>
+            <span class="wcag-acc-name">h1 con className="hidden" en Home</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">1.3.1 Información y relaciones (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Despliegue</span><span class="wcag-detail-value">Home (ContentHome.tsx:19)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Cambiar <code>className="hidden"</code> por <code>className="sr-only"</code>. Considerar texto: "CAMBIO — Noticias y opinión". CSS-only, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-opinion-01 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-opinion-01</span>
+            <span class="wcag-acc-name">h1 con className="hidden" en Los Danieles</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">1.3.1 / 2.4.6 (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Despliegue</span><span class="wcag-detail-value">Opinión / Los Danieles (TitleImage)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Mismo patrón que A-home-01. Cambiar <code>hidden</code> por <code>sr-only</code> en TitleImage.tsx:13. CSS-only, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-seccion-01 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-seccion-01</span>
+            <span class="wcag-acc-name">Sub-secciones sin landmark nav</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">1.3.1 Información y relaciones (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Componente</span><span class="wcag-detail-value">TitleTop (sub-secciones de sección)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Cambiar el wrapper <code>&lt;div&gt;</code> por <code>&lt;nav aria-label="Sub-secciones"&gt;</code>. CSS+attr, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-transversal-03 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-transversal-03</span>
+            <span class="wcag-acc-name">NavigationRibbon sin aria-current</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">1.3.1 Información y relaciones (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Despliegue</span><span class="wcag-detail-value">Transversal (todos)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Agregar <code>aria-current="page"</code> al link activo del NavigationRibbon. CSS+attr, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-buscador-01 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-buscador-01</span>
+            <span class="wcag-acc-name">Botón clear del buscador mide 20px</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">2.5.8 Target Size (AA, nuevo en 2.2)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Componente</span><span class="wcag-detail-value">Search (molecules/Search.tsx)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Subir botón clear de <code>h-5 w-5</code> (20px) a <code>h-6 w-6</code> (24px). CSS-only, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-buscador-02 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-buscador-02</span>
+            <span class="wcag-acc-name">Buscador no anuncia cantidad de resultados a SR</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">4.1.3 Mensajes de estado (AA)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Componente</span><span class="wcag-detail-value">Search (resultados)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Agregar <code>&lt;p role="status" className="sr-only"&gt;</code> con conteo de resultados. CSS+microJS, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-articulo-02 -->
+        <div class="wcag-acc-item">
+          <button class="wcag-acc-trigger" aria-expanded="false">
+            <span class="wcag-acc-id">A-articulo-02</span>
+            <span class="wcag-acc-name">Iframe de Spotify sin atributo title</span>
+            <span class="wcag-acc-severity severity-moderada">Moderada</span>
+            <svg class="wcag-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="wcag-acc-panel">
+            <div class="wcag-detail-grid">
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Criterio WCAG</span><span class="wcag-detail-value">4.1.2 Nombre, función, valor (A)</span></div>
+              <div class="wcag-detail-block"><span class="wcag-detail-label">Componente</span><span class="wcag-detail-value">RichTextBlock (artículos con embed Spotify)</span></div>
+              <div class="wcag-fix-box"><strong>Fix:</strong> Agregar <code>title="Reproductor de Spotify"</code> al iframe en <code>RichTextBlock.tsx:30-32</code>. Atributo HTML, esfuerzo S.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cierre de sección -->
+      <div class="section-cierre">
+        <h3 class="cierre-title">Alcance de intervención en esta fase</h3>
+        <div class="cierre-grid">
+          <div class="cierre-col cierre-col-dentro">
+            <h4>Dentro del alcance CSS / Fase 1</h4>
+            <ul class="cierre-list">
+              <li>11 hallazgos WCAG corregibles vía CSS-only o CSS+microJS</li>
+              <li>Fix de target-size en carousel dots (74 nodos, un solo cambio CSS)</li>
+              <li>Corrección de 2 violaciones de contraste (badge verde + text-white/50)</li>
+              <li>aria-label en SpecialsBanner para corregir link-name</li>
+              <li>Mejoras de contraste text-gray-400 en 16 nodos transversales</li>
+              <li>Propagación de mejoras a 6 secciones vía ContentSectionPage</li>
+            </ul>
+          </div>
+          <div class="cierre-col cierre-col-fuera">
+            <h4>Requiere fase posterior</h4>
+            <ul class="cierre-list">
+              <li>Performance Home 13/100 (optimización de render, imágenes, JS)</li>
+              <li>Best Practices 54 sistémico (configuración de servidor/framework)</li>
+              <li>Migración técnica de URLs legacy Especiales y subdominio Eventos (en ejecución por Nivelics — hallazgos de refresh aplicables post-migración)</li>
+              <li>Verificaciones con lector de pantalla (NVDA) del flujo de suscripción</li>
+              <li>CookieConsent con opción de rechazo explícito (decisión legal)</li>
+              <li>Auditoría de componentes custom shadcn (DropdownMenu, Tabs, Sheet)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Análisis complementario: Especiales y Eventos -->
+      <div class="complementario">
+        <div class="complementario-header">
+          <span class="complementario-tag">Análisis pre-migración · 4 despliegues adicionales</span>
+          <h3 class="complementario-title">Análisis complementario: Especiales y Eventos</h3>
+        </div>
+
+        <!-- 2-col: context + scorecard table -->
+        <div class="migration-context-layout">
+          <div class="migration-context">
+            <span class="migration-context-tag">Contexto estratégico</span>
+            <p>Nivelics ejecuta en paralelo la <strong>migración técnica</strong> de <code style="color: var(--accent-nivelics)">eventos.cambiocolombia.com</code> (WordPress 7.0) y URLs legacy de Especiales (Bootstrap) al stack Next.js 16 del frontend principal. Producción en <strong>máximo 4 semanas</strong>.</p>
+            <p>Los hallazgos no son deuda para fase futura — son parte del alcance con cronograma sincronizado. <strong>Ambos proyectos los ejecuta Nivelics</strong>, sin handoffs ni intermediarios.</p>
+          </div>
+          <div class="migration-context-side">
+            <!-- Compact scorecard as table -->
+            <table class="comp-coverage-table" role="table" style="font-size: 12px;">
+              <thead>
+                <tr>
+                  <th scope="col">Despliegue</th>
+                  <th scope="col">Perf</th>
+                  <th scope="col">A11y</th>
+                  <th scope="col">BP</th>
+                  <th scope="col">SEO</th>
+                  <th scope="col">axe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Especiales home</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:var(--accent-success)">Next.js · hoy</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">69</span></td>
+                  <td><span class="comp-score-val" data-level="green" style="font-size:14px">100</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">54</span></td>
+                  <td><span class="comp-score-val" data-level="green" style="font-size:14px">100</span></td>
+                  <td style="font-size:11px">0 frontend</td>
+                </tr>
+                <tr>
+                  <td><strong>Especial detalle</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:var(--accent-success)">Next.js · hoy</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">74</span></td>
+                  <td><span class="comp-score-val" data-level="green" style="font-size:14px">100</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">54</span></td>
+                  <td><span class="comp-score-val" data-level="green" style="font-size:14px">100</span></td>
+                  <td style="font-size:11px">0 total</td>
+                </tr>
+                <tr>
+                  <td><strong>Eventos home</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:var(--accent-warning)">WP 7.0 · 4 sem</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">85</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">81</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">58</span></td>
+                  <td><span class="comp-score-val" data-level="green" style="font-size:14px">92</span></td>
+                  <td style="font-size:11px;color:var(--accent-danger)">27 serious</td>
+                </tr>
+                <tr>
+                  <td><strong>Evento detalle</strong><br><span style="font-family:var(--font-mono);font-size:10px;color:var(--accent-warning)">WP 7.0 · 4 sem</span></td>
+                  <td><span class="comp-score-val" data-level="green" style="font-size:14px">97</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">88</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">58</span></td>
+                  <td><span class="comp-score-val" data-level="yellow" style="font-size:14px">85</span></td>
+                  <td style="font-size:11px;color:var(--accent-danger)">24 serious</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Hallazgos + Coverage side by side -->
+        <div class="comp-dual-layout">
+          <!-- Left: 5 hallazgos compact -->
+          <div class="comp-hallazgos-compact">
+            <h4 class="comp-section-subtitle">5 oportunidades transversales</h4>
+            <div class="comp-h-compact-item">
+              <span class="comp-h-temporal" data-when="now">Hoy</span>
+              <div><strong>Tipologizar piezas de Especiales</strong> con eyebrow editorial (ranking / investigación / serie). CSS-only, esfuerzo S.</div>
+            </div>
+            <div class="comp-h-compact-item">
+              <span class="comp-h-temporal" data-when="now">Hoy</span>
+              <div><strong>Especial detalle: subir título a H1</strong> + agregar storytelling visual (hero, capítulos, créditos). CSS+microJS, esfuerzo M.</div>
+            </div>
+            <div class="comp-h-compact-item">
+              <span class="comp-h-temporal" data-when="post">4 sem</span>
+              <div><strong>Contraste cards Eventos</strong> (18 nodos). Resuelto por migración — patrón ya correcto en frontend principal.</div>
+            </div>
+            <div class="comp-h-compact-item">
+              <span class="comp-h-temporal" data-when="post">4 sem</span>
+              <div><strong>Acordeón Eventos detalle</strong> (8 nodos nested-interactive). Bug funcional grave. Resuelto por migración a Atomic Design.</div>
+            </div>
+            <div class="comp-h-compact-item">
+              <span class="comp-h-temporal" data-when="now">Hoy</span>
+              <div><strong>Hub Especiales: descriptor editorial</strong> y peso visual del destacado. H1 sin propuesta de valor. CSS-only, esfuerzo S.</div>
+            </div>
+          </div>
+
+          <!-- Right: coverage table -->
+          <div class="comp-coverage-compact">
+            <h4 class="comp-section-subtitle">Cobertura de alcance</h4>
+            <table class="comp-coverage-table" role="table">
+              <thead>
+                <tr>
+                  <th scope="col">Despliegue</th>
+                  <th scope="col">CSS hoy</th>
+                  <th scope="col">Post-migración</th>
+                  <th scope="col">Auto por migración</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Especiales home</td>
+                  <td class="cov-yes">Todo</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Especial detalle</td>
+                  <td class="cov-yes">Casi todo</td>
+                  <td class="cov-post">1 micro-cambio</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Eventos home</td>
+                  <td>—</td>
+                  <td class="cov-post">Tipografía + contraste</td>
+                  <td class="cov-auto">H1, main, links</td>
+                </tr>
+                <tr>
+                  <td>Evento detalle</td>
+                  <td>—</td>
+                  <td class="cov-post">Contraste + CTA</td>
+                  <td class="cov-auto">Acordeón, shares</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Compact reco -->
+            <div class="comp-reco" style="margin-top: var(--space-md);">
+              <p style="font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0"><strong style="color:var(--accent-success)">Especiales modernos</strong> listos para refresh CSS inmediato (a11y 100/100). <strong style="color:var(--accent-nivelics)">Eventos + legacy</strong> migran en 4 semanas — el refresh aplica automáticamente al código migrado. Ambos proyectos los ejecuta Nivelics.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!-- ============= SECCIÓN 5: INVENTARIO DE COMPONENTES Y TOKENS ============= -->
+  <section id="inventario" class="section section-inventario">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2 class="section-title">Inventario de Componentes y Tokens</h2>
+        <p class="section-subtitle">Mapeo de la arquitectura frontend existente: 105 componentes clasificados, 6 dimensiones de tokens analizadas y 6 inconsistencias sistémicas documentadas con propuesta de racionalización.</p>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="inv-stats">
+        <div class="inv-stat-card" data-type="total">
+          <span class="inv-stat-num">105</span>
+          <span class="inv-stat-label">Componentes totales</span>
+        </div>
+        <div class="inv-stat-card">
+          <span class="inv-stat-num">19</span>
+          <span class="inv-stat-label">Atoms</span>
+        </div>
+        <div class="inv-stat-card">
+          <span class="inv-stat-num">55</span>
+          <span class="inv-stat-label">Molecules</span>
+        </div>
+        <div class="inv-stat-card">
+          <span class="inv-stat-num">31</span>
+          <span class="inv-stat-label">Organisms</span>
+        </div>
+        <div class="inv-stat-card">
+          <span class="inv-stat-num">8</span>
+          <span class="inv-stat-label">Content Pages</span>
+        </div>
+      </div>
+
+      <!-- Stack context -->
+      <div class="audit-lead">
+        <p>El frontend de CAMBIO Colombia opera sobre <strong>Next.js 16 App Router + React 19 + Tailwind v4</strong>, organizado en <strong>Atomic Design</strong> (atoms → molecules → organisms → content pages). Las fuentes tipográficas son locales (<code>Mulish</code> sans-serif + <code>Noto Serif</code>) cargadas desde el repositorio, sin dependencia de Google Fonts en runtime. El inventario se extrajo mediante análisis estático del repositorio <code>cambio-frontend</code>.</p>
+        <div class="audit-tools">
+          <span class="audit-tool">Análisis estático del repo</span>
+          <span class="audit-tool">grep + AST parsing</span>
+          <span class="audit-tool">Tailwind v4 @theme</span>
+          <span class="audit-tool">105 componentes</span>
+          <span class="audit-tool">6 dimensiones de tokens</span>
+        </div>
+      </div>
+
+      <!-- Classification by intervention -->
+      <h3 class="inv-incon-title">Clasificación por tipo de intervención</h3>
+      <div class="inv-filters">
+        <button class="inv-filter-btn active" data-filter="all">Todos <span style="opacity:.6">105</span></button>
+        <button class="inv-filter-btn" data-filter="tokens-only">Tokens-only <span style="opacity:.6">18</span></button>
+        <button class="inv-filter-btn" data-filter="component-only">Component-only <span style="opacity:.6">26</span></button>
+        <button class="inv-filter-btn" data-filter="refactor-componente">Refactor <span style="opacity:.6">4</span></button>
+        <button class="inv-filter-btn" data-filter="requiere-editorial">Editorial <span style="opacity:.6">2</span></button>
+      </div>
+
+      <div class="inv-table-wrap">
+        <table class="inv-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">Tipo</th>
+              <th scope="col">Componente</th>
+              <th scope="col">Intervención</th>
+              <th scope="col">Notas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-interv="tokens-only"><td><span class="inv-type-badge" data-type="atom">Atom</span></td><td>Typography</td><td><span class="inv-interv-badge">Tokens-only</span></td><td>Variantes parcialmente adoptadas</td></tr>
+            <tr data-interv="tokens-only"><td><span class="inv-type-badge" data-type="atom">Atom</span></td><td>Heading</td><td><span class="inv-interv-badge">Tokens-only</span></td><td>Centraliza h1-h6 con variantes</td></tr>
+            <tr data-interv="tokens-only"><td><span class="inv-type-badge" data-type="atom">Atom</span></td><td>Picture</td><td><span class="inv-interv-badge">Tokens-only</span></td><td>Wrapper de img responsive</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="atom">Atom</span></td><td>Badge</td><td><span class="inv-interv-badge">Component</span></td><td>Badge "Suscriptores" rojo existente → más prominente y aspiracional</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>CardNews</td><td><span class="inv-interv-badge">Component</span></td><td>Card principal de noticias</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>CardFeatured</td><td><span class="inv-interv-badge">Component</span></td><td>Variante destacada — evaluar merge con CardNews</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>CardImage</td><td><span class="inv-interv-badge">Component</span></td><td>Variante imagen — evaluar merge con CardNews</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>PaywallBlock</td><td><span class="inv-interv-badge">Component</span></td><td>Disclaimer → CTA aspiracional</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>ContentShare</td><td><span class="inv-interv-badge">Component</span></td><td>Botones de compartir</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>SpecialsBanner</td><td><span class="inv-interv-badge">Component</span></td><td>Falta aria-label (axe link-name)</td></tr>
+            <tr data-interv="tokens-only"><td><span class="inv-type-badge" data-type="molecule">Molecule</span></td><td>NavigationRibbon</td><td><span class="inv-interv-badge">Tokens-only</span></td><td>Falta aria-current (A-transversal-03)</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>FeaturedSlider</td><td><span class="inv-interv-badge">Component</span></td><td>Dots 8×8 → 24×24 (target-size)</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>NewsSlider</td><td><span class="inv-interv-badge">Component</span></td><td>Hereda fix de dots</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>ColumnistSlider</td><td><span class="inv-interv-badge">Component</span></td><td>Breakpoints Bootstrap mezclados</td></tr>
+            <tr data-interv="refactor-componente"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>HamburgerMenu</td><td><span class="inv-interv-badge" style="background:color-mix(in srgb, var(--accent-danger) 12%, transparent);color:var(--accent-danger)">Refactor</span></td><td>id duplicado en DOM (H-transversal-02)</td></tr>
+            <tr data-interv="refactor-componente"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>CookieConsent</td><td><span class="inv-interv-badge" style="background:color-mix(in srgb, var(--accent-danger) 12%, transparent);color:var(--accent-danger)">Refactor</span></td><td>Sin opción Rechazar (riesgo legal RGPD)</td></tr>
+            <tr data-interv="refactor-componente"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>GalleryBlock</td><td><span class="inv-interv-badge" style="background:color-mix(in srgb, var(--accent-danger) 12%, transparent);color:var(--accent-danger)">Refactor</span></td><td>Bug img.caption (catastrophic H-articulo-02)</td></tr>
+            <tr data-interv="component-only"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>ContentSectionPage</td><td><span class="inv-interv-badge">Component</span></td><td>1 intervención → 6 secciones (Poder/País/Economía/etc.)</td></tr>
+            <tr data-interv="requiere-editorial"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>ContentOpinion</td><td><span class="inv-interv-badge" style="background:color-mix(in srgb, var(--accent-blue) 12%, transparent);color:var(--accent-blue-deep)">Editorial</span></td><td>Los Danieles: captura email + recirculación</td></tr>
+            <tr data-interv="requiere-editorial"><td><span class="inv-type-badge" data-type="organism">Organism</span></td><td>ContentArticle</td><td><span class="inv-interv-badge" style="background:color-mix(in srgb, var(--accent-blue) 12%, transparent);color:var(--accent-blue-deep)">Editorial</span></td><td>Lógica paywall fragmentada entre frontend y servicio externo</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:var(--space-sm);font-family:var(--font-mono)">Mostrando 20 componentes clave de 105 totales. Inventario completo disponible en anexos JSON.</p>
+      </div>
+
+      <!-- 6 Inconsistencies -->
+      <div class="inv-inconsistencies">
+        <h3 class="inv-incon-title">6 inconsistencias sistémicas del design system</h3>
+        <div class="inv-incon-grid">
+          <div class="inv-incon-card">
+            <span class="inv-incon-num">01</span>
+            <span class="inv-incon-name">Tokens redundantes</span>
+            <p class="inv-incon-desc">Mismo color declarado con nombres distintos en globals.css y en clases Tailwind.</p>
+            <p class="inv-incon-items">gray-500 = muted-foreground · gray-200 = border = input · success = successful</p>
+          </div>
+          <div class="inv-incon-card">
+            <span class="inv-incon-num">02</span>
+            <span class="inv-incon-name">Hex literales en TSX</span>
+            <p class="inv-incon-desc">Valores de color hardcodeados directamente en archivos .tsx en lugar de usar tokens o clases Tailwind.</p>
+            <p class="inv-incon-items">#333333 ×10 · #f5f5f5 ×10 · #ffffff ×6 · #e12204 ×3</p>
+          </div>
+          <div class="inv-incon-card">
+            <span class="inv-incon-num">03</span>
+            <span class="inv-incon-name">18 grises → 7 propuestos</span>
+            <p class="inv-incon-desc">Escala sobre-poblada con pasos de 25-50 entre tokens. Varios declarados sin uso en código.</p>
+            <p class="inv-incon-items">gray-350, gray-375, gray-450 sin uso · Propuesta: consolidar a 7 grises canónicos</p>
+          </div>
+          <div class="inv-incon-card">
+            <span class="inv-incon-num">04</span>
+            <span class="inv-incon-name">Radius arbitrarios</span>
+            <p class="inv-incon-desc">Valores fuera de la escala oficial de tokens, heredados del CMS Utopia/Bootstrap.</p>
+            <p class="inv-incon-items">[.313rem] 5px ×5 · [0.625rem] 10px ×8 · 7 valores distintos no tokenizados</p>
+          </div>
+          <div class="inv-incon-card">
+            <span class="inv-incon-num">05</span>
+            <span class="inv-incon-name">Breakpoints Bootstrap</span>
+            <p class="inv-incon-desc">Breakpoints del antiguo CMS mezclados con los de Tailwind v4 en el mismo componente.</p>
+            <p class="inv-incon-items">min-[575px] + min-[992px] + min-[1199px] en ColumnistSlider vs sm:/lg:/xl:</p>
+          </div>
+          <div class="inv-incon-card">
+            <span class="inv-incon-num">06</span>
+            <span class="inv-incon-name">CSS legacy en globals</span>
+            <p class="inv-incon-desc">Bloques de estilos heredados en globals.css que deberían vivir como componentes React.</p>
+            <p class="inv-incon-items">.paywall-* ~120 líneas · .checkbox-custom SVG inline · typo ".accoden"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Token visualization -->
+      <div class="inv-tokens">
+        <h3 class="inv-tokens-title">Visualización de tokens y propuesta de racionalización</h3>
+
+        <!-- Color tokens -->
+        <div class="inv-token-section">
+          <span class="inv-token-label">Paleta de color — grises <span class="token-count">18 actuales → 7 propuestos</span></span>
+          <div class="inv-color-grid">
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#f5f5f5"></div><span class="inv-swatch-hex">#f5f5f5</span><span class="inv-swatch-freq">31 usos</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#e7e7e7"></div><span class="inv-swatch-hex">#e7e7e7</span><span class="inv-swatch-freq">7</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#e5e5e5"></div><span class="inv-swatch-hex">#e5e5e5</span><span class="inv-swatch-freq">8</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#c4c4c4"></div><span class="inv-swatch-hex">#c4c4c4</span><span class="inv-swatch-freq">1</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#d4d4d4"></div><span class="inv-swatch-hex">#d4d4d4</span><span class="inv-swatch-freq">9</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#dddddd"></div><span class="inv-swatch-hex">#dddddd</span><span class="inv-swatch-freq">0</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#adacac"></div><span class="inv-swatch-hex">#adacac</span><span class="inv-swatch-freq">0</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#a3a3a3"></div><span class="inv-swatch-hex">#a3a3a3</span><span class="inv-swatch-freq">16</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#888888"></div><span class="inv-swatch-hex">#888888</span><span class="inv-swatch-freq">0</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#737373"></div><span class="inv-swatch-hex">#737373</span><span class="inv-swatch-freq">32</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#595959"></div><span class="inv-swatch-hex">#595959</span><span class="inv-swatch-freq">1</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#525252"></div><span class="inv-swatch-hex">#525252</span><span class="inv-swatch-freq">22</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#4d4d4d"></div><span class="inv-swatch-hex">#4d4d4d</span><span class="inv-swatch-freq">1</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#555555"></div><span class="inv-swatch-hex">#555555</span><span class="inv-swatch-freq">3</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#292929"></div><span class="inv-swatch-hex">#292929</span><span class="inv-swatch-freq">1</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#444444"></div><span class="inv-swatch-hex">#444444</span><span class="inv-swatch-freq">8</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#333333"></div><span class="inv-swatch-hex">#333333</span><span class="inv-swatch-freq">71</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#1a1a1a"></div><span class="inv-swatch-hex">#1a1a1a</span><span class="inv-swatch-freq">8</span></div>
+          </div>
+          <div class="inv-rational">
+            <span class="inv-rational-arrow">→</span>
+            <p><strong>Racionalización propuesta:</strong> consolidar a 7 grises canónicos: gray-50 (#fafafa), gray-100 (#f5f5f5), gray-200 (#e5e5e5), gray-400 (#a3a3a3), gray-500 (#737373), gray-700 (#444444), gray-900 (#1a1a1a). Elimina 11 tokens, reduce dispersión visual y simplifica futuras decisiones de diseño.</p>
+          </div>
+        </div>
+
+        <!-- Brand colors -->
+        <div class="inv-token-section">
+          <span class="inv-token-label">Marca y estado <span class="token-count">6 tokens</span></span>
+          <div class="inv-color-grid">
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#e12204"></div><span class="inv-swatch-hex">primary</span><span class="inv-swatch-freq">31 usos</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#c51e03"></div><span class="inv-swatch-hex">p-hover</span><span class="inv-swatch-freq">CTAs</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#f7cc46"></div><span class="inv-swatch-hex">accent</span><span class="inv-swatch-freq">17 usos</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#27ae60"></div><span class="inv-swatch-hex">success</span><span class="inv-swatch-freq">2.87:1 ⚠</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#ef4444"></div><span class="inv-swatch-hex">destructive</span><span class="inv-swatch-freq">errores</span></div>
+            <div class="inv-swatch"><div class="inv-swatch-color" style="background:#25d366"></div><span class="inv-swatch-hex">whatsapp</span><span class="inv-swatch-freq">canal</span></div>
+          </div>
+        </div>
+
+        <!-- Typography scale -->
+        <div class="inv-token-section">
+          <span class="inv-token-label">Escala tipográfica <span class="token-count">Mulish sans + Noto Serif · 8 niveles</span></span>
+          <div class="inv-type-scale">
+            <div class="inv-type-row"><span class="inv-type-class">text-xs</span><span class="inv-type-size">12px</span><span class="inv-type-sample" style="font-size:12px">Metadata, fechas, badges</span><span class="inv-type-freq">×34</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-sm</span><span class="inv-type-size">14px</span><span class="inv-type-sample" style="font-size:14px">Cuerpo secundario, nav links</span><span class="inv-type-freq">×48</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-base</span><span class="inv-type-size">16px</span><span class="inv-type-sample" style="font-size:16px">Cuerpo principal, botones</span><span class="inv-type-freq">×23</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-lg</span><span class="inv-type-size">18px</span><span class="inv-type-sample" style="font-size:18px">Subtítulos, titulares cards</span><span class="inv-type-freq">×15</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-xl</span><span class="inv-type-size">20px</span><span class="inv-type-sample" style="font-size:20px">Titulares de sección menor</span><span class="inv-type-freq">×13</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-2xl</span><span class="inv-type-size">24px</span><span class="inv-type-sample" style="font-size:22px">Titulares grandes</span><span class="inv-type-freq">×4</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-3xl</span><span class="inv-type-size">30px</span><span class="inv-type-sample" style="font-size:26px">Hero / pieza dominante</span><span class="inv-type-freq">×5</span></div>
+            <div class="inv-type-row"><span class="inv-type-class">text-4xl</span><span class="inv-type-size">36px</span><span class="inv-type-sample" style="font-size:28px">Outlier (1 uso)</span><span class="inv-type-freq">×1</span></div>
+          </div>
+          <div class="inv-rational">
+            <span class="inv-rational-arrow">→</span>
+            <p><strong>Observación:</strong> la escala es coherente excepto por el salto 24→30 px (text-2xl→text-3xl). <code>font-black</code> y <code>text-4xl</code> son outliers con 1 uso cada uno. El atom <code>Typography</code> existe pero su adopción es inconsistente — muchos archivos usan clases Tailwind directamente.</p>
+          </div>
+        </div>
+
+        <!-- Radius tokens -->
+        <div class="inv-token-section">
+          <span class="inv-token-label">Border radius <span class="token-count">5 tokens oficiales + 7 arbitrarios</span></span>
+          <div class="inv-radius-grid">
+            <div class="inv-radius-item"><div class="inv-radius-box" style="border-radius:4px"></div><span class="inv-radius-val">sm · 4px</span></div>
+            <div class="inv-radius-item inv-radius-arb"><div class="inv-radius-box" style="border-radius:5px"></div><span class="inv-radius-val">5px ×5 ⚠</span></div>
+            <div class="inv-radius-item"><div class="inv-radius-box" style="border-radius:8px"></div><span class="inv-radius-val">md · 8px</span></div>
+            <div class="inv-radius-item inv-radius-arb"><div class="inv-radius-box" style="border-radius:10px"></div><span class="inv-radius-val">10px ×8 ⚠</span></div>
+            <div class="inv-radius-item"><div class="inv-radius-box" style="border-radius:12px"></div><span class="inv-radius-val">lg · 12px</span></div>
+            <div class="inv-radius-item"><div class="inv-radius-box" style="border-radius:16px"></div><span class="inv-radius-val">xl · 16px</span></div>
+            <div class="inv-radius-item"><div class="inv-radius-box" style="border-radius:50%"></div><span class="inv-radius-val">full · 9999px</span></div>
+          </div>
+          <div class="inv-rational">
+            <span class="inv-rational-arrow">→</span>
+            <p><strong>Racionalización:</strong> los valores 5px (.313rem, herencia Bootstrap) y 10px (.625rem) no son tokens oficiales pero se usan 13 veces combinadas. Propuesta: promover 10px a <code>--radius-md-plus</code> y migrar 5px a <code>--radius-sm</code> (4px).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insight box: Atomic Design -->
+      <div class="insight-box">
+        <span class="insight-tag">Arquitectura del frontend</span>
+        <h3 class="insight-title">La adopción de Atomic Design es una fortaleza estructural — pero las inconsistencias de tokens erosionan sus beneficios</h3>
+        <div class="insight-body">
+          <p>El frontend de CAMBIO tiene una base arquitectónica sólida: 105 componentes organizados en Atomic Design con atoms → molecules → organisms bien delimitados. Esto significa que <strong>los cambios de tokens se propagan coherentemente</strong> a través de toda la jerarquía de componentes. Sin embargo, las 6 inconsistencias documentadas (tokens duplicados, hex literales, radius arbitrarios, breakpoints mixtos) actúan como "fugas" que rompen esa propagación. Cada hex literal hardcodeado es un componente que NO se beneficia de un cambio de token. La racionalización propuesta elimina esas fugas y maximiza el ROI del refresh visual.</p>
+        </div>
+      </div>
+
+      <!-- Cierre -->
+      <div class="section-cierre">
+        <div class="cierre-grid">
+          <div class="cierre-col cierre-col-dentro">
+            <h4>Dentro de este alcance</h4>
+            <ul class="cierre-list">
+              <li>Documentación completa de los 105 componentes con clasificación de intervención</li>
+              <li>Propuesta de racionalización de grises (18→7) integrada al refresh visual</li>
+              <li>Migración de hex literales a tokens durante el sprint de implementación CSS</li>
+              <li>Alineación de radius arbitrarios a la escala oficial</li>
+            </ul>
+          </div>
+          <div class="cierre-col cierre-col-fuera">
+            <h4>Requiere fase posterior</h4>
+            <ul class="cierre-list">
+              <li>Migración de breakpoints Bootstrap a Tailwind v4 en ColumnistSlider (requiere testing funcional)</li>
+              <li>Adopción completa del atom Typography vs. clases Tailwind directas</li>
+              <li>Eliminación del bloque CSS legacy .paywall-* de globals.css (requiere refactor de componente React)</li>
+              <li>Limpieza de tokens sin uso (gray-350, gray-375, gray-450, font-black, text-4xl)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= SECCIÓN 6: DIAGNÓSTICO HEURÍSTICO ============= -->
+  <section id="heuristico" class="section section-heuristico">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2 class="section-title">Diagnóstico Heurístico</h2>
+        <p class="section-subtitle">20 hallazgos formales + 14 focalizados + 5 fortalezas reconocidas · 6 frameworks especializados</p>
+      </div>
+
+      <!-- Lead -->
+      <div class="heur-lead">
+        <p>El diagnóstico heurístico evalúa la experiencia del usuario y la arquitectura editorial de CAMBIO aplicando seis frameworks complementarios: heurísticas de Nielsen (usabilidad general), WCAG 2.2 desde perspectiva UX, NN/G News (patrones editoriales digitales), Baymard (suscripción y paywall), Gestalt (organización visual) y heurísticas LATAM propias (densidad informativa y expectativas regionales). Cada hallazgo está clasificado por severidad, vinculado al componente afectado y calificado según su cobertura dentro del alcance contratado.</p>
+      </div>
+
+      <!-- Nota metodológica -->
+      <div class="heur-method-note">
+        <span class="heur-method-tag">Nota metodológica</span>
+        <p>Los <strong>20 hallazgos formales</strong> aplican los 6 frameworks con rigor completo sobre los 6 despliegues principales (Home, Poder, País, Artículo, Opinión, Buscador). Los <strong>14 hallazgos complementarios</strong> cubren Especiales y Eventos con auditoría focalizada (frameworks seleccionados por relevancia editorial). Adicionalmente, se documentan <strong>10 oportunidades de profundización</strong> como backlog argumentado para Fase 2.</p>
+      </div>
+
+      <!-- Stats overview -->
+      <div class="heur-stats">
+        <div class="heur-stat-card">
+          <span class="heur-stat-num">36</span>
+          <span class="heur-stat-label">puntos de análisis<br>documentados</span>
+        </div>
+        <div class="heur-stat-card">
+          <span class="heur-stat-num">20</span>
+          <span class="heur-stat-label">hallazgos formales<br>(rigor completo)</span>
+        </div>
+        <div class="heur-stat-card">
+          <span class="heur-stat-num">14</span>
+          <span class="heur-stat-label">hallazgos focalizados<br>(Especiales + Eventos)</span>
+        </div>
+        <div class="heur-stat-card">
+          <span class="heur-stat-num">5</span>
+          <span class="heur-stat-label">fortalezas<br>reconocidas</span>
+        </div>
+        <div class="heur-stat-card heur-stat-accent">
+          <span class="heur-stat-num">70%</span>
+          <span class="heur-stat-label">resolvible dentro<br>del alcance CSS</span>
+        </div>
+        <div class="heur-stat-card">
+          <span class="heur-stat-num">6</span>
+          <span class="heur-stat-label">frameworks<br>aplicados</span>
+        </div>
+      </div>
+
+      <!-- Distribución por severidad -->
+      <div class="heur-severity-section">
+        <h3 class="heur-section-title">Distribución por severidad</h3>
+        <p class="heur-section-desc">De los 20 hallazgos formales, la distribución refleja un frontend con base sólida pero con debilidades críticas puntuales que requieren acción inmediata.</p>
+        
+        <div class="heur-severity-bars">
+          <div class="heur-sev-row">
+            <span class="heur-sev-label">Catastrophic</span>
+            <div class="heur-sev-bar-wrap">
+              <div class="heur-sev-bar heur-sev-catastrophic" style="width:5%"></div>
+            </div>
+            <span class="heur-sev-count">1</span>
+            <span class="heur-sev-detail">Bug literal en producción</span>
+          </div>
+          <div class="heur-sev-row">
+            <span class="heur-sev-label">Major</span>
+            <div class="heur-sev-bar-wrap">
+              <div class="heur-sev-bar heur-sev-major" style="width:30%"></div>
+            </div>
+            <span class="heur-sev-count">6</span>
+            <span class="heur-sev-detail">Impacto directo en negocio o a11y</span>
+          </div>
+          <div class="heur-sev-row">
+            <span class="heur-sev-label">Minor</span>
+            <div class="heur-sev-bar-wrap">
+              <div class="heur-sev-bar heur-sev-minor" style="width:55%"></div>
+            </div>
+            <span class="heur-sev-count">11</span>
+            <span class="heur-sev-detail">Mejorables, mayoría resolvible vía CSS</span>
+          </div>
+          <div class="heur-sev-row">
+            <span class="heur-sev-label">Fortalezas</span>
+            <div class="heur-sev-bar-wrap">
+              <div class="heur-sev-bar heur-sev-strength" style="width:10%"></div>
+            </div>
+            <span class="heur-sev-count">2</span>
+            <span class="heur-sev-detail">Patrones a preservar</span>
+          </div>
+        </div>
+
+        <p class="heur-severity-note">Los 14 hallazgos focalizados de Especiales y Eventos agregan 3 severidad major adicionales (todos en Eventos WordPress) y 11 minor/cosmetic con correcciones CSS-only.</p>
+      </div>
+
+      <!-- Distribución por framework -->
+      <div class="heur-framework-section">
+        <h3 class="heur-section-title">Distribución por framework</h3>
+        <div class="heur-fw-grid">
+          <div class="heur-fw-card">
+            <span class="heur-fw-count">4</span>
+            <span class="heur-fw-name">Nielsen</span>
+            <span class="heur-fw-desc">Usabilidad general, landmarks, feedback del sistema</span>
+          </div>
+          <div class="heur-fw-card">
+            <span class="heur-fw-count">4</span>
+            <span class="heur-fw-name">WCAG (UX)</span>
+            <span class="heur-fw-desc">Accesibilidad como experiencia, no solo compliance</span>
+          </div>
+          <div class="heur-fw-card">
+            <span class="heur-fw-count">4</span>
+            <span class="heur-fw-name">NN/G News</span>
+            <span class="heur-fw-desc">Patrones editoriales digitales, jerarquía informativa</span>
+          </div>
+          <div class="heur-fw-card">
+            <span class="heur-fw-count">4</span>
+            <span class="heur-fw-name">Baymard</span>
+            <span class="heur-fw-desc">Suscripción, paywall, fricción de conversión</span>
+          </div>
+          <div class="heur-fw-card">
+            <span class="heur-fw-count">2</span>
+            <span class="heur-fw-name">Gestalt</span>
+            <span class="heur-fw-desc">Organización visual, agrupamiento, proximidad</span>
+          </div>
+          <div class="heur-fw-card">
+            <span class="heur-fw-count">2</span>
+            <span class="heur-fw-name">LATAM</span>
+            <span class="heur-fw-desc">Densidad informativa, expectativas de audiencia regional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 10 hallazgos críticos -->
+      <div class="heur-top10">
+        <h3 class="heur-section-title">Top 10 hallazgos críticos</h3>
+        <p class="heur-section-desc">Ordenados por impacto combinado en negocio, accesibilidad y percepción de marca. Los hallazgos marcados como "dentro del alcance" se convierten en transformaciones CSS concretas en la Sección 7.</p>
+
+        <div class="heur-list heur-list-grid">
+
+          <!-- 1 -->
+          <div class="heur-card heur-card--catastrophic">
+            <div class="heur-card-header">
+              <span class="heur-card-num">01</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--catastrophic">Catastrophic</span>
+                <span class="heur-badge heur-badge--fw">Nielsen</span>
+                <span class="heur-badge heur-badge--scope-in">Dentro del alcance</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">Bug literal <code>'img.caption'</code> en GalleryBlock</h4>
+            <p class="heur-card-id">H-articulo-02 · Artículo · Esfuerzo S</p>
+            <p class="heur-card-desc">El componente <code>GalleryBlock.client.tsx:115</code> renderiza el string literal <code>'img.caption'</code> en lugar del caption real de la imagen. Es un bug de producción visible para todos los usuarios que acceden a artículos con galería fotográfica. Daña percepción de calidad editorial y credibilidad del producto.</p>
+            <p class="heur-card-action"><strong>Acción requerida:</strong> hotfix inmediato. Corregir la interpolación del caption en el componente. Esfuerzo de minutos, impacto de reputación alto.</p>
+          </div>
+
+          <!-- 2 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">02</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">Baymard</span>
+                <span class="heur-badge heur-badge--scope-out">Fuera — Requiere editorial</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">Lógica de paywall fragmentada entre código frontend y servicio externo</h4>
+            <p class="heur-card-id">H-articulo-01 · Artículo / Paywall · Esfuerzo M</p>
+            <p class="heur-card-desc">El componente <code>PaywallBlock</code> del frontend declara variantes <code>hard-article</code> y <code>metered-article</code>, pero <code>ContentArticle.tsx</code> no las renderiza directamente. A nivel de producto, el paywall SÍ opera con metered (10 artículos gratuitos por usuario/mes) y hard wall asignado editorialmente en consejos de redacción — pero la lógica vive fuera del frontend principal (servicio Marfeel u otro gateway de paywall). Esta fragmentación dificulta el control desde el frontend, limita la capacidad de A/B testing visual del muro, y reduce la transparencia operativa entre código y producto.</p>
+            <p class="heur-card-action"><strong>Fase recomendada:</strong> Fase 2. Unificar la lógica de paywall en componentes renderizables del frontend principal para habilitar A/B testing de variantes visuales, mensajes contextuales y posiciones del muro. Coordinar con el equipo que opera el servicio externo (Marfeel) para exponer las variantes de paywall como props consumibles por el frontend.</p>
+          </div>
+
+          <!-- 3 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">03</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">Baymard</span>
+                <span class="heur-badge heur-badge--scope-out">Fuera — Requiere editorial</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">CookieConsent sin opción de Rechazar — riesgo legal</h4>
+            <p class="heur-card-id">H-transversal-01 · Todos los despliegues · Esfuerzo M</p>
+            <p class="heur-card-desc">El banner de cookies presenta únicamente la opción "Aceptar". No existe botón de rechazo ni enlace a configuración granular. Esto es una mala práctica frente a la Ley 1581 de 2012 (Protección de Datos Personales en Colombia) y frente a GDPR si se recibe tráfico europeo. Es un riesgo legal documentable.</p>
+            <p class="heur-card-action"><strong>Fase recomendada:</strong> Fase 2. Requiere decisión legal + integración de CMP (Consent Management Platform). El componente actual puede recibir un fix visual inmediato para mejorar la prominencia del aviso, pero el botón de rechazo requiere lógica de backend.</p>
+          </div>
+
+          <!-- 4 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">04</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">WCAG</span>
+                <span class="heur-badge heur-badge--scope-in">Dentro del alcance</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">HamburgerMenu con id duplicado rompe accesibilidad mobile</h4>
+            <p class="heur-card-id">H-transversal-02 · Todos (mobile) · Esfuerzo S</p>
+            <p class="heur-card-desc">El componente <code>HamburgerMenu</code> asigna el mismo <code>id="hamburger-menu"</code> tanto al botón trigger como al dialog de navegación. Esto invalida la relación <code>aria-controls</code> y produce un fallo funcional de accesibilidad en la navegación mobile — el recurso de interacción más básico del sitio para el 60-80% del tráfico que llega desde dispositivos móviles.</p>
+            <p class="heur-card-action"><strong>Acción:</strong> renombrar IDs y actualizar aria-controls. CSS-only + micro ajuste de atributo. Quick win con impacto en toda la base mobile.</p>
+          </div>
+
+          <!-- 5 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">05</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">Nielsen</span>
+                <span class="heur-badge heur-badge--scope-in">Dentro del alcance</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">Home sin landmark <code>&lt;main&gt;</code> ni skip link</h4>
+            <p class="heur-card-id">H-home-01 · Home · Esfuerzo S</p>
+            <p class="heur-card-desc">La página principal carece del elemento <code>&lt;main&gt;</code> que delimita el contenido principal y del enlace "Saltar al contenido" que permite a usuarios de teclado y lectores de pantalla evitar la navegación repetitiva. Es un requisito de WCAG 2.4.1 (nivel A) y una de las heurísticas más básicas de Nielsen sobre eficiencia del usuario.</p>
+            <p class="heur-card-action"><strong>Acción:</strong> agregar <code>&lt;main&gt;</code> wrapper y skip link con CSS posicionado. Quick win con impacto en Lighthouse Accessibility score y en la experiencia de usuarios con tecnología asistiva.</p>
+          </div>
+
+          <!-- 6 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">06</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">NN/G News</span>
+                <span class="heur-badge heur-badge--scope-in">Dentro del alcance</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">Pieza dominante de Poder sin diferenciación editorial</h4>
+            <p class="heur-card-id">H-seccion-poder-01 · Sección Poder · Esfuerzo S</p>
+            <p class="heur-card-desc">La pieza dominante de la sección Poder — la sección más estratégica de CAMBIO para identidad de marca política — no distingue visualmente entre una investigación profunda, un análisis y una nota informativa rápida. Un lector no puede determinar a simple vista si la pieza principal es periodismo de peso o una cobertura de rutina. Los medios de referencia (NYT, El Espectador, La Silla Vacía) usan eyebrow labels editoriales para esta diferenciación.</p>
+            <p class="heur-card-action"><strong>Acción:</strong> CSS injection con eyebrow editorial (Investigación / Análisis / Exclusivo). Aplica a ContentSectionPage y por tanto se propaga a 6 secciones adicionales (País, Economía, Justicia, Empresas, Cultura, Deportes). Ver Sección 7: una intervención, seis secciones beneficiadas.</p>
+          </div>
+
+          <!-- 7 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">07</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">WCAG</span>
+                <span class="heur-badge heur-badge--scope-post">Post-migración Nivelics</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">Acordeón de programa de Eventos con nested-interactive inválido</h4>
+            <p class="heur-card-id">eventos-detalle-01 · Eventos detalle (WordPress) · Esfuerzo M</p>
+            <p class="heur-card-desc">El acordeón del programa del evento usa <code>role="tab"</code> anidando elementos interactivos dentro de otros interactivos (8 nodos). Esto rompe la navegación por teclado y por lector de pantalla. Es el patrón de accesibilidad más grave detectado en todo el ecosistema de CAMBIO — en la página donde ocurre la conversión real (registro a eventos).</p>
+            <p class="heur-card-action"><strong>Acción:</strong> se resuelve durante la migración técnica de Eventos al stack Next.js (en curso, producción en 4 semanas). El fix se integra al código migrado con el pattern de acordeón correcto del design system principal.</p>
+          </div>
+
+          <!-- 8 -->
+          <div class="heur-card heur-card--major">
+            <div class="heur-card-header">
+              <span class="heur-card-num">08</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--major">Major</span>
+                <span class="heur-badge heur-badge--fw">WCAG</span>
+                <span class="heur-badge heur-badge--scope-post">Post-migración Nivelics</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">27 nodos con contraste insuficiente en Eventos</h4>
+            <p class="heur-card-id">eventos-home-02 + eventos-detalle-03 · Eventos (WordPress) · Esfuerzo S</p>
+            <p class="heur-card-desc">Las cards de eventos (<code>.gt-text</code>, <code>.gt-date</code>) y la sidebar de detalles presentan 27 nodos que no cumplen el ratio mínimo de contraste WCAG 2.2 AA (4.5:1 para texto normal). Es el hallazgo cuantitativo más alto de toda la auditoría — una sola intervención CSS corrige 27 violaciones simultáneamente.</p>
+            <p class="heur-card-action"><strong>Acción intermedia:</strong> override CSS desde admin WordPress alinea paleta y corrige contraste de inmediato. <strong>Acción definitiva:</strong> migración al frontend Next.js donde se aplican tokens del design system.</p>
+          </div>
+
+          <!-- 9 -->
+          <div class="heur-card heur-card--minor">
+            <div class="heur-card-header">
+              <span class="heur-card-num">09</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--minor">Minor</span>
+                <span class="heur-badge heur-badge--fw">WCAG</span>
+                <span class="heur-badge heur-badge--scope-in">Dentro del alcance</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">h1 oculto con <code>hidden</code> en Los Danieles</h4>
+            <p class="heur-card-id">H-opinion-01 · Opinión / Los Danieles · Esfuerzo S</p>
+            <p class="heur-card-desc">El componente <code>TitleImage</code> de la sección Los Danieles oculta el <code>&lt;h1&gt;</code> con el atributo <code>hidden</code> en lugar de usar la clase <code>sr-only</code>. Con <code>hidden</code>, el heading no es leído por tecnología asistiva — el título de la sección queda invisible para lectores de pantalla. Con <code>sr-only</code>, el heading se oculta visualmente pero sigue presente en el árbol de accesibilidad.</p>
+            <p class="heur-card-action"><strong>Acción:</strong> reemplazar <code>hidden</code> por <code>sr-only</code>. Una línea de CSS. Quick win.</p>
+          </div>
+
+          <!-- 10 -->
+          <div class="heur-card heur-card--minor">
+            <div class="heur-card-header">
+              <span class="heur-card-num">10</span>
+              <div class="heur-card-badges">
+                <span class="heur-badge heur-badge--minor">Minor</span>
+                <span class="heur-badge heur-badge--fw">NN/G News</span>
+                <span class="heur-badge heur-badge--scope-in">Dentro del alcance</span>
+              </div>
+            </div>
+            <h4 class="heur-card-title">Especiales sin storytelling visual en la página de detalle</h4>
+            <p class="heur-card-id">especiales-detalle-02 · Especiales detalle · Esfuerzo M</p>
+            <p class="heur-card-desc">La página de detalle de un Especial se presenta como un listado de artículos sin hero, sin capítulos narrativos y sin créditos editoriales. Los especiales son el activo de marca de mayor valor editorial de un medio digital — merecen un tratamiento visual que refleje su inversión en investigación y producción. La ausencia de storytelling visual reduce su percepción de valor y su potencial de recirculación.</p>
+            <p class="heur-card-action"><strong>Acción:</strong> CSS + micro JS para hero visual, estructura de capítulos y créditos. El contenido ya existe; la transformación es de presentación, no de contenido.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Fortalezas -->
+      <div class="heur-fortalezas">
+        <h3 class="heur-section-title">Las 5 fortalezas que CAMBIO debe preservar</h3>
+        <p class="heur-section-desc">No todo es corrección. El frontend de CAMBIO tiene patrones bien resueltos que deben mantenerse y protegerse durante el refresh.</p>
+        
+        <div class="heur-fortaleza-grid">
+          <div class="heur-fortaleza-card">
+            <span class="heur-fortaleza-tag">Fortaleza</span>
+            <h4>Recirculación bien implementada en artículos</h4>
+            <p class="heur-fortaleza-id">H-articulo-03 · NN/G News</p>
+            <p>El artículo incluye tres módulos de recirculación correctamente posicionados: "Más de [Sección]", "Más columnas" y "Lo último" con Suspense. Este es un patrón que muchos medios colombianos no implementan bien. Preservar su estructura durante el refresh y potenciar su visibilidad es más valioso que rediseñarlo.</p>
+          </div>
+          <div class="heur-fortaleza-card">
+            <span class="heur-fortaleza-tag">Fortaleza</span>
+            <h4>ContentShare con aria-labelledby y role='alert'</h4>
+            <p class="heur-fortaleza-id">H-articulo-04 · WCAG (UX)</p>
+            <p>El componente de compartir artículo usa correctamente <code>aria-labelledby</code> para vincular el botón con su contexto y <code>role="alert"</code> para anunciar la acción de copiado. Es un detalle de accesibilidad que demuestra intencionalidad en el equipo de desarrollo — no es accidental. Esto sugiere que el equipo puede adoptar más patrones de a11y si se les da la guía correcta.</p>
+          </div>
+          <div class="heur-fortaleza-card">
+            <span class="heur-fortaleza-tag">Fortaleza · Verificación mayo 2026</span>
+            <h4>Tipografía editorial dual: Mulish + Noto Serif</h4>
+            <p class="heur-fortaleza-id">Verificación benchmark · Tipografía</p>
+            <p>CAMBIO usa un sistema tipográfico dual deliberado: <strong>Mulish</strong> (sans-serif) para UI, navegación y cards del home, y <strong>Noto Serif</strong> para titulares (h1 a 48px/700) y cuerpo de artículo (18px, line-height 28px, ratio 1.55). El carácter editorial serif en la experiencia de lectura es comparable al de NYT o El País. Esta es una decisión de diseño sólida que el refresh debe preservar y potenciar — no reemplazar.</p>
+          </div>
+          <div class="heur-fortaleza-card">
+            <span class="heur-fortaleza-tag">Fortaleza · Verificación mayo 2026</span>
+            <h4>Diferenciación visual de opinión: CardColumnist y CardOpinion</h4>
+            <p class="heur-fortaleza-id">Verificación benchmark · Opinión</p>
+            <p>Las secciones "Los Danieles" y "Puntos de vista" sí tienen componentes diferenciados: <code>CardColumnist</code> con foto gradient overlay y nombre del autor prominente, <code>CardOpinion</code> con foto circular y tipografía diferenciada. La diferenciación existe a nivel componente — la oportunidad es reforzarla en contextos mixtos (sliders del home, strips que mezclan opinión con noticia).</p>
+          </div>
+          <div class="heur-fortaleza-card">
+            <span class="heur-fortaleza-tag">Fortaleza · Verificación mayo 2026</span>
+            <h4>Sticky CTA de suscripción en artículos premium</h4>
+            <p class="heur-fortaleza-id">Verificación benchmark · Conversión</p>
+            <p>Los artículos premium incluyen un CTA sticky/fixed hacia la página de suscripción que persiste durante el scroll. Esta buena práctica Baymard de conversión contextual reduce la distancia entre el contenido que genera interés y la acción de suscribirse. Preservar y potenciar durante el refresh.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insight benchmark -->
+      <div class="insight-box">
+        <span class="insight-tag">Hallazgo transversal · Diagnóstico + Benchmark + Verificación</span>
+        <h3 class="insight-title">Dos fuentes independientes confirman el mismo problema: la jerarquía editorial de CAMBIO no se comunica visualmente</h3>
+        <div class="insight-body">
+          <p>El diagnóstico heurístico de Poder documenta cuantitativamente lo que el benchmark editorial identificó cualitativamente: la pieza dominante de CAMBIO existe pero queda relegada bajo el strip de breaking news, sin recirculación inline en artículos, y sin tipologización en sus hubs de sección. La verificación de mayo 2026 confirmó que CAMBIO tiene activos editoriales reales (tipografía Noto Serif, componentes diferenciados de opinión, sticky CTA) que el benchmark original no documentó. El problema no es ausencia — es subexposición. La intervención de jerarquía visual tiene base sólida porque los componentes ya existen: el refresh debe potenciarlos, no crearlos de cero.</p>
+        </div>
+      </div>
+
+      <!-- Backlog Fase 2 -->
+      <div class="heur-backlog">
+        <h3 class="heur-section-title">Backlog de profundización — Oportunidades para Fase 2</h3>
+        <p class="heur-section-desc">Durante el diagnóstico se identificaron oportunidades adicionales que no se desarrollaron formalmente porque exceden el alcance contratado o requieren datos que aún no están disponibles (Analytics, test con usuarios). Se documentan aquí para honestidad metodológica y como insumo de trabajo futuro.</p>
+
+        <div class="heur-backlog-list heur-backlog-grid">
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Paywall: fricción cognitiva del precio sin valor articulado</h4>
+            <p>El usuario llega al paywall, ve un precio y no recibe una propuesta de valor que justifique el pago. La experiencia es transaccional, no persuasiva. Requiere instrumentación del paywall y datos de abandono.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Página de planes: plan recomendado no es el de mayor ahorro</h4>
+            <p>El plan destacado como "Recomendado" es el de 12 meses con 30% de ahorro, pero el de 24 meses ofrece 35%. La inconsistencia comercial puede generar desconfianza o confusión sobre cuál conviene más al usuario.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Página de planes: sin social proof, sin garantía, sin FAQ inline</h4>
+            <p>Tres ausencias documentadas que la literatura de Baymard asocia directamente con fricción de conversión en suscripciones: testimonios, política de cancelación y resolución de objeciones frecuentes.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Checkout con 9 campos requeridos y doble contraseña</h4>
+            <p>El formulario de registro/checkout solicita tipo y número de documento antes del pago (innecesario para la transacción) y dos campos de contraseña. Cada campo adicional incrementa la tasa de abandono en puntos medibles.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Checkout sin recordatorio de beneficios en momento de mayor ansiedad</h4>
+            <p>Durante el flujo de pago, el usuario no recibe refuerzo de la propuesta de valor. La ausencia de un recordatorio lateral con beneficios del plan amplifica la ansiedad transaccional propia de pagos online en LATAM.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">LATAM</span>
+            <h4>Home sin "más leídos de la semana" como hook de engagement</h4>
+            <p>La audiencia colombiana espera encontrar indicadores de popularidad editorial ("lo más leído", "tendencias") que validen socialmente sus decisiones de lectura. CAMBIO no ofrece este patrón en la portada.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">LATAM</span>
+            <h4>Home sin diferenciación visual noticia vs. opinión vs. patrocinado</h4>
+            <p>Las cards de contenido editorial, de opinión y de contenido patrocinado comparten el mismo tratamiento visual. La audiencia LATAM espera diferenciación clara de estos tres tipos para evaluar credibilidad y relevancia.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">NN/G News</span>
+            <h4>Ausencia de hooks "Lea también" inline en artículos</h4>
+            <p>CAMBIO es el único medio del benchmark sin recirculación intercalada en el cuerpo del artículo. "Lea también:" entre párrafos es un patrón documentado de NN/G para medios digitales que incrementa páginas por sesión.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Nielsen</span>
+            <h4>Buscador sin atajos de teclado</h4>
+            <p>La tecla <code>/</code> o <code>Cmd+K</code> para abrir el buscador es un estándar en productos digitales modernos. El buscador de CAMBIO requiere navegación manual hasta el link de texto en el header. Funcionalidad contextual con autocompletado queda para Fase 3.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Footer sin CTAs de suscripción efectivos</h4>
+            <p>El footer actual muestra links de texto plano para "Suscribirse" y "Registrarse". Es la última oportunidad de conversión en una sesión de lectura y está completamente desaprovechada. Un banner pre-footer con propuesta de valor y CTA sólido es intervención CSS-only.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>WhatsApp como canal asistido subutilizado</h4>
+            <p>El botón de WhatsApp existe pero está enterrado entre secciones editoriales con mínima prominencia visual. Es probablemente el canal de cierre más efectivo en LATAM (conversación humana reduce objeciones). Elevar y rediseñar el bloque puede duplicar conversiones asistidas.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">NN/G News</span>
+            <h4>Carruseles temáticos homogéneos sin jerarquía interna</h4>
+            <p>Los 8 carruseles de secciones (Poder, País, Economía, etc.) usan el mismo layout y tratamiento visual. No hay diferenciación entre la pieza más importante de cada sección y las secundarias. El lector no puede escanear por relevancia.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Gestalt</span>
+            <h4>Páginas de sección sin identidad cromática propia</h4>
+            <p>Poder, País, Economía y demás secciones comparten idéntico tratamiento visual. Un sistema de color por sección (accent color variable) refuerza la wayfinding y la identidad editorial de cada vertical.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Nielsen</span>
+            <h4>Artículo sin indicador de progreso de lectura</h4>
+            <p>Artículos largos de investigación no muestran al lector cuánto ha leído ni cuánto le falta. Una barra de progreso de lectura es CSS-only y mejora la retención en artículos premium (los más valiosos para el modelo de negocio).</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">Baymard</span>
+            <h4>Artículo premium sin CTA contextual post-preview</h4>
+            <p>Cuando el usuario llega al final del contenido visible (pre-paywall), no hay un CTA contextual que convierta el interés en acción. El contenido simplemente se corta. Una intervención de "Suscríbete para seguir leyendo" con beneficios es estándar en la industria.</p>
+          </div>
+
+          <div class="heur-backlog-item">
+            <span class="heur-backlog-fw">NN/G News</span>
+            <h4>Falta de timestamp relativo en cards editoriales</h4>
+            <p>Las cards muestran fecha absoluta ("27 Mayo 2026") en lugar de timestamp relativo ("hace 2 horas"). El patrón de timestamp relativo transmite inmediatez y frescura editorial, especialmente relevante en la cobertura política donde la actualidad es el diferenciador.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Cierre de sección -->
+      <div class="section-cierre">
+        <div class="cierre-single">
+          <h4>De diagnóstico a intervención</h4>
+          <p>Estos hallazgos no se quedan en diagnóstico. La <a href="propuesta.html#transformaciones">Sección 7 — Transformaciones CSS</a> presenta cómo cada hallazgo aplicable al alcance contratado se convierte en una intervención concreta con hipótesis de impacto medible, esfuerzo estimado y plan de A/B testing asociado. Los hallazgos de severidad major que están fuera del alcance (paywall, cookies, checkout) quedan documentados en el <a href="estrategia.html#roadmap">roadmap de Fase 2</a> con su argumentación intacta.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============= FOOTER ============= -->
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="footer-logo" viewBox="0 0 300 80" width="160" height="42"><use href="#nivelics-logo"/></svg>
+        <p class="footer-tagline">Inteligencia Artificial · Cloud · Staffing Inteligente</p>
+      </div>
+      <div class="footer-meta">
+        <div class="footer-meta-block">
+          <span class="footer-label">Proyecto</span>
+          <span class="footer-value">CAMBIO Colombia · Fase 1</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Versión</span>
+          <span class="footer-value">1.0 · Mayo 2026</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Contacto</span>
+          <span class="footer-value">camilo@nivelics.com</span>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>Documento confidencial. Preparado por Nivelics para CAMBIO Colombia. Reproducción restringida.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
