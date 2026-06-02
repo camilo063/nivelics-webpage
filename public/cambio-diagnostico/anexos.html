@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="Material de soporte: reportes, hallazgos detallados y metodología · CAMBIO Colombia · Nivelics">
+  <title>Anexos · CAMBIO Colombia · Fase 1 · Nivelics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+  /* Gate v15: las páginas internas requieren sesión autenticada; si no existe, redirige a index.html antes de pintar. */
+  (function(){try{if(sessionStorage.getItem("cambio-reporte-auth")!=="ok")location.replace("index.html")}catch(e){location.replace("index.html")}})();
+  </script>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- ============= LOGO NIVELICS INLINE (definición SVG global) ============= -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="nivelics-logo" viewBox="0 0 300 80">
+        <!-- Isotipo N geométrico -->
+        <g class="logo-icon">
+          <path d="M 8 18 L 8 62 L 48 62 L 48 38 Z" class="logo-iso-dark"/>
+          <path d="M 8 18 L 48 18 L 48 62 L 28 62 Z" class="logo-iso-accent"/>
+        </g>
+        <!-- Wordmark -->
+        <text x="60" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-main">IVEL</text>
+        <text x="180" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-accent">ICS</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============= NAVEGACIÓN STICKY ============= -->
+  <nav class="nav-sticky" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="Inicio">
+        <svg class="nav-logo" viewBox="0 0 300 80" width="120" height="32"><use href="#nivelics-logo"/></svg>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir navegación" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-groups" id="nav-list">
+
+        <li class="nav-group">
+          <a href="index.html" class="nav-link" data-page="inicio">Inicio</a>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="diagnostico" data-group="diagnostico">
+            Diagnóstico
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="diagnostico.html#contexto" class="submenu-link"><span class="sm-num">03</span> Alcance y Contexto</a>
+            <a href="diagnostico.html#tecnica" class="submenu-link"><span class="sm-num">04</span> Auditoría Técnica y WCAG</a>
+            <a href="diagnostico.html#inventario" class="submenu-link"><span class="sm-num">05</span> Inventario de Componentes</a>
+            <a href="diagnostico.html#heuristico" class="submenu-link"><span class="sm-num">06</span> Diagnóstico Heurístico</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="propuesta" data-group="propuesta">
+            Propuesta
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="propuesta.html#transformaciones" class="submenu-link"><span class="sm-num">07</span> Transformaciones CSS</a>
+            <a href="propuesta.html#abtesting" class="submenu-link"><span class="sm-num">08</span> A/B Testing Visual</a>
+            <a href="propuesta.html#analisis360" class="submenu-link"><span class="sm-num">09</span> Análisis 360° del Producto</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="estrategia" data-group="estrategia">
+            Estrategia
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="estrategia.html#benchmark" class="submenu-link"><span class="sm-num">10</span> Benchmark Editorial</a>
+            <a href="estrategia.html#roadmap" class="submenu-link"><span class="sm-num">11</span> Roadmap de Fases</a>
+            <a href="estrategia.html#rebranding" class="submenu-link"><span class="sm-num">12</span> Alineación Rebranding</a>
+            <a href="estrategia.html#proximos" class="submenu-link"><span class="sm-num">13</span> Próximos Pasos</a>
+          </div>
+        </li>
+
+        <li class="nav-group">
+          <a href="index.html#resumen" class="nav-link" data-page="resumen">Resumen Ejecutivo</a>
+        </li>
+
+        <li class="nav-group">
+          <a href="anexos.html" class="nav-link active" data-page="anexos">Anexos</a>
+        </li>
+
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-pdf" id="btn-pdf">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>PDF</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-progress" id="nav-progress"></div>
+  </nav>
+
+  <main id="contenido">
+
+  <!-- ============= ANEXOS: ENCABEZADO ============= -->
+  <section class="section section-anexos-intro" id="anexos-top">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-number" style="font-size:3rem;">A</span>
+        <h2 class="section-title">Anexos</h2>
+        <p class="section-subtitle">Material de soporte navegable para profundizar en los hallazgos del diagnóstico</p>
+      </div>
+      <p class="audit-lead" style="margin-bottom:var(--space-xl);">Estos anexos presentan el material de la auditoría en formato navegable y contextualizado, no como volcados de archivos técnicos. Cada hallazgo, componente y reporte se puede consultar sin abrir un JSON. El material crudo se ofrece como descarga complementaria al final de cada anexo.</p>
+      <nav class="anx-toc" aria-label="Índice de anexos">
+        <a href="#anexo-a"><span class="anx-toc-letter">A</span> Detalle WCAG completo</a>
+        <a href="#anexo-b"><span class="anx-toc-letter">B</span> Catálogo de componentes</a>
+        <a href="#anexo-c"><span class="anx-toc-letter">C</span> Hallazgos heurísticos</a>
+        <a href="#anexo-d"><span class="anx-toc-letter">D</span> Reportes Lighthouse</a>
+        <a href="#anexo-e"><span class="anx-toc-letter">E</span> Metodología y scripts</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section anx-section" id="anexo-a">
+    <div class="section-inner">
+      <div class="anx-head"><span class="anx-letter">A</span>
+        <div><h3 class="anx-title">Detalle WCAG completo</h3>
+        <p class="anx-desc">Scorecard medido, los 11 hallazgos de accesibilidad y las violaciones axe-core agregadas.</p></div></div>
+      <p class="block-lead">Auditoría ejecutada con <strong>Lighthouse 13.3</strong> y <strong>axe-core 4.11</strong> sobre producción (mayo 2026, viewport desktop 1440px), complementada con análisis estático del código fuente del repositorio. Las cifras de esta sección son medidas, no estimadas.</p>
+      <h4 class="anx-sub">Scorecard Lighthouse · 6 despliegues principales</h4>
+      <div class="anx-sc-grid">
+        <div class="anx-sc-card"><div class="anx-sc-name">Home<span>/</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-bad" style="width:13%"></span></div><span class="anx-lh-num lh-bad">13</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:93%"></span></div><span class="anx-lh-num lh-ok">93</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+        <div class="anx-sc-card"><div class="anx-sc-name">Sección Poder<span>/poder</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:62%"></span></div><span class="anx-lh-num lh-mid">62</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+        <div class="anx-sc-card"><div class="anx-sc-name">Sección País<span>/pais</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:60%"></span></div><span class="anx-lh-num lh-mid">60</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+        <div class="anx-sc-card"><div class="anx-sc-name">Artículo<span>/pais/articulo/…</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:63%"></span></div><span class="anx-lh-num lh-mid">63</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:96%"></span></div><span class="anx-lh-num lh-ok">96</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+        <div class="anx-sc-card"><div class="anx-sc-name">Opinión · Los Danieles<span>/los-danieles</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:65%"></span></div><span class="anx-lh-num lh-mid">65</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+        <div class="anx-sc-card"><div class="anx-sc-name">Buscador<span>/buscar</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:69%"></span></div><span class="anx-lh-num lh-mid">69</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:66%"></span></div><span class="anx-lh-num lh-mid">66</span></div></div>
+      </div>
+      <h4 class="anx-sub">11 hallazgos WCAG individuales</h4>
+      <div class="anx-table-wrap"><table class="anx-table"><thead><tr><th>ID</th><th>Criterio</th><th>Página / componente</th><th>Actual → requerido</th><th>Impacto</th><th>Cobertura</th></tr></thead><tbody>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-home-01</code></td><td><strong>1.3.1</strong> Información y relaciones <span class="anx-lvl">A</span></td>
+          <td>Home · ContentHome.tsx:19</td><td>h1 con clase hidden (sale del árbol de a11y)</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Reemplazar hidden por sr-only (mismo fix que A-opinion-01). <span class="anx-qwin">Quick-win CSS-only · PR de accesibilidad Fase 1</span></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-articulo-01</code></td><td><strong>1.3.1</strong> Información y relaciones <span class="anx-lvl">A</span></td>
+          <td>Artículo · GalleryBlock</td><td>Pie de foto roto: la relación imagen↔caption no llega a la estructura</td><td><span class="anx-sevpill sev-cata">crítica</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Corregir la interpolación del caption (ver hallazgo H-articulo-02). <a class="anx-txlink" href="propuesta.html#tx-25">→ Transformación TX-25</a></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-articulo-02</code></td><td><strong>4.1.2</strong> Nombre, función, valor <span class="anx-lvl">A</span></td>
+          <td>Artículo · RichTextBlock.tsx:30-32</td><td>iframe de Spotify sin atributo title</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Agregar title descriptivo al iframe de Spotify. <span class="anx-qwin">Quick-win CSS-only · PR de accesibilidad Fase 1</span></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-buscador-01</code></td><td><strong>2.5.8</strong> Tamaño del objetivo (mínimo) <span class="anx-lvl">AA</span></td>
+          <td>Buscador · Search (botón limpiar)</td><td>20×20 px → 24×24 px mínimo</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Subir el botón limpiar a h-6 w-6 (24px). <span class="anx-qwin">Quick-win CSS-only · PR de accesibilidad Fase 1</span></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-buscador-02</code></td><td><strong>4.1.3</strong> Mensajes de estado <span class="anx-lvl">AA</span></td>
+          <td>Buscador · SearchSection</td><td>aria-live presente, pero sin texto de cantidad</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Añadir &lt;p role=&quot;status&quot; class=&quot;sr-only&quot;&gt;{total} resultados&lt;/p&gt;. <a class="anx-txlink" href="propuesta.html#tx-24">→ Transformación TX-24</a></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-opinion-01</code></td><td><strong>1.3.1</strong> Información y relaciones <span class="anx-lvl">A</span></td>
+          <td>Opinión · TitleImage</td><td>h1 con clase hidden (sale del árbol de a11y)</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Reemplazar hidden por sr-only para que el lector lo anuncie. <a class="anx-txlink" href="propuesta.html#tx-23">→ Transformación TX-23</a></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-seccion-01</code></td><td><strong>1.3.1</strong> Información y relaciones <span class="anx-lvl">A</span></td>
+          <td>Sección · navItems</td><td>Sub-secciones en &lt;div&gt;, no en &lt;nav&gt;</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Envolver en &lt;nav aria-label=&quot;Sub-secciones&quot;&gt;. <a class="anx-txlink" href="propuesta.html#tx-22">→ Transformación TX-22</a></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-transversal-01</code></td><td><strong>4.1.1</strong> Procesamiento (parsing) <span class="anx-lvl">A</span></td>
+          <td>Todos (mobile) · HamburgerMenu</td><td>id=&quot;hamburger-menu&quot; duplicado rompe aria-controls</td><td><span class="anx-sevpill sev-major">seria</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Renombrar uno de los dos ids. <a class="anx-txlink" href="propuesta.html#tx-20">→ Transformación TX-20</a></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-transversal-02</code></td><td><strong>1.4.3</strong> Contraste mínimo <span class="anx-lvl">AA</span></td>
+          <td>Todos · text-gray-400 sobre blanco</td><td>2.85:1 → 4.5:1 (AA)</td><td><span class="anx-sevpill sev-major">seria</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Reemplazar text-gray-400 por text-gray-500 en los ~16 usos sobre fondo blanco. <span class="anx-qwin">Quick-win CSS-only · PR de accesibilidad Fase 1</span></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-transversal-03</code></td><td><strong>1.3.1</strong> Información y relaciones <span class="anx-lvl">A</span></td>
+          <td>Todos · NavigationRibbon</td><td>Link activo sin aria-current</td><td><span class="anx-sevpill sev-minor">moderada</span></td><td><span class="anx-covpill cov-in">Dentro · CSS-only</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Añadir aria-current=&quot;page&quot; al enlace activo. <a class="anx-txlink" href="propuesta.html#tx-21">→ Transformación TX-21</a></div></td></tr>
+        <tr class="anx-acc-row" tabindex="0" role="button" aria-expanded="false">
+          <td><code>A-transversal-04</code></td><td><strong>2.4.1</strong> Evitar bloques (skip link) <span class="anx-lvl">A</span></td>
+          <td>Todos · layout</td><td>Sin skip link: el teclado tabula todo el header</td><td><span class="anx-sevpill sev-major">seria</span></td><td><span class="anx-covpill cov-in">Dentro · CSS+microJS</span></td></tr>
+        <tr class="anx-acc-detail"><td colspan="6"><div class="anx-acc-inner"><strong>Recomendación:</strong> Añadir skip link &lt;a href=&quot;#contenido&quot;&gt; al inicio del DOM. <a class="anx-txlink" href="propuesta.html#tx-19">→ Transformación TX-19</a></div></td></tr>
+      </tbody></table></div>
+      <h4 class="anx-sub">Fortalezas de accesibilidad detectadas</h4>
+      <p class="block-lead">El frontend ya implementa varios patrones de accesibilidad correctamente. Reconocerlos da contexto: los hallazgos no parten de cero, sino de una base decente que conviene mantener.</p>
+      <div class="anx-fort-grid">
+        <div class="anx-fort"><code>Search</code><p>role="search" + label sr-only asociada + aria-live. Patrón de libro (Search.tsx:42-48, 85).</p></div>
+        <div class="anx-fort"><code>PaywallBlock</code><p>role="region" + aria-labelledby="paywall-heading". Bien estructurado (línea 81-82).</p></div>
+        <div class="anx-fort"><code>HamburgerMenu</code><p>aria-expanded + aria-modal + cierre con Esc (con el bug de id duplicado que corrige A-transversal-01).</p></div>
+        <div class="anx-fort"><code>CookieConsent</code><p>role="dialog" + aria-label correctos (le falta el botón Rechazar — ver H-transversal-01).</p></div>
+        <div class="anx-fort"><code>ContentShare</code><p>aria-labelledby + role="alert" con aria-live para el feedback de copia. Patrón ejemplar a replicar.</p></div>
+        <div class="anx-fort"><code>ArticleJsonLd</code><p>schema.org NewsArticle / OpinionNewsArticle completo (mejora SEO y a11y indirecta).</p></div>
+      </div>
+      <h4 class="anx-sub">Violaciones axe-core agregadas (despliegues principales)</h4>
+      <div class="anx-axe-grid">
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>target-size</code><span class="anx-axe-nodes">74 nodos</span><span class="anx-origin origin-fe">Frontend CAMBIO</span></div>
+          <p>Dots del carrusel a 8×8 px (FeaturedSlider, VideosSection). Un fix CSS único resuelve los 74 nodos.</p><img class="anx-axe-img" loading="lazy" src="assets/evidencias/A-medido-01.png" alt="Evidencia anotada de la violación target-size"></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>link-name</code><span class="anx-axe-nodes">10 nodos</span><span class="anx-origin origin-mix">Mixto</span></div>
+          <p>Enlaces sin texto accesible: SpecialsBanner (frontend) + anuncios GAM (third-party).</p><img class="anx-axe-img" loading="lazy" src="assets/evidencias/A-medido-02.png" alt="Evidencia anotada de la violación link-name"></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>color-contrast</code><span class="anx-axe-nodes">5 nodos</span><span class="anx-origin origin-fe">Frontend CAMBIO</span></div>
+          <p>Incluye text-gray-400 sobre blanco (2.85:1), el badge --color-successful (2.87:1) y text-white/50 (4.43:1), todos bajo el mínimo AA.</p><img class="anx-axe-img" loading="lazy" src="assets/evidencias/A-medido-03.png" alt="Evidencia anotada de la violación color-contrast"></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>aria-command-name</code><span class="anx-axe-nodes">6 nodos</span><span class="anx-origin origin-tp">Third-party (GAM)</span></div>
+          <p>Comandos sin nombre dentro del slot publicitario GAM. No es código de CAMBIO.</p></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>html-has-lang</code><span class="anx-axe-nodes">1 nodos</span><span class="anx-origin origin-fe">Frontend CAMBIO</span></div>
+          <p>Único nodo: la plantilla legacy /elecciones-colombia-2026 (Bootstrap, CMS Utopia).</p></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>image-alt</code><span class="anx-axe-nodes">2 nodos</span><span class="anx-origin origin-tp">Third-party (GAM)</span></div>
+          <p>Imágenes sin alt dentro de creatividades GAM. No es código de CAMBIO.</p></div>
+      </div>
+      <h4 class="anx-sub">Violaciones complementarias · Eventos (subdominio WordPress)</h4>
+      <div class="anx-axe-grid">
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>nested-interactive</code><span class="anx-axe-nodes">8 nodos</span><span class="anx-origin origin-fe">Eventos</span></div>
+          <p>Acordeón del programa de Eventos: div role=&quot;tab&quot; con interactivos anidados.</p><img class="anx-axe-img" loading="lazy" src="assets/evidencias/eventos-detalle-01.png" alt="Evidencia anotada nested-interactive en Eventos"></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>color-contrast</code><span class="anx-axe-nodes">18 nodos</span><span class="anx-origin origin-fe">Eventos</span></div>
+          <p>Tema WordPress &quot;eventchamp&quot; usa grises bajo AA en cards de evento.</p><img class="anx-axe-img" loading="lazy" src="assets/evidencias/eventos-home-02.png" alt="Evidencia anotada color-contrast en Eventos"></div>
+        <div class="anx-axe-card"><div class="anx-axe-top"><code>link-name</code><span class="anx-axe-nodes">6 nodos</span><span class="anx-origin origin-fe">Eventos</span></div>
+          <p>Botones de compartir (Facebook/X/LinkedIn/WhatsApp/Email) sin aria-label.</p><img class="anx-axe-img" loading="lazy" src="assets/evidencias/eventos-detalle-02.png" alt="Evidencia anotada link-name en Eventos"></div>
+      </div>
+      <div class="anx-download"><span class="anx-dl-tag">Descarga complementaria opcional</span><p>Reportes Lighthouse HTML completos en el <a href="#anexo-d">Anexo D</a>. Datos crudos: <code>auditoria-wcag.json</code> (matriz estructurada de los 11 hallazgos).</p></div>
+    </div>
+  </section>
+  <section class="section anx-section" id="anexo-b">
+    <div class="section-inner">
+      <div class="anx-head"><span class="anx-letter">B</span>
+        <div><h3 class="anx-title">Catálogo de componentes inventariados</h3>
+        <p class="anx-desc">El sistema de componentes de CAMBIO, sus tokens y las inconsistencias detectadas.</p></div></div>
+      <p class="block-lead">El frontend de CAMBIO está construido en <strong>Atomic Design</strong> sobre Next.js 16 + React 19 + Tailwind v4: <strong>105 componentes</strong> (19 atoms + 55 molecules + 31 organisms) más <strong>8 content pages</strong> que orquestan los despliegues. La tabla detalla los componentes auditados con su clasificación de intervención.</p>
+      <div class="anx-bstats">
+        <div class="anx-bstat"><strong>19</strong><span>atoms</span></div>
+        <div class="anx-bstat"><strong>55</strong><span>molecules</span></div>
+        <div class="anx-bstat"><strong>31</strong><span>organisms</span></div>
+        <div class="anx-bstat"><strong>8</strong><span>content pages</span></div>
+      </div>
+      <h4 class="anx-sub">Tabla de componentes</h4>
+      <div class="anx-filters" data-target="comp">
+        <input type="search" class="anx-search" data-target="comp" placeholder="Buscar componente…" aria-label="Buscar componente">
+        <select class="anx-filter" data-target="comp" data-field="tipo" aria-label="Filtrar por tipo"><option value="">Todos los tipos</option><option>atom</option><option>molecule</option><option>organism</option></select>
+        <select class="anx-filter" data-target="comp" data-field="interv" aria-label="Filtrar por intervención"><option value="">Toda intervención</option><option>component-only</option><option>fuera-alcance</option><option>refactor-componente</option><option>tokens-only</option></select>
+      </div>
+      <div class="anx-table-wrap"><table class="anx-table" id="comp-table"><thead><tr><th>Componente</th><th>Tipo</th><th>Despliegues</th><th>Intervención</th><th>Notas</th></tr></thead><tbody>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="ad-banner"><td><code>ad-banner</code></td><td>atom</td><td class="anx-uso">home, seccion, articulo, especiales, opinion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Variantes top/sidebar/sticky/middle. iframe title=&#x27;Publicidad&#x27; OK. hidden sin aria-live.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="tokens-only" data-name="breaking-news-badge"><td><code>breaking-news-badge</code></td><td>atom</td><td class="anx-uso">home, articulo</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="button-link"><td><code>button-link</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Atom central — variantes primary/secondary/light/nav/link. Verificar focus visible y target=_blank con rel.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="tokens-only" data-name="chip"><td><code>chip</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="refactor-componente" data-name="content-html"><td><code>content-html</code></td><td>atom</td><td class="anx-uso">articulo, especiales-detalle</td><td><span class="anx-ivpill iv-ref">refactor-componente</span></td><td class="anx-note">Usa marked + dangerouslySetInnerHTML. Sin control sobre jerarquía de headings ni iframes embebidos.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="tokens-only" data-name="end-sign"><td><code>end-sign</code></td><td>atom</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="heading"><td><code>heading</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="icon"><td><code>icon</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Verificar aria-hidden por defecto cuando son decorativos.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="input"><td><code>input</code></td><td>atom</td><td class="anx-uso">transversal-formularios</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="fuera-alcance" data-name="json-ld"><td><code>json-ld</code></td><td>atom</td><td class="anx-uso">home, articulo, seccion, autor</td><td><span class="anx-ivpill iv-out">fuera-alcance</span></td><td class="anx-note">Solo afecta SEO.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="link-nav"><td><code>link-nav</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="logo-svg"><td><code>logo-svg</code></td><td>atom</td><td class="anx-uso">header, footer</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Verificar role=&#x27;img&#x27; y aria-label=&#x27;CAMBIO&#x27;.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="picture"><td><code>picture</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Punto crítico de a11y — prop alt obligatoria pero no enforced. Issue en ImageBlock y GalleryBlock.</td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="textarea"><td><code>textarea</code></td><td>atom</td><td class="anx-uso">transversal-formularios</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="tokens-only" data-name="time"><td><code>time</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="tooltip"><td><code>tooltip</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="typography"><td><code>typography</code></td><td>atom</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="atom" data-interv="component-only" data-name="youtube-facade"><td><code>youtube-facade</code></td><td>atom</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Patrón facade para lazy embed. Verificar iframe title cuando se reemplaza.</td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="tokens-only" data-name="article-badge"><td><code>article-badge</code></td><td>molecule</td><td class="anx-uso">articulo, home, seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="component-only" data-name="article-comments"><td><code>article-comments</code></td><td>molecule</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Coral Talk lazy. Focus post-load no verificado.</td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="tokens-only" data-name="article-cta"><td><code>article-cta</code></td><td>molecule</td><td class="anx-uso">home, seccion, articulo</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="component-only" data-name="card-columnist"><td><code>card-columnist</code></td><td>molecule</td><td class="anx-uso">opinion, los-danieles</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">aspect-4/5 + gradient overlay. objectPosition=&#x27;top&#x27; faltante.</td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="tokens-only" data-name="card-featured"><td><code>card-featured</code></td><td>molecule</td><td class="anx-uso">home, seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="component-only" data-name="card-news"><td><code>card-news</code></td><td>molecule</td><td class="anx-uso">home, seccion, especiales, opinion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="tokens-only" data-name="card-opinion"><td><code>card-opinion</code></td><td>molecule</td><td class="anx-uso">opinion, articulo-recirculacion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="component-only" data-name="card-result"><td><code>card-result</code></td><td>molecule</td><td class="anx-uso">buscador</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="component-only" data-name="pagination"><td><code>pagination</code></td><td>molecule</td><td class="anx-uso">buscador, listados</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="component-only" data-name="search"><td><code>search</code></td><td>molecule</td><td class="anx-uso">buscador</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">role=&#x27;search&#x27; OK. Botón clear 20px &lt; 24px (WCAG 2.5.5).</td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="tokens-only" data-name="no-results"><td><code>no-results</code></td><td>molecule</td><td class="anx-uso">buscador, listados</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="molecule" data-interv="tokens-only" data-name="content-share"><td><code>content-share</code></td><td>molecule</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="header"><td><code>header</code></td><td>organism</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Sticky + shrink. Verificar LogoSvg a11y.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="hamburger-menu"><td><code>hamburger-menu</code></td><td>organism</td><td class="anx-uso">transversal-mobile</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Esc OK. Doble id=&#x27;hamburger-menu&#x27; — bug aria-controls.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="navigation-ribbon"><td><code>navigation-ribbon</code></td><td>organism</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Falta aria-current en link activo.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="footer"><td><code>footer</code></td><td>organism</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="user-menu"><td><code>user-menu</code></td><td>organism</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">DropdownMenuTrigger es div custom — verificar role.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="paywall-block"><td><code>paywall-block</code></td><td>organism</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="subscription-form"><td><code>subscription-form</code></td><td>organism</td><td class="anx-uso">suscripcion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="subscription-plans"><td><code>subscription-plans</code></td><td>organism</td><td class="anx-uso">suscripcion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">TabsTrigger usa plan.period como label — texto genérico.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="refactor-componente" data-name="cookie-consent"><td><code>cookie-consent</code></td><td>organism</td><td class="anx-uso">transversal</td><td><span class="anx-ivpill iv-ref">refactor-componente</span></td><td class="anx-note">Falta botón Rechazar — riesgo legal.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="featured-slider"><td><code>featured-slider</code></td><td>organism</td><td class="anx-uso">home</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="news-slider"><td><code>news-slider</code></td><td>organism</td><td class="anx-uso">home, seccion, articulo-recirculacion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="columnist-slider"><td><code>columnist-slider</code></td><td>organism</td><td class="anx-uso">home, opinion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Breakpoints Bootstrap (575/992/1199).</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="opinion-slider"><td><code>opinion-slider</code></td><td>organism</td><td class="anx-uso">home, seccion, opinion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="article-header"><td><code>article-header</code></td><td>organism</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="content-blocks"><td><code>content-blocks</code></td><td>organism</td><td class="anx-uso">home, seccion, opinion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note">Engine de bloques dinámicos. 18 tipos. Cada bloque envuelto en BlockErrorBoundary.</td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="special-section"><td><code>special-section</code></td><td>organism</td><td class="anx-uso">especiales</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="specials-banner"><td><code>specials-banner</code></td><td>organism</td><td class="anx-uso">home, seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="specials-section"><td><code>specials-section</code></td><td>organism</td><td class="anx-uso">especiales-listado, home</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="videos-section"><td><code>videos-section</code></td><td>organism</td><td class="anx-uso">home, seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="gallery-section"><td><code>gallery-section</code></td><td>organism</td><td class="anx-uso">home, seccion</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="main-news-section"><td><code>main-news-section</code></td><td>organism</td><td class="anx-uso">home</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="section-articles-grid"><td><code>section-articles-grid</code></td><td>organism</td><td class="anx-uso">seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="card-news-feature"><td><code>card-news-feature</code></td><td>organism</td><td class="anx-uso">home, seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="card-news-row"><td><code>card-news-row</code></td><td>organism</td><td class="anx-uso">home, seccion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="columns-section"><td><code>columns-section</code></td><td>organism</td><td class="anx-uso">articulo-recirculacion-opinion</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="list-pagination"><td><code>list-pagination</code></td><td>organism</td><td class="anx-uso">seccion, listados</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="liveblog-widget"><td><code>liveblog-widget</code></td><td>organism</td><td class="anx-uso">articulo-liveblog</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="podcast-player"><td><code>podcast-player</code></td><td>organism</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="tokens-only" data-name="whatsapp-channel"><td><code>whatsapp-channel</code></td><td>organism</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-tok">tokens-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="organism" data-interv="component-only" data-name="youtube-widget"><td><code>youtube-widget</code></td><td>organism</td><td class="anx-uso">articulo, home</td><td><span class="anx-ivpill iv-comp">component-only</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-home"><td><code>content-home</code></td><td>content page</td><td class="anx-uso">home</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-section-page"><td><code>content-section-page</code></td><td>content page</td><td class="anx-uso">seccion, opinion, los-danieles</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-article"><td><code>content-article</code></td><td>content page</td><td class="anx-uso">articulo</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-special"><td><code>content-special</code></td><td>content page</td><td class="anx-uso">especiales-detalle</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-author"><td><code>content-author</code></td><td>content page</td><td class="anx-uso">autor (sin despliegue explícito en prompts)</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-basic"><td><code>content-basic</code></td><td>content page</td><td class="anx-uso">paginas-basicas</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-liveblog"><td><code>content-liveblog</code></td><td>content page</td><td class="anx-uso">articulo-liveblog</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+        <tr class="comp-row" data-tipo="content page" data-interv="content-page" data-name="content-tag"><td><code>content-tag</code></td><td>content page</td><td class="anx-uso">listados-por-etiqueta</td><td><span class="anx-ivpill iv-comp">orquestador</span></td><td class="anx-note"></td></tr>
+      </tbody></table></div>
+      <p class="anx-empty" id="comp-empty" hidden>Ningún componente coincide con los filtros.</p>
+      <h4 class="anx-sub">Tokens del sistema</h4>
+      <h5 class="anx-sub2">Paleta de color</h5><div class="anx-swatches">
+        <div class="anx-swatch"><span class="anx-chip" style="background:#e12204"></span><code>primary</code><span class="anx-hex">#e12204</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#c51e03"></span><code>primary-hover</code><span class="anx-hex">#c51e03</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#ffffff"></span><code>primary-foreground</code><span class="anx-hex">#ffffff</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#f7cc46"></span><code>accent</code><span class="anx-hex">#f7cc46</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#e5bb35"></span><code>accent-hover</code><span class="anx-hex">#e5bb35</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#1a1a1a"></span><code>accent-foreground</code><span class="anx-hex">#1a1a1a</span></div>
+      </div><h5 class="anx-sub2">Grises (18 declarados → propuesta de 7 canónicos)</h5><div class="anx-swatches">
+        <div class="anx-swatch"><span class="anx-chip" style="background:#f5f5f5"></span><code>gray-100</code><span class="anx-hex">#f5f5f5</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#e7e7e7"></span><code>gray-150</code><span class="anx-hex">#e7e7e7</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#e5e5e5"></span><code>gray-200</code><span class="anx-hex">#e5e5e5</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#c4c4c4"></span><code>gray-250</code><span class="anx-hex">#c4c4c4</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#d4d4d4"></span><code>gray-300</code><span class="anx-hex">#d4d4d4</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#dddddd"></span><code>gray-350</code><span class="anx-hex">#dddddd</span><span class=anx-suse>sin uso</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#adacac"></span><code>gray-375</code><span class="anx-hex">#adacac</span><span class=anx-suse>sin uso</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#a3a3a3"></span><code>gray-400</code><span class="anx-hex">#a3a3a3</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#888888"></span><code>gray-450</code><span class="anx-hex">#888888</span><span class=anx-suse>sin uso</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#737373"></span><code>gray-500</code><span class="anx-hex">#737373</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#595959"></span><code>gray-550</code><span class="anx-hex">#595959</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#525252"></span><code>gray-600</code><span class="anx-hex">#525252</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#4d4d4d"></span><code>gray-625</code><span class="anx-hex">#4d4d4d</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#555555"></span><code>gray-650</code><span class="anx-hex">#555555</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#292929"></span><code>gray-675</code><span class="anx-hex">#292929</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#444444"></span><code>gray-700</code><span class="anx-hex">#444444</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#333333"></span><code>gray-800</code><span class="anx-hex">#333333</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#1a1a1a"></span><code>gray-900</code><span class="anx-hex">#1a1a1a</span></div>
+      </div><h5 class="anx-sub2">Estado</h5><div class="anx-swatches">
+        <div class="anx-swatch"><span class="anx-chip" style="background:#27ae60"></span><code>success</code><span class="anx-hex">#27ae60</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#d4efdf"></span><code>success-bg</code><span class="anx-hex">#d4efdf</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#badbcc"></span><code>success-border</code><span class="anx-hex">#badbcc</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#0f5132"></span><code>success-foreground</code><span class="anx-hex">#0f5132</span></div>
+        <div class="anx-swatch"><span class="anx-chip" style="background:#ef4444"></span><code>destructive</code><span class="anx-hex">#ef4444</span></div>
+      </div>
+      <h5 class="anx-sub2">Tipografías</h5><div class="anx-typo">
+        <div class="anx-typo-card"><span class="anx-typo-stack">&#x27;Mulish&#x27;, sans-serif</span><p>cuerpo, UI, titulares secundarios</p></div>
+        <div class="anx-typo-card"><span class="anx-typo-stack">&#x27;Noto Serif&#x27;, Georgia, serif</span><p>titulares editoriales (h1 de artículo)</p></div>
+      </div><p class="anx-note2">Carga: Fuentes locales en src/shared/fonts/ (no Google Fonts en runtime).. Escala de tamaños: text-xs a text-4xl. Pesos: normal a black (font-black es outlier, 1 uso).</p>
+      <h5 class="anx-sub2">Spacing · Radius · Shadows · Breakpoints</h5>
+      <div class="anx-tok-grid">
+        <div class="anx-tok-card"><h6>Spacing</h6><p>Escala default de Tailwind v4. Pocos arbitrarios (p-[14px] fuera de escala). Container: 1280px.</p></div>
+        <div class="anx-tok-card"><h6>Radius</h6><p>5 tokens declarados (--radius-sm, --radius-md, --radius-lg, --radius-xl, --radius-full) + 7 valores arbitrarios. Propuesta: escala de 6 tokens (añadir --radius-md-plus 10px).</p></div>
+        <div class="anx-tok-card"><h6>Shadows</h6><p>Tailwind default (shadow-md/lg los más usados). 1 drop-shadow arbitrario en el hero de Los Danieles; box-shadow inline en .paywall-content.</p></div>
+        <div class="anx-tok-card"><h6>Breakpoints</h6><p>Tailwind (640/768/1024/1280/1536) + 3 arbitrarios Bootstrap (575/992/1199) en ColumnistSlider. Alinear o declarar custom.</p></div>
+      </div>
+      <h4 class="anx-sub">Inconsistencias detectadas (deuda técnica)</h4><div class="anx-inc-list">
+        <div class="anx-inc"><div class="anx-inc-top"><strong>Tokens redundantes</strong><span class="anx-sevpill sev-minor">media</span></div><p>gray-500 = muted-foreground (#737373); gray-200 = border = input (#e5e5e5); success = successful (#27ae60, duplicado por error).</p></div>
+        <div class="anx-inc"><div class="anx-inc-top"><strong>Hex literales en TSX</strong><span class="anx-sevpill sev-minor">media</span></div><p>25+ ocurrencias hardcoded: #333333 (×10), #f5f5f5 (×10), #ffffff (×6), #e12204 (×3) — saltan por encima de los tokens.</p></div>
+        <div class="anx-inc"><div class="anx-inc-top"><strong>Radius arbitrarios</strong><span class="anx-sevpill sev-minor">media</span></div><p>16 ocurrencias rounded-[*] fuera de escala: .313rem (5px ×5, legacy Bootstrap), .625rem (10px ×8).</p></div>
+        <div class="anx-inc"><div class="anx-inc-top"><strong>Breakpoints mezclados</strong><span class="anx-sevpill sev-minor">media</span></div><p>min-[575px] / min-[992px] / min-[1199px] (Bootstrap) conviven con sm:/lg:/xl: de Tailwind en ColumnistSlider.</p></div>
+        <div class="anx-inc"><div class="anx-inc-top"><strong>Componentes equivalentes</strong><span class="anx-sevpill sev-cosmetic">baja</span></div><p>CardNews / CardFeatured / CardImage / CardNewsFeature / CardNewsRow — tarjeta de noticia con variantes próximas. Validar consolidación.</p></div>
+        <div class="anx-inc"><div class="anx-inc-top"><strong>CSS legacy en globals</strong><span class="anx-sevpill sev-minor">media</span></div><p>Bloque .paywall-* (~120 líneas, globals.css:188-310) que debería vivir como variante de componente.</p></div>
+      </div>
+      <div class="anx-download"><span class="anx-dl-tag">Descarga complementaria opcional</span><p>Datos crudos: <code>inventario-global.json</code> (105 componentes) y los 6 JSON de tokens (colores, tipografías, spacing, radius, shadows, breakpoints).</p></div>
+    </div>
+  </section>
+  <section class="section anx-section" id="anexo-c">
+    <div class="section-inner">
+      <div class="anx-head"><span class="anx-letter">C</span>
+        <div><h3 class="anx-title">Hallazgos heurísticos detallados</h3>
+        <p class="anx-desc">Los 18 hallazgos y 2 fortalezas, con evidencia visual anotada y conexión a su transformación.</p></div></div>
+      <p class="block-lead">Diagnóstico multi-framework: <strong>Nielsen</strong>, <strong>WCAG (capa UX)</strong>, <strong>NN/G News</strong>, <strong>Baymard</strong> (suscripción/paywall), <strong>Gestalt</strong> y heurísticas <strong>LATAM</strong>. Cada hallazgo enlaza a la transformación de la Sección 7 que lo resuelve.</p>
+      <div class="anx-dist">
+        <div class="anx-dist-card"><h5>Por severidad</h5>
+          <div class="anx-dist-rows">
+          <span><i class="dot sev-cata"></i>Catastrophic <b>1</b></span>
+          <span><i class="dot sev-major"></i>Major <b>6</b></span>
+          <span><i class="dot sev-minor"></i>Minor <b>11</b></span>
+          <span><i class="dot cov-keep"></i>Fortalezas <b>2</b></span></div></div>
+        <div class="anx-dist-card"><h5>Por framework</h5><div class="anx-dist-rows"><span>Nielsen <b>4</b></span><span>WCAG UX <b>4</b></span><span>NN/G News <b>4</b></span><span>Baymard <b>4</b></span><span>Gestalt <b>2</b></span><span>LATAM <b>2</b></span></div></div>
+        <div class="anx-dist-card"><h5>Por despliegue</h5><div class="anx-dist-rows"><span>seccion-poder <b>6</b></span><span>articulo <b>5</b></span><span>todos <b>2</b></span><span>home <b>1</b></span><span>seccion <b>1</b></span><span>buscador <b>1</b></span><span>opinion <b>1</b></span><span>especiales <b>1</b></span><span>todos-mobile <b>1</b></span><span>suscripcion <b>1</b></span></div></div>
+      </div>
+      <div class="anx-filters" data-target="heur">
+        <select class="anx-filter" data-target="heur" data-field="fw" aria-label="Framework"><option value="">Todos los frameworks</option><option value="baymard">Baymard</option><option value="gestalt">Gestalt</option><option value="latam">LATAM</option><option value="nielsen">Nielsen</option><option value="nng-news">NN/G News</option><option value="wcag">WCAG UX</option></select>
+        <select class="anx-filter" data-target="heur" data-field="sev" aria-label="Severidad"><option value="">Toda severidad</option><option value="4">Catastrophic</option><option value="3">Major</option><option value="2">Minor</option><option value="fort">Fortaleza</option></select>
+        <select class="anx-filter" data-target="heur" data-field="dep" aria-label="Despliegue"><option value="">Todo despliegue</option><option value="articulo">articulo</option><option value="buscador">buscador</option><option value="especiales">especiales</option><option value="home">home</option><option value="opinion">opinion</option><option value="seccion">seccion</option><option value="seccion-poder">seccion-poder</option><option value="suscripcion">suscripcion</option><option value="todos">todos</option><option value="todos-mobile">todos-mobile</option></select>
+        <select class="anx-filter" data-target="heur" data-field="cov" aria-label="Cobertura"><option value="">Toda cobertura</option><option value="in">Dentro de alcance</option><option value="out">Fuera de alcance</option></select>
+      </div>
+      <div class="anx-heur-list" id="heur-list">
+        <article class="anx-heur acc-item" data-fw="nielsen" data-sev="3" data-dep="home" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-home-01</code></span>
+            <span class="anx-heur-title">Falta &lt;main&gt; y skip link en Home</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Nielsen</span><span class="anx-sevpill sev-major">Major</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>home</strong></span><span>Componente: <code>layout.tsx / ContentHome</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">Header sin landmark &lt;main&gt; ni skip link: un usuario de teclado debe tabular todo el header antes de llegar al contenido.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-home-01.png" alt="Evidencia anotada de H-home-01"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Añadir skip link y envolver el contenido en &lt;main id=&quot;contenido&quot;&gt;.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-19">→ Transformación TX-19 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="baymard" data-sev="3" data-dep="articulo" data-cov="out">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-articulo-01</code></span>
+            <span class="anx-heur-title">Paywall hard/metered declarado pero no implementado</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Baymard</span><span class="anx-sevpill sev-major">Major</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>articulo</strong></span><span>Componente: <code>PaywallBlock / ContentArticle</code></span><span class="anx-covpill cov-out">Fuera · decisión editorial</span></div>
+            <p class="anx-heur-desc">PaywallBlock declara variantes hard-article y metered-article, pero ContentArticle solo bloquea comentarios. El modelo de monetización está declarado pero no implementado.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Decisión editorial sobre modelo metered/hard. Documentado como Fase 2.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-18">→ Transformación TX-18 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="nielsen" data-sev="4" data-dep="articulo" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-articulo-02</code></span>
+            <span class="anx-heur-title">Bug literal &#x27;img.caption&#x27; en GalleryBlock</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Nielsen</span><span class="anx-sevpill sev-cata">Catastrophic</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>articulo</strong></span><span>Componente: <code>GalleryBlock.client.tsx:115</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">GalleryBlock.client.tsx:115 renderiza el string literal &#x27;img.caption&#x27; en lugar de interpolar la variable. Toda imagen de galería pierde su pie de foto.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-articulo-02.png" alt="Evidencia anotada de H-articulo-02"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Corregir la interpolación: { img.caption } en vez de { &#x27;img.caption&#x27; }. Hotfix inmediato.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-25">→ Transformación TX-25 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="nng-news" data-sev="fort" data-dep="articulo" data-cov="keep">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-articulo-03</code></span>
+            <span class="anx-heur-title">Recirculación bien implementada (Más de Sección + Más columnas + Lo último con Suspense)</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">NN/G News</span><span class="anx-sevpill cov-keep">Fortaleza</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>articulo</strong></span><span>Componente: <code>ContentArticle</code></span><span class="anx-covpill cov-keep">Fortaleza · mantener</span></div>
+            <p class="anx-heur-desc">Recirculación bien implementada: &quot;Más de Sección&quot; + &quot;Más columnas&quot; + &quot;Lo último&quot; con Suspense. Patrón a mantener y extender.</p>
+            
+            <p class="anx-heur-rec"><strong>Acción:</strong> Mantener. Base para extender recirculación a secciones.</p>
+            
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="wcag" data-sev="fort" data-dep="articulo" data-cov="keep">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-articulo-04</code></span>
+            <span class="anx-heur-title">ContentShare con aria-labelledby + role=&#x27;alert&#x27; bien resuelto</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">WCAG UX</span><span class="anx-sevpill cov-keep">Fortaleza</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>articulo</strong></span><span>Componente: <code>ContentShare</code></span><span class="anx-covpill cov-keep">Fortaleza · mantener</span></div>
+            <p class="anx-heur-desc">ContentShare resuelve bien aria-labelledby + role=&quot;alert&quot; con aria-live para el feedback de copia. Patrón ejemplar a replicar.</p>
+            
+            <p class="anx-heur-rec"><strong>Acción:</strong> Mantener. Replicar el patrón en otros componentes.</p>
+            
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="latam" data-sev="2" data-dep="articulo" data-cov="out">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-articulo-05</code></span>
+            <span class="anx-heur-title">Layout minimalista vs densidad informativa esperada en LATAM</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">LATAM</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>articulo</strong></span><span>Componente: <code>ContentArticle</code></span><span class="anx-covpill cov-out">Fuera · decisión editorial</span></div>
+            <p class="anx-heur-desc">Layout minimalista frente a la densidad informativa que espera la audiencia LATAM de noticias.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Decisión editorial de identidad. Hipótesis A/B para Fase 2.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-08">→ Transformación TX-08 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="wcag" data-sev="2" data-dep="seccion" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-01</code></span>
+            <span class="anx-heur-title">navItems de sub-secciones sin &lt;nav&gt;</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">WCAG UX</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion</strong></span><span>Componente: <code>navItems</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">Los navItems de sub-secciones se renderizan en &lt;div&gt;, sin &lt;nav&gt; semántico.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Envolver en &lt;nav aria-label=&quot;Sub-secciones&quot;&gt;.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-22">→ Transformación TX-22 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="nng-news" data-sev="2" data-dep="buscador" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-buscador-01</code></span>
+            <span class="anx-heur-title">Buscador no anuncia cantidad explícita de resultados</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">NN/G News</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>buscador</strong></span><span>Componente: <code>SearchSection.client.tsx:85</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">El buscador no anuncia explícitamente la cantidad de resultados a lectores de pantalla: hay aria-live, pero falta el texto del total.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-buscador-01.png" alt="Evidencia anotada de H-buscador-01"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Añadir &lt;p role=&quot;status&quot; class=&quot;sr-only&quot;&gt;{total} resultados para &quot;{q}&quot;&lt;/p&gt;.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-24">→ Transformación TX-24 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="wcag" data-sev="2" data-dep="opinion" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-opinion-01</code></span>
+            <span class="anx-heur-title">h1 oculto en Los Danieles via hidden (no sr-only)</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">WCAG UX</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>opinion</strong></span><span>Componente: <code>TitleImage.tsx:13</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">El h1 de Los Danieles usa class=&quot;hidden&quot;, que lo saca del árbol de accesibilidad en vez de ocultarlo solo visualmente.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-opinion-01.png" alt="Evidencia anotada de H-opinion-01"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Reemplazar hidden por sr-only.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-23">→ Transformación TX-23 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="gestalt" data-sev="3" data-dep="especiales" data-cov="out">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-especiales-01</code></span>
+            <span class="anx-heur-title">EspecialDetailPage usa HTML legacy Bootstrap inconsistente con resto del sitio</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Gestalt</span><span class="anx-sevpill sev-major">Major</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>especiales</strong></span><span>Componente: <code>EspecialDetailPage (legacy)</code></span><span class="anx-covpill cov-out">Fuera · requiere markup</span></div>
+            <p class="anx-heur-desc">EspecialDetailPage (/elecciones-colombia-2026) usa HTML legacy Bootstrap del CMS Utopia: tipografía, spacing y colores divergen del resto del frontend, y es la única página sin &lt;html lang&gt;.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-especiales-01.png" alt="Evidencia anotada de H-especiales-01"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Proyecto de plantilla. Migración en curso por Nivelics (Fase 2/3).</p>
+            <a class="anx-txlink" href="propuesta.html#tx-10">→ Transformación TX-10 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="baymard" data-sev="3" data-dep="todos" data-cov="out">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-transversal-01</code></span>
+            <span class="anx-heur-title">CookieConsent sin opción Rechazar — riesgo legal</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Baymard</span><span class="anx-sevpill sev-major">Major</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>todos</strong></span><span>Componente: <code>CookieConsent</code></span><span class="anx-covpill cov-out">Fuera · decisión editorial</span></div>
+            <p class="anx-heur-desc">CookieConsent ofrece solo &quot;Entendido&quot;, sin botón &quot;Rechazar&quot;. Riesgo legal en Colombia (Ley 1581/2012) y mala práctica frente a GDPR.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-transversal-01.png" alt="Evidencia anotada de H-transversal-01"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Añadir botón Rechazar visible. Requiere validación legal (Fase 2).</p>
+            <a class="anx-txlink" href="propuesta.html#tx-29">→ Transformación TX-29 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="wcag" data-sev="3" data-dep="todos-mobile" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-transversal-02</code></span>
+            <span class="anx-heur-title">HamburgerMenu duplica id &#x27;hamburger-menu&#x27; en trigger y dialog</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">WCAG UX</span><span class="anx-sevpill sev-major">Major</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>todos-mobile</strong></span><span>Componente: <code>HamburgerMenu</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">HamburgerMenu duplica id=&quot;hamburger-menu&quot; en el trigger y en el dialog, lo que rompe el aria-controls. Bug funcional de a11y en mobile.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-transversal-02.png" alt="Evidencia anotada de H-transversal-02"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Asignar ids únicos al trigger y al dialog.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-20">→ Transformación TX-20 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="wcag" data-sev="2" data-dep="todos" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-transversal-03</code></span>
+            <span class="anx-heur-title">NavigationRibbon sin aria-current=&#x27;page&#x27;</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">WCAG UX</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>todos</strong></span><span>Componente: <code>NavigationRibbon</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">NavigationRibbon no expone aria-current=&quot;page&quot; en el enlace activo.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Añadir aria-current=&quot;page&quot; al link activo.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-21">→ Transformación TX-21 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="baymard" data-sev="2" data-dep="suscripcion" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-transversal-04</code></span>
+            <span class="anx-heur-title">SubscriptionPlans usa plan.period como label (texto genérico)</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Baymard</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>suscripcion</strong></span><span>Componente: <code>SubscriptionPlans</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">SubscriptionPlans usa plan.period como label de los tabs (texto genérico), sin destacar el ahorro del plan anual.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Labels descriptivos con ahorro destacado en los tabs.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-26">→ Transformación TX-26 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="nng-news" data-sev="3" data-dep="seccion-poder" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-poder-01</code></span>
+            <span class="anx-heur-title">Pieza dominante de Poder sin diferenciación editorial (investigación vs nota rápida)</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">NN/G News</span><span class="anx-sevpill sev-major">Major</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion-poder</strong></span><span>Componente: <code>ContentSectionPage</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">La pieza dominante de Poder (&quot;Informes secretos UIAF / Roy Barreras&quot;) no tiene eyebrow editorial (INVESTIGACIÓN / EXCLUSIVO) ni escala tipográfica diferenciada del grid. Palanca central de identidad de marca en la sección estratégica.</p>
+            <figure class="anx-heur-fig"><img loading="lazy" src="assets/evidencias/H-seccion-poder-01.png" alt="Evidencia anotada de H-seccion-poder-01"><figcaption>Evidencia anotada · bounding box sobre captura real</figcaption></figure>
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Eyebrow editorial + escala tipográfica diferenciada.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-05">→ Transformación TX-05 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="gestalt" data-sev="2" data-dep="seccion-poder" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-poder-02</code></span>
+            <span class="anx-heur-title">Grid &#x27;Lo último de Poder&#x27; visualmente uniforme — sin jerarquía editorial</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Gestalt</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion-poder</strong></span><span>Componente: <code>ContentSectionPage</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">El grid &quot;Lo último de Poder&quot; es visualmente uniforme: ranking, investigación y nota rápida se ven igual, sin jerarquía editorial.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Primera pieza mayor + jerarquía visual en el grid.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-27">→ Transformación TX-27 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="nielsen" data-sev="2" data-dep="seccion-poder" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-poder-03</code></span>
+            <span class="anx-heur-title">Sin sub-navegación temática dentro de Poder (Congreso/Gobierno/Justicia/Elecciones)</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Nielsen</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion-poder</strong></span><span>Componente: <code>ContentSectionPage</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">No hay sub-navegación temática dentro de Poder (Congreso / Gobierno / Justicia / Elecciones).</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Sub-navegación temática por slug.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-05">→ Transformación TX-05 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="latam" data-sev="2" data-dep="seccion-poder" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-poder-04</code></span>
+            <span class="anx-heur-title">Falta descriptor editorial y contexto de agenda política bajo H1 &#x27;Poder&#x27;</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">LATAM</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion-poder</strong></span><span>Componente: <code>ContentSectionPage</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">Falta un descriptor editorial y el contexto de agenda política bajo el H1 &quot;Poder&quot;.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Descriptor editorial + contexto bajo el H1.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-05">→ Transformación TX-05 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="baymard" data-sev="2" data-dep="seccion-poder" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-poder-05</code></span>
+            <span class="anx-heur-title">Cards premium del grid sin resaltar como activo deseable (badge minimizado)</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">Baymard</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion-poder</strong></span><span>Componente: <code>ArticleBadge / cards</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">Las cards premium del grid no se resaltan como activo deseable: el badge de suscripción está minimizado.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Badge premium aspiracional con color.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-02">→ Transformación TX-02 en Sección 7</a>
+          </div>
+        </article>
+        <article class="anx-heur acc-item" data-fw="nng-news" data-sev="2" data-dep="seccion-poder" data-cov="in">
+          <button class="anx-heur-top acc-trigger" aria-expanded="false">
+            <span class="anx-heur-id"><code>H-seccion-poder-06</code></span>
+            <span class="anx-heur-title">Recirculación interna débil — falta &#x27;Lo más leído de Poder&#x27;, &#x27;Columnistas&#x27;, &#x27;Investigaciones&#x27;</span>
+            <span class="anx-heur-badges"><span class="anx-fwpill">NN/G News</span><span class="anx-sevpill sev-minor">Minor</span></span>
+            <svg class="anx-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="anx-heur-body">
+            <div class="anx-heur-meta"><span>Despliegue: <strong>seccion-poder</strong></span><span>Componente: <code>ContentSectionPage</code></span><span class="anx-covpill cov-in">Dentro de alcance · CSS+microJS</span></div>
+            <p class="anx-heur-desc">Recirculación interna débil: falta &quot;Lo más leído de Poder&quot;, &quot;Columnistas&quot; e &quot;Investigaciones&quot;.</p>
+            
+            <p class="anx-heur-rec"><strong>Recomendación:</strong> Bloques de recirculación interna por sección.</p>
+            <a class="anx-txlink" href="propuesta.html#tx-28">→ Transformación TX-28 en Sección 7</a>
+          </div>
+        </article>
+      </div>
+      <p class="anx-empty" id="heur-empty" hidden>Ningún hallazgo coincide con los filtros.</p>
+      <h4 class="anx-sub">Backlog Fase 2+ (hallazgos fuera del alcance contratado)</h4>
+      <div class="anx-backlog">
+        <div class="anx-bl"><code>H-articulo-01</code><div><strong>Paywall metered/hard</strong><p>Decisión de modelo de monetización. Fase 2.</p></div></div>
+        <div class="anx-bl"><code>H-articulo-05</code><div><strong>Layout denso LATAM</strong><p>Decisión editorial de identidad. Fase 2.</p></div></div>
+        <div class="anx-bl"><code>H-transversal-01</code><div><strong>CookieConsent + CMP</strong><p>Rechazo explícito + granularidad. Decisión legal. Fase 2.</p></div></div>
+        <div class="anx-bl"><code>H-especiales-01</code><div><strong>Rediseño Especiales legacy</strong><p>Migración de plantilla al stack Next.js. Fase 2/3.</p></div></div>
+        <div class="anx-bl"><code>recirc-ml</code><div><strong>Recirculación personalizada</strong><p>Por historial de lectura. Requiere backend ML. Fase 3.</p></div></div>
+        <div class="anx-bl"><code>perf-home</code><div><strong>Performance Home 13→90</strong><p>Optimización profunda de render y assets. Fase 3.</p></div></div>
+        <div class="anx-bl"><code>buscador-ctx</code><div><strong>Buscador contextual</strong><p>Autocompletado + sugerencias + historial. Fase 3.</p></div></div>
+        <div class="anx-bl"><code>planes-cro</code><div><strong>Página de planes (CRO)</strong><p>Social proof, FAQ, garantía, propuesta de valor. Fase 2.</p></div></div>
+        <div class="anx-bl"><code>checkout-cro</code><div><strong>Checkout de baja fricción</strong><p>Reducir de 9 campos; documento tras pago. Fase 2.</p></div></div>
+        <div class="anx-bl"><code>ab-renovacion</code><div><strong>A/B renovación anual</strong><p>Tabs con ahorro destacado. Fase 4 (experimentación).</p></div></div>
+      </div>
+      <div class="anx-download"><span class="anx-dl-tag">Descarga complementaria opcional</span><p>Datos crudos: <code>matriz-heuristica.json</code> (20 elementos clasificados) y las 15 evidencias PNG anotadas en <code>assets/evidencias/</code>.</p></div>
+    </div>
+  </section>
+  <section class="section anx-section" id="anexo-d">
+    <div class="section-inner">
+      <div class="anx-head"><span class="anx-letter">D</span>
+        <div><h3 class="anx-title">Reportes Lighthouse navegables</h3>
+        <p class="anx-desc">Scorecards de 6 despliegues principales + 5 complementarios, con enlace al reporte HTML completo.</p></div></div>
+      <p class="block-lead">Lighthouse <strong>13.3.0</strong>, dispositivo <strong>desktop</strong>, sobre producción (mayo 2026). El patrón sistémico Best Practices 54 se explica por errores en consola, APIs deprecadas y cookies de terceros presentes en todos los despliegues del stack.</p>
+      <h4 class="anx-sub">Despliegues principales</h4><div class="anx-lh-grid">
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Home</h5><code>https://cambiocolombia.com/</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-bad" style="width:13%"></span></div><span class="anx-lh-num lh-bad">13</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:93%"></span></div><span class="anx-lh-num lh-ok">93</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Reduce JavaScript sin usar (~270 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Total Blocking Time en rojo</li><li>Errores en consola del navegador</li><li>APIs deprecadas</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/home_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Sección Poder</h5><code>https://cambiocolombia.com/poder</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:62%"></span></div><span class="anx-lh-num lh-mid">62</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Evitar redirecciones múltiples (~432 ms)</li><li>Reduce JavaScript sin usar (~120 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Errores en consola</li><li>APIs deprecadas</li><li>Cookies de terceros</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/seccion-poder_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Sección País</h5><code>https://cambiocolombia.com/pais</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:60%"></span></div><span class="anx-lh-num lh-mid">60</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Evitar redirecciones múltiples (~396 ms)</li><li>Reduce JavaScript sin usar (~130 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Errores en consola</li><li>APIs deprecadas</li><li>Cookies de terceros</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/seccion-pais_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Artículo</h5><code>https://cambiocolombia.com/pais/articulo/…</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:63%"></span></div><span class="anx-lh-num lh-mid">63</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:96%"></span></div><span class="anx-lh-num lh-ok">96</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Reduce JavaScript sin usar (~100 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Errores en consola</li><li>APIs deprecadas</li><li>Cookies de terceros</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/articulo_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Opinión · Los Danieles</h5><code>https://cambiocolombia.com/los-danieles</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:65%"></span></div><span class="anx-lh-num lh-mid">65</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Evitar redirecciones múltiples (~392 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Errores en consola</li><li>APIs deprecadas</li><li>Cookies de terceros</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/opinion-los-danieles_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Buscador</h5><code>https://cambiocolombia.com/buscar</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:69%"></span></div><span class="anx-lh-num lh-mid">69</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:66%"></span></div><span class="anx-lh-num lh-mid">66</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Reduce JavaScript sin usar (~120 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Página bloqueada para indexación: explica el SEO 66 y es lo esperado en una página de resultados</li><li>Errores en consola · APIs deprecadas · cookies de terceros</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/buscador_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+      </div>
+      <h4 class="anx-sub">Despliegues complementarios</h4><div class="anx-lh-grid">
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Especiales (hub)</h5><code>https://cambiocolombia.com/especiales</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:69%"></span></div><span class="anx-lh-num lh-mid">69</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>Tiempo de respuesta del servidor (~700 ms)</li><li>JavaScript sin usar (~40 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Errores en consola</li><li>APIs deprecadas</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/especiales-home_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Especial detalle</h5><code>https://cambiocolombia.com/especiales/especial-innovacion-2024</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:74%"></span></div><span class="anx-lh-num lh-mid">74</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>JavaScript sin usar (~0 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Errores en consola</li><li>Evitar layout shifts grandes</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/especiales-detalle_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Especiales legacy</h5><code>https://cambiocolombia.com/elecciones-colombia-2026</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:64%"></span></div><span class="anx-lh-num lh-mid">64</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:89%"></span></div><span class="anx-lh-num lh-mid">89</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:54%"></span></div><span class="anx-lh-num lh-mid">54</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:100%"></span></div><span class="anx-lh-num lh-ok">100</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>JavaScript sin usar (~300 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Plantilla Bootstrap legacy</li><li>Sin &lt;html lang&gt;</li><li>Layout shifts</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/especiales_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Eventos (home)</h5><code>https://eventos.cambiocolombia.com/</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:85%"></span></div><span class="anx-lh-num lh-mid">85</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:81%"></span></div><span class="anx-lh-num lh-mid">81</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:58%"></span></div><span class="anx-lh-num lh-mid">58</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:92%"></span></div><span class="anx-lh-num lh-ok">92</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>JavaScript sin usar (~170 ms)</li><li>CSS sin usar (~120 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Contraste insuficiente</li><li>Sin landmark main</li><li>APIs deprecadas</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/eventos-home_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+        <div class="anx-lh-card"><div class="anx-lh-head"><h5>Eventos detalle</h5><code>https://eventos.cambiocolombia.com/event/…</code></div>
+          <div class="anx-lh-bars"><div class="anx-lh-cell"><span class="anx-lh-lbl">Performance</span><div class="anx-lh-track"><span class="anx-lh-fill lh-ok" style="width:97%"></span></div><span class="anx-lh-num lh-ok">97</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Accessibility</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:88%"></span></div><span class="anx-lh-num lh-mid">88</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">Best Practices</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:58%"></span></div><span class="anx-lh-num lh-mid">58</span></div><div class="anx-lh-cell"><span class="anx-lh-lbl">SEO</span><div class="anx-lh-track"><span class="anx-lh-fill lh-mid" style="width:85%"></span></div><span class="anx-lh-num lh-mid">85</span></div></div>
+          <div class="anx-lh-cols"><div><span class="anx-lh-collbl">Oportunidades</span><ul><li>CSS sin usar (~120 ms)</li><li>Minificar CSS (~40 ms)</li></ul></div>
+          <div><span class="anx-lh-collbl">Diagnósticos</span><ul><li>Contraste insuficiente</li><li>Sin landmark main</li></ul></div></div>
+          <a class="anx-lh-link" href="assets/lighthouse/eventos-detalle_report.html" target="_blank" rel="noopener">Ver reporte completo →</a></div>
+      </div>
+      <h4 class="anx-sub">Vista comparativa</h4><div class="anx-table-wrap"><table class="anx-table"><thead><tr><th>Despliegue</th><th>Perf.</th><th>Access.</th><th>Best Pr.</th><th>SEO</th></tr></thead><tbody>
+        <tr><td>Home</td><td class="anx-tnum lh-bad">13</td><td class="anx-tnum lh-ok">93</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Sección Poder</td><td class="anx-tnum lh-mid">62</td><td class="anx-tnum lh-ok">100</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Sección País</td><td class="anx-tnum lh-mid">60</td><td class="anx-tnum lh-ok">100</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Artículo</td><td class="anx-tnum lh-mid">63</td><td class="anx-tnum lh-ok">96</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Opinión · Los Danieles</td><td class="anx-tnum lh-mid">65</td><td class="anx-tnum lh-ok">100</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Buscador</td><td class="anx-tnum lh-mid">69</td><td class="anx-tnum lh-ok">100</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-mid">66</td></tr>
+        <tr><td>Especiales (hub)</td><td class="anx-tnum lh-mid">69</td><td class="anx-tnum lh-ok">100</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Especial detalle</td><td class="anx-tnum lh-mid">74</td><td class="anx-tnum lh-ok">100</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Especiales legacy</td><td class="anx-tnum lh-mid">64</td><td class="anx-tnum lh-mid">89</td><td class="anx-tnum lh-mid">54</td><td class="anx-tnum lh-ok">100</td></tr>
+        <tr><td>Eventos (home)</td><td class="anx-tnum lh-mid">85</td><td class="anx-tnum lh-mid">81</td><td class="anx-tnum lh-mid">58</td><td class="anx-tnum lh-ok">92</td></tr>
+        <tr><td>Eventos detalle</td><td class="anx-tnum lh-ok">97</td><td class="anx-tnum lh-mid">88</td><td class="anx-tnum lh-mid">58</td><td class="anx-tnum lh-mid">85</td></tr>
+      </tbody></table></div>
+      <div class="anx-download"><span class="anx-dl-tag">Nota</span><p>Los 11 reportes Lighthouse HTML completos (6 principales + 5 complementarios) están enlazados arriba y alojados en <code>assets/lighthouse/</code>. Todos fueron corridos con Lighthouse 13.3 en desktop sobre producción.</p></div>
+    </div>
+  </section>
+  <section class="section anx-section" id="anexo-e">
+    <div class="section-inner">
+      <div class="anx-head"><span class="anx-letter">E</span>
+        <div><h3 class="anx-title">Metodología y scripts</h3>
+        <p class="anx-desc">Cómo se ejecutó el diagnóstico y cómo el equipo CAMBIO puede reproducirlo.</p></div></div>
+      <p class="block-lead">El diagnóstico combinó auditoría automatizada (Lighthouse, axe-core), inspección de DOM en vivo, análisis estático del repositorio y un proceso de verificación cruzada contra producción. Esta sección documenta cada método.</p>
+      <div class="anx-method">
+        <div class="anx-method-block"><h4>a · Auditoría técnica</h4><p>Lighthouse 13.3 y axe-core 4.11 ejecutados con Puppeteer (Chromium headless) sobre producción, en desktop 1440px y mobile 375px. Inspección de DOM en vivo para resolver selectores y obtener bounding boxes reales de los nodos afectados, más capturas full-page por despliegue. Las reglas WCAG 2.2 nivel AA se evaluaron en su capa automatizable.</p></div>
+        <div class="anx-method-block"><h4>b · Auditoría heurística</h4><p>Seis frameworks: <strong>Nielsen</strong> (usabilidad general), <strong>WCAG-UX</strong> (accesibilidad como experiencia), <strong>NN/G News</strong> (patrones de medios), <strong>Baymard</strong> (suscripción y paywall), <strong>Gestalt</strong> (jerarquía visual) y heurísticas <strong>LATAM</strong> (densidad y expectativas regionales). Severidad en escala cosmético / minor / major / catastrophic. Cobertura clasificada como dentro del alcance (CSS+microJS) o fuera (editorial / markup / backend).</p></div>
+        <div class="anx-method-block"><h4>c · Inventario de componentes</h4><p>Mapeo estático del repositorio <code>cambio-frontend</code> (Next.js 16 + React 19 + Tailwind v4): 105 componentes en Atomic Design (19 atoms, 55 molecules, 31 organisms) y 8 content pages, con clasificación de intervención y extracción de tokens desde <code>globals.css</code> y las clases en uso.</p></div>
+        <div class="anx-method-block anx-method-strong"><h4>d · Verificación cruzada <span class="anx-method-tag">fortaleza del proceso</span></h4><p>Los hallazgos del benchmark se verificaron contra producción el 28 de mayo con navegación en vivo. De 10 hallazgos: <strong>5 se confirmaron</strong>, <strong>4 se matizaron</strong> y <strong>1 se corrigió</strong> (Los Danieles SÍ se diferencia visualmente), además de 6 hallazgos nuevos. El benchmark estaba bien orientado pero su redacción inicial exageraba debilidades reales; el reporte fue auditado contra sí mismo y corregido donde la evidencia lo exigió. No se atribuye a CAMBIO ninguna debilidad que no tenga.</p></div>
+        <div class="anx-method-block"><h4>e · Benchmark editorial</h4><p>Ocho referentes evaluados en 8 dimensiones. Dos niveles de rigor declarados: <strong>verificación directa</strong> (navegación HTML, DevTools, fuentes citadas) para CAMBIO y los referentes verificables; e <strong>inferencia profesional</strong> (rangos defensibles basados en práctica documentada) para dimensiones cuantitativas no accesibles sin autenticación. Cada dimensión estimada está marcada como tal.</p></div>
+        <div class="anx-method-block"><h4>f · Scripts reproducibles</h4><p>La auditoría es re-ejecutable. Scripts clave: <code>run-lighthouse-all.sh</code>, <code>run-axe-all.mjs</code>, <code>screenshots.mjs</code>, <code>scrape-article-url.mjs</code> y <code>make-evidencias.mjs</code> (genera las evidencias anotadas). Constituyen un activo metodológico replicable a otros medios.</p></div>
+      </div>
+      <div class="anx-download"><span class="anx-dl-tag">Descarga complementaria opcional</span><p>Datos crudos de la verificación cruzada y los scripts viven en el repositorio <code>audit-fase1/</code>.</p></div>
+    </div>
+  </section>
+  <a href="#anexos-top" class="anx-totop" aria-label="Volver al inicio de anexos">↑</a>
+
+    </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="footer-logo" viewBox="0 0 300 80" width="160" height="42"><use href="#nivelics-logo"/></svg>
+        <p class="footer-tagline">Inteligencia Artificial · Cloud · Staffing Inteligente</p>
+      </div>
+      <div class="footer-meta">
+        <div class="footer-meta-block">
+          <span class="footer-label">Proyecto</span>
+          <span class="footer-value">CAMBIO Colombia · Fase 1</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Versión</span>
+          <span class="footer-value">1.0 · Mayo 2026</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Contacto</span>
+          <span class="footer-value">camilo@nivelics.com</span>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>Documento confidencial. Preparado por Nivelics para CAMBIO Colombia. Reproducción restringida.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

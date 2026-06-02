@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="Diagnóstico Estratégico CAMBIO Colombia · Fase 1 · Nivelics">
+  <title>Diagnóstico Estratégico · CAMBIO Colombia · Fase 1 · Nivelics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+  /* Gate v15: aplica tema y estado de acceso antes de pintar para evitar parpadeo de contenido. */
+  (function(){var d=document.documentElement;try{var t=localStorage.getItem("cambio-reporte-theme");if(t)d.setAttribute("data-theme",t)}catch(e){}try{if(sessionStorage.getItem("cambio-reporte-auth")==="ok")d.classList.add("is-authed");else d.classList.add("gate-locked")}catch(e){d.classList.add("gate-locked")}})();
+  </script>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- ============= LOGO NIVELICS INLINE (definición SVG global) ============= -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="nivelics-logo" viewBox="0 0 300 80">
+        <!-- Isotipo N geométrico -->
+        <g class="logo-icon">
+          <path d="M 8 18 L 8 62 L 48 62 L 48 38 Z" class="logo-iso-dark"/>
+          <path d="M 8 18 L 48 18 L 48 62 L 28 62 Z" class="logo-iso-accent"/>
+        </g>
+        <!-- Wordmark -->
+        <text x="60" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-main">IVEL</text>
+        <text x="180" y="55"
+              font-family="'Inter Tight', sans-serif"
+              font-size="42"
+              font-weight="300"
+              letter-spacing="2"
+              class="logo-text-accent">ICS</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============= PANTALLA DE ACCESO · DOCUMENTO CONFIDENCIAL ============= -->
+  <div class="access-gate" id="access-gate" role="dialog" aria-modal="true" aria-labelledby="access-title" aria-describedby="access-desc">
+    <div class="access-card">
+      <svg class="access-logo" viewBox="0 0 300 80" width="160" aria-hidden="true"><use href="#nivelics-logo"/></svg>
+      <h1 class="access-title" id="access-title">Documento Confidencial</h1>
+      <p class="access-subtitle">Diagnóstico Estratégico CAMBIO Colombia · Fase 1</p>
+      <p class="access-note" id="access-desc">Este reporte contiene información confidencial preparada por Nivelics para CAMBIO Colombia. Ingrese la clave de acceso proporcionada para continuar.</p>
+      <form class="access-form" id="access-form" autocomplete="off" novalidate>
+        <input class="access-input" id="access-input" type="password" placeholder="Clave de acceso" aria-label="Clave de acceso" autocomplete="current-password" aria-describedby="access-error">
+        <button class="access-submit" id="access-submit" type="submit">Acceder</button>
+      </form>
+      <p class="access-error" id="access-error" role="alert" hidden>Clave incorrecta. Verifique e intente nuevamente.</p>
+      <p class="access-footer">© 2026 Nivelics · camilo@nivelics.com</p>
+    </div>
+  </div>
+
+  <!-- ============= NAVEGACIÓN STICKY ============= -->
+  <nav class="nav-sticky" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="Inicio">
+        <svg class="nav-logo" viewBox="0 0 300 80" width="120" height="32"><use href="#nivelics-logo"/></svg>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir navegación" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-groups" id="nav-list">
+
+        <li class="nav-group">
+          <a href="index.html" class="nav-link active" data-page="inicio">Inicio</a>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="diagnostico" data-group="diagnostico">
+            Diagnóstico
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="diagnostico.html#contexto" class="submenu-link"><span class="sm-num">03</span> Alcance y Contexto</a>
+            <a href="diagnostico.html#tecnica" class="submenu-link"><span class="sm-num">04</span> Auditoría Técnica y WCAG</a>
+            <a href="diagnostico.html#inventario" class="submenu-link"><span class="sm-num">05</span> Inventario de Componentes</a>
+            <a href="diagnostico.html#heuristico" class="submenu-link"><span class="sm-num">06</span> Diagnóstico Heurístico</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="propuesta" data-group="propuesta">
+            Propuesta
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="propuesta.html#transformaciones" class="submenu-link"><span class="sm-num">07</span> Transformaciones CSS</a>
+            <a href="propuesta.html#abtesting" class="submenu-link"><span class="sm-num">08</span> A/B Testing Visual</a>
+            <a href="propuesta.html#analisis360" class="submenu-link"><span class="sm-num">09</span> Análisis 360° del Producto</a>
+          </div>
+        </li>
+
+        <li class="nav-group has-submenu">
+          <button class="nav-link nav-link-group" data-page="estrategia" data-group="estrategia">
+            Estrategia
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-submenu">
+            <a href="estrategia.html#benchmark" class="submenu-link"><span class="sm-num">10</span> Benchmark Editorial</a>
+            <a href="estrategia.html#roadmap" class="submenu-link"><span class="sm-num">11</span> Roadmap de Fases</a>
+            <a href="estrategia.html#rebranding" class="submenu-link"><span class="sm-num">12</span> Alineación Rebranding</a>
+            <a href="estrategia.html#proximos" class="submenu-link"><span class="sm-num">13</span> Próximos Pasos</a>
+          </div>
+        </li>
+
+        <li class="nav-group">
+          <a href="index.html#resumen" class="nav-link" data-page="resumen">Resumen Ejecutivo</a>
+        </li>
+
+        <li class="nav-group">
+          <a href="anexos.html" class="nav-link" data-page="anexos">Anexos</a>
+        </li>
+
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-theme" id="btn-theme" aria-label="Cambiar tema">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-pdf" id="btn-pdf">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>PDF</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-progress" id="nav-progress"></div>
+  </nav>
+
+  <main id="contenido">
+  <!-- ============= SECCIÓN 1: HERO ============= -->
+  <section id="hero" class="section section-hero">
+    <div class="hero-grain"></div>
+    <div class="hero-grid">
+
+      <div class="hero-meta">
+        <span class="meta-tag">Documento estratégico</span>
+        <span class="meta-divider">·</span>
+        <span class="meta-date">Mayo 2026</span>
+        <span class="meta-divider">·</span>
+        <span class="meta-version">v 1.0</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-eyebrow">Diagnóstico Estratégico</span>
+        <span class="hero-main">CAMBIO<br>Colombia</span>
+        <span class="hero-phase">Fase 01 · Refresh visual con visión 360°</span>
+      </h1>
+
+      <div class="hero-credentials">
+        <div class="credential-block">
+          <span class="credential-label">Elaborado por</span>
+          <svg class="credential-logo-svg" viewBox="0 0 300 80" width="140" height="38"><use href="#nivelics-logo"/></svg>
+        </div>
+        <div class="credential-divider"></div>
+        <div class="credential-block">
+          <span class="credential-label">Para</span>
+          <img src="assets/cambio-logo.png" alt="CAMBIO Colombia" class="credential-logo-cambio">
+        </div>
+      </div>
+
+      <div class="hero-summary">
+        <p class="summary-lead">Auditoría completa de 6 despliegues principales del portal cambiocolombia.com con análisis técnico, heurístico, de accesibilidad WCAG 2.2 AA, y propuesta priorizada de transformaciones CSS con A/B testing visual incluido.</p>
+        <p class="summary-extension">Como valor adicional al alcance contratado, incluimos un análisis 360° del funnel de conversión a suscripción y un benchmark editorial contra 8 referentes regionales y globales.</p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">6</div>
+          <div class="stat-label">despliegues<br>auditados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">105</div>
+          <div class="stat-label">componentes<br>mapeados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">14</div>
+          <div class="stat-label">hallazgos<br>heurísticos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">11</div>
+          <div class="stat-label">violaciones<br>WCAG documentadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">32</div>
+          <div class="stat-label">bloques del funnel<br>de conversión</div>
+        </div>
+        <div class="stat-card stat-card-accent">
+          <div class="stat-num">13</div>
+          <div class="stat-label">hipótesis<br>CRO priorizadas</div>
+        </div>
+      </div>
+
+      <div class="hero-scroll-cue">
+        <span>Desplácese para comenzar</span>
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 4v16M2 14l6 6 6-6"/>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+  <!-- ============= SECCIÓN 2: RESUMEN EJECUTIVO ============= -->
+  <section id="resumen" class="section section-resumen">
+    <div class="section-inner">
+
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Resumen Ejecutivo</h2>
+        <p class="section-subtitle">Lectura sugerida: 2 minutos · Para C-level y toma de decisiones</p>
+      </div>
+
+      <div class="resumen-grid">
+
+        <!-- Lo que SÍ cubre el alcance -->
+        <div class="resumen-block resumen-block-cubre">
+          <div class="block-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <h3 class="block-title">Lo que sí cubre este alcance</h3>
+          <p class="block-lead">Diseño injection sobre el CMS actual mediante CSS moderno y JavaScript no intrusivo.</p>
+          <ul class="block-list">
+            <li><strong>Refresh visual</strong> de bloques principales en Home, Sección, Artículo, Opinión, Poder y Buscador</li>
+            <li><strong>Refresh visual del hub de Especiales</strong> y especiales modernos (intervenibles vía CSS de inmediato)</li>
+            <li><strong>Refresh visual de Eventos y Especiales legacy</strong> (aplicable post-migración técnica de Nivelics, sincronizado en cronograma de 4 semanas)</li>
+            <li><strong>A/B testing visual</strong> sobre bloques refrescados para medir impacto en CTR y engagement</li>
+            <li><strong>Mejoras de accesibilidad CSS-only</strong> sobre 11 violaciones WCAG 2.2 AA documentadas</li>
+            <li><strong>Racionalización del sistema de diseño</strong> existente: tipografía, color, spacing, radius</li>
+            <li><strong>Tratamiento visual de cards premium</strong> y badges de suscripción</li>
+            <li><strong>Quick wins</strong>: 74 nodos con target-size incorrecto, 5 violaciones de contraste corregibles</li>
+            <li><strong>Alineación con rebranding en curso</strong> (sujeto a entrega del brand book)</li>
+          </ul>
+        </div>
+
+        <!-- Lo que NO cubre el alcance -->
+        <div class="resumen-block resumen-block-no-cubre">
+          <div class="block-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <h3 class="block-title">Lo que no cubre este alcance</h3>
+          <p class="block-lead">Identificado durante el diagnóstico. Documentado como oportunidad de fases futuras.</p>
+          <ul class="block-list">
+            <li><strong>Optimización del paywall</strong> persuasivo (lógica fragmentada entre frontend y servicio externo)</li>
+            <li><strong>Rediseño funcional</strong> de la página de planes y del checkout</li>
+            <li><strong>Buscador contextual</strong> con autocompletado y filtros editoriales</li>
+            <li><strong>Optimización de performance</strong> Home (Lighthouse 13/100)</li>
+            <li><strong>Ejecución de la migración técnica</strong> del subdominio Eventos y URLs legacy de Especiales al stack Next.js — gestionada por Nivelics como proyecto paralelo independiente</li>
+            <li><strong>A/B testing de conversión a pago</strong> (requiere infraestructura mayor — Fase 2)</li>
+          </ul>
+        </div>
+
+        <!-- Lo descubierto más allá del alcance -->
+        <div class="resumen-block resumen-block-descubierto">
+          <div class="block-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="8"/></svg>
+          </div>
+          <h3 class="block-title">Lo que descubrimos durante la auditoría</h3>
+          <p class="block-lead">Análisis adicional al contrato. Insumo estratégico de producto entregado sin costo.</p>
+          <ul class="block-list">
+            <li><strong>Inventario del funnel completo</strong> de conversión: 32 bloques mapeados con impacto comercial</li>
+            <li><strong>13 hipótesis CRO priorizadas</strong> con ICE Score, ajustadas al volumen real de tráfico</li>
+            <li><strong>Plan de testing en cascada</strong> de 11 semanas respetando significancia estadística</li>
+            <li><strong>Identificación del cuello de botella real</strong> de conversión a pago</li>
+            <li><strong>Benchmark editorial verificado</strong> contra 8 referentes regionales y globales</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- 5 hallazgos críticos -->
+      <div class="hallazgos-criticos">
+        <h3 class="hallazgos-header">Cinco hallazgos que definen el proyecto</h3>
+
+        <div class="hallazgo-row">
+          <div class="hallazgo-num">01</div>
+          <div class="hallazgo-content">
+            <span class="hallazgo-badge hallazgo-badge-tecnico">Producto</span>
+            <h4 class="hallazgo-title">El home no es el cuello de botella principal de conversión a pago</h4>
+            <p class="hallazgo-desc">El home cumple bien su función de distribuir tráfico editorial — 2.5 millones de usuarios únicos y 9.6 millones de pageviews en 3 meses (72% mobile). El paywall opera con un modelo híbrido funcional (metered de 10 artículos + hard wall editorial), pero el copy del muro carece de propuesta de valor: CTA amarillo con border de marca, sin precio visible, sin social proof, sin preview. El refresh visual contratado tendrá impacto en percepción de marca y engagement, pero el lift sustancial en conversión a pago requiere reforzar el copy del paywall en una fase posterior.</p>
+          </div>
+        </div>
+
+        <div class="hallazgo-row">
+          <div class="hallazgo-num">02</div>
+          <div class="hallazgo-content">
+            <span class="hallazgo-badge hallazgo-badge-accesibilidad">Accesibilidad</span>
+            <h4 class="hallazgo-title">74 elementos táctiles violan WCAG 2.2 con un solo origen</h4>
+            <p class="hallazgo-desc">Los puntos de paginación de carruseles (FeaturedSlider, NewsSlider, ColumnistSlider y otros) miden 8×8 px cuando el mínimo WCAG 2.5.8 AA exige 24×24 px. Un único fix CSS resuelve 74 nodos simultáneamente. Impacto inmediato en accesibilidad móvil sin costo significativo de desarrollo.</p>
+          </div>
+        </div>
+
+        <div class="hallazgo-row">
+          <div class="hallazgo-num">03</div>
+          <div class="hallazgo-content">
+            <span class="hallazgo-badge hallazgo-badge-performance">Performance</span>
+            <h4 class="hallazgo-title">El Home obtiene Performance 13/100 en Lighthouse</h4>
+            <p class="hallazgo-desc">Render bloqueado, imágenes sin optimizar, JavaScript sin defer. Es el indicador más bajo de toda la auditoría y representa una pérdida silenciosa de tráfico antes de cualquier consideración de diseño. No está en el alcance contratado de refresh CSS, pero exige atención inmediata: rediseñar visualmente un sitio que tarda en cargar es construir sobre arena.</p>
+          </div>
+        </div>
+
+        <div class="hallazgo-row">
+          <div class="hallazgo-num">04</div>
+          <div class="hallazgo-content">
+            <span class="hallazgo-badge hallazgo-badge-legal">Legal</span>
+            <h4 class="hallazgo-title">El consentimiento de cookies no permite rechazar</h4>
+            <p class="hallazgo-desc">El componente CookieConsent ofrece únicamente "Aceptar". No hay botón "Rechazar" ni gestión granular de categorías. Esto representa riesgo de cumplimiento bajo la Ley 1581 de 2012 de Colombia y es contrario a las mejores prácticas GDPR. Resolución dentro del alcance pero requiere decisión editorial sobre el comportamiento por defecto.</p>
+          </div>
+        </div>
+
+        <div class="hallazgo-row">
+          <div class="hallazgo-num">05</div>
+          <div class="hallazgo-content">
+            <span class="hallazgo-badge hallazgo-badge-estrategico">Estrategia editorial</span>
+            <h4 class="hallazgo-title">Los Danieles genera engagement profundo que el sitio no capitaliza</h4>
+            <p class="hallazgo-desc">Los Danieles es el 2do destino más visitado del sitio (87.815 usuarios únicos en 3 meses). Las columnas individuales generan engagement extraordinario — Coronell CPB: 6m 24s de avg reading time (273% del benchmark del sitio). Por contrato editorial, el contenido permanece abierto — esto es correcto y debe respetarse. Pero al final de cada columna, el lector que invirtió 5+ minutos no encuentra recirculación hacia premium relacionado ni captura de email — y los números lo confirman: la recirculación interna del sitio es del 17.8% (446.496 usuarios) y el email pesa apenas 0.3% del tráfico (8.328 usuarios), señal de un canal de newsletter subdesarrollado. La oportunidad no es monetizar la columna, sino convertir los lectores profundos en suscriptores del ecosistema premium. Intervenible dentro del alcance CSS.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recomendación principal -->
+      <div class="recomendacion-principal">
+        <div class="recom-header">
+          <span class="recom-tag">Recomendación principal</span>
+          <h3 class="recom-title">Ejecutar el alcance contratado con foco en alto rendimiento visual, y abrir conversación de Fase 2 antes del cierre de Fase 1</h3>
+        </div>
+        <div class="recom-body">
+          <p>El refresh CSS contratado puede ejecutarse con impacto visible y medible en accesibilidad, percepción de marca y engagement. El A/B testing visual incluido en este alcance permitirá validar las hipótesis de cada transformación con datos reales, no con opiniones.</p>
+          <p>Sin embargo, los hallazgos más críticos para el negocio —paywall persuasivo, página de planes, performance Home, buscador contextual— requieren intervenciones que exceden el alcance actual. Proponemos que la presentación de cierre de Fase 1 incluya un roadmap argumentado de Fase 2 con esfuerzos, KPI esperados y plan de testing, de modo que la decisión sobre continuidad sea informada y oportuna.</p>
+          <p>El detalle operativo —el cronograma de 13 semanas en tres oleadas de experimentación (sujeto a la entrega del brand book del rebranding), las 31 transformaciones priorizadas y las decisiones que pedimos esta semana— está desarrollado en las páginas de Diagnóstico, Propuesta y Estrategia. Recomendamos recorrerlas en ese orden.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============= NAVEGACIÓN A PÁGINAS ============= -->
+  <section class="section section-page-nav">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 class="section-title" style="font-size:1.75rem;">Explorar el reporte completo</h2>
+        <p class="section-subtitle">Este diagnóstico está organizado en cuatro áreas. Cada una es navegable de forma independiente.</p>
+      </div>
+
+      <div class="page-nav-grid">
+
+        <a href="diagnostico.html" class="page-nav-card page-nav-card--diagnostico">
+          <div class="page-nav-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <div class="page-nav-content">
+            <h3 class="page-nav-title">Diagnóstico</h3>
+            <p class="page-nav-desc">Auditoría técnica, WCAG, inventario de componentes y análisis heurístico del frontend actual.</p>
+            <div class="page-nav-meta">
+              <span class="page-nav-badge">11 hallazgos WCAG</span>
+              <span class="page-nav-badge">20 hallazgos heurísticos</span>
+              <span class="page-nav-badge">105 componentes</span>
+            </div>
+          </div>
+          <svg class="page-nav-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <a href="propuesta.html" class="page-nav-card page-nav-card--propuesta">
+          <div class="page-nav-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="page-nav-content">
+            <h3 class="page-nav-title">Propuesta</h3>
+            <p class="page-nav-desc">Transformaciones CSS priorizadas, plan de A/B testing visual y análisis 360° del producto.</p>
+            <div class="page-nav-meta">
+              <span class="page-nav-badge">Transformaciones priorizadas</span>
+              <span class="page-nav-badge">Plan de A/B testing</span>
+            </div>
+          </div>
+          <svg class="page-nav-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <a href="estrategia.html" class="page-nav-card page-nav-card--estrategia">
+          <div class="page-nav-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="page-nav-content">
+            <h3 class="page-nav-title">Estrategia</h3>
+            <p class="page-nav-desc">Benchmark editorial, roadmap de fases, alineación con rebranding y próximos pasos.</p>
+            <div class="page-nav-meta">
+              <span class="page-nav-badge">9 medios comparados</span>
+              <span class="page-nav-badge">Roadmap 4 fases</span>
+            </div>
+          </div>
+          <svg class="page-nav-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+        <a href="anexos.html" class="page-nav-card page-nav-card--anexos">
+          <div class="page-nav-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="page-nav-content">
+            <h3 class="page-nav-title">Anexos</h3>
+            <p class="page-nav-desc">Material de soporte: reportes Lighthouse, hallazgos detallados, scripts y metodología.</p>
+            <div class="page-nav-meta">
+              <span class="page-nav-badge">5 anexos navegables</span>
+            </div>
+          </div>
+          <svg class="page-nav-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FOOTER ============= -->
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="footer-logo" viewBox="0 0 300 80" width="160" height="42"><use href="#nivelics-logo"/></svg>
+        <p class="footer-tagline">Inteligencia Artificial · Cloud · Staffing Inteligente</p>
+      </div>
+      <div class="footer-meta">
+        <div class="footer-meta-block">
+          <span class="footer-label">Proyecto</span>
+          <span class="footer-value">CAMBIO Colombia · Fase 1</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Versión</span>
+          <span class="footer-value">1.0 · Mayo 2026</span>
+        </div>
+        <div class="footer-meta-block">
+          <span class="footer-label">Contacto</span>
+          <span class="footer-value">camilo@nivelics.com</span>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>Documento confidencial. Preparado por Nivelics para CAMBIO Colombia. Reproducción restringida.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
