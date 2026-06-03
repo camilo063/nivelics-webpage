@@ -95,7 +95,7 @@
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="nav-submenu">
-            <a href="estrategia.html#benchmark" class="submenu-link"><span class="sm-num">10</span> Benchmark Editorial</a>
+            <a href="estrategia.html#benchmark" class="submenu-link"><span class="sm-num">10</span> Benchmark de Conversión</a>
             <a href="estrategia.html#roadmap" class="submenu-link"><span class="sm-num">11</span> Roadmap de Fases</a>
             <a href="estrategia.html#rebranding" class="submenu-link"><span class="sm-num">12</span> Alineación Rebranding</a>
             <a href="estrategia.html#proximos" class="submenu-link"><span class="sm-num">13</span> Próximos Pasos</a>
@@ -662,11 +662,19 @@
             <div class="bandera-score">13</div>
             <div class="bandera-metric">Performance · Home</div>
             <p class="bandera-desc">Render bloqueado por JavaScript sin defer, imágenes pesadas sin lazy loading y CSS no crítico cargando en el head. Es pérdida silenciosa de tráfico. Fuera del alcance CSS pero exige atención prioritaria.</p>
+            <div class="impacto-negocio impacto-negocio--on-dark">
+              <div class="impacto-negocio-head"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Impacto en negocio</div>
+              <p>Cada segundo extra de carga en home reduce 5–7% la tasa de continuación al siguiente artículo (benchmarks de Google Web Vitals). En el volumen actual de <strong>2.5M usuarios trimestrales</strong>, esto representa una pérdida estimada del orden de <strong>175K–250K pageviews al mes</strong> (cálculo directivo sobre el tráfico observado, no baseline medido). Llevar el Performance a 75+ es prerequisito para que el A/B testing visual genere resultados medibles.</p>
+            </div>
           </div>
           <div class="bandera-card">
             <div class="bandera-score">54</div>
             <div class="bandera-metric">Best Practices · Todas las páginas</div>
             <p class="bandera-desc">Score idéntico en los 6 despliegues sugiere un problema sistémico en la configuración del servidor o del framework: mixed content, deprecated APIs, errores de consola o falta de HTTPS en recursos secundarios.</p>
+            <div class="impacto-negocio impacto-negocio--on-dark">
+              <div class="impacto-negocio-head"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Impacto en negocio</div>
+              <p>Best Practices 54 indica problemas estructurales que afectan la confianza del browser y la posición en SEO. Para un medio cuya autoridad SEO genera el <strong>52.9% del tráfico</strong>, esto no es opcional: cada punto de mejora aquí se traduce en mejor ranking, mayor descubrimiento orgánico y menor costo de adquisición de audiencia.</p>
+            </div>
           </div>
           <div class="bandera-card">
             <div class="bandera-score">66</div>
@@ -1036,6 +1044,11 @@
       <div class="wcag-accordion">
         <h3 class="wcag-acc-title">11 hallazgos WCAG individuales</h3>
         <p class="wcag-acc-desc">Cada hallazgo documentado con criterio violado, evidencia, fix recomendado y clasificación de intervención. Todos caen dentro del alcance CSS-only o CSS+microJS.</p>
+
+        <div class="impacto-negocio">
+          <div class="impacto-negocio-head"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Impacto en negocio</div>
+          <p>Más allá del impacto ético, las 11 violaciones representan <strong>audiencia efectivamente excluida</strong>: la prevalencia de algún tipo de discapacidad en Colombia se estima entre ~7% según el Censo DANE 2018 y ~15% según referentes globales como la OMS. También hay <strong>penalización de SEO</strong> —Google favorece sitios accesibles y semánticos—, lo que pesa directamente en un medio cuya autoridad orgánica genera el 52.9% del tráfico. En el plano normativo, el estándar de accesibilidad web en Colombia (Ley 1618 de 2013 + Resolución 1519 de 2020 del MinTIC, que adopta WCAG) obliga hoy principalmente a entidades públicas y prestadores de servicios públicos —no claramente a un medio privado de suscripción—, pero marca la dirección regulatoria y el estándar de industria. Las 11 son corregibles vía CSS-only o CSS+microJS dentro de esta fase.</p>
+        </div>
 
         <!-- A-articulo-01 -->
         <div class="wcag-acc-item">
@@ -1824,6 +1837,10 @@
             <p class="heur-card-id">H-articulo-01 · Artículo / Paywall · Esfuerzo M</p>
             <p class="heur-card-desc">El componente <code>PaywallBlock</code> del frontend declara variantes <code>hard-article</code> y <code>metered-article</code>, pero <code>ContentArticle.tsx</code> no las renderiza directamente. A nivel de producto, el paywall SÍ opera con metered (10 artículos gratuitos por usuario/mes) y hard wall asignado editorialmente en consejos de redacción — pero la lógica vive fuera del frontend principal (servicio Marfeel u otro gateway de paywall). Esta fragmentación dificulta el control desde el frontend, limita la capacidad de A/B testing visual del muro, y reduce la transparencia operativa entre código y producto.</p>
             <p class="heur-card-action"><strong>Fase recomendada:</strong> Fase 2. Unificar la lógica de paywall en componentes renderizables del frontend principal para habilitar A/B testing de variantes visuales, mensajes contextuales y posiciones del muro. Coordinar con el equipo que opera el servicio externo (Marfeel) para exponer las variantes de paywall como props consumibles por el frontend.</p>
+            <div class="impacto-negocio">
+              <div class="impacto-negocio-head"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Impacto en negocio</div>
+              <p>La infraestructura técnica existe (paywall funcional con metered + hard wall), pero hoy opera como <strong>disclaimer, no como CTA</strong>: sin precio visible, sin prueba social, sin preview. Estudios de Baymard Institute sobre paywalls premium muestran que articular propuesta de valor (precio + beneficios + prueba social) frente a un muro plano genera del orden de <strong>2–4× más conversión a la página de planes</strong>. CAMBIO está dejando dinero sobre la mesa por copy genérico, no por falta de tecnología.</p>
+            </div>
           </div>
 
           <!-- 3 -->
@@ -1840,6 +1857,10 @@
             <p class="heur-card-id">H-transversal-01 · Todos los despliegues · Esfuerzo M</p>
             <p class="heur-card-desc">El banner de cookies presenta únicamente la opción "Aceptar". No existe botón de rechazo ni enlace a configuración granular. Esto es una mala práctica frente a la Ley 1581 de 2012 (Protección de Datos Personales en Colombia) y frente a GDPR si se recibe tráfico europeo. Es un riesgo legal documentable.</p>
             <p class="heur-card-action"><strong>Fase recomendada:</strong> Fase 2. Requiere decisión legal + integración de CMP (Consent Management Platform). El componente actual puede recibir un fix visual inmediato para mejorar la prominencia del aviso, pero el botón de rechazo requiere lógica de backend.</p>
+            <div class="impacto-negocio">
+              <div class="impacto-negocio-head"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Impacto en negocio</div>
+              <p>Las cookies constituyen tratamiento de datos personales: el <strong>artículo 9 de la Ley 1581 de 2012 exige autorización previa e informada</strong>, y un banner sin opción real de rechazo o configuración debilita la validez de ese consentimiento. La Superintendencia de Industria y Comercio (SIC) es la autoridad de control y puede imponer multas <strong>de hasta 2.000 SMMLV</strong> por incumplimientos del régimen de datos. Para un medio de periodismo, al riesgo sancionatorio se suma el reputacional. Es el hallazgo de mayor exposición legal del reporte.</p>
+            </div>
           </div>
 
           <!-- 4 -->
