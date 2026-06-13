@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PortalEffect } from "@/components/ui/portal-effect";
+import { Reveal } from "@/components/effects/reveal";
 
 interface CTABannerProps {
   title?: string;
@@ -65,84 +66,86 @@ export function CTABanner({
           width: "100%",
         }}
       >
-        {resolvedEyebrow ? (
-          <div
-            className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-[5px]"
-            style={{
-              borderColor: "rgba(0,212,255,0.25)",
-              background: "rgba(0,212,255,0.06)",
-            }}
-          >
-            <span className="cta-portal-dot" aria-hidden="true" />
-            <span
-              className="text-[11px] font-semibold uppercase tracking-[0.09em]"
-              style={{ color: "#00D4FF" }}
+        <Reveal>
+          {resolvedEyebrow ? (
+            <div
+              className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-[5px]"
+              style={{
+                borderColor: "rgba(0,212,255,0.25)",
+                background: "rgba(0,212,255,0.06)",
+              }}
             >
-              {resolvedEyebrow}
-            </span>
-          </div>
-        ) : null}
-
-        <h2
-          id="cta-portal-title"
-          className="font-bold text-white"
-          style={{
-            fontSize: "clamp(28px, 4vw, 48px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.025em",
-            margin: "0 0 16px",
-            maxWidth: "640px",
-          }}
-        >
-          {title}
-        </h2>
-
-        <p
-          className="text-[15px] leading-[1.65]"
-          style={{
-            color: "rgba(255,255,255,0.5)",
-            margin: "0 0 40px",
-            maxWidth: "480px",
-          }}
-        >
-          {description}
-        </p>
-
-        <div className="flex flex-wrap items-center gap-5">
-          <Link
-            href={buttonHref}
-            className="inline-flex items-center gap-2 rounded-full font-semibold transition-all duration-150 hover:scale-[1.02]"
-            style={{
-              background: "#00D4FF",
-              color: "#000000",
-              letterSpacing: "-0.01em",
-              height: "48px",
-              padding: "0 28px",
-              fontSize: "15px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {buttonText}
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path
-                d="M3 7h8M8 4l3 3-3 3"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-
-          {resolvedTrust ? (
-            <span
-              className="text-xs"
-              style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.01em" }}
-            >
-              {resolvedTrust}
-            </span>
+              <span className="cta-portal-dot" aria-hidden="true" />
+              <span
+                className="text-[11px] font-semibold uppercase tracking-[0.09em]"
+                style={{ color: "#00D4FF" }}
+              >
+                {resolvedEyebrow}
+              </span>
+            </div>
           ) : null}
-        </div>
+
+          <h2
+            id="cta-portal-title"
+            className="font-bold text-white"
+            style={{
+              fontSize: "clamp(28px, 4vw, 48px)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
+              margin: "0 0 16px",
+              maxWidth: "640px",
+            }}
+          >
+            {title}
+          </h2>
+
+          <p
+            className="text-[15px] leading-[1.65]"
+            style={{
+              color: "rgba(255,255,255,0.5)",
+              margin: "0 0 40px",
+              maxWidth: "480px",
+            }}
+          >
+            {description}
+          </p>
+
+          <div className="flex flex-wrap items-center gap-5">
+            <Link
+              href={buttonHref}
+              className="inline-flex items-center gap-2 rounded-full font-semibold transition-all duration-150 hover:scale-[1.02]"
+              style={{
+                background: "#00D4FF",
+                color: "#000000",
+                letterSpacing: "-0.01em",
+                height: "48px",
+                padding: "0 28px",
+                fontSize: "15px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {buttonText}
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M3 7h8M8 4l3 3-3 3"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+
+            {resolvedTrust ? (
+              <span
+                className="text-xs"
+                style={{ color: "rgba(255,255,255,0.28)", letterSpacing: "0.01em" }}
+              >
+                {resolvedTrust}
+              </span>
+            ) : null}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

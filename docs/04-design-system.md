@@ -106,6 +106,34 @@ Tailwind v4 picks them up automatically via CSS-first config.
   `requestIdleCallback`, halved nodes on mobile, paused off-screen.
 - `portal-effect.tsx` — radial glow effect used on CTABanner.
 
+## Scroll / 3D effects
+
+[components/effects/](../components/effects/) — client wrappers around
+server-rendered children. All of them are performance/SEO-safe by design:
+the SSR HTML stays fully visible (no `opacity: 0` in served markup — hidden
+states are applied by JS after hydration), they animate `transform`/`opacity`
+only (zero CLS), use passive listeners + `requestAnimationFrame`, and respect
+`prefers-reduced-motion`.
+
+- `reveal.tsx` — `<Reveal delay={ms}>` reveal-on-scroll (IntersectionObserver).
+  Skips elements already in the viewport on load to protect LCP.
+- `tilt-card.tsx` — `<TiltCard>` mouse-tracking 3D tilt + cursor-following
+  glow. Only activates on `(hover: hover)` devices.
+- `parallax-layer.tsx` — `<ParallaxLayer speed={n}>` subtle parallax for
+  decorative hero layers (`aria-hidden`).
+- `scroll-beam.tsx` — `<ScrollBeam>` fixed 3D scroll-progress line (desktop
+  ≥lg only), mounted once in the marketing layout so every public page gets
+  it (it hides itself on `/contacto`). Past 55% scroll it reveals a contact
+  invite: localized link to `/contacto` plus a button that opens the Dapta
+  agent chat (falls back to `/contacto`).
+
+These are applied transversally through the shared components (`ServiceCard`,
+`BenefitCard`, `CaseStudyCard`, `CTABanner`, `CmsServicioBenefits`,
+`CmsSubServicesGrid`), so individual pages rarely need to import them.
+
+- CSS lives in `app/globals.css` (`nv-reveal-*`, `tilt-card*`, `border-anim`,
+  `scroll-beam*`). `border-anim` = animated conic-gradient border on hover.
+
 ## Design tokens to use, not invent
 
 - `max-w-[1280px]` for content containers.
