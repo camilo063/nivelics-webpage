@@ -2,6 +2,7 @@
 
 import type { LucideIcon } from "lucide-react";
 import { GeoIconBox, type IconColor, LUCIDE_TO_GEO } from "@/lib/icons/geometric";
+import { TiltCard } from "@/components/effects/tilt-card";
 
 const ACCENT_ICON_COLOR: Record<string, IconColor> = {
   "#00D4FF": "cyan",
@@ -48,61 +49,64 @@ export function BenefitCard({ title, description, icon, accentColor }: BenefitCa
   const iconName = typeof icon === "string" ? icon : icon ? lucideToIconName(icon) : undefined;
 
   return (
-    <div
-      style={{
-        background: "rgba(255,255,255,0.02)",
-        border: "0.5px solid rgba(255,255,255,0.07)",
-        borderTop: `2px solid ${accentColor}`,
-        borderRadius: "10px",
-        padding: "16px",
-        transition: "transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
-        cursor: "default",
-      }}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLDivElement;
-        el.style.transform = "translateY(-3px)";
-        el.style.borderColor = "rgba(255,255,255,0.14)";
-        el.style.borderTopColor = accentColor;
-        el.style.boxShadow = "0 8px 24px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.06)";
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLDivElement;
-        el.style.transform = "translateY(0)";
-        el.style.borderColor = "rgba(255,255,255,0.07)";
-        el.style.borderTopColor = accentColor;
-        el.style.boxShadow = "none";
-      }}
-    >
+    <TiltCard>
       <div
         style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "12px",
-          marginBottom: "10px",
+          height: "100%",
+          background: "rgba(255,255,255,0.02)",
+          border: "0.5px solid rgba(255,255,255,0.07)",
+          borderTop: `2px solid ${accentColor}`,
+          borderRadius: "10px",
+          padding: "16px",
+          transition: "transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
+          cursor: "default",
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.transform = "translateY(-3px)";
+          el.style.borderColor = "rgba(255,255,255,0.14)";
+          el.style.borderTopColor = accentColor;
+          el.style.boxShadow = "0 8px 24px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.06)";
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.transform = "translateY(0)";
+          el.style.borderColor = "rgba(255,255,255,0.07)";
+          el.style.borderTopColor = accentColor;
+          el.style.boxShadow = "none";
         }}
       >
-        <GeoIconBox name={iconName} size={18} color={iconColor} />
         <div
           style={{
-            fontSize: "14px",
-            fontWeight: 600,
-            color: "#fff",
-            lineHeight: 1.35,
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "12px",
+            marginBottom: "10px",
           }}
         >
-          {title}
+          <GeoIconBox name={iconName} size={18} color={iconColor} />
+          <div
+            style={{
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "#fff",
+              lineHeight: 1.35,
+            }}
+          >
+            {title}
+          </div>
         </div>
+        <p
+          style={{
+            fontSize: "13px",
+            color: "rgba(255,255,255,0.55)",
+            lineHeight: 1.6,
+            margin: 0,
+          }}
+        >
+          {description}
+        </p>
       </div>
-      <p
-        style={{
-          fontSize: "13px",
-          color: "rgba(255,255,255,0.55)",
-          lineHeight: 1.6,
-          margin: 0,
-        }}
-      >
-        {description}
-      </p>
-    </div>
+    </TiltCard>
   );
 }

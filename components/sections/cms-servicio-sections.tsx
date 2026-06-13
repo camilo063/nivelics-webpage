@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { ProcessTimeline } from "@/components/sections/process-timeline";
+import { Reveal } from "@/components/effects/reveal";
+import { TiltCard } from "@/components/effects/tilt-card";
 import type { MappedServicio, Locale } from "@/lib/cms/types";
 
 interface BenefitsProps {
@@ -28,18 +30,23 @@ export function CmsServicioBenefits({
   return (
     <section className="py-12 md:py-16" data-section="cms-benefits">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-        <h2 className="text-3xl font-bold text-text-100 md:text-4xl">{title}</h2>
+        <Reveal>
+          <h2 className="text-3xl font-bold text-text-100 md:text-4xl">{title}</h2>
+        </Reveal>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((b) => (
-            <div
-              key={b.title}
-              className="glass glow-hover rounded-xl p-6"
-              style={{ borderTop: `2px solid ${accentColor}` }}
-            >
-              <GeoIconBox name={b.icon} size={20} color="cyan" />
-              <h3 className="mt-3 text-lg font-semibold text-text-100">{b.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-70">{b.copy}</p>
-            </div>
+          {benefits.map((b, i) => (
+            <Reveal key={b.title} delay={(i % 3) * 70} className="h-full">
+              <TiltCard>
+                <div
+                  className="glass glow-hover h-full rounded-xl p-6"
+                  style={{ borderTop: `2px solid ${accentColor}` }}
+                >
+                  <GeoIconBox name={b.icon} size={20} color="cyan" />
+                  <h3 className="mt-3 text-lg font-semibold text-text-100">{b.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-70">{b.copy}</p>
+                </div>
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -153,23 +160,28 @@ export function CmsSubServicesGrid({
   return (
     <section id="sub-services" className="bg-bg-surface py-16 md:py-24">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-        <h2 className="text-3xl font-bold text-text-100">{title}</h2>
+        <Reveal>
+          <h2 className="text-3xl font-bold text-text-100">{title}</h2>
+        </Reveal>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((s) => (
-            <Link
-              key={s.href}
-              href={s.href}
-              className="glass glow-hover rounded-xl p-6 block group cursor-pointer"
-            >
-              <GeoIconBox name={s.icon ?? undefined} size={20} color={iconColor} />
-              <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
-                {s.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-70">{s.description}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                {isEn ? "Learn more" : "Conocer más"} <ArrowRight size={14} />
-              </span>
-            </Link>
+          {items.map((s, i) => (
+            <Reveal key={s.href} delay={(i % 3) * 70} className="h-full">
+              <TiltCard>
+                <Link
+                  href={s.href}
+                  className="glass glow-hover rounded-xl p-6 block h-full group cursor-pointer"
+                >
+                  <GeoIconBox name={s.icon ?? undefined} size={20} color={iconColor} />
+                  <h3 className="text-lg font-semibold text-text-100 group-hover:text-primary transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-70">{s.description}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                    {isEn ? "Learn more" : "Conocer más"} <ArrowRight size={14} />
+                  </span>
+                </Link>
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>

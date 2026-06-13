@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { DaptaWidget } from "@/components/shared";
 import { TranslationBanner } from "@/components/shared/translation-banner";
+import { ScrollBeam } from "@/components/effects/scroll-beam";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
 import { pickLocale } from "@/lib/cms/bilingual";
 import type { Locale } from "@/lib/cms/types";
@@ -55,6 +56,11 @@ export default async function MarketingLayout({ children, params }: MarketingLay
     <>
       <Nav logoUrl={logoUrl} logoAlt={logoAlt} logoTitle={logoTitle} logo={logoSlot} />
       <TranslationBanner />
+      {/* Línea de navegación 3D — progreso de scroll + invitación a contactar (todas las páginas públicas) */}
+      <ScrollBeam
+        ctaLabel={locale === "es" ? "¿Hablamos?" : "Let's talk"}
+        chatLabel={locale === "es" ? "Abrir chat con nuestro agente" : "Open chat with our agent"}
+      />
       {children}
       <Footer
         logoUrl={logoUrl}

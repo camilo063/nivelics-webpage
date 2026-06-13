@@ -250,6 +250,241 @@ body {
   }
 }
 
+/* ─── Efectos 3D / scroll (components/effects) ─────────────────────
+   Todo compositor-only (transform/opacity) — sin reflow, CLS = 0.
+   El estado oculto (.nv-reveal-hidden) lo añade JS tras hidratar:
+   el HTML servido siempre es visible para crawlers y sin JS. */
+
+/* Reveal on scroll */
+.nv-reveal-hidden {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(5px);
+}
+.nv-reveal-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Tilt 3D + glow que sigue el cursor */
+.tilt-card {
+  perspective: 700px;
+  height: 100%;
+}
+.tilt-card__inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--nv-rx, 0deg)) rotateY(var(--nv-ry, 0deg));
+  transition: transform 0.18s ease-out;
+}
+.tilt-card:hover .tilt-card__inner {
+  will-change: transform;
+}
+.tilt-card__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    240px circle at var(--nv-mx, 50%) var(--nv-my, 50%),
+    rgba(0, 212, 255, 0.1),
+    transparent 65%
+  );
+  transition: opacity 0.3s ease;
+}
+.tilt-card:hover .tilt-card__glow {
+  opacity: 1;
+}
+
+/* Borde con gradiente cónico animado (solo en hover) */
+@property --nv-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes nv-border-spin {
+  to {
+    --nv-border-angle: 360deg;
+  }
+}
+.border-anim {
+  position: relative;
+}
+.border-anim::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--nv-border-angle),
+    transparent 0%,
+    rgba(0, 212, 255, 0.6) 12%,
+    transparent 30%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.border-anim:hover::after {
+  opacity: 1;
+  animation: nv-border-spin 3.5s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .border-anim:hover::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ScrollBeam — línea de navegación 3D (solo desktop, decorativa) */
+.scroll-beam {
+  position: fixed;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .scroll-beam {
+    display: flex;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-beam {
+    display: none !important;
+  }
+}
+.scroll-beam__stage {
+  position: relative;
+  height: 38vh;
+  width: 18px;
+  perspective: 400px;
+  transform-style: preserve-3d;
+}
+.scroll-beam__track {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 2px;
+  transform: translateX(-50%) rotateY(38deg);
+  background: rgba(255, 255, 255, 0.08);
+}
+.scroll-beam__track--back {
+  transform: translateX(-50%) rotateY(38deg) translateZ(-10px) translateX(5px);
+  background: rgba(139, 92, 246, 0.16);
+}
+.scroll-beam__fill {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  border-radius: 2px;
+  transform-origin: top center;
+  transform: translateX(-50%) rotateY(38deg) scaleY(var(--nv-p, 0));
+  background: linear-gradient(to bottom, #00d4ff, #0099cc);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+.scroll-beam__node {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow:
+    0 0 16px rgba(0, 212, 255, 0.8),
+    0 0 40px rgba(0, 212, 255, 0.35);
+  transform: translate(-50%, -50%) translateY(calc(var(--nv-p, 0) * 38vh)) translateZ(8px);
+}
+.scroll-beam__dot {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00d4ff;
+  transform: translate(-50%, -50%);
+}
+.scroll-beam__cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s;
+}
+.scroll-beam__cta.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.scroll-beam__cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.scroll-beam__cta-link:hover {
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+}
+.scroll-beam__chat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(10, 10, 15, 0.85);
+  color: var(--primary);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.scroll-beam__chat:hover {
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+}
+
 /* Tiptap editor (admin WYSIWYG) */
 .tiptap-editor .ProseMirror {
   min-height: 400px;
