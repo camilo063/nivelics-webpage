@@ -257,8 +257,8 @@
                 <span class="s10-ref-tag">NYT · CTA + Gift + Student</span>
                 <span class="s10-ref-tag">LSV · Newsletter + Súper Amigos</span>
               </div>
-              <p style="margin-top: var(--space-md); font-size: 0.9rem;"><strong style="color: var(--accent-green, #16a34a);">✅ Ejecutable ahora (refresh):</strong> 2 componentes nuevos — <code>&lt;ArticleInlineCTA&gt;</code> al 60% scroll vía <code>IntersectionObserver</code> + <code>&lt;ArticleEndCTA&gt;</code> al final del artículo cuando <code>paywall=false</code>. ~80 líneas TSX + 15 CSS.<br>
-              <strong style="color: var(--text-secondary);">⚠ Fase 2:</strong> social login one-tap, personalización dinámica del nombre del usuario en el CTA.</p>
+              <p style="margin-top: var(--space-md); font-size: 0.9rem;"><strong style="color: var(--accent-green, #16a34a);">✅ Ejecutable ahora (refresh):</strong> 2 componentes nuevos — <code>&lt;ArticleInlineCTA&gt;</code> al 60% scroll vía <code>IntersectionObserver</code> + <code>&lt;ArticleEndCTA&gt;</code> al final del artículo cuando <code>paywall=false</code>. ~80 líneas TSX + 15 CSS. Incluye el <strong>prompt de Google One Tap</strong> para captura de nombre/email en frontend (la verificación del token es dependencia del backend de CAMBIO — Etapa 0).<br>
+              <strong style="color: var(--text-secondary);">⚠ Fase 2:</strong> sesión autenticada completa (login one-tap end-to-end) y personalización dinámica del nombre del usuario en el CTA.</p>
               <div class="s10-hallazgo-evidencias" style="margin-top: var(--space-md);">
                 <picture><source srcset="assets/evidencias-conversion/D2-cambio-actual.webp" type="image/webp"><img src="assets/evidencias-conversion/D2-cambio-actual.png" alt="Header de CAMBIO con CTA único en header" loading="lazy" style="width: 100%; max-width: 720px; height: auto; border-radius: var(--radius-md); margin-bottom: var(--space-sm);"></picture>
                 <picture><source srcset="assets/evidencias-conversion/D2-intervencion-propuesta.webp" type="image/webp"><img src="assets/evidencias-conversion/D2-intervencion-propuesta.png" alt="Comparación CTA único vs triple exposición con copy de beneficio" loading="lazy" style="width: 100%; max-width: 720px; height: auto; border-radius: var(--radius-md);"></picture>
@@ -551,7 +551,7 @@
                 <td></td><td></td><td></td><td></td><td></td>
               </tr>
               <tr>
-                <th scope="row" class="rm-gantt-rowhead">Implementación CSS <span class="rm-gantt-owner">Nivelics · 31 transformaciones</span></th>
+                <th scope="row" class="rm-gantt-rowhead">Implementación CSS <span class="rm-gantt-owner">Nivelics · 32 transformaciones</span></th>
                 <td></td><td></td><td></td><td></td>
                 <td class="rm-on rm-impl" data-w="5"><span class="rm-bar-label">Sprint de implementación</span></td>
                 <td class="rm-on rm-impl" data-w="6"></td><td class="rm-on rm-impl" data-w="7"></td><td class="rm-on rm-impl" data-w="8"></td>
@@ -585,7 +585,7 @@
       <!-- 11.2 Distribución del esfuerzo -->
       <div class="s11-block">
         <h3 class="s11-sub"><span class="s11-sub-num">11.2</span> Distribución del esfuerzo de implementación</h3>
-        <p class="block-lead">Las <strong>31 transformaciones</strong> priorizadas en la Sección 7 se reparten en tres niveles de prioridad. La secuencia respeta dos restricciones reales: lo que aplica hoy sobre el Next.js actual se ejecuta primero, y lo que cae sobre código legacy (Eventos, Especiales) espera a la migración técnica.</p>
+        <p class="block-lead">Las <strong>32 transformaciones</strong> priorizadas en la Sección 7 se reparten en tres niveles de prioridad. La secuencia respeta dos restricciones reales: lo que aplica hoy sobre el Next.js actual se ejecuta primero, y lo que cae sobre código legacy (Eventos, Especiales) espera a la migración técnica.</p>
 
         <div class="s11-effort">
           <div class="s11-effort-row">
@@ -645,11 +645,11 @@
             <p class="s11-dep-mit"><strong>Mitigación:</strong> no bloquea el sprint principal — la implementación P0/P1 corre sobre el frontend ya unificado.</p>
           </div>
           <div class="s11-dep-card" data-kind="prereq">
-            <span class="s11-dep-tag">Prerrequisito</span>
-            <h4>c · Instrumentación de Analytics</h4>
-            <p class="s11-dep-state"><strong>Estado:</strong> parcial — hoy solo hay datos básicos del funnel.</p>
-            <p class="s11-dep-risk"><strong>Impacto:</strong> sin instrumentación completa, el A/B testing no es medible y las hipótesis de la Sección 7 no se pueden validar.</p>
-            <p class="s11-dep-mit"><strong>Acción:</strong> primera tarea del sprint de implementación (semana 5). No es opcional: es prerrequisito de todo lo que viene después.</p>
+            <span class="s11-dep-tag">Etapa 0 · Prerrequisito de CAMBIO</span>
+            <h4>c · Marcación GA4 del funnel</h4>
+            <p class="s11-dep-state"><strong>Estado:</strong> parcial — hoy solo hay datos básicos del funnel. La marcación completa de eventos (anónimo → registrado → suscriptor) es responsabilidad de CAMBIO.</p>
+            <p class="s11-dep-risk"><strong>Impacto:</strong> sin la marcación al 100%, el A/B testing no es medible y las hipótesis de la Sección 7 no se pueden validar. Es la Etapa 0 que habilita todo lo demás.</p>
+            <p class="s11-dep-mit"><strong>Reparto:</strong> CAMBIO provee la marcación completa del sitio; Nivelics define el spec de eventos mínimos que cada A/B visual necesita y verifica que disparen correctamente antes de cada oleada.</p>
           </div>
         </div>
       </div>
@@ -663,21 +663,21 @@
             <span class="s11-wave-num">Oleada 1</span>
             <div class="s11-wave-body">
               <span class="s11-wave-when">Inicia semana 8 · 4 experimentos</span>
-              <p>Quick wins de jerarquía y CTAs: header con CTA de suscripción prominente, cards refrescadas vs. actuales, badge premium con color. Métricas intermedias (CTR, clics a planes) que alcanzan significancia en 1–2 semanas.</p>
+              <p>Las palancas de conversión de mayor retorno y menor esfuerzo (P0): header CTA sólido (T04), cards premium con badge aspiracional (T02), pieza dominante como hero editorial (T01) y pieza estelar con CTA contextual (T18). Métricas intermedias —CTR a /suscribirse, hit-paywall qualified rate— con significancia en 1–2 semanas.</p>
             </div>
           </li>
           <li class="s11-wave">
             <span class="s11-wave-num">Oleada 2</span>
             <div class="s11-wave-body">
               <span class="s11-wave-when">Semanas 10–11</span>
-              <p>Cascada de <code>ContentSectionPage</code> y tratamiento editorial: pieza dominante con eyebrow, recirculación interna profunda, Los Danieles como puerta de entrada con captura de email inline.</p>
+              <p>Recirculación y captura de registro (P0): Los Danieles como puerta a premium con newsletter inline (T03), recirculación "Lea también" en artículos (T08), barra de progreso de lectura (T13) y la cascada editorial de <code>ContentSectionPage</code> con eyebrow (T05). Métricas: páginas/sesión, scroll depth y email captures.</p>
             </div>
           </li>
           <li class="s11-wave">
             <span class="s11-wave-num">Oleada 3</span>
             <div class="s11-wave-body">
               <span class="s11-wave-when">Semanas 12–13</span>
-              <p>Hub de Especiales con tipología visual, página de planes y refinamientos basados en lo aprendido en las dos oleadas anteriores. Cierra el ciclo de experimentación de la Fase 1.</p>
+              <p>Página de planes con labels descriptivos y ahorro visible (T26), recirculación en secciones (T27, T28) y el hub de Especiales. Refinamientos según lo aprendido en las dos oleadas anteriores. Cierra el ciclo de experimentación de la Fase 1.</p>
             </div>
           </li>
         </ol>
@@ -689,7 +689,7 @@
         <p class="block-lead">Puntos de control concretos. Cada uno es comprobable de forma binaria — está o no está en producción.</p>
         <ul class="s11-milestones">
           <li class="s11-ms"><span class="s11-ms-week">Semana 4</span><span class="s11-ms-text">Migración técnica de Eventos y Especiales completada y deployada.</span></li>
-          <li class="s11-ms"><span class="s11-ms-week">Semana 5</span><span class="s11-ms-text">Instrumentación de Analytics del funnel activa.</span></li>
+          <li class="s11-ms"><span class="s11-ms-week">Semana 5</span><span class="s11-ms-text">Marcación GA4 del funnel (provista por CAMBIO) verificada y activa.</span></li>
           <li class="s11-ms"><span class="s11-ms-week">Semana 6</span><span class="s11-ms-text">Primeras 5 transformaciones P0 en producción.</span></li>
           <li class="s11-ms"><span class="s11-ms-week">Semana 8</span><span class="s11-ms-text">Primera oleada de A/B testing lanzada.</span></li>
           <li class="s11-ms"><span class="s11-ms-week">Semana 10</span><span class="s11-ms-text">50% de las transformaciones P0 + P1 implementadas.</span></li>
@@ -802,15 +802,15 @@
         <div class="s13-decisions">
           <article class="s13-dec">
             <div class="s13-dec-head"><span class="s13-dec-letter">a</span><h4>Aprobación del alcance</h4><span class="s13-dec-due">Esta semana</span></div>
-            <p class="s13-dec-what">Confirmar que las 31 transformaciones priorizadas en la Sección 7 se aceptan tal cual.</p>
+            <p class="s13-dec-what">Confirmar que las 32 transformaciones priorizadas en la Sección 7 se aceptan tal cual.</p>
             <p class="s13-dec-why"><strong>Por qué importa:</strong> define el contenido exacto del sprint. Si CAMBIO quiere reordenar prioridades, este es el momento de hacerlo sin coste.</p>
             <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> aprobar el set completo; las prioridades P0/P1/P2 ya están ordenadas por impacto y dependencia.</p>
           </article>
           <article class="s13-dec">
-            <div class="s13-dec-head"><span class="s13-dec-letter">b</span><h4>Autorización de acceso a GA4</h4><span class="s13-dec-due s13-due-urgent">Antes de semana 5</span></div>
-            <p class="s13-dec-what">Otorgar a Nivelics acceso a GA4 para instrumentar el funnel y medir los A/B tests.</p>
-            <p class="s13-dec-why"><strong>Por qué importa:</strong> sin instrumentación, el sprint no puede iniciar correctamente y el A/B testing no es medible. Es el cuello de botella de todo lo demás.</p>
-            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> tramitar el acceso esta misma semana; suele tardar más de lo esperado por temas de permisos internos.</p>
+            <div class="s13-dec-head"><span class="s13-dec-letter">b</span><h4>Marcación GA4 del funnel al 100% (Etapa 0)</h4><span class="s13-dec-due s13-due-urgent">Antes de semana 5</span></div>
+            <p class="s13-dec-what">Completar y proveer la marcación de eventos del embudo (anónimo → registrado → suscriptor) y dar a Nivelics acceso de lectura para verificar y medir los A/B tests.</p>
+            <p class="s13-dec-why"><strong>Por qué importa:</strong> es la Etapa 0 del proyecto. Sin la marcación completa, el refresh se ejecuta pero su impacto no se puede demostrar y el A/B testing no es medible. Es el cuello de botella de todo lo demás.</p>
+            <p class="s13-dec-rec"><strong>Recomendación Nivelics:</strong> arrancar esta semana; suele tardar por permisos internos. Nivelics entrega el spec de eventos mínimos requeridos para que el equipo de CAMBIO los implemente sin ambigüedad.</p>
           </article>
           <article class="s13-dec">
             <div class="s13-dec-head"><span class="s13-dec-letter">c</span><h4>Coordinación con el equipo de rebranding</h4><span class="s13-dec-due">Semana 1 del sprint</span></div>
@@ -843,7 +843,7 @@
       <div class="s13-block">
         <h3 class="s11-sub"><span class="s11-sub-num">13.2</span> Lo que arranca el día 1 del sprint</h3>
         <ul class="s13-day1">
-          <li>Instrumentación de GA4 del funnel completo.</li>
+          <li>Verificación de la marcación GA4 del funnel provista por CAMBIO (Etapa 0) y entrega del spec de eventos mínimos para los A/B.</li>
           <li>Implementación de Microsoft Clarity en el sitio principal (hoy solo está instalado en el subdominio de Eventos, perdiendo data del 99% del sitio).</li>
           <li>Setup de la herramienta de A/B testing elegida.</li>
           <li>Kickoff con el equipo de rebranding (primera reunión de check-point).</li>
@@ -866,32 +866,32 @@
       <!-- 13.3 Cómo medir el éxito -->
       <div class="s13-block">
         <h3 class="s11-sub"><span class="s11-sub-num">13.3</span> Cómo se mide el éxito del proyecto</h3>
-        <p class="block-lead">El éxito de este refresh no es estético: es medible. Y se separa con honestidad entre lo que Nivelics compromete y lo que depende de fases futuras.</p>
+        <p class="block-lead">El éxito de este refresh no es estético: es de conversión, y es medible. La regla para leer esta tabla es <strong>partir el funnel, no la conversión</strong>: el refresh visual mueve la parte alta y media del embudo —descubrimiento, registro, captura de email, recirculación, intención de suscripción—, que es justamente la que alimenta la conversión a pago. El salto final a suscriptor pagado vive aguas abajo, en el motor de paywall (Fase 2) y en la instrumentación del checkout (Etapa 0). Comprometemos lo que el refresh sí mueve; lo demás se documenta con honestidad, no se promete.</p>
         <div class="s13-metrics">
           <div class="s13-metric-col s13-metric-primary">
-            <h4>Primarias · comprometidas</h4>
+            <h4>Comprometidas · palancas de conversión que el refresh mueve</h4>
             <ul>
-              <li>100% de transformaciones P0 + P1 en producción.</li>
-              <li>Lighthouse Performance del home: <strong>13 → &gt; 75</strong>.</li>
-              <li>Lighthouse Best Practices del sitio: <strong>54 → &gt; 90</strong>.</li>
-              <li>Recirculación interna: <strong>17.8% → &gt; 25%</strong> (medible en GA4).</li>
-              <li>Al menos 3 oleadas de A/B testing completas.</li>
+              <li>Recirculación interna: <strong>17.8% → &gt; 25%</strong> (páginas/sesión, medible en GA4).</li>
+              <li>Captura de registro / desanonimización: lectores anónimos → registrados vía newsletter inline (Los Danieles) + Google One Tap. Baseline de email hoy: 0.3% del tráfico.</li>
+              <li>CTR a <code>/suscribirse</code> desde el header CTA y la pieza estelar del home.</li>
+              <li>Hit-paywall qualified rate: clics al muro deliberados, no accidentales.</li>
+              <li>100% de transformaciones P0 + P1 en producción + al menos 3 oleadas de A/B testing completas.</li>
             </ul>
           </div>
           <div class="s13-metric-col s13-metric-secondary">
-            <h4>Secundarias · orientativas</h4>
+            <h4>Baseline e higiene · se miden y reportan, no se comprometen como objetivo</h4>
             <ul>
               <li>CTR promedio: cards refrescadas vs. actuales.</li>
-              <li>Tasa de hit-paywall post-instrumentación (baseline).</li>
-              <li>Capturas de email desde columnas individuales de Los Danieles.</li>
+              <li>Scroll depth en artículos largos (baseline: 37.82%).</li>
+              <li>Performance del Home (hoy 13) y Best Practices (hoy 54): se reporta el baseline y la mejora <em>incidental</em> que traiga el refresh; la optimización profunda es Fase 3 (requiere ingeniería, no CSS).</li>
             </ul>
           </div>
           <div class="s13-metric-col s13-metric-out">
-            <h4>Fuera de alcance · no comprometidas</h4>
+            <h4>Aguas abajo del refresh · dependen de Fase 2 / Etapa 0</h4>
             <ul>
-              <li>Conversión a suscripción (depende de Fase 2 y decisiones editoriales).</li>
-              <li>Retención de suscriptores (no medible en Fase 1).</li>
-              <li>LTV (no medible en Fase 1).</li>
+              <li><strong>Conversión final a pago:</strong> no es que no la persigamos — el refresh mueve el funnel que la alimenta (registro, email, recirculación, intención). El salto a suscriptor pagado depende del paywall persuasivo (Fase 2) y de la instrumentación del checkout (Etapa 0).</li>
+              <li>Retención de suscriptores y churn (no medible en Fase 1).</li>
+              <li>LTV por plan (no disponible en Fase 1).</li>
             </ul>
           </div>
         </div>

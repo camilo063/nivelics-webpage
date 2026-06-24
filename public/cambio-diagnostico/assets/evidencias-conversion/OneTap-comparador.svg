@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" font-family="'Inter Tight', system-ui, sans-serif">
+  <rect width="1200" height="470" fill="#FBFAF7"/>
+
+  <!-- ===== PANEL ANTES ===== -->
+  <g>
+    <text x="40" y="46" font-size="15" font-weight="700" letter-spacing="1" fill="#9a6200">ANTES · LECTOR ANÓNIMO</text>
+    <rect x="40" y="64" width="500" height="360" rx="10" fill="#ffffff" stroke="#e8e2d5" stroke-width="1.5"/>
+    <!-- header -->
+    <rect x="40" y="64" width="500" height="44" rx="10" fill="#ffffff"/>
+    <rect x="218" y="78" width="86" height="18" rx="3" fill="#E12204"/>
+    <text x="261" y="92" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">CAMBIO</text>
+    <line x1="40" y1="108" x2="540" y2="108" stroke="#e8e2d5" stroke-width="1"/>
+    <!-- article -->
+    <rect x="72" y="138" width="320" height="16" rx="3" fill="#1A1612"/>
+    <rect x="72" y="162" width="436" height="10" rx="3" fill="#d4ccb8"/>
+    <rect x="72" y="180" width="436" height="10" rx="3" fill="#d4ccb8"/>
+    <rect x="72" y="198" width="380" height="10" rx="3" fill="#d4ccb8"/>
+    <rect x="72" y="232" width="436" height="10" rx="3" fill="#e8e2d5"/>
+    <rect x="72" y="250" width="436" height="10" rx="3" fill="#e8e2d5"/>
+    <rect x="72" y="268" width="300" height="10" rx="3" fill="#e8e2d5"/>
+    <!-- ghost reader -->
+    <circle cx="290" cy="356" r="30" fill="#f4efe6" stroke="#d4ccb8" stroke-width="1.5"/>
+    <text x="290" y="366" font-size="28" fill="#b8ad97" text-anchor="middle" font-weight="700">?</text>
+    <text x="290" y="406" font-size="13" fill="#7a7160" text-anchor="middle">Sin nombre · sin email · no medible</text>
+  </g>
+
+  <!-- arrow -->
+  <g>
+    <line x1="566" y1="244" x2="628" y2="244" stroke="#1A1612" stroke-width="2.5"/>
+    <path d="M628 244 l-12 -7 v14 z" fill="#1A1612"/>
+  </g>
+
+  <!-- ===== PANEL DESPUÉS ===== -->
+  <g>
+    <text x="660" y="46" font-size="15" font-weight="700" letter-spacing="1" fill="#2d7a3e">DESPUÉS · GOOGLE ONE TAP</text>
+    <rect x="660" y="64" width="500" height="360" rx="10" fill="#ffffff" stroke="#2d7a3e" stroke-width="1.5"/>
+    <!-- header -->
+    <rect x="838" y="78" width="86" height="18" rx="3" fill="#E12204"/>
+    <text x="881" y="92" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">CAMBIO</text>
+    <line x1="660" y1="108" x2="1160" y2="108" stroke="#e8e2d5" stroke-width="1"/>
+    <!-- article dimmed -->
+    <rect x="692" y="138" width="320" height="16" rx="3" fill="#cfc7b6"/>
+    <rect x="692" y="162" width="436" height="10" rx="3" fill="#e8e2d5"/>
+    <rect x="692" y="180" width="436" height="10" rx="3" fill="#e8e2d5"/>
+    <rect x="692" y="198" width="380" height="10" rx="3" fill="#e8e2d5"/>
+    <!-- One Tap prompt card -->
+    <rect x="772" y="232" width="356" height="150" rx="12" fill="#ffffff" stroke="#dadce0" stroke-width="1.5"/>
+    <rect x="772" y="232" width="356" height="150" rx="12" fill="#ffffff" stroke="#dadce0" stroke-width="1.5" opacity="0"/>
+    <text x="796" y="262" font-size="13" fill="#5f6368">Inicia sesión en CAMBIO con Google</text>
+    <!-- google G -->
+    <circle cx="812" cy="306" r="20" fill="#ffffff" stroke="#e8e2d5" stroke-width="1"/>
+    <text x="812" y="314" font-size="22" font-weight="700" text-anchor="middle" fill="#4285F4">G</text>
+    <text x="846" y="300" font-size="14" font-weight="600" fill="#202124">Continuar como María</text>
+    <text x="846" y="320" font-size="12" fill="#5f6368">maria@gmail.com</text>
+    <rect x="796" y="342" width="308" height="30" rx="6" fill="#1a73e8"/>
+    <text x="950" y="362" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">Continuar</text>
+    <text x="910" y="410" font-size="13" fill="#2d7a3e" text-anchor="middle" font-weight="600">Un tap → nombre + email capturados</text>
+  </g>
+</svg>
