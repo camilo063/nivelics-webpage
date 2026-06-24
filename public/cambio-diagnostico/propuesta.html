@@ -135,7 +135,7 @@
       <div class="section-header">
         <span class="section-number">07</span>
         <h2 class="section-title">Propuesta de Transformaciones CSS</h2>
-        <p class="section-subtitle">31 intervenciones priorizadas por impacto: del hallazgo a la transformación medible</p>
+        <p class="section-subtitle">32 intervenciones priorizadas por impacto: del hallazgo a la transformación medible</p>
       </div>
 
       <div class="tx-intro-grid">
@@ -166,7 +166,7 @@
       <!-- ====== COMPARADORES VISUALES POR DIMENSIÓN DEL BENCHMARK ====== -->
       <div class="tx-comparadores" id="tx-comparadores">
         <h3 class="tx-priority-section-title">Comparadores visuales por dimensión del benchmark</h3>
-        <p class="tx-priority-section-desc">Los seis comparadores antes/después que respaldan visualmente las palancas del <a href="estrategia.html#benchmark">Benchmark de Conversión (Sección 10)</a>. Cada uno muestra el estado actual de CAMBIO frente a la propuesta de refresh CSS/JS, con su intervención técnica embebida. Sirven como puente entre el scorecard y el inventario completo de 31 transformaciones que viene a continuación.</p>
+        <p class="tx-priority-section-desc">Los seis comparadores por dimensión del benchmark, más un séptimo de captura de registro (Google One Tap), que respaldan visualmente las palancas del <a href="estrategia.html#benchmark">Benchmark de Conversión (Sección 10)</a>. Cada uno muestra el estado actual de CAMBIO frente a la propuesta de refresh CSS/JS, con su intervención técnica embebida. Sirven como puente entre el scorecard y el inventario completo de 32 transformaciones que viene a continuación.</p>
 
         <div class="tx-comp-grid">
 
@@ -254,6 +254,57 @@
             </div>
           </article>
 
+          <article class="tx-comp-card">
+            <header class="tx-comp-head">
+              <span class="tx-comp-dim">OT</span>
+              <h4 class="tx-comp-title">Google One Tap · captura de registro sin fricción</h4>
+            </header>
+            <img src="assets/evidencias-conversion/OneTap-comparador.svg" alt="Comparador: lector anónimo sin captura frente al prompt de Google One Tap que captura nombre y email en un tap" loading="lazy" style="width:100%; height:auto; border-radius: var(--radius-md); display:block;">
+            <div class="tx-comp-footer">
+              <p class="tx-comp-mapeo"><strong>Mapea a:</strong> <a href="#tx-32">T32 · Google One Tap</a>. Palanca de captura que complementa D2 (CTAs de registro) y D3 (email gateway): desanonimiza al lector en un solo tap. La recepción/verificación del token es dependencia de backend (Etapa 0).</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+
+      <!-- ====== PALANCA TRANSVERSAL: MURO DE REGISTRO / DESANONIMIZACIÓN ====== -->
+      <div class="eg-guion" id="tx-muro-registro" style="margin: var(--space-xl) 0 var(--space-3xl);">
+        <div class="eg-head">
+          <span class="eg-tag">Palanca transversal de conversión · derivada del benchmark</span>
+          <h3 class="eg-title" style="font-size: clamp(1.3rem, 2.6vw, 1.7rem);">El escalón que falta en el funnel: el muro de registro (anónimo → registrado → suscriptor)</h3>
+        </div>
+        <div class="eg-body">
+          <p>El benchmark revela una palanca que CAMBIO no usa y que es la más atada al objetivo de negocio de <strong>crecer la base de suscriptores</strong>: el registro gratuito como paso intermedio antes del pago. Hoy el lector de CAMBIO solo tiene dos estados —anónimo o suscriptor de pago— y entre ellos hay un salto demasiado grande. Los referentes insertan un escalón intermedio: <em>"Regístrese gratis para seguir leyendo"</em>, que desanonimiza al lector, habilita el contacto por email y multiplica la probabilidad de conversión a pago más adelante.</p>
+
+          <div class="eg-3col" style="margin: var(--space-lg) 0;">
+            <div class="eg-col">
+              <span class="eg-col-tag">ESTADO 1</span>
+              <h5>Anónimo</h5>
+              <p>La inmensa mayoría del tráfico. Llega, lee y se va sin dejar rastro — CAMBIO no puede volver a contactarlo.</p>
+            </div>
+            <div class="eg-col eg-col--new">
+              <span class="eg-col-tag">ESTADO 2 · EL QUE FALTA</span>
+              <h5>Registrado (gratis)</h5>
+              <p>Email capturado. Recibe newsletters, vuelve al sitio y es el candidato cualificado para la suscripción. Hoy en CAMBIO casi no existe como estado.</p>
+            </div>
+            <div class="eg-col">
+              <span class="eg-col-tag">ESTADO 3</span>
+              <h5>Suscriptor de pago</h5>
+              <p>El objetivo de negocio. Hoy se le pide el salto directo desde anónimo: la fricción máxima, con 9 campos de checkout al final.</p>
+            </div>
+          </div>
+
+          <p><strong>Qué hacen los referentes (verificado en el benchmark):</strong> El País y El Tiempo ofrecen contenido a cambio de registro <em>antes</em> de mostrar el muro de pago; NYT alterna registro y suscripción en el mismo flujo. Es el modelo Guardian: entregar valor y capturar el correo antes de pedir dinero. El email pasa a ser el canal de retorno — justo el que en CAMBIO hoy pesa apenas 0.3% del tráfico.</p>
+
+          <p><strong>Cómo lo ejecuta CAMBIO en Fase 1 (CSS/JS, sin tocar el motor de paywall):</strong> esta palanca no es una transformación nueva — es la lectura coordinada de tres que ya están en el plan como una sola <em>escalera de conversión</em>:</p>
+          <ul style="margin: var(--space-sm) 0 0; padding-left: 1.1em; font-size: 0.92rem; line-height: 1.6; color: var(--text-secondary);">
+            <li><a href="#tx-32" class="tx-inline-link">T32 · Google One Tap</a> — desanonimización en un tap: captura nombre y email sin formulario (Chrome ≈ 90% del mercado).</li>
+            <li><a href="#tx-03" class="tx-inline-link">T03 · Los Danieles como puerta de entrada</a> — newsletter inline al cierre de columnas: el registro como gateway natural del contenido de mayor engagement (Coronell, 6m 24s).</li>
+            <li><a href="#tx-08" class="tx-inline-link">T08 · Recirculación inline "Lea también"</a> — mantiene al lector recién registrado dentro del ecosistema en vez de dejarlo salir.</li>
+          </ul>
+          <p style="margin-top: var(--space-md);"><strong>Qué es Fase 1 y qué es Fase 2:</strong> el tratamiento visual del prompt de registro y la captura de email son 100% Fase 1. El <em>soft gate</em> propiamente dicho —contar artículos y exigir registro al N-ésimo— necesita el contador del motor de paywall, así que su lógica es Fase 2. <strong>Es el mapeo directo al objetivo #1 del cliente: crecer la base de suscriptores empieza por crecer la base de registrados</strong> — y eso arranca en este sprint.</p>
         </div>
       </div>
 
@@ -261,9 +312,9 @@
       <!-- Transformaciones prioritarias: dónde empezar -->
       <div class="tx-priority-section">
         <h3 class="tx-priority-section-title">Transformaciones prioritarias: dónde empezar</h3>
-        <p class="tx-priority-section-desc">Las siguientes transformaciones concentran el mayor impacto con el menor esfuerzo. Son el punto de partida recomendado del sprint de implementación. El inventario completo de 31 transformaciones está debajo para referencia y priorización conjunta con el cliente.</p>
+        <p class="tx-priority-section-desc">El punto de partida del sprint, ordenado bajo una sola regla: <strong>primero conversión</strong>. El primer grupo son las palancas que el <a href="estrategia.html#benchmark">Benchmark de Conversión (Sección 10)</a> valida como las de mayor retorno — las mismas seis dimensiones de los comparadores de arriba. El segundo grupo es higiene obligatoria (bug, legal, accesibilidad funcional) que corre en paralelo. El inventario completo de 32 está debajo, con la prioridad de cada una ajustada a esta misma lectura y las palancas de conversión marcadas con su chip.</p>
 
-        <h4 class="tx-pri-group-title"><span class="tx-priority tx-p0">P0</span> Sprint 1 — Impacto inmediato</h4>
+        <h4 class="tx-pri-group-title"><span class="tx-priority tx-p0">P0</span> Conversión — el núcleo del refresh</h4>
         <div class="tx-pri-cards">
           <div class="tx-pri-card tx-pri-card--p0">
             <div class="tx-pri-card-header">
@@ -342,6 +393,86 @@
           </div>
           <div class="tx-pri-card tx-pri-card--p0">
             <div class="tx-pri-card-header">
+              <span class="tx-card-id">T08</span>
+              <span class="tx-priority tx-p0">P0</span>
+              <span class="tx-effort tx-effort-m">M</span>
+              <span class="tx-type">CSS + micro JS</span>
+            </div>
+            <h4 class="tx-pri-card-title">Recirculación inline 'Lea también' en artículos</h4>
+            <span class="tx-pri-desp">Artículo</span>
+            <p class="tx-pri-card-desc">Bloque intercalado después del párrafo 3-4 con artículos relacionados. CAMBIO es el único medio del benchmark sin recirculación inline (palanca D4). Scroll promedio 37.82% — la recirculación al final no alcanza a la mayoría.</p>
+            <div class="tx-pri-card-footer">
+              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Páginas/sesión +0.3 en flujo artículo.</p>
+              <a href="#exp-t08" class="tx-pri-ablink">→ Se valida en Experimento E08</a>
+            </div>
+          </div>
+          <div class="tx-pri-card tx-pri-card--p0">
+            <div class="tx-pri-card-header">
+              <span class="tx-card-id">T13</span>
+              <span class="tx-priority tx-p0">P0</span>
+              <span class="tx-effort tx-effort-s">S</span>
+              <span class="tx-type">CSS + micro JS</span>
+            </div>
+            <h4 class="tx-pri-card-title">Indicador de progreso de lectura</h4>
+            <span class="tx-pri-desp">Artículo</span>
+            <p class="tx-pri-card-desc">Barra de progreso fija debajo del nav (palanca D4). Mejora retención en artículos largos de investigación — el contenido premium que justifica la suscripción.</p>
+            <div class="tx-pri-card-footer">
+              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Scroll depth >50% en artículos >800 palabras (baseline: 37.82%).</p>
+              <a href="#exp-t13" class="tx-pri-ablink">→ Se valida en Experimento E13</a>
+            </div>
+          </div>
+          <div class="tx-pri-card tx-pri-card--p0">
+            <div class="tx-pri-card-header">
+              <span class="tx-card-id">T18</span>
+              <span class="tx-priority tx-p0">P0</span>
+              <span class="tx-effort tx-effort-s">S</span>
+              <span class="tx-type">CSS + micro JS</span>
+            </div>
+            <h4 class="tx-pri-card-title">Pieza editorial estelar con CTA contextual premium</h4>
+            <span class="tx-pri-desp">Home</span>
+            <p class="tx-pri-card-desc">Badge premium arriba, bajada extendida y mini-CTA "Suscríbete y léelo completo" con color de marca sobre la pieza estelar del home (palanca D2 del benchmark).</p>
+            <div class="tx-pri-card-footer">
+              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> CTR a /suscribirse desde la pieza estelar >1% de impresiones.</p>
+              <a href="#tx-18" class="tx-pri-ablink">→ Ver detalle T18</a>
+            </div>
+          </div>
+          <div class="tx-pri-card tx-pri-card--p0">
+            <div class="tx-pri-card-header">
+              <span class="tx-card-id">T26</span>
+              <span class="tx-priority tx-p0">P0</span>
+              <span class="tx-effort tx-effort-s">S</span>
+              <span class="tx-type">CSS + micro JS</span>
+            </div>
+            <h4 class="tx-pri-card-title">Tabs de planes: labels descriptivos con ahorro</h4>
+            <span class="tx-pri-desp">Página de planes</span>
+            <p class="tx-pri-card-desc">'1 Mes' → 'Mensual', '12 Meses' → 'Anual — Ahorra 35% · Recomendado' (palanca D6). El ahorro visible reduce la fricción de comparación.</p>
+            <div class="tx-pri-card-footer">
+              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Selección plan anual +10 puntos porcentuales.</p>
+              <a href="#exp-t26" class="tx-pri-ablink">→ Se valida en Experimento E26</a>
+            </div>
+          </div>
+          <div class="tx-pri-card tx-pri-card--p0">
+            <div class="tx-pri-card-header">
+              <span class="tx-card-id">T32</span>
+              <span class="tx-priority tx-p0">P0</span>
+              <span class="tx-effort tx-effort-m">M</span>
+              <span class="tx-type">JS + dependencia backend</span>
+            </div>
+            <h4 class="tx-pri-card-title">Google One Tap — captura de registro sin fricción</h4>
+            <span class="tx-pri-desp">Todos</span>
+            <p class="tx-pri-card-desc">Prompt de Google One Tap que captura nombre y email del lector anónimo en un solo tap (Chrome ≈ 90% del mercado). Desanonimiza sin formulario. La verificación del token es dependencia de backend (Etapa 0).</p>
+            <div class="tx-pri-card-footer">
+              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Tasa de registro de lectores anónimos +2–5 puntos porcentuales vs. el formulario de 9 campos.</p>
+              <a href="#tx-32" class="tx-pri-ablink">→ Ver detalle T32</a>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="tx-pri-group-title"><span class="tx-priority tx-p0">P0</span> Higiene obligatoria — en paralelo</h4>
+        <p class="tx-priority-section-desc">No son conversión, pero son innegociables: un bug visible en producción, un riesgo legal y dos fallos de accesibilidad funcional. Se ejecutan en el mismo Sprint 1, sin competir con las palancas de conversión.</p>
+        <div class="tx-pri-cards">
+          <div class="tx-pri-card tx-pri-card--p0">
+            <div class="tx-pri-card-header">
               <span class="tx-card-id">T25</span>
               <span class="tx-priority tx-p0">P0</span>
               <span class="tx-effort tx-effort-s">S</span>
@@ -402,38 +533,8 @@
           </div>
         </div>
 
-        <h4 class="tx-pri-group-title"><span class="tx-priority tx-p1">P1</span> Sprint 2 — Engagement y recirculación</h4>
+        <h4 class="tx-pri-group-title"><span class="tx-priority tx-p1">P1</span> Engagement y recirculación — segunda ola</h4>
         <div class="tx-pri-cards tx-pri-cards--p1">
-          <div class="tx-pri-card tx-pri-card--p1">
-            <div class="tx-pri-card-header">
-              <span class="tx-card-id">T08</span>
-              <span class="tx-priority tx-p1">P1</span>
-              <span class="tx-effort tx-effort-m">M</span>
-              <span class="tx-type">CSS + micro JS</span>
-            </div>
-            <h4 class="tx-pri-card-title">Recirculación inline 'Lea también' en artículos</h4>
-            <span class="tx-pri-desp">Artículo</span>
-            <p class="tx-pri-card-desc">Bloque intercalado después del párrafo 3-4 con artículos relacionados. CAMBIO es el único medio del benchmark sin recirculación inline. Scroll promedio 37.82% — la recirculación al final no alcanza a la mayoría.</p>
-            <div class="tx-pri-card-footer">
-              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Páginas/sesión +0.3 en flujo artículo.</p>
-              <a href="#exp-t08" class="tx-pri-ablink">→ Se valida en Experimento E08</a>
-            </div>
-          </div>
-          <div class="tx-pri-card tx-pri-card--p1">
-            <div class="tx-pri-card-header">
-              <span class="tx-card-id">T13</span>
-              <span class="tx-priority tx-p1">P1</span>
-              <span class="tx-effort tx-effort-s">S</span>
-              <span class="tx-type">CSS + micro JS</span>
-            </div>
-            <h4 class="tx-pri-card-title">Indicador de progreso de lectura</h4>
-            <span class="tx-pri-desp">Artículo</span>
-            <p class="tx-pri-card-desc">Barra de progreso fija debajo del nav. Mejora retención en artículos largos de investigación — el contenido premium que justifica la suscripción.</p>
-            <div class="tx-pri-card-footer">
-              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Scroll depth >50% en artículos >800 palabras (baseline: 37.82%).</p>
-              <a href="#exp-t13" class="tx-pri-ablink">→ Se valida en Experimento E13</a>
-            </div>
-          </div>
           <div class="tx-pri-card tx-pri-card--p1">
             <div class="tx-pri-card-header">
               <span class="tx-card-id">T17</span>
@@ -479,26 +580,12 @@
               <a href="#exp-t28" class="tx-pri-ablink">→ Se valida en Experimento E28</a>
             </div>
           </div>
-          <div class="tx-pri-card tx-pri-card--p1">
-            <div class="tx-pri-card-header">
-              <span class="tx-card-id">T26</span>
-              <span class="tx-priority tx-p1">P1</span>
-              <span class="tx-effort tx-effort-s">S</span>
-              <span class="tx-type">CSS + micro JS</span>
-            </div>
-            <h4 class="tx-pri-card-title">Tabs de planes: labels descriptivos con ahorro</h4>
-            <span class="tx-pri-desp">Página de planes</span>
-            <p class="tx-pri-card-desc">'1 Mes' → 'Mensual', '12 Meses' → 'Anual — Ahorra 35% · Recomendado'. El ahorro visible reduce fricción de comparación.</p>
-            <div class="tx-pri-card-footer">
-              <p class="tx-pri-hipotesis"><strong>Hipótesis:</strong> Selección plan anual +10 puntos porcentuales.</p>
-              <a href="#exp-t26" class="tx-pri-ablink">→ Se valida en Experimento E26</a>
-            </div>
-          </div>
         </div>
       </div>
 
       <div class="tx-summary" id="tx-mapa">
-        <h3 class="tx-summary-title">Inventario completo de 31 transformaciones priorizadas</h3>
+        <h3 class="tx-summary-title">Inventario completo de 32 transformaciones priorizadas</h3>
+        <p class="tx-priority-section-desc">Ordenadas por ID, con su prioridad (P0 / P1 / P2). Las filas marcadas <span class="tx-conv-chip">Conversión</span> son las palancas que el benchmark valida como de mayor retorno: todas en P0. Toca cualquier fila para abrir su detalle.</p>
         <div class="tx-table-wrap">
           <table class="tx-table">
             <thead>
@@ -512,24 +599,24 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="tx-table-row-link" data-target="tx-01"><td class="tx-id">T01</td><td>Pieza dominante del Home como hero editorial</td><td><span class="tx-desp">Home</span></td><td>Aumento de scroll depth en home y tiempo en página. Baseline...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-02"><td class="tx-id">T02</td><td>Cards premium con badge aspiracional y diferenciación visual</td><td><span class="tx-desp">Home</span> <span class="tx-desp">Secciones</span></td><td>Mejora del hit-paywall qualified rate. Los clics al paywall ...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-03"><td class="tx-id">T03</td><td>Los Danieles: puerta de entrada a contenido premium</td><td><span class="tx-desp">Opinión / Los Danieles</span></td><td>Email captures desde sección de mayor tráfico orgánico de op...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-04"><td class="tx-id">T04</td><td>Header CTA Suscribirse como botón sólido con jerarquía visual</td><td><span class="tx-desp">Todos</span></td><td>CTR a /suscribirse +30-80% (rango documentado). Quick win de...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-05"><td class="tx-id">T05</td><td>Eyebrow editorial + sub-navegación temática en secciones</td><td><span class="tx-desp">Poder</span> <span class="tx-desp">País</span> <span class="tx-desp">Economía</span> <span class="tx-desp">Justicia</span> <span class="tx-desp">Empresas</span> <span class="tx-desp">Cultura</span> <span class="tx-desp">Deportes</span></td><td>Percepción de marca editorial y credibilidad. CTR pieza domi...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-01"><td class="tx-id">T01</td><td>Pieza dominante del Home como hero editorial <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Home</span></td><td>Aumento de scroll depth en home y tiempo en página. Baseline...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-02"><td class="tx-id">T02</td><td>Cards premium con badge aspiracional y diferenciación visual <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Home</span> <span class="tx-desp">Secciones</span></td><td>Mejora del hit-paywall qualified rate. Los clics al paywall ...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-03"><td class="tx-id">T03</td><td>Los Danieles: puerta de entrada a contenido premium <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Opinión / Los Danieles</span></td><td>Email captures desde sección de mayor tráfico orgánico de op...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-04"><td class="tx-id">T04</td><td>Header CTA Suscribirse como botón sólido con jerarquía visual <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Todos</span></td><td>CTR a /suscribirse +30-80% (rango documentado). Quick win de...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-05"><td class="tx-id">T05</td><td>Eyebrow editorial + sub-navegación temática en secciones <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Poder</span> <span class="tx-desp">País</span> <span class="tx-desp">Economía</span> <span class="tx-desp">Justicia</span> <span class="tx-desp">Empresas</span> <span class="tx-desp">Cultura</span> <span class="tx-desp">Deportes</span></td><td>Percepción de marca editorial y credibilidad. CTR pieza domi...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-06"><td class="tx-id">T06</td><td>Carousel dots a 24×24 px — corrección WCAG 2.5.8</td><td><span class="tx-desp">Todos</span></td><td>74 violaciones WCAG resueltas. Impacto directo en Lighthouse...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-07"><td class="tx-id">T07</td><td>Contraste badge --color-successful a ratio AA</td><td><span class="tx-desp">Todos</span></td><td>5 nodos axe-core corregidos. Mejora Lighthouse....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-08"><td class="tx-id">T08</td><td>Recirculación inline "Lea también" en artículos</td><td><span class="tx-desp">Artículo</span></td><td>Aumento de páginas/sesión. Mayor probabilidad de clic a mita...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-08"><td class="tx-id">T08</td><td>Recirculación inline "Lea también" en artículos <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Artículo</span></td><td>Aumento de páginas/sesión. Mayor probabilidad de clic a mita...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-09"><td class="tx-id">T09</td><td>Hub Especiales con tipologización editorial</td><td><span class="tx-desp">Especiales</span></td><td>Engagement con hub. Lector identifica tipo de especial sin c...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-10"><td class="tx-id">T10</td><td>Especial detalle con storytelling visual</td><td><span class="tx-desp">Especiales</span></td><td>Percepción de valor de marca. Cada especial bien presentado ...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-11"><td class="tx-id">T11</td><td>Buscador visual prominente en header</td><td><span class="tx-desp">Todos</span></td><td>Aumento de uso del buscador (% sesiones). Baseline GA4: 835k usuarios/mes, 3.2M PV/mes...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-12"><td class="tx-id">T12</td><td>Footer rediseñado con CTA suscripción y newsletter</td><td><span class="tx-desp">Todos</span></td><td>Conversiones y email captures desde footer. Baseline pendien...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-13"><td class="tx-id">T13</td><td>Indicador de progreso de lectura en artículos</td><td><span class="tx-desp">Artículo</span></td><td>Aumento de completion rate en artículos largos....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-13"><td class="tx-id">T13</td><td>Indicador de progreso de lectura en artículos <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Artículo</span></td><td>Aumento de completion rate en artículos largos....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-14"><td class="tx-id">T14</td><td>Timestamp relativo en cards editoriales</td><td><span class="tx-desp">Home</span> <span class="tx-desp">Secciones</span></td><td>Percepción de inmediatez editorial....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-15"><td class="tx-id">T15</td><td>Diferenciación visual noticia vs opinión vs patrocinado</td><td><span class="tx-desp">Home</span></td><td>Credibilidad editorial + transparencia....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-16"><td class="tx-id">T16</td><td>Carruseles temáticos con jerarquía interna</td><td><span class="tx-desp">Home</span></td><td>CTR en primera pieza por carrusel....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-17"><td class="tx-id">T17</td><td>WhatsApp como canal asistido prominente</td><td><span class="tx-desp">Home</span> <span class="tx-desp">Artículo</span></td><td>Conversiones asistidas. WhatsApp es el canal de cierre más e...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-18"><td class="tx-id">T18</td><td>Pieza editorial estelar con CTA contextual premium</td><td><span class="tx-desp">Home</span></td><td>Conversión desde piezas destacadas....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-18"><td class="tx-id">T18</td><td>Pieza editorial estelar con CTA contextual premium <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Home</span></td><td>Conversión desde piezas destacadas....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-19"><td class="tx-id">T19</td><td>Home: landmark main + skip link</td><td><span class="tx-desp">Home</span></td><td>Lighthouse Accessibility + compliance WCAG A....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-20"><td class="tx-id">T20</td><td>HamburgerMenu: IDs únicos para a11y mobile</td><td><span class="tx-desp">Todos (mobile)</span></td><td>Corrección de fallo funcional a11y en nav mobile....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-21"><td class="tx-id">T21</td><td>NavigationRibbon con aria-current=page</td><td><span class="tx-desp">Todos</span></td><td>Orientación para usuarios asistivos....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
@@ -537,12 +624,13 @@
               <tr class="tx-table-row-link" data-target="tx-23"><td class="tx-id">T23</td><td>Los Danieles: h1 hidden → sr-only</td><td><span class="tx-desp">Opinión</span></td><td>h1 accesible para lectores de pantalla....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-24"><td class="tx-id">T24</td><td>Buscador anuncia cantidad de resultados a SR</td><td><span class="tx-desp">Buscador</span></td><td>Feedback para usuarios asistivos....</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-25"><td class="tx-id">T25</td><td>Bug literal 'img.caption' en GalleryBlock — hotfix</td><td><span class="tx-desp">Artículo</span></td><td>Eliminación del único bug catastrófico detectado. Impacto di...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-26"><td class="tx-id">T26</td><td>SubscriptionPlans: labels descriptivos en tabs de períodos</td><td><span class="tx-desp">Página de planes</span></td><td>Mejora de claridad en la decisión de período. El ahorro visi...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-26"><td class="tx-id">T26</td><td>SubscriptionPlans: labels descriptivos en tabs de períodos <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Página de planes</span></td><td>Mejora de claridad en la decisión de período. El ahorro visi...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-27"><td class="tx-id">T27</td><td>Grid Lo último: jerarquía visual con primera pieza mayor</td><td><span class="tx-desp">Poder</span> <span class="tx-desp">País</span> <span class="tx-desp">Economía</span> <span class="tx-desp">Justicia</span> <span class="tx-desp">Empresas</span> <span class="tx-desp">Cultura</span> <span class="tx-desp">Deportes</span></td><td>Aumento de CTR en la primera pieza del grid. Efecto cascada ...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-28"><td class="tx-id">T28</td><td>Recirculación en secciones: Lo más leído + Columnistas + Investigaciones</td><td><span class="tx-desp">Poder</span> <span class="tx-desp">País</span> <span class="tx-desp">Economía</span> <span class="tx-desp">Justicia</span> <span class="tx-desp">Empresas</span> <span class="tx-desp">Cultura</span> <span class="tx-desp">Deportes</span></td><td>Aumento de páginas/sesión dentro de la sección. Recirculació...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-29"><td class="tx-id">T29</td><td>CookieConsent: botón Rechazar visible — corrección legal</td><td><span class="tx-desp">Todos</span></td><td>Mitigación de riesgo legal. Compliance con regulación colomb...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
               <tr class="tx-table-row-link" data-target="tx-30"><td class="tx-id">T30</td><td>Identidad cromática por sección editorial</td><td><span class="tx-desp">Poder</span> <span class="tx-desp">País</span> <span class="tx-desp">Economía</span> <span class="tx-desp">Justicia</span> <span class="tx-desp">Empresas</span> <span class="tx-desp">Cultura</span> <span class="tx-desp">Deportes</span></td><td>Identidad de producto diferenciada. El lector reconoce la se...</td><td><span class="tx-effort tx-effort-s">S</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
-              <tr class="tx-table-row-link" data-target="tx-31"><td class="tx-id">T31</td><td>Paywall CSS legacy: migración de globals a tokens del design system</td><td><span class="tx-desp">Artículo</span></td><td>Mejora de mantenibilidad. El paywall adopta automáticamente ...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p2">P2</span></td></tr>
+              <tr class="tx-table-row-link" data-target="tx-31"><td class="tx-id">T31</td><td>Paywall CSS legacy: migración de globals a tokens del design system</td><td><span class="tx-desp">Artículo</span></td><td>Mejora de mantenibilidad. El paywall adopta automáticamente ...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p1">P1</span></td></tr>
+              <tr class="tx-table-row-link tx-row-conv" data-target="tx-32"><td class="tx-id">T32</td><td>Google One Tap — captura de registro sin fricción <span class="tx-conv-chip">Conversión</span></td><td><span class="tx-desp">Todos</span></td><td>Desanonimización del lector anónimo en un tap. Captura nombre + email sin formulario. Dependencia de backend (Etapa 0)...</td><td><span class="tx-effort tx-effort-m">M</span></td><td><span class="tx-priority tx-p0">P0</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -619,12 +707,15 @@
               <div class="tx-estado">
                 <span class="tx-estado-tag">Estado actual</span>
                 <div class="tx-screenshot">
-                  <img src="assets/screenshots/poder-grid.png" alt="Estado actual — Cards premium con badge aspiracional y diferenciación visual" loading="lazy">
+                  <picture><source srcset="assets/evidencias-conversion/D1-cambio-actual.webp" type="image/webp"><img src="assets/evidencias-conversion/D1-cambio-actual.png" alt="Estado actual — bloque premium de CAMBIO con etiqueta 'Suscriptores' sin propuesta de valor" loading="lazy"></picture>
                 </div>
                 <p>Las tarjetas premium muestran badge "Suscriptores" en rojo con ícono, pero su tamaño es pequeño y su posición (inferior de la card) no capta la atención antes del clic. La diferenciación visual entre contenido abierto y premium es insuficiente para prevenir hits no cualificados al paywall.</p>
               </div>
               <div class="tx-propuesta">
                 <span class="tx-propuesta-tag">Transformación propuesta</span>
+                <div class="tx-screenshot">
+                  <picture><source srcset="assets/evidencias-conversion/D1-intervencion-propuesta.webp" type="image/webp"><img src="assets/evidencias-conversion/D1-intervencion-propuesta.png" alt="Propuesta — bloque premium con título de beneficio, lista de beneficios, precio ancla y social proof" loading="lazy"></picture>
+                </div>
                 <p>Badge "Premium" con color de marca, contraste mínimo 5.8:1, sobre la imagen de la card. Borde de diferenciación cromática. El usuario identifica a simple vista qué contenido es premium antes de hacer clic.</p>
               </div>
             </div>
@@ -899,7 +990,7 @@
         <div class="tx-card acc-item" id="tx-08">
           <button class="tx-card-top acc-trigger" aria-expanded="false">
             <span class="tx-card-id">T08</span>
-            <span class="tx-priority tx-p1">P1</span>
+            <span class="tx-priority tx-p0">P0</span>
             <span class="tx-effort tx-effort-m">M</span>
             <span class="tx-type">CSS + micro JS</span>
             
@@ -1145,7 +1236,7 @@
         <div class="tx-card acc-item" id="tx-13">
           <button class="tx-card-top acc-trigger" aria-expanded="false">
             <span class="tx-card-id">T13</span>
-            <span class="tx-priority tx-p1">P1</span>
+            <span class="tx-priority tx-p0">P0</span>
             <span class="tx-effort tx-effort-s">S</span>
             <span class="tx-type">CSS + micro JS</span>
             
@@ -1389,7 +1480,7 @@
         <div class="tx-card acc-item" id="tx-18">
           <button class="tx-card-top acc-trigger" aria-expanded="false">
             <span class="tx-card-id">T18</span>
-            <span class="tx-priority tx-p2">P2</span>
+            <span class="tx-priority tx-p0">P0</span>
             <span class="tx-effort tx-effort-s">S</span>
             <span class="tx-type">CSS + micro JS</span>
             
@@ -1766,7 +1857,7 @@
         <div class="tx-card acc-item" id="tx-26">
           <button class="tx-card-top acc-trigger" aria-expanded="false">
             <span class="tx-card-id">T26</span>
-            <span class="tx-priority tx-p1">P1</span>
+            <span class="tx-priority tx-p0">P0</span>
             <span class="tx-effort tx-effort-s">S</span>
             <span class="tx-type">CSS + micro JS</span>
             
@@ -2009,7 +2100,7 @@
         <div class="tx-card acc-item" id="tx-31">
           <button class="tx-card-top acc-trigger" aria-expanded="false">
             <span class="tx-card-id">T31</span>
-            <span class="tx-priority tx-p2">P2</span>
+            <span class="tx-priority tx-p1">P1</span>
             <span class="tx-effort tx-effort-m">M</span>
             <span class="tx-type">CSS-only</span>
             
@@ -2053,6 +2144,54 @@
           </div>
         </div>
 
+        <div class="tx-card acc-item" id="tx-32">
+          <button class="tx-card-top acc-trigger" aria-expanded="false">
+            <span class="tx-card-id">T32</span>
+            <span class="tx-priority tx-p0">P0</span>
+            <span class="tx-effort tx-effort-m">M</span>
+            <span class="tx-type">JS + dependencia backend</span>
+            
+            <span class="tx-card-title-inline">Google One Tap — captura de registro sin fricción</span>
+            <a href="#tx-mapa" class="tx-back-link" title="Volver al mapa">↑</a>
+            <svg class="tx-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="tx-card-detail">
+            <h4 class="tx-card-title">Google One Tap — captura de registro sin fricción</h4>
+            <div class="tx-card-desps"><span class="tx-desp">Todos</span></div>
+            <div class="tx-card-body">
+              <div class="tx-estado">
+                <span class="tx-estado-tag">Estado actual</span>
+                <p>El registro exige hoy un formulario de hasta 9 campos (tipo y número de documento, dos contraseñas, etc.). La mayoría de los 835k usuarios/mes navega de forma anónima: el email pesa apenas 0.3% del tráfico, lo que deja al funnel sin forma de re-contactar ni medir al lector.</p>
+              </div>
+              <div class="tx-propuesta">
+                <span class="tx-propuesta-tag">Transformación propuesta</span>
+                <div class="tx-screenshot"><img src="assets/evidencias-conversion/OneTap-comparador.svg" alt="Comparador: lector anónimo sin captura frente al prompt de Google One Tap" loading="lazy"></div>
+                <p>Integrar el prompt de Google One Tap, que ofrece "Continuar como [nombre]" en un solo tap y captura nombre y email verificados sin formulario. Con Chrome en ≈90% del mercado colombiano la cobertura es alta. La implementación de frontend es ligera; la verificación del token (server-side) y el alta de cuenta son dependencia del backend de CAMBIO — Etapa 0.</p>
+              </div>
+            </div>
+            <div class="tx-card-metrics">
+              <div class="tx-metric">
+                <span class="tx-metric-label">Hipótesis</span>
+                <p>La captura de registro de lectores anónimos sube 2–5 puntos porcentuales frente al formulario de 9 campos, alimentando el motor de adquisición premium (newsletter, recirculación).</p>
+              </div>
+              <div class="tx-metric">
+                <span class="tx-metric-label">A/B test</span>
+                <p>Medición antes/después. El A/B limpio (con/sin prompt) requiere que la Etapa 0 (backend) instrumente la recepción del token. Métrica: tasa de registro / usuarios anónimos.</p>
+              </div>
+              <div class="tx-metric">
+                <span class="tx-metric-label">Conexión</span>
+                <p>Palanca de captura del benchmark (complementa D2/D3). Habilita la desanonimización del funnel. Depende de la Etapa 0 (backend que reciba el token).</p>
+              </div>
+              <div class="tx-metric tx-metric-med">
+                <span class="tx-metric-label">Medición</span>
+                <p><strong>Instrumento:</strong> GA4: eventos one_tap_shown / one_tap_accepted. Ratio: registros_one_tap / usuarios_anónimos</p>
+                <p><strong>Frecuencia:</strong> Semanal durante el A/B</p>
+                <p><strong>Umbral de éxito:</strong> +2 puntos porcentuales en tasa de registro de lectores anónimos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="tx-post-migration">
@@ -2085,7 +2224,7 @@
       <div class="section-cierre">
         <div class="cierre-single">
           <h4>Del reporte a la implementación</h4>
-          <p>Estas 31 transformaciones representan el alcance completo del diagnóstico. Cada una está documentada con su hallazgo fuente, hipótesis medible y recomendación de testing. La implementación se ejecuta tras la entrega del brand book del rebranding, con A/B testing visual incluido para las que lo requieren (ver <a href="#abtesting">Sección 8 — A/B Testing Visual</a>). Las transformaciones post-migración se integran al completar la migración técnica.</p>
+          <p>Estas 32 transformaciones representan el alcance completo del diagnóstico. Cada una está documentada con su hallazgo fuente, hipótesis medible y recomendación de testing. La implementación se ejecuta tras la entrega del brand book del rebranding, con A/B testing visual incluido para las que lo requieren (ver <a href="#abtesting">Sección 8 — A/B Testing Visual</a>). Las transformaciones post-migración se integran al completar la migración técnica.</p>
         </div>
       </div>
 
@@ -2108,12 +2247,12 @@
         <div class="ab-scope-in">
           <span class="ab-scope-tag ab-scope-tag--in">Dentro del alcance</span>
           <h4>A/B testing de transformaciones CSS</h4>
-          <p>Validar el impacto visual de las intervenciones CSS del refresh: cambios de layout, jerarquía visual, badges, CTAs, y tratamientos editoriales. Métricas intermedias: CTR, scroll depth, páginas/sesión, email captures.</p>
+          <p>Validar el impacto visual de las intervenciones CSS del refresh: layout, jerarquía visual, badges, CTAs, tratamiento del paywall y de la página de planes, y captura de registro. Se mide contra KPIs de conversión con potencia estadística: <strong>CTR a planes, hit-paywall qualified rate, captura de email/registro y scroll depth</strong>. La conversión a suscripción pagada se observa como señal direccional, no como endpoint primario.</p>
         </div>
         <div class="ab-scope-out">
           <span class="ab-scope-tag ab-scope-tag--out">Fuera del alcance · Fase 2</span>
-          <h4>A/B testing de conversión a paywall</h4>
-          <p>Tests que modifican el modelo de monetización: paywall hard vs metered, redesign de página de planes, optimización del checkout, pricing experiments. Requieren instrumentación GA4 avanzada, motor de feature flags y coordinación editorial.</p>
+          <h4>A/B que modifica el modelo de monetización</h4>
+          <p>Tests que cambian la lógica de negocio: paywall hard vs metered, reglas del muro, pricing experiments y rediseño <strong>funcional</strong> de planes y checkout. Requieren motor de feature flags, backend y coordinación editorial. Distinto de medir nuestras mejoras <strong>visuales</strong>, que sí ocurre en Fase 1.</p>
         </div>
       </div>
 
@@ -2122,7 +2261,7 @@
         <div class="ab-stat-card">
           <span class="ab-stat-number">14</span>
           <span class="ab-stat-label">Tests A/B recomendados</span>
-          <span class="ab-stat-desc">De las 31 transformaciones</span>
+          <span class="ab-stat-desc">De las 32 transformaciones</span>
         </div>
         <div class="ab-stat-card">
           <span class="ab-stat-number">3</span>
@@ -2587,20 +2726,20 @@
 
       <!-- Lo que no se testea -->
       <div class="ab-no-test">
-        <h3 class="ab-section-title">Transformaciones sin A/B test (17 de 31)</h3>
+        <h3 class="ab-section-title">Transformaciones sin A/B test (18 de 32)</h3>
         <p class="ab-no-test-desc">Las siguientes se implementan directamente. Son correcciones de compliance, bug fixes o refactors donde el resultado es binario (funciona o no), no una hipótesis de comportamiento.</p>
         <div class="ab-no-test-grid">
           <div class="ab-no-test-group">
             <span class="ab-no-test-tag">Compliance WCAG — 8 transformaciones</span>
-            <p>T06 (carousel dots 24px), T07 (contraste badge), T19 (main + skip link), T20 (hamburger IDs), T21 (aria-current), T22 (nav semántico), T23 (h1 sr-only), T24 (buscador SR)</p>
+            <p><a href="#tx-06" class="tx-inline-link">T06</a> (carousel dots 24px), <a href="#tx-07" class="tx-inline-link">T07</a> (contraste badge), <a href="#tx-19" class="tx-inline-link">T19</a> (main + skip link), <a href="#tx-20" class="tx-inline-link">T20</a> (hamburger IDs), <a href="#tx-21" class="tx-inline-link">T21</a> (aria-current), <a href="#tx-22" class="tx-inline-link">T22</a> (nav semántico), <a href="#tx-23" class="tx-inline-link">T23</a> (h1 sr-only), <a href="#tx-24" class="tx-inline-link">T24</a> (buscador SR)</p>
           </div>
           <div class="ab-no-test-group">
             <span class="ab-no-test-tag">Bug fix + corrección legal — 2 transformaciones</span>
-            <p>T25 (bug literal img.caption en GalleryBlock — catastrófico) y T29 (CookieConsent sin botón Rechazar — riesgo legal Ley 1581/2012)</p>
+            <p><a href="#tx-25" class="tx-inline-link">T25</a> (bug literal img.caption en GalleryBlock — catastrófico) y <a href="#tx-29" class="tx-inline-link">T29</a> (CookieConsent sin botón Rechazar — riesgo legal Ley 1581/2012)</p>
           </div>
           <div class="ab-no-test-group">
-            <span class="ab-no-test-tag">Medición antes/después — 7 transformaciones</span>
-            <p>T09 (Especiales hub), T10 (Especiales detalle), T14 (timestamp relativo), T15 (diferenciación noticia/opinión), T18 (pieza estelar CTA), T30 (identidad cromática), T31 (paywall CSS tokens). Volumen insuficiente o sin hipótesis A/B — se implementan y se mide el delta antes/después</p>
+            <span class="ab-no-test-tag">Medición antes/después — 8 transformaciones</span>
+            <p><a href="#tx-09" class="tx-inline-link">T09</a> (Especiales hub), <a href="#tx-10" class="tx-inline-link">T10</a> (Especiales detalle), <a href="#tx-14" class="tx-inline-link">T14</a> (timestamp relativo), <a href="#tx-15" class="tx-inline-link">T15</a> (diferenciación noticia/opinión), <a href="#tx-18" class="tx-inline-link">T18</a> (pieza estelar CTA), <a href="#tx-30" class="tx-inline-link">T30</a> (identidad cromática), <a href="#tx-31" class="tx-inline-link">T31</a> (paywall CSS tokens), <a href="#tx-32" class="tx-inline-link">T32</a> (Google One Tap — A/B real depende de la Etapa 0). Volumen insuficiente, sin hipótesis A/B limpia o pendiente de instrumentación — se implementan y se mide el delta antes/después</p>
           </div>
         </div>
       </div>
@@ -2635,8 +2774,8 @@
       <!-- Intro / Lead -->
       <div class="s9-lead">
         <div class="s9-lead-text">
-          <span class="s9-scope-badge s9-scope-badge--extra">Valor agregado · fuera del alcance contractual</span>
-          <p>Este análisis excede el refresh visual contratado. El contrato contempla transformaciones CSS sobre el CMS existente; lo que sigue es una radiografía de negocio del producto digital de CAMBIO como plataforma de conversión. Lo incluimos porque la evidencia recolectada durante la auditoría técnica y heurística revela oportunidades que serían irresponsable no documentar.</p>
+          <span class="s9-scope-badge s9-scope-badge--extra">Profundización estratégica · del refresh visual al objetivo de negocio</span>
+          <p>Este análisis conecta el refresh visual con el objetivo de negocio de CAMBIO: la conversión a suscripción. El contrato contempla transformaciones CSS sobre el CMS existente; lo que sigue es la radiografía del producto digital como plataforma de conversión —el porqué estratégico detrás de cada intervención del refresh—. Lo desarrollamos porque la evidencia recolectada durante la auditoría revela oportunidades de conversión que serían irresponsable no documentar.</p>
           <p>Cada hallazgo de esta sección distingue explícitamente lo que es ajustable dentro del refresh visual (CSS injection) de lo que requiere intervención de producto, editorial o backend (fases futuras). El objetivo es que el equipo CAMBIO tenga un mapa completo, no que Nivelics amplíe su alcance sin acuerdo previo.</p>
         </div>
         <div class="insight-box tx-insight-compact">
@@ -2712,7 +2851,7 @@
         </div>
 
         <div class="funnel-closing">
-          <p>El refresh visual contratado para Fase 1 ataca principalmente las etapas <strong>TOFU y MOFU</strong> (mejor descubrimiento, mejor recirculación, mejor engagement). Las etapas BOFU y Retención requieren intervenciones más profundas que se proponen para Fase 2: paywall persuasivo, optimización de checkout, newsletter como motor de adquisición premium y captura de registro mediante Google One Tap. Las transformaciones de la Sección 7 están priorizadas con esta lectura: <strong>P0 ataca TOFU/MOFU porque es donde la inversión retorna más rápido en CTR, scroll y recirculación</strong>. Este marco macro de 4 etapas organiza el análisis que sigue; el desglose operativo de 6 pasos del sitio (home → sección → artículo → paywall → planes → checkout) se detalla en 9.3.</p>
+          <p>El refresh visual contratado para Fase 1 ataca principalmente las etapas <strong>TOFU y MOFU</strong> (mejor descubrimiento, mejor recirculación, mejor engagement) e incluye la <strong>captura de registro</strong> —newsletter inline y prompt de Google One Tap— por su bajo costo de implementación y su impacto directo en desanonimizar la audiencia. Lo que queda para <strong>Fase 2</strong> es lo que toca el modelo de negocio o el backend: paywall persuasivo / dinámico y optimización funcional del checkout. Las transformaciones de la Sección 7 están priorizadas con esta lectura: <strong>P0 ataca TOFU/MOFU porque es donde la inversión retorna más rápido en CTR, scroll y recirculación</strong>. Este marco macro de 4 etapas organiza el análisis que sigue; el desglose operativo de 6 pasos del sitio (home → sección → artículo → paywall → planes → checkout) se detalla en 9.3.</p>
         </div>
       </div>
 
@@ -3176,7 +3315,7 @@
             <div class="s9-hyp-meta">
               <span class="s9-hyp-meta-item s9-hyp-meta-item--future">Parcial CSS + redacción editorial · fase futura</span>
             </div>
-            <p class="s9-hyp-verdict">Validada. El tratamiento visual del muro es CSS (refresh actual); el contenido de la propuesta de valor requiere decisión editorial (fase futura).</p>
+            <p class="s9-hyp-verdict">Validada. El tratamiento visual del muro es CSS (refresh actual); el contenido de la propuesta de valor requiere decisión editorial (fase futura). Conecta con <a href="#tx-02" class="tx-inline-link">T02</a> y <a href="#tx-31" class="tx-inline-link">T31</a>.</p>
           </div>
 
           <!-- H4: Página de planes -->
@@ -3191,7 +3330,7 @@
             <div class="s9-hyp-meta">
               <span class="s9-hyp-meta-item s9-hyp-meta-item--scope">Parcial CSS · refresh actual</span>
             </div>
-            <p class="s9-hyp-verdict">Validada. Jerarquía visual es CSS; decisión de qué plan es "Recomendado" es comercial/editorial.</p>
+            <p class="s9-hyp-verdict">Validada. Jerarquía visual es CSS; decisión de qué plan es "Recomendado" es comercial/editorial. Conecta con <a href="#tx-26" class="tx-inline-link">T26</a>.</p>
           </div>
 
           <!-- H5: Social proof en planes -->
@@ -3206,7 +3345,7 @@
             <div class="s9-hyp-meta">
               <span class="s9-hyp-meta-item s9-hyp-meta-item--future">Layout CSS ahora · contenido fase futura</span>
             </div>
-            <p class="s9-hyp-verdict">Validada con matiz. Preparamos el espacio visual; el contenido depende del cliente.</p>
+            <p class="s9-hyp-verdict">Validada con matiz. Preparamos el espacio visual; el contenido depende del cliente. Conecta con <a href="#tx-26" class="tx-inline-link">T26</a> y el <a href="#analisis360" class="tx-inline-link">Análisis 360° (S9)</a>.</p>
           </div>
 
           <!-- H6: Checkout -->
@@ -3221,7 +3360,7 @@
             <div class="s9-hyp-meta">
               <span class="s9-hyp-meta-item s9-hyp-meta-item--future">Backend · fase futura</span>
             </div>
-            <p class="s9-hyp-verdict">Validada pero fuera de alcance actual. Documentada como P0 de Fase 3.</p>
+            <p class="s9-hyp-verdict">Validada pero fuera de alcance actual (backend). Documentada como P0 de Fase 3 en el <a href="estrategia.html#roadmap" class="tx-inline-link">Roadmap</a>.</p>
           </div>
 
           <!-- H7: WhatsApp -->
@@ -3236,7 +3375,7 @@
             <div class="s9-hyp-meta">
               <span class="s9-hyp-meta-item s9-hyp-meta-item--scope">CSS + micro JS · refresh actual</span>
             </div>
-            <p class="s9-hyp-verdict">Validada. Conecta con la realidad del mercado colombiano donde WhatsApp es canal de cierre natural.</p>
+            <p class="s9-hyp-verdict">Validada. Conecta con la realidad del mercado colombiano donde WhatsApp es canal de cierre natural — <a href="#tx-17" class="tx-inline-link">T17</a> y <a href="#exp-t17" class="tx-inline-link">Experimento E17</a>.</p>
           </div>
 
           <!-- H8: Propuesta de valor en planes -->
@@ -3251,7 +3390,7 @@
             <div class="s9-hyp-meta">
               <span class="s9-hyp-meta-item s9-hyp-meta-item--future">Redacción editorial · fase futura</span>
             </div>
-            <p class="s9-hyp-verdict">Validada. La estructura CSS se puede preparar; el copy diferenciador requiere decisión editorial.</p>
+            <p class="s9-hyp-verdict">Validada. La estructura CSS se puede preparar; el copy diferenciador requiere decisión editorial. Conecta con <a href="#tx-26" class="tx-inline-link">T26</a>.</p>
           </div>
 
         </div>
@@ -3373,5 +3512,21 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+  /* Mejora de navegación: los enlaces internos a #tx-NN abren la card de detalle (acordeón) además de hacer scroll. */
+  (function(){
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a[href^="#tx-"]');
+      if(!a) return;
+      var id = a.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if(target && target.classList.contains('acc-item') && !target.classList.contains('open')){
+        target.classList.add('open');
+        var trg = target.querySelector('.acc-trigger');
+        if(trg) trg.setAttribute('aria-expanded','true');
+      }
+    }, false);
+  })();
+  </script>
 </body>
 </html>

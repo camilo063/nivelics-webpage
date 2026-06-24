@@ -176,7 +176,7 @@
 
       <div class="hero-summary">
         <p class="summary-lead">Auditoría completa de 6 despliegues principales del portal cambiocolombia.com con análisis técnico, heurístico, de accesibilidad WCAG 2.2 AA, y propuesta priorizada de transformaciones CSS con A/B testing visual incluido.</p>
-        <p class="summary-extension">Como valor adicional al alcance contratado, incluimos un análisis 360° del funnel de conversión a suscripción y un benchmark editorial contra 8 referentes regionales y globales.</p>
+        <p class="summary-extension">Llevamos el diagnóstico más allá del refresh visual para conectarlo con su objetivo de negocio —la conversión a suscripción—: incluye un análisis 360° del funnel de conversión y un benchmark de conversión contra 9 referentes regionales y globales.</p>
       </div>
 
       <div class="hero-stats">
@@ -189,7 +189,7 @@
           <div class="stat-label">componentes<br>mapeados</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">14</div>
+          <div class="stat-num">20</div>
           <div class="stat-label">hallazgos<br>heurísticos</div>
         </div>
         <div class="stat-card">
@@ -201,7 +201,7 @@
           <div class="stat-label">bloques del funnel<br>de conversión</div>
         </div>
         <div class="stat-card stat-card-accent">
-          <div class="stat-num">13</div>
+          <div class="stat-num">12</div>
           <div class="stat-label">hipótesis<br>CRO priorizadas</div>
         </div>
       </div>
@@ -222,28 +222,124 @@
       <div class="section-header">
         <span class="section-number">02</span>
         <h2 class="section-title">Resumen Ejecutivo</h2>
-        <p class="section-subtitle">Lectura sugerida: 2 minutos · Para C-level y toma de decisiones</p>
+        <p class="section-subtitle">Lectura sugerida: 3 minutos · El guion de la sustentación, con todo a un clic</p>
       </div>
 
-      <!-- Bloque C-level · 30 segundos (Cambio 1) -->
-      <div class="fed-block">
-        <span class="fed-tag">Para C-level · 30 segundos</span>
-        <h2 class="fed-title">Tres ideas para arrancar el sprint</h2>
-        <div class="fed-grid">
-          <div class="fed-card">
-            <div class="fed-num">2.5M</div>
-            <span class="fed-label">Usuarios únicos en 3 meses</span>
-            <p class="fed-text">CAMBIO no tiene un problema de tráfico. El <strong>52.9% del tráfico es orgánico</strong> (autoridad SEO real) y el <strong>72% es mobile</strong>. La oportunidad real es convertir mejor lo que ya llega: la recirculación interna es <strong>17.8%</strong> (medios maduros: 35–50%) y el canal email apenas <strong>0.3%</strong> del tráfico.</p>
+      <!-- ============= GUION DE SUSTENTACIÓN (bloque rector) ============= -->
+      <div class="eg-guion" id="guion">
+        <div class="eg-head">
+          <span class="eg-tag">Guion de la sustentación · empiece aquí</span>
+          <h2 class="eg-title">Un solo objetivo: convertir en suscriptores el tráfico que ya llega</h2>
+          <p class="eg-lead">CAMBIO no tiene un problema de audiencia —<strong>2.5M usuarios únicos y 9.6M de pageviews en 3 meses, 72% mobile, 52.9% orgánico</strong>—. Tiene un problema de <strong>conversión</strong>: ese tráfico ni circula ni se captura. Este refresh visual está enteramente orientado a cerrar esa brecha. Lo que sigue es el argumento de tres movimientos sobre el que se sostiene esta sustentación.</p>
+        </div>
+
+        <!-- Movimiento 1 · lo conocido vs lo nuevo -->
+        <div class="eg-block">
+          <h3 class="eg-block-title"><span class="eg-block-num">01</span> Lo que ya estaba en su radar vs. lo que el Discovery reveló</h3>
+          <div class="eg-2col">
+            <div class="eg-col eg-col--known">
+              <h4 class="eg-col-h">Ya lo tenían identificado — lo confirmamos y lo dejamos medido</h4>
+              <ul>
+                <li>Ajustes de <strong>SEO</strong> y score técnico (el sitio ya rankea: SEO 100/100).</li>
+                <li><strong>Consentimiento de cookies</strong> sin opción de rechazo (riesgo legal Ley 1581).</li>
+                <li><strong>Performance del Home</strong> (Lighthouse 13/100).</li>
+                <li>11 violaciones de <strong>accesibilidad</strong> WCAG 2.2 AA.</li>
+              </ul>
+              <p style="margin: var(--space-sm) 0 0; font-size: 0.84rem; color: var(--text-tertiary);">Esto no es el valor del Discovery — es higiene. Lo validamos con datos reales y lo dejamos priorizado, sin presentarlo como hallazgo nuevo.</p>
+            </div>
+            <div class="eg-col eg-col--new">
+              <h4 class="eg-col-h">Lo que el Discovery reveló — nuevo, estratégico y accionable</h4>
+              <ul>
+                <li><strong>4 piezas abiertas de altísimo tráfico</strong> (390K+ evaluaciones en una semana) sin una sola ruta de conversión: el lector llega, consume y se va.</li>
+                <li><strong>Los Danieles:</strong> 2º destino del sitio (87.815 usuarios); la columna de Coronell promedia <strong>6m 24s — 273% del benchmark</strong>. Hoy es un callejón sin salida.</li>
+                <li><strong>El funnel de pago no está instrumentado:</strong> planes → checkout → suscripción no miden dónde se cae el usuario.</li>
+                <li><strong>Recirculación 17.8%</strong> (medios maduros: 30–50%) y <strong>email 0.3%</strong>: las dos palancas de retorno, casi apagadas.</li>
+                <li>El <strong>paywall comunica como disclaimer</strong>, no como oferta: bloquea sin argumentar por qué pagar.</li>
+              </ul>
+            </div>
           </div>
-          <div class="fed-card">
-            <div class="fed-num">7</div>
-            <span class="fed-label">Secciones beneficiadas por una intervención</span>
-            <p class="fed-text">Una transformación en <strong>ContentSectionPage</strong> propaga a Poder, País, Economía, Justicia, Empresas, Cultura y Deportes. Es la inversión de mayor ROI del refresh: un componente, siete impactos.</p>
+        </div>
+
+        <!-- Movimiento 2 · por qué conversión es Fase 1 -->
+        <div class="eg-block">
+          <h3 class="eg-block-title"><span class="eg-block-num">02</span> Por qué la conversión es el núcleo de la Fase 1 — no la Fase 2</h3>
+          <div class="eg-rationale">
+            <div class="eg-point">
+              <span class="eg-point-n">1</span>
+              <p><strong>No aplazamos la conversión: partimos el funnel.</strong> Todo lo que una capa visual puede mover —descubrimiento, registro, captura de email, recirculación, intención de suscripción— es Fase 1, P0. Solo el pago en sí (motor de paywall, checkout, pricing) es Fase 2.</p>
+            </div>
+            <div class="eg-point">
+              <span class="eg-point-n">2</span>
+              <p><strong>El alcance contratado es CSS/JS injection, no backend.</strong> Las palancas más profundas son backend por naturaleza — no es una decisión de prioridad nuestra, es lo que técnicamente es, y no es, un refresh visual.</p>
+            </div>
+            <div class="eg-point">
+              <span class="eg-point-n">3</span>
+              <p><strong>No se optimiza lo que no se mide.</strong> La conversión a pago hoy no está instrumentada. La marcación GA4 del funnel (Etapa 0, del lado de CAMBIO) es el prerrequisito que habilita medir todo lo demás.</p>
+            </div>
+            <div class="eg-point">
+              <span class="eg-point-n">4</span>
+              <p><strong>Especiales y Eventos no compiten con la conversión.</strong> Son P2 / post-migración — lo último del cronograma. Lo que arranca el día 1 del sprint son las palancas de conversión.</p>
+            </div>
           </div>
-          <div class="fed-card">
-            <div class="fed-num">6m 24s</div>
-            <span class="fed-label">Engagement profundo en columnas premium</span>
-            <p class="fed-text">La columna de Coronell sobre el premio CPB registra <strong>6m 24s de lectura — 273% del benchmark</strong> del sitio. Las columnas individuales de Los Danieles son un motor de adquisición a premium desaprovechado: cada una puede redirigir a contenido premium relacionado sin romper el contrato editorial.</p>
+        </div>
+
+        <!-- Movimiento 3 · qué mueve el refresh + puente design system -->
+        <div class="eg-block">
+          <h3 class="eg-block-title"><span class="eg-block-num">03</span> Qué mueve el refresh — y qué comprometemos</h3>
+          <div class="eg-moves">
+            <p><strong>10 palancas de conversión P0</strong> son el núcleo del sprint: CTA de suscripción sólido, captura de registro (newsletter inline en Los Danieles + Google One Tap), recirculación inline y progreso de lectura, badge premium aspiracional, paywall con estructura de propuesta de valor, y página de planes con social proof, FAQ y anchoring coherente.</p>
+            <p><strong>El sistema de diseño no es "craft" — es el multiplicador.</strong> Una intervención sobre <code>ContentSectionPage</code> se ejecuta una sola vez y propaga a <strong>7 secciones</strong> (Poder, País, Economía, Justicia, Empresas, Cultura, Deportes). Por eso la consistencia visual y la racionalización de tokens importan: son lo que hace que cada palanca de conversión se construya una vez y rinda siete veces.</p>
+            <p><strong>Lo que comprometemos y medimos:</strong></p>
+            <div class="eg-chips">
+              <span class="eg-chip">Recirculación 17.8% → &gt; 25%</span>
+              <span class="eg-chip">Captura de email / desanonimización</span>
+              <span class="eg-chip">CTR a /suscribirse</span>
+              <span class="eg-chip">Hit-paywall qualified rate</span>
+              <span class="eg-chip">3 oleadas de A/B testing</span>
+            </div>
+            <p style="margin-top: var(--space-md);">El detalle vive a un clic: las <a href="propuesta.html#transformaciones">32 transformaciones priorizadas (S7)</a>, el <a href="estrategia.html#benchmark">benchmark de conversión (S10)</a> y el <a href="estrategia.html#proximos">roadmap con métricas comprometidas (S13)</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tesis de alcance + 3 carriles: Etapa 0 / Fase 1 / Fase 2 -->
+      <div class="alcance-marco">
+        <div class="alcance-tesis">
+          <span class="alcance-tesis-tag">El proyecto en una frase</span>
+          <p class="alcance-tesis-text">Este es un <strong>refresh visual orientado a conversión</strong>: intervenimos la piel del producto —CSS y JavaScript no intrusivo sobre el CMS actual— con una priorización optimizada para mover las métricas del embudo. <strong>No es rediseño funcional ni trabajo de backend.</strong> Es la capa visual que prepara y potencia la conversión, y la medimos. La instrumentación que habilita esa medición corre por cuenta de CAMBIO: es la Etapa 0 del proyecto.</p>
+        </div>
+        <div class="alcance-carriles">
+          <div class="carril carril--cliente">
+            <span class="carril-tag">Etapa 0 · Provee CAMBIO</span>
+            <h4 class="carril-title">La base de medición</h4>
+            <p class="carril-lead">Prerrequisito. Sin esto, el refresh se ejecuta pero su impacto no se puede demostrar.</p>
+            <ul class="carril-list">
+              <li><strong>Marcación GA4 al 100%</strong> del sitio y de los eventos del embudo (anónimo → registrado → suscriptor)</li>
+              <li><strong>Endpoint de autenticación</strong> que reciba el token de Google One Tap (la captura en frontend la entrega Nivelics)</li>
+              <li>Acceso a las plataformas de medición y al CMS para la inyección CSS/JS</li>
+              <li>Contenido de soporte para conversión: cifras de social proof y testimonios reales</li>
+            </ul>
+          </div>
+          <div class="carril carril--nivelics">
+            <span class="carril-tag">Fase 1 · Ejecuta Nivelics</span>
+            <h4 class="carril-title">Refresh visual + medición</h4>
+            <p class="carril-lead">La piel del producto y la lectura de su impacto en conversión.</p>
+            <ul class="carril-list">
+              <li><strong>Tratamiento visual</strong> de paywall, página de planes, CTAs, badges y cards premium</li>
+              <li><strong>Captura de registro</strong>: newsletter inline (Los Danieles + cierre de artículo) y prompt de Google One Tap</li>
+              <li><strong>A/B testing visual</strong> de cada intervención, medido contra KPIs de conversión: CTR a planes, hit-paywall qualified rate y captura de email</li>
+              <li><strong>Spec de eventos</strong> mínimos que los A/B necesitan, sobre la marcación que provee CAMBIO</li>
+            </ul>
+          </div>
+          <div class="carril carril--futuro">
+            <span class="carril-tag">Fase 2 · Siguiente paso</span>
+            <h4 class="carril-title">Modelo de negocio y backend</h4>
+            <p class="carril-lead">Lo que requiere lógica de negocio o desarrollo. Documentado, no vendido.</p>
+            <ul class="carril-list">
+              <li><strong>Paywall persuasivo / dinámico</strong> y reglas de monetización (hard vs metered, 10→3 páginas)</li>
+              <li><strong>Optimización funcional del checkout</strong>: reducción de campos, Google Pay, pago recurrente</li>
+              <li><strong>A/B sobre el modelo</strong>: pricing y rediseño funcional de la página de planes</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -265,6 +361,7 @@
             <li><strong>Mejoras de accesibilidad CSS-only</strong> sobre 11 violaciones WCAG 2.2 AA documentadas</li>
             <li><strong>Racionalización del sistema de diseño</strong> existente: tipografía, color, spacing, radius</li>
             <li><strong>Tratamiento visual de cards premium</strong> y badges de suscripción</li>
+            <li><strong>Captura de registro en frontend</strong>: newsletter inline al cierre de columnas (Los Danieles) y artículos, más el prompt de Google One Tap para desanonimizar lectores</li>
             <li><strong>Quick wins</strong>: 74 nodos con target-size incorrecto, 5 violaciones de contraste corregibles</li>
             <li><strong>Alineación con rebranding en curso</strong> (sujeto a entrega del brand book)</li>
           </ul>
@@ -278,12 +375,12 @@
           <h3 class="block-title">Lo que no cubre este alcance</h3>
           <p class="block-lead">Identificado durante el diagnóstico. Documentado como oportunidad de fases futuras.</p>
           <ul class="block-list">
-            <li><strong>Optimización del paywall</strong> persuasivo (lógica fragmentada entre frontend y servicio externo)</li>
-            <li><strong>Rediseño funcional</strong> de la página de planes y del checkout</li>
-            <li><strong>Buscador contextual</strong> con autocompletado y filtros editoriales</li>
-            <li><strong>Optimización de performance</strong> Home (Lighthouse 13/100)</li>
+            <li><strong>Paywall persuasivo / dinámico</strong>: la lógica de monetización (reglas hard vs metered, propuesta de valor del muro) vive entre el frontend y el servicio externo. En Fase 1 sí refrescamos su <em>tratamiento visual</em>; su lógica es Fase 2</li>
+            <li><strong>Rediseño funcional</strong> de planes y checkout: flujo, reducción de campos, pasarela y pago recurrente. El <em>tratamiento visual</em> de ambas páginas sí está en este alcance (ver Propuesta · S7 y Estrategia · S10)</li>
+            <li><strong>Buscador contextual</strong> con autocompletado y filtros editoriales (su tratamiento visual sí entra en Fase 1)</li>
+            <li><strong>Optimización de performance</strong> Home (Lighthouse 13/100) — requiere trabajo de ingeniería, no de CSS</li>
             <li><strong>Ejecución de la migración técnica</strong> del subdominio Eventos y URLs legacy de Especiales al stack Next.js — gestionada por Nivelics como proyecto paralelo independiente</li>
-            <li><strong>A/B testing de conversión a pago</strong> (requiere infraestructura mayor — Fase 2)</li>
+            <li><strong>A/B que modifica el modelo de monetización</strong>: pricing, paywall hard vs metered, rediseño funcional del checkout. Distinto del A/B <em>visual</em> de nuestras mejoras, que sí está incluido en Fase 1</li>
           </ul>
         </div>
 
@@ -296,10 +393,10 @@
           <p class="block-lead">Análisis adicional al contrato. Insumo estratégico de producto entregado sin costo.</p>
           <ul class="block-list">
             <li><strong>Inventario del funnel completo</strong> de conversión: 32 bloques mapeados con impacto comercial</li>
-            <li><strong>13 hipótesis CRO priorizadas</strong> con ICE Score, ajustadas al volumen real de tráfico</li>
+            <li><strong>12 hipótesis CRO priorizadas</strong> con ICE Score, ajustadas al volumen real de tráfico</li>
             <li><strong>Plan de testing en cascada</strong> de 11 semanas respetando significancia estadística</li>
             <li><strong>Identificación del cuello de botella real</strong> de conversión a pago</li>
-            <li><strong>Benchmark editorial verificado</strong> contra 8 referentes regionales y globales</li>
+            <li><strong>Benchmark de conversión verificado</strong> contra 9 referentes regionales y globales</li>
           </ul>
         </div>
 
@@ -312,45 +409,50 @@
         <div class="hallazgo-row">
           <div class="hallazgo-num">01</div>
           <div class="hallazgo-content">
-            <span class="hallazgo-badge hallazgo-badge-tecnico">Producto</span>
-            <h4 class="hallazgo-title">El home no es el cuello de botella principal de conversión a pago</h4>
-            <p class="hallazgo-desc">El home cumple bien su función de distribuir tráfico editorial — 2.5 millones de usuarios únicos y 9.6 millones de pageviews en 3 meses (72% mobile). El paywall opera con un modelo híbrido funcional (metered de 10 artículos + hard wall editorial), pero el copy del muro carece de propuesta de valor: CTA amarillo con border de marca, sin precio visible, sin social proof, sin preview. El refresh visual contratado tendrá impacto en percepción de marca y engagement, pero el lift sustancial en conversión a pago requiere reforzar el copy del paywall en una fase posterior.</p>
+            <span class="hallazgo-badge hallazgo-badge-estrategico">Conversión</span>
+            <h4 class="hallazgo-title">El tráfico abunda; la oportunidad está en convertirlo</h4>
+            <p class="hallazgo-desc">CAMBIO no tiene un problema de audiencia: 2.5 millones de usuarios únicos y 9.6 millones de pageviews en 3 meses (72% mobile). El problema es que ese tráfico no circula ni se captura. La recirculación interna es del 17.8% cuando los medios maduros operan en 30–50%, y el email pesa apenas 0.3% del tráfico. El refresh ataca justo esa brecha.</p>
+            <p class="hallazgo-move"><strong>Qué hacemos:</strong> recirculación inline y captura de registro — <a href="propuesta.html#transformaciones">T08, T03 y T32</a>. <strong>Qué se mueve:</strong> páginas/sesión y email captures, las dos métricas que alimentan el funnel premium.</p>
           </div>
         </div>
 
         <div class="hallazgo-row">
           <div class="hallazgo-num">02</div>
           <div class="hallazgo-content">
-            <span class="hallazgo-badge hallazgo-badge-accesibilidad">Accesibilidad</span>
-            <h4 class="hallazgo-title">74 elementos táctiles violan WCAG 2.2 con un solo origen</h4>
-            <p class="hallazgo-desc">Los puntos de paginación de carruseles (FeaturedSlider, NewsSlider, ColumnistSlider y otros) miden 8×8 px cuando el mínimo WCAG 2.5.8 AA exige 24×24 px. Un único fix CSS resuelve 74 nodos simultáneamente. Impacto inmediato en accesibilidad móvil sin costo significativo de desarrollo.</p>
+            <span class="hallazgo-badge hallazgo-badge-tecnico">Producto</span>
+            <h4 class="hallazgo-title">Una intervención, siete secciones</h4>
+            <p class="hallazgo-desc">Poder, País, Economía, Justicia, Empresas, Cultura y Deportes comparten el mismo componente: <code>ContentSectionPage</code>. Una sola transformación CSS se propaga a las siete sin trabajo adicional. Es el mayor retorno por esfuerzo de todo el refresh, y la razón por la que el piloto puede validarse en una sección antes de cascada.</p>
+            <p class="hallazgo-move"><strong>Qué hacemos:</strong> eyebrow editorial, jerarquía y recirculación de sección — <a href="propuesta.html#transformaciones">T05, T27 y T28</a>. <strong>Qué se mueve:</strong> CTR de la pieza dominante, multiplicado por siete.</p>
           </div>
         </div>
 
         <div class="hallazgo-row">
           <div class="hallazgo-num">03</div>
           <div class="hallazgo-content">
-            <span class="hallazgo-badge hallazgo-badge-performance">Performance</span>
-            <h4 class="hallazgo-title">El Home obtiene Performance 13/100 en Lighthouse</h4>
-            <p class="hallazgo-desc">Render bloqueado, imágenes sin optimizar, JavaScript sin defer. Es el indicador más bajo de toda la auditoría y representa una pérdida silenciosa de tráfico antes de cualquier consideración de diseño. No está en el alcance contratado de refresh CSS, pero exige atención inmediata: rediseñar visualmente un sitio que tarda en cargar es construir sobre arena.</p>
+            <span class="hallazgo-badge hallazgo-badge-estrategico">Paywall</span>
+            <h4 class="hallazgo-title">El muro comunica como disclaimer, no como oferta</h4>
+            <p class="hallazgo-desc">Hoy el paywall es un CTA amarillo sin precio, sin beneficios y sin prueba social: informa que el contenido es cerrado, no convence de pagar por él. Aquí marcamos la línea con honestidad: en Fase 1 refrescamos su piel (estructura visual lista para recibir propuesta de valor); el copy persuasivo —lo que de verdad mueve la conversión a pago— es decisión editorial de Fase 2.</p>
+            <p class="hallazgo-move"><strong>Qué hacemos:</strong> piel del muro — <a href="propuesta.html#transformaciones">T02 y T31</a>. <strong>Qué necesita:</strong> el copy aspiracional con propuesta de valor, planificado en el <a href="estrategia.html#roadmap">Roadmap (Fase 2)</a>.</p>
           </div>
         </div>
 
         <div class="hallazgo-row">
           <div class="hallazgo-num">04</div>
           <div class="hallazgo-content">
-            <span class="hallazgo-badge hallazgo-badge-legal">Legal</span>
-            <h4 class="hallazgo-title">El consentimiento de cookies no permite rechazar</h4>
-            <p class="hallazgo-desc">El componente CookieConsent ofrece únicamente "Aceptar". No hay botón "Rechazar" ni gestión granular de categorías. Esto representa riesgo de cumplimiento bajo la Ley 1581 de 2012 de Colombia y es contrario a las mejores prácticas GDPR. Resolución dentro del alcance pero requiere decisión editorial sobre el comportamiento por defecto.</p>
+            <span class="hallazgo-badge hallazgo-badge-estrategico">Editorial</span>
+            <h4 class="hallazgo-title">Los Danieles: el motor de adquisición que el sitio no enciende</h4>
+            <p class="hallazgo-desc">Es el 2º destino más visitado (87.815 usuarios únicos en 3 meses) y genera un engagement excepcional — la columna de Coronell sobre el CPB promedia 6m 24s de lectura, 273% del benchmark del sitio. Por contrato editorial el contenido permanece abierto, y así debe ser. La oportunidad no es monetizar la columna: es convertir a ese lector profundo en suscriptor del ecosistema premium antes de que se vaya.</p>
+            <p class="hallazgo-move"><strong>Qué hacemos:</strong> newsletter inline y recirculación a premium al cierre de cada columna — <a href="propuesta.html#transformaciones">T03</a>. <strong>Qué se mueve:</strong> email captures y conversión asistida desde el contenido de mayor engagement orgánico.</p>
           </div>
         </div>
 
         <div class="hallazgo-row">
           <div class="hallazgo-num">05</div>
           <div class="hallazgo-content">
-            <span class="hallazgo-badge hallazgo-badge-estrategico">Estrategia editorial</span>
-            <h4 class="hallazgo-title">Los Danieles genera engagement profundo que el sitio no capitaliza</h4>
-            <p class="hallazgo-desc">Los Danieles es el 2do destino más visitado del sitio (87.815 usuarios únicos en 3 meses). Las columnas individuales generan engagement extraordinario — Coronell CPB: 6m 24s de avg reading time (273% del benchmark del sitio). Por contrato editorial, el contenido permanece abierto — esto es correcto y debe respetarse. Pero al final de cada columna, el lector que invirtió 5+ minutos no encuentra recirculación hacia premium relacionado ni captura de email — y los números lo confirman: la recirculación interna del sitio es del 17.8% (446.496 usuarios) y el email pesa apenas 0.3% del tráfico (8.328 usuarios), señal de un canal de newsletter subdesarrollado. La oportunidad no es monetizar la columna, sino convertir los lectores profundos en suscriptores del ecosistema premium. Intervenible dentro del alcance CSS.</p>
+            <span class="hallazgo-badge hallazgo-badge-performance">Medición e higiene</span>
+            <h4 class="hallazgo-title">Sin medición no hay resultado — y hay dos bloqueos antes</h4>
+            <p class="hallazgo-desc">La marcación de eventos GA4 al 100% es la Etapa 0 del cliente: sin ella, el refresh se ejecuta pero no se puede demostrar su impacto, y todo el plan de testing queda ciego. Además, dos bloqueos de higiene exigen atención inmediata antes de construir encima: el Home obtiene Performance 13/100 en Lighthouse (rediseñar sobre un sitio que tarda en cargar es construir sobre arena) y el consentimiento de cookies no permite rechazar, un riesgo de cumplimiento bajo la Ley 1581 de 2012.</p>
+            <p class="hallazgo-move"><strong>Qué necesita:</strong> GA4 instrumentado (cliente, Etapa 0) y dos hotfixes de higiene — el detalle de prioridades está en la <a href="propuesta.html#transformaciones">Sección 7</a> y el roadmap en la <a href="estrategia.html#roadmap">Sección 11</a>.</p>
           </div>
         </div>
 
@@ -364,8 +466,8 @@
         </div>
         <div class="recom-body">
           <p>El refresh CSS contratado puede ejecutarse con impacto visible y medible en accesibilidad, percepción de marca y engagement. El A/B testing visual incluido en este alcance permitirá validar las hipótesis de cada transformación con datos reales, no con opiniones.</p>
-          <p>Sin embargo, los hallazgos más críticos para el negocio —paywall persuasivo, página de planes, performance Home, buscador contextual— requieren intervenciones que exceden el alcance actual. Proponemos que la presentación de cierre de Fase 1 incluya un roadmap argumentado de Fase 2 con esfuerzos, KPI esperados y plan de testing, de modo que la decisión sobre continuidad sea informada y oportuna.</p>
-          <p>El detalle operativo —el cronograma de 13 semanas en tres oleadas de experimentación (sujeto a la entrega del brand book del rebranding), las 31 transformaciones priorizadas y las decisiones que pedimos esta semana— está desarrollado en las páginas de Diagnóstico, Propuesta y Estrategia. Recomendamos recorrerlas en ese orden.</p>
+          <p>Sin embargo, las palancas de mayor profundidad —la lógica del paywall persuasivo, el rediseño funcional de planes y checkout, la optimización de performance del Home y el buscador contextual— requieren desarrollo de producto o backend que excede el refresh visual. En Fase 1 intervenimos su capa visual y la medimos; su lógica se documenta como Fase 2. Proponemos que la presentación de cierre de Fase 1 incluya un roadmap argumentado de Fase 2 con esfuerzos, KPI esperados y plan de testing, de modo que la decisión sobre continuidad sea informada y oportuna.</p>
+          <p>El detalle operativo —el cronograma de 13 semanas en tres oleadas de experimentación (sujeto a la entrega del brand book del rebranding), las 32 transformaciones priorizadas y las decisiones que pedimos esta semana— está desarrollado en las páginas de Diagnóstico, Propuesta y Estrategia. Recomendamos recorrerlas en ese orden.</p>
         </div>
       </div>
 
@@ -419,7 +521,7 @@
           </div>
           <div class="page-nav-content">
             <h3 class="page-nav-title">Estrategia</h3>
-            <p class="page-nav-desc">Benchmark editorial, roadmap de fases, alineación con rebranding y próximos pasos.</p>
+            <p class="page-nav-desc">Benchmark de conversión, roadmap de fases, alineación con rebranding y próximos pasos.</p>
             <div class="page-nav-meta">
               <span class="page-nav-badge">9 medios comparados</span>
               <span class="page-nav-badge">Roadmap 4 fases</span>

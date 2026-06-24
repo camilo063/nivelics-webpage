@@ -10060,3 +10060,470 @@ html.is-authed .access-gate {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ============================================================
+   MARCO DE ALCANCE · Resumen Ejecutivo (Etapa 0 / Fase 1 / Fase 2)
+   Añadido v17 — encuadre de expectativas orientado a conversión
+   ============================================================ */
+.alcance-marco {
+  margin-bottom: var(--space-2xl);
+}
+
+.alcance-tesis {
+  background: var(--text-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+.alcance-tesis-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  margin-bottom: var(--space-sm);
+}
+.alcance-tesis-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--bg-card);
+  margin: 0;
+}
+.alcance-tesis-text strong {
+  color: var(--bg-card);
+  font-weight: 600;
+}
+
+.alcance-carriles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+.carril {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-base);
+}
+.carril::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--carril-accent, var(--accent-red));
+}
+.carril:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.carril--cliente {
+  --carril-accent: var(--accent-warning);
+}
+.carril--nivelics {
+  --carril-accent: var(--accent-success);
+}
+.carril--futuro {
+  --carril-accent: var(--text-tertiary);
+}
+
+.carril-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--carril-accent);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+.carril-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+.carril-lead {
+  font-size: 13px;
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--text-tertiary);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.carril-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.carril-list li {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  padding-left: var(--space-md);
+  position: relative;
+}
+.carril-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--carril-accent);
+}
+.carril-list strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .alcance-carriles {
+    grid-template-columns: 1fr;
+  }
+  .alcance-tesis-text {
+    font-size: 1.1rem;
+  }
+}
+
+/* Inline links en texto (sin A/B, hipótesis, mapeos) */
+.tx-inline-link {
+  color: var(--accent-red);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.tx-inline-link:hover {
+  color: var(--accent-red-deep);
+}
+
+/* Chip de Conversión e indicador de fila en el inventario de transformaciones */
+.tx-conv-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent-success);
+  background: rgba(45, 122, 62, 0.1);
+  border: 1px solid rgba(45, 122, 62, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  margin-left: 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.tx-table-row-link.tx-row-conv td.tx-id {
+  position: relative;
+}
+.tx-table-row-link.tx-row-conv td.tx-id::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--accent-success);
+  border-radius: 2px;
+}
+
+/* Footer accionable en cada hallazgo crítico del Resumen Ejecutivo */
+.hallazgo-move {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.hallazgo-move strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.hallazgo-move a {
+  color: var(--accent-red);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+.hallazgo-move a:hover {
+  color: var(--accent-red-deep);
+}
+
+/* ============================================================
+   GUION DE SUSTENTACIÓN — bloque rector del Resumen Ejecutivo
+   Solo variables existentes · dark-mode automático · responsive 1024px
+   ============================================================ */
+.eg-guion {
+  margin: var(--space-xl) 0;
+  padding: var(--space-xl);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-top: 4px solid var(--accent-red);
+  border-radius: var(--radius-lg);
+}
+.eg-head {
+  margin-bottom: var(--space-lg);
+}
+.eg-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin-bottom: var(--space-sm);
+}
+.eg-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md);
+}
+.eg-lead {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 72ch;
+}
+.eg-lead strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.eg-block {
+  margin-top: var(--space-xl);
+}
+.eg-block-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md);
+}
+.eg-block-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-red);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 2px 7px;
+}
+
+.eg-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+.eg-col {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+.eg-col--known {
+  border-top: 3px solid var(--text-tertiary);
+}
+.eg-col--new {
+  border-top: 3px solid var(--accent-success);
+}
+.eg-col-h {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-sm);
+}
+.eg-col--known .eg-col-h {
+  color: var(--text-secondary);
+}
+.eg-col--new .eg-col-h {
+  color: var(--accent-success);
+}
+.eg-col ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+.eg-col li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+.eg-col li:last-child {
+  margin-bottom: 0;
+}
+.eg-col li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.eg-rationale {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.eg-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+.eg-col-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+.eg-col--new .eg-col-tag {
+  color: var(--accent-success);
+}
+.eg-col h5 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.02rem;
+  margin: 0 0 var(--space-xs);
+  color: var(--text-primary);
+}
+.eg-col p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.eg-body p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-md);
+}
+.eg-body p:last-child {
+  margin-bottom: 0;
+}
+.eg-body strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.eg-body em {
+  color: var(--text-primary);
+  font-style: italic;
+}
+.eg-body ul {
+  margin: var(--space-sm) 0 var(--space-md);
+  padding-left: 1.1em;
+}
+.eg-body li {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+.eg-body li:last-child {
+  margin-bottom: 0;
+}
+.eg-point {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.eg-point-n {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--accent-red);
+  line-height: 1.1;
+}
+.eg-point p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.eg-point strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.eg-moves {
+  margin-top: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-success);
+  border-radius: var(--radius-md);
+}
+.eg-moves p {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.eg-moves p:last-child {
+  margin-bottom: 0;
+}
+.eg-moves strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.eg-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+.eg-chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+}
+.eg-guion a {
+  color: var(--accent-red);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+.eg-guion a:hover {
+  color: var(--accent-red-deep);
+}
+
+@media (max-width: 1024px) {
+  .eg-guion {
+    padding: var(--space-lg);
+  }
+  .eg-2col,
+  .eg-rationale,
+  .eg-3col {
+    grid-template-columns: 1fr;
+  }
+}
