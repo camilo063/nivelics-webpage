@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -143,27 +143,71 @@ function useHoverPanel() {
   return { open, setOpen, enter, leave };
 }
 
+/* ── Keyboard helpers (a11y): abrir panel con ArrowDown enfoca el primer
+   item; Escape dentro del panel devuelve el foco al trigger. ── */
+function focusFirstInPanel(panelId: string) {
+  window.setTimeout(() => {
+    document.getElementById(panelId)?.querySelector<HTMLElement>("a, button")?.focus();
+  }, 60);
+}
+
+function triggerKeyDown(
+  panel: { enter: () => void; setOpen: (v: boolean) => void },
+  panelId: string,
+) {
+  return (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      panel.enter();
+      focusFirstInPanel(panelId);
+    } else if (e.key === "Escape") {
+      panel.setOpen(false);
+    }
+  };
+}
+
+function panelKeyDown(panel: { setOpen: (v: boolean) => void }, triggerId: string) {
+  return (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      e.stopPropagation();
+      panel.setOpen(false);
+      document.getElementById(triggerId)?.focus();
+    }
+  };
+}
+
 /* ── Mobile accordion ── */
 
 function MobileAccordion({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const panelId = useId();
   return (
-    <div>
+    <div
+      onKeyDown={(e) => {
+        if (e.key === "Escape" && open) {
+          e.stopPropagation();
+          setOpen(false);
+        }
+      }}
+    >
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
+        aria-controls={panelId}
         className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-text-100"
       >
         {title}
         <ChevronDown
           size={16}
+          aria-hidden="true"
           className={cn("text-text-40 transition-transform", open && "rotate-180")}
         />
       </button>
       <AnimatePresence>
         {open && (
           <motion.div
+            id={panelId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -502,8 +546,11 @@ export function NavClient({
           >
             <Link
               href={serviciosHref}
+              id="nav-trigger-servicios"
               aria-haspopup="true"
               aria-expanded={serviciosPanel.open}
+              aria-controls="nav-panel-servicios"
+              onKeyDown={triggerKeyDown(serviciosPanel, "nav-panel-servicios")}
               data-nav-category="servicios"
               data-nav-level="hub"
               className={cn(
@@ -527,8 +574,11 @@ export function NavClient({
           >
             <Link
               href={productosHref}
+              id="nav-trigger-productos"
               aria-haspopup="true"
               aria-expanded={productosPanel.open}
+              aria-controls="nav-panel-productos"
+              onKeyDown={triggerKeyDown(productosPanel, "nav-panel-productos")}
               data-nav-category="productos"
               data-nav-level="hub"
               className={cn(
@@ -552,8 +602,11 @@ export function NavClient({
           >
             <Link
               href={industriasHref}
+              id="nav-trigger-industrias"
               aria-haspopup="true"
               aria-expanded={industriasPanel.open}
+              aria-controls="nav-panel-industrias"
+              onKeyDown={triggerKeyDown(industriasPanel, "nav-panel-industrias")}
               data-nav-category="industrias"
               data-nav-level="hub"
               className={cn(
@@ -573,8 +626,11 @@ export function NavClient({
           <div className="relative" onMouseEnter={nosotrosEnter} onMouseLeave={nosotrosPanel.leave}>
             <Link
               href={nosotrosHref}
+              id="nav-trigger-nosotros"
               aria-haspopup="true"
               aria-expanded={nosotrosPanel.open}
+              aria-controls="nav-panel-nosotros"
+              onKeyDown={triggerKeyDown(nosotrosPanel, "nav-panel-nosotros")}
               className={cn(
                 "inline-flex items-center gap-1 text-sm font-medium transition-colors",
                 isActive("/nosotros") ? "text-primary" : "text-text-70 hover:text-text-100",
@@ -607,6 +663,7 @@ export function NavClient({
           <div className="flex items-center gap-1 text-sm">
             <a
               href={getEsUrl(pathname)}
+              aria-current={locale === "es" ? "page" : undefined}
               className={cn(
                 "font-medium transition-colors",
                 locale === "es" ? "text-text-100" : "text-text-40 hover:text-text-70",
@@ -614,9 +671,12 @@ export function NavClient({
             >
               ES
             </a>
-            <span className="text-text-40/50">|</span>
+            <span aria-hidden="true" className="text-text-40">
+              |
+            </span>
             <a
               href={getEnUrl(pathname)}
+              aria-current={locale === "en" ? "page" : undefined}
               className={cn(
                 "font-medium transition-colors",
                 locale === "en" ? "text-text-100" : "text-text-40 hover:text-text-70",
@@ -637,8 +697,10 @@ export function NavClient({
           className="text-text-100 lg:!hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? closeMenuAria : openMenuAria}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav-drawer"
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </nav>
 
@@ -650,10 +712,14 @@ export function NavClient({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
+            id="nav-panel-servicios"
+            role="region"
+            aria-label={serviciosLabel}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={serviciosEnter}
             onMouseLeave={serviciosPanel.leave}
             onClick={handlePanelClick}
+            onKeyDown={panelKeyDown(serviciosPanel, "nav-trigger-servicios")}
           >
             <div
               className="relative border-y border-white/[0.06]"
@@ -707,7 +773,7 @@ export function NavClient({
                         <span className="font-mono text-lg font-bold" style={{ color: col.color }}>
                           {col.metric.value}
                         </span>
-                        <span className="text-[10px] text-text-40">{col.metric.context}</span>
+                        <span className="text-xs text-text-40">{col.metric.context}</span>
                       </p>
 
                       {/* Sub-items */}
@@ -727,7 +793,7 @@ export function NavClient({
                                   : "hover:bg-white/[0.04]",
                               )}
                             >
-                              <span className="block text-[13px] font-medium text-text-100">
+                              <span className="block text-sm font-medium text-text-100">
                                 {item.label}
                               </span>
                               <span className="block text-[11px] text-text-40">{item.desc}</span>
@@ -763,10 +829,14 @@ export function NavClient({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
+            id="nav-panel-industrias"
+            role="region"
+            aria-label={industriasLabel}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={industriasEnter}
             onMouseLeave={industriasPanel.leave}
             onClick={handlePanelClick}
+            onKeyDown={panelKeyDown(industriasPanel, "nav-trigger-industrias")}
           >
             <div
               className="relative border-y border-white/[0.06]"
@@ -817,7 +887,7 @@ export function NavClient({
                           />
                           <div>
                             <span
-                              className="block text-[13px] font-semibold text-white"
+                              className="block text-sm font-semibold text-white"
                               itemProp="name"
                             >
                               {item.label}
@@ -857,10 +927,14 @@ export function NavClient({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
+            id="nav-panel-productos"
+            role="region"
+            aria-label={productosLabel}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={productosEnter}
             onMouseLeave={productosPanel.leave}
             onClick={handlePanelClick}
+            onKeyDown={panelKeyDown(productosPanel, "nav-trigger-productos")}
           >
             <div
               className="relative border-y border-white/[0.06]"
@@ -972,12 +1046,12 @@ export function NavClient({
                                 </svg>
                               )}
                             </div>
-                            <span className="text-[13px] font-semibold text-white" itemProp="name">
+                            <span className="text-sm font-semibold text-white" itemProp="name">
                               {p.name}
                             </span>
                           </div>
                           <span
-                            className="text-[10px] uppercase font-semibold tracking-wider"
+                            className="text-[11px] uppercase font-semibold tracking-wider"
                             style={{ color: p.accent, opacity: 0.9 }}
                           >
                             {p.category}
@@ -1022,10 +1096,14 @@ export function NavClient({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
+            id="nav-panel-nosotros"
+            role="region"
+            aria-label={nosotrosLabel}
             className="absolute left-0 right-0 top-16 z-40 max-lg:hidden"
             onMouseEnter={nosotrosEnter}
             onMouseLeave={nosotrosPanel.leave}
             onClick={handlePanelClick}
+            onKeyDown={panelKeyDown(nosotrosPanel, "nav-trigger-nosotros")}
           >
             <div
               className="relative border-y border-white/[0.06]"
@@ -1078,7 +1156,7 @@ export function NavClient({
                             />
                             <div>
                               <span
-                                className="block text-[13px] font-semibold text-white"
+                                className="block text-sm font-semibold text-white"
                                 itemProp="name"
                               >
                                 {item.label}
@@ -1141,7 +1219,7 @@ export function NavClient({
                           aria-hidden="true"
                         />
                         <div>
-                          <span className="block text-[13px] font-semibold text-white">
+                          <span className="block text-sm font-semibold text-white">
                             {credAwardName}
                           </span>
                           <span
@@ -1178,6 +1256,7 @@ export function NavClient({
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-nav-drawer"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}

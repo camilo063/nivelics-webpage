@@ -79,13 +79,13 @@ export function MetricsBar({ metrics }: MetricsBarProps) {
           {metrics.map((m, i) => (
             <div
               key={`${m.label}-${i}`}
-              className="rounded-xl border border-[rgba(0,212,255,0.15)] bg-[rgba(255,255,255,0.03)] p-6 text-center transition-all duration-200 hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.05)]"
+              className="glass rounded-xl border-primary/15 p-6 text-center transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.05]"
             >
               <AnimatedValue value={m.value} unit={m.unit} />
-              <p className="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-white/60">
+              <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-text-70">
                 {m.label}
               </p>
-              <p className="mt-1 text-[11px] text-white/35">{m.sublabel}</p>
+              <p className="mt-1 text-[11px] text-text-40">{m.sublabel}</p>
             </div>
           ))}
         </div>

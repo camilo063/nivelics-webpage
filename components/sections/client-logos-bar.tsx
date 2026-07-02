@@ -17,7 +17,7 @@ export function ClientLogosBar({ title, logos }: ClientLogosBarProps) {
   return (
     <section className="py-8 md:py-10">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-        <p className="text-center text-[13px] font-medium uppercase tracking-[0.08em] text-text-40 mb-8">
+        <p className="text-center text-sm font-medium uppercase tracking-[0.08em] text-text-40 mb-8">
           {title}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
@@ -33,7 +33,7 @@ export function ClientLogosBar({ title, logos }: ClientLogosBarProps) {
               <span className="text-sm font-semibold text-text-40 transition-colors group-hover:text-text-100">
                 {logo.name}
               </span>
-              <span className="text-[10px] text-text-40/60">{logo.sector}</span>
+              <span className="text-xs text-text-40">{logo.sector}</span>
             </motion.div>
           ))}
         </div>

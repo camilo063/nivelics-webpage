@@ -44,7 +44,8 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.dapta.ai; script-src-elem 'self' 'unsafe-inline' https://*.googletagmanager.com https://*.dapta.ai; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net; font-src 'self' data:; connect-src 'self' https: wss: https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://*.dapta.ai wss://*.dapta.ai; frame-src 'self' https://www.googletagmanager.com https://*.dapta.ai; frame-ancestors 'none';",
+              // *.clarity.ms: GTM inyecta Microsoft Clarity — sin él, error CSP en consola en cada página
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.dapta.ai https://*.clarity.ms; script-src-elem 'self' 'unsafe-inline' https://*.googletagmanager.com https://*.dapta.ai https://*.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://*.google-analytics.com https://*.googletagmanager.com https://*.g.doubleclick.net; font-src 'self' data:; connect-src 'self' https: wss: https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://*.dapta.ai wss://*.dapta.ai https://*.clarity.ms; frame-src 'self' https://www.googletagmanager.com https://*.dapta.ai; frame-ancestors 'none';",
           },
         ],
       },

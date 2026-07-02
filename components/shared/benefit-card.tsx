@@ -50,62 +50,13 @@ export function BenefitCard({ title, description, icon, accentColor }: BenefitCa
 
   return (
     <TiltCard>
-      <div
-        style={{
-          height: "100%",
-          background: "rgba(255,255,255,0.02)",
-          border: "0.5px solid rgba(255,255,255,0.07)",
-          borderTop: `2px solid ${accentColor}`,
-          borderRadius: "10px",
-          padding: "16px",
-          transition: "transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
-          cursor: "default",
-        }}
-        onMouseEnter={(e) => {
-          const el = e.currentTarget as HTMLDivElement;
-          el.style.transform = "translateY(-3px)";
-          el.style.borderColor = "rgba(255,255,255,0.14)";
-          el.style.borderTopColor = accentColor;
-          el.style.boxShadow = "0 8px 24px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.06)";
-        }}
-        onMouseLeave={(e) => {
-          const el = e.currentTarget as HTMLDivElement;
-          el.style.transform = "translateY(0)";
-          el.style.borderColor = "rgba(255,255,255,0.07)";
-          el.style.borderTopColor = accentColor;
-          el.style.boxShadow = "none";
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "12px",
-            marginBottom: "10px",
-          }}
-        >
+      {/* Hover en CSS (.benefit-card en globals.css) — el acento viaja por CSS var */}
+      <div className="benefit-card" style={{ "--nv-accent": accentColor } as React.CSSProperties}>
+        <div className="mb-2.5 flex items-start gap-3">
           <GeoIconBox name={iconName} size={18} color={iconColor} />
-          <div
-            style={{
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "#fff",
-              lineHeight: 1.35,
-            }}
-          >
-            {title}
-          </div>
+          <div className="text-sm font-semibold leading-snug text-text-100">{title}</div>
         </div>
-        <p
-          style={{
-            fontSize: "13px",
-            color: "rgba(255,255,255,0.55)",
-            lineHeight: 1.6,
-            margin: 0,
-          }}
-        >
-          {description}
-        </p>
+        <p className="m-0 text-sm leading-relaxed text-text-55">{description}</p>
       </div>
     </TiltCard>
   );

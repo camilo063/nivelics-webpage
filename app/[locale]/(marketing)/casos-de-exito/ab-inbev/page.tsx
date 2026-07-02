@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
@@ -23,18 +24,42 @@ export async function generateMetadata({
   const raw = await getCasoExito("ab-inbev");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
+  const esUrl = "https://www.nivelics.com/casos-de-exito/ab-inbev";
+  const enUrl = "https://www.nivelics.com/en/case-studies/ab-inbev";
+  const canonical = locale === "en" ? enUrl : esUrl;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
+
+  const title = caso?.seoTitle || "Caso de Éxito AB InBev-Bavaria | Nivelics";
+  const description =
+    caso?.seoDescription ||
+    "Cómo Nivelics ayudó a AB InBev-Bavaria a digitalizar procesos de distribución y ventas en Centroamérica.";
+
   return {
-    title: caso?.seoTitle || "Caso de Éxito AB InBev-Bavaria | Nivelics",
-    description:
-      caso?.seoDescription ||
-      "Cómo Nivelics ayudó a AB InBev-Bavaria a digitalizar procesos de distribución y ventas en Centroamérica.",
+    title,
+    description,
     alternates: {
-      canonical: "https://www.nivelics.com/casos-de-exito/ab-inbev",
+      canonical,
       languages: {
-        es: "https://www.nivelics.com/casos-de-exito/ab-inbev",
-        en: "https://www.nivelics.com/en/case-studies/ab-inbev",
-        "x-default": "https://www.nivelics.com/casos-de-exito/ab-inbev",
+        es: esUrl,
+        en: enUrl,
+        "x-default": esUrl,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: locale === "en" ? "en_US" : "es_CO",
+      alternateLocale: locale === "en" ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -63,12 +88,23 @@ export default async function ABInBevPage({ params }: { params: Promise<{ locale
     { name: caso?.clientName || "AB InBev-Bavaria", url: "/casos-de-exito/ab-inbev" },
   ]);
 
+  const creativeWork = getCreativeWorkSchema([
+    {
+      name: caso?.clientName || "AB InBev-Bavaria",
+      description:
+        caso?.seoDescription ||
+        "Cómo Nivelics ayudó a AB InBev-Bavaria a digitalizar procesos de distribución y ventas en Centroamérica.",
+      url: "/casos-de-exito/ab-inbev",
+    },
+  ])[0];
+
   return (
     <PageWrapper>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      <JsonLd data={creativeWork} />
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

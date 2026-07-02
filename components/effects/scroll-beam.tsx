@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, usePathname, useRouter } from "@/lib/i18n/navigation";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { track } from "@/lib/analytics/track";
 
 const MILESTONES = [0.02, 0.34, 0.66, 0.98];
 const CTA_THRESHOLD = 0.55;
@@ -68,6 +69,7 @@ export function ScrollBeam({ ctaLabel, chatLabel }: ScrollBeamProps) {
   // Best-effort: abre el launcher del widget Dapta si ya está montado;
   // si no, lleva a la página de contacto (el CTA nunca queda muerto).
   const openChat = () => {
+    track("chat_invite", { action: "open", path: pathname ?? "", source: "scroll_beam" });
     const launcher = document.querySelector<HTMLElement>(
       'button[id*="dapta" i], button[class*="dapta" i], [id*="dapta" i] button',
     );
@@ -99,7 +101,11 @@ export function ScrollBeam({ ctaLabel, chatLabel }: ScrollBeamProps) {
         <span className="scroll-beam__node" />
       </div>
       <div className={cn("scroll-beam__cta", engaged && "is-on")}>
-        <Link href={CONTACT_ROUTE} className="scroll-beam__cta-link">
+        <Link
+          href={CONTACT_ROUTE}
+          className="scroll-beam__cta-link"
+          onClick={() => track("cta_click", { cta: "scroll_beam", path: pathname ?? "" })}
+        >
           <span className="cta-portal-dot" aria-hidden="true" />
           {ctaLabel}
           <ArrowRight size={12} aria-hidden="true" />

@@ -50,8 +50,8 @@ export function LpMetrics({ metrics, title, accentColor = "#00D4FF" }: LpMetrics
                   {displayValue}
                 </div>
                 <div
-                  className={`mx-auto mt-2 max-w-[160px] text-white/60 ${
-                    labelLong ? "text-[12px]" : "text-[13px]"
+                  className={`mx-auto mt-2 max-w-[160px] text-text-70 ${
+                    labelLong ? "text-xs" : "text-sm"
                   }`}
                   style={{ lineHeight: 1.4 }}
                 >

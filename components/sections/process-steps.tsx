@@ -20,7 +20,7 @@ export function ProcessSteps({ title, subtitle, steps }: Props) {
           <h2 id="process-title" className="text-3xl font-bold text-text-100 md:text-4xl">
             {title}
           </h2>
-          {subtitle && <p className="mx-auto mt-3 max-w-xl text-white/55">{subtitle}</p>}
+          {subtitle && <p className="mx-auto mt-3 max-w-xl text-text-55">{subtitle}</p>}
         </div>
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
           <div
@@ -37,11 +37,11 @@ export function ProcessSteps({ title, subtitle, steps }: Props) {
                   {step.number}
                 </span>
                 {step.duration && (
-                  <span className="text-xs font-medium text-white/35">{step.duration}</span>
+                  <span className="text-xs font-medium text-text-40">{step.duration}</span>
                 )}
               </div>
               <h3 className="text-base font-semibold text-text-100">{step.title}</h3>
-              <p className="text-sm leading-relaxed text-white/55">{step.desc}</p>
+              <p className="text-sm leading-relaxed text-text-55">{step.desc}</p>
             </div>
           ))}
         </div>

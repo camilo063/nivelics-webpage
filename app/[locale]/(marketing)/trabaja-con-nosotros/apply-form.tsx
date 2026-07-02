@@ -1,28 +1,74 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useLocale } from "next-intl";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const MESSAGES = {
+  es: {
+    nameMin: "El nombre debe tener al menos 2 caracteres",
+    emailInvalid: "Email inválido",
+    roleRequired: "Selecciona un rol",
+    linkedinInvalid: "La URL de LinkedIn no es válida",
+    messageMax: "El mensaje no puede superar los 2000 caracteres",
+    submitError: "Error al enviar la solicitud",
+    unexpectedError: "Error inesperado",
+    optional: "(Opcional)",
+  },
+  en: {
+    nameMin: "Name must be at least 2 characters",
+    emailInvalid: "Invalid email",
+    roleRequired: "Select a role",
+    linkedinInvalid: "LinkedIn URL is not valid",
+    messageMax: "Message cannot exceed 2000 characters",
+    submitError: "Error submitting the application",
+    unexpectedError: "Unexpected error",
+    optional: "(Optional)",
+  },
+} as const;
+
+function buildApplySchema(t: (typeof MESSAGES)[keyof typeof MESSAGES]) {
+  return z.object({
+    name: z.string().trim().min(2, t.nameMin),
+    email: z.string().trim().email(t.emailInvalid),
+    role: z.string().min(1, t.roleRequired),
+    linkedin: z.string().trim().url(t.linkedinInvalid).optional().or(z.literal("")),
+    message: z.string().trim().max(2000, t.messageMax).optional(),
+  });
+}
+
+type ApplyFormData = z.infer<ReturnType<typeof buildApplySchema>>;
+
+const INPUT_CLASSES =
+  "mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary";
+
 export function ApplyForm() {
+  const rawLocale = useLocale();
+  const locale: "es" | "en" = rawLocale === "en" ? "en" : "es";
+  const t = MESSAGES[locale];
+
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  // Mount timestamp for the server-side timing check (sub-3s submits = bots).
+  const [formTs] = useState<number>(() => Date.now());
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  const schema = useMemo(() => buildApplySchema(t), [t]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ApplyFormData>({
+    resolver: zodResolver(schema),
+  });
+
+  async function onSubmit(data: ApplyFormData) {
     setError(null);
-    setIsSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      role: formData.get("role") as string,
-      linkedin: formData.get("linkedin") as string,
-      message: formData.get("message") as string,
-    };
-
     try {
       const res = await fetch("/api/apply", {
         method: "POST",
@@ -30,17 +76,17 @@ export function ApplyForm() {
         body: JSON.stringify({
           ...data,
           referrerUrl: typeof window !== "undefined" ? window.location.href : undefined,
+          website: honeypotRef.current?.value ?? "",
+          _ts: formTs,
         }),
       });
       if (!res.ok) {
         const body = await res.json();
-        throw new Error(body.error ?? "Error al enviar la solicitud");
+        throw new Error(body.error ?? t.submitError);
       }
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error inesperado");
-    } finally {
-      setIsSubmitting(false);
+      setError(err instanceof Error ? err.message : t.unexpectedError);
     }
   }
 
@@ -63,21 +109,54 @@ export function ApplyForm() {
       id="apply-form"
       data-purpose="job-application"
       aria-label="Formulario de aplicación laboral Nivelics"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="space-y-6"
     >
+      {/* Honeypot — hidden from humans and assistive tech; bots fill it. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: "auto",
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+          opacity: 0,
+        }}
+      >
+        <label>
+          Website
+          <input
+            ref={honeypotRef}
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            defaultValue=""
+          />
+        </label>
+      </div>
+
       <div>
         <label htmlFor="apply-name" className="block text-sm font-medium text-text-100">
           Nombre completo
         </label>
         <input
           id="apply-name"
-          name="name"
-          required
           autoComplete="name"
-          className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+          data-field="apply-name"
+          aria-invalid={errors.name ? true : undefined}
+          aria-describedby={errors.name ? "apply-name-error" : undefined}
+          {...register("name")}
+          className={INPUT_CLASSES}
           placeholder="Tu nombre completo"
         />
+        {errors.name && (
+          <p id="apply-name-error" className="mt-1 text-xs text-red-400" role="alert">
+            {errors.name.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -86,13 +165,20 @@ export function ApplyForm() {
         </label>
         <input
           id="apply-email"
-          name="email"
           type="email"
-          required
           autoComplete="email"
-          className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+          data-field="apply-email"
+          aria-invalid={errors.email ? true : undefined}
+          aria-describedby={errors.email ? "apply-email-error" : undefined}
+          {...register("email")}
+          className={INPUT_CLASSES}
           placeholder="tu@email.com"
         />
+        {errors.email && (
+          <p id="apply-email-error" className="mt-1 text-xs text-red-400" role="alert">
+            {errors.email.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -101,9 +187,11 @@ export function ApplyForm() {
         </label>
         <select
           id="apply-role"
-          name="role"
-          required
-          className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 focus:border-primary focus:outline-none"
+          data-field="apply-role"
+          aria-invalid={errors.role ? true : undefined}
+          aria-describedby={errors.role ? "apply-role-error" : undefined}
+          {...register("role")}
+          className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
         >
           <option value="">Seleccionar rol</option>
           <option value="frontend">Frontend Developer</option>
@@ -117,33 +205,55 @@ export function ApplyForm() {
           <option value="design">UX/UI Designer</option>
           <option value="otro">Otro</option>
         </select>
+        {errors.role && (
+          <p id="apply-role-error" className="mt-1 text-xs text-red-400" role="alert">
+            {errors.role.message}
+          </p>
+        )}
       </div>
 
       <div>
         <label htmlFor="apply-linkedin" className="block text-sm font-medium text-text-100">
-          LinkedIn URL
+          LinkedIn URL <span className="font-normal text-text-40">{t.optional}</span>
         </label>
         <input
           id="apply-linkedin"
-          name="linkedin"
           type="url"
           autoComplete="url"
-          className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+          data-field="apply-linkedin"
+          aria-invalid={errors.linkedin ? true : undefined}
+          aria-describedby={errors.linkedin ? "apply-linkedin-error" : undefined}
+          {...register("linkedin")}
+          className={INPUT_CLASSES}
           placeholder="https://linkedin.com/in/tu-perfil"
         />
+        {errors.linkedin && (
+          <p id="apply-linkedin-error" className="mt-1 text-xs text-red-400" role="alert">
+            {errors.linkedin.message}
+          </p>
+        )}
       </div>
 
       <div>
         <label htmlFor="apply-message" className="block text-sm font-medium text-text-100">
-          Mensaje
+          Mensaje <span className="font-normal text-text-40">{t.optional}</span>
         </label>
         <textarea
           id="apply-message"
-          name="message"
           rows={4}
-          className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none resize-none"
+          maxLength={2000}
+          data-field="apply-message"
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? "apply-message-error" : undefined}
+          {...register("message")}
+          className={`${INPUT_CLASSES} resize-none`}
           placeholder="Cuéntanos sobre tu experiencia y por qué te interesa Nivelics..."
         />
+        {errors.message && (
+          <p id="apply-message-error" className="mt-1 text-xs text-red-400" role="alert">
+            {errors.message.message}
+          </p>
+        )}
       </div>
 
       {error && (

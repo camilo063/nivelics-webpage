@@ -336,7 +336,7 @@ export default async function StaffAugmentationPage({
                 className="rounded-xl border border-[rgba(16,185,129,0.2)] bg-[rgba(16,185,129,0.04)] p-5"
               >
                 <h3 className="text-sm font-semibold text-text-100">{g.title}</h3>
-                <p className="mt-1 text-[12px] leading-relaxed text-text-70">{g.description}</p>
+                <p className="mt-1 text-xs leading-relaxed text-text-70">{g.description}</p>
               </div>
             ))}
           </div>

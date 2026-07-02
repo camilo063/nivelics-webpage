@@ -94,10 +94,7 @@ export function ClientLogosSection() {
           <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
             Proyectos que hablan por sí solos
           </h2>
-          <p
-            className="mx-auto mt-3 max-w-xl text-[15px]"
-            style={{ color: "rgba(255,255,255,0.5)" }}
-          >
+          <p className="mx-auto mt-3 max-w-xl text-base" style={{ color: "var(--text-55)" }}>
             Clientes en 7 países que confiaron en Nivelics para su transformación digital.
           </p>
         </motion.div>
@@ -121,14 +118,14 @@ export function ClientLogosSection() {
                 href={c.href}
                 itemProp="url"
                 aria-label={`Caso de éxito: ${c.client} — ${c.result}`}
-                className="group flex flex-col rounded-xl p-5 min-h-[180px] cursor-pointer transition-all duration-200 bg-[rgba(255,255,255,0.03)] border-[0.5px] border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.2)] hover:-translate-y-0.5"
+                className="group glass-elevated card-lift flex flex-col rounded-xl p-5 min-h-[180px] cursor-pointer"
               >
                 {/* Top row: badge + country */}
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-white/50">
+                  <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-text-55">
                     {c.sector}
                   </span>
-                  <span className="text-[11px] text-white/40">
+                  <span className="text-[11px] text-text-40">
                     {c.flag} {c.country}
                   </span>
                 </div>
@@ -139,19 +136,19 @@ export function ClientLogosSection() {
                 </h3>
 
                 {/* Result */}
-                <p className="mt-2 text-[13px] text-white/60" itemProp="description">
+                <p className="mt-2 text-sm text-text-70" itemProp="description">
                   {c.result}
                 </p>
 
                 {/* Metric */}
-                <p className="mt-1 text-[13px] font-semibold text-primary">{c.metric}</p>
+                <p className="mt-1 text-sm font-semibold text-primary">{c.metric}</p>
 
                 {/* Bottom: service pill + link */}
                 <div className="mt-auto flex items-end justify-between pt-3.5">
-                  <span className="rounded-full border-[0.5px] border-[rgba(0,212,255,0.2)] bg-[rgba(0,212,255,0.08)] px-2.5 py-0.5 text-[10px] text-[rgba(0,212,255,0.7)]">
+                  <span className="rounded-full border-[0.5px] border-[rgba(0,212,255,0.2)] bg-[rgba(0,212,255,0.08)] px-2.5 py-0.5 text-[11px] text-[rgba(0,212,255,0.7)]">
                     {c.service}
                   </span>
-                  <span className="text-xs text-white/30 transition-colors group-hover:text-primary">
+                  <span className="text-xs text-text-40 transition-colors group-hover:text-primary">
                     Ver <ArrowRight size={12} className="inline" />
                   </span>
                 </div>
@@ -162,7 +159,7 @@ export function ClientLogosSection() {
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-white/40 mb-4">7 empresas. Resultados reales.</p>
+          <p className="text-sm text-text-40 mb-4">7 empresas. Resultados reales.</p>
           <Link
             href="/casos-de-exito"
             className="inline-block rounded-lg border border-[rgba(255,255,255,0.2)] px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[rgba(255,255,255,0.06)]"

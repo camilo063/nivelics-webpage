@@ -33,7 +33,7 @@ export function RelatedPosts({ posts, locale, heading }: Props) {
 
   return (
     <section className="mt-16 pt-12 border-t border-white/[0.06]">
-      <h2 className="mb-6 text-xl font-medium text-white/90">{heading}</h2>
+      <h2 className="mb-6 text-xl font-medium text-text-100">{heading}</h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {posts.map((post) => (
           <Link
@@ -63,7 +63,7 @@ export function RelatedPosts({ posts, locale, heading }: Props) {
               <h3 className="mt-3 text-base font-medium leading-snug text-white transition-colors group-hover:text-primary line-clamp-2">
                 {post.title}
               </h3>
-              <div className="mt-3 flex items-center gap-3 text-xs text-white/40">
+              <div className="mt-3 flex items-center gap-3 text-xs text-text-40">
                 {post.publishedAt ? (
                   <time className="font-[family-name:var(--font-jetbrains-mono)]">
                     {formatDate(post.publishedAt, locale)}

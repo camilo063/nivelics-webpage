@@ -67,7 +67,7 @@ export function LpFAQ({
                 </button>
                 {isOpen && (
                   <div className="border-t border-white/5 px-6 py-5">
-                    <p className="text-white/70 leading-relaxed">{item.answer}</p>
+                    <p className="text-text-70 leading-relaxed">{item.answer}</p>
                   </div>
                 )}
               </div>

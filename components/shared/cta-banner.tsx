@@ -100,9 +100,9 @@ export function CTABanner({
           </h2>
 
           <p
-            className="text-[15px] leading-[1.65]"
+            className="text-base leading-[1.65]"
             style={{
-              color: "rgba(255,255,255,0.5)",
+              color: "var(--text-55)",
               margin: "0 0 40px",
               maxWidth: "480px",
             }}

@@ -33,7 +33,7 @@ export function HeroPortfolio({ title, items, accentColor, ctaText, ctaUrl }: He
               {item.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full px-1.5 py-0.5 text-[9px] font-medium"
+                  className="rounded-full px-1.5 py-0.5 text-[11px] font-medium"
                   style={{ background: `${accentColor}12`, color: accentColor }}
                 >
                   {tag}

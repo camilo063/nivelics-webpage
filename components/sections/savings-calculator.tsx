@@ -23,7 +23,7 @@ export function SavingsCalculator({ title, type }: SavingsCalculatorProps) {
   return (
     <section className="py-10 md:py-14">
       <div className="mx-auto max-w-[600px] px-6 md:px-20">
-        <div className="glass rounded-2xl p-8 border border-primary/20">
+        <div className="glass rounded-xl p-8 border border-primary/20">
           <div className="flex items-center gap-3 mb-6">
             <Calculator size={24} className="text-primary" />
             <h2 className="text-xl font-bold text-text-100">{title}</h2>

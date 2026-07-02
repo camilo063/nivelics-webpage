@@ -18,20 +18,45 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
+
+  const esUrl = "https://www.nivelics.com/productos";
+  const enUrl = "https://www.nivelics.com/en/products";
+  const canonical = isEn ? enUrl : esUrl;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
+
+  const title = isEn
+    ? "Nivelics SaaS Products | PAYWL, Niveleads, Hirely"
+    : "Productos SaaS propios | Nivelics";
+  const description = isEn
+    ? "PAYWL, Niveleads and Hirely: three SaaS products built by Nivelics to solve real LATAM problems."
+    : "PAYWL, Niveleads e Hirely: tres productos SaaS construidos por Nivelics para resolver problemas reales en LATAM.";
+
   return {
-    title: isEn
-      ? "Nivelics SaaS Products | PAYWL, Niveleads, Hirely"
-      : "Productos SaaS propios | Nivelics",
-    description: isEn
-      ? "PAYWL, Niveleads and Hirely: three SaaS products built by Nivelics to solve real LATAM problems."
-      : "PAYWL, Niveleads e Hirely: tres productos SaaS construidos por Nivelics para resolver problemas reales en LATAM.",
+    title,
+    description,
     alternates: {
-      canonical: "https://www.nivelics.com/productos",
+      canonical,
       languages: {
-        es: "https://www.nivelics.com/productos",
-        en: "https://www.nivelics.com/en/products",
-        "x-default": "https://www.nivelics.com/productos",
+        es: esUrl,
+        en: enUrl,
+        "x-default": esUrl,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: isEn ? "en_US" : "es_CO",
+      alternateLocale: isEn ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -131,7 +156,7 @@ export default async function ProductosHubPage({
           <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-[52px] leading-tight max-w-3xl">
             {isEn ? "Three products. One same principle." : "Tres productos. Un mismo principio."}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-white/60">
+          <p className="mt-5 max-w-2xl text-lg text-text-70">
             {isEn
               ? "We built them because we needed them first. Battle-tested in production. Available for you."
               : "Construimos software porque lo necesitábamos primero. Probado en producción. Disponible para ti."}
@@ -182,7 +207,7 @@ export default async function ProductosHubPage({
                   </span>
 
                   <h2 className="text-xl font-bold text-white">{p.name}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60">{p.tagline}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-text-70">{p.tagline}</p>
 
                   {p.pricingLabel && (
                     <div className="mt-4 text-sm font-semibold" style={{ color: accent }}>
@@ -190,7 +215,7 @@ export default async function ProductosHubPage({
                     </div>
                   )}
                   {p.pricingNote && (
-                    <div className="mt-1 text-xs text-white/40">{p.pricingNote}</div>
+                    <div className="mt-1 text-xs text-text-40">{p.pricingNote}</div>
                   )}
 
                   <div className="mt-6 flex flex-col gap-2">
@@ -206,7 +231,7 @@ export default async function ProductosHubPage({
                       href={p.externalUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-text-100 hover:bg-white/5"
                     >
                       {isEn ? "Official site" : "Sitio oficial"}
                       <ExternalLink size={13} />
@@ -229,13 +254,13 @@ export default async function ProductosHubPage({
           <div className="grid gap-8 text-center md:grid-cols-3">
             <div>
               <div className="text-2xl font-bold text-white">3</div>
-              <div className="text-xs text-white/50 mt-1">
+              <div className="text-xs text-text-55 mt-1">
                 {isEn ? "Products · 100% owned" : "Productos · 100% propios"}
               </div>
             </div>
             <div>
               <div className="text-2xl font-bold text-white">LATAM first</div>
-              <div className="text-xs text-white/50 mt-1">
+              <div className="text-xs text-text-55 mt-1">
                 {isEn ? "AWS Infrastructure" : "Infraestructura AWS"}
               </div>
             </div>
@@ -243,7 +268,7 @@ export default async function ProductosHubPage({
               <div className="text-2xl font-bold text-white">
                 {isEn ? "In active use" : "En uso activo"}
               </div>
-              <div className="text-xs text-white/50 mt-1">
+              <div className="text-xs text-text-55 mt-1">
                 {isEn ? "By our team" : "Por nuestro equipo"}
               </div>
             </div>

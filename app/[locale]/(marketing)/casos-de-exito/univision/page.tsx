@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
@@ -23,18 +24,42 @@ export async function generateMetadata({
   const raw = await getCasoExito("univision");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
+  const esUrl = "https://www.nivelics.com/casos-de-exito/univision";
+  const enUrl = "https://www.nivelics.com/en/case-studies/univision";
+  const canonical = locale === "en" ? enUrl : esUrl;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
+
+  const title = caso?.seoTitle || "Caso de Éxito Univision | Nivelics";
+  const description =
+    caso?.seoDescription ||
+    "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.";
+
   return {
-    title: caso?.seoTitle || "Caso de Éxito Univision | Nivelics",
-    description:
-      caso?.seoDescription ||
-      "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.",
+    title,
+    description,
     alternates: {
-      canonical: "https://www.nivelics.com/casos-de-exito/univision",
+      canonical,
       languages: {
-        es: "https://www.nivelics.com/casos-de-exito/univision",
-        en: "https://www.nivelics.com/en/case-studies/univision",
-        "x-default": "https://www.nivelics.com/casos-de-exito/univision",
+        es: esUrl,
+        en: enUrl,
+        "x-default": esUrl,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: locale === "en" ? "en_US" : "es_CO",
+      alternateLocale: locale === "en" ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -63,12 +88,23 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
     { name: caso?.clientName || "Univision", url: "/casos-de-exito/univision" },
   ]);
 
+  const creativeWork = getCreativeWorkSchema([
+    {
+      name: caso?.clientName || "Univision",
+      description:
+        caso?.seoDescription ||
+        "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.",
+      url: "/casos-de-exito/univision",
+    },
+  ])[0];
+
   return (
     <PageWrapper>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      <JsonLd data={creativeWork} />
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

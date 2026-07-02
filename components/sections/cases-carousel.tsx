@@ -88,7 +88,7 @@ export function CasesCarousel({ title, subtitle, cases, ctaText, ctaUrl }: Cases
                 disabled={index === 0}
                 aria-label="Caso anterior"
                 className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-white/60 transition-colors",
+                  "flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-text-70 transition-colors",
                   index === 0
                     ? "opacity-30 cursor-not-allowed"
                     : "hover:bg-white/[0.12] hover:text-white",
@@ -102,7 +102,7 @@ export function CasesCarousel({ title, subtitle, cases, ctaText, ctaUrl }: Cases
                 disabled={index >= maxMobile}
                 aria-label="Caso siguiente"
                 className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-white/60 transition-colors",
+                  "flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-text-70 transition-colors",
                   index >= maxMobile
                     ? "opacity-30 cursor-not-allowed"
                     : "hover:bg-white/[0.12] hover:text-white",
@@ -136,7 +136,7 @@ export function CasesCarousel({ title, subtitle, cases, ctaText, ctaUrl }: Cases
             </Link>
           </div>
 
-          <p className="mt-3 text-[13px] text-text-40">7 empresas. Resultados reales.</p>
+          <p className="mt-3 text-sm text-text-40">7 empresas. Resultados reales.</p>
         </div>
       </div>
     </section>
@@ -147,10 +147,7 @@ function CaseCard({ c, className }: { c: CaseItem; className?: string }) {
   return (
     <Link
       href={c.href}
-      className={cn(
-        "group block rounded-xl bg-[rgba(255,255,255,0.03)] border border-white/[0.08] p-5 transition-all hover:border-white/20 hover:bg-white/[0.06] hover:-translate-y-0.5",
-        className,
-      )}
+      className={cn("group glass-elevated card-lift block rounded-xl p-5", className)}
     >
       <div className="flex items-center justify-between text-[11px] text-text-40">
         <span>
@@ -161,13 +158,13 @@ function CaseCard({ c, className }: { c: CaseItem; className?: string }) {
       <h3 className="mt-3 text-lg font-bold text-white group-hover:text-primary transition-colors">
         {c.client}
       </h3>
-      <p className="mt-2 text-[13px] text-white/60">{c.result}</p>
+      <p className="mt-2 text-sm text-text-70">{c.result}</p>
       <p className="mt-1 font-mono text-sm font-semibold text-primary">{c.metric}</p>
       <div className="mt-3 flex items-center justify-between">
-        <span className="rounded-full border border-primary/20 bg-primary/[0.08] px-2.5 py-0.5 text-[10px] text-primary/70">
+        <span className="rounded-full border border-primary/20 bg-primary/[0.08] px-2.5 py-0.5 text-[11px] text-primary-200">
           {c.service}
         </span>
-        <span className="text-xs text-white/30 group-hover:text-primary transition-colors">
+        <span className="text-xs text-text-40 group-hover:text-primary transition-colors">
           Ver <ArrowRight size={12} className="inline" />
         </span>
       </div>

@@ -134,7 +134,7 @@ export function HeroSelector({ title, options, accentColor }: HeroSelectorProps)
               <div>
                 <span className="block text-sm font-semibold text-text-100">{opt.label}</span>
                 {opt.description && (
-                  <span className="block text-[12px] text-text-40 mt-0.5">{opt.description}</span>
+                  <span className="block text-xs text-text-40 mt-0.5">{opt.description}</span>
                 )}
               </div>
             </Link>

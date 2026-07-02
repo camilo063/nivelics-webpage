@@ -26,7 +26,7 @@ export function GuaranteesBlock({ title, guarantees }: GuaranteesBlockProps) {
               >
                 <Icon size={24} className="text-[#10B981] mb-3" aria-hidden="true" />
                 <h3 className="text-sm font-semibold text-text-100">{g.title}</h3>
-                <p className="mt-1 text-[12px] leading-relaxed text-text-70">{g.description}</p>
+                <p className="mt-1 text-xs leading-relaxed text-text-70">{g.description}</p>
               </div>
             );
           })}

@@ -203,7 +203,7 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                       autoComplete="name"
                       data-field="contact-name"
                       {...register("name")}
-                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
                       placeholder="Tu nombre"
                     />
                     {errors.name && (
@@ -223,7 +223,7 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                       autoComplete="email"
                       data-field="contact-email"
                       {...register("email")}
-                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
                       placeholder="tu@empresa.com"
                     />
                     {errors.email && (
@@ -242,7 +242,7 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                       autoComplete="organization"
                       data-field="contact-company"
                       {...register("company")}
-                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
                       placeholder="Nombre de tu empresa"
                     />
                     {errors.company && (
@@ -260,7 +260,7 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                       id="service"
                       data-field="service-interest"
                       {...register("service")}
-                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 focus:border-primary focus:outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
                     >
                       <option value="">Seleccionar servicio</option>
                       <option value="ia">Inteligencia Artificial</option>
@@ -285,7 +285,7 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                       rows={4}
                       data-field="contact-message"
                       {...register("message")}
-                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none resize-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
                       placeholder="Cuéntanos sobre tu proyecto o desafío..."
                     />
                     {errors.message && (

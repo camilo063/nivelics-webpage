@@ -24,7 +24,7 @@ export function LpNicheSection({
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-black tracking-tight text-white md:text-4xl">{title}</h2>
-          {subtitle && <p className="mt-4 text-lg text-white/70">{subtitle}</p>}
+          {subtitle && <p className="mt-4 text-lg text-text-70">{subtitle}</p>}
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
@@ -39,7 +39,7 @@ export function LpNicheSection({
                   <Icon className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm text-white/70 leading-relaxed">{item.copy}</p>
+                <p className="mt-3 text-sm text-text-70 leading-relaxed">{item.copy}</p>
               </div>
             );
           })}

@@ -146,13 +146,13 @@ export function HeroCalculator(props: HeroCalculatorProps) {
         </p>
         <div className="mt-3 grid grid-cols-2 gap-3">
           <div className="rounded-lg bg-bg-base/50 p-3 text-center">
-            <p className="text-[10px] uppercase tracking-wider text-text-40">Ahorro mensual</p>
+            <p className="text-[11px] uppercase tracking-wider text-text-40">Ahorro mensual</p>
             <p className="mt-0.5 font-mono text-lg font-bold" style={{ color: accentColor }}>
               ${savings.toLocaleString()}
             </p>
           </div>
           <div className="rounded-lg bg-bg-base/50 p-3 text-center">
-            <p className="text-[10px] uppercase tracking-wider text-text-40">Ahorro anual</p>
+            <p className="text-[11px] uppercase tracking-wider text-text-40">Ahorro anual</p>
             <p className="mt-0.5 font-mono text-lg font-bold" style={{ color: accentColor }}>
               ${annual.toLocaleString()}
             </p>

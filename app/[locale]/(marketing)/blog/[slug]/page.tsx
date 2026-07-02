@@ -304,7 +304,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
               <li>
                 <Link
                   href={locale === "en" ? "/en" : "/"}
-                  className="text-white/35 transition-colors hover:text-white/60 font-medium"
+                  className="text-text-40 transition-colors hover:text-text-70 font-medium"
                 >
                   {t(locale, "Inicio", "Home")}
                 </Link>
@@ -315,7 +315,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                 </span>
                 <Link
                   href={locale === "en" ? "/en/blog" : "/blog"}
-                  className="text-white/35 transition-colors hover:text-white/60 font-medium"
+                  className="text-text-40 transition-colors hover:text-text-70 font-medium"
                 >
                   Blog
                 </Link>
@@ -324,7 +324,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                 <span aria-hidden="true" className="text-white/20">
                   /
                 </span>
-                <span className="text-white/70 font-medium truncate" aria-current="page">
+                <span className="text-text-70 font-medium truncate" aria-current="page">
                   {mapped.title}
                 </span>
               </li>
@@ -351,12 +351,12 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
               ) : null}
               {formattedDate ? (
                 <>
-                  {category ? <span className="text-white/30">•</span> : null}
-                  <time className="text-white/40">{formattedDate}</time>
+                  {category ? <span className="text-text-40">•</span> : null}
+                  <time className="text-text-40">{formattedDate}</time>
                 </>
               ) : null}
-              <span className="text-white/30">•</span>
-              <span className="text-white/40 font-[family-name:var(--font-jetbrains-mono)]">
+              <span className="text-text-40">•</span>
+              <span className="text-text-40 font-[family-name:var(--font-jetbrains-mono)]">
                 {readingTime} {t(locale, "min de lectura", "min read")}
               </span>
             </div>
@@ -364,13 +364,13 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
               {mapped.title}
             </h1>
             {mapped.excerpt ? (
-              <p className="max-w-3xl text-lg leading-relaxed text-white/60">{mapped.excerpt}</p>
+              <p className="max-w-3xl text-lg leading-relaxed text-text-70">{mapped.excerpt}</p>
             ) : null}
           </header>
 
           {/* Two-column layout */}
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_280px] lg:gap-14">
-            <article>
+            <article itemScope itemType="https://schema.org/BlogPosting">
               <TableOfContentsCollapsible
                 headings={headings}
                 label={t(locale, "Contenido", "Contents")}
@@ -420,7 +420,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <article className="py-16 md:py-24">
+      <article itemScope itemType="https://schema.org/BlogPosting" className="py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-20">
           <Button asChild variant="ghost" size="sm" className="mb-8">
             <Link href="/blog">

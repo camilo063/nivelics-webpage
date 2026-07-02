@@ -7,14 +7,22 @@
   --bg-surface: #12121a;
   --bg-elevated: #1a1a28;
 
-  /* PRIMARIO */
+  /* PRIMARIO — rampa tonal. El tono puro (--primary) se reserva para
+     acciones y foco; decoración usa los derivados (Fase 0 §0.4). */
+  --primary-50: #e0fbff;
+  --primary-200: #7fe9ff;
   --primary: #00d4ff;
+  --primary-600: #00a8cc;
   --primary-dark: #0099cc;
   --primary-glow: rgba(0, 212, 255, 0.12);
+
+  /* ACENTO SECUNDARIO CÁLIDO — máx. 1 uso por vista (badges/highlights) */
+  --accent-warm: #ff8a5c;
 
   /* TEXTO */
   --text-100: #ffffff;
   --text-70: #b3b3cc;
+  --text-55: #8a8aa0;
   --text-40: #66667a;
 
   /* ACENTOS POR SERVICIO */
@@ -24,9 +32,20 @@
   --finops: #f59e0b;
   --dev: #00d4ff;
 
-  /* BORDES */
-  --border: #1e1e2e;
-  --border-hover: rgba(0, 212, 255, 0.3);
+  /* BORDES — escala de elevación (Fase 0 §0.3) */
+  --border-subtle: rgba(255, 255, 255, 0.05); /* divisores, fondos */
+  --border: #1e1e2e; /* card default */
+  --border-strong: rgba(255, 255, 255, 0.14); /* card destacada / hover */
+  --border-hover: rgba(0, 212, 255, 0.3); /* foco de acción */
+
+  /* SOMBRAS — escala de elevación (usar via shadow-(--shadow-md) o clases .glass-*) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 8px 40px rgba(0, 212, 255, 0.15);
+
+  /* MOTION — easing único del sitio (Fase 1 §1.5) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* GRADIENTES */
   --grad-hero: linear-gradient(135deg, #0a0a0f 0%, #0d1117 50%, #0a0f1a 100%);
@@ -41,10 +60,15 @@
   --color-bg-surface: var(--bg-surface);
   --color-bg-elevated: var(--bg-elevated);
   --color-primary: var(--primary);
+  --color-primary-50: var(--primary-50);
+  --color-primary-200: var(--primary-200);
+  --color-primary-600: var(--primary-600);
   --color-primary-dark: var(--primary-dark);
   --color-primary-glow: var(--primary-glow);
+  --color-accent-warm: var(--accent-warm);
   --color-text-100: var(--text-100);
   --color-text-70: var(--text-70);
+  --color-text-55: var(--text-55);
   --color-text-40: var(--text-40);
   --color-ia: var(--ia);
   --color-cloud: var(--cloud);
@@ -52,6 +76,8 @@
   --color-finops: var(--finops);
   --color-dev: var(--dev);
   --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
   --color-border-hover: var(--border-hover);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
@@ -73,12 +99,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glassmorphism base */
+/* Glassmorphism — dos niveles de elevación (Fase 0 §0.3):
+   .glass = card informativa · .glass-elevated = card destacada/interactiva */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+}
+.glass-elevated {
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.glass-elevated:hover {
+  border-color: var(--border-strong);
 }
 
 /* Glow hover effect */
@@ -88,6 +125,58 @@ body {
 .glow-hover:hover {
   border-color: var(--border-hover);
   box-shadow: 0 8px 40px rgba(0, 212, 255, 0.1);
+}
+
+/* Hero aurora — mesh gradient moderno, reemplaza la retícula apilada (Fase 1 §1.1) */
+.hero-aurora {
+  background:
+    radial-gradient(60% 50% at 20% 10%, rgba(0, 212, 255, 0.1), transparent 70%),
+    radial-gradient(50% 45% at 85% 20%, rgba(139, 92, 246, 0.1), transparent 70%), var(--grad-hero);
+}
+
+/* Card interactiva — lift en hover (Fase 1 §1.5). Compositor-only. */
+.card-lift {
+  transition:
+    transform 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+.card-lift:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift,
+  .card-lift:hover {
+    transform: none;
+  }
+}
+
+/* BenefitCard — hover en CSS (antes JS imperativo; Fase 1 §1.5).
+   El acento se inyecta vía --nv-accent desde el componente. */
+.benefit-card {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 0.5px solid rgba(255, 255, 255, 0.07);
+  border-top: 2px solid var(--nv-accent, var(--primary));
+  border-radius: 10px;
+  padding: 16px;
+  cursor: default;
+  transition:
+    transform 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out);
+}
+.benefit-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  border-top-color: var(--nv-accent, var(--primary));
+  box-shadow: var(--shadow-md);
+}
+@media (prefers-reduced-motion: reduce) {
+  .benefit-card:hover {
+    transform: none;
+  }
 }
 
 /* Grid pattern for hero */

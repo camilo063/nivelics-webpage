@@ -6,6 +6,7 @@ import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { GeoIconBox, type IconColor } from "@/lib/icons/geometric";
+import { JsonLd } from "@/components/shared/json-ld";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllProductos, getProductoBySlug, mapProducto, accentHex } from "@/lib/cms/productos";
 import type { Locale } from "@/lib/cms";
@@ -110,6 +111,27 @@ export default async function ProductoDetailPage({
     sameAs: p.externalUrl,
   };
 
+  // Product schema (complements the SoftwareApplication above — both are emitted).
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: p.name,
+    description: p.description,
+    url: canonical,
+    ...(p.ogImage ? { image: p.ogImage } : {}),
+    brand: { "@type": "Brand", name: "Nivelics" },
+    manufacturer: { "@id": `${baseUrl}/#organization` },
+    offers: {
+      "@type": "Offer",
+      ...(p.pricingFrom != null
+        ? { price: p.pricingFrom.toString(), priceCurrency: p.pricingCurrency }
+        : {}),
+      availability: "https://schema.org/InStock",
+      url: canonical,
+    },
+    sameAs: p.externalUrl,
+  };
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -139,6 +161,7 @@ export default async function ProductoDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
+      <JsonLd data={productSchema} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -160,7 +183,7 @@ export default async function ProductoDetailPage({
         <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-16 md:px-20 md:py-24">
           <Link
             href="/productos"
-            className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white mb-6"
+            className="inline-flex items-center gap-1.5 text-sm text-text-70 hover:text-white mb-6"
           >
             <ArrowLeft size={14} /> {isEn ? "Back to Products" : "Volver a Productos"}
           </Link>
@@ -174,15 +197,15 @@ export default async function ProductoDetailPage({
 
           <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-[52px] leading-tight">
             {p.name}
-            <span className="block text-white/70 font-medium text-2xl md:text-3xl mt-3">
+            <span className="block text-text-70 font-medium text-2xl md:text-3xl mt-3">
               {p.tagline}
             </span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg text-white/60 leading-relaxed">{p.description}</p>
+          <p className="mt-6 max-w-2xl text-lg text-text-70 leading-relaxed">{p.description}</p>
 
-          <div className="mt-4 text-sm text-white/40">
-            <span className="font-semibold text-white/60">ICP:</span> {p.icp}
+          <div className="mt-4 text-sm text-text-40">
+            <span className="font-semibold text-text-70">ICP:</span> {p.icp}
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -228,7 +251,7 @@ export default async function ProductoDetailPage({
                   >
                     {m.value}
                   </div>
-                  <div className="mt-1 text-xs text-white/50 md:text-sm">{m.label}</div>
+                  <div className="mt-1 text-xs text-text-55 md:text-sm">{m.label}</div>
                 </div>
               ))}
             </div>
@@ -260,7 +283,7 @@ export default async function ProductoDetailPage({
                       {f.title}
                     </h3>
                   </div>
-                  <p className="text-sm leading-relaxed text-white/55">{f.description}</p>
+                  <p className="text-sm leading-relaxed text-text-55">{f.description}</p>
                 </div>
               ))}
             </div>
@@ -289,7 +312,7 @@ export default async function ProductoDetailPage({
                         className="px-4 py-3 text-xs font-semibold uppercase tracking-wider"
                         style={{
                           background: i === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)",
-                          color: "rgba(255,255,255,0.55)",
+                          color: "var(--text-55)",
                           borderBottom: "1px solid rgba(255,255,255,0.08)",
                         }}
                       >
@@ -418,10 +441,10 @@ export default async function ProductoDetailPage({
                       >
                         {o.category}
                       </span>
-                      <ArrowRight size={14} className="text-white/40" />
+                      <ArrowRight size={14} className="text-text-40" />
                     </div>
                     <h3 className="mt-2 text-lg font-semibold text-white">{o.name}</h3>
-                    <p className="mt-1 text-sm text-white/50">{o.tagline}</p>
+                    <p className="mt-1 text-sm text-text-55">{o.tagline}</p>
                   </Link>
                 );
               })}

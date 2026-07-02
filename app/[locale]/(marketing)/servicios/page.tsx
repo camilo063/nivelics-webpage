@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { ServicesGrid } from "@/components/sections";
 import { ServiciosHubExtras } from "@/components/sections/servicios-hub-extras";
-import { CTABanner } from "@/components/shared";
+import { CTABanner, JsonLd } from "@/components/shared";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getServiceSchema } from "@/lib/schema/service";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale, MappedServicio } from "@/lib/cms/types";
@@ -63,18 +64,42 @@ export async function generateMetadata({
   const locale = (await getLocale()) as Locale;
   const hub = await getServicioData("servicios", locale);
 
+  const esUrl = "https://www.nivelics.com/servicios";
+  const enUrl = "https://www.nivelics.com/en/services";
+  const canonical = locale === "en" ? enUrl : esUrl;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
+
+  const title = hub?.seoTitle || "Servicios de Transformación Digital | IA · Cloud · Staffing";
+  const description =
+    hub?.seoDescription ||
+    "Descubre nuestras soluciones de Inteligencia Artificial, Cloud, Staff Augmentation y Desarrollo Digital.";
+
   return {
-    title: hub?.seoTitle || "Servicios de Transformación Digital | IA · Cloud · Staffing",
-    description:
-      hub?.seoDescription ||
-      "Descubre nuestras soluciones de Inteligencia Artificial, Cloud, Staff Augmentation y Desarrollo Digital.",
+    title,
+    description,
     alternates: {
-      canonical: "https://www.nivelics.com/servicios",
+      canonical,
       languages: {
-        es: "https://www.nivelics.com/servicios",
-        en: "https://www.nivelics.com/en/services",
-        "x-default": "https://www.nivelics.com/servicios",
+        es: esUrl,
+        en: enUrl,
+        "x-default": esUrl,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: locale === "en" ? "en_US" : "es_CO",
+      alternateLocale: locale === "en" ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -90,6 +115,16 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
     { name: isEn ? "Home" : "Inicio", url: "/" },
     { name: isEn ? "Services" : "Servicios", url: "/servicios" },
   ]);
+  const serviceSchema = getServiceSchema({
+    name: isEn
+      ? "Digital Transformation Services | AI · Cloud · Staffing"
+      : "Servicios de Transformación Digital | IA · Cloud · Staffing",
+    description: isEn
+      ? "Artificial Intelligence, Cloud & FinOps, Staff Augmentation and Digital Development solutions for B2B companies."
+      : "Soluciones de Inteligencia Artificial, Cloud & FinOps, Staff Augmentation y Desarrollo Digital para empresas B2B.",
+    url: "/servicios",
+    serviceType: isEn ? "Digital Transformation" : "Transformación Digital",
+  });
 
   const hubMetrics = hub?.hubMetrics.length ? hub.hubMetrics : FALLBACK_HUB_METRICS;
   const frameworkPillars = hub?.frameworkPillars.length
@@ -122,6 +157,7 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      <JsonLd data={serviceSchema} />
       <section className="relative overflow-hidden py-16 md:py-24">
         <HeroEffect kind="radar" opacity={0.9} />
         <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">

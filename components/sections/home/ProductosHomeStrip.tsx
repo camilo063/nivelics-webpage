@@ -58,15 +58,15 @@ export function ProductosHomeStrip({ productos, locale, title, cta }: Props) {
                 >
                   <div className="flex items-center justify-between mb-1.5">
                     <span
-                      className="text-[10px] uppercase tracking-wider font-semibold"
+                      className="text-[11px] uppercase tracking-wider font-semibold"
                       style={{ color: accent }}
                     >
                       {p.category}
                     </span>
-                    <ArrowRight size={12} className="text-white/30 group-hover:text-white/60" />
+                    <ArrowRight size={12} className="text-text-40 group-hover:text-text-70" />
                   </div>
                   <div className="text-sm font-semibold text-white">{p.name}</div>
-                  <div className="mt-1 text-xs text-white/50 line-clamp-2">{p.tagline}</div>
+                  <div className="mt-1 text-xs text-text-55 line-clamp-2">{p.tagline}</div>
                 </Link>
               );
             })}

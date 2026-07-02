@@ -104,7 +104,7 @@ export function HeroSplit({
             {bullets && bullets.length > 0 && (
               <ul className="mt-6 space-y-2.5">
                 {bullets.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5 text-[15px] text-text-70">
+                  <li key={b} className="flex items-start gap-2.5 text-base text-text-70">
                     <Check
                       size={18}
                       className="shrink-0 mt-0.5"

@@ -173,7 +173,7 @@ export function InlineContactForm({
             >
               {isSubmitting ? "Enviando..." : "Enviar mensaje"}
             </Button>
-            <p className="mt-3 text-[12px] text-text-40">
+            <p className="mt-3 text-xs text-text-40">
               Respondemos en menos de 24 horas. Sin compromiso.
             </p>
           </div>

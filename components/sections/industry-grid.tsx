@@ -28,7 +28,7 @@ export function IndustryGrid({ title, industries }: IndustryGridProps) {
                 <span className="text-sm font-semibold text-text-100 group-hover:text-primary transition-colors">
                   {ind.name}
                 </span>
-                <p className="mt-1 text-[12px] text-text-40">{ind.description}</p>
+                <p className="mt-1 text-xs text-text-40">{ind.description}</p>
               </div>
               <ArrowRight
                 size={14}

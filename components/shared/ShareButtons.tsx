@@ -46,11 +46,11 @@ export function ShareButtons({ url, title, label, copyLabel, copiedLabel }: Prop
   }
 
   const buttonClass =
-    "inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.05] text-white/60 transition-colors hover:bg-white/[0.1] hover:text-white";
+    "inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.05] text-text-70 transition-colors hover:bg-white/[0.1] hover:text-white";
 
   return (
     <div>
-      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-white/30">{label}</p>
+      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-text-40">{label}</p>
       <div className="flex gap-2">
         <a
           href={linkedinHref}

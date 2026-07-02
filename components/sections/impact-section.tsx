@@ -71,7 +71,7 @@ function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
   }, [isInView, value]);
 
   return (
-    <span ref={ref} className="font-mono text-5xl font-bold text-primary md:text-[48px]">
+    <span ref={ref} className="font-mono text-5xl font-bold text-primary">
       {count}
       {suffix}
     </span>
@@ -168,7 +168,7 @@ export function ImpactSection() {
             <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
               13 años. 7 países. Un solo aliado.
             </h2>
-            <p className="mt-3 text-[15px]" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <p className="mt-3 text-base" style={{ color: "var(--text-55)" }}>
               Proyectos activos en Colombia, USA, México, El Salvador, Panamá, Ecuador, Perú y
               Argentina.
             </p>
@@ -180,19 +180,16 @@ export function ImpactSection() {
                   <div
                     key={m.label}
                     className={cn(
-                      "rounded-xl p-6 transition-all duration-200 cursor-default",
-                      "bg-[rgba(255,255,255,0.03)] border border-[rgba(0,212,255,0.15)]",
-                      "hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.05)]",
+                      "glass rounded-xl p-6 transition-all duration-200 cursor-default",
+                      "border-primary/15 hover:border-primary/40 hover:bg-primary/[0.05]",
                     )}
                   >
                     <Icon size={16} className="text-primary mb-3" aria-hidden="true" />
                     <AnimatedNumber value={m.value} suffix={m.suffix} />
-                    <p className="mt-2 text-[13px] font-medium uppercase tracking-[0.08em] text-white/60">
+                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-text-70">
                       {m.label}
                     </p>
-                    <p className="mt-1 text-[11px]" style={{ color: "rgba(255,255,255,0.35)" }}>
-                      {m.sublabel}
-                    </p>
+                    <p className="mt-1 text-xs text-text-40">{m.sublabel}</p>
                   </div>
                 );
               })}

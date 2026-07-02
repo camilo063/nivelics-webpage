@@ -38,7 +38,7 @@ export function ServiceProcessCta({
             <Link href={ctaHref}>{ctaText}</Link>
           </Button>
         </div>
-        <p className="mt-4 text-[12px] text-text-40">{trustText}</p>
+        <p className="mt-4 text-xs text-text-40">{trustText}</p>
       </div>
     </section>
   );

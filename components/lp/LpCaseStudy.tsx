@@ -53,10 +53,17 @@ export function LpCaseStudy({
             {logoUrl ? (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logoUrl} alt={clientName} className="h-8 object-contain opacity-80" />
-                <span className="text-sm text-white/60">{country}</span>
-                <span className="text-sm text-white/40">·</span>
-                <span className="text-sm text-white/60">{sector}</span>
+                <img
+                  src={logoUrl}
+                  alt={clientName}
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-8 w-auto object-contain opacity-80"
+                />
+                <span className="text-sm text-text-70">{country}</span>
+                <span className="text-sm text-text-40">·</span>
+                <span className="text-sm text-text-70">{sector}</span>
               </>
             ) : (
               <>
@@ -67,12 +74,12 @@ export function LpCaseStudy({
                   {initialsFrom(clientName)}
                 </div>
                 <span className="text-lg font-semibold text-white">{clientName}</span>
-                <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-[#66667A]">
+                <span className="rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-[#66667A]">
                   Cliente real
                 </span>
-                <span className="ml-2 text-sm text-white/60">{country}</span>
-                <span className="text-sm text-white/40">·</span>
-                <span className="text-sm text-white/60">{sector}</span>
+                <span className="ml-2 text-sm text-text-70">{country}</span>
+                <span className="text-sm text-text-40">·</span>
+                <span className="text-sm text-text-70">{sector}</span>
               </>
             )}
           </div>
@@ -90,7 +97,7 @@ export function LpCaseStudy({
             <div className="mt-2 text-xl font-bold text-white md:text-2xl">{resultado}</div>
           </div>
 
-          <p className="mt-6 text-white/70 leading-relaxed">{extracto}</p>
+          <p className="mt-6 text-text-70 leading-relaxed">{extracto}</p>
         </div>
       </div>
     </section>

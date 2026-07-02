@@ -97,7 +97,7 @@ export function CTAContextual({ categorySlug, locale }: Props) {
   return (
     <div className="mt-14 mb-14 rounded-xl border border-white/10 bg-gradient-to-br from-[var(--primary)]/10 via-[var(--primary)]/5 to-transparent p-8 md:p-10">
       <h3 className="text-xl md:text-2xl font-medium text-white max-w-xl">{copy.title}</h3>
-      <p className="mt-3 text-white/60">{copy.subtitle}</p>
+      <p className="mt-3 text-text-70">{copy.subtitle}</p>
       <Link
         href={href}
         className="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark px-6 py-3 text-sm font-semibold text-bg-base shadow-lg shadow-primary/25 transition-transform duration-300 hover:scale-[1.02]"

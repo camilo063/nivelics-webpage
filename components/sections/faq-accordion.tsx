@@ -59,7 +59,7 @@ function FAQItem({ question, answer }: FAQItem) {
         aria-expanded={open}
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >
-        <span className="text-[15px] font-medium text-text-100 pr-4">{question}</span>
+        <span className="text-base font-medium text-text-100 pr-4">{question}</span>
         <ChevronDown
           size={18}
           className={cn(

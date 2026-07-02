@@ -46,7 +46,7 @@ export function LpHeroWithForm({
           <h1 className="mt-6 text-3xl font-black tracking-tight text-white md:text-4xl lg:text-5xl">
             {h1}
           </h1>
-          <p className="mt-6 text-lg text-white/70">{subtitle}</p>
+          <p className="mt-6 text-lg text-text-70">{subtitle}</p>
         </div>
 
         <div>
