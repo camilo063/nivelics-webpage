@@ -14,7 +14,9 @@ const buttonVariants = cva(
         ghost: "text-text-70 hover:text-text-100 hover:bg-bg-elevated",
         secondary:
           "bg-bg-elevated text-text-100 hover:bg-bg-surface border border-border hover:-translate-y-px motion-reduce:hover:translate-y-0",
-        cta: "bg-gradient-to-r from-primary to-primary-dark text-bg-base font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02]",
+        // CTA de conversión: cálido — único color de acción de la vista
+        // (Von Restorff; el cyan queda para marca/informativo)
+        cta: "bg-gradient-to-r from-accent-warm to-accent-warm-dark text-[#221008] font-semibold shadow-lg shadow-accent-warm/25 hover:shadow-accent-warm/40 hover:scale-[1.02]",
       },
       size: {
         default: "h-10 px-5 py-2",

@@ -375,7 +375,11 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                 headings={headings}
                 label={t(locale, "Contenido", "Contents")}
               />
-              <ProseContent content={processedHtml} />
+              {/* Superficie clara: lectura long-form sobre "papel" (menos fatiga
+                  que dark puro); el chrome del sitio permanece oscuro */}
+              <div className="reading-surface px-6 py-8 md:px-12 md:py-12">
+                <ProseContent content={processedHtml} variant="light" />
+              </div>
 
               <CTAContextual categorySlug={category?.slug ?? null} locale={locale} />
 
@@ -443,7 +447,9 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
 
           <h1 className="mt-4 text-3xl font-bold text-text-100 md:text-4xl">{post.title}</h1>
 
-          <ProseContent content={post.content} className="mt-12" />
+          <div className="reading-surface mt-12 px-6 py-8 md:px-12 md:py-12">
+            <ProseContent content={post.content} variant="light" />
+          </div>
         </div>
       </article>
     </PageWrapper>

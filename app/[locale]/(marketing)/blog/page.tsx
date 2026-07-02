@@ -357,7 +357,7 @@ export default async function BlogPage({
                   <span>Nivelics</span>
                 </div>
                 <div className="mt-8">
-                  <span className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark px-6 py-3 text-sm font-semibold text-bg-base shadow-lg shadow-primary/25 transition-transform duration-300 group-hover:scale-[1.02]">
+                  <span className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-accent-warm to-accent-warm-dark px-6 py-3 text-sm font-semibold text-[#221008] shadow-lg shadow-accent-warm/25 transition-transform duration-300 group-hover:scale-[1.02]">
                     {t(locale, "Leer artículo", "Read article")} <ArrowRight size={16} />
                   </span>
                 </div>

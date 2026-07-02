@@ -11,7 +11,8 @@ interface StickyMobileCtaProps {
   accentColor?: string;
 }
 
-export function StickyMobileCta({ text, url, accentColor = "#00D4FF" }: StickyMobileCtaProps) {
+// Default cálido: los CTAs de conversión usan el acento warm (el cyan es marca)
+export function StickyMobileCta({ text, url, accentColor = "#ff8a5c" }: StickyMobileCtaProps) {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
 

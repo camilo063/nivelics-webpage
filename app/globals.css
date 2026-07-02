@@ -16,8 +16,17 @@
   --primary-dark: #0099cc;
   --primary-glow: rgba(0, 212, 255, 0.12);
 
-  /* ACENTO SECUNDARIO CÁLIDO — máx. 1 uso por vista (badges/highlights) */
+  /* ACENTO CÁLIDO — reservado para CTAs de conversión (efecto Von Restorff:
+     el único color cálido de la vista captura la mirada; el cyan queda para
+     marca e informativo). También badges/highlights puntuales. */
   --accent-warm: #ff8a5c;
+  --accent-warm-dark: #f0703d;
+
+  /* SUPERFICIE DE LECTURA CLARA — artículos del blog (legibilidad long-form) */
+  --reading-bg: #f7f5f2;
+  --reading-text: #1f1f28;
+  --reading-muted: #4b4b57;
+  --reading-link: #00708f;
 
   /* TEXTO */
   --text-100: #ffffff;
@@ -49,7 +58,7 @@
 
   /* GRADIENTES */
   --grad-hero: linear-gradient(135deg, #0a0a0f 0%, #0d1117 50%, #0a0f1a 100%);
-  --grad-cta: linear-gradient(90deg, #00d4ff 0%, #0099cc 100%);
+  --grad-cta: linear-gradient(90deg, #ff8a5c 0%, #f0703d 100%);
   --grad-ia: linear-gradient(135deg, #8b5cf6 0%, #00d4ff 100%);
   --grad-cloud: linear-gradient(135deg, #1e40af 0%, #00d4ff 100%);
   --grad-staffing: linear-gradient(135deg, #00e5a0 0%, #00d4ff 100%);
@@ -66,6 +75,7 @@
   --color-primary-dark: var(--primary-dark);
   --color-primary-glow: var(--primary-glow);
   --color-accent-warm: var(--accent-warm);
+  --color-accent-warm-dark: var(--accent-warm-dark);
   --color-text-100: var(--text-100);
   --color-text-70: var(--text-70);
   --color-text-55: var(--text-55);
@@ -97,6 +107,17 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Superficie de lectura clara — hoja de "papel" para artículos del blog.
+   El chrome del sitio (nav/footer) permanece dark; el cuerpo del artículo
+   descansa sobre claro para lecturas largas (menos fatiga, mejor retención). */
+.reading-surface {
+  background: var(--reading-bg);
+  color: var(--reading-text);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
 }
 
 /* Glassmorphism — dos niveles de elevación (Fase 0 §0.3):

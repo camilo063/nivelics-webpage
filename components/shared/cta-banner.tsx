@@ -115,8 +115,8 @@ export function CTABanner({
               href={buttonHref}
               className="inline-flex items-center gap-2 rounded-full font-semibold transition-all duration-150 hover:scale-[1.02]"
               style={{
-                background: "#00D4FF",
-                color: "#000000",
+                background: "var(--grad-cta)",
+                color: "#221008",
                 letterSpacing: "-0.01em",
                 height: "48px",
                 padding: "0 28px",
