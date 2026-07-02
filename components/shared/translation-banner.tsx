@@ -17,12 +17,12 @@ export function TranslationBanner() {
   return (
     <div className="bg-[rgba(245,158,11,0.08)] border-b border-[rgba(245,158,11,0.2)]">
       <div className="mx-auto max-w-[1280px] px-6 py-2.5 md:px-20 flex items-center justify-between gap-4">
-        <p className="text-[13px] text-[rgba(245,158,11,0.9)]">
+        <p className="text-sm text-[rgba(245,158,11,0.9)]">
           This page is being translated. Some content may appear in Spanish.
         </p>
         <Link
           href={esPath}
-          className="shrink-0 text-[12px] font-medium text-[rgba(245,158,11,0.9)] hover:text-[#F59E0B] transition-colors"
+          className="shrink-0 text-xs font-medium text-[rgba(245,158,11,0.9)] hover:text-[#F59E0B] transition-colors"
         >
           Ver en español →
         </Link>

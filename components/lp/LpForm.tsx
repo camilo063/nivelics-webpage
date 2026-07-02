@@ -118,7 +118,7 @@ export function LpForm({
           <Check className="h-6 w-6" style={{ color: accentColor }} />
         </div>
         <h3 className="text-xl font-bold text-white">¡Mensaje enviado!</h3>
-        <p className="mt-2 text-white/70">Te contactamos en menos de 24 horas.</p>
+        <p className="mt-2 text-text-70">Te contactamos en menos de 24 horas.</p>
       </div>
     );
   }
@@ -131,7 +131,7 @@ export function LpForm({
       {title && (
         <h3 className={`${compact ? "text-lg" : "text-2xl"} font-bold text-white`}>{title}</h3>
       )}
-      {subtitle && <p className="mt-2 text-sm text-white/70">{subtitle}</p>}
+      {subtitle && <p className="mt-2 text-sm text-text-70">{subtitle}</p>}
 
       <form onSubmit={handleSubmit} className="mt-5 space-y-3" aria-label="Formulario de contacto">
         <div
@@ -223,7 +223,7 @@ export function LpForm({
       {trustSignals && trustSignals.length > 0 && (
         <div className="mt-5 space-y-1.5 border-t border-white/10 pt-4">
           {trustSignals.map((s, i) => (
-            <p key={i} className="text-xs text-white/60">
+            <p key={i} className="text-xs text-text-70">
               {s}
             </p>
           ))}

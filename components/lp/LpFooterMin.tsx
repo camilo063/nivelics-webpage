@@ -12,7 +12,7 @@ export function LpFooterMin({}: LpFooterMinProps) {
           <Link href="/" className="text-xl font-black tracking-tight text-white">
             Nivelics
           </Link>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-text-70">
             <Link href="/privacidad" className="hover:text-white transition-colors">
               Política de privacidad
             </Link>
@@ -28,7 +28,7 @@ export function LpFooterMin({}: LpFooterMinProps) {
               WhatsApp
             </a>
           </div>
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-text-40">
             © {new Date().getFullYear()} Nivelics. Bogotá · Miami.
           </p>
         </div>

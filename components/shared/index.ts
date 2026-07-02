@@ -4,3 +4,4 @@ export { CTABanner } from "./cta-banner";
 export { DaptaWidget } from "./dapta-widget";
 export { ServiceBadge } from "./service-badge";
 export { TestimonialCard } from "./testimonial-card";
+export { JsonLd } from "./json-ld";

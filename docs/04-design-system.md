@@ -11,6 +11,18 @@
 - **Accent colors are semantic**, not decorative — cyan = info/AI, amber =
   industries, green = staffing, violet = premium/experimental, red = alerts.
 
+### Icon usage rule (Fase 1 §1.6)
+
+- **GeoIcon** para iconos de **contenido y marca**: features, badges, servicios,
+  industrias, métricas, cards.
+- **lucide** solo para **affordances de acción de UI**: `ArrowRight`,
+  `ChevronDown/Right`, `Check`, `X`, `Menu`, `MessageCircle` en botones/links.
+- Nunca introducir un icono lucide decorativo nuevo — buscar el equivalente en
+  `ICON_MAP` o añadirlo a `LUCIDE_TO_GEO`.
+- Deuda conocida: las columnas del mega-menú (`NAV_DEFAULTS`) todavía usan
+  `LucideIcon` tipado — migrarlas a GeoIcon requiere tocar los VM types del nav
+  (pendiente, no bloqueante).
+
 ## GeoIcon system
 
 [lib/icons/geometric.tsx](../lib/icons/geometric.tsx) is a self-contained
@@ -60,13 +72,34 @@ CSS variables: `--font-inter`, `--font-jetbrains-mono`.
 
 Defined in [app/globals.css](../app/globals.css) as CSS variables:
 
-- `--primary` / `--primary-dark` — brand cyan
+- `--primary-50/-200` / `--primary` / `--primary-600/-dark` — brand cyan ramp.
+  **Pure `--primary` is reserved for actions and focus**; decorative borders,
+  accent text and glows use the derived tones.
+- `--accent-warm` — warm secondary accent. Max **one use per view** (badges/highlights).
 - `--bg-base` / `--bg-surface` — backgrounds
-- `--text-100` / `--text-70` / `--text-40` — text opacities
-- `--border` — default border color
+- `--text-100` / `--text-70` / `--text-55` / `--text-40` — text hierarchy.
+  **The only way to dim text.** Never `text-white/NN` opacities and never
+  opacity modifiers on the tokens (`text-text-40/50` is forbidden — fails WCAG).
+- `--border-subtle` / `--border` / `--border-strong` — border elevation scale
+  (dividers → default card → highlighted/hover).
+- `--shadow-sm/-md/-lg/-glow` — shadow elevation scale (plain CSS vars, used by
+  `.glass-elevated` or via `shadow-(--shadow-md)` arbitrary syntax).
 - `--grad-hero` — hero gradient (home page uses this)
 
 Tailwind v4 picks them up automatically via CSS-first config.
+
+## Typography scale
+
+[lib/design/typography.ts](../lib/design/typography.ts) exports `TYPO` — the
+single type scale (eyebrow, caption, bodySmall, body, cardTitle,
+sectionSubtitle, sectionTitle, pageTitle). Rules:
+
+- **No arbitrary `text-[Npx]` sizes.** The only allowed arbitrary value is
+  `text-[11px]` for eyebrows/pills (intentionally below Tailwind's scale).
+- Decorative exceptions (`text-[52px]`, `text-[80px]` on the 404 page) are
+  documented outliers — do not add new ones.
+- Migration mapping used across the site: `13px → text-sm`, `12px → text-xs`,
+  `15px → text-base`, `10px → text-[11px]` (eyebrow/pill) or `text-xs` (caption).
 
 ## Shared components
 
@@ -136,10 +169,16 @@ These are applied transversally through the shared components (`ServiceCard`,
 
 ## Design tokens to use, not invent
 
-- `max-w-[1280px]` for content containers.
-- `px-6 md:px-20` for horizontal padding.
-- `py-10 md:py-14` for standard sections; `py-16 md:py-24` for heros.
-- `glass` class = translucent glass card style (white 3% bg, white 8% border).
+- `<MaxWidthWrapper>` ([components/layout/max-width-wrapper.tsx](../components/layout/max-width-wrapper.tsx))
+  = `mx-auto max-w-[1280px] px-6 md:px-20`. Use it in new code instead of
+  repeating the raw classes; existing pages migrate incrementally.
+- **Vertical rhythm** (two rhythms only):
+  - Standard section: `py-16 md:py-24`
+  - Compact section (strips, logo bars): `py-10 md:py-14`
+  - Hero: `pt-24 pb-16` (documented exception)
+- `glass` class = informational card (white 3% bg, `--border-subtle`).
+- `glass-elevated` class = highlighted/interactive card (white 6% bg,
+  `--border`, `--shadow-md`; hover raises to `--border-strong`).
 - `glow-hover` class = hover glow + subtle scale.
 
 Look at [app/[locale]/(marketing)/page.tsx](<../app/[locale]/(marketing)/page.tsx>)

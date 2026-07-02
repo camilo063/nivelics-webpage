@@ -56,7 +56,7 @@ export default async function LocaleNotFound() {
 
           <span className="mb-4 inline-flex w-fit items-center gap-1.5">
             <span
-              className="rounded-full border px-2.5 py-1 text-[10px] font-medium"
+              className="rounded-full border px-2.5 py-1 text-[11px] font-medium"
               style={{
                 background: "rgba(239,68,68,0.10)",
                 color: "#f87171",
@@ -67,11 +67,11 @@ export default async function LocaleNotFound() {
             </span>
           </span>
 
-          <h1 className="mb-3 text-[22px] font-medium leading-snug text-text-100">
-            {en ? "This URL doesn't exist on the site" : "Esta URL no existe en el sitio"}
+          <h1 className="mb-3 text-2xl font-medium leading-snug text-text-100">
+            {en ? "404: This URL doesn't exist on the site" : "404: Esta URL no existe en el sitio"}
           </h1>
 
-          <p className="mb-6 max-w-[340px] text-[13px] leading-relaxed text-text-70">
+          <p className="mb-6 max-w-[340px] text-sm leading-relaxed text-text-70">
             {en
               ? "The content you're looking for may have moved. Explore the full site map →"
               : "El contenido que buscas puede haber cambiado de dirección. Explora el mapa completo →"}
@@ -80,14 +80,14 @@ export default async function LocaleNotFound() {
           <div className="flex max-w-[340px] flex-col gap-2.5">
             <Link
               href={en ? "/en" : "/"}
-              className="rounded-md bg-primary px-4 py-2.5 text-center text-[12px] font-medium text-[#0d1117] transition-colors duration-150 hover:bg-[#22d3ee]"
+              className="rounded-md bg-primary px-4 py-2.5 text-center text-xs font-medium text-[#0d1117] transition-colors duration-150 hover:bg-[#22d3ee]"
             >
               ← {en ? "Go to home" : "Ir al inicio"}
             </Link>
 
             <Link
               href={en ? "/en/contact" : "/contacto"}
-              className="rounded-md border border-white/[0.10] px-4 py-2.5 text-center text-[12px] text-text-70 transition-colors duration-150 hover:bg-white/[0.04] hover:text-text-100"
+              className="rounded-md border border-white/[0.10] px-4 py-2.5 text-center text-xs text-text-70 transition-colors duration-150 hover:bg-white/[0.04] hover:text-text-100"
             >
               {en ? "Contact" : "Contactar"}
             </Link>
@@ -103,7 +103,7 @@ export default async function LocaleNotFound() {
 
         <section className="px-6 py-10 md:px-10 md:py-14 lg:px-12 lg:py-16">
           <header className="mb-6">
-            <p className="text-[10px] font-medium uppercase tracking-wider text-text-40">
+            <p className="text-[11px] font-medium uppercase tracking-wider text-text-40">
               {en ? "Full site map" : "Mapa completo del sitio"}
             </p>
           </header>

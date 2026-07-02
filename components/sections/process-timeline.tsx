@@ -39,7 +39,7 @@ export function ProcessTimeline({ title, steps, accentColor = "#00D4FF" }: Proce
                 <span className="ml-2 text-[11px] text-text-40">{step.duration}</span>
               )}
               <h3 className="mt-2 text-base font-semibold text-text-100">{step.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-text-70">{step.description}</p>
+              <p className="mt-2 text-sm leading-relaxed text-text-70">{step.description}</p>
               {step.deliverable && (
                 <p className="mt-3 border-t border-border pt-2 text-[11px] text-text-40">
                   Entregable: {step.deliverable}

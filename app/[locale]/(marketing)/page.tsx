@@ -203,12 +203,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* ═══ 1. HERO ═══ */}
       <section
-        className="relative overflow-hidden pt-20 pb-14 md:pt-24 md:pb-16 min-h-[520px] lg:min-h-[600px]"
-        style={{ background: "var(--grad-hero)" }}
+        className="hero-aurora relative overflow-hidden pt-20 pb-14 md:pt-24 md:pb-16 min-h-[520px] lg:min-h-[600px]"
         data-section="hero"
       >
-        <div className="grid-pattern absolute inset-0" />
-        <div aria-hidden="true" className="dot-grid" />
         <HeroGraph />
         <ParallaxLayer
           speed={0.25}
@@ -272,13 +269,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <TiltCard>
                       <Link
                         href={`/servicios/${s.slug}`}
-                        className="group glass border-anim rounded-xl p-5 block h-full cursor-pointer"
+                        className="group glass-elevated card-lift border-anim rounded-xl p-5 block h-full cursor-pointer"
                         style={{ borderLeft: `3px solid ${color}` }}
                       >
                         <div className="flex items-center gap-2 mb-3">
                           <GeoIcon name={icon} size={18} color={hexToIconColor(color)} />
                           <span
-                            className="text-[10px] font-semibold uppercase tracking-wider"
+                            className="text-[11px] font-semibold uppercase tracking-[0.12em]"
                             style={{ color }}
                           >
                             {(() => {
@@ -290,7 +287,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         <h3 className="text-base font-semibold text-text-100 group-hover:text-primary transition-colors">
                           {s.title}
                         </h3>
-                        <p className="mt-1.5 text-[13px] text-text-70 leading-snug">{s.subtitle}</p>
+                        <p className="mt-1.5 text-sm text-text-70 leading-snug">{s.subtitle}</p>
                         {metric ? (
                           <p className="mt-3 font-mono text-sm font-bold text-primary">{metric}</p>
                         ) : null}
@@ -334,10 +331,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <TiltCard>
                       <Link
                         href={`/casos-de-exito/${c.slug}`}
-                        className="group flex h-full flex-col justify-between rounded-xl bg-[rgba(255,255,255,0.03)] border border-white/[0.08] p-5 min-h-[160px] transition-colors duration-200 ease-out hover:border-white/20 hover:bg-white/[0.06]"
+                        className="group glass-elevated card-lift flex h-full flex-col justify-between rounded-xl p-5 min-h-[160px]"
                       >
                         <div>
-                          <div className="flex items-center justify-between text-[11px] text-text-40">
+                          <div className="flex items-center justify-between text-xs text-text-40">
                             <span>
                               {flag} {c.clientCountry}
                             </span>
@@ -346,24 +343,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                           <h3 className="mt-2 text-lg font-bold text-white group-hover:text-primary transition-colors">
                             {c.clientName}
                           </h3>
-                          <p className="mt-1 text-[13px] text-white/60 line-clamp-1">
-                            {resultLabel}
-                          </p>
+                          <p className="mt-1 text-sm text-text-70 line-clamp-1">{resultLabel}</p>
                           {firstMetric ? (
-                            <p className="mt-1 text-[13px] font-semibold text-primary">
+                            <p className="mt-1 text-sm font-semibold text-primary">
                               {firstMetric.value} {firstMetric.label}
                             </p>
                           ) : null}
                         </div>
                         <div className="mt-3 flex items-center justify-between">
                           {serviceLabel ? (
-                            <span className="rounded-full border border-primary/20 bg-primary/[0.08] px-2.5 py-0.5 text-[10px] text-primary/70">
+                            <span className="rounded-full border border-primary/20 bg-primary/[0.08] px-2.5 py-0.5 text-[11px] text-primary-200">
                               {serviceLabel}
                             </span>
                           ) : (
                             <span />
                           )}
-                          <span className="text-xs text-white/30 group-hover:text-primary transition-colors">
+                          <span className="text-xs text-text-40 group-hover:text-primary transition-colors">
                             {uiViewAll} <ArrowRight size={12} className="inline" />
                           </span>
                         </div>
@@ -375,7 +370,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
             <div className="mt-8 text-center">
               {home.casesSectionFooter ? (
-                <p className="text-[13px] text-text-40 mb-3">{home.casesSectionFooter}</p>
+                <p className="text-sm text-text-40 mb-3">{home.casesSectionFooter}</p>
               ) : null}
               <Link
                 href="/casos-de-exito"
@@ -422,25 +417,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <div>
                 <h2 className="text-3xl font-bold text-text-100 md:text-4xl">{home.mapTitle}</h2>
                 {home.mapSubtitle ? (
-                  <p className="mt-3 text-[15px] text-white/50">{home.mapSubtitle}</p>
+                  <p className="mt-3 text-base text-text-55">{home.mapSubtitle}</p>
                 ) : null}
                 {home.mapMetrics.length > 0 ? (
                   <div className="mt-8 grid grid-cols-2 gap-4">
                     {home.mapMetrics.map((m, i) => (
                       <Reveal key={m.label} delay={i * 70} className="h-full">
-                        <div className="h-full rounded-xl border border-primary/15 bg-white/[0.03] p-5 text-center">
+                        <div className="glass h-full rounded-xl border-primary/15 p-5 text-center">
                           <data
                             value={m.value}
                             className="font-mono text-4xl font-bold text-primary"
                           >
                             {m.value}
                           </data>
-                          <p className="mt-1 text-xs uppercase tracking-wider text-white/50">
+                          <p className="mt-1 text-xs uppercase tracking-wider text-text-55">
                             {m.label}
                           </p>
-                          {m.sublabel ? (
-                            <p className="text-[11px] text-white/35">{m.sublabel}</p>
-                          ) : null}
+                          {m.sublabel ? <p className="text-xs text-text-40">{m.sublabel}</p> : null}
                         </div>
                       </Reveal>
                     ))}
@@ -473,7 +466,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <Reveal key={ind.slug} delay={(i % 3) * 60}>
                   <Link
                     href={`/industrias/${ind.slug}`}
-                    className="flex h-full items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-5 py-4 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white/[0.06] hover:border-white/15 group"
+                    className="glass flex h-full items-center gap-3 rounded-xl px-5 py-4 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-border-strong group"
                   >
                     <span className="shrink-0">
                       <GeoIcon name={ind.icon || "trending-up"} size={18} color="amber" />
@@ -483,7 +476,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         {ind.name}
                       </span>
                       {ind.heroSubtitle ? (
-                        <p className="text-[12px] text-text-40 line-clamp-1">{ind.heroSubtitle}</p>
+                        <p className="text-xs text-text-40 line-clamp-1">{ind.heroSubtitle}</p>
                       ) : null}
                     </div>
                     <ChevronRight
@@ -517,14 +510,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <Reveal key={d.title} delay={(i % 2) * 80}>
                   <TiltCard>
                     <div
-                      className="h-full rounded-xl p-5 bg-white/[0.02]"
+                      className="glass h-full rounded-xl p-5"
                       style={{ borderLeft: `3px solid ${d.color}` }}
                     >
                       <span className="mb-3 inline-block">
                         <GeoIcon name={d.icon} size={18} color={hexToIconColor(d.color)} />
                       </span>
                       <h3 className="text-sm font-semibold text-text-100">{d.title}</h3>
-                      <p className="mt-1.5 text-[13px] text-text-70 leading-relaxed">{d.copy}</p>
+                      <p className="mt-1.5 text-sm text-text-70 leading-relaxed">{d.copy}</p>
                     </div>
                   </TiltCard>
                 </Reveal>

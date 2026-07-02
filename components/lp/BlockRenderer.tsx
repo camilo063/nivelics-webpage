@@ -149,7 +149,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
                 {str(d.h2)}
               </h2>
               {str(d.parrafo) && (
-                <p className="mt-4 text-white/70 leading-relaxed">{str(d.parrafo)}</p>
+                <p className="mt-4 text-text-70 leading-relaxed">{str(d.parrafo)}</p>
               )}
               {bullets.length > 0 && (
                 <ul className="mt-8 space-y-4">
@@ -161,7 +161,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
                       >
                         <Check className="h-4 w-4" />
                       </div>
-                      <span className="text-white/85 leading-relaxed">{item}</span>
+                      <span className="text-text-100 leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>

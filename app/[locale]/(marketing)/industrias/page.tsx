@@ -103,7 +103,7 @@ export default async function IndustriasHubPage({
                 <Link
                   key={ind.slug}
                   href={`/industrias/${ind.slug}`}
-                  className={`group flex flex-col gap-4 rounded-2xl border ${colors.border} bg-white/[0.02] p-6 transition-all duration-200 ease-out ${colors.hoverBorder} hover:-translate-y-1 hover:bg-white/[0.04]`}
+                  className={`group flex flex-col gap-4 rounded-xl border ${colors.border} bg-white/[0.02] p-6 transition-all duration-200 ease-out ${colors.hoverBorder} hover:-translate-y-1 hover:bg-white/[0.04]`}
                 >
                   <div
                     className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl ${colors.iconBg}`}
@@ -115,7 +115,7 @@ export default async function IndustriasHubPage({
                     <h2 className={`mb-1 text-base font-semibold ${colors.labelColor}`}>
                       {ind.name}
                     </h2>
-                    <p className="line-clamp-3 text-sm leading-relaxed text-white/55">
+                    <p className="line-clamp-3 text-sm leading-relaxed text-text-55">
                       {ind.heroSubtitle || ind.heroTitle}
                     </p>
                   </div>

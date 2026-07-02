@@ -7,10 +7,12 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ children, className }: PageWrapperProps) {
+  // div, no <main>: el <main id="main-content"> único lo provee el layout
+  // de marketing (a11y skip-link + landmark único por página).
   return (
-    <main className={cn("flex-1 pt-16", className)}>
+    <div className={cn("flex-1 pt-16", className)}>
       <Breadcrumb />
       {children}
-    </main>
+    </div>
   );
 }

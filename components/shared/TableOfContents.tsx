@@ -41,14 +41,14 @@ export function TableOfContents({ headings, label }: Props) {
 
   return (
     <nav aria-label={label} className="border-l border-white/10 pl-4">
-      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-white/30">{label}</p>
+      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-text-40">{label}</p>
       <ul className="space-y-0">
         {headings.map((h) => {
           const isActive = h.id === activeId;
           const baseLink = "block py-1 transition-colors text-sm";
           const indent = h.level === 3 ? "pl-3" : "";
           const inactive =
-            h.level === 3 ? "text-white/30 hover:text-white/70" : "text-white/50 hover:text-white";
+            h.level === 3 ? "text-text-40 hover:text-text-70" : "text-text-55 hover:text-white";
           const active =
             "text-[var(--primary)] border-l-2 border-[var(--primary)] -ml-[calc(1rem+1px)] pl-[calc(1rem-1px)]";
           const levelActive = h.level === 3 ? `${active} pl-[calc(1rem+0.75rem-1px)]` : active;
@@ -73,7 +73,7 @@ export function TableOfContentsCollapsible({ headings, label }: Props) {
   if (headings.length === 0) return null;
   return (
     <details className="mb-8 rounded-lg border border-white/10 bg-white/[0.03] p-4 lg:hidden">
-      <summary className="cursor-pointer text-sm font-medium text-white/70">{label}</summary>
+      <summary className="cursor-pointer text-sm font-medium text-text-70">{label}</summary>
       <ul className="mt-3 space-y-1">
         {headings.map((h) => (
           <li key={h.id}>
@@ -81,8 +81,8 @@ export function TableOfContentsCollapsible({ headings, label }: Props) {
               href={`#${h.id}`}
               className={`block py-1 text-sm transition-colors ${
                 h.level === 3
-                  ? "pl-3 text-white/40 hover:text-white/70"
-                  : "text-white/60 hover:text-white"
+                  ? "pl-3 text-text-40 hover:text-text-70"
+                  : "text-text-70 hover:text-white"
               }`}
             >
               {h.text}

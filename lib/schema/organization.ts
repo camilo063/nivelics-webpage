@@ -35,7 +35,11 @@ export function getOrganizationSchema() {
       contactType: "sales",
       availableLanguage: ["Spanish", "English"],
     },
-    sameAs: ["https://www.linkedin.com/company/nivelics", "https://www.nivelics.com/en"],
+    sameAs: [
+      "https://www.linkedin.com/company/nivelics",
+      "https://www.instagram.com/nivelics",
+      "https://www.nivelics.com/en",
+    ],
     availableLanguage: ["Spanish", "English"],
     areaServed: ["CO", "US", "MX", "SV", "PA", "EC", "PE", "AR"],
     hasCredential: {

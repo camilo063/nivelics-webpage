@@ -63,7 +63,7 @@ export function SiblingServicesNav({ parentService, siblings }: SiblingServicesN
               <span
                 key={s.url}
                 aria-current="page"
-                className="shrink-0 whitespace-nowrap rounded-full px-3.5 py-1 text-[13px] font-medium"
+                className="shrink-0 whitespace-nowrap rounded-full px-3.5 py-1 text-sm font-medium"
                 style={{
                   background: `${accent}18`,
                   color: accent,
@@ -79,7 +79,7 @@ export function SiblingServicesNav({ parentService, siblings }: SiblingServicesN
             <Link
               key={s.url}
               href={url}
-              className="shrink-0 whitespace-nowrap rounded-full border border-transparent px-3.5 py-1 text-[13px] text-white/50 transition-all duration-150 hover:bg-white/[0.04] hover:text-white"
+              className="shrink-0 whitespace-nowrap rounded-full border border-transparent px-3.5 py-1 text-sm text-text-55 transition-all duration-150 hover:bg-white/[0.04] hover:text-white"
             >
               {name}
             </Link>

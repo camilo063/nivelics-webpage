@@ -32,7 +32,7 @@ export function LpTestimonial({
             </div>
             <div>
               <div className="font-bold text-white">{author}</div>
-              <div className="text-sm text-white/60">{role}</div>
+              <div className="text-sm text-text-70">{role}</div>
             </div>
           </div>
         </div>

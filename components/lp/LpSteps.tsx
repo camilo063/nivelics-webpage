@@ -20,7 +20,7 @@ export function LpSteps({ title, subtitle, steps, accentColor = "#00D4FF" }: LpS
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-black tracking-tight text-white md:text-4xl">{title}</h2>
-          {subtitle && <p className="mt-4 text-lg text-white/70">{subtitle}</p>}
+          {subtitle && <p className="mt-4 text-lg text-text-70">{subtitle}</p>}
         </div>
 
         <div className="mt-14" style={cssVars}>
@@ -37,7 +37,7 @@ export function LpSteps({ title, subtitle, steps, accentColor = "#00D4FF" }: LpS
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-white">{step.title}</h3>
-                    <p className="mt-2 text-sm text-white/70 leading-relaxed">{step.copy}</p>
+                    <p className="mt-2 text-sm text-text-70 leading-relaxed">{step.copy}</p>
                   </div>
                 </div>
 

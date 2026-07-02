@@ -39,7 +39,7 @@ export function ComparisonTable({
                   style={{
                     padding: "10px 14px",
                     background: "rgba(255,255,255,0.04)",
-                    color: "rgba(255,255,255,0.55)",
+                    color: "var(--text-55)",
                     fontWeight: 500,
                     fontSize: "11px",
                     letterSpacing: ".05em",
@@ -55,7 +55,7 @@ export function ComparisonTable({
                   style={{
                     padding: "10px 14px",
                     background: "rgba(255,255,255,0.025)",
-                    color: "rgba(255,255,255,0.40)",
+                    color: "var(--text-40)",
                     fontWeight: 400,
                     fontSize: "11px",
                     borderBottom: "1px solid rgba(255,255,255,0.08)",
@@ -69,7 +69,7 @@ export function ComparisonTable({
                     style={{
                       padding: "10px 14px",
                       background: "rgba(255,255,255,0.025)",
-                      color: "rgba(255,255,255,0.40)",
+                      color: "var(--text-40)",
                       fontWeight: 400,
                       fontSize: "11px",
                       borderBottom: "1px solid rgba(255,255,255,0.08)",
@@ -112,7 +112,7 @@ export function ComparisonTable({
                   <td
                     style={{
                       padding: "9px 14px",
-                      color: "rgba(255,255,255,0.65)",
+                      color: "var(--text-70)",
                       fontSize: "13px",
                       fontWeight: 500,
                       borderBottom: ".5px solid rgba(255,255,255,0.06)",
@@ -123,7 +123,7 @@ export function ComparisonTable({
                   <td
                     style={{
                       padding: "9px 14px",
-                      color: "rgba(255,255,255,0.40)",
+                      color: "var(--text-40)",
                       fontSize: "13px",
                       borderBottom: ".5px solid rgba(255,255,255,0.06)",
                       textDecoration: "line-through",
@@ -136,7 +136,7 @@ export function ComparisonTable({
                     <td
                       style={{
                         padding: "9px 14px",
-                        color: "rgba(255,255,255,0.40)",
+                        color: "var(--text-40)",
                         fontSize: "13px",
                         borderBottom: ".5px solid rgba(255,255,255,0.06)",
                         textDecoration: "line-through",
@@ -149,7 +149,7 @@ export function ComparisonTable({
                   <td
                     style={{
                       padding: "9px 14px",
-                      color: "rgba(255,255,255,0.92)",
+                      color: "var(--text-100)",
                       fontSize: "13px",
                       fontWeight: 600,
                       borderBottom: ".5px solid rgba(0,212,255,0.08)",

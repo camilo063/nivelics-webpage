@@ -157,7 +157,7 @@ export function Breadcrumb() {
           <li className="shrink-0">
             <Link
               href="/"
-              className="text-xs text-white/35 transition-colors duration-150 hover:text-white/60 font-medium"
+              className="text-xs text-text-40 transition-colors duration-150 hover:text-text-70 font-medium"
               aria-label={`${t("home")}`}
             >
               {t("home")}
@@ -171,13 +171,13 @@ export function Breadcrumb() {
                   /
                 </span>
                 {isLast ? (
-                  <span className="text-xs text-white/70 font-medium" aria-current="page">
+                  <span className="text-xs text-text-70 font-medium" aria-current="page">
                     {crumb.label}
                   </span>
                 ) : (
                   <Link
                     href={crumb.href}
-                    className="text-xs text-white/35 transition-colors duration-150 hover:text-white/60 font-medium"
+                    className="text-xs text-text-40 transition-colors duration-150 hover:text-text-70 font-medium"
                     aria-label={`Ir a ${crumb.label}`}
                   >
                     {crumb.label}
@@ -193,7 +193,7 @@ export function Breadcrumb() {
           <li className="shrink-0">
             <Link
               href="/"
-              className="text-xs text-white/35 transition-colors hover:text-white/60 font-medium"
+              className="text-xs text-text-40 transition-colors hover:text-text-70 font-medium"
             >
               {t("home")}
             </Link>
@@ -203,7 +203,7 @@ export function Breadcrumb() {
               <span aria-hidden="true" className="text-white/20 text-xs select-none">
                 /
               </span>
-              <span className="text-xs text-white/35">…</span>
+              <span className="text-xs text-text-40">…</span>
             </li>
           )}
           {mobileCrumbs.map((crumb, i) => {
@@ -214,13 +214,13 @@ export function Breadcrumb() {
                   /
                 </span>
                 {isLast ? (
-                  <span className="text-xs text-white/70 font-medium" aria-current="page">
+                  <span className="text-xs text-text-70 font-medium" aria-current="page">
                     {crumb.label}
                   </span>
                 ) : (
                   <Link
                     href={crumb.href}
-                    className="text-xs text-white/35 transition-colors hover:text-white/60 font-medium"
+                    className="text-xs text-text-40 transition-colors hover:text-text-70 font-medium"
                   >
                     {crumb.label}
                   </Link>

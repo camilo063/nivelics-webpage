@@ -53,6 +53,17 @@ function buildEs(productos: ProductoLlmsRow[]): string {
 
 Nivelics diseña, construye y opera software para empresas B2B que necesitan resultados medibles. Tres líneas integradas: **Inteligencia Artificial**, **Cloud / FinOps** y **Staff Augmentation premium**. Además, operamos 3 productos SaaS propios disponibles para clientes externos.
 
+## Quick Facts
+
+- Fundación: 2012 (13+ años de experiencia)
+- Sedes: Bogotá (Colombia) y Miami (FL, USA)
+- Operación: proyectos activos en 7+ países (CO, US, MX, SV, PA, EC, PE, AR)
+- Equipo: 50+ ingenieros especializados · 200+ proyectos entregados · 98% retención de clientes
+- Líneas de servicio: IA aplicada, Cloud & FinOps, Staff Augmentation, Desarrollo Digital
+- Productos SaaS propios: PAYWL, Niveleads, Hirely
+- Reconocimiento: Great Place to Work Colombia 2022
+- Hiring: vacantes tech activas en ${BASE}/trabaja-con-nosotros
+
 ## Servicios
 
 - [IA aplicada](${BASE}/servicios/inteligencia-artificial): agentes autónomos, automatización, RAG
@@ -149,6 +160,17 @@ function buildEn(productos: ProductoLlmsRow[]): string {
 > Colombian B2B digital transformation company founded in 2012. Applied AI, real-governance Cloud (AWS, GCP, Azure, FinOps) and premium Staff Augmentation. Offices in Bogotá and Miami. Active projects in 7+ countries across LATAM and USA.
 
 Nivelics designs, builds and operates software for B2B companies that need measurable results. Three integrated service lines: **Applied AI**, **Cloud / FinOps** and **Premium Staff Augmentation**. We also operate 3 proprietary SaaS products available for external customers.
+
+## Quick Facts
+
+- Founded: 2012 (13+ years of experience)
+- Offices: Bogotá (Colombia) and Miami (FL, USA)
+- Operations: active projects in 7+ countries (CO, US, MX, SV, PA, EC, PE, AR)
+- Team: 50+ specialized engineers · 200+ delivered projects · 98% client retention
+- Service lines: Applied AI, Cloud & FinOps, Staff Augmentation, Digital Development
+- Proprietary SaaS products: PAYWL, Niveleads, Hirely
+- Recognition: Great Place to Work Colombia 2022
+- Hiring: open tech roles at ${BASE}/en/careers
 
 ## Services
 

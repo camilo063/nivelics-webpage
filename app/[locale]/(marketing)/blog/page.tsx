@@ -106,6 +106,7 @@ export async function generateMetadata({
 
   const path = activeCategory ? `/blog?cat=${activeCategory.slug}` : "/blog";
   const canonical = `https://www.nivelics.com${locale === "en" ? "/en" : ""}${path}`;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
   return {
     title,
@@ -122,6 +123,17 @@ export async function generateMetadata({
       type: "website",
       title,
       description,
+      url: canonical,
+      locale: locale === "en" ? "en_US" : "es_CO",
+      alternateLocale: locale === "en" ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -278,7 +290,7 @@ export default async function BlogPage({
           <li>
             <Link
               href={locale === "en" ? "/en" : "/"}
-              className="text-white/35 transition-colors hover:text-white/60 font-medium"
+              className="text-text-40 transition-colors hover:text-text-70 font-medium"
             >
               {t(locale, "Inicio", "Home")}
             </Link>
@@ -290,12 +302,12 @@ export default async function BlogPage({
             {activeCategory ? (
               <Link
                 href={locale === "en" ? "/en/blog" : "/blog"}
-                className="text-white/35 transition-colors hover:text-white/60 font-medium"
+                className="text-text-40 transition-colors hover:text-text-70 font-medium"
               >
                 Blog
               </Link>
             ) : (
-              <span className="text-white/70 font-medium" aria-current="page">
+              <span className="text-text-70 font-medium" aria-current="page">
                 Blog
               </span>
             )}
@@ -305,7 +317,7 @@ export default async function BlogPage({
               <span aria-hidden="true" className="text-white/20">
                 /
               </span>
-              <span className="text-white/70 font-medium" aria-current="page">
+              <span className="text-text-70 font-medium" aria-current="page">
                 {categoryLabel(activeCategory, locale)}
               </span>
             </li>
@@ -327,7 +339,7 @@ export default async function BlogPage({
           <div className="mx-auto max-w-[1280px] px-6 md:px-20">
             <Link
               href={`/blog/${featured.slug}`}
-              className="group relative flex min-h-[400px] items-end overflow-hidden rounded-2xl md:min-h-[500px]"
+              className="group relative flex min-h-[400px] items-end overflow-hidden rounded-xl md:min-h-[500px]"
               style={
                 featured.coverImage
                   ? {
@@ -353,23 +365,23 @@ export default async function BlogPage({
                   {featured.title}
                 </h2>
                 {featured.excerpt ? (
-                  <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/70">
+                  <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-70">
                     {featured.excerpt}
                   </p>
                 ) : null}
-                <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/50">
+                <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-text-55">
                   {featured.publishedAt ? (
                     <time className="font-[family-name:var(--font-jetbrains-mono)]">
                       {formatDate(featured.publishedAt, locale)}
                     </time>
                   ) : null}
-                  <span aria-hidden="true" className="text-white/30">
+                  <span aria-hidden="true" className="text-text-40">
                     ·
                   </span>
                   <span className="font-[family-name:var(--font-jetbrains-mono)]">
                     {featured.readingTime} {t(locale, "min de lectura", "min read")}
                   </span>
-                  <span aria-hidden="true" className="text-white/30">
+                  <span aria-hidden="true" className="text-text-40">
                     ·
                   </span>
                   <span>Nivelics</span>
@@ -395,7 +407,7 @@ export default async function BlogPage({
                 className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                   !activeCategory
                     ? "bg-[var(--primary)] text-white"
-                    : "bg-white/[0.05] text-white/60 hover:bg-white/[0.08] hover:text-white/80"
+                    : "bg-white/[0.05] text-text-70 hover:bg-white/[0.08] hover:text-text-100"
                 }`}
               >
                 {t(locale, "Todos", "All")}
@@ -410,7 +422,7 @@ export default async function BlogPage({
                     className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
                         ? "bg-[var(--primary)] text-white"
-                        : "bg-white/[0.05] text-white/60 hover:bg-white/[0.08] hover:text-white/80"
+                        : "bg-white/[0.05] text-text-70 hover:bg-white/[0.08] hover:text-text-100"
                     }`}
                   >
                     {locale === "en" ? cat.nameEn || cat.nameEs : cat.nameEs}
@@ -474,11 +486,11 @@ export default async function BlogPage({
                           {paged[0].title}
                         </h3>
                         {paged[0].excerpt ? (
-                          <p className="mt-2 text-sm text-white/60 line-clamp-2">
+                          <p className="mt-2 text-sm text-text-70 line-clamp-2">
                             {paged[0].excerpt}
                           </p>
                         ) : null}
-                        <div className="mt-4 flex items-center gap-3 text-xs text-white/40">
+                        <div className="mt-4 flex items-center gap-3 text-xs text-text-40">
                           {paged[0].publishedAt ? (
                             <time className="font-[family-name:var(--font-jetbrains-mono)]">
                               {formatDate(paged[0].publishedAt, locale)}
@@ -526,11 +538,9 @@ export default async function BlogPage({
                             {post.title}
                           </h3>
                           {post.excerpt ? (
-                            <p className="mt-2 text-sm text-white/50 line-clamp-2">
-                              {post.excerpt}
-                            </p>
+                            <p className="mt-2 text-sm text-text-55 line-clamp-2">{post.excerpt}</p>
                           ) : null}
-                          <div className="mt-3 flex items-center gap-3 text-xs text-white/40">
+                          <div className="mt-3 flex items-center gap-3 text-xs text-text-40">
                             {post.publishedAt ? (
                               <time className="font-[family-name:var(--font-jetbrains-mono)]">
                                 {formatDate(post.publishedAt, locale)}
@@ -556,7 +566,7 @@ export default async function BlogPage({
                     {currentPage > 1 ? (
                       <Link
                         href={blogHref(activeCategory?.slug ?? null, currentPage - 1)}
-                        className="rounded-full px-4 py-2 text-sm text-white/60 transition-colors hover:bg-white/[0.08] hover:text-white/80"
+                        className="rounded-full px-4 py-2 text-sm text-text-70 transition-colors hover:bg-white/[0.08] hover:text-text-100"
                       >
                         ← {t(locale, "Anterior", "Previous")}
                       </Link>
@@ -569,7 +579,7 @@ export default async function BlogPage({
                         className={`rounded-full px-4 py-2 text-sm font-[family-name:var(--font-jetbrains-mono)] transition-colors ${
                           n === currentPage
                             ? "bg-[var(--primary)] text-white"
-                            : "text-white/60 hover:bg-white/[0.08] hover:text-white/80"
+                            : "text-text-70 hover:bg-white/[0.08] hover:text-text-100"
                         }`}
                       >
                         {n}
@@ -578,7 +588,7 @@ export default async function BlogPage({
                     {currentPage < totalPages ? (
                       <Link
                         href={blogHref(activeCategory?.slug ?? null, currentPage + 1)}
-                        className="rounded-full px-4 py-2 text-sm text-white/60 transition-colors hover:bg-white/[0.08] hover:text-white/80"
+                        className="rounded-full px-4 py-2 text-sm text-text-70 transition-colors hover:bg-white/[0.08] hover:text-text-100"
                       >
                         {t(locale, "Siguiente", "Next")} →
                       </Link>
@@ -592,7 +602,7 @@ export default async function BlogPage({
                 <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start">
                   {popular.length > 0 ? (
                     <div>
-                      <h2 className="mb-4 text-lg font-medium text-white/90">
+                      <h2 className="mb-4 text-lg font-medium text-text-100">
                         {t(locale, "Artículos populares", "Popular articles")}
                       </h2>
                       <ul className="space-y-4">
@@ -606,11 +616,11 @@ export default async function BlogPage({
                                 {String(i + 1).padStart(2, "0")}
                               </span>
                               <div className="min-w-0 flex-1">
-                                <p className="text-sm text-white/70 transition-colors group-hover:text-white line-clamp-2">
+                                <p className="text-sm text-text-70 transition-colors group-hover:text-white line-clamp-2">
                                   {post.title}
                                 </p>
                                 {post.category ? (
-                                  <span className="mt-1 inline-block text-[11px] text-white/40">
+                                  <span className="mt-1 inline-block text-[11px] text-text-40">
                                     {categoryLabel(post.category, locale)}
                                   </span>
                                 ) : null}
@@ -626,7 +636,7 @@ export default async function BlogPage({
                     <h3 className="text-base font-medium text-white">
                       {t(locale, "¿Necesitas implementar esto?", "Need to implement this?")}
                     </h3>
-                    <p className="mt-2 text-sm text-white/60">
+                    <p className="mt-2 text-sm text-text-70">
                       {t(locale, "Agenda un diagnóstico gratuito.", "Schedule a free assessment.")}
                     </p>
                     <Button asChild variant="cta" size="sm" className="mt-4 w-full">

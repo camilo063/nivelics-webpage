@@ -31,14 +31,14 @@ export function CaseStudyCard({
           <TiltCard>
             <Link
               href={url}
-              className="group block rounded-2xl border border-border bg-[rgba(255,255,255,0.02)] p-8 transition-all duration-200 hover:border-border-hover hover:bg-bg-elevated"
+              className="group glass-elevated card-lift block rounded-xl p-8"
               aria-label={`Caso de éxito: ${client} — ${result}`}
             >
               <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-text-40">
+                <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-text-40">
                   {sector}
                 </span>
-                <span className="text-[12px] text-text-40">
+                <span className="text-xs text-text-40">
                   {countryFlag} {country}
                 </span>
               </div>

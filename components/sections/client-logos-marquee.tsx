@@ -45,7 +45,7 @@ function LogoItem({ name, abbr }: { name: string; abbr: string }) {
       <span
         style={{
           fontSize: "14px",
-          color: "rgba(255,255,255,0.5)",
+          color: "var(--text-55)",
           fontWeight: 500,
           whiteSpace: "nowrap",
         }}

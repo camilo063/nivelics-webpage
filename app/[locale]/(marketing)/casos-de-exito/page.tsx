@@ -10,19 +10,54 @@ import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Casos de Éxito | Televisa, Grupo Bolívar, Two Maids",
-  description:
-    "Conoce cómo hemos ayudado a empresas B2B a transformarse digitalmente con resultados medibles.",
-  alternates: {
-    canonical: "https://www.nivelics.com/casos-de-exito",
-    languages: {
-      es: "https://www.nivelics.com/casos-de-exito",
-      en: "https://www.nivelics.com/en/case-studies",
-      "x-default": "https://www.nivelics.com/casos-de-exito",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: __locale } = await params;
+  setRequestLocale(__locale);
+  const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
+
+  const esUrl = "https://www.nivelics.com/casos-de-exito";
+  const enUrl = "https://www.nivelics.com/en/case-studies";
+  const canonical = isEn ? enUrl : esUrl;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
+
+  const title = "Casos de Éxito | Televisa, Grupo Bolívar, Two Maids";
+  const description =
+    "Conoce cómo hemos ayudado a empresas B2B a transformarse digitalmente con resultados medibles.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        es: esUrl,
+        en: enUrl,
+        "x-default": esUrl,
+      },
     },
-  },
-};
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: isEn ? "en_US" : "es_CO",
+      alternateLocale: isEn ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
 
 // LEGACY FALLBACK
 const CASES = [

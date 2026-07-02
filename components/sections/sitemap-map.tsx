@@ -24,7 +24,7 @@ export function SitemapMap({ sections, locale }: SitemapMapProps) {
               aria-hidden="true"
             />
             <span
-              className="text-[10px] font-medium uppercase tracking-wider"
+              className="text-[11px] font-medium uppercase tracking-wider"
               style={{ color: section.color }}
             >
               {en ? section.labelEn : section.label}

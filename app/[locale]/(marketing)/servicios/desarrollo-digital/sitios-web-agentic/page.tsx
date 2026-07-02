@@ -786,7 +786,7 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
               Lo que ves aquí es lo que construimos para ti
             </h2>
 
-            <div className="mt-10 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-8 md:p-12">
+            <div className="mt-10 rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-8 md:p-12">
               <p className="text-lg text-text-70">
                 Este mismo sitio — <strong className="text-text-100">nivelics.com</strong> — es un
                 sitio agentic-first. No es un mockup ni un caso hipotético. Cada estándar que

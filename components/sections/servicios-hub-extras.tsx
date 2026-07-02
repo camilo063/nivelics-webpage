@@ -50,7 +50,7 @@ export function ServiciosHubExtras({
                       .join(" ")}
                   >
                     <span className="text-4xl font-bold tabular-nums text-primary">{m.value}</span>
-                    <span className="mt-2 max-w-[140px] text-sm leading-tight text-white/50">
+                    <span className="mt-2 max-w-[140px] text-sm leading-tight text-text-55">
                       {m.label}
                     </span>
                   </div>
@@ -69,7 +69,7 @@ export function ServiciosHubExtras({
                 {frameworkTitle}
               </h2>
               {frameworkSubtitle && (
-                <p className="mx-auto max-w-2xl text-base text-white/55">{frameworkSubtitle}</p>
+                <p className="mx-auto max-w-2xl text-base text-text-55">{frameworkSubtitle}</p>
               )}
             </div>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -80,7 +80,7 @@ export function ServiciosHubExtras({
                 >
                   <span className={`text-4xl font-black ${p.colorClass}`}>{p.letter}</span>
                   <h3 className="text-base font-semibold text-text-100">{p.title}</h3>
-                  <p className="text-sm leading-relaxed text-white/55">{p.desc}</p>
+                  <p className="text-sm leading-relaxed text-text-55">{p.desc}</p>
                 </div>
               ))}
             </div>
@@ -91,7 +91,7 @@ export function ServiciosHubExtras({
       {sectors.length > 0 && (
         <section className="border-t border-white/[0.06] px-4 py-10" data-section="sectors-list">
           <div className="mx-auto max-w-5xl">
-            <h2 className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-white/60">
+            <h2 className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-text-70">
               {sectorsTitle}
             </h2>
             <div className="flex flex-wrap justify-center gap-3">
@@ -101,7 +101,7 @@ export function ServiciosHubExtras({
                   <Link
                     key={s.slug}
                     href={`/industrias/${routeSlug}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/60 no-underline transition-all duration-150 hover:border-primary/30 hover:bg-white/[0.05] hover:text-white/90"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-text-70 no-underline transition-all duration-150 hover:border-primary/30 hover:bg-white/[0.05] hover:text-text-100"
                   >
                     <GeoIcon name={s.icon} size={16} color="cyan" />
                     {s.label}

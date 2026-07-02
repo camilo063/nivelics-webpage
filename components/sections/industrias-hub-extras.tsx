@@ -45,7 +45,7 @@ export function IndustriasHubExtras({ locale, positioningTitle, positioningCopy,
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <div>
             <h2 className="text-2xl font-bold text-text-100 md:text-3xl">{resolvedTitle}</h2>
-            <p className="mt-4 max-w-2xl text-white/60">{resolvedCopy}</p>
+            <p className="mt-4 max-w-2xl text-text-70">{resolvedCopy}</p>
           </div>
           <div className="grid grid-cols-3 gap-3">
             {resolvedStats.map((s) => (
@@ -56,7 +56,7 @@ export function IndustriasHubExtras({ locale, positioningTitle, positioningCopy,
                 <div className="text-2xl font-bold tabular-nums text-primary md:text-3xl">
                   {s.value}
                 </div>
-                <div className="mt-1 text-[11px] leading-tight text-white/55">{s.label}</div>
+                <div className="mt-1 text-[11px] leading-tight text-text-55">{s.label}</div>
               </div>
             ))}
           </div>

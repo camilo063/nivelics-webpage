@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
-import { CTABanner, ServiceBadge } from "@/components/shared";
+import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
@@ -23,18 +24,42 @@ export async function generateMetadata({
   const raw = await getCasoExito("grupo-bolivar");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
+  const esUrl = "https://www.nivelics.com/casos-de-exito/grupo-bolivar";
+  const enUrl = "https://www.nivelics.com/en/case-studies/grupo-bolivar";
+  const canonical = locale === "en" ? enUrl : esUrl;
+  const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
+
+  const title = caso?.seoTitle || "Caso de Éxito Grupo Bolívar | Nivelics";
+  const description =
+    caso?.seoDescription ||
+    "Cómo Nivelics ayudó a Grupo Bolívar a modernizar múltiples líneas de negocio con productos digitales para seguros, salud y e-commerce.";
+
   return {
-    title: caso?.seoTitle || "Caso de Éxito Grupo Bolívar | Nivelics",
-    description:
-      caso?.seoDescription ||
-      "Cómo Nivelics ayudó a Grupo Bolívar a modernizar múltiples líneas de negocio con productos digitales para seguros, salud y e-commerce.",
+    title,
+    description,
     alternates: {
-      canonical: "https://www.nivelics.com/casos-de-exito/grupo-bolivar",
+      canonical,
       languages: {
-        es: "https://www.nivelics.com/casos-de-exito/grupo-bolivar",
-        en: "https://www.nivelics.com/en/case-studies/grupo-bolivar",
-        "x-default": "https://www.nivelics.com/casos-de-exito/grupo-bolivar",
+        es: esUrl,
+        en: enUrl,
+        "x-default": esUrl,
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: locale === "en" ? "en_US" : "es_CO",
+      alternateLocale: locale === "en" ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -67,12 +92,23 @@ export default async function GrupoBolivarPage({
     { name: caso?.clientName || "Grupo Bolívar", url: "/casos-de-exito/grupo-bolivar" },
   ]);
 
+  const creativeWork = getCreativeWorkSchema([
+    {
+      name: caso?.clientName || "Grupo Bolívar",
+      description:
+        caso?.seoDescription ||
+        "Cómo Nivelics ayudó a Grupo Bolívar a modernizar múltiples líneas de negocio con productos digitales para seguros, salud y e-commerce.",
+      url: "/casos-de-exito/grupo-bolivar",
+    },
+  ])[0];
+
   return (
     <PageWrapper>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      <JsonLd data={creativeWork} />
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

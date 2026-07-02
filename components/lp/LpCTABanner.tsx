@@ -28,7 +28,7 @@ export function LpCTABanner({
           <div className="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
             <div className="flex-1">
               <h3 className="text-2xl font-black tracking-tight text-white md:text-3xl">{title}</h3>
-              {subtitle && <p className="mt-2 text-white/70">{subtitle}</p>}
+              {subtitle && <p className="mt-2 text-text-70">{subtitle}</p>}
             </div>
             <Link
               href={ctaHref}

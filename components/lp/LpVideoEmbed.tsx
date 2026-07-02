@@ -26,7 +26,7 @@ export function LpVideoEmbed({ videoUrl, poster, title, caption }: LpVideoEmbedP
             />
           </div>
         </div>
-        {caption && <p className="mt-4 text-center text-sm text-white/60">{caption}</p>}
+        {caption && <p className="mt-4 text-center text-sm text-text-70">{caption}</p>}
       </div>
     </section>
   );
