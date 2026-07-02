@@ -125,8 +125,8 @@ export function ClientLogosSection() {
                   <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-text-55">
                     {c.sector}
                   </span>
-                  <span className="text-[11px] text-text-40">
-                    {c.flag} {c.country}
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-40">
+                    {c.country}
                   </span>
                 </div>
 

@@ -16,6 +16,7 @@ import {
   mapBlogPost,
 } from "@/lib/cms";
 import type { Locale, MappedBlogPost } from "@/lib/cms";
+import { BlogCardArt } from "@/components/shared/blog-card-art";
 
 export const revalidate = 86400;
 
@@ -284,46 +285,7 @@ export default async function BlogPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      {/* ═══ UI breadcrumb ═══ */}
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-[1280px] px-6 pt-6 md:px-20">
-        <ol className="flex items-center gap-1.5 text-xs">
-          <li>
-            <Link
-              href={locale === "en" ? "/en" : "/"}
-              className="text-text-40 transition-colors hover:text-text-70 font-medium"
-            >
-              {t(locale, "Inicio", "Home")}
-            </Link>
-          </li>
-          <li className="flex items-center gap-1.5">
-            <span aria-hidden="true" className="text-white/20">
-              /
-            </span>
-            {activeCategory ? (
-              <Link
-                href={locale === "en" ? "/en/blog" : "/blog"}
-                className="text-text-40 transition-colors hover:text-text-70 font-medium"
-              >
-                Blog
-              </Link>
-            ) : (
-              <span className="text-text-70 font-medium" aria-current="page">
-                Blog
-              </span>
-            )}
-          </li>
-          {activeCategory ? (
-            <li className="flex items-center gap-1.5">
-              <span aria-hidden="true" className="text-white/20">
-                /
-              </span>
-              <span className="text-text-70 font-medium" aria-current="page">
-                {categoryLabel(activeCategory, locale)}
-              </span>
-            </li>
-          ) : null}
-        </ol>
-      </nav>
+      {/* Breadcrumb UI: lo renderiza PageWrapper — el nav manual duplicaba "Inicio / Blog" */}
 
       {/* ═══ Page heading ═══ */}
       <section className="pt-6 md:pt-8">
@@ -351,6 +313,14 @@ export default async function BlogPage({
               }
               aria-label={featured.title}
             >
+              {!featured.coverImage ? (
+                <BlogCardArt
+                  seed={featured.slug}
+                  categorySlug={featured.category?.slug}
+                  categoryColor={featured.category?.color}
+                  className="absolute inset-0 h-full w-full"
+                />
+              ) : null}
               <div
                 className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/85 to-[#0d1117]/20"
                 aria-hidden="true"
@@ -473,7 +443,12 @@ export default async function BlogPage({
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="h-full w-full bg-gradient-to-br from-primary/25 to-bg-surface" />
+                          <BlogCardArt
+                            seed={paged[0].slug}
+                            categorySlug={paged[0].category?.slug}
+                            categoryColor={paged[0].category?.color}
+                            className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                          />
                         )}
                       </div>
                       <div className="p-6 md:p-8">
@@ -525,7 +500,12 @@ export default async function BlogPage({
                               className="object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                           ) : (
-                            <div className="h-full w-full bg-gradient-to-br from-primary/15 to-bg-surface" />
+                            <BlogCardArt
+                              seed={post.slug}
+                              categorySlug={post.category?.slug}
+                              categoryColor={post.category?.color}
+                              className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                            />
                           )}
                         </div>
                         <div className="p-5">

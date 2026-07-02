@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Locale } from "@/lib/cms";
+import { BlogCardArt } from "@/components/shared/blog-card-art";
 
 interface RelatedPost {
   slug: string;
@@ -51,7 +52,11 @@ export function RelatedPosts({ posts, locale, heading }: Props) {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
-                <div className="h-full w-full bg-gradient-to-br from-primary/15 to-bg-surface" />
+                <BlogCardArt
+                  seed={post.slug}
+                  categorySlug={post.categoryName}
+                  className="h-full w-full transition-transform duration-500 group-hover:scale-105"
+                />
               )}
             </div>
             <div className="p-5">

@@ -158,11 +158,13 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <JsonLd data={serviceSchema} />
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden pt-12 pb-8 md:pt-16 md:pb-10">
         <HeroEffect kind="radar" opacity={0.9} />
         <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
-          <h1 className="text-4xl font-bold text-text-100 md:text-5xl">{h1}</h1>
-          <p className="mt-4 max-w-2xl text-lg text-text-70">{intro}</p>
+          <h1 className="text-balance text-4xl font-extrabold tracking-[-0.02em] text-text-100 md:text-6xl">
+            {h1}
+          </h1>
+          <p className="mt-4 max-w-2xl text-balance text-lg text-text-70">{intro}</p>
         </div>
       </section>
       <ServicesGrid />

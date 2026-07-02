@@ -21,6 +21,12 @@ import { ParallaxLayer } from "@/components/effects/parallax-layer";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import {
+  cleanCaseTitle,
+  formatCaseMetric,
+  countryCode,
+  stripFootnote,
+} from "@/lib/utils/case-copy";
+import {
   getHomeContent,
   getAllCasosExito,
   getHubServicios,
@@ -68,24 +74,6 @@ const SERVICE_ICON_MAP: Record<string, string> = {
   dev: "code2",
   finops: "bar-chart2",
 };
-
-const COUNTRY_FLAGS: Record<string, string> = {
-  Colombia: "🇨🇴",
-  México: "🇲🇽",
-  Mexico: "🇲🇽",
-  USA: "🇺🇸",
-  "United States": "🇺🇸",
-  "El Salvador": "🇸🇻",
-  Panamá: "🇵🇦",
-  Ecuador: "🇪🇨",
-  Perú: "🇵🇪",
-  Argentina: "🇦🇷",
-};
-
-function countryFlag(country: string | null | undefined): string {
-  if (!country) return "";
-  return COUNTRY_FLAGS[country] ?? "🌎";
-}
 
 function badgeKey(slug: string | null | undefined): string | null {
   if (!slug) return null;
@@ -201,39 +189,49 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* ═══ 1. HERO ═══ */}
+      {/* ═══ 1. HERO — asimétrico, comprimido, display XL (Fase 1.5) ═══ */}
       <section
-        className="hero-aurora relative overflow-hidden pt-20 pb-14 md:pt-24 md:pb-16 min-h-[520px] lg:min-h-[600px]"
+        className="hero-aurora relative overflow-hidden pt-24 pb-16 md:pt-28 md:pb-20"
         data-section="hero"
       >
         <HeroGraph />
         <ParallaxLayer
           speed={0.25}
-          className="absolute left-1/4 top-1/3 h-72 w-72 rounded-full bg-primary/5 blur-[100px]"
+          className="absolute right-[10%] top-1/4 h-72 w-72 rounded-full bg-primary/5 blur-[100px]"
         />
-        <div className="relative z-10 mx-auto max-w-[1280px] px-6 text-center md:px-20">
-          {home.heroBadge ? (
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary">
-              {home.heroBadge}
-            </span>
-          ) : null}
-          <h1 className="mt-6 text-4xl font-bold text-text-100 md:text-6xl">{home.heroTitle}</h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-text-70">{home.heroSubtitle}</p>
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            {home.heroCtaPrimary ? (
-              <Button asChild variant="cta" size="lg">
-                <Link href={home.heroCtaPrimaryUrl || "/contacto"}>
-                  {home.heroCtaPrimary} <ArrowRight size={18} />
-                </Link>
-              </Button>
+        <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
+          <div className="max-w-[780px]">
+            {home.heroBadge ? (
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm text-primary-200">
+                {home.heroBadge}
+              </span>
             ) : null}
-            {home.heroCtaSecondary ? (
-              <Button asChild variant="outline" size="lg">
-                <a href={home.heroCtaSecondaryUrl || "#"} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle size={18} /> {home.heroCtaSecondary}
-                </a>
-              </Button>
-            ) : null}
+            <h1 className="mt-6 text-balance text-5xl font-extrabold leading-[1.04] tracking-[-0.03em] text-text-100 md:text-7xl">
+              {home.heroTitle}
+            </h1>
+            <p className="mt-6 max-w-[560px] text-balance text-lg leading-relaxed text-text-70">
+              {home.heroSubtitle}
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              {home.heroCtaPrimary ? (
+                <Button asChild variant="cta" size="lg">
+                  <Link href={home.heroCtaPrimaryUrl || "/contacto"}>
+                    {home.heroCtaPrimary} <ArrowRight size={18} />
+                  </Link>
+                </Button>
+              ) : null}
+              {home.heroCtaSecondary ? (
+                <Button asChild variant="outline" size="lg">
+                  <a
+                    href={home.heroCtaSecondaryUrl || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <MessageCircle size={18} /> {home.heroCtaSecondary}
+                  </a>
+                </Button>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>
@@ -250,30 +248,39 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         >
           <div className="mx-auto max-w-[1280px] px-6 md:px-20">
             <Reveal>
-              <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
+              <h2 className="text-balance text-3xl font-bold tracking-tight text-text-100 md:text-4xl">
                 {home.servicesSectionTitle}
               </h2>
               {home.pillarsSubtitle ? (
                 <p className="mt-3 max-w-2xl text-text-70">{home.pillarsSubtitle}</p>
               ) : null}
             </Reveal>
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Bento: el primer pilar (IA) es protagonista con columna más ancha
+                (grid template asimétrico — sin col-span para no dejar huérfanos) */}
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
               {hubs.map((s, i) => {
                 const color = accentColorToHex(s.accentColor);
                 const icon = s.icon || SERVICE_ICON_MAP[s.accentColor] || "layers";
-                const metric = s.metrics[0]?.value
-                  ? `${s.metrics[0].value} ${s.metrics[0].label}`
-                  : "";
+                const metric = formatCaseMetric(s.metrics[0]?.value, s.metrics[0]?.label);
+                const featured = i === 0;
                 return (
-                  <Reveal key={s.slug} delay={i * 80}>
+                  <Reveal
+                    key={s.slug}
+                    delay={i * 80}
+                    className={featured ? "sm:col-span-2 lg:col-span-1" : ""}
+                  >
                     <TiltCard>
                       <Link
                         href={`/servicios/${s.slug}`}
-                        className="group glass-elevated card-lift border-anim rounded-xl p-5 block h-full cursor-pointer"
+                        className={`group glass-elevated card-lift border-anim rounded-xl block h-full cursor-pointer ${featured ? "p-6 md:p-7" : "p-5"}`}
                         style={{ borderLeft: `3px solid ${color}` }}
                       >
                         <div className="flex items-center gap-2 mb-3">
-                          <GeoIcon name={icon} size={18} color={hexToIconColor(color)} />
+                          <GeoIcon
+                            name={icon}
+                            size={featured ? 22 : 18}
+                            color={hexToIconColor(color)}
+                          />
                           <span
                             className="text-[11px] font-semibold uppercase tracking-[0.12em]"
                             style={{ color }}
@@ -284,12 +291,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                             })()}
                           </span>
                         </div>
-                        <h3 className="text-base font-semibold text-text-100 group-hover:text-primary transition-colors">
+                        <h3
+                          className={`font-semibold text-text-100 group-hover:text-primary transition-colors ${featured ? "text-xl md:text-2xl tracking-tight" : "text-base"}`}
+                        >
                           {s.title}
                         </h3>
-                        <p className="mt-1.5 text-sm text-text-70 leading-snug">{s.subtitle}</p>
+                        <p
+                          className={`mt-1.5 text-text-70 leading-snug ${featured ? "text-base max-w-[52ch]" : "text-sm"}`}
+                        >
+                          {stripFootnote(s.subtitle)}
+                        </p>
                         {metric ? (
-                          <p className="mt-3 font-mono text-sm font-bold text-primary">{metric}</p>
+                          <p
+                            className={`mt-3 font-mono font-bold text-primary ${featured ? "text-lg" : "text-sm"}`}
+                          >
+                            {metric}
+                          </p>
                         ) : null}
                       </Link>
                     </TiltCard>
@@ -313,40 +330,54 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         >
           <div className="mx-auto max-w-[1280px] px-6 md:px-20">
             <Reveal>
-              <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
+              <h2 className="text-balance text-3xl font-bold tracking-tight text-text-100 md:text-4xl">
                 {home.casesSectionTitle}
               </h2>
               {home.casesSectionSubtitle ? (
                 <p className="mt-3 max-w-2xl text-text-70">{home.casesSectionSubtitle}</p>
               ) : null}
             </Reveal>
+            {/* Caso destacado a doble columna + secundarios (retícula rota a propósito) */}
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {casos.map((c, i) => {
-                const flag = countryFlag(c.clientCountry);
                 const firstMetric = c.metrics[0];
                 const serviceLabel = c.servicesUsed?.[0] ?? "";
-                const resultLabel = c.title;
+                const resultLabel = cleanCaseTitle(c.clientName, c.title);
+                const metricText = formatCaseMetric(firstMetric?.value, firstMetric?.label);
+                const featured = i === 0;
                 return (
-                  <Reveal key={c.slug} delay={(i % 3) * 70}>
+                  <Reveal
+                    key={c.slug}
+                    delay={(i % 3) * 70}
+                    className={featured ? "sm:col-span-2" : ""}
+                  >
                     <TiltCard>
                       <Link
                         href={`/casos-de-exito/${c.slug}`}
-                        className="group glass-elevated card-lift flex h-full flex-col justify-between rounded-xl p-5 min-h-[160px]"
+                        className={`group glass-elevated card-lift flex h-full flex-col justify-between rounded-xl min-h-[160px] ${featured ? "p-6 md:p-7" : "p-5"}`}
                       >
                         <div>
-                          <div className="flex items-center justify-between text-xs text-text-40">
-                            <span>
-                              {flag} {c.clientCountry}
+                          <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.08em] text-text-40">
+                            <span>{countryCode(c.clientCountry)}</span>
+                            <span className="font-sans normal-case tracking-normal">
+                              {c.clientSector}
                             </span>
-                            <span>{c.clientSector}</span>
                           </div>
-                          <h3 className="mt-2 text-lg font-bold text-white group-hover:text-primary transition-colors">
+                          <h3
+                            className={`mt-2 font-bold text-white group-hover:text-primary transition-colors ${featured ? "text-2xl tracking-tight" : "text-lg"}`}
+                          >
                             {c.clientName}
                           </h3>
-                          <p className="mt-1 text-sm text-text-70 line-clamp-1">{resultLabel}</p>
-                          {firstMetric ? (
-                            <p className="mt-1 text-sm font-semibold text-primary">
-                              {firstMetric.value} {firstMetric.label}
+                          <p
+                            className={`mt-1 text-text-70 ${featured ? "text-base line-clamp-2 max-w-[60ch]" : "text-sm line-clamp-1"}`}
+                          >
+                            {resultLabel}
+                          </p>
+                          {metricText ? (
+                            <p
+                              className={`mt-1 font-semibold text-primary ${featured ? "text-base" : "text-sm"}`}
+                            >
+                              {metricText}
                             </p>
                           ) : null}
                         </div>
