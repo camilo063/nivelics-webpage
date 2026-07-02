@@ -38,8 +38,8 @@ export function CaseStudyCard({
                 <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-text-40">
                   {sector}
                 </span>
-                <span className="text-xs text-text-40">
-                  {countryFlag} {country}
+                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-40">
+                  {country}
                 </span>
               </div>
               <h3 className="text-2xl font-bold text-text-100 group-hover:text-primary transition-colors md:text-3xl">

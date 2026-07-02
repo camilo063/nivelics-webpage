@@ -150,9 +150,7 @@ function CaseCard({ c, className }: { c: CaseItem; className?: string }) {
       className={cn("group glass-elevated card-lift block rounded-xl p-5", className)}
     >
       <div className="flex items-center justify-between text-[11px] text-text-40">
-        <span>
-          {c.flag} {c.country}
-        </span>
+        <span className="font-mono uppercase tracking-[0.08em]">{c.country}</span>
         <span>{c.sector}</span>
       </div>
       <h3 className="mt-3 text-lg font-bold text-white group-hover:text-primary transition-colors">

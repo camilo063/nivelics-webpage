@@ -50,42 +50,54 @@ function AnimatedValue({ value, unit }: { value: string; unit?: string }) {
 
   if (isNaN(numericPart)) {
     return (
-      <span ref={ref} className="font-mono text-4xl font-bold text-primary md:text-5xl">
+      <span
+        ref={ref}
+        className="font-mono text-5xl font-bold tracking-tight text-text-100 md:text-6xl"
+      >
         {value}
-        {trailingUnit}
+        <span className="text-primary">{trailingUnit}</span>
       </span>
     );
   }
 
   return (
-    <span ref={ref} className="font-mono text-4xl font-bold text-primary md:text-5xl">
+    <span
+      ref={ref}
+      className="font-mono text-5xl font-bold tracking-tight text-text-100 md:text-6xl"
+    >
       {count.toFixed(decimalPlaces)}
-      {valueSuffix}
-      {trailingUnit}
+      <span className="text-primary">
+        {valueSuffix}
+        {trailingUnit}
+      </span>
     </span>
   );
 }
 
+/**
+ * Banda tipográfica de métricas (Fase 1.5): sin cajas — numerales grandes
+ * blancos con sufijo cyan, separados por hairlines. Editorial, no template.
+ */
 export function MetricsBar({ metrics }: MetricsBarProps) {
   return (
-    <section className="bg-bg-surface py-10 md:py-14">
+    <section className="border-y border-border-subtle bg-bg-surface py-12 md:py-16">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
         <div
           className={cn(
-            "grid gap-6",
-            metrics.length === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3",
+            "grid gap-x-6 gap-y-10 grid-cols-2",
+            metrics.length === 4 ? "lg:grid-cols-4" : "sm:grid-cols-3",
           )}
         >
           {metrics.map((m, i) => (
             <div
               key={`${m.label}-${i}`}
-              className="glass rounded-xl border-primary/15 p-6 text-center transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.05]"
+              className={cn("lg:px-8", i > 0 && "lg:border-l lg:border-border-subtle")}
             >
               <AnimatedValue value={m.value} unit={m.unit} />
               <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-text-70">
                 {m.label}
               </p>
-              <p className="mt-1 text-[11px] text-text-40">{m.sublabel}</p>
+              <p className="mt-0.5 text-[11px] text-text-40">{m.sublabel}</p>
             </div>
           ))}
         </div>

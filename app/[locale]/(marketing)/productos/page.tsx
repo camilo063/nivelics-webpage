@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getAllProductosHub, mapProductoCard, accentHex } from "@/lib/cms/productos";
 import type { Locale } from "@/lib/cms";
+
+/** Screenshots reales de los productos (public/products/*.png — Fase 1.5) */
+const PRODUCT_SHOTS: Record<string, string> = {
+  paywl: "/products/paywl.png",
+  niveleads: "/products/niveleads.png",
+  hirely: "/products/hirely.png",
+};
 
 export const revalidate = 86400;
 
@@ -192,50 +200,63 @@ export default async function ProductosHubPage({
               return (
                 <article
                   key={p.id}
-                  className="flex flex-col rounded-xl p-6 transition-transform duration-200 ease-out hover:-translate-y-1"
-                  style={{
-                    background: "rgba(255,255,255,0.02)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    borderTop: `2px solid ${accent}`,
-                  }}
+                  className="glass-elevated card-lift flex flex-col overflow-hidden rounded-xl"
+                  style={{ borderTop: `2px solid ${accent}` }}
                 >
-                  <span
-                    className="mb-4 self-start rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider"
-                    style={{ borderColor: `${accent}40`, color: accent, background: `${accent}10` }}
-                  >
-                    {p.category}
-                  </span>
-
-                  <h2 className="text-xl font-bold text-white">{p.name}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-text-70">{p.tagline}</p>
-
-                  {p.pricingLabel && (
-                    <div className="mt-4 text-sm font-semibold" style={{ color: accent }}>
-                      {p.pricingLabel}
+                  {PRODUCT_SHOTS[p.slug] ? (
+                    <div className="relative aspect-[16/9] overflow-hidden border-b border-border-subtle bg-bg-surface">
+                      <Image
+                        src={PRODUCT_SHOTS[p.slug]}
+                        alt={`${p.name} — interfaz real del producto`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        className="object-cover object-top"
+                      />
                     </div>
-                  )}
-                  {p.pricingNote && (
-                    <div className="mt-1 text-xs text-text-40">{p.pricingNote}</div>
-                  )}
+                  ) : null}
+                  <div className="flex flex-1 flex-col p-6">
+                    <span
+                      className="mb-4 self-start rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider"
+                      style={{
+                        borderColor: `${accent}40`,
+                        color: accent,
+                        background: `${accent}10`,
+                      }}
+                    >
+                      {p.category}
+                    </span>
 
-                  <div className="mt-6 flex flex-col gap-2">
-                    <Link
-                      href={`/productos/${p.slug}`}
-                      className="inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors"
-                      style={{ background: accent, color: "#000" }}
-                    >
-                      {isEn ? `Explore ${p.name}` : `Ver ${p.name}`}
-                      <ArrowRight size={14} />
-                    </Link>
-                    <a
-                      href={p.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-text-100 hover:bg-white/5"
-                    >
-                      {isEn ? "Official site" : "Sitio oficial"}
-                      <ExternalLink size={13} />
-                    </a>
+                    <h2 className="text-xl font-bold text-white">{p.name}</h2>
+                    <p className="mt-2 text-sm leading-relaxed text-text-70">{p.tagline}</p>
+
+                    {p.pricingLabel && (
+                      <div className="mt-4 text-sm font-semibold" style={{ color: accent }}>
+                        {p.pricingLabel}
+                      </div>
+                    )}
+                    {p.pricingNote && (
+                      <div className="mt-1 text-xs text-text-40">{p.pricingNote}</div>
+                    )}
+
+                    <div className="mt-6 flex flex-col gap-2">
+                      <Link
+                        href={`/productos/${p.slug}`}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors"
+                        style={{ background: accent, color: "#000" }}
+                      >
+                        {isEn ? `Explore ${p.name}` : `Ver ${p.name}`}
+                        <ArrowRight size={14} />
+                      </Link>
+                      <a
+                        href={p.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-text-100 hover:bg-white/5"
+                      >
+                        {isEn ? "Official site" : "Sitio oficial"}
+                        <ExternalLink size={13} />
+                      </a>
+                    </div>
                   </div>
                 </article>
               );
