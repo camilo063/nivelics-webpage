@@ -16,15 +16,26 @@ import {
   type CertificacionInput,
 } from "@/lib/admin/validations/nosotros.schema";
 import { getAdminSession } from "@/lib/admin/session";
-import { eq, asc } from "drizzle-orm";
+import { eq, ne, asc } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { revalidatePublicPages } from "@/lib/admin/revalidate-public";
 
+const EQUIPO_PATHS = ["/nosotros", "/nosotros/equipo"];
+const HISTORIA_PATHS = ["/nosotros", "/nosotros/historia"];
+const CERTIFICACIONES_PATHS = ["/nosotros", "/nosotros/certificaciones"];
+
 // ─── TEAM MEMBERS ───────────────────────────────────────
 
+// `deleteTeamMember` archiva en vez de borrar, para no perder el histórico.
+// El listado del admin tiene que excluir esos archivados o el miembro
+// "eliminado" reaparece al recargar.
 export async function getTeamMembers() {
   if (!db) return [];
-  return db.select().from(teamMembers).orderBy(asc(teamMembers.sortOrder));
+  return db
+    .select()
+    .from(teamMembers)
+    .where(ne(teamMembers.status, "archived"))
+    .orderBy(asc(teamMembers.sortOrder));
 }
 
 export async function getTeamMember(id: string) {
@@ -64,6 +75,7 @@ export async function createTeamMember(input: TeamMemberInput) {
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(EQUIPO_PATHS);
   return member;
 }
 
@@ -103,6 +115,7 @@ export async function updateTeamMember(id: string, input: Partial<TeamMemberInpu
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(EQUIPO_PATHS);
   return member;
 }
 
@@ -124,6 +137,7 @@ export async function deleteTeamMember(id: string) {
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(EQUIPO_PATHS);
 }
 
 // ─── HISTORIA ITEMS ─────────────────────────────────────
@@ -157,6 +171,7 @@ export async function createHistoriaItem(input: HistoriaItemInput) {
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(HISTORIA_PATHS);
   return item;
 }
 
@@ -185,6 +200,7 @@ export async function updateHistoriaItem(id: string, input: Partial<HistoriaItem
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(HISTORIA_PATHS);
   return item;
 }
 
@@ -203,6 +219,7 @@ export async function deleteHistoriaItem(id: string) {
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(HISTORIA_PATHS);
 }
 
 // ─── CERTIFICACIONES ────────────────────────────────────
@@ -236,6 +253,7 @@ export async function createCertificacion(input: CertificacionInput) {
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(CERTIFICACIONES_PATHS);
   return cert;
 }
 
@@ -264,6 +282,7 @@ export async function updateCertificacion(id: string, input: Partial<Certificaci
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(CERTIFICACIONES_PATHS);
   return cert;
 }
 
@@ -282,4 +301,5 @@ export async function deleteCertificacion(id: string) {
   });
 
   revalidatePath("/admin/nosotros");
+  await revalidatePublicPages(CERTIFICACIONES_PATHS);
 }
