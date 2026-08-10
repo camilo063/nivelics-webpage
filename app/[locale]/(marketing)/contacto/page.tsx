@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
 import type { Locale } from "@/lib/cms";
 import { JsonLd } from "@/components/shared/json-ld";
 import { getLocalBusinessSchema } from "@/lib/schema/local-business";
@@ -75,6 +76,7 @@ export default async function ContactoPage({ params }: { params: Promise<{ local
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("contact");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+  const config = await getSiteConfigPublic().catch(() => null);
 
   return (
     <>
@@ -85,6 +87,7 @@ export default async function ContactoPage({ params }: { params: Promise<{ local
           seoDescription={page?.seoDescription || undefined}
           pageTitle={page?.title || undefined}
           pageSubtitle={undefined}
+          phoneWhatsapp={config?.phoneWhatsapp}
         />
       </Suspense>
     </>

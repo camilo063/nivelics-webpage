@@ -3,6 +3,8 @@ import { PageWrapper } from "@/components/layout";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { waDisplay, waUrl } from "@/lib/utils/whatsapp";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -40,6 +42,7 @@ export default async function PrivacidadPage({ params }: { params: Promise<{ loc
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("privacy");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+  const config = await getSiteConfigPublic().catch(() => null);
 
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
@@ -224,12 +227,12 @@ export default async function PrivacidadPage({ params }: { params: Promise<{ loc
                       <li>
                         <strong className="text-text-100">WhatsApp:</strong>{" "}
                         <a
-                          href="https://wa.me/573103926621"
+                          href={waUrl(config?.phoneWhatsapp)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-primary hover:underline"
                         >
-                          +57 310-3926621
+                          {waDisplay(config?.phoneWhatsapp)}
                         </a>
                       </li>
                     </ul>

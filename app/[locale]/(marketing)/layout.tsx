@@ -87,6 +87,7 @@ export default async function MarketingLayout({ children, params }: MarketingLay
       <DaptaWidget />
       {/* ── Touchpoints CRO globales (docs/mejoras/conversion-cro-engagement.md) ── */}
       <WhatsAppFab
+        phone={config?.phoneWhatsapp}
         message={
           locale === "es"
             ? "Hola, quiero más información sobre Nivelics"

@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MessageCircle, X } from "lucide-react";
 import { track } from "@/lib/analytics/track";
+import { waUrl } from "@/lib/utils/whatsapp";
 
-const DEFAULT_PHONE = "573103926621";
 const DISMISS_KEY = "nv-wa-fab-dismissed";
 
 interface WhatsAppFabProps {
+  /** `site_config.phone_whatsapp` — se administra en Admin → Configuración. */
+  phone?: string | null;
   message?: string;
   ariaLabel?: string;
   closeLabel?: string;
@@ -23,6 +25,7 @@ interface WhatsAppFabProps {
  *  las LP no montan Dapta.)
  */
 export function WhatsAppFab({
+  phone,
   message = "Hola, quiero más información sobre Nivelics",
   ariaLabel = "Chatear por WhatsApp",
   closeLabel = "Ocultar botón de WhatsApp",
@@ -45,11 +48,7 @@ export function WhatsAppFab({
 
   if (!visible) return null;
 
-  const phone =
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
-    (process.env.NEXT_PUBLIC_WHATSAPP ? process.env.NEXT_PUBLIC_WHATSAPP.replace(/\D/g, "") : "") ||
-    DEFAULT_PHONE;
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  const url = waUrl(phone, message);
 
   return (
     <div className="fixed bottom-20 left-4 z-40 md:bottom-6 md:left-6 group">
