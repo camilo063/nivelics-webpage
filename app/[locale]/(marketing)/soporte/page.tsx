@@ -6,6 +6,8 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { waDisplay, waUrl } from "@/lib/utils/whatsapp";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -57,13 +59,13 @@ const FAQ_ITEMS = [
 ];
 
 // LEGACY FALLBACK
-const CHANNELS = [
+const buildChannels = (phoneWhatsapp?: string | null) => [
   {
     icon: "message-circle",
     title: "WhatsApp",
     description: "Respuesta rápida para consultas y soporte.",
-    contact: "+57 310-3926621",
-    href: "https://wa.me/573103926621",
+    contact: waDisplay(phoneWhatsapp),
+    href: waUrl(phoneWhatsapp),
     linkText: "Enviar mensaje",
   },
   {
@@ -82,6 +84,8 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("support");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
+  const config = await getSiteConfigPublic().catch(() => null);
+  const channels = buildChannels(config?.phoneWhatsapp);
 
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
@@ -117,7 +121,7 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="grid gap-6 md:grid-cols-2">
-            {CHANNELS.map((channel) => {
+            {channels.map((channel) => {
               const iconName = channel.icon;
               return (
                 <div key={channel.title} className="glass glow-hover rounded-xl p-8">

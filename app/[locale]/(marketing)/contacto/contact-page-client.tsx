@@ -10,6 +10,7 @@ import { SITE } from "@/lib/constants";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { deriveFromPath } from "@/lib/utils/from-service";
+import { waDisplay, waUrl } from "@/lib/utils/whatsapp";
 
 const contactSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -26,9 +27,15 @@ interface ContactPageClientProps {
   seoDescription?: string;
   pageTitle?: string;
   pageSubtitle?: string;
+  /** `site_config.phone_whatsapp` — se administra en Admin → Configuración. */
+  phoneWhatsapp?: string | null;
 }
 
-export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClientProps) {
+export function ContactPageClient({
+  pageTitle,
+  pageSubtitle,
+  phoneWhatsapp,
+}: ContactPageClientProps) {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
@@ -128,12 +135,12 @@ export function ContactPageClient({ pageTitle, pageSubtitle }: ContactPageClient
                   <div>
                     <h3 className="font-medium text-text-100">WhatsApp</h3>
                     <a
-                      href={`https://wa.me/${SITE.whatsapp.replace("+", "")}`}
+                      href={waUrl(phoneWhatsapp)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-text-70 hover:text-primary"
                     >
-                      {SITE.whatsapp}
+                      {waDisplay(phoneWhatsapp)}
                     </a>
                   </div>
                 </div>

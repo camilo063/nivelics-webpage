@@ -22,6 +22,8 @@ import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { waUrl } from "@/lib/utils/whatsapp";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import type { Locale } from "@/lib/cms/types";
 
@@ -97,9 +99,10 @@ export default async function StaffAugmentationPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const [cms, uiLabels] = await Promise.all([
+  const [cms, uiLabels, config] = await Promise.all([
     getServicioData("staff-augmentation", locale),
     getAllUiLabels(),
+    getSiteConfigPublic().catch(() => null),
   ]);
   const subs = cms ? await getSubserviciosData(cms.id, locale) : [];
   const cmsSubItems = subs.map((s) => ({
@@ -117,7 +120,7 @@ export default async function StaffAugmentationPage({
     },
     fallbackSecondary: {
       text: uiLabel(uiLabels, "servicio.staffaug_cta_whatsapp", locale),
-      url: "https://wa.me/573103926621",
+      url: waUrl(config?.phoneWhatsapp),
     },
   });
   const serviceSchema = getServiceSchema({
