@@ -34,7 +34,7 @@ export async function generateMetadata({
 
   const title = isEn
     ? "Nivelics SaaS Products | PAYWL, Niveleads, Hirely"
-    : "Productos SaaS propios | Nivelics";
+    : "Productos SaaS propios";
   const description = isEn
     ? "PAYWL, Niveleads and Hirely: three SaaS products built by Nivelics to solve real LATAM problems."
     : "PAYWL, Niveleads e Hirely: tres productos SaaS construidos por Nivelics para resolver problemas reales en LATAM.";

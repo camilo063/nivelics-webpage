@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { db } from "@/lib/db";
 import {
+  adminUsers,
   servicios,
   industrias,
   casosExito,
@@ -416,6 +417,24 @@ export const getPopularBlogPosts = cache(async (limit = 5) => {
     .orderBy(desc(blogPosts.publishedAt))
     .limit(limit);
   return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
+});
+
+// Public byline lookup for blog posts (E-E-A-T). Returns ONLY the display
+// name — never select email, passwordHash, or role here: those are internal
+// admin fields and must not leak into public pages or JSON-LD.
+export const getBlogPostAuthor = cache(async (authorId: string) => {
+  if (!db) return null;
+  try {
+    const result = await db
+      .select({ name: adminUsers.name })
+      .from(adminUsers)
+      .where(eq(adminUsers.id, authorId))
+      .limit(1);
+    return result[0]?.name ?? null;
+  } catch {
+    // Byline is non-critical — a DB hiccup must never break the post page.
+    return null;
+  }
 });
 
 // ─── HOME ──────────────────────────────────────────────

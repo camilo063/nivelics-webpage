@@ -9,25 +9,31 @@ import { METRICS, SITE } from "@/lib/constants";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getTeamMembers, mapTeamMember } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Quiénes Somos | Nivelics — 13 años en transformación digital LATAM",
-  description:
-    "Conoce a Nivelics: empresa colombiana de transformación digital B2B fundada en 2012 con sede en Bogotá y Miami.",
-  alternates: {
-    canonical: "https://www.nivelics.com/nosotros",
-    languages: {
-      es: "https://www.nivelics.com/nosotros",
-      en: "https://www.nivelics.com/en/about",
-      "x-default": "https://www.nivelics.com/nosotros",
-    },
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return buildPageMetadata({
+    locale: isEn ? "en" : "es",
+    href: "/nosotros",
+    title: isEn
+      ? "About Us — 13 Years of Digital Transformation in LATAM"
+      : "Quiénes Somos — 13 años en transformación digital LATAM",
+    description: isEn
+      ? "Meet Nivelics: a Colombian B2B digital transformation company founded in 2012 with offices in Bogotá and Miami."
+      : "Conoce a Nivelics: empresa colombiana de transformación digital B2B fundada en 2012 con sede en Bogotá y Miami.",
+  });
+}
 
 const VALUES = [
   {

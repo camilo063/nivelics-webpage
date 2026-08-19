@@ -18,6 +18,7 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -33,7 +34,9 @@ export async function generateMetadata({
   const isEn = locale === "en";
   const cms = await getServicioData("finops", locale);
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/cloud/finops",
     title:
       cms?.seoTitle ||
       (isEn
@@ -44,15 +47,7 @@ export async function generateMetadata({
       (isEn
         ? "Real-time cloud financial governance. Automated anomaly alerts and up to 40% savings in 90 days. AWS, GCP and Azure."
         : "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento."),
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/cloud/finops",
-      languages: {
-        es: "https://www.nivelics.com/servicios/cloud/finops",
-        en: "https://www.nivelics.com/en/services/cloud/finops",
-        "x-default": "https://www.nivelics.com/servicios/cloud/finops",
-      },
-    },
-  };
+  });
 }
 
 const PILLARS_ES = [

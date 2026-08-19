@@ -7,4 +7,5 @@ export { getPersonSchema, TEAM_MEMBERS } from "./person";
 export { getCreativeWorkSchema } from "./creative-work";
 export { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "./industria";
 export { getBlogPostingSchema } from "./blog-posting";
+export { getReviewSchema } from "./review";
 export { getLocalBusinessSchema } from "./local-business";

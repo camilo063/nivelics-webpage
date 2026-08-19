@@ -24,6 +24,7 @@ import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -37,20 +38,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("desarrollo-digital", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/desarrollo-digital",
     title: cms?.seoTitle || "Desarrollo de Software y Apps | Plataformas Digitales",
     description:
       cms?.seoDescription ||
       "Desarrollo de productos digitales, aplicaciones web y móviles con metodologías ágiles y arquitectura moderna.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/desarrollo-digital",
-      languages: {
-        es: "https://www.nivelics.com/servicios/desarrollo-digital",
-        en: "https://www.nivelics.com/en/services/digital-development",
-        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital",
-      },
-    },
-  };
+  });
 }
 
 const SUB_SERVICES = [

@@ -19,6 +19,7 @@ import {
 } from "@/components/sections/cms-servicio-sections";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -32,20 +33,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("ecommerce", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/desarrollo-digital/ecommerce",
     title: cms?.seoTitle || "Desarrollo E-commerce | Tiendas Digitales que Venden",
     description:
       cms?.seoDescription ||
       "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
-      languages: {
-        es: "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
-        en: "https://www.nivelics.com/en/services/digital-development/ecommerce",
-        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/ecommerce",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

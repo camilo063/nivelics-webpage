@@ -19,6 +19,7 @@ import { Reveal } from "@/components/effects/reveal";
 import { TiltCard } from "@/components/effects/tilt-card";
 import { ParallaxLayer } from "@/components/effects/parallax-layer";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import {
   cleanCaseTitle,
@@ -102,17 +103,19 @@ export async function generateMetadata({
 
   const brandSuffix = uiLabel(uiLabels, "seo.home_brand_suffix", locale);
 
-  return {
-    title: home?.heroTitle ? `${home.heroTitle}${brandSuffix}` : defaultTitle,
+  const title = home?.heroTitle ? `${home.heroTitle}${brandSuffix}` : defaultTitle;
+  const base = buildPageMetadata({
+    locale,
+    href: "/",
+    title,
     description: home?.heroSubtitle || defaultDescription,
-    alternates: {
-      canonical: "https://www.nivelics.com",
-      languages: {
-        es: "https://www.nivelics.com",
-        en: "https://www.nivelics.com/en",
-        "x-default": "https://www.nivelics.com",
-      },
-    },
+  });
+
+  return {
+    ...base,
+    // Si el título ya trae la marca (brandSuffix del CMS), va absoluto para no
+    // duplicar el template "%s | Nivelics"
+    ...(title.includes("Nivelics") ? { title: { absolute: title } } : {}),
     other: { "link-llms": "/llms.txt" },
   };
 }

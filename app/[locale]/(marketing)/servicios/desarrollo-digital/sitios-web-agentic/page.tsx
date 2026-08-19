@@ -18,6 +18,7 @@ import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -33,7 +34,9 @@ export async function generateMetadata({
   const isEn = locale === "en";
   const cms = await getServicioData("sitios-web-agentic", locale);
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/desarrollo-digital/sitios-web-agentic",
     title:
       cms?.seoTitle ||
       (isEn
@@ -44,15 +47,7 @@ export async function generateMetadata({
       (isEn
         ? "We build websites navigable by AI agents and LLMs. Multilingual, complete Schema.org, llms.txt, Core Web Vitals ≥95. Indexed by Google SGE, ChatGPT, Claude and Perplexity."
         : "Construimos sitios web navegables por IA, agentes y LLMs. Multi-idioma, Schema.org completo, llms.txt, Core Web Vitals ≥95. Indexados por Google SGE, ChatGPT, Claude y Perplexity."),
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/desarrollo-digital/sitios-web-agentic",
-      languages: {
-        es: "https://www.nivelics.com/servicios/desarrollo-digital/sitios-web-agentic",
-        en: "https://www.nivelics.com/en/services/digital-development/agentic-web",
-        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/sitios-web-agentic",
-      },
-    },
-  };
+  });
 }
 
 /* ------------------------------------------------------------------ */

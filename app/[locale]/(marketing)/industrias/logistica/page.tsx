@@ -8,6 +8,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,20 +25,14 @@ export async function generateMetadata({
   const raw = await getIndustria("logistica");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/industrias/logistica",
     title: ind?.seoTitle || "Tecnología para Logística y Transporte",
     description:
       ind?.seoDescription ||
       "Soluciones de trazabilidad, optimización de rutas y automatización de warehouse para empresas de logística y transporte.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias/logistica",
-      languages: {
-        es: "https://www.nivelics.com/industrias/logistica",
-        en: "https://www.nivelics.com/en/industries/logistics",
-        "x-default": "https://www.nivelics.com/industrias/logistica",
-      },
-    },
-  };
+  });
 }
 
 // LEGACY FALLBACK

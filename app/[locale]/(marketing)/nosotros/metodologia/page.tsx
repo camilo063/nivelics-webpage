@@ -4,23 +4,29 @@ import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { setRequestLocale } from "next-intl/server";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Metodología Ágil | Framework Scrum para Productos Digitales",
-  description:
-    "Framework Ágil Nivelics basado en Scrum. Delivery Manager en cada proyecto, sprints de 2 semanas, entrega continua.",
-  alternates: {
-    canonical: "https://www.nivelics.com/nosotros/metodologia",
-    languages: {
-      es: "https://www.nivelics.com/nosotros/metodologia",
-      en: "https://www.nivelics.com/en/about/methodology",
-      "x-default": "https://www.nivelics.com/nosotros/metodologia",
-    },
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return buildPageMetadata({
+    locale: isEn ? "en" : "es",
+    href: "/nosotros/metodologia",
+    title: isEn
+      ? "Agile Methodology | Scrum Framework for Digital Products"
+      : "Metodología Ágil | Framework Scrum para Productos Digitales",
+    description: isEn
+      ? "The Nivelics Agile Framework, based on Scrum. A Delivery Manager on every project, 2-week sprints, continuous delivery."
+      : "Framework Ágil Nivelics basado en Scrum. Delivery Manager en cada proyecto, sprints de 2 semanas, entrega continua.",
+  });
+}
 
 const FALLBACK_ROLES = [
   {
@@ -79,11 +85,32 @@ export default async function MetodologiaPage({ params }: { params: Promise<{ lo
     { name: "Metodología", url: "/nosotros/metodologia" },
   ]);
 
+  // HowTo: las ceremonias del sprint son pasos secuenciales reales que la página
+  // ya muestra en la sección "Eventos". Derivado de FALLBACK_EVENTS para que el
+  // schema nunca se desincronice del contenido renderizado.
+  const howTo = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Metodología Ágil Nivelics",
+    description:
+      "Framework basado en Scrum con sprints de 2 semanas, entrega continua y un Delivery Manager dedicado en cada proyecto.",
+    step: FALLBACK_EVENTS.map((event, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: event.title,
+      text: event.description,
+    })),
+  };
+
   return (
     <PageWrapper>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
       />
 
       {/* Hero */}

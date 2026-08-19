@@ -5,6 +5,7 @@ import { IndustriasHubExtras } from "@/components/sections/industrias-hub-extras
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getAllIndustrias, getHomeContent } from "@/lib/cms/queries";
 import { mapIndustria } from "@/lib/cms/mappers";
 import type { Locale } from "@/lib/cms/types";
@@ -30,19 +31,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
-  return {
-    title: "Industrias | IA, Cloud y Staffing por sector — Nivelics",
+  const locale = (await getLocale()) as Locale;
+  return buildPageMetadata({
+    locale,
+    href: "/industrias",
+    title: "Industrias | IA, Cloud y Staffing por sector",
     description:
       "Experiencia comprobada en fintech, medios, salud, retail, logística y manufactura. 13 años entregando tecnología en los sectores más exigentes de LATAM y USA.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias",
-      languages: {
-        es: "https://www.nivelics.com/industrias",
-        en: "https://www.nivelics.com/en/industries",
-        "x-default": "https://www.nivelics.com/industrias",
-      },
-    },
-  };
+  });
 }
 
 export default async function IndustriasHubPage({

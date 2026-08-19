@@ -5,6 +5,7 @@ import { landingPages } from "@/lib/db/schema/admin";
 import { eq, and, ne } from "drizzle-orm";
 import { BlocksRenderer, type LandingBlock } from "@/components/lp/BlockRenderer";
 import { LpWhatsApp } from "@/components/lp/LpWhatsApp";
+import { DEFAULT_OG_IMAGE, mirroredUrls } from "@/lib/seo/page-meta";
 import { setRequestLocale } from "next-intl/server";
 
 export const revalidate = 86400;
@@ -58,18 +59,36 @@ export async function generateMetadata({
   const landing = await getLanding(slug);
   if (!landing) return {};
 
+  const isEn = __locale === "en";
+  const urls = mirroredUrls(`/lp/${landing.slug}`);
+  const canonical = isEn ? urls.en : urls.es;
+  const title = landing.metaTitle || landing.campaignName;
+  const description = landing.metaDescription || undefined;
+  const ogImage = landing.ogImage || DEFAULT_OG_IMAGE;
+
   return {
-    title: landing.metaTitle || `${landing.campaignName} | Nivelics`,
-    description: landing.metaDescription || undefined,
+    title,
+    description,
     robots: landing.noindex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
-      title: landing.metaTitle || landing.campaignName,
-      description: landing.metaDescription || undefined,
-      images: landing.ogImage ? [{ url: landing.ogImage }] : undefined,
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      locale: isEn ? "en_US" : "es_CO",
+      alternateLocale: isEn ? ["es_CO"] : ["en_US"],
+      siteName: "Nivelics",
+      images: [{ url: ogImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
     alternates: landing.noindex
       ? undefined
-      : { canonical: `https://nivelics.com/lp/${landing.slug}` },
+      : { canonical, languages: { es: urls.es, en: urls.en, "x-default": urls.es } },
   };
 }
 
@@ -95,7 +114,7 @@ export default async function LandingPageDynamic({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Nivelics",
-    url: "https://nivelics.com",
+    url: "https://www.nivelics.com",
     foundingDate: "2012",
   };
 
@@ -104,10 +123,10 @@ export default async function LandingPageDynamic({
     "@type": "WebPage",
     name: landing.metaTitle || landing.campaignName,
     description: landing.metaDescription,
-    url: `https://nivelics.com/lp/${landing.slug}`,
+    url: `https://www.nivelics.com/lp/${landing.slug}`,
     mainEntity: {
       "@type": "ContactPage",
-      url: `https://nivelics.com/lp/${landing.slug}#formulario`,
+      url: `https://www.nivelics.com/lp/${landing.slug}#formulario`,
     },
   };
 

@@ -3,6 +3,8 @@ import type { MappedBlogPost } from "@/lib/cms";
 interface BlogPostingOptions {
   locale: "es" | "en";
   categoryName?: string;
+  /** Display name of the post's author. When absent, falls back to the Organization. */
+  authorName?: string;
 }
 
 const HTML_TAG = /<[^>]+>/g;
@@ -21,7 +23,7 @@ function isoOrUndefined(d: Date | null | undefined): string | undefined {
 }
 
 export function getBlogPostingSchema(post: MappedBlogPost, opts: BlogPostingOptions) {
-  const { locale, categoryName } = opts;
+  const { locale, categoryName, authorName } = opts;
   const slug = post.slug;
   const localePrefix = locale === "en" ? "/en" : "";
   const canonical = `https://www.nivelics.com${localePrefix}/blog/${slug}`;
@@ -38,11 +40,21 @@ export function getBlogPostingSchema(post: MappedBlogPost, opts: BlogPostingOpti
     description: post.excerpt || post.seoDescription || undefined,
     datePublished,
     dateModified,
-    author: {
-      "@type": "Organization",
-      name: "Nivelics",
-      url: "https://www.nivelics.com",
-    },
+    author: authorName
+      ? {
+          "@type": "Person",
+          name: authorName,
+          worksFor: {
+            "@type": "Organization",
+            name: "Nivelics",
+            url: "https://www.nivelics.com",
+          },
+        }
+      : {
+          "@type": "Organization",
+          name: "Nivelics",
+          url: "https://www.nivelics.com",
+        },
     publisher: {
       "@type": "Organization",
       name: "Nivelics",

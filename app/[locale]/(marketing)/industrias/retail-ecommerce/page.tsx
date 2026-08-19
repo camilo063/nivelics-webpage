@@ -8,6 +8,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,20 +25,14 @@ export async function generateMetadata({
   const raw = await getIndustria("retail-ecommerce");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/industrias/retail-ecommerce",
     title: ind?.seoTitle || "Soluciones Tech para Retail y E-commerce",
     description:
       ind?.seoDescription ||
       "Soluciones de omnicanalidad, personalización y logística last-mile para empresas de retail y e-commerce.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias/retail-ecommerce",
-      languages: {
-        es: "https://www.nivelics.com/industrias/retail-ecommerce",
-        en: "https://www.nivelics.com/en/industries/retail-ecommerce",
-        "x-default": "https://www.nivelics.com/industrias/retail-ecommerce",
-      },
-    },
-  };
+  });
 }
 
 // LEGACY FALLBACK

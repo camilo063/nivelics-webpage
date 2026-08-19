@@ -19,6 +19,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -32,20 +33,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("serverless", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/cloud/serverless",
     title: cms?.seoTitle || "Soluciones Serverless | Escala sin Administrar Servidores",
     description:
       cms?.seoDescription ||
       "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por lo que usas.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/cloud/serverless",
-      languages: {
-        es: "https://www.nivelics.com/servicios/cloud/serverless",
-        en: "https://www.nivelics.com/en/services/cloud/serverless",
-        "x-default": "https://www.nivelics.com/servicios/cloud/serverless",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

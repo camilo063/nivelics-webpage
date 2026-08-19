@@ -6,7 +6,9 @@ import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -24,12 +26,11 @@ export async function generateMetadata({
   const raw = await getCasoExito("ab-inbev");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
-  const esUrl = "https://www.nivelics.com/casos-de-exito/ab-inbev";
-  const enUrl = "https://www.nivelics.com/en/case-studies/ab-inbev";
+  const { es: esUrl, en: enUrl } = localizedUrls("/casos-de-exito/ab-inbev");
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito AB InBev-Bavaria | Nivelics";
+  const title = caso?.seoTitle || "Caso de Éxito AB InBev-Bavaria";
   const description =
     caso?.seoDescription ||
     "Cómo Nivelics ayudó a AB InBev-Bavaria a digitalizar procesos de distribución y ventas en Centroamérica.";
@@ -98,6 +99,18 @@ export default async function ABInBevPage({ params }: { params: Promise<{ locale
     },
   ])[0];
 
+  const review =
+    caso?.testimonialQuote && caso.testimonialAuthor
+      ? getReviewSchema({
+          quote: caso.testimonialQuote,
+          author: caso.testimonialAuthor,
+          role: caso.testimonialRole,
+          aboutName: caso.clientName || "AB InBev-Bavaria",
+          aboutUrl: "/casos-de-exito/ab-inbev",
+          locale,
+        })
+      : null;
+
   return (
     <PageWrapper>
       <script
@@ -105,6 +118,7 @@ export default async function ABInBevPage({ params }: { params: Promise<{ locale
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <JsonLd data={creativeWork} />
+      {review && <JsonLd data={review} />}
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

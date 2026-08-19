@@ -4,25 +4,29 @@ import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getTeamMembers, mapTeamMember } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Equipo Directivo | Nivelics",
-  description:
-    "Conoce al equipo directivo de Nivelics: liderazgo con experiencia en transformación digital B2B.",
-  alternates: {
-    canonical: "https://www.nivelics.com/nosotros/equipo",
-    languages: {
-      es: "https://www.nivelics.com/nosotros/equipo",
-      en: "https://www.nivelics.com/en/about/team",
-      "x-default": "https://www.nivelics.com/nosotros/equipo",
-    },
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return buildPageMetadata({
+    locale: isEn ? "en" : "es",
+    href: "/nosotros/equipo",
+    title: isEn ? "Leadership Team" : "Equipo Directivo",
+    description: isEn
+      ? "Meet the Nivelics leadership team: leaders with experience in B2B digital transformation."
+      : "Conoce al equipo directivo de Nivelics: liderazgo con experiencia en transformación digital B2B.",
+  });
+}
 
 export default async function EquipoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;

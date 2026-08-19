@@ -5,6 +5,7 @@ import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { ApplyForm } from "./apply-form";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -19,23 +20,22 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const raw = await getPageGeneral("careers");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
 
-  return {
-    title: page?.seoTitle || "Trabaja con Nivelics | Únete al Equipo",
+  return buildPageMetadata({
+    locale,
+    href: "/trabaja-con-nosotros",
+    title:
+      page?.seoTitle ||
+      (isEn ? "Work at Nivelics | Join the Team" : "Trabaja con Nivelics | Únete al Equipo"),
     description:
       page?.seoDescription ||
-      "Únete al equipo de Nivelics. Cultura directa, humana y ambiciosa. Posiciones en desarrollo, cloud, IA y más.",
-    alternates: {
-      canonical: "https://www.nivelics.com/trabaja-con-nosotros",
-      languages: {
-        es: "https://www.nivelics.com/trabaja-con-nosotros",
-        en: "https://www.nivelics.com/en/careers",
-        "x-default": "https://www.nivelics.com/trabaja-con-nosotros",
-      },
-    },
-  };
+      (isEn
+        ? "Join the Nivelics team. A direct, human and ambitious culture. Openings in development, cloud, AI and more."
+        : "Únete al equipo de Nivelics. Cultura directa, humana y ambiciosa. Posiciones en desarrollo, cloud, IA y más."),
+  });
 }
 
 // LEGACY FALLBACK
