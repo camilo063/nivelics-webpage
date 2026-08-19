@@ -486,8 +486,8 @@ export const getNavConfigPublic = cache(async () => {
 
 // Request-level memoization: multiple calls within the same render tree
 // (e.g. marketing layout + llms.txt route on the same request) hit the DB once.
-// Omits llmsTxtContent / llmsFullTxtContent — those are kilobytes of text only
-// the /llms.txt and /llms-full.txt routes read. Use getSiteConfigLlms() for those.
+// Omits llmsTxtContent / llmsFullTxtContent — columnas legacy del override
+// admin eliminado en 2026-08 (los /llms*.txt son siempre dinámicos).
 export const getSiteConfigPublic = cache(async () => {
   if (!db) {
     const fb = SITE_CONFIG_FB.find((r) => r.id === "main") ?? SITE_CONFIG_FB[0] ?? null;
@@ -519,27 +519,6 @@ export const getSiteConfigPublic = cache(async () => {
       googleAnalyticsId: siteConfig.googleAnalyticsId,
       googleTagManagerId: siteConfig.googleTagManagerId,
       updatedAt: siteConfig.updatedAt,
-    })
-    .from(siteConfig)
-    .where(eq(siteConfig.id, "main"))
-    .limit(1);
-  return result[0] || null;
-});
-
-// Loaded only by /llms.txt and /llms-full.txt routes.
-export const getSiteConfigLlms = cache(async () => {
-  if (!db) {
-    const fb = SITE_CONFIG_FB.find((r) => r.id === "main") ?? SITE_CONFIG_FB[0] ?? null;
-    if (!fb) return null;
-    return {
-      llmsTxtContent: fb.llmsTxtContent,
-      llmsFullTxtContent: fb.llmsFullTxtContent,
-    };
-  }
-  const result = await db
-    .select({
-      llmsTxtContent: siteConfig.llmsTxtContent,
-      llmsFullTxtContent: siteConfig.llmsFullTxtContent,
     })
     .from(siteConfig)
     .where(eq(siteConfig.id, "main"))

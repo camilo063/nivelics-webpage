@@ -64,16 +64,19 @@ Bilingual, spec-compliant per [llmstxt.org](https://llmstxt.org).
 
 ### Endpoints
 
-| URL                 | Primary locale | Admin override                                      |
-| ------------------- | -------------- | --------------------------------------------------- |
-| `/llms.txt`         | ES             | Yes — `siteConfig.llmsTxtContent` wins if non-empty |
-| `/llms-full.txt`    | ES             | Yes — `siteConfig.llmsFullTxtContent`               |
-| `/en/llms.txt`      | EN             | **No** — always dynamic                             |
-| `/en/llms-full.txt` | EN             | **No** — always dynamic                             |
+All four endpoints (`/llms.txt`, `/llms-full.txt`, `/en/llms.txt`,
+`/en/llms-full.txt`) are **always dynamic** — built from the DB on each
+revalidation. The former admin override (`siteConfig.llmsTxtContent` /
+`llmsFullTxtContent`) was removed in 2026-08 because a frozen text silently
+stopped reflecting products, posts and pricing; the DB columns remain but
+nothing reads or writes them (`scripts/clear-llms-admin-content.ts` and
+`scripts/seed-llms-to-config.ts` are obsolete).
 
-When either `llmsTxtContent` column is non-empty, the ES route returns it
-verbatim. To force the dynamic builder, null out the column:
-[scripts/clear-llms-admin-content.ts](../scripts/clear-llms-admin-content.ts).
+Cost is negligible: `revalidate = 86400` + `s-maxage=86400,
+stale-while-revalidate=604800` mean the builder runs at most ~once a day per
+route; every other request is served from the CDN/route cache. Saving site
+config in the admin also calls `revalidatePath("/llms.txt")` for an immediate
+refresh.
 
 ### Shared builder
 

@@ -30,8 +30,6 @@ interface ConfigData {
   linkedinUrl: string;
   googleAnalyticsId: string;
   googleTagManagerId: string;
-  llmsTxtContent: string;
-  llmsFullTxtContent: string;
 }
 
 const defaultConfig: ConfigData = {
@@ -55,15 +53,13 @@ const defaultConfig: ConfigData = {
   linkedinUrl: "",
   googleAnalyticsId: "",
   googleTagManagerId: "",
-  llmsTxtContent: "",
-  llmsFullTxtContent: "",
 };
 
 export default function ConfigClient({ initialData }: { initialData: Partial<ConfigData> | null }) {
   const router = useRouter();
   const [config, setConfig] = useState<ConfigData>({ ...defaultConfig, ...initialData });
   const [activeTab, setActiveTab] = useState<
-    "sitio" | "contacto" | "integraciones" | "llms" | "revalidacion"
+    "sitio" | "contacto" | "integraciones" | "revalidacion"
   >("sitio");
   const [saving, setSaving] = useState(false);
 
@@ -116,7 +112,6 @@ export default function ConfigClient({ initialData }: { initialData: Partial<Con
     { key: "sitio" as const, label: "Sitio" },
     { key: "contacto" as const, label: "Contacto" },
     { key: "integraciones" as const, label: "Integraciones" },
-    { key: "llms" as const, label: "llms.txt" },
     { key: "revalidacion" as const, label: "Revalidación" },
   ];
 
@@ -383,33 +378,6 @@ export default function ConfigClient({ initialData }: { initialData: Partial<Con
                 placeholder="GTM-XXXXXXX"
               />
             </div>
-          </>
-        )}
-
-        {activeTab === "llms" && (
-          <>
-            <div>
-              <label className="mb-2 block text-sm font-medium text-text-70">llms.txt</label>
-              <textarea
-                value={config.llmsTxtContent}
-                onChange={(e) => update("llmsTxtContent", e.target.value)}
-                rows={12}
-                className={inputClass + " resize-none font-mono text-sm"}
-                placeholder="# Nivelics&#10;&#10;> Transformación digital B2B..."
-              />
-            </div>
-            <div>
-              <label className="mb-2 block text-sm font-medium text-text-70">llms-full.txt</label>
-              <textarea
-                value={config.llmsFullTxtContent}
-                onChange={(e) => update("llmsFullTxtContent", e.target.value)}
-                rows={16}
-                className={inputClass + " resize-none font-mono text-sm"}
-              />
-            </div>
-            <p className="text-xs text-text-40">
-              Al guardar, se actualizan los archivos /llms.txt y /llms-full.txt del sitio.
-            </p>
           </>
         )}
 

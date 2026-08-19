@@ -37,6 +37,6 @@ update discipline — when a doc goes stale, fix it in the same PR as the code.
 - **Next.js 16 has breaking changes vs. your training data** — see [AGENTS.md](./AGENTS.md)
 - **Every bilingual DB column has `*_es` + `*_en`**. Use [lib/cms/mappers.ts](./lib/cms/mappers.ts) to resolve.
 - **Metadata template is `%s | Nivelics`** — never put `| Nivelics` in `seoTitleEs/En`.
-- **Admin override for llms.txt**: ES endpoints check `siteConfig.llmsTxtContent` first. Null it out with [scripts/clear-llms-admin-content.ts](./scripts/clear-llms-admin-content.ts) to force the dynamic builder.
+- **llms.txt is ALWAYS dynamic** (since 2026-08): all four endpoints use the builder in [lib/seo/llms-content.ts](./lib/seo/llms-content.ts) — the old `siteConfig.llmsTxtContent` admin override was removed (it silently froze content). The DB columns still exist but nothing reads them.
 - **Fallback arrays in `lib/cms/*.ts` keep the site alive if DB is down** — do not remove them during refactors.
 - **When you add a public route**, three files change: page file, [lib/i18n/routing.ts](./lib/i18n/routing.ts), and [lib/seo/sitemap-urls.ts](./lib/seo/sitemap-urls.ts).

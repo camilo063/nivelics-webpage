@@ -34,8 +34,6 @@ export async function updateSiteConfig(input: {
   linkedinUrl?: string;
   googleAnalyticsId?: string;
   googleTagManagerId?: string;
-  llmsTxtContent?: string;
-  llmsFullTxtContent?: string;
 }) {
   const session = await getAdminSession();
   if (!session) throw new Error("No autorizado");
