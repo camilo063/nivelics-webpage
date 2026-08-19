@@ -18,6 +18,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -31,20 +32,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("datos-ia", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/staff-augmentation/datos-ia",
     title: cms?.seoTitle || "Datos e IA | Data Scientists y ML Engineers",
     description:
       cms?.seoDescription ||
       "Data Scientists, Data Engineers y ML Engineers para proyectos de analítica avanzada y machine learning.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/staff-augmentation/datos-ia",
-      languages: {
-        es: "https://www.nivelics.com/servicios/staff-augmentation/datos-ia",
-        en: "https://www.nivelics.com/en/services/staff-augmentation/data-ai",
-        "x-default": "https://www.nivelics.com/servicios/staff-augmentation/datos-ia",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

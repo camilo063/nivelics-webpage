@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
@@ -17,23 +18,20 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const raw = await getPageGeneral("privacy");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
 
-  return {
-    title: page?.seoTitle || "Política de Privacidad | Nivelics",
+  return buildPageMetadata({
+    locale,
+    href: "/privacidad",
+    title: page?.seoTitle || (isEn ? "Privacy Policy" : "Política de Privacidad"),
     description:
       page?.seoDescription ||
-      "Política de privacidad de Nivelics SAS. Información sobre el tratamiento de datos personales.",
-    alternates: {
-      canonical: "https://www.nivelics.com/privacidad",
-      languages: {
-        es: "https://www.nivelics.com/privacidad",
-        en: "https://www.nivelics.com/en/privacy",
-        "x-default": "https://www.nivelics.com/privacidad",
-      },
-    },
-  };
+      (isEn
+        ? "Nivelics SAS privacy policy. Information about the processing of personal data."
+        : "Política de privacidad de Nivelics SAS. Información sobre el tratamiento de datos personales."),
+  });
 }
 
 export default async function PrivacidadPage({ params }: { params: Promise<{ locale: string }> }) {

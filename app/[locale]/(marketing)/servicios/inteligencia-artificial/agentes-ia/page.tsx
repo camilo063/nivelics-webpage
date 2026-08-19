@@ -18,6 +18,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -31,20 +32,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("agentes-ia", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/inteligencia-artificial/agentes-ia",
     title: cms?.seoTitle || "Agentes de IA para Empresas | Automatización Inteligente",
     description:
       cms?.seoDescription ||
       "Diseñamos agentes de IA para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
-      languages: {
-        es: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
-        en: "https://www.nivelics.com/en/services/artificial-intelligence/ai-agents",
-        "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-ia",
-      },
-    },
-  };
+  });
 }
 
 export default async function AgentesIAPage({ params }: { params: Promise<{ locale: string }> }) {

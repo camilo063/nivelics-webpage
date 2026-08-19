@@ -8,7 +8,14 @@ import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getBlogPostingSchema } from "@/lib/schema/blog-posting";
 import { getLocale, setRequestLocale } from "next-intl/server";
-import { getBlogPost, getAllBlogPostsLight, mapBlogPost, getBlogCategoriesPublic } from "@/lib/cms";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo/page-meta";
+import {
+  getBlogPost,
+  getBlogPostAuthor,
+  getAllBlogPostsLight,
+  mapBlogPost,
+  getBlogCategoriesPublic,
+} from "@/lib/cms";
 import type { Locale, MappedBlogPost } from "@/lib/cms";
 import { processBlogContent } from "@/lib/utils/blog";
 import { TableOfContents, TableOfContentsCollapsible } from "@/components/shared/TableOfContents";
@@ -159,9 +166,10 @@ export async function generateMetadata(props: BlogPostPageProps): Promise<Metada
   const dbPost = await getBlogPost(slug);
   if (dbPost) {
     const mapped = mapBlogPost(dbPost as Record<string, unknown>, locale);
+    const authorName = dbPost.authorId ? await getBlogPostAuthor(dbPost.authorId) : null;
     const title = mapped.seoTitle || mapped.title;
     const description = mapped.seoDescription || mapped.excerpt.slice(0, 160);
-    const image = mapped.coverImage || undefined;
+    const image = mapped.coverImage || DEFAULT_OG_IMAGE;
     const datePublished = (mapped.publishedAt ?? mapped.createdAt)?.toISOString();
     const dateModified = (
       mapped.updatedAt ??
@@ -183,10 +191,10 @@ export async function generateMetadata(props: BlogPostPageProps): Promise<Metada
         locale: locale === "en" ? "en_US" : "es_CO",
         alternateLocale: locale === "en" ? ["es_CO"] : ["en_US"],
         siteName: "Nivelics",
-        images: image ? [{ url: image }] : undefined,
+        images: [{ url: image }],
         publishedTime: datePublished,
         modifiedTime: dateModified,
-        authors: ["Equipo Nivelics"],
+        authors: [authorName ?? t(locale, "Equipo Nivelics", "Nivelics Team")],
         tags: mapped.tags,
         section: undefined,
       },
@@ -194,7 +202,7 @@ export async function generateMetadata(props: BlogPostPageProps): Promise<Metada
         card: "summary_large_image",
         title,
         description,
-        images: image ? [image] : undefined,
+        images: [image],
       },
     };
   }
@@ -215,8 +223,9 @@ export async function generateMetadata(props: BlogPostPageProps): Promise<Metada
       url: canonical,
       locale: locale === "en" ? "en_US" : "es_CO",
       siteName: "Nivelics",
+      images: [{ url: DEFAULT_OG_IMAGE }],
     },
-    twitter: { card: "summary_large_image", title: post.title },
+    twitter: { card: "summary_large_image", title: post.title, images: [DEFAULT_OG_IMAGE] },
   };
 }
 
@@ -229,9 +238,10 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
   if (dbPost) {
     const mapped = mapBlogPost(dbPost as Record<string, unknown>, locale);
 
-    const [allPostsRaw, categoriesRaw] = await Promise.all([
+    const [allPostsRaw, categoriesRaw, authorName] = await Promise.all([
       getAllBlogPostsLight(),
       getBlogCategoriesPublic(),
+      dbPost.authorId ? getBlogPostAuthor(dbPost.authorId) : Promise.resolve(null),
     ]);
 
     const categoryById = new Map(
@@ -284,7 +294,12 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
     const blogPosting = getBlogPostingSchema(mapped, {
       locale,
       categoryName: category?.name,
+      // No name → schema keeps its Organization author fallback.
+      authorName: authorName ?? undefined,
     });
+    const byline = authorName
+      ? t(locale, `Por ${authorName}`, `By ${authorName}`)
+      : t(locale, "Equipo Nivelics", "Nivelics Team");
 
     return (
       <PageWrapper>
@@ -349,9 +364,11 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                   {category.name}
                 </Link>
               ) : null}
+              {category ? <span className="text-text-40">•</span> : null}
+              <span className="text-text-70">{byline}</span>
               {formattedDate ? (
                 <>
-                  {category ? <span className="text-text-40">•</span> : null}
+                  <span className="text-text-40">•</span>
                   <time className="text-text-40">{formattedDate}</time>
                 </>
               ) : null}

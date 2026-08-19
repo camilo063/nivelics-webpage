@@ -8,6 +8,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,20 +25,14 @@ export async function generateMetadata({
   const raw = await getIndustria("fintech");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/industrias/fintech",
     title: ind?.seoTitle || "IA y Cloud para Fintech",
     description:
       ind?.seoDescription ||
       "Soluciones de inteligencia artificial, cloud e ingeniería para empresas fintech. Compliance, escalabilidad y experiencia de usuario.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias/fintech",
-      languages: {
-        es: "https://www.nivelics.com/industrias/fintech",
-        en: "https://www.nivelics.com/en/industries/fintech",
-        "x-default": "https://www.nivelics.com/industrias/fintech",
-      },
-    },
-  };
+  });
 }
 
 // LEGACY FALLBACK

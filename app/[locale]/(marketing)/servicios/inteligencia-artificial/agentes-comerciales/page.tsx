@@ -18,6 +18,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -31,21 +32,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("agentes-comerciales", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/inteligencia-artificial/agentes-comerciales",
     title: cms?.seoTitle || "Agentes Comerciales Inteligentes | IA para Ventas",
     description:
       cms?.seoDescription ||
       "Agentes de IA que califican leads, hacen seguimiento y escalan oportunidades a tu equipo de ventas.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
-      languages: {
-        es: "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
-        en: "https://www.nivelics.com/en/services/artificial-intelligence/sales-agents",
-        "x-default":
-          "https://www.nivelics.com/servicios/inteligencia-artificial/agentes-comerciales",
-      },
-    },
-  };
+  });
 }
 
 export default async function AgentesComerciales({

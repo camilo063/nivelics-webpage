@@ -8,6 +8,7 @@ import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { GeoIconBox, type IconColor } from "@/lib/icons/geometric";
 import { JsonLd } from "@/components/shared/json-ld";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo/page-meta";
 import { getAllProductos, getProductoBySlug, mapProducto, accentHex } from "@/lib/cms/productos";
 import type { Locale } from "@/lib/cms";
 
@@ -35,6 +36,7 @@ export async function generateMetadata({
   const esPath = `/productos/${raw.slugEs}`;
   const enPath = `/en/products/${raw.slugEn}`;
   const canonical = isEn ? `${baseUrl}${enPath}` : `${baseUrl}${esPath}`;
+  const ogImage = p.ogImage || DEFAULT_OG_IMAGE;
 
   return {
     title: p.seoTitle,
@@ -51,14 +53,14 @@ export async function generateMetadata({
       title: p.seoTitle,
       description: p.seoDescription,
       url: canonical,
-      images: p.ogImage ? [{ url: p.ogImage }] : [],
+      images: [{ url: ogImage }],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: p.seoTitle,
       description: p.seoDescription,
-      images: p.ogImage ? [p.ogImage] : [],
+      images: [ogImage],
     },
   };
 }

@@ -19,6 +19,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -32,20 +33,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("qa-seguridad", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/staff-augmentation/qa-seguridad",
     title: cms?.seoTitle || "QA y Ciberseguridad | Calidad Garantizada",
     description:
       cms?.seoDescription ||
       "QA Engineers, SDET y especialistas en ciberseguridad para asegurar calidad y protección en cada sprint.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/staff-augmentation/qa-seguridad",
-      languages: {
-        es: "https://www.nivelics.com/servicios/staff-augmentation/qa-seguridad",
-        en: "https://www.nivelics.com/en/services/staff-augmentation/qa-security",
-        "x-default": "https://www.nivelics.com/servicios/staff-augmentation/qa-seguridad",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

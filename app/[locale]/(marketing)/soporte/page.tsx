@@ -4,6 +4,7 @@ import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
@@ -20,23 +21,21 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const raw = await getPageGeneral("support");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
 
-  return {
-    title: page?.seoTitle || "Soporte y Contacto Técnico | Nivelics",
+  return buildPageMetadata({
+    locale,
+    href: "/soporte",
+    title:
+      page?.seoTitle || (isEn ? "Support and Technical Contact" : "Soporte y Contacto Técnico"),
     description:
       page?.seoDescription ||
-      "Soporte técnico Nivelics. Contacto por WhatsApp y email. Horario de atención: Lunes a Viernes 8:00 - 18:00 (GMT-5).",
-    alternates: {
-      canonical: "https://www.nivelics.com/soporte",
-      languages: {
-        es: "https://www.nivelics.com/soporte",
-        en: "https://www.nivelics.com/en/support",
-        "x-default": "https://www.nivelics.com/soporte",
-      },
-    },
-  };
+      (isEn
+        ? "Nivelics technical support. Contact us via WhatsApp and email. Business hours: Monday to Friday, 8:00 - 18:00 (GMT-5)."
+        : "Soporte técnico Nivelics. Contacto por WhatsApp y email. Horario de atención: Lunes a Viernes 8:00 - 18:00 (GMT-5)."),
+  });
 }
 
 // LEGACY FALLBACK

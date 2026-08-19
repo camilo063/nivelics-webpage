@@ -2,18 +2,31 @@ import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getHistoriaItems, mapHistoriaItem } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Historia de Nivelics | De Bogotá al mundo",
-  description:
-    "La historia de Nivelics: de startup bogotana a referente de transformación digital B2B en LATAM y USA.",
-  alternates: { canonical: "https://www.nivelics.com/nosotros/historia" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return buildPageMetadata({
+    locale: isEn ? "en" : "es",
+    href: "/nosotros/historia",
+    title: isEn
+      ? "The History of Nivelics | From Bogotá to the World"
+      : "Historia de Nivelics | De Bogotá al mundo",
+    description: isEn
+      ? "The history of Nivelics: from a Bogotá startup to a B2B digital transformation leader in LATAM and the USA."
+      : "La historia de Nivelics: de startup bogotana a referente de transformación digital B2B en LATAM y USA.",
+  });
+}
 
 // LEGACY FALLBACK
 const TIMELINE = [

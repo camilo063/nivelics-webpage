@@ -6,7 +6,9 @@ import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -24,12 +26,11 @@ export async function generateMetadata({
   const raw = await getCasoExito("grupo-bolivar");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
-  const esUrl = "https://www.nivelics.com/casos-de-exito/grupo-bolivar";
-  const enUrl = "https://www.nivelics.com/en/case-studies/grupo-bolivar";
+  const { es: esUrl, en: enUrl } = localizedUrls("/casos-de-exito/grupo-bolivar");
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Grupo Bolívar | Nivelics";
+  const title = caso?.seoTitle || "Caso de Éxito Grupo Bolívar";
   const description =
     caso?.seoDescription ||
     "Cómo Nivelics ayudó a Grupo Bolívar a modernizar múltiples líneas de negocio con productos digitales para seguros, salud y e-commerce.";
@@ -102,6 +103,18 @@ export default async function GrupoBolivarPage({
     },
   ])[0];
 
+  const review =
+    caso?.testimonialQuote && caso.testimonialAuthor
+      ? getReviewSchema({
+          quote: caso.testimonialQuote,
+          author: caso.testimonialAuthor,
+          role: caso.testimonialRole,
+          aboutName: caso.clientName || "Grupo Bolívar",
+          aboutUrl: "/casos-de-exito/grupo-bolivar",
+          locale,
+        })
+      : null;
+
   return (
     <PageWrapper>
       <script
@@ -109,6 +122,7 @@ export default async function GrupoBolivarPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <JsonLd data={creativeWork} />
+      {review && <JsonLd data={review} />}
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

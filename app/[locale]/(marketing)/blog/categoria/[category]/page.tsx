@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PageWrapper } from "@/components/layout";
 import { ServiceBadge } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { setRequestLocale, getLocale } from "next-intl/server";
 import { getBlogCategoryBySlug, getBlogPostsByCategory, mapBlogPost } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -80,11 +81,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       : dbCategory.nameEs
     : fallback!.label;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    path: `/blog/categoria/${category}`,
     title: `Blog ${label} | Artículos y Guías`,
     description: `Artículos sobre ${label.toLowerCase()} para empresas B2B.`,
-    alternates: { canonical: `https://www.nivelics.com/blog/categoria/${category}` },
-  };
+  });
 }
 
 export default async function BlogCategoryPage(props: Props) {

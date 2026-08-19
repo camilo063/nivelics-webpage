@@ -8,6 +8,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,20 +25,14 @@ export async function generateMetadata({
   const raw = await getIndustria("medios-entretenimiento");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/industrias/medios-entretenimiento",
     title: ind?.seoTitle || "Tecnología para Medios y Entretenimiento",
     description:
       ind?.seoDescription ||
       "Soluciones de streaming, personalización de contenido y monetización digital para empresas de medios y entretenimiento.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias/medios-entretenimiento",
-      languages: {
-        es: "https://www.nivelics.com/industrias/medios-entretenimiento",
-        en: "https://www.nivelics.com/en/industries/media-entertainment",
-        "x-default": "https://www.nivelics.com/industrias/medios-entretenimiento",
-      },
-    },
-  };
+  });
 }
 
 // LEGACY FALLBACK

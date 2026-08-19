@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { LEGACY_REDIRECTS } from "./lib/seo/legacy-redirects";
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
 
@@ -146,6 +147,10 @@ const nextConfig: NextConfig = {
       { source: "/en/about-us", destination: "/en/about", permanent: true },
       { source: "/en/how-do-we-work", destination: "/en/about/methodology", permanent: true },
       { source: "/en/timeline", destination: "/en/about/history", permanent: true },
+      // El hub /industrias ganó ruta EN localizada (/en/industries) en lib/i18n/routing.ts
+      { source: "/en/industrias", destination: "/en/industries", permanent: true },
+      // Legacy GSC → sitio nuevo (generado por scripts/build-legacy-redirects.ts)
+      ...LEGACY_REDIRECTS,
     ];
   },
 };

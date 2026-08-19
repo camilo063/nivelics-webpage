@@ -18,6 +18,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -31,20 +32,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("migracion-aws", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/cloud/migracion-aws",
     title: cms?.seoTitle || "Migraci\u00f3n a AWS | Cloud Migration sin Interrupciones",
     description:
       cms?.seoDescription ||
       "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\u00f3n de costos desde el d\u00eda uno.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/cloud/migracion-aws",
-      languages: {
-        es: "https://www.nivelics.com/servicios/cloud/migracion-aws",
-        en: "https://www.nivelics.com/en/services/cloud/aws-migration",
-        "x-default": "https://www.nivelics.com/servicios/cloud/migracion-aws",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

@@ -39,6 +39,11 @@ export const metadata: Metadata = {
     "Transformación digital para empresas en LATAM y USA. IA aplicada, Cloud (AWS/GCP), FinOps y Staff Augmentation premium. Bogotá + Miami. 13 años de proyectos entregados.",
   authors: [{ name: "Nivelics SAS", url: "https://www.nivelics.com" }],
   creator: "Nivelics SAS",
+  alternates: {
+    types: {
+      "application/rss+xml": [{ url: "/feed.xml", title: "Blog de Nivelics — RSS" }],
+    },
+  },
   openGraph: {
     type: "website",
     url: "https://www.nivelics.com",

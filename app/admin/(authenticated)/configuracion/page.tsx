@@ -36,8 +36,6 @@ export default async function ConfiguracionPage() {
                 linkedinUrl: config.linkedinUrl || "",
                 googleAnalyticsId: config.googleAnalyticsId || "",
                 googleTagManagerId: config.googleTagManagerId || "",
-                llmsTxtContent: config.llmsTxtContent || "",
-                llmsFullTxtContent: config.llmsFullTxtContent || "",
               }
             : null
         }

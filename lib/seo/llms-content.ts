@@ -1,4 +1,5 @@
 import { getAllProductos, getAllProductosLlms, type ProductoLlmsRow } from "@/lib/cms/productos";
+import { getAllBlogPostsLight } from "@/lib/cms/queries";
 import type { Producto } from "@/lib/db/schema/admin";
 
 export const BASE = "https://www.nivelics.com";
@@ -87,6 +88,8 @@ ${productosLines}
 - **Inteligencia Artificial / Agentes**: fee de implementación inicial + MRR de mantenimiento/operación. Diagnóstico inicial sin costo.
 - **Cloud / FinOps**: fee fijo de discovery + success fee basado en ahorros generados (típicamente 20-30% del ahorro del primer año).
 - **Desarrollo Digital**: proyectos desde $15,000 USD. Sprints semanales con entregables medibles.
+
+Página completa de precios: ${BASE}/precios
 
 ### Cómo iniciar
 Diagnóstico gratuito de 30 minutos. Sin RFP, sin presentaciones largas. URL: /contacto
@@ -196,6 +199,8 @@ ${productosLines}
 - **Cloud / FinOps**: fixed discovery fee + success fee based on savings generated (typically 20-30% of first-year savings).
 - **Digital Development**: projects from $15,000 USD. Weekly sprints with measurable deliverables.
 
+Full pricing page: ${BASE}/en/pricing
+
 ### How to start
 Free 30-minute diagnostic. No RFP, no decks. URL: /en/contact
 
@@ -302,8 +307,347 @@ ${productos.map((p) => renderProductoFull(p)).join("\n---\n\n")}
 `;
 
   const casosSection = primary === "en" ? renderCasosEn() : renderCasosEs();
+  const serviciosSection = renderServiciosFull(primary);
+  const industriasSection = renderIndustriasFull(primary);
+  const blogSection = await renderBlogFull(primary);
 
-  return `${header}${productosSection}${casosSection}`;
+  return `${header}${serviciosSection}${industriasSection}${productosSection}${casosSection}${blogSection}`;
+}
+
+// ─── Servicios: catálogo completo (líneas de negocio + sub-servicios) ────────
+
+type ServicioEntry = {
+  es: string;
+  en: string;
+  nameEs: string;
+  nameEn: string;
+  descEs: string;
+  descEn: string;
+};
+
+const SERVICIOS_CATALOG: { hub: ServicioEntry; subs: ServicioEntry[] }[] = [
+  {
+    hub: {
+      es: "/servicios/inteligencia-artificial",
+      en: "/en/services/artificial-intelligence",
+      nameEs: "Inteligencia Artificial aplicada",
+      nameEn: "Applied Artificial Intelligence",
+      descEs:
+        "Agentes de IA, automatización de procesos y soluciones de contenido y marketing con resultados medibles.",
+      descEn:
+        "AI agents, process automation and content/marketing solutions with measurable results.",
+    },
+    subs: [
+      {
+        es: "/servicios/inteligencia-artificial/agentes-ia",
+        en: "/en/services/artificial-intelligence/ai-agents",
+        nameEs: "Agentes de IA",
+        nameEn: "AI Agents",
+        descEs: "Agentes conversacionales y operativos integrados a los sistemas de la empresa.",
+        descEn: "Conversational and operational agents integrated with company systems.",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/agentes-comerciales",
+        en: "/en/services/artificial-intelligence/sales-agents",
+        nameEs: "Agentes comerciales con IA",
+        nameEn: "AI Sales Agents",
+        descEs: "Automatización de prospección, calificación y seguimiento comercial.",
+        descEn: "Automated prospecting, qualification and sales follow-up.",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/automatizacion-procesos",
+        en: "/en/services/artificial-intelligence/process-automation",
+        nameEs: "Automatización de procesos",
+        nameEn: "Process Automation",
+        descEs: "Flujos de negocio automatizados de punta a punta con IA.",
+        descEn: "End-to-end business workflows automated with AI.",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/gestion-contenido",
+        en: "/en/services/artificial-intelligence/content-management",
+        nameEs: "Gestión de contenido con IA",
+        nameEn: "AI Content Management",
+        descEs: "Producción y operación de contenido a escala para medios y marcas.",
+        descEn: "Content production and operations at scale for media and brands.",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/marketing-crm",
+        en: "/en/services/artificial-intelligence/marketing-crm",
+        nameEs: "Marketing y CRM con IA",
+        nameEn: "AI Marketing & CRM",
+        descEs: "Segmentación, personalización y automatización sobre el CRM existente.",
+        descEn: "Segmentation, personalization and automation on top of the existing CRM.",
+      },
+    ],
+  },
+  {
+    hub: {
+      es: "/servicios/cloud",
+      en: "/en/services/cloud",
+      nameEs: "Cloud y FinOps",
+      nameEn: "Cloud & FinOps",
+      descEs:
+        "Arquitectura, migración, seguridad y optimización de costos en AWS, GCP y Azure con gobierno real.",
+      descEn:
+        "Architecture, migration, security and cost optimization on AWS, GCP and Azure with real governance.",
+    },
+    subs: [
+      {
+        es: "/servicios/cloud/finops",
+        en: "/en/services/cloud/finops",
+        nameEs: "FinOps",
+        nameEn: "FinOps",
+        descEs: "Reducción de costos cloud del 30–40% con modelo de success fee.",
+        descEn: "30–40% cloud cost reduction with a success-fee model.",
+      },
+      {
+        es: "/servicios/cloud/migracion-aws",
+        en: "/en/services/cloud/aws-migration",
+        nameEs: "Migración a AWS",
+        nameEn: "AWS Migration",
+        descEs: "Migración de workloads con zero downtime y estrategia de rollback.",
+        descEn: "Workload migration with zero downtime and rollback strategy.",
+      },
+      {
+        es: "/servicios/cloud/infraestructura",
+        en: "/en/services/cloud/infrastructure",
+        nameEs: "Infraestructura cloud",
+        nameEn: "Cloud Infrastructure",
+        descEs: "Arquitecturas de alta disponibilidad en AWS, Azure y GCP.",
+        descEn: "High-availability architectures on AWS, Azure and GCP.",
+      },
+      {
+        es: "/servicios/cloud/seguridad",
+        en: "/en/services/cloud/security",
+        nameEs: "Seguridad cloud",
+        nameEn: "Cloud Security",
+        descEs: "Hardening, cumplimiento y monitoreo continuo de la nube.",
+        descEn: "Hardening, compliance and continuous cloud monitoring.",
+      },
+      {
+        es: "/servicios/cloud/serverless",
+        en: "/en/services/cloud/serverless",
+        nameEs: "Serverless",
+        nameEn: "Serverless",
+        descEs: "Aplicaciones event-driven que escalan sin administrar servidores.",
+        descEn: "Event-driven applications that scale without managing servers.",
+      },
+    ],
+  },
+  {
+    hub: {
+      es: "/servicios/staff-augmentation",
+      en: "/en/services/staff-augmentation",
+      nameEs: "Staff Augmentation premium",
+      nameEn: "Premium Staff Augmentation",
+      descEs:
+        "Talento senior de LATAM integrado a equipos en 5 días hábiles, desde $25/h según seniority.",
+      descEn:
+        "Senior LATAM talent embedded in your team within 5 business days, from $25/h by seniority.",
+    },
+    subs: [
+      {
+        es: "/servicios/staff-augmentation/desarrollo-software",
+        en: "/en/services/staff-augmentation/software-development",
+        nameEs: "Desarrolladores de software",
+        nameEn: "Software Developers",
+        descEs: "Frontend, backend y full-stack senior en stacks modernos.",
+        descEn: "Senior frontend, backend and full-stack across modern stacks.",
+      },
+      {
+        es: "/servicios/staff-augmentation/datos-ia",
+        en: "/en/services/staff-augmentation/data-ai",
+        nameEs: "Datos e IA",
+        nameEn: "Data & AI",
+        descEs: "Data engineers, data scientists y especialistas en ML/IA.",
+        descEn: "Data engineers, data scientists and ML/AI specialists.",
+      },
+      {
+        es: "/servicios/staff-augmentation/devops-cloud",
+        en: "/en/services/staff-augmentation/devops-cloud",
+        nameEs: "DevOps y Cloud",
+        nameEn: "DevOps & Cloud",
+        descEs: "SRE, DevOps e ingenieros cloud certificados.",
+        descEn: "Certified SRE, DevOps and cloud engineers.",
+      },
+      {
+        es: "/servicios/staff-augmentation/diseno-ux-ui",
+        en: "/en/services/staff-augmentation/ux-ui-design",
+        nameEs: "Diseño UX/UI",
+        nameEn: "UX/UI Design",
+        descEs: "Diseñadores de producto e investigación de usuarios.",
+        descEn: "Product designers and user researchers.",
+      },
+      {
+        es: "/servicios/staff-augmentation/qa-seguridad",
+        en: "/en/services/staff-augmentation/qa-security",
+        nameEs: "QA y Seguridad",
+        nameEn: "QA & Security",
+        descEs: "QA automation, testing y especialistas en seguridad.",
+        descEn: "QA automation, testing and security specialists.",
+      },
+    ],
+  },
+  {
+    hub: {
+      es: "/servicios/desarrollo-digital",
+      en: "/en/services/digital-development",
+      nameEs: "Desarrollo Digital",
+      nameEn: "Digital Development",
+      descEs: "Apps móviles, plataformas web, e-commerce y sitios agentic-ready a la medida.",
+      descEn: "Custom mobile apps, web platforms, e-commerce and agentic-ready websites.",
+    },
+    subs: [
+      {
+        es: "/servicios/desarrollo-digital/apps-moviles",
+        en: "/en/services/digital-development/mobile-apps",
+        nameEs: "Apps móviles",
+        nameEn: "Mobile Apps",
+        descEs: "iOS, Android y multiplataforma con foco en producto.",
+        descEn: "iOS, Android and cross-platform with a product focus.",
+      },
+      {
+        es: "/servicios/desarrollo-digital/plataformas-web",
+        en: "/en/services/digital-development/web-platforms",
+        nameEs: "Plataformas web",
+        nameEn: "Web Platforms",
+        descEs: "Aplicaciones web escalables y portales de alto tráfico.",
+        descEn: "Scalable web applications and high-traffic portals.",
+      },
+      {
+        es: "/servicios/desarrollo-digital/ecommerce",
+        en: "/en/services/digital-development/ecommerce",
+        nameEs: "E-commerce",
+        nameEn: "E-commerce",
+        descEs: "Tiendas y plataformas transaccionales de alto rendimiento.",
+        descEn: "High-performance stores and transactional platforms.",
+      },
+      {
+        es: "/servicios/desarrollo-digital/sitios-web-agentic",
+        en: "/en/services/digital-development/agentic-web",
+        nameEs: "Sitios web agentic-ready",
+        nameEn: "Agentic-ready Websites",
+        descEs: "Sitios optimizados para ser leídos y citados por agentes de IA (GEO).",
+        descEn: "Websites optimized to be read and cited by AI agents (GEO).",
+      },
+    ],
+  },
+];
+
+function renderServiciosFull(primary: "es" | "en"): string {
+  const title = primary === "en" ? "# Services — full catalog" : "# Servicios — catálogo completo";
+  const body = SERVICIOS_CATALOG.map(({ hub, subs }) => {
+    const hubName = primary === "en" ? hub.nameEn : hub.nameEs;
+    const hubDesc = primary === "en" ? hub.descEn : hub.descEs;
+    const hubUrl = BASE + (primary === "en" ? hub.en : hub.es);
+    const subLines = subs
+      .map((s) => {
+        const name = primary === "en" ? s.nameEn : s.nameEs;
+        const desc = primary === "en" ? s.descEn : s.descEs;
+        const url = BASE + (primary === "en" ? s.en : s.es);
+        return `- [${name}](${url}) — ${desc}`;
+      })
+      .join("\n");
+    return `## [${hubName}](${hubUrl})\n\n${hubDesc}\n\n${subLines}`;
+  }).join("\n\n");
+  return `\n${title}\n\n${body}\n\n---\n`;
+}
+
+// ─── Industrias ──────────────────────────────────────────────────────────────
+
+const INDUSTRIAS_LLMS: {
+  es: string;
+  en: string;
+  nameEs: string;
+  nameEn: string;
+  descEs: string;
+  descEn: string;
+}[] = [
+  {
+    es: "/industrias/fintech",
+    en: "/en/industries/fintech",
+    nameEs: "Fintech",
+    nameEn: "Fintech",
+    descEs:
+      "Compliance, escalabilidad transaccional y experiencia de usuario para finanzas digitales.",
+    descEn: "Compliance, transactional scalability and UX for digital finance.",
+  },
+  {
+    es: "/industrias/medios-entretenimiento",
+    en: "/en/industries/media-entertainment",
+    nameEs: "Medios y Entretenimiento",
+    nameEn: "Media & Entertainment",
+    descEs:
+      "Streaming, plataformas de contenido y monetización (casos Televisa, Univision, Pulzo).",
+    descEn: "Streaming, content platforms and monetization (Televisa, Univision, Pulzo cases).",
+  },
+  {
+    es: "/industrias/salud",
+    en: "/en/industries/healthcare",
+    nameEs: "Salud",
+    nameEn: "Healthcare",
+    descEs: "Software clínico y operativo con seguridad y trazabilidad.",
+    descEn: "Clinical and operational software with security and traceability.",
+  },
+  {
+    es: "/industrias/retail-ecommerce",
+    en: "/en/industries/retail-ecommerce",
+    nameEs: "Retail y E-commerce",
+    nameEn: "Retail & E-commerce",
+    descEs: "Comercio digital de alto tráfico y operaciones omnicanal.",
+    descEn: "High-traffic digital commerce and omnichannel operations.",
+  },
+  {
+    es: "/industrias/logistica",
+    en: "/en/industries/logistics",
+    nameEs: "Logística",
+    nameEn: "Logistics",
+    descEs: "Optimización de operaciones, tracking y visibilidad de cadena de suministro.",
+    descEn: "Operations optimization, tracking and supply-chain visibility.",
+  },
+  {
+    es: "/industrias/manufactura",
+    en: "/en/industries/manufacturing",
+    nameEs: "Manufactura",
+    nameEn: "Manufacturing",
+    descEs: "Digitalización de planta, datos industriales y automatización.",
+    descEn: "Plant digitalization, industrial data and automation.",
+  },
+];
+
+function renderIndustriasFull(primary: "es" | "en"): string {
+  const title = primary === "en" ? "# Industries" : "# Industrias";
+  const body = INDUSTRIAS_LLMS.map((i) => {
+    const name = primary === "en" ? i.nameEn : i.nameEs;
+    const desc = primary === "en" ? i.descEn : i.descEs;
+    const url = BASE + (primary === "en" ? i.en : i.es);
+    return `- [${name}](${url}) — ${desc}`;
+  }).join("\n");
+  return `\n${title}\n\n${body}\n\n---\n`;
+}
+
+// ─── Blog: posts publicados ──────────────────────────────────────────────────
+
+async function renderBlogFull(primary: "es" | "en"): Promise<string> {
+  let posts: Awaited<ReturnType<typeof getAllBlogPostsLight>> = [];
+  try {
+    posts = await getAllBlogPostsLight();
+  } catch {
+    return "";
+  }
+  if (!posts.length) return "";
+
+  const title = primary === "en" ? "# Blog — published articles" : "# Blog — artículos publicados";
+  const prefix = primary === "en" ? "/en" : "";
+  const body = posts
+    .map((p) => {
+      const postTitle = (primary === "en" ? p.titleEn : p.titleEs) || p.titleEs || p.slug;
+      const excerpt = (primary === "en" ? p.excerptEn : p.excerptEs) || p.excerptEs || "";
+      const url = `${BASE}${prefix}/blog/${p.slug}`;
+      return `- [${postTitle}](${url})${excerpt ? ` — ${excerpt}` : ""}`;
+    })
+    .join("\n");
+  return `\n${title}\n\n${body}\n`;
 }
 
 function renderCasosEs(): string {

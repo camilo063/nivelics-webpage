@@ -22,6 +22,7 @@ import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -35,20 +36,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("cloud", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/cloud",
     title: cms?.seoTitle || "Servicios Cloud AWS · GCP · Azure | Migración y FinOps",
     description:
       cms?.seoDescription ||
       "Arquitectura multi-cloud, migración, DevOps y optimización de costos con enfoque FinOps.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/cloud",
-      languages: {
-        es: "https://www.nivelics.com/servicios/cloud",
-        en: "https://www.nivelics.com/en/services/cloud",
-        "x-default": "https://www.nivelics.com/servicios/cloud",
-      },
-    },
-  };
+  });
 }
 
 const SUB_SERVICES = [

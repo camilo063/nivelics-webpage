@@ -6,7 +6,9 @@ import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -24,12 +26,11 @@ export async function generateMetadata({
   const raw = await getCasoExito("cronica");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
-  const esUrl = "https://www.nivelics.com/casos-de-exito/cronica";
-  const enUrl = "https://www.nivelics.com/en/case-studies/cronica";
+  const { es: esUrl, en: enUrl } = localizedUrls("/casos-de-exito/cronica");
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Crónica Argentina | Nivelics";
+  const title = caso?.seoTitle || "Caso de Éxito Crónica Argentina";
   const description =
     caso?.seoDescription ||
     "Cómo Nivelics modernizó la plataforma digital de Crónica con arquitectura moderna y personalización con IA.";
@@ -98,6 +99,18 @@ export default async function CronicaPage({ params }: { params: Promise<{ locale
     },
   ])[0];
 
+  const review =
+    caso?.testimonialQuote && caso.testimonialAuthor
+      ? getReviewSchema({
+          quote: caso.testimonialQuote,
+          author: caso.testimonialAuthor,
+          role: caso.testimonialRole,
+          aboutName: caso.clientName || "Crónica",
+          aboutUrl: "/casos-de-exito/cronica",
+          locale,
+        })
+      : null;
+
   return (
     <PageWrapper>
       <script
@@ -105,6 +118,7 @@ export default async function CronicaPage({ params }: { params: Promise<{ locale
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <JsonLd data={creativeWork} />
+      {review && <JsonLd data={review} />}
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

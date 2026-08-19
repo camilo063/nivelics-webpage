@@ -96,6 +96,7 @@ export const routing = defineRouting({
       es: "/servicios/desarrollo-digital/sitios-web-agentic",
       en: "/services/digital-development/agentic-web",
     },
+    "/industrias": { es: "/industrias", en: "/industries" },
     "/industrias/fintech": { es: "/industrias/fintech", en: "/industries/fintech" },
     "/industrias/medios-entretenimiento": {
       es: "/industrias/medios-entretenimiento",
@@ -133,6 +134,7 @@ export const routing = defineRouting({
       en: "/success-stories/univision",
     },
     "/blog": { es: "/blog", en: "/blog" },
+    "/precios": { es: "/precios", en: "/pricing" },
     "/contacto": { es: "/contacto", en: "/contact" },
     "/trabaja-con-nosotros": { es: "/trabaja-con-nosotros", en: "/careers" },
     "/privacidad": { es: "/privacidad", en: "/privacy" },

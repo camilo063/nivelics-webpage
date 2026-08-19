@@ -4,6 +4,7 @@ import { ServiceBadge, CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getAllCasosExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -20,8 +21,7 @@ export async function generateMetadata({
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
 
-  const esUrl = "https://www.nivelics.com/casos-de-exito";
-  const enUrl = "https://www.nivelics.com/en/case-studies";
+  const { es: esUrl, en: enUrl } = localizedUrls("/casos-de-exito");
   const canonical = isEn ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 

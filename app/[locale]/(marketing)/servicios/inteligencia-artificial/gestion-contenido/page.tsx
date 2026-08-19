@@ -18,6 +18,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -31,20 +32,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("gestion-contenido", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/inteligencia-artificial/gestion-contenido",
     title: cms?.seoTitle || "Gestión de Contenido con IA | SEO y Marketing Automatizado",
     description:
       cms?.seoDescription ||
       "Generación y optimización de contenido a escala con IA. Integración con tu CMS y flujos editoriales.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
-      languages: {
-        es: "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
-        en: "https://www.nivelics.com/en/services/artificial-intelligence/content-management",
-        "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial/gestion-contenido",
-      },
-    },
-  };
+  });
 }
 
 export default async function GestionContenidoPage({

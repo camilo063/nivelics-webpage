@@ -23,6 +23,7 @@ import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -36,20 +37,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("inteligencia-artificial", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/inteligencia-artificial",
     title: cms?.seoTitle || "IA Aplicada a Negocios | Agentes, Automatización y RAG",
     description:
       cms?.seoDescription ||
       "Soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/inteligencia-artificial",
-      languages: {
-        es: "https://www.nivelics.com/servicios/inteligencia-artificial",
-        en: "https://www.nivelics.com/en/services/artificial-intelligence",
-        "x-default": "https://www.nivelics.com/servicios/inteligencia-artificial",
-      },
-    },
-  };
+  });
 }
 
 const SUB_SERVICES = [

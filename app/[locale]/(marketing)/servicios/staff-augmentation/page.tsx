@@ -25,6 +25,7 @@ import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
 import { waUrl } from "@/lib/utils/whatsapp";
 import { uiLabel } from "@/lib/cms/ui-labels-helper";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -38,20 +39,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("staff-augmentation", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/staff-augmentation",
     title: cms?.seoTitle || "Staff Augmentation Premium Colombia | Talento Tech LATAM",
     description:
       cms?.seoDescription ||
       "Equipos de ingeniería on-demand con talento senior verificado. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/staff-augmentation",
-      languages: {
-        es: "https://www.nivelics.com/servicios/staff-augmentation",
-        en: "https://www.nivelics.com/en/services/staff-augmentation",
-        "x-default": "https://www.nivelics.com/servicios/staff-augmentation",
-      },
-    },
-  };
+  });
 }
 
 const SUB_SERVICES = [

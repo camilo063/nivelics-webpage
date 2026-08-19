@@ -3,25 +3,29 @@ import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getCertificacionesPublic, pickLocale } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: "Reconocimientos y Certificaciones | Nivelics",
-  description:
-    "Reconocimientos y certificaciones de Nivelics: Great Place to Work, miembro ANDI, presencia USA a través de Nivelics LLC.",
-  alternates: {
-    canonical: "https://www.nivelics.com/nosotros/certificaciones",
-    languages: {
-      es: "https://www.nivelics.com/nosotros/certificaciones",
-      en: "https://www.nivelics.com/en/about/certifications",
-      "x-default": "https://www.nivelics.com/nosotros/certificaciones",
-    },
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return buildPageMetadata({
+    locale: isEn ? "en" : "es",
+    href: "/nosotros/certificaciones",
+    title: isEn ? "Awards and Certifications" : "Reconocimientos y Certificaciones",
+    description: isEn
+      ? "Nivelics awards and certifications: Great Place to Work, ANDI member, US presence through Nivelics LLC."
+      : "Reconocimientos y certificaciones de Nivelics: Great Place to Work, miembro ANDI, presencia USA a través de Nivelics LLC.",
+  });
+}
 
 // LEGACY FALLBACK
 const CERTIFICATIONS = [

@@ -6,7 +6,9 @@ import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -24,12 +26,11 @@ export async function generateMetadata({
   const raw = await getCasoExito("univision");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
-  const esUrl = "https://www.nivelics.com/casos-de-exito/univision";
-  const enUrl = "https://www.nivelics.com/en/case-studies/univision";
+  const { es: esUrl, en: enUrl } = localizedUrls("/casos-de-exito/univision");
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Univision | Nivelics";
+  const title = caso?.seoTitle || "Caso de Éxito Univision";
   const description =
     caso?.seoDescription ||
     "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.";
@@ -98,6 +99,18 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
     },
   ])[0];
 
+  const review =
+    caso?.testimonialQuote && caso.testimonialAuthor
+      ? getReviewSchema({
+          quote: caso.testimonialQuote,
+          author: caso.testimonialAuthor,
+          role: caso.testimonialRole,
+          aboutName: caso.clientName || "Univision",
+          aboutUrl: "/casos-de-exito/univision",
+          locale,
+        })
+      : null;
+
   return (
     <PageWrapper>
       <script
@@ -105,6 +118,7 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <JsonLd data={creativeWork} />
+      {review && <JsonLd data={review} />}
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

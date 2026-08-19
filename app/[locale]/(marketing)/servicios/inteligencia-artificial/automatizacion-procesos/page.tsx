@@ -18,6 +18,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -31,22 +32,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("automatizacion-procesos", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/inteligencia-artificial/automatizacion-procesos",
     title: cms?.seoTitle || "Automatización de Procesos con IA | Eficiencia Operacional",
     description:
       cms?.seoDescription ||
       "Automatizamos procesos en finanzas, RRHH y logística. Hasta 50% reducción de tiempo operativo.",
-    alternates: {
-      canonical:
-        "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
-      languages: {
-        es: "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
-        en: "https://www.nivelics.com/en/services/artificial-intelligence/process-automation",
-        "x-default":
-          "https://www.nivelics.com/servicios/inteligencia-artificial/automatizacion-procesos",
-      },
-    },
-  };
+  });
 }
 
 export default async function AutomatizacionProcesosPage({

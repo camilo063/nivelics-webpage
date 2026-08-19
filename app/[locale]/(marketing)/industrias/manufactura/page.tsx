@@ -8,6 +8,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,20 +25,14 @@ export async function generateMetadata({
   const raw = await getIndustria("manufactura");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/industrias/manufactura",
     title: ind?.seoTitle || "Industria 4.0 y Manufactura Inteligente",
     description:
       ind?.seoDescription ||
       "Soluciones de IoT, mantenimiento predictivo y calidad automatizada para la industria manufacturera.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias/manufactura",
-      languages: {
-        es: "https://www.nivelics.com/industrias/manufactura",
-        en: "https://www.nivelics.com/en/industries/manufacturing",
-        "x-default": "https://www.nivelics.com/industrias/manufactura",
-      },
-    },
-  };
+  });
 }
 
 // LEGACY FALLBACK

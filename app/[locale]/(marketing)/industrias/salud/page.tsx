@@ -8,6 +8,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getIndustria, mapIndustria } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
 
@@ -24,20 +25,14 @@ export async function generateMetadata({
   const raw = await getIndustria("salud");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/industrias/salud",
     title: ind?.seoTitle || "Transformación Digital en Salud",
     description:
       ind?.seoDescription ||
       "Soluciones de interoperabilidad, telemedicina y gestión de datos clínicos para el sector salud.",
-    alternates: {
-      canonical: "https://www.nivelics.com/industrias/salud",
-      languages: {
-        es: "https://www.nivelics.com/industrias/salud",
-        en: "https://www.nivelics.com/en/industries/healthcare",
-        "x-default": "https://www.nivelics.com/industrias/salud",
-      },
-    },
-  };
+  });
 }
 
 // LEGACY FALLBACK

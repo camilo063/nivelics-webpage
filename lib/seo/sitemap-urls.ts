@@ -2,6 +2,8 @@ import { db } from "@/lib/db";
 import { landingPages, blogPosts } from "@/lib/db/schema/admin";
 import { eq, and, isNull } from "drizzle-orm";
 import { getAllProductosSitemap } from "@/lib/cms/productos";
+import { getBlogCategoriesPublic } from "@/lib/cms/queries";
+import { LEGACY_REDIRECTS } from "@/lib/seo/legacy-redirects";
 
 export const BASE = "https://www.nivelics.com";
 export const STATIC_LAST_MOD = new Date("2026-04-01");
@@ -151,7 +153,7 @@ const STATIC_URLS: SiteUrl[] = [
   // Subservicios Desarrollo Digital
   {
     es: "/servicios/desarrollo-digital/sitios-web-agentic",
-    en: "/en/services/digital-development/agentic-websites",
+    en: "/en/services/digital-development/agentic-web",
     priority: 0.85,
     lastModified: SERVICIOS_MOD,
   },
@@ -175,6 +177,13 @@ const STATIC_URLS: SiteUrl[] = [
   },
 
   // Industrias
+  {
+    es: "/industrias",
+    en: "/en/industries",
+    priority: 0.85,
+    changeFrequency: "monthly",
+    lastModified: INDUSTRIAS_MOD,
+  },
   {
     es: "/industrias/fintech",
     en: "/en/industries/fintech",
@@ -301,6 +310,13 @@ const STATIC_URLS: SiteUrl[] = [
     lastModified: STATIC_LAST_MOD,
   },
   { es: "/contacto", en: "/en/contact", priority: 0.8, lastModified: NOSOTROS_MOD },
+  {
+    es: "/precios",
+    en: "/en/pricing",
+    priority: 0.9,
+    changeFrequency: "monthly",
+    lastModified: new Date("2026-08-19"),
+  },
   { es: "/trabaja-con-nosotros", en: "/en/careers", priority: 0.6, lastModified: NOSOTROS_MOD },
   { es: "/soporte", en: "/en/support", priority: 0.5, lastModified: NOSOTROS_MOD },
   {
@@ -311,6 +327,50 @@ const STATIC_URLS: SiteUrl[] = [
     lastModified: new Date("2025-06-01"),
   },
 ];
+
+// --- Legacy-redirect shadow guard -----------------------------------------
+// Machine surfaces (sitemap, RSS) must never announce a URL that answers with
+// a redirect. A blog slug that still appears in the legacy redirects consumed
+// by next.config.ts is "shadowed": the redirect fires before routing, so the
+// page is unreachable even when the DB row is published (e.g. a renamed slug
+// kept as a published duplicate, or a post migrated after the redirect list
+// was generated).
+
+function safeDecode(s: string): string {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+}
+
+const LITERAL_REDIRECT_PATHS = new Set<string>();
+const SLUG_GROUP_REDIRECTS: Array<{ prefix: string; slugs: Set<string> }> = [];
+
+for (const rule of LEGACY_REDIRECTS) {
+  const group = rule.source.match(/^(.*)\/:slug\((.+)\)$/);
+  if (group) {
+    SLUG_GROUP_REDIRECTS.push({
+      prefix: group[1],
+      slugs: new Set(group[2].split("|").map(safeDecode)),
+    });
+  } else if (!/[:(){}*+?]/.test(rule.source)) {
+    LITERAL_REDIRECT_PATHS.add(safeDecode(rule.source));
+  }
+}
+
+function isLegacyRedirectedPath(path: string): boolean {
+  const decoded = safeDecode(path);
+  if (LITERAL_REDIRECT_PATHS.has(decoded)) return true;
+  return SLUG_GROUP_REDIRECTS.some(
+    (g) => decoded.startsWith(`${g.prefix}/`) && g.slugs.has(decoded.slice(g.prefix.length + 1)),
+  );
+}
+
+/** True when a blog post's ES or EN URL is shadowed by a legacy redirect. */
+export function isLegacyShadowedBlogSlug(slug: string): boolean {
+  return isLegacyRedirectedPath(`/blog/${slug}`) || isLegacyRedirectedPath(`/en/blog/${slug}`);
+}
 
 async function getIndexableLandings() {
   if (!db) return [];
@@ -362,10 +422,11 @@ async function getProductosForSitemap() {
 }
 
 export async function getAllSiteUrls(): Promise<SiteUrl[]> {
-  const [landings, productos, posts] = await Promise.all([
+  const [landings, productos, posts, categories] = await Promise.all([
     getIndexableLandings(),
     getProductosForSitemap(),
     getBlogPostsForSitemap(),
+    getBlogCategoriesPublic().catch(() => []),
   ]);
 
   const lastProductoUpdate = productos.reduce((latest, p) => {
@@ -404,12 +465,21 @@ export async function getAllSiteUrls(): Promise<SiteUrl[]> {
       changeFrequency: "monthly" as const,
       lastModified: p.updatedAt ? new Date(p.updatedAt) : undefined,
     })),
-    ...posts.map((p) => ({
-      es: `/blog/${p.slug}`,
-      en: `/en/blog/${p.slug}`,
-      priority: 0.6,
-      changeFrequency: "monthly" as const,
-      lastModified: p.updatedAt ?? p.createdAt ?? undefined,
+    ...posts
+      .filter((p) => !isLegacyShadowedBlogSlug(p.slug))
+      .map((p) => ({
+        es: `/blog/${p.slug}`,
+        en: `/en/blog/${p.slug}`,
+        priority: 0.6,
+        changeFrequency: "monthly" as const,
+        lastModified: p.updatedAt ?? p.createdAt ?? undefined,
+      })),
+    ...categories.map((c) => ({
+      es: `/blog/categoria/${c.slug}`,
+      en: `/en/blog/categoria/${c.slug}`,
+      priority: 0.5,
+      changeFrequency: "weekly" as const,
+      lastModified: lastBlogUpdate,
     })),
   ];
 }

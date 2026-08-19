@@ -19,6 +19,7 @@ import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -32,20 +33,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("infraestructura", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/cloud/infraestructura",
     title: cms?.seoTitle || "Arquitectura e Infraestructura Cloud | AWS \u00b7 GCP \u00b7 Azure",
     description:
       cms?.seoDescription ||
       "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/cloud/infraestructura",
-      languages: {
-        es: "https://www.nivelics.com/servicios/cloud/infraestructura",
-        en: "https://www.nivelics.com/en/services/cloud/infrastructure",
-        "x-default": "https://www.nivelics.com/servicios/cloud/infraestructura",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

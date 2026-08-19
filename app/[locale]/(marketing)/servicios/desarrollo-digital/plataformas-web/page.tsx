@@ -19,6 +19,7 @@ import {
 } from "@/components/sections/cms-servicio-sections";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -32,20 +33,14 @@ export async function generateMetadata({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("plataformas-web", locale);
-  return {
+  return buildPageMetadata({
+    locale,
+    href: "/servicios/desarrollo-digital/plataformas-web",
     title: cms?.seoTitle || "Plataformas Web | Desarrollo Full-Stack Escalable",
     description:
       cms?.seoDescription ||
       "Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna y escalable.",
-    alternates: {
-      canonical: "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
-      languages: {
-        es: "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
-        en: "https://www.nivelics.com/en/services/digital-development/web-platforms",
-        "x-default": "https://www.nivelics.com/servicios/desarrollo-digital/plataformas-web",
-      },
-    },
-  };
+  });
 }
 
 const BENEFITS = [

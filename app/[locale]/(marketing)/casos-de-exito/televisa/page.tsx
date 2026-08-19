@@ -6,7 +6,9 @@ import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
+import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
 import { getCasoExito, mapCasoExito, uiLabel } from "@/lib/cms";
 import type { Locale } from "@/lib/cms";
@@ -24,12 +26,11 @@ export async function generateMetadata({
   const raw = await getCasoExito("televisa");
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
-  const esUrl = "https://www.nivelics.com/casos-de-exito/televisa";
-  const enUrl = "https://www.nivelics.com/en/case-studies/televisa";
+  const { es: esUrl, en: enUrl } = localizedUrls("/casos-de-exito/televisa");
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Televisa N+ | Nivelics";
+  const title = caso?.seoTitle || "Caso de Éxito Televisa N+";
   const description =
     caso?.seoDescription ||
     "Cómo Nivelics ayudó a Televisa a construir N+, una plataforma de noticias digitales tipo streaming escalable a millones de usuarios.";
@@ -98,6 +99,18 @@ export default async function TelevisaPage({ params }: { params: Promise<{ local
     },
   ])[0];
 
+  const review =
+    caso?.testimonialQuote && caso.testimonialAuthor
+      ? getReviewSchema({
+          quote: caso.testimonialQuote,
+          author: caso.testimonialAuthor,
+          role: caso.testimonialRole,
+          aboutName: caso.clientName || "Televisa / N+",
+          aboutUrl: "/casos-de-exito/televisa",
+          locale,
+        })
+      : null;
+
   return (
     <PageWrapper>
       <script
@@ -105,6 +118,7 @@ export default async function TelevisaPage({ params }: { params: Promise<{ local
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <JsonLd data={creativeWork} />
+      {review && <JsonLd data={review} />}
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
