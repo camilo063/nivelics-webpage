@@ -113,4 +113,32 @@ export const INDUSTRIAS_SCHEMA_DATA: Record<string, IndustriaSchemaParams> = {
       "automatización planta",
     ],
   },
+  "medicion-de-audiencias": {
+    nombre: "Medición de Audiencias",
+    descripcion:
+      "IA para medición de audiencias y ratings: agentes de voz para gestión de paneles, QA automatizado de datos de sintonía y dashboards de audiencia en tiempo real.",
+    slugEs: "medicion-de-audiencias",
+    slugEn: "audience-measurement",
+    keywords: [
+      "medición de audiencias LATAM",
+      "ratings televisión",
+      "gestión de paneles IA",
+      "agentes de voz encuestas",
+      "dashboards de audiencia",
+    ],
+  },
+  "investigacion-de-mercados": {
+    nombre: "Investigación de Mercados",
+    descripcion:
+      "IA para investigación de mercados y trabajo de campo: back-checks con llamadas automáticas, CATI híbrido, dashboards de campo en tiempo real y entregables generados con IA.",
+    slugEs: "investigacion-de-mercados",
+    slugEn: "market-research",
+    keywords: [
+      "investigación de mercados Colombia",
+      "back-checks encuestas IA",
+      "CATI automatizado",
+      "supervisión trabajo de campo",
+      "encuestas con inteligencia artificial",
+    ],
+  },
 };

@@ -23,6 +23,8 @@ import {
   Clock,
   GitBranch,
   Award,
+  Radio,
+  ClipboardList,
   type LucideIcon,
 } from "lucide-react";
 import { SITE } from "@/lib/constants";
@@ -53,6 +55,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   clock: Clock,
   "git-branch": GitBranch,
   award: Award,
+  radio: Radio,
+  "clipboard-list": ClipboardList,
 };
 
 function resolveIcon(name: string | undefined, fallback: LucideIcon): LucideIcon {

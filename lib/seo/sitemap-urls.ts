@@ -220,6 +220,18 @@ const STATIC_URLS: SiteUrl[] = [
     priority: 0.85,
     lastModified: INDUSTRIAS_MOD,
   },
+  {
+    es: "/industrias/medicion-de-audiencias",
+    en: "/en/industries/audience-measurement",
+    priority: 0.85,
+    lastModified: new Date("2026-08-25"),
+  },
+  {
+    es: "/industrias/investigacion-de-mercados",
+    en: "/en/industries/market-research",
+    priority: 0.85,
+    lastModified: new Date("2026-08-25"),
+  },
 
   // Productos (hub) — lastModified set dynamically in getAllSiteUrls
   { es: "/productos", en: "/en/products", priority: 0.9, changeFrequency: "monthly" },

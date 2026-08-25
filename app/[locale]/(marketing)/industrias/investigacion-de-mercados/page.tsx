@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
+import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
@@ -22,38 +22,38 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const raw = await getIndustria("manufactura");
+  const raw = await getIndustria("investigacion-de-mercados");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   return buildPageMetadata({
     locale,
-    href: "/industrias/manufactura",
-    title: ind?.seoTitle || "Industria 4.0 y Manufactura Inteligente",
+    href: "/industrias/investigacion-de-mercados",
+    title: ind?.seoTitle || "IA y Automatización para Investigación de Mercados",
     description:
       ind?.seoDescription ||
-      "Soluciones de IoT, mantenimiento predictivo y calidad automatizada para la industria manufacturera.",
+      "Back-checks con llamadas de IA al 100% de la muestra, CATI híbrido, dashboards de campo en tiempo real y entregables automáticos para firmas de investigación.",
   });
 }
 
 // LEGACY FALLBACK
 const CHALLENGES = [
   {
-    icon: "cpu",
-    title: "IoT y sensores",
+    icon: "tri-check",
+    title: "Back-checks que solo cubren una muestra",
     description:
-      "Conectar miles de sensores en planta para recolectar datos en tiempo real y alimentar dashboards de producción.",
+      "La supervisión telefónica verifica el 10–20% del trabajo de campo; el resto queda sin auditar y los hallazgos llegan tarde.",
   },
   {
-    icon: "wrench",
-    title: "Mantenimiento predictivo",
+    icon: "hex-nodes",
+    title: "Coordinación de campo manual",
     description:
-      "Anticipar fallas en equipos antes de que ocurran para reducir tiempos de inactividad y costos de reparación no planificada.",
+      "Rutas, agendas y supervisión de encuestadores gestionados con planillas y llamadas, sin visibilidad en tiempo real del operativo.",
   },
   {
-    icon: "scan-line",
-    title: "Calidad automatizada",
+    icon: "hex-time",
+    title: "Entregables que tardan semanas",
     description:
-      "Detectar defectos de producción en línea con visión por computadora y controles de calidad automatizados en tiempo real.",
+      "Codificación de abiertas, cruces y armado de informes consumen el tiempo entre el cierre de campo y el cliente.",
   },
 ];
 
@@ -61,50 +61,60 @@ const CHALLENGES = [
 const SOLUTIONS = [
   {
     badge: "ia" as const,
-    title: "IA para Manufactura",
+    title: "IA para Investigación de Mercados",
     description:
-      "Modelos de mantenimiento predictivo, visión por computadora para control de calidad y optimización de procesos con ML.",
+      "Agentes de voz para back-checks al 100% de la muestra y CATI híbrido; codificación automática de abiertas y detección de fraude.",
   },
   {
     badge: "cloud" as const,
-    title: "Cloud para Manufactura",
+    title: "Cloud para Investigación de Mercados",
     description:
-      "Plataformas IoT en la nube, digital twins, procesamiento de datos de sensores y dashboards de producción en tiempo real.",
+      "Dashboards de operación de campo en tiempo real y pipelines que conectan captura, validación y entrega.",
   },
   {
     badge: "staffing" as const,
-    title: "Staffing para Manufactura",
+    title: "Staffing para Investigación de Mercados",
     description:
-      "Ingenieros con experiencia en IoT industrial, integraciones SCADA/MES y desarrollo de plataformas de Industria 4.0.",
+      "Científicos de datos e ingenieros bilingües integrados a tus proyectos de research en 5 días.",
   },
 ];
 
-export default async function ManufacturaPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function InvestigacionMercadosPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const raw = await getIndustria("manufactura");
+  const raw = await getIndustria("investigacion-de-mercados");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   const challenges = ind?.painPoints?.length ? ind.painPoints : CHALLENGES;
   const isEn = locale === "en";
-  const industriaName = ind?.name || (isEn ? "Manufacturing" : "Manufactura");
+  const industriaName = ind?.name || (isEn ? "Market Research" : "Investigación de Mercados");
+
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
-    name: ind?.name || "Industria 4.0 y Manufactura Inteligente",
+    name: ind?.name || "Soluciones Tecnológicas para Investigación de Mercados",
     description:
       ind?.heroSubtitle ||
-      "IA, cloud y staffing para empresas manufactureras que necesitan IoT, mantenimiento predictivo y calidad automatizada.",
-    url: "/industrias/manufactura",
-    serviceType: "Manufacturing Technology Consulting",
+      "IA, cloud y staffing para firmas de investigación: back-checks automatizados, CATI híbrido, dashboards de campo y entregables en días.",
+    url: "/industrias/investigacion-de-mercados",
+    serviceType: "Market Research Technology Consulting",
   });
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
-    { name: ind?.name || "Manufactura", url: "/industrias/manufactura" },
+    {
+      name: ind?.name || "Investigación de Mercados",
+      url: "/industrias/investigacion-de-mercados",
+    },
   ]);
-  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["manufactura"]);
+  const webPageSchema = getIndustriaWebPageSchema(
+    INDUSTRIAS_SCHEMA_DATA["investigacion-de-mercados"],
+  );
 
   return (
     <PageWrapper>
@@ -130,11 +140,11 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
         />
         <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            {ind?.heroTitle || "Industria 4.0: IA y Cloud para Manufactura"}
+            {ind?.heroTitle || "Transformación Digital para Investigación de Mercados"}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-text-70">
             {ind?.heroSubtitle ||
-              "Conectamos sensores, predecimos fallas y automatizamos calidad para llevar tu planta al siguiente nivel."}
+              "Verificación con llamadas de IA al 100% de la muestra, dashboards de campo en tiempo real y automatización de entregables."}
           </p>
         </div>
       </section>
@@ -153,7 +163,7 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
               return (
                 <div key={ch.title} className="glass glow-hover rounded-xl p-6">
                   <div className="mb-4">
-                    <GeoIconBox name={iconName} size={22} color="amber" />
+                    <GeoIconBox name={iconName} size={22} color="green" />
                   </div>
                   <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">
@@ -194,9 +204,7 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
       </section>
 
       {ind && <IndustriaRichSections industria={ind} locale={locale} />}
-      {!ind?.ctaTitle && (
-        <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Manufactura"} />
-      )}
+      {!ind?.ctaTitle && <CTABanner title={ind?.ctaText || "Hablemos de tu operación de campo"} />}
     </PageWrapper>
   );
 }

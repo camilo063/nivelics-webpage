@@ -11,6 +11,8 @@ interface LpComparativeTableProps {
   rows: Row[];
   footnote?: string;
   accentColor?: string;
+  /** Texto del chip sobre la columna resaltada. */
+  highlightBadge?: string;
 }
 
 export function LpComparativeTable({
@@ -21,6 +23,7 @@ export function LpComparativeTable({
   rows,
   footnote,
   accentColor = "#00E5A0",
+  highlightBadge = "Recomendado",
 }: LpComparativeTableProps) {
   return (
     <section className="bg-[#0A0A0F] py-20 md:py-24">
@@ -49,7 +52,7 @@ export function LpComparativeTable({
                           className="rounded-full px-2 py-0.5 text-[11px] font-bold uppercase text-black"
                           style={{ backgroundColor: accentColor }}
                         >
-                          Recomendado
+                          {highlightBadge}
                         </span>
                       )}
                     </div>

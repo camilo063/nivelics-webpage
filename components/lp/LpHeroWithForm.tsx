@@ -9,6 +9,7 @@ interface LpHeroWithFormProps {
   formCtaText?: string;
   fuente: string;
   defaultServicio?: string;
+  locale?: "es" | "en";
 }
 
 export function LpHeroWithForm({
@@ -16,11 +17,16 @@ export function LpHeroWithForm({
   h1,
   subtitle,
   accentColor = "#00D4FF",
-  formTitle = "Agenda tu diagnóstico",
-  formCtaText = "Quiero mi diagnóstico →",
+  formTitle,
+  formCtaText,
   fuente,
   defaultServicio,
+  locale = "es",
 }: LpHeroWithFormProps) {
+  const resolvedFormTitle =
+    formTitle ?? (locale === "en" ? "Book your diagnostic" : "Agenda tu diagnóstico");
+  const resolvedFormCta =
+    formCtaText ?? (locale === "en" ? "Get my diagnostic →" : "Quiero mi diagnóstico →");
   return (
     <section className="relative overflow-hidden bg-[#0A0A0F] pt-16 pb-20 md:pt-24 md:pb-28">
       <div
@@ -52,13 +58,14 @@ export function LpHeroWithForm({
         <div>
           <LpForm
             fuente={fuente}
-            title={formTitle}
+            title={resolvedFormTitle}
             subtitle=""
-            ctaText={formCtaText}
+            ctaText={resolvedFormCta}
             accentColor={accentColor}
             compact
             withAnchor={false}
             defaultServicio={defaultServicio}
+            locale={locale}
           />
         </div>
       </div>

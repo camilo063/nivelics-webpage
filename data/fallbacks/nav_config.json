@@ -358,6 +358,26 @@
             "ariaLabelEs": "Manufactura — soluciones de Industria 4.0, automatización de procesos y digitalización de planta",
             "descriptionEn": "Industry 4.0 and plant automation",
             "descriptionEs": "Industria 4.0 y automatización de planta"
+          },
+          {
+            "url": "/industrias/medicion-de-audiencias",
+            "icon": "radio",
+            "labelEs": "Medición de Audiencias",
+            "labelEn": "Audience Measurement",
+            "ariaLabelEs": "Medición de Audiencias — agentes de voz IA, QA de datos y dashboards para operaciones de ratings y paneles",
+            "ariaLabelEn": "Audience Measurement — AI voice agents, data QA and dashboards for ratings and panel operations",
+            "descriptionEs": "Paneles, ratings y QA de datos con IA",
+            "descriptionEn": "Panels, ratings and AI-powered data QA"
+          },
+          {
+            "url": "/industrias/investigacion-de-mercados",
+            "icon": "clipboard-list",
+            "labelEs": "Investigación de Mercados",
+            "labelEn": "Market Research",
+            "ariaLabelEs": "Investigación de Mercados — back-checks con IA, CATI híbrido y dashboards de campo para firmas de research",
+            "ariaLabelEn": "Market Research — AI back-checks, hybrid CATI and field dashboards for research firms",
+            "descriptionEs": "Campo, CATI y entregables con IA",
+            "descriptionEn": "Fieldwork, CATI and AI deliverables"
           }
         ],
         "titleEn": "Industries",

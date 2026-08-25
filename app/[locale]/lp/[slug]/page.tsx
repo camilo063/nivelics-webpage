@@ -6,6 +6,7 @@ import { eq, and, ne } from "drizzle-orm";
 import { BlocksRenderer, type LandingBlock } from "@/components/lp/BlockRenderer";
 import { LpWhatsApp } from "@/components/lp/LpWhatsApp";
 import { DEFAULT_OG_IMAGE, mirroredUrls } from "@/lib/seo/page-meta";
+import { getSiteConfigPublic } from "@/lib/cms/queries";
 import { setRequestLocale } from "next-intl/server";
 
 export const revalidate = 86400;
@@ -99,11 +100,14 @@ export default async function LandingPageDynamic({
 }) {
   const { slug, locale: __locale } = await params;
   setRequestLocale(__locale);
-  const landing = await getLanding(slug);
+  const [landing, siteConfig] = await Promise.all([getLanding(slug), getSiteConfigPublic()]);
 
   if (!landing || landing.status === "draft" || landing.status === "archived") {
     notFound();
   }
+
+  const lpLocale: "es" | "en" = __locale === "en" ? "en" : "es";
+  const whatsappPhone = siteConfig?.phoneWhatsapp ?? null;
 
   const accentKey = (landing.accentColor as string) || "dev";
   const accentColor = ACCENT_COLORS[accentKey] || "#00D4FF";
@@ -130,9 +134,10 @@ export default async function LandingPageDynamic({
     },
   };
 
-  // Resolve WhatsApp message from B18 block (if any)
+  // Resolve WhatsApp message: admin column → B18 block → default.
   const footerBlock = blocks.find((b) => b.type === "B18");
   const waMessage =
+    landing.whatsappMessage ||
     (footerBlock?.data?.whatsapp_mensaje as string) ||
     `Hola, quiero información sobre ${landing.campaignName}`;
 
@@ -152,9 +157,11 @@ export default async function LandingPageDynamic({
         accentColor={accentColor}
         fuente={landing.slug}
         defaultServicio={defaultServicio}
+        locale={lpLocale}
+        whatsappPhone={whatsappPhone}
       />
 
-      <LpWhatsApp message={waMessage} />
+      <LpWhatsApp message={waMessage} phone={whatsappPhone} />
     </>
   );
 }

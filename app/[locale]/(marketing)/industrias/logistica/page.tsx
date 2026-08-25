@@ -87,6 +87,8 @@ export default async function LogisticaPage({ params }: { params: Promise<{ loca
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   const challenges = ind?.painPoints?.length ? ind.painPoints : CHALLENGES;
+  const isEn = locale === "en";
+  const industriaName = ind?.name || (isEn ? "Logistics" : "Logística");
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
@@ -140,7 +142,11 @@ export default async function LogisticaPage({ params }: { params: Promise<{ loca
       {/* Challenges */}
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Los 3 retos tech de Logística</h2>
+          <h2 className="text-3xl font-bold text-text-100">
+            {isEn
+              ? `The 3 tech challenges in ${industriaName}`
+              : `Los 3 retos tech de ${industriaName}`}
+          </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {challenges.map((ch) => {
               const iconName = "icon" in ch && typeof ch.icon === "string" ? ch.icon : undefined;
@@ -163,7 +169,9 @@ export default async function LogisticaPage({ params }: { params: Promise<{ loca
       {/* Solutions */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Cómo el marco I+C+S resuelve esto</h2>
+          <h2 className="text-3xl font-bold text-text-100">
+            {isEn ? "How the I+C+S framework solves this" : "Cómo el marco I+C+S resuelve esto"}
+          </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {solutions.map((sol) => {
               const badge = "badge" in sol ? sol.badge : null;

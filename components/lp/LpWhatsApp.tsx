@@ -1,25 +1,19 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
+import { waUrl } from "@/lib/utils/whatsapp";
 
 interface LpWhatsAppProps {
   message?: string;
-  phone?: string;
+  /** Número configurado en Admin → Configuración (site_config.phone_whatsapp). */
+  phone?: string | null;
 }
-
-const DEFAULT_PHONE = "573103926621";
 
 export function LpWhatsApp({
   message = "Hola, quiero más información sobre Nivelics",
   phone,
 }: LpWhatsAppProps) {
-  const resolvedPhone =
-    phone ||
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
-    (process.env.NEXT_PUBLIC_WHATSAPP ? process.env.NEXT_PUBLIC_WHATSAPP.replace(/\D/g, "") : "") ||
-    DEFAULT_PHONE;
-
-  const url = `https://wa.me/${resolvedPhone}?text=${encodeURIComponent(message)}`;
+  const url = waUrl(phone, message);
 
   return (
     <a

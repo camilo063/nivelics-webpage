@@ -18,6 +18,8 @@ import {
   Store,
   MapPin,
   Wrench,
+  Radio,
+  ClipboardList,
   type LucideIcon,
 } from "lucide-react";
 
@@ -41,6 +43,8 @@ export const INDUSTRIA_ICON_MAP: Record<string, LucideIcon> = {
   store: Store,
   "map-pin": MapPin,
   wrench: Wrench,
+  radio: Radio,
+  "clipboard-list": ClipboardList,
 };
 
 interface IndustriaIconProps {
@@ -103,6 +107,20 @@ export const SECTOR_COLORS: Record<string, SectorColor> = {
     iconColor: "text-amber-400",
     labelColor: "text-amber-400",
     hoverBorder: "hover:border-amber-500/50",
+  },
+  "medicion-de-audiencias": {
+    border: "border-cyan-500/20",
+    iconBg: "bg-cyan-500/10",
+    iconColor: "text-cyan-400",
+    labelColor: "text-cyan-400",
+    hoverBorder: "hover:border-cyan-500/50",
+  },
+  "investigacion-de-mercados": {
+    border: "border-teal-500/20",
+    iconBg: "bg-teal-500/10",
+    iconColor: "text-teal-400",
+    labelColor: "text-teal-400",
+    hoverBorder: "hover:border-teal-500/50",
   },
 };
 

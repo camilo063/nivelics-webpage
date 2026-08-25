@@ -102,6 +102,8 @@ Diagnóstico gratuito de 30 minutos. Sin RFP, sin presentaciones largas. URL: /c
 - [Retail / E-commerce](${BASE}/industrias/retail-ecommerce)
 - [Logística](${BASE}/industrias/logistica)
 - [Manufactura](${BASE}/industrias/manufactura)
+- [Medición de Audiencias](${BASE}/industrias/medicion-de-audiencias)
+- [Investigación de Mercados](${BASE}/industrias/investigacion-de-mercados)
 
 ## Casos de Éxito
 
@@ -212,6 +214,8 @@ Free 30-minute diagnostic. No RFP, no decks. URL: /en/contact
 - [Retail / E-commerce](${BASE}/en/industries/retail-ecommerce)
 - [Logistics](${BASE}/en/industries/logistics)
 - [Manufacturing](${BASE}/en/industries/manufacturing)
+- [Audience Measurement](${BASE}/en/industries/audience-measurement)
+- [Market Research](${BASE}/en/industries/market-research)
 
 ## Success stories
 
@@ -612,6 +616,26 @@ const INDUSTRIAS_LLMS: {
     nameEn: "Manufacturing",
     descEs: "Digitalización de planta, datos industriales y automatización.",
     descEn: "Plant digitalization, industrial data and automation.",
+  },
+  {
+    es: "/industrias/medicion-de-audiencias",
+    en: "/en/industries/audience-measurement",
+    nameEs: "Medición de Audiencias",
+    nameEn: "Audience Measurement",
+    descEs:
+      "Agentes de voz IA para gestión de paneles, QA del 100% de los datos de sintonía y dashboards de audiencia en tiempo real.",
+    descEn:
+      "AI voice agents for panel management, QA across 100% of tuning data and real-time audience dashboards.",
+  },
+  {
+    es: "/industrias/investigacion-de-mercados",
+    en: "/en/industries/market-research",
+    nameEs: "Investigación de Mercados",
+    nameEn: "Market Research",
+    descEs:
+      "Back-checks con llamadas de IA al 100% de la muestra, CATI híbrido, dashboards de campo y entregables automáticos.",
+    descEn:
+      "AI-call back-checks across 100% of the sample, hybrid CATI, field dashboards and automated deliverables.",
   },
 ];
 

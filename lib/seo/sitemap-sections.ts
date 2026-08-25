@@ -192,6 +192,18 @@ function buildSections(productosLinks: SitemapLink[]): SitemapSection[] {
           href: "/industrias/manufactura",
           hrefEn: "/en/industries/manufacturing",
         },
+        {
+          label: "Medición de Audiencias",
+          labelEn: "Audience Measurement",
+          href: "/industrias/medicion-de-audiencias",
+          hrefEn: "/en/industries/audience-measurement",
+        },
+        {
+          label: "Investigación de Mercados",
+          labelEn: "Market Research",
+          href: "/industrias/investigacion-de-mercados",
+          hrefEn: "/en/industries/market-research",
+        },
       ],
     },
     {
