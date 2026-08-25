@@ -714,6 +714,12 @@ export const leads = pgTable("leads", {
   // /api/contact leads — for /api/leads and /api/apply the `fuente` field
   // already carries the origin.
   fromService: varchar("from_service", { length: 200 }),
+  // UTM de la campaña que trajo el lead (capturados por el form de las LP
+  // desde la query string — p.ej. secuencias de Niveleads).
+  utmSource: varchar("utm_source", { length: 255 }),
+  utmMedium: varchar("utm_medium", { length: 255 }),
+  utmCampaign: varchar("utm_campaign", { length: 255 }),
+  utmContent: varchar("utm_content", { length: 255 }),
   isSpam: boolean("is_spam").default(false).notNull(),
   spamReason: varchar("spam_reason", { length: 50 }),
   createdAt: timestamp("created_at").defaultNow().notNull(),

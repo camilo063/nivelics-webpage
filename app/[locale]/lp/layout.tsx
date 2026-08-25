@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-export default function LpLayout({ children }: { children: React.ReactNode }) {
+export default async function LpLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const isEn = locale === "en";
   return (
     <div className="min-h-screen bg-[#0A0A0F] text-white">
       {/* Minimal nav — logo + single CTA */}
@@ -23,7 +31,7 @@ export default function LpLayout({ children }: { children: React.ReactNode }) {
             href="#formulario"
             className="inline-flex h-9 items-center rounded-full bg-[#00D4FF] px-4 text-sm font-bold text-black transition-opacity hover:opacity-90"
           >
-            Hablemos →
+            {isEn ? "Let's talk →" : "Hablemos →"}
           </a>
         </div>
       </nav>

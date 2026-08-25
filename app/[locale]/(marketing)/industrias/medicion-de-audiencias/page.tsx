@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
+import { PageWrapper } from "@/components/layout";
 import { HeroEffect } from "@/components/ui/hero-effect";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
@@ -22,38 +22,38 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const raw = await getIndustria("manufactura");
+  const raw = await getIndustria("medicion-de-audiencias");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   return buildPageMetadata({
     locale,
-    href: "/industrias/manufactura",
-    title: ind?.seoTitle || "Industria 4.0 y Manufactura Inteligente",
+    href: "/industrias/medicion-de-audiencias",
+    title: ind?.seoTitle || "IA y Automatización para Medición de Audiencias",
     description:
       ind?.seoDescription ||
-      "Soluciones de IoT, mantenimiento predictivo y calidad automatizada para la industria manufacturera.",
+      "Agentes de voz con IA, dashboards en tiempo real y automatización para operaciones de medición de audiencias: gestión de paneles, QA de datos y reportería.",
   });
 }
 
 // LEGACY FALLBACK
 const CHALLENGES = [
   {
-    icon: "cpu",
-    title: "IoT y sensores",
+    icon: "arc-person",
+    title: "Gestión de panel intensiva en llamadas",
     description:
-      "Conectar miles de sensores en planta para recolectar datos en tiempo real y alimentar dashboards de producción.",
+      "Reclutamiento, retención e incidencias de panelistas dependen de un call center en horario hábil que no escala con los picos de la operación.",
   },
   {
-    icon: "wrench",
-    title: "Mantenimiento predictivo",
+    icon: "oct-scan",
+    title: "QA de datos por muestreo manual",
     description:
-      "Anticipar fallas en equipos antes de que ocurran para reducir tiempos de inactividad y costos de reparación no planificada.",
+      "La validación de datos de sintonía se hace sobre muestras; las anomalías se detectan tarde y cuestan credibilidad frente a los clientes.",
   },
   {
-    icon: "scan-line",
-    title: "Calidad automatizada",
+    icon: "hex-chart",
+    title: "Reportería que llega tarde",
     description:
-      "Detectar defectos de producción en línea con visión por computadora y controles de calidad automatizados en tiempo real.",
+      "Canales, agencias y anunciantes esperan datos accionables el mismo día; los informes armados a mano tardan días.",
   },
 ];
 
@@ -61,50 +61,55 @@ const CHALLENGES = [
 const SOLUTIONS = [
   {
     badge: "ia" as const,
-    title: "IA para Manufactura",
+    title: "IA para Medición de Audiencias",
     description:
-      "Modelos de mantenimiento predictivo, visión por computadora para control de calidad y optimización de procesos con ML.",
+      "Agentes de voz 24/7 para gestión de panel y encuestas; detección de anomalías y fraude sobre el 100% de los datos de sintonía.",
   },
   {
     badge: "cloud" as const,
-    title: "Cloud para Manufactura",
+    title: "Cloud para Medición de Audiencias",
     description:
-      "Plataformas IoT en la nube, digital twins, procesamiento de datos de sensores y dashboards de producción en tiempo real.",
+      "Pipelines de datos en tiempo real y dashboards inteligentes para decisiones internas y entrega a clientes.",
   },
   {
     badge: "staffing" as const,
-    title: "Staffing para Manufactura",
+    title: "Staffing para Medición de Audiencias",
     description:
-      "Ingenieros con experiencia en IoT industrial, integraciones SCADA/MES y desarrollo de plataformas de Industria 4.0.",
+      "Ingenieros de datos e IA bilingües con experiencia en medios, integrados a tu equipo de medición en 5 días.",
   },
 ];
 
-export default async function ManufacturaPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function MedicionAudienciasPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const raw = await getIndustria("manufactura");
+  const raw = await getIndustria("medicion-de-audiencias");
   const ind = raw ? mapIndustria(raw as Record<string, unknown>, locale) : null;
 
   const challenges = ind?.painPoints?.length ? ind.painPoints : CHALLENGES;
   const isEn = locale === "en";
-  const industriaName = ind?.name || (isEn ? "Manufacturing" : "Manufactura");
+  const industriaName = ind?.name || (isEn ? "Audience Measurement" : "Medición de Audiencias");
+
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
-    name: ind?.name || "Industria 4.0 y Manufactura Inteligente",
+    name: ind?.name || "Soluciones Tecnológicas para Medición de Audiencias",
     description:
       ind?.heroSubtitle ||
-      "IA, cloud y staffing para empresas manufactureras que necesitan IoT, mantenimiento predictivo y calidad automatizada.",
-    url: "/industrias/manufactura",
-    serviceType: "Manufacturing Technology Consulting",
+      "IA, cloud y staffing para operaciones de medición de audiencias: gestión de paneles, QA de datos de sintonía y reportería en tiempo real.",
+    url: "/industrias/medicion-de-audiencias",
+    serviceType: "Audience Measurement Technology Consulting",
   });
   const breadcrumb = getBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
-    { name: ind?.name || "Manufactura", url: "/industrias/manufactura" },
+    { name: ind?.name || "Medición de Audiencias", url: "/industrias/medicion-de-audiencias" },
   ]);
-  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["manufactura"]);
+  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["medicion-de-audiencias"]);
 
   return (
     <PageWrapper>
@@ -130,11 +135,11 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
         />
         <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            {ind?.heroTitle || "Industria 4.0: IA y Cloud para Manufactura"}
+            {ind?.heroTitle || "Transformación Digital para Medición de Audiencias"}
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-text-70">
             {ind?.heroSubtitle ||
-              "Conectamos sensores, predecimos fallas y automatizamos calidad para llevar tu planta al siguiente nivel."}
+              "Agentes de voz con IA, dashboards en tiempo real y automatización para las operaciones que hoy dependen de llamadas y procesos manuales."}
           </p>
         </div>
       </section>
@@ -153,7 +158,7 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
               return (
                 <div key={ch.title} className="glass glow-hover rounded-xl p-6">
                   <div className="mb-4">
-                    <GeoIconBox name={iconName} size={22} color="amber" />
+                    <GeoIconBox name={iconName} size={22} color="green" />
                   </div>
                   <h3 className="text-lg font-semibold text-text-100">{ch.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-70">
@@ -195,7 +200,7 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
 
       {ind && <IndustriaRichSections industria={ind} locale={locale} />}
       {!ind?.ctaTitle && (
-        <CTABanner title={ind?.ctaText || "Hablemos de tu proyecto en Manufactura"} />
+        <CTABanner title={ind?.ctaText || "Hablemos de tu operación de medición"} />
       )}
     </PageWrapper>
   );

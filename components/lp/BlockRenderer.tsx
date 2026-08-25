@@ -28,6 +28,10 @@ interface BlockRendererProps {
   fuente: string;
   defaultServicio?: string;
   serviceTypeToServicio?: string;
+  /** Idioma del chrome de los bloques (form, footer, chips). Default "es". */
+  locale?: "es" | "en";
+  /** Número de WhatsApp configurado en Admin → Configuración. */
+  whatsappPhone?: string | null;
 }
 
 type D = Record<string, unknown>;
@@ -35,14 +39,23 @@ const str = (v: unknown, fallback = ""): string => (typeof v === "string" ? v : 
 const arr = <T,>(v: unknown, fallback: T[] = []): T[] => (Array.isArray(v) ? (v as T[]) : fallback);
 const bool = (v: unknown, fallback = false): boolean => (typeof v === "boolean" ? v : fallback);
 
-export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: BlockRendererProps) {
+export function BlockRenderer({
+  block,
+  accentColor,
+  fuente,
+  defaultServicio,
+  locale = "es",
+  whatsappPhone,
+}: BlockRendererProps) {
   const d: D = block.data || {};
+  // Copy de respaldo para los campos que la landing no trae desde Admin.
+  const t = (es: string, en: string) => (locale === "en" ? en : es);
 
   switch (block.type) {
     // ─── B01 Hero Corto ─────────────────────────────────
     case "B01": {
       const ctaPrimary = {
-        text: str(d.cta_primario_texto, "Contactar"),
+        text: str(d.cta_primario_texto) || t("Contactar", "Get in touch"),
         href: str(d.cta_primario_url, "#formulario"),
       };
       const ctaSecondary = str(d.cta_secundario_texto)
@@ -72,10 +85,11 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
           badge={str(d.badge_text)}
           h1={str(d.h1)}
           subtitle={str(d.subtitulo)}
-          formTitle={str(d.form_title, "Agenda tu diagnóstico")}
-          formCtaText={str(d.cta_texto, "Quiero mi diagnóstico →")}
+          formTitle={str(d.form_title) || undefined}
+          formCtaText={str(d.cta_texto) || undefined}
           accentColor={accentColor}
           defaultServicio={defaultServicio}
+          locale={locale}
         />
       );
 
@@ -83,7 +97,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
     case "B03":
       return (
         <LpLogosBar
-          title={str(d.titulo, "Empresas que confían en nosotros")}
+          title={str(d.titulo) || t("Empresas que confían en nosotros", "Companies that trust us")}
           logos={arr<string>(d.logos)}
         />
       );
@@ -118,7 +132,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
       }));
       return (
         <LpValueProps
-          title={str(d.titulo, "Propuesta de valor")}
+          title={str(d.titulo) || t("Propuesta de valor", "Value proposition")}
           subtitle={str(d.subtitulo)}
           items={items}
           accentColor={accentColor}
@@ -190,7 +204,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
       }));
       return (
         <LpSteps
-          title={str(d.titulo, "Cómo funciona")}
+          title={str(d.titulo) || t("Cómo funciona", "How it works")}
           subtitle={str(d.subtitulo)}
           steps={steps}
           accentColor={accentColor}
@@ -217,7 +231,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
       return (
         <LpTestimonial
           quote={str(d.quote)}
-          author={str(d.autor_nombre, "Cliente")}
+          author={str(d.autor_nombre) || t("Cliente", "Client")}
           role={`${str(d.autor_cargo)}${str(d.autor_empresa) ? `, ${str(d.autor_empresa)}` : ""}`}
           photo={str(d.autor_foto) || undefined}
           accentColor={accentColor}
@@ -230,7 +244,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
       const items = preguntas.map((p) => ({ question: p.pregunta, answer: p.respuesta }));
       return (
         <LpFAQ
-          title={str(d.titulo, "Preguntas frecuentes")}
+          title={str(d.titulo) || t("Preguntas frecuentes", "Frequently asked questions")}
           items={items}
           accentColor={accentColor}
         />
@@ -241,9 +255,11 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
     case "B11":
       return (
         <LpCTABanner
-          title={str(d.copy, "¿Listo para dar el siguiente paso?")}
+          title={
+            str(d.copy) || t("¿Listo para dar el siguiente paso?", "Ready to take the next step?")
+          }
           subtitle={str(d.subtitulo)}
-          ctaText={str(d.boton_texto, "Contactar →")}
+          ctaText={str(d.boton_texto) || t("Contactar →", "Get in touch →")}
           ctaHref={str(d.boton_url, "#formulario")}
           accentColor={accentColor}
         />
@@ -257,12 +273,13 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
           <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
             <LpForm
               fuente={fuente}
-              title={str(d.titulo, "Solicita más información")}
-              subtitle={str(d.subtitulo, "En menos de 24h te respondemos.")}
-              ctaText={str(d.cta_texto, "Enviar →")}
+              title={str(d.titulo) || undefined}
+              subtitle={str(d.subtitulo) || undefined}
+              ctaText={str(d.cta_texto) || undefined}
               accentColor={accentColor}
               defaultServicio={defaultServicio}
               trustSignals={trustSignals.length > 0 ? trustSignals : undefined}
+              locale={locale}
             />
           </div>
         </div>
@@ -277,13 +294,14 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
       return (
         <div id={str(d.anchor_id) || undefined}>
           <LpComparativeTable
-            title={str(d.titulo, "Comparativa")}
+            title={str(d.titulo) || t("Comparativa", "Comparison")}
             subtitle={str(d.subtitulo)}
             columns={columns}
             highlightColIdx={highlightIdx}
             rows={rawRows}
             footnote={str(d.footnote)}
             accentColor={accentColor}
+            highlightBadge={t("Recomendado", "Recommended")}
           />
         </div>
       );
@@ -297,7 +315,7 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
       if (items.length > 0) {
         return (
           <LpNicheSection
-            title={str(d.titulo, str(d.nicho_nombre, "Vertical"))}
+            title={str(d.titulo) || str(d.nicho_nombre) || "Vertical"}
             subtitle={str(d.subtitulo)}
             items={items.map((i) => ({
               icon: resolveIcon(i.icono),
@@ -324,7 +342,13 @@ export function BlockRenderer({ block, accentColor, fuente, defaultServicio }: B
 
     // ─── B18 Footer Mínimo ─────────────────────────────
     case "B18":
-      return <LpFooterMin whatsappMessage={str(d.whatsapp_mensaje)} />;
+      return (
+        <LpFooterMin
+          whatsappMessage={str(d.whatsapp_mensaje) || undefined}
+          whatsappPhone={whatsappPhone}
+          locale={locale}
+        />
+      );
 
     default:
       // Unknown block — silently skip in production
@@ -344,6 +368,8 @@ interface BlocksRendererProps {
   accentColor: string;
   fuente: string;
   defaultServicio?: string;
+  locale?: "es" | "en";
+  whatsappPhone?: string | null;
 }
 
 export function BlocksRenderer({
@@ -351,6 +377,8 @@ export function BlocksRenderer({
   accentColor,
   fuente,
   defaultServicio,
+  locale = "es",
+  whatsappPhone,
 }: BlocksRendererProps) {
   const sorted = [...blocks].sort((a, b) => a.order - b.order);
   return (
@@ -362,6 +390,8 @@ export function BlocksRenderer({
           accentColor={accentColor}
           fuente={fuente}
           defaultServicio={defaultServicio}
+          locale={locale}
+          whatsappPhone={whatsappPhone}
         />
       ))}
     </>

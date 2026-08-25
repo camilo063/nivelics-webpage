@@ -16,6 +16,11 @@ const leadSchema = z.object({
   fuente: z.string().min(1, "Fuente requerida"),
   mensaje: z.string().optional().nullable(),
   referrerUrl: z.string().url().optional(),
+  // UTM de la campaña (los captura el form de la LP desde la query string).
+  utmSource: z.string().trim().max(255).optional().nullable(),
+  utmMedium: z.string().trim().max(255).optional().nullable(),
+  utmCampaign: z.string().trim().max(255).optional().nullable(),
+  utmContent: z.string().trim().max(255).optional().nullable(),
 });
 
 export async function POST(request: NextRequest) {
@@ -58,7 +63,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: false, error: firstError }, { status: 400 });
     }
 
-    const { nombre, empresa, email, servicio, fuente, mensaje, referrerUrl } = parsed.data;
+    const {
+      nombre,
+      empresa,
+      email,
+      servicio,
+      fuente,
+      mensaje,
+      referrerUrl,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmContent,
+    } = parsed.data;
 
     // Capa 4 — content heuristics.
     const spamCheck = isLikelySpam({
@@ -86,6 +103,10 @@ export async function POST(request: NextRequest) {
         fuente,
         mensaje: mensaje ?? null,
         referrerUrl: referrerUrl ?? null,
+        utmSource: utmSource ?? null,
+        utmMedium: utmMedium ?? null,
+        utmCampaign: utmCampaign ?? null,
+        utmContent: utmContent ?? null,
         isSpam: spamCheck.spam,
         spamReason: spamCheck.reason ?? null,
       })

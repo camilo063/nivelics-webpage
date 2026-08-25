@@ -109,6 +109,14 @@ export const routing = defineRouting({
     },
     "/industrias/logistica": { es: "/industrias/logistica", en: "/industries/logistics" },
     "/industrias/manufactura": { es: "/industrias/manufactura", en: "/industries/manufacturing" },
+    "/industrias/medicion-de-audiencias": {
+      es: "/industrias/medicion-de-audiencias",
+      en: "/industries/audience-measurement",
+    },
+    "/industrias/investigacion-de-mercados": {
+      es: "/industrias/investigacion-de-mercados",
+      en: "/industries/market-research",
+    },
     "/productos": { es: "/productos", en: "/products" },
     "/productos/[slug]": { es: "/productos/[slug]", en: "/products/[slug]" },
     "/nosotros": { es: "/nosotros", en: "/about" },

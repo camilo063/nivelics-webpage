@@ -1,10 +1,15 @@
 import Link from "next/link";
+import { waUrl } from "@/lib/utils/whatsapp";
 
 interface LpFooterMinProps {
   whatsappMessage?: string;
+  /** Número configurado en Admin → Configuración (site_config.phone_whatsapp). */
+  whatsappPhone?: string | null;
+  locale?: "es" | "en";
 }
 
-export function LpFooterMin({}: LpFooterMinProps) {
+export function LpFooterMin({ whatsappMessage, whatsappPhone, locale = "es" }: LpFooterMinProps) {
+  const isEn = locale === "en";
   return (
     <footer className="border-t border-white/10 bg-[#0A0A0F] py-10">
       <div className="mx-auto max-w-6xl px-6">
@@ -14,13 +19,13 @@ export function LpFooterMin({}: LpFooterMinProps) {
           </Link>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-text-70">
             <Link href="/privacidad" className="hover:text-white transition-colors">
-              Política de privacidad
+              {isEn ? "Privacy policy" : "Política de privacidad"}
             </Link>
             <Link href="/soporte" className="hover:text-white transition-colors">
-              Soporte
+              {isEn ? "Support" : "Soporte"}
             </Link>
             <a
-              href="https://wa.me/573103926621"
+              href={waUrl(whatsappPhone, whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
