@@ -53,11 +53,23 @@ export async function enviarLeadANiveleads(lead: LeadParaNiveleads): Promise<Res
   const key = process.env.NIVELEADS_CAPTURE_KEY;
   if (!url || !key) return { estado: "sin_configurar" };
 
+  // La clave se añade como parámetro, no pegando `?key=` al final: si alguien
+  // configura la URL con query (`…/capture?x=1`) la cadena resultante tendría
+  // dos «?» y Niveleads no vería ninguna clave — es decir, el puente quedaría
+  // mudo con las dos variables puestas, que es el fallo más difícil de ver.
+  let destino: URL;
+  try {
+    destino = new URL(url);
+  } catch {
+    return { estado: "error", motivo: "NIVELEADS_CAPTURE_URL no es una URL válida" };
+  }
+  destino.searchParams.set("key", key);
+
   const controlador = new AbortController();
   const temporizador = setTimeout(() => controlador.abort(), TIMEOUT_MS);
 
   try {
-    const respuesta = await fetch(`${url}?key=${encodeURIComponent(key)}`, {
+    const respuesta = await fetch(destino, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       signal: controlador.signal,
