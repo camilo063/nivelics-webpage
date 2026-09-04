@@ -7,6 +7,7 @@ import { sendLeadConfirmation, detectLocaleFromReferrer } from "@/lib/email/send
 import { checkRateLimit, getRequestIp } from "@/lib/security/rate-limit";
 import { isHoneypotTriggered, isTimingSuspicious } from "@/lib/security/anti-bot";
 import { isLikelySpam } from "@/lib/security/spam-detection";
+import { enviarLeadANiveleads } from "@/lib/integrations/niveleads";
 
 const leadSchema = z.object({
   nombre: z.string().trim().min(2, "Nombre requerido"),
@@ -129,6 +130,33 @@ export async function POST(request: NextRequest) {
     if (!mail.ok && !mail.skipped) {
       console.error("[api/leads] Email delivery failed but lead saved:", mail.error);
     }
+
+    // El lead también entra a Niveleads, que es donde el equipo comercial lo
+    // trabaja y donde se mide de qué campaña salió. Va en `after`, después de
+    // responder: el visitante ya tiene su confirmación y este envío no puede
+    // hacerle esperar ni romperle el formulario si la plataforma está caída.
+    // No se reenvía el spam: este sitio ya lo clasificó, y mandarlo ensuciaría
+    // la base comercial con lo que aquí se acaba de descartar.
+    after(async () => {
+      const puente = await enviarLeadANiveleads({
+        nombre,
+        empresa,
+        email,
+        servicio: servicio ?? null,
+        fuente,
+        mensaje: mensaje ?? null,
+        referrerUrl: referrerUrl ?? null,
+        utmSource: utmSource ?? null,
+        utmMedium: utmMedium ?? null,
+        utmCampaign: utmCampaign ?? null,
+        utmContent: utmContent ?? null,
+      });
+      if (puente.estado === "error") {
+        // Se registra con el lead a la vista: si el puente se cae, alguien
+        // tiene que poder reenviarlo a mano sin adivinar cuál era.
+        console.error("[api/leads] Puente a Niveleads falló:", puente.motivo, { leadId: lead.id });
+      }
+    });
 
     after(async () => {
       const res = await sendLeadConfirmation({
