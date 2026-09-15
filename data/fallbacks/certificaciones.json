@@ -34,5 +34,29 @@
     "descriptionEs": "A través de Nivelics LLC, nuestra entidad en Estados Unidos con sede en Miami, Florida, atendemos clientes en el mercado norteamericano.",
     "descriptionEn": "Through Nivelics LLC, our US entity headquartered in Miami, Florida, we serve clients in the North American market.",
     "sortOrder": 3
+  },
+  {
+    "id": "6e349cef-5ed0-424e-aa5b-4c7e13453e45",
+    "nameEs": "Partners AWS",
+    "nameEn": "AWS Partners",
+    "issuer": "Amazon Web Services",
+    "year": 2022,
+    "logo": "",
+    "certificateUrl": "",
+    "descriptionEs": "",
+    "descriptionEn": "",
+    "sortOrder": 0
+  },
+  {
+    "id": "9507c0ef-582e-46cf-9d9e-0405564cad3c",
+    "nameEs": "Aprtners GCP",
+    "nameEn": "GCP Partners",
+    "issuer": "Google",
+    "year": 2022,
+    "logo": "",
+    "certificateUrl": "",
+    "descriptionEs": "",
+    "descriptionEn": "",
+    "sortOrder": 0
   }
 ]
