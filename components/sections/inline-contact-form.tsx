@@ -45,8 +45,17 @@ export function InlineContactForm({
         }),
       });
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? "Error al enviar el formulario");
+        const body = (await res.json().catch(() => ({}))) as {
+          error?: string;
+          details?: Record<string, string[] | undefined>;
+        };
+        // La ruta devuelve `details` con el error de cada campo y aquí se tiraba,
+        // así que un mensaje de 9 caracteres se reportaba como «Datos inválidos»
+        // y no había forma de saber qué corregir.
+        const porCampo = Object.values(body.details ?? {})
+          .flatMap((msgs) => msgs ?? [])
+          .join(" · ");
+        throw new Error(porCampo || body.error || "Error al enviar el formulario");
       }
       setSubmitted(true);
     } catch (err) {
@@ -150,9 +159,11 @@ export function InlineContactForm({
               name="message"
               rows={3}
               required
+              minLength={10}
               className="w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none resize-none"
               placeholder="Cuéntanos sobre tu proyecto..."
             />
+            <p className="mt-1 text-xs text-text-40">Mínimo 10 caracteres.</p>
           </div>
           {error && (
             <div className="sm:col-span-2">
