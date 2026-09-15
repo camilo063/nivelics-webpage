@@ -1,7 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { after } from "next/server";
 import { routing } from "@/lib/i18n/routing";
+import { pingIndexNow } from "@/lib/seo/indexnow";
 
 type PathnameEntry = string | Record<string, string>;
 
@@ -34,6 +36,26 @@ export async function revalidatePublicPages(paths: string[]) {
       }
     }
   }
+
+  // Avisar a IndexNow (Bing/Yandex, y con ello Copilot) va DESPUÉS de responder:
+  // va en after() para que una caída suya no alargue ni rompa un guardado del
+  // admin. Se manda la lista explícita, no el sitio entero: el protocolo
+  // penaliza avisar de URLs que no cambiaron.
+  const urls = paths.flatMap((path) =>
+    routing.locales.map((locale) => {
+      const localized = toLocalePath(path, locale);
+      // toLocalePath devuelve /es/... y /en/...; la URL pública en español no
+      // lleva prefijo (localePrefix "as-needed"), así que se le quita.
+      const publica =
+        locale === routing.defaultLocale ? localized.replace(/^\/es/, "") || "/" : localized;
+      return `https://www.nivelics.com${publica}`;
+    }),
+  );
+
+  after(async () => {
+    const res = await pingIndexNow(urls);
+    if (!res.ok) console.error("[indexnow] no se pudo avisar:", res.motivo);
+  });
 
   // Nav, footer, home strips and cross-links mean an explicit path list is
   // never complete: editing a service also changes the mega-menu on every
