@@ -116,6 +116,15 @@
                 "ariaLabelEs": "Serverless — arquitecturas event-driven con Lambda y Cloud Functions",
                 "descriptionEn": "Pay-per-use, automatic scaling",
                 "descriptionEs": "Pay-per-use, escala automática"
+              },
+              {
+                "url": "/servicios/cloud/ciberseguridad-ethical-hacking",
+                "labelEn": "Cybersecurity & Ethical Hacking",
+                "labelEs": "Ciberseguridad y Ethical Hacking",
+                "ariaLabelEn": "Cybersecurity and Ethical Hacking — pentesting, red team and AI agent security audits",
+                "ariaLabelEs": "Ciberseguridad y Ethical Hacking — pentesting, red team y auditoría de seguridad de agentes de IA",
+                "descriptionEn": "Pentesting, red team and AI security",
+                "descriptionEs": "Pentesting, red team y seguridad de IA"
               }
             ],
             "titleEn": "Cloud",

@@ -127,6 +127,12 @@ export default async function MigracionAWSPage({
             url: "/servicios/cloud/serverless",
             urlEn: "/en/services/cloud/serverless",
           },
+          {
+            name: "Ciberseguridad y Ethical Hacking",
+            nameEn: "Cybersecurity & Ethical Hacking",
+            url: "/servicios/cloud/ciberseguridad-ethical-hacking",
+            urlEn: "/en/services/cloud/ethical-hacking",
+          },
         ]}
       />
       <script

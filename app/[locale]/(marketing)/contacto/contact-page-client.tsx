@@ -274,6 +274,7 @@ export function ContactPageClient({
                       <option value="cloud">Cloud / FinOps</option>
                       <option value="staffing">Staff Augmentation</option>
                       <option value="desarrollo">Desarrollo Digital</option>
+                      <option value="ciberseguridad">Ciberseguridad / Ethical Hacking</option>
                       <option value="otro">Otro</option>
                     </select>
                     {errors.service && (

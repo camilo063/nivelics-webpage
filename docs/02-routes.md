@@ -38,6 +38,7 @@ When you add a new public route, **three** files change:
 | `/servicios/cloud/migracion-aws`                             | `/en/services/cloud/aws-migration`                        |
 | `/servicios/cloud/infraestructura`                           | `/en/services/cloud/infrastructure`                       |
 | `/servicios/cloud/seguridad`                                 | `/en/services/cloud/security`                             |
+| `/servicios/cloud/ciberseguridad-ethical-hacking`            | `/en/services/cloud/ethical-hacking`                      |
 | `/servicios/cloud/serverless`                                | `/en/services/cloud/serverless`                           |
 | `/servicios/staff-augmentation`                              | `/en/services/staff-augmentation`                         |
 | `/servicios/staff-augmentation/desarrollo-software`          | `/en/services/staff-augmentation/software-development`    |

@@ -1,5 +1,6 @@
 // CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Shield, KeyRound, Activity } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
@@ -73,6 +74,7 @@ export default async function SeguridadCloudPage({
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const cms = await getServicioData("seguridad", locale);
+  const isEn = locale === "en";
   const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
     primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
     secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
@@ -127,6 +129,12 @@ export default async function SeguridadCloudPage({
             nameEn: "Serverless",
             url: "/servicios/cloud/serverless",
             urlEn: "/en/services/cloud/serverless",
+          },
+          {
+            name: "Ciberseguridad y Ethical Hacking",
+            nameEn: "Cybersecurity & Ethical Hacking",
+            url: "/servicios/cloud/ciberseguridad-ethical-hacking",
+            urlEn: "/en/services/cloud/ethical-hacking",
           },
         ]}
       />
@@ -232,6 +240,38 @@ export default async function SeguridadCloudPage({
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Enlace cruzado hacia Ethical Hacking. Bilingüe: el resto de esta página
+          todavía está en español duro, pero lo que se añade nuevo no lo agrava. */}
+      <section className="pt-4">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+          <p className="max-w-3xl text-sm leading-relaxed text-text-70">
+            {isEn ? (
+              <>
+                Want to go beyond hardening? We also break into systems on purpose — under a signed
+                agreement — to find what an attacker would find first.{" "}
+                <Link
+                  href="/en/services/cloud/ethical-hacking"
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  See Cybersecurity and Ethical Hacking →
+                </Link>
+              </>
+            ) : (
+              <>
+                ¿Quieres ir más allá del hardening? También entramos a los sistemas a propósito —
+                bajo acuerdo firmado — para encontrar lo que un atacante encontraría primero.{" "}
+                <Link
+                  href="/servicios/cloud/ciberseguridad-ethical-hacking"
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Conoce Ciberseguridad y Ethical Hacking →
+                </Link>
+              </>
+            )}
+          </p>
         </div>
       </section>
 

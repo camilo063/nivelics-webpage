@@ -151,6 +151,17 @@ const megaMenu: MegaMenuSection[] = [
             ariaLabelEs: "Serverless — arquitecturas event-driven con Lambda y Cloud Functions",
             ariaLabelEn: "Serverless — event-driven architectures with Lambda and Cloud Functions",
           },
+          {
+            labelEs: "Ciberseguridad y Ethical Hacking",
+            labelEn: "Cybersecurity & Ethical Hacking",
+            url: "/servicios/cloud/ciberseguridad-ethical-hacking",
+            descriptionEs: "Pentesting, red team y seguridad de IA",
+            descriptionEn: "Pentesting, red team and AI security",
+            ariaLabelEs:
+              "Ciberseguridad y Ethical Hacking — pentesting, red team y auditoría de seguridad de agentes de IA",
+            ariaLabelEn:
+              "Cybersecurity and Ethical Hacking — pentesting, red team and AI agent security audits",
+          },
         ],
       },
       {

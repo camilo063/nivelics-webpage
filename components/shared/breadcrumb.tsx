@@ -27,6 +27,8 @@ const SLUG_TO_KEY: Record<string, string> = {
   seguridad: "security",
   security: "security",
   serverless: "serverless",
+  "ciberseguridad-ethical-hacking": "ethicalHacking",
+  "ethical-hacking": "ethicalHacking",
   "staff-augmentation": "staffAugmentation",
   "desarrollo-software": "softwareDevelopment",
   "software-development": "softwareDevelopment",
