@@ -34,23 +34,6 @@
     "updatedAt": "2026-04-09T01:55:41.989Z"
   },
   {
-    "id": "f63c8e8e-a06c-4a6e-88f2-5b83b4ead7f6",
-    "slug": "omar-neira",
-    "name": "Omar Neira",
-    "roleEs": "CSO (Chief Sales Officer)",
-    "roleEn": "CSO (Chief Sales Officer)",
-    "bioEs": "Lidera la estrategia comercial y desarrollo de nuevos mercados. Foco en expansión regional y partnerships estratégicos.",
-    "bioEn": "Leads commercial strategy and new market development. Focus on regional expansion and strategic partnerships.",
-    "photo": null,
-    "linkedinUrl": null,
-    "isFounder": false,
-    "isFeatured": true,
-    "sortOrder": 3,
-    "status": "published",
-    "createdAt": "2026-04-09T01:55:42.151Z",
-    "updatedAt": "2026-04-09T01:55:42.151Z"
-  },
-  {
     "id": "1e8ae997-97e9-4451-b465-22545c8011a9",
     "slug": "fernanda-soto",
     "name": "Fernanda Soto",
@@ -83,5 +66,22 @@
     "status": "published",
     "createdAt": "2026-04-09T01:55:42.473Z",
     "updatedAt": "2026-04-09T01:55:42.473Z"
+  },
+  {
+    "id": "f63c8e8e-a06c-4a6e-88f2-5b83b4ead7f6",
+    "slug": "omar-neira",
+    "name": "Omar Neira",
+    "roleEs": "CSO (Chief Sales Officer)",
+    "roleEn": "CSO (Chief Sales Officer)",
+    "bioEs": "Lidera la estrategia comercial y desarrollo de nuevos mercados. Foco en expansión regional y partnerships estratégicos.",
+    "bioEn": "Leads commercial strategy and new market development. Focus on regional expansion and strategic partnerships.",
+    "photo": null,
+    "linkedinUrl": null,
+    "isFounder": false,
+    "isFeatured": true,
+    "sortOrder": 3,
+    "status": "archived",
+    "createdAt": "2026-04-09T01:55:42.151Z",
+    "updatedAt": "2026-08-10T19:36:38.867Z"
   }
 ]

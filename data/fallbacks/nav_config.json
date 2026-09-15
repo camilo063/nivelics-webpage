@@ -371,22 +371,22 @@
           {
             "url": "/industrias/medicion-de-audiencias",
             "icon": "radio",
-            "labelEs": "Medición de Audiencias",
             "labelEn": "Audience Measurement",
-            "ariaLabelEs": "Medición de Audiencias — agentes de voz IA, QA de datos y dashboards para operaciones de ratings y paneles",
+            "labelEs": "Medición de Audiencias",
             "ariaLabelEn": "Audience Measurement — AI voice agents, data QA and dashboards for ratings and panel operations",
-            "descriptionEs": "Paneles, ratings y QA de datos con IA",
-            "descriptionEn": "Panels, ratings and AI-powered data QA"
+            "ariaLabelEs": "Medición de Audiencias — agentes de voz IA, QA de datos y dashboards para operaciones de ratings y paneles",
+            "descriptionEn": "Panels, ratings and AI-powered data QA",
+            "descriptionEs": "Paneles, ratings y QA de datos con IA"
           },
           {
             "url": "/industrias/investigacion-de-mercados",
             "icon": "clipboard-list",
-            "labelEs": "Investigación de Mercados",
             "labelEn": "Market Research",
-            "ariaLabelEs": "Investigación de Mercados — back-checks con IA, CATI híbrido y dashboards de campo para firmas de research",
+            "labelEs": "Investigación de Mercados",
             "ariaLabelEn": "Market Research — AI back-checks, hybrid CATI and field dashboards for research firms",
-            "descriptionEs": "Campo, CATI y entregables con IA",
-            "descriptionEn": "Fieldwork, CATI and AI deliverables"
+            "ariaLabelEs": "Investigación de Mercados — back-checks con IA, CATI híbrido y dashboards de campo para firmas de research",
+            "descriptionEn": "Fieldwork, CATI and AI deliverables",
+            "descriptionEs": "Campo, CATI y entregables con IA"
           }
         ],
         "titleEn": "Industries",
@@ -627,6 +627,6 @@
       "contactWhatsappLabelEn": "WhatsApp",
       "contactWhatsappLabelEs": "WhatsApp"
     },
-    "updatedAt": "2026-04-16T17:07:57.803Z"
+    "updatedAt": "2026-09-15T16:51:46.386Z"
   }
 ]

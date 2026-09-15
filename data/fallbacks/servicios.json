@@ -1267,100 +1267,6 @@
     "deletedAt": null
   },
   {
-    "id": "98e77e02-3c1e-4b45-a705-7c4610876b4e",
-    "slugEs": "ecommerce",
-    "slugEn": "ecommerce",
-    "parentId": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
-    "serviceType": "sub",
-    "accentColor": "dev",
-    "icon": "hex-plus",
-    "titleEs": "E-commerce",
-    "titleEn": "E-commerce",
-    "subtitleEs": "E-commerce a medida con cero comisiones por transacción. Catálogo inteligente, pricing dinámico, pasarelas de pago y conexión real con tu ERP.",
-    "subtitleEn": "Custom e-commerce with zero transaction fees. Smart catalog, dynamic pricing, payment gateways and real integration with your ERP.",
-    "descriptionEs": "Plataformas propias sin comisiones. Arquitectura escalable para ventas digitales.",
-    "descriptionEn": "Own platforms with zero commissions. Scalable architecture for digital sales.",
-    "benefits": [
-      {
-        "icon": "hex-plus",
-        "copyEn": "Advanced catalog management with variants, segment-based pricing, scheduled discounts, and dynamic pricing rules.",
-        "copyEs": "Gestión avanzada de catálogo con variantes, precios por segmento, descuentos programados y reglas de pricing dinámico.",
-        "titleEn": "Dynamic catalog and pricing",
-        "titleEs": "Catálogo y pricing dinámico"
-      },
-      {
-        "icon": "credit-card",
-        "copyEn": "Integration with Stripe, MercadoPago, PayU and local gateways for secure payments with multiple payment methods.",
-        "copyEs": "Integración con Stripe, MercadoPago, PayU y pasarelas locales para pagos seguros con múltiples métodos de pago.",
-        "titleEn": "Integrated payment gateways",
-        "titleEs": "Pasarelas de pago integradas"
-      },
-      {
-        "icon": "package-check",
-        "copyEn": "Connection with SAP, Oracle, Odoo, and logistics systems for inventory synchronization, orders, and fulfillment.",
-        "copyEs": "Conexión con SAP, Oracle, Odoo y sistemas de logística para sincronización de inventario, órdenes y fulfillment.",
-        "titleEn": "ERP and logistics integration",
-        "titleEs": "Integración ERP y logística"
-      }
-    ],
-    "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "0%",
-        "labelEn": "Sales commissions — every sale is 100% yours",
-        "labelEs": "Comisiones por venta — cada venta es 100% tuya"
-      },
-      {
-        "unit": "",
-        "value": "99.9%",
-        "labelEn": "Guaranteed uptime — even on Black Friday",
-        "labelEs": "Uptime garantizado — incluso en Black Friday"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Your customer data — on your infrastructure",
-        "labelEs": "Datos del cliente tuyos — en tu infraestructura"
-      },
-      {
-        "unit": "",
-        "value": "<2s",
-        "labelEn": "Load time — optimized checkout",
-        "labelEs": "Tiempo de carga — checkout optimizado"
-      }
-    ],
-    "faqs": null,
-    "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
-    "ctaPrimaryTextEn": "Tell us about your project",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": null,
-    "ctaSecondaryTextEn": null,
-    "ctaSecondaryUrl": null,
-    "coverImage": null,
-    "seoTitleEs": "E-commerce | Plataformas Propias",
-    "seoTitleEn": "E-commerce | Custom Platforms",
-    "seoDescriptionEs": "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
-    "seoDescriptionEn": "B2B and B2C digital stores with catalog, dynamic pricing, payment gateways and ERP integration.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 2,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:39.144Z",
-    "updatedAt": "2026-04-09T11:25:58.770Z",
-    "deletedAt": null
-  },
-  {
     "id": "f192e7ac-b9e1-4a8e-9025-8e81c861872f",
     "slugEs": "sitios-web-agentic",
     "slugEn": "agentic-websites",
@@ -1885,146 +1791,6 @@
     "deletedAt": null
   },
   {
-    "id": "a5d08ac2-9a81-47cc-acb3-8a3f91948403",
-    "slugEs": "finops",
-    "slugEn": "finops",
-    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
-    "serviceType": "sub",
-    "accentColor": "finops",
-    "icon": "hex-chart",
-    "titleEs": "Optimiza tu inversión cloud hasta un 40%",
-    "titleEn": "Optimize your cloud investment by up to 40%",
-    "subtitleEs": "Implementamos prácticas FinOps para que cada dólar en la nube genere valor medible para tu negocio.",
-    "subtitleEn": "We implement FinOps practices so every dollar in the cloud generates measurable value for your business.",
-    "descriptionEs": "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento.",
-    "descriptionEn": "Cloud financial governance and optimization. We reduce costs up to 40% without losing performance.",
-    "benefits": [
-      {
-        "icon": "eye",
-        "copyEn": "Real-time dashboards of consumption by team, service and environment.",
-        "copyEs": "Dashboards en tiempo real de consumo por equipo, servicio y ambiente.",
-        "titleEn": "Visibility",
-        "titleEs": "Visibilidad"
-      },
-      {
-        "icon": "trending-down",
-        "copyEn": "Rightsizing, reserved instances, spot fleet and orphaned resource elimination.",
-        "copyEs": "Rightsizing, instancias reservadas, spot fleet y eliminación de recursos huérfanos.",
-        "titleEn": "Optimization",
-        "titleEs": "Optimización"
-      },
-      {
-        "icon": "pie-chart",
-        "copyEn": "Tagging strategy, showback/chargeback and unit economics per product.",
-        "copyEs": "Estrategia de tagging, showback/chargeback y unit economics por producto.",
-        "titleEn": "Cost Allocation",
-        "titleEs": "Asignación de costos"
-      },
-      {
-        "icon": "bar-chart",
-        "copyEn": "Cost projection with predictive models and anomaly alerts.",
-        "copyEs": "Proyección de costos con modelos predictivos y alertas de anomalías.",
-        "titleEn": "Forecasting",
-        "titleEs": "Forecasting"
-      },
-      {
-        "icon": "dia-flow",
-        "copyEn": "Automated policies, budgets and approval workflows.",
-        "copyEs": "Políticas automatizadas, presupuestos y workflows de aprobación.",
-        "titleEn": "Governance",
-        "titleEs": "Gobernanza"
-      },
-      {
-        "icon": "hex-chart",
-        "copyEn": "Team training, FinOps ceremonies and efficiency metrics.",
-        "copyEs": "Capacitación de equipos, ceremonias FinOps y métricas de eficiencia.",
-        "titleEn": "FinOps Culture",
-        "titleEs": "Cultura FinOps"
-      }
-    ],
-    "processSteps": [
-      {
-        "descEn": "Current spend mapping, waste identification, benchmark against best practices.",
-        "descEs": "Mapeo del gasto actual, identificación de waste, benchmark contra mejores prácticas.",
-        "number": 1,
-        "titleEn": "Discovery",
-        "titleEs": "Discovery",
-        "duration": "Semana 1-2"
-      },
-      {
-        "descEn": "First savings implemented: rightsizing, reserved instances, orphaned resource elimination.",
-        "descEs": "Primeros ahorros implementados: rightsizing, instancias reservadas, eliminación de recursos huérfanos.",
-        "number": 2,
-        "titleEn": "Quick Wins",
-        "titleEs": "Quick Wins",
-        "duration": "Semana 3-4"
-      },
-      {
-        "descEn": "Automated policies, anomaly alerts, governance dashboards and handoff to internal team.",
-        "descEs": "Políticas automatizadas, alertas de anomalías, dashboards de gobernanza y handoff al equipo interno.",
-        "number": 3,
-        "titleEn": "Governance",
-        "titleEs": "Gobernanza",
-        "duration": "Semana 5-6"
-      }
-    ],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "30-40%",
-        "labelEn": "Cloud bill reduction",
-        "labelEs": "Reducción factura cloud"
-      },
-      {
-        "unit": "sem",
-        "value": "2-3",
-        "labelEn": "Time to first savings",
-        "labelEs": "Tiempo al primer ahorro"
-      },
-      {
-        "unit": "",
-        "value": "5x-10x",
-        "labelEn": "Project ROI",
-        "labelEs": "ROI del proyecto"
-      },
-      {
-        "unit": "",
-        "value": "15-30%",
-        "labelEn": "Orphaned resources eliminated",
-        "labelEs": "Recursos huérfanos eliminados"
-      }
-    ],
-    "faqs": null,
-    "ctaPrimaryTextEs": "Solicitar evaluación",
-    "ctaPrimaryTextEn": "Request assessment",
-    "ctaPrimaryUrl": "/servicios/cloud/finops",
-    "ctaSecondaryTextEs": null,
-    "ctaSecondaryTextEn": null,
-    "ctaSecondaryUrl": null,
-    "coverImage": null,
-    "seoTitleEs": "FinOps — Optimización Financiera Cloud",
-    "seoTitleEn": "FinOps — Cloud Financial Optimization",
-    "seoDescriptionEs": "Gobernanza y optimización financiera cloud. Ahorro típico de 30-40% en gasto cloud.",
-    "seoDescriptionEn": "Cloud financial governance and optimization. Typical 30-40% savings in cloud spend.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 1,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:36.467Z",
-    "updatedAt": "2026-04-09T01:55:36.467Z",
-    "deletedAt": null
-  },
-  {
     "id": "04ae48c8-6f3f-4031-af05-b0a7ed047ae1",
     "slugEs": "agentes-ia",
     "slugEn": "ai-agents",
@@ -2147,6 +1913,146 @@
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.635Z",
     "updatedAt": "2026-04-16T21:41:31.352Z",
+    "deletedAt": null
+  },
+  {
+    "id": "a5d08ac2-9a81-47cc-acb3-8a3f91948403",
+    "slugEs": "finops",
+    "slugEn": "finops",
+    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
+    "serviceType": "sub",
+    "accentColor": "finops",
+    "icon": "hex-chart",
+    "titleEs": "Optimiza tu inversión cloud hasta un 35%",
+    "titleEn": "Optimize your cloud investment by up to 35%",
+    "subtitleEs": "Implementamos prácticas FinOps para que cada dólar en la nube genere valor medible para tu negocio.",
+    "subtitleEn": "We implement FinOps practices so every dollar in the cloud generates measurable value for your business.",
+    "descriptionEs": "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 35% sin perder rendimiento.",
+    "descriptionEn": "Cloud financial governance and optimization. We reduce costs up to 35% without losing performance.",
+    "benefits": [
+      {
+        "icon": "eye",
+        "copyEn": "Real-time dashboards of consumption by team, service and environment.",
+        "copyEs": "Dashboards en tiempo real de consumo por equipo, servicio y ambiente.",
+        "titleEn": "Visibility",
+        "titleEs": "Visibilidad"
+      },
+      {
+        "icon": "trending-down",
+        "copyEn": "Rightsizing, reserved instances, spot fleet and orphaned resource elimination.",
+        "copyEs": "Rightsizing, instancias reservadas, spot fleet y eliminación de recursos huérfanos.",
+        "titleEn": "Optimization",
+        "titleEs": "Optimización"
+      },
+      {
+        "icon": "pie-chart",
+        "copyEn": "Tagging strategy, showback/chargeback and unit economics per product.",
+        "copyEs": "Estrategia de tagging, showback/chargeback y unit economics por producto.",
+        "titleEn": "Cost Allocation",
+        "titleEs": "Asignación de costos"
+      },
+      {
+        "icon": "bar-chart",
+        "copyEn": "Cost projection with predictive models and anomaly alerts.",
+        "copyEs": "Proyección de costos con modelos predictivos y alertas de anomalías.",
+        "titleEn": "Forecasting",
+        "titleEs": "Forecasting"
+      },
+      {
+        "icon": "dia-flow",
+        "copyEn": "Automated policies, budgets and approval workflows.",
+        "copyEs": "Políticas automatizadas, presupuestos y workflows de aprobación.",
+        "titleEn": "Governance",
+        "titleEs": "Gobernanza"
+      },
+      {
+        "icon": "hex-chart",
+        "copyEn": "Team training, FinOps ceremonies and efficiency metrics.",
+        "copyEs": "Capacitación de equipos, ceremonias FinOps y métricas de eficiencia.",
+        "titleEn": "FinOps Culture",
+        "titleEs": "Cultura FinOps"
+      }
+    ],
+    "processSteps": [
+      {
+        "descEn": "Current spend mapping, waste identification, benchmark against best practices.",
+        "descEs": "Mapeo del gasto actual, identificación de waste, benchmark contra mejores prácticas.",
+        "number": 1,
+        "titleEn": "Discovery",
+        "titleEs": "Discovery",
+        "duration": "Semana 1-2"
+      },
+      {
+        "descEn": "First savings implemented: rightsizing, reserved instances, orphaned resource elimination.",
+        "descEs": "Primeros ahorros implementados: rightsizing, instancias reservadas, eliminación de recursos huérfanos.",
+        "number": 2,
+        "titleEn": "Quick Wins",
+        "titleEs": "Quick Wins",
+        "duration": "Semana 3-4"
+      },
+      {
+        "descEn": "Automated policies, anomaly alerts, governance dashboards and handoff to internal team.",
+        "descEs": "Políticas automatizadas, alertas de anomalías, dashboards de gobernanza y handoff al equipo interno.",
+        "number": 3,
+        "titleEn": "Governance",
+        "titleEs": "Gobernanza",
+        "duration": "Semana 5-6"
+      }
+    ],
+    "metrics": [
+      {
+        "unit": "",
+        "value": "30-40%",
+        "labelEn": "Cloud bill reduction",
+        "labelEs": "Reducción factura cloud"
+      },
+      {
+        "unit": "sem",
+        "value": "2-3",
+        "labelEn": "Time to first savings",
+        "labelEs": "Tiempo al primer ahorro"
+      },
+      {
+        "unit": "",
+        "value": "5x-10x",
+        "labelEn": "Project ROI",
+        "labelEs": "ROI del proyecto"
+      },
+      {
+        "unit": "",
+        "value": "15-30%",
+        "labelEn": "Orphaned resources eliminated",
+        "labelEs": "Recursos huérfanos eliminados"
+      }
+    ],
+    "faqs": [],
+    "ctaPrimaryTextEs": "Solicitar evaluación",
+    "ctaPrimaryTextEn": "Request assessment",
+    "ctaPrimaryUrl": "/servicios/cloud/finops",
+    "ctaSecondaryTextEs": "",
+    "ctaSecondaryTextEn": "",
+    "ctaSecondaryUrl": "",
+    "coverImage": "",
+    "seoTitleEs": "FinOps — Optimización Financiera Cloud",
+    "seoTitleEn": "FinOps — Cloud Financial Optimization",
+    "seoDescriptionEs": "Gobernanza y optimización financiera cloud. Ahorro típico de 30-40% en gasto cloud.",
+    "seoDescriptionEn": "Cloud financial governance and optimization. Typical 30-40% savings in cloud spend.",
+    "schemaServiceJson": null,
+    "hubMetrics": [],
+    "frameworkTitleEs": "",
+    "frameworkTitleEn": "",
+    "frameworkSubtitleEs": "",
+    "frameworkSubtitleEn": "",
+    "frameworkPillars": [],
+    "sectorsTitleEs": "",
+    "sectorsTitleEn": "",
+    "sectors": [],
+    "sortOrder": 1,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:36.467Z",
+    "updatedAt": "2026-05-26T17:30:09.361Z",
     "deletedAt": null
   },
   {
@@ -2782,6 +2688,100 @@
     "deletedAt": null
   },
   {
+    "id": "98e77e02-3c1e-4b45-a705-7c4610876b4e",
+    "slugEs": "ecommerce",
+    "slugEn": "ecommerce",
+    "parentId": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
+    "serviceType": "sub",
+    "accentColor": "dev",
+    "icon": "hex-plus",
+    "titleEs": "E-commerce",
+    "titleEn": "E-commerce",
+    "subtitleEs": "E-commerce a medida con cero comisiones por transacción. Catálogo inteligente, pricing dinámico, pasarelas de pago y conexión real con tu ERP.",
+    "subtitleEn": "Custom e-commerce with zero transaction fees. Smart catalog, dynamic pricing, payment gateways and real integration with your ERP.",
+    "descriptionEs": "Plataformas propias sin comisiones. Arquitectura escalable para ventas digitales.",
+    "descriptionEn": "Own platforms with zero commissions. Scalable architecture for digital sales.",
+    "benefits": [
+      {
+        "icon": "hex-plus",
+        "copyEn": "Advanced catalog management with variants, segment-based pricing, scheduled discounts, and dynamic pricing rules.",
+        "copyEs": "Gestión avanzada de catálogo con variantes, precios por segmento, descuentos programados y reglas de pricing dinámico.",
+        "titleEn": "Dynamic catalog and pricing",
+        "titleEs": "Catálogo y pricing dinámico"
+      },
+      {
+        "icon": "credit-card",
+        "copyEn": "Integration with Stripe, MercadoPago, PayU and local gateways for secure payments with multiple payment methods.",
+        "copyEs": "Integración con Stripe, MercadoPago, PayU y pasarelas locales para pagos seguros con múltiples métodos de pago.",
+        "titleEn": "Integrated payment gateways",
+        "titleEs": "Pasarelas de pago integradas"
+      },
+      {
+        "icon": "package-check",
+        "copyEn": "Connection with SAP, Oracle, Odoo, and logistics systems for inventory synchronization, orders, and fulfillment.",
+        "copyEs": "Conexión con SAP, Oracle, Odoo y sistemas de logística para sincronización de inventario, órdenes y fulfillment.",
+        "titleEn": "ERP and logistics integration",
+        "titleEs": "Integración ERP y logística"
+      }
+    ],
+    "processSteps": [],
+    "metrics": [
+      {
+        "unit": "",
+        "value": "0%",
+        "labelEn": "Sales commissions — every sale is 100% yours",
+        "labelEs": "Comisiones por venta — cada venta es 100% tuya"
+      },
+      {
+        "unit": "%",
+        "value": "99.9",
+        "labelEn": "Guaranteed uptime — even on Black Friday",
+        "labelEs": "Uptime garantizado — incluso en Black Friday"
+      },
+      {
+        "unit": "",
+        "value": "100%",
+        "labelEn": "Your customer data — on your infrastructure",
+        "labelEs": "Datos del cliente tuyos — en tu infraestructura"
+      },
+      {
+        "unit": "",
+        "value": "<2s",
+        "labelEn": "Load time — optimized checkout",
+        "labelEs": "Tiempo de carga — checkout optimizado"
+      }
+    ],
+    "faqs": [],
+    "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
+    "ctaPrimaryTextEn": "Tell us about your project",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "",
+    "ctaSecondaryTextEn": "",
+    "ctaSecondaryUrl": "",
+    "coverImage": "",
+    "seoTitleEs": "E-commerce | Plataformas Propias",
+    "seoTitleEn": "E-commerce | Custom Platforms",
+    "seoDescriptionEs": "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
+    "seoDescriptionEn": "B2B and B2C digital stores with catalog, dynamic pricing, payment gateways and ERP integration.",
+    "schemaServiceJson": null,
+    "hubMetrics": [],
+    "frameworkTitleEs": "",
+    "frameworkTitleEn": "",
+    "frameworkSubtitleEs": "",
+    "frameworkSubtitleEn": "",
+    "frameworkPillars": [],
+    "sectorsTitleEs": "",
+    "sectorsTitleEn": "",
+    "sectors": [],
+    "sortOrder": 2,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:39.144Z",
+    "updatedAt": "2026-05-07T20:26:44.912Z",
+    "deletedAt": null
+  },
+  {
     "id": "4894094e-60a2-4665-a011-ceaa31ee8dc8",
     "slugEs": "ciberseguridad-ethical-hacking",
     "slugEn": "ethical-hacking",
@@ -2798,45 +2798,45 @@
     "benefits": [
       {
         "icon": "oct-scan",
-        "titleEs": "Hallazgos reproducibles, no un listado de escáner",
-        "titleEn": "Reproducible findings, not a scanner dump",
+        "copyEn": "Every vulnerability ships with evidence, a CVSS severity rating and the steps to reproduce it. What cannot be reproduced is not reported.",
         "copyEs": "Cada vulnerabilidad va con evidencia, severidad CVSS y los pasos para reproducirla. Lo que no se puede reproducir, no se reporta.",
-        "copyEn": "Every vulnerability ships with evidence, a CVSS severity rating and the steps to reproduce it. What cannot be reproduced is not reported."
+        "titleEn": "Reproducible findings, not a scanner dump",
+        "titleEs": "Hallazgos reproducibles, no un listado de escáner"
       },
       {
         "icon": "dia-pulse",
-        "titleEs": "Cubrimos la superficie de ataque de la IA",
-        "titleEn": "We cover the AI attack surface",
+        "copyEn": "Prompt injection, training-data leakage, jailbreaks and abuse of connected tools — what a traditional pentest does not look at.",
         "copyEs": "Prompt injection, fuga de datos de entrenamiento, jailbreaks y abuso de herramientas conectadas: lo que un pentest tradicional no mira.",
-        "copyEn": "Prompt injection, training-data leakage, jailbreaks and abuse of connected tools — what a traditional pentest does not look at."
+        "titleEn": "We cover the AI attack surface",
+        "titleEs": "Cubrimos la superficie de ataque de la IA"
       },
       {
         "icon": "tri-check",
-        "titleEs": "Dos reportes, dos audiencias",
-        "titleEn": "Two reports, two audiences",
+        "copyEn": "An executive report for leadership and a technical report for the IT team, with a prioritized remediation plan and a closing retest.",
         "copyEs": "Reporte ejecutivo para dirección y reporte técnico para el equipo de TI, con plan de remediación priorizado y retest de cierre.",
-        "copyEn": "An executive report for leadership and a technical report for the IT team, with a prioritized remediation plan and a closing retest."
+        "titleEn": "Two reports, two audiences",
+        "titleEs": "Dos reportes, dos audiencias"
       }
     ],
     "processSteps": null,
     "metrics": [
       {
+        "unit": "",
         "value": "4-6",
-        "unit": "",
-        "labelEs": "Semanas — De kickoff a reporte final",
-        "labelEn": "Weeks — From kickoff to final report"
+        "labelEn": "Weeks — From kickoff to final report",
+        "labelEs": "Semanas — De kickoff a reporte final"
       },
       {
+        "unit": "",
         "value": "100%",
-        "unit": "",
-        "labelEs": "Bajo acuerdo legal — Ninguna prueba sin autorización firmada",
-        "labelEn": "Under legal agreement — No test runs without signed authorization"
+        "labelEn": "Under legal agreement — No test runs without signed authorization",
+        "labelEs": "Bajo acuerdo legal — Ninguna prueba sin autorización firmada"
       },
       {
-        "value": "4",
         "unit": "",
-        "labelEs": "Fases — Alcance, ejecución, reporte, retest",
-        "labelEn": "Phases — Scope, execution, reporting, retest"
+        "value": "4",
+        "labelEn": "Phases — Scope, execution, reporting, retest",
+        "labelEs": "Fases — Alcance, ejecución, reporte, retest"
       }
     ],
     "faqs": null,
@@ -2864,9 +2864,9 @@
     "sortOrder": 6,
     "status": "published",
     "translationStatusEn": "complete",
-    "publishedAt": "2026-09-15T00:00:00.000Z",
-    "createdAt": "2026-09-15T00:00:00.000Z",
-    "updatedAt": "2026-09-15T00:00:00.000Z",
+    "publishedAt": "2026-09-15T16:51:45.660Z",
+    "createdAt": "2026-09-15T16:51:45.741Z",
+    "updatedAt": "2026-09-15T16:51:51.789Z",
     "deletedAt": null
   }
 ]
