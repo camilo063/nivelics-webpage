@@ -146,9 +146,17 @@ export const LEGACY_REDIRECTS: LegacyRedirect[] = [
     confidence: "high",
   },
   {
-    source:
-      "/servicios/:slug(seguridad-informatica|pruebas-de-penetracion|remediacion-de-sitios-vulnerados)",
+    // "seguridad-informatica" es genérico: hardening y compliance, que es
+    // Seguridad Cloud. Los otros dos son ofensivos —probar el sistema y
+    // recuperarlo tras una intrusión— y esa es la página de Ethical Hacking.
+    source: "/servicios/:slug(seguridad-informatica)",
     destination: "/servicios/cloud/seguridad",
+    permanent: true,
+    confidence: "high",
+  },
+  {
+    source: "/servicios/:slug(pruebas-de-penetracion|remediacion-de-sitios-vulnerados)",
+    destination: "/servicios/cloud/ciberseguridad-ethical-hacking",
     permanent: true,
     confidence: "high",
   },
