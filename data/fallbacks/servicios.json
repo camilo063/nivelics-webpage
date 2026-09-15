@@ -2780,5 +2780,93 @@
     "createdAt": "2026-04-09T01:55:35.731Z",
     "updatedAt": "2026-04-17T02:03:34.685Z",
     "deletedAt": null
+  },
+  {
+    "id": "c1b5e7a4-3d92-4f18-9a6c-8e2f0d5b7a31",
+    "slugEs": "ciberseguridad-ethical-hacking",
+    "slugEn": "ethical-hacking",
+    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
+    "serviceType": "sub",
+    "accentColor": "cloud",
+    "icon": "oct-scan",
+    "titleEs": "Ciberseguridad y Ethical Hacking",
+    "titleEn": "Cybersecurity & Ethical Hacking",
+    "subtitleEs": "Pentesting, red team y auditorías de seguridad ejecutadas por hackers éticos certificados. Reportes accionables, no PDFs genéricos.",
+    "subtitleEn": "Pentesting, red team and security audits run by certified ethical hackers. Actionable reports, not generic PDFs.",
+    "descriptionEs": "Encontramos tus vulnerabilidades antes que un atacante real. Bajo acuerdo de alcance firmado, siempre.",
+    "descriptionEn": "We find your vulnerabilities before a real attacker does. Always under a signed rules-of-engagement agreement.",
+    "benefits": [
+      {
+        "icon": "oct-scan",
+        "titleEs": "Hallazgos reproducibles, no un listado de escáner",
+        "titleEn": "Reproducible findings, not a scanner dump",
+        "copyEs": "Cada vulnerabilidad va con evidencia, severidad CVSS y los pasos para reproducirla. Lo que no se puede reproducir, no se reporta.",
+        "copyEn": "Every vulnerability ships with evidence, a CVSS severity rating and the steps to reproduce it. What cannot be reproduced is not reported."
+      },
+      {
+        "icon": "dia-pulse",
+        "titleEs": "Cubrimos la superficie de ataque de la IA",
+        "titleEn": "We cover the AI attack surface",
+        "copyEs": "Prompt injection, fuga de datos de entrenamiento, jailbreaks y abuso de herramientas conectadas: lo que un pentest tradicional no mira.",
+        "copyEn": "Prompt injection, training-data leakage, jailbreaks and abuse of connected tools — what a traditional pentest does not look at."
+      },
+      {
+        "icon": "tri-check",
+        "titleEs": "Dos reportes, dos audiencias",
+        "titleEn": "Two reports, two audiences",
+        "copyEs": "Reporte ejecutivo para dirección y reporte técnico para el equipo de TI, con plan de remediación priorizado y retest de cierre.",
+        "copyEn": "An executive report for leadership and a technical report for the IT team, with a prioritized remediation plan and a closing retest."
+      }
+    ],
+    "processSteps": null,
+    "metrics": [
+      {
+        "value": "4-6",
+        "unit": "",
+        "labelEs": "Semanas — De kickoff a reporte final",
+        "labelEn": "Weeks — From kickoff to final report"
+      },
+      {
+        "value": "100%",
+        "unit": "",
+        "labelEs": "Bajo acuerdo legal — Ninguna prueba sin autorización firmada",
+        "labelEn": "Under legal agreement — No test runs without signed authorization"
+      },
+      {
+        "value": "4",
+        "unit": "",
+        "labelEs": "Fases — Alcance, ejecución, reporte, retest",
+        "labelEn": "Phases — Scope, execution, reporting, retest"
+      }
+    ],
+    "faqs": null,
+    "ctaPrimaryTextEs": "Solicitar diagnóstico de seguridad",
+    "ctaPrimaryTextEn": "Request a security assessment",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "Ver alcance de un pentest",
+    "ctaSecondaryTextEn": "See what a pentest covers",
+    "ctaSecondaryUrl": "#soluciones",
+    "coverImage": null,
+    "seoTitleEs": "Ethical Hacking y Ciberseguridad | Pentesting Real",
+    "seoTitleEn": "Ethical Hacking & Cybersecurity | Real Pentesting",
+    "seoDescriptionEs": "Pentesting, red team y auditorías de ciberseguridad con hackers éticos certificados. Encontramos las vulnerabilidades antes que un atacante real.",
+    "seoDescriptionEn": "Pentesting, red team and cybersecurity audits with certified ethical hackers. We find the vulnerabilities before a real attacker does.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 6,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": "2026-09-15T00:00:00.000Z",
+    "createdAt": "2026-09-15T00:00:00.000Z",
+    "updatedAt": "2026-09-15T00:00:00.000Z",
+    "deletedAt": null
   }
 ]

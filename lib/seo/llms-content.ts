@@ -68,7 +68,7 @@ Nivelics diseña, construye y opera software para empresas B2B que necesitan res
 ## Servicios
 
 - [IA aplicada](${BASE}/servicios/inteligencia-artificial): agentes autónomos, automatización, RAG
-- [Cloud & FinOps](${BASE}/servicios/cloud): migración, infraestructura, FinOps, seguridad, serverless
+- [Cloud & FinOps](${BASE}/servicios/cloud): migración, infraestructura, FinOps, seguridad, serverless, ethical hacking
 - [Staff Augmentation](${BASE}/servicios/staff-augmentation): talento tech bilingüe integrado en 5 días
 - [Desarrollo Digital](${BASE}/servicios/desarrollo-digital): web agentic, apps móviles, e-commerce, plataformas
 
@@ -180,7 +180,7 @@ Nivelics designs, builds and operates software for B2B companies that need measu
 ## Services
 
 - [Applied AI](${BASE}/en/services/artificial-intelligence): autonomous agents, automation, RAG
-- [Cloud & FinOps](${BASE}/en/services/cloud): migration, infrastructure, FinOps, security, serverless
+- [Cloud & FinOps](${BASE}/en/services/cloud): migration, infrastructure, FinOps, security, serverless, ethical hacking
 - [Staff Augmentation](${BASE}/en/services/staff-augmentation): bilingual tech talent integrated in 5 days
 - [Digital Development](${BASE}/en/services/digital-development): agentic web, mobile apps, e-commerce, platforms
 
@@ -435,6 +435,16 @@ const SERVICIOS_CATALOG: { hub: ServicioEntry; subs: ServicioEntry[] }[] = [
         nameEn: "Serverless",
         descEs: "Aplicaciones event-driven que escalan sin administrar servidores.",
         descEn: "Event-driven applications that scale without managing servers.",
+      },
+      {
+        es: "/servicios/cloud/ciberseguridad-ethical-hacking",
+        en: "/en/services/cloud/ethical-hacking",
+        nameEs: "Ciberseguridad y ethical hacking",
+        nameEn: "Cybersecurity & Ethical Hacking",
+        descEs:
+          "Pentesting, red team y auditor\u00eda de seguridad de agentes de IA, bajo acuerdo de alcance firmado.",
+        descEn:
+          "Pentesting, red team and AI agent security audits, under a signed rules-of-engagement agreement.",
       },
     ],
   },

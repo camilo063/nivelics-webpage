@@ -1,5 +1,6 @@
 // CMS-connected: 2026-05-07 — sub-services, benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageWrapper } from "@/components/layout";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
@@ -89,6 +90,7 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [cms, uiLabels] = await Promise.all([
     getServicioData("inteligencia-artificial", locale),
     getAllUiLabels(),
@@ -290,6 +292,52 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
           { name: "Integraciones", items: ["Odoo", "Salesforce", "HubSpot", "WhatsApp API"] },
         ]}
       />
+
+      {/* Enlace cruzado: la superficie de ataque de un agente de IA no la cubre un
+          pentest tradicional, y es el ángulo que más nos diferencia. */}
+      <section className="pb-4">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+          <ul className="max-w-3xl space-y-2 text-sm leading-relaxed text-text-70">
+            <li className="flex gap-2">
+              <span aria-hidden="true" className="text-primary">
+                ·
+              </span>
+              <span>
+                {isEn ? (
+                  <>
+                    <strong className="font-semibold text-text-100">
+                      Security audit for AI agents:
+                    </strong>{" "}
+                    prompt injection, training-data leakage, jailbreaks and abuse of connected tools
+                    — an attack surface traditional pentests do not cover.{" "}
+                    <Link
+                      href="/en/services/cloud/ethical-hacking"
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      See Cybersecurity and Ethical Hacking →
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <strong className="font-semibold text-text-100">
+                      Auditoría de seguridad de agentes de IA:
+                    </strong>{" "}
+                    prompt injection, fuga de datos de entrenamiento, jailbreaks y abuso de
+                    herramientas conectadas — una superficie de ataque que los pentests
+                    tradicionales no cubren.{" "}
+                    <Link
+                      href="/servicios/cloud/ciberseguridad-ethical-hacking"
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      Conoce Ciberseguridad y Ethical Hacking →
+                    </Link>
+                  </>
+                )}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       {/* Benefits from CMS (renders only when admin has populated benefits) */}
       <CmsServicioBenefits

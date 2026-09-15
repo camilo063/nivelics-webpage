@@ -135,6 +135,7 @@ export function InlineContactForm({
               <option value="cloud">Cloud / FinOps</option>
               <option value="staffing">Staff Augmentation</option>
               <option value="desarrollo">Desarrollo Digital</option>
+              <option value="ciberseguridad">Ciberseguridad / Ethical Hacking</option>
             </select>
           </div>
           <div className="sm:col-span-2">

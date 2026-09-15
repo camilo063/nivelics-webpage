@@ -82,6 +82,13 @@ const SUB_SERVICES = [
       "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por lo que usas.",
     href: "/servicios/cloud/serverless",
   },
+  {
+    icon: "oct-scan",
+    title: "Ciberseguridad y Ethical Hacking",
+    description:
+      "Pentesting, red team y auditoría de seguridad de agentes de IA. Encontramos las vulnerabilidades antes que un atacante real.",
+    href: "/servicios/cloud/ciberseguridad-ethical-hacking",
+  },
 ];
 
 export default async function CloudPage({ params }: { params: Promise<{ locale: string }> }) {

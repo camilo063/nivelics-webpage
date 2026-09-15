@@ -48,6 +48,10 @@ export const routing = defineRouting({
       es: "/servicios/cloud/seguridad",
       en: "/services/cloud/security",
     },
+    "/servicios/cloud/ciberseguridad-ethical-hacking": {
+      es: "/servicios/cloud/ciberseguridad-ethical-hacking",
+      en: "/services/cloud/ethical-hacking",
+    },
     "/servicios/cloud/serverless": {
       es: "/servicios/cloud/serverless",
       en: "/services/cloud/serverless",

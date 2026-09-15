@@ -18,7 +18,7 @@ export type SiteUrl = {
 
 // Única fuente de verdad. Cada entrada conoce su ruta ES y EN.
 // En el sitemap de cada locale se emite la ruta correspondiente + hreflang al otro.
-const SERVICIOS_MOD = new Date("2026-04-01");
+const SERVICIOS_MOD = new Date("2026-09-15");
 const INDUSTRIAS_MOD = new Date("2026-04-01");
 const NOSOTROS_MOD = new Date("2026-03-01");
 const CASOS_MOD = new Date("2025-12-15");
@@ -114,6 +114,12 @@ const STATIC_URLS: SiteUrl[] = [
   {
     es: "/servicios/cloud/serverless",
     en: "/en/services/cloud/serverless",
+    priority: 0.85,
+    lastModified: SERVICIOS_MOD,
+  },
+  {
+    es: "/servicios/cloud/ciberseguridad-ethical-hacking",
+    en: "/en/services/cloud/ethical-hacking",
     priority: 0.85,
     lastModified: SERVICIOS_MOD,
   },

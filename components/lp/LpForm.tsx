@@ -23,6 +23,7 @@ const SERVICIO_OPTIONS = [
   "IA Aplicada",
   "Cloud / FinOps",
   "Desarrollo Digital",
+  "Ciberseguridad / Ethical Hacking",
   "Otro",
 ];
 
@@ -56,6 +57,7 @@ const FORM_COPY = {
       "Applied AI",
       "Cloud / FinOps",
       "Digital Development",
+      "Cybersecurity / Ethical Hacking",
       "Other",
     ],
     trustLine: "🔒 No spam · We reply within 24h · Great Place to Work 2022",

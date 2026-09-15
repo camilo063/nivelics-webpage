@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 
 interface TimelineStep {
   number: string;
@@ -17,6 +18,9 @@ interface ProcessTimelineProps {
 }
 
 export function ProcessTimeline({ title, steps, accentColor = "#00D4FF" }: ProcessTimelineProps) {
+  // La etiqueta estaba en español duro y salía así en las 5 páginas EN que usan
+  // este componente. Se resuelve por locale, como hace SiblingServicesNav.
+  const isEn = useLocale() === "en";
   return (
     <section className="py-10 md:py-14">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
@@ -42,7 +46,7 @@ export function ProcessTimeline({ title, steps, accentColor = "#00D4FF" }: Proce
               <p className="mt-2 text-sm leading-relaxed text-text-70">{step.description}</p>
               {step.deliverable && (
                 <p className="mt-3 border-t border-border pt-2 text-[11px] text-text-40">
-                  Entregable: {step.deliverable}
+                  {isEn ? "Deliverable" : "Entregable"}: {step.deliverable}
                 </p>
               )}
             </motion.div>
