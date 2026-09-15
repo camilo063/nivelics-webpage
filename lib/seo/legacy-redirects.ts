@@ -4,7 +4,7 @@
  *
  * Source of truth: docs/seo/redirects-proposed.ts, verified 2026-08-19 with
  * scripts/verify-redirects.ts (100% coverage of GSC legacy URLs, 0 chains).
- * 52 rules. Consumed by next.config.ts redirects().
+ * 53 rules. Consumed by next.config.ts redirects().
  */
 
 export const LEGACY_REDIRECTS: { source: string; destination: string; permanent: true }[] = [
@@ -72,9 +72,13 @@ export const LEGACY_REDIRECTS: { source: string; destination: string; permanent:
     permanent: true,
   },
   {
-    source:
-      "/servicios/:slug(seguridad-informatica|pruebas-de-penetracion|remediacion-de-sitios-vulnerados)",
+    source: "/servicios/:slug(seguridad-informatica)",
     destination: "/servicios/cloud/seguridad",
+    permanent: true,
+  },
+  {
+    source: "/servicios/:slug(pruebas-de-penetracion|remediacion-de-sitios-vulnerados)",
+    destination: "/servicios/cloud/ciberseguridad-ethical-hacking",
     permanent: true,
   },
   {
