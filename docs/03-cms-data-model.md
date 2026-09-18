@@ -132,3 +132,30 @@ Schema.org `BlogPosting` is emitted per-post via
 [`lib/schema/blog-posting.ts`](../lib/schema/blog-posting.ts) from the detail
 route. `generateMetadata` covers OpenGraph (type=article), Twitter card, and
 hreflang alternates (ES/EN/x-default).
+
+## Code-driven service pages: the agent-engineering line
+
+The IA hub (`/servicios/inteligencia-artificial`) and its four agent-engineering
+pages (`agentes-ia`, `integracion-sistemas-mcp`, `ia-privada-on-premise`,
+`agentops-gobierno-agentes`) take their copy from
+[`lib/content/agentes.ts`](../lib/content/agentes.ts) (ES + EN) and render through
+[`components/sections/agentes/`](../components/sections/agentes/). They do **not**
+read their `servicios` row: the jsonb fields don't cover every section, the CTA URLs
+in the DB are ES paths, and the pages must be fully English under `/en`. The hub only
+reads the list of sub-services (titles, subtitles, icons, order) for its grid.
+
+[`scripts/seed-servicios-agentes.ts`](../scripts/seed-servicios-agentes.ts) writes the
+same copy into `servicios` and `nav_config` so the admin, the hub grid, `/servicios`
+and `llms.txt` stay consistent. **Edit the copy in `lib/content/agentes.ts` and re-run
+the seed**; editing those rows in the admin does not change these pages.
+
+Content rule for this line: no result figures (percentages, multipliers, prices,
+"24/7" promises, "our clients see…"). The numbers band is replaced by
+`DesignPrinciples` — rules applied in every agent, not client metrics.
+
+The six articles of the line live in `content/agentes/articulos/{es,en}/*.md`
+(tracked; `content/generated/` is gitignored) and are loaded with
+[`scripts/seed-articulos-agentes.ts`](../scripts/seed-articulos-agentes.ts), which
+touches only those slugs — do **not** use `seed-blog-posts.ts` for them, it upserts
+every generated article and would overwrite admin edits. Covers and diagrams are
+static files in `public/blog/agentes/`.

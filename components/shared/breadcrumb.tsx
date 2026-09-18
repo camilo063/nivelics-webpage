@@ -11,6 +11,12 @@ const SLUG_TO_KEY: Record<string, string> = {
   "artificial-intelligence": "artificialIntelligence",
   "agentes-ia": "aiAgents",
   "ai-agents": "aiAgents",
+  "integracion-sistemas-mcp": "systemsIntegrationMcp",
+  "systems-integration-mcp": "systemsIntegrationMcp",
+  "ia-privada-on-premise": "privateAi",
+  "private-ai-on-premises": "privateAi",
+  "agentops-gobierno-agentes": "agentOps",
+  agentops: "agentOps",
   "agentes-comerciales": "salesAgents",
   "sales-agents": "salesAgents",
   "automatizacion-procesos": "processAutomation",
@@ -101,7 +107,10 @@ export function Breadcrumb() {
   const rawPathname = useNextPathname();
   const t = useTranslations("breadcrumb");
 
-  // Strip /en prefix for processing
+  // Strip /en prefix for processing — y se vuelve a poner en los enlaces: antes los
+  // crumbs de /en apuntaban a /services/... sin prefijo y redirigían a la página ES.
+  const isEn = /^\/en(\/|$)/.test(rawPathname);
+  const prefix = isEn ? "/en" : "";
   const pathname = rawPathname.replace(/^\/en(\/|$)/, "/");
 
   if (pathname === "/") return null;
@@ -111,7 +120,8 @@ export function Breadcrumb() {
 
   // Ocultar breadcrumb en páginas de subservicio (donde ya aparece SiblingServicesNav).
   // Path pattern: /servicios/{hub}/{subservice}
-  if (segments[0] === "servicios" && segments.length >= 3) return null;
+  if ((segments[0] === "servicios" || segments[0] === "services") && segments.length >= 3)
+    return null;
 
   const crumbs: BreadcrumbItem[] = segments.map((segment, i) => {
     const key = SLUG_TO_KEY[segment];
@@ -120,7 +130,7 @@ export function Breadcrumb() {
       : segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
     return {
       label,
-      href: "/" + segments.slice(0, i + 1).join("/"),
+      href: prefix + "/" + segments.slice(0, i + 1).join("/"),
     };
   });
 
@@ -128,7 +138,12 @@ export function Breadcrumb() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: t("home"), item: "https://www.nivelics.com/" },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: t("home"),
+        item: `https://www.nivelics.com${prefix || "/"}`,
+      },
       ...crumbs.map((c, i) => ({
         "@type": "ListItem",
         position: i + 2,
@@ -158,7 +173,7 @@ export function Breadcrumb() {
         <ol className="flex items-center gap-1.5 max-md:hidden">
           <li className="shrink-0">
             <Link
-              href="/"
+              href={prefix || "/"}
               className="text-xs text-text-40 transition-colors duration-150 hover:text-text-70 font-medium"
               aria-label={`${t("home")}`}
             >
@@ -194,7 +209,7 @@ export function Breadcrumb() {
         <ol className="flex items-center gap-1.5 md:hidden">
           <li className="shrink-0">
             <Link
-              href="/"
+              href={prefix || "/"}
               className="text-xs text-text-40 transition-colors hover:text-text-70 font-medium"
             >
               {t("home")}

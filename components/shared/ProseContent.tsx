@@ -12,7 +12,7 @@ const PROSE_CLASSES = [
   "prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4",
   "prose-h4:text-lg prose-h4:mt-8 prose-h4:mb-3",
   "prose-p:text-text-70 prose-p:leading-[1.8] prose-p:mb-6",
-  "prose-a:text-[var(--primary)] prose-a:no-underline hover:prose-a:underline",
+  "prose-a:text-[var(--primary)] prose-a:no-underline hover:prose-a:underline prose-a:[overflow-wrap:anywhere]",
   "prose-strong:text-text-100 prose-strong:font-semibold",
   "prose-em:text-text-100",
   "prose-ul:text-text-70 prose-ol:text-text-70 prose-ul:mb-6 prose-ol:mb-6",

@@ -17,6 +17,21 @@ export function slugify(input: string): string {
     .replace(/-+/g, "-");
 }
 
+// El HTML trae entidades (marked escribe `can&#39;t`) y React las volvería a escapar en
+// el índice: se muestra «can&#39;t». Solo se decodifica el texto visible; el id sigue
+// saliendo del texto crudo para no romper anclas que ya circulan.
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&#(\d+);/g, (_m, code: string) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_m, hex: string) => String.fromCharCode(parseInt(hex, 16)))
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
 // Walks h2/h3 in the rendered HTML and injects stable `id` attributes so the
 // TOC scroll-spy has anchors to observe. Headings that already carry an `id`
 // are preserved; collisions get `-2`, `-3`, etc. suffixes.
@@ -39,7 +54,7 @@ export function addHeadingIds(html: string): { html: string; headings: Heading[]
       }
       used.add(candidate);
       const level: 2 | 3 = tag.toLowerCase() === "h2" ? 2 : 3;
-      headings.push({ id: candidate, text, level });
+      headings.push({ id: candidate, text: decodeEntities(text), level });
 
       if (existingId) {
         const patched = attrs.replace(/\sid=["'][^"']+["']/i, ` id="${candidate}"`);

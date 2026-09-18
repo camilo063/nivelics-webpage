@@ -18,6 +18,18 @@ export const routing = defineRouting({
       es: "/servicios/inteligencia-artificial/agentes-ia",
       en: "/services/artificial-intelligence/ai-agents",
     },
+    "/servicios/inteligencia-artificial/integracion-sistemas-mcp": {
+      es: "/servicios/inteligencia-artificial/integracion-sistemas-mcp",
+      en: "/services/artificial-intelligence/systems-integration-mcp",
+    },
+    "/servicios/inteligencia-artificial/ia-privada-on-premise": {
+      es: "/servicios/inteligencia-artificial/ia-privada-on-premise",
+      en: "/services/artificial-intelligence/private-ai-on-premises",
+    },
+    "/servicios/inteligencia-artificial/agentops-gobierno-agentes": {
+      es: "/servicios/inteligencia-artificial/agentops-gobierno-agentes",
+      en: "/services/artificial-intelligence/agentops",
+    },
     "/servicios/inteligencia-artificial/agentes-comerciales": {
       es: "/servicios/inteligencia-artificial/agentes-comerciales",
       en: "/services/artificial-intelligence/sales-agents",

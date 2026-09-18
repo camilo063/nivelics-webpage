@@ -1,10 +1,60 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale } from "next-intl";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deriveFromPath } from "@/lib/utils/from-service";
 import { HoneypotFields } from "@/components/security/honeypot-fields";
+
+// Textos propios del formulario. Antes estaban solo en español y el formulario salía así
+// en todas las páginas /en que lo usan.
+const LABELS = {
+  es: {
+    sent: "Mensaje enviado",
+    sentBody: "Te contactaremos en menos de 24 horas.",
+    name: "Nombre",
+    namePh: "Tu nombre",
+    company: "Empresa",
+    companyPh: "Tu empresa",
+    emailPh: "tu@empresa.com",
+    service: "Servicio",
+    select: "Seleccionar",
+    ia: "Inteligencia Artificial",
+    development: "Desarrollo Digital",
+    security: "Ciberseguridad / Ethical Hacking",
+    message: "Mensaje",
+    messagePh: "Cuéntanos sobre tu proyecto...",
+    minChars: "Mínimo 10 caracteres.",
+    sending: "Enviando...",
+    send: "Enviar mensaje",
+    trust: "Respondemos en menos de 24 horas. Sin compromiso.",
+    genericError: "Error al enviar el formulario",
+    unexpected: "Error inesperado",
+  },
+  en: {
+    sent: "Message sent",
+    sentBody: "We will get back to you within 24 hours.",
+    name: "Name",
+    namePh: "Your name",
+    company: "Company",
+    companyPh: "Your company",
+    emailPh: "you@company.com",
+    service: "Service",
+    select: "Select",
+    ia: "Artificial Intelligence",
+    development: "Digital Development",
+    security: "Cybersecurity / Ethical Hacking",
+    message: "Message",
+    messagePh: "Tell us about your project...",
+    minChars: "At least 10 characters.",
+    sending: "Sending...",
+    send: "Send message",
+    trust: "We reply within 24 hours. No commitment.",
+    genericError: "The form could not be sent",
+    unexpected: "Unexpected error",
+  },
+};
 
 interface InlineContactFormProps {
   title: string;
@@ -19,6 +69,7 @@ export function InlineContactForm({
   serviceDefault = "",
   accentColor = "#00D4FF",
 }: InlineContactFormProps) {
+  const t = LABELS[useLocale() === "en" ? "en" : "es"];
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,11 +106,11 @@ export function InlineContactForm({
         const porCampo = Object.values(body.details ?? {})
           .flatMap((msgs) => msgs ?? [])
           .join(" · ");
-        throw new Error(porCampo || body.error || "Error al enviar el formulario");
+        throw new Error(porCampo || body.error || t.genericError);
       }
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error inesperado");
+      setError(err instanceof Error ? err.message : t.unexpected);
     } finally {
       setIsSubmitting(false);
     }
@@ -72,8 +123,8 @@ export function InlineContactForm({
           <div className="flex h-16 w-16 mx-auto items-center justify-center rounded-full bg-primary/10">
             <Send size={28} className="text-primary" />
           </div>
-          <h2 className="mt-6 text-2xl font-bold text-text-100">Mensaje enviado</h2>
-          <p className="mt-2 text-text-70">Te contactaremos en menos de 24 horas.</p>
+          <h2 className="mt-6 text-2xl font-bold text-text-100">{t.sent}</h2>
+          <p className="mt-2 text-text-70">{t.sentBody}</p>
         </div>
       </section>
     );
@@ -88,14 +139,14 @@ export function InlineContactForm({
           <HoneypotFields />
           <div>
             <label htmlFor="inline-name" className="block text-sm font-medium text-text-100 mb-1">
-              Nombre
+              {t.name}
             </label>
             <input
               id="inline-name"
               name="name"
               required
               className="w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
-              placeholder="Tu nombre"
+              placeholder={t.namePh}
             />
           </div>
           <div>
@@ -103,14 +154,14 @@ export function InlineContactForm({
               htmlFor="inline-company"
               className="block text-sm font-medium text-text-100 mb-1"
             >
-              Empresa
+              {t.company}
             </label>
             <input
               id="inline-company"
               name="company"
               required
               className="w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
-              placeholder="Tu empresa"
+              placeholder={t.companyPh}
             />
           </div>
           <div>
@@ -123,7 +174,7 @@ export function InlineContactForm({
               type="email"
               required
               className="w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none"
-              placeholder="tu@empresa.com"
+              placeholder={t.emailPh}
             />
           </div>
           <div>
@@ -131,7 +182,7 @@ export function InlineContactForm({
               htmlFor="inline-service"
               className="block text-sm font-medium text-text-100 mb-1"
             >
-              Servicio
+              {t.service}
             </label>
             <select
               id="inline-service"
@@ -139,12 +190,12 @@ export function InlineContactForm({
               defaultValue={serviceDefault}
               className="w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 focus:border-primary focus:outline-none"
             >
-              <option value="">Seleccionar</option>
-              <option value="ia">Inteligencia Artificial</option>
+              <option value="">{t.select}</option>
+              <option value="ia">{t.ia}</option>
               <option value="cloud">Cloud / FinOps</option>
               <option value="staffing">Staff Augmentation</option>
-              <option value="desarrollo">Desarrollo Digital</option>
-              <option value="ciberseguridad">Ciberseguridad / Ethical Hacking</option>
+              <option value="desarrollo">{t.development}</option>
+              <option value="ciberseguridad">{t.security}</option>
             </select>
           </div>
           <div className="sm:col-span-2">
@@ -152,7 +203,7 @@ export function InlineContactForm({
               htmlFor="inline-message"
               className="block text-sm font-medium text-text-100 mb-1"
             >
-              Mensaje
+              {t.message}
             </label>
             <textarea
               id="inline-message"
@@ -161,9 +212,9 @@ export function InlineContactForm({
               required
               minLength={10}
               className="w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 placeholder:text-text-40 focus:border-primary focus:outline-none resize-none"
-              placeholder="Cuéntanos sobre tu proyecto..."
+              placeholder={t.messagePh}
             />
-            <p className="mt-1 text-xs text-text-40">Mínimo 10 caracteres.</p>
+            <p className="mt-1 text-xs text-text-40">{t.minChars}</p>
           </div>
           {error && (
             <div className="sm:col-span-2">
@@ -183,11 +234,9 @@ export function InlineContactForm({
               className="w-full sm:w-auto"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+              {isSubmitting ? t.sending : t.send}
             </Button>
-            <p className="mt-3 text-xs text-text-40">
-              Respondemos en menos de 24 horas. Sin compromiso.
-            </p>
+            <p className="mt-3 text-xs text-text-40">{t.trust}</p>
           </div>
         </form>
       </div>

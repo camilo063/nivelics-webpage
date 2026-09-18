@@ -1,0 +1,301 @@
+{
+  "slug": "agentes-ia-casos-uso-empresa-b2b",
+  "replacements": {
+    "contentEs": [
+      {
+        "old": "Esa es la conversación real en comités de inversión tecnológica de banca, retail, salud e industria en Colombia, México, Perú y Chile.",
+        "new": "Esa es la conversación que hoy ocupa a los comités de inversión tecnológica en empresas B2B de la región."
+      },
+      {
+        "old": "Cubre qué es (y qué no es) un agente IA, cómo se construye, 7 casos de uso con KPIs reales, cómo evaluar si tu empresa lo necesita, cuánto cuesta, qué riesgos",
+        "new": "Cubre qué es (y qué no es) un agente IA, cómo se construye, 7 casos de uso con los KPIs que conviene medir, cómo evaluar si tu empresa lo necesita, cómo se estructura su costo, qué riesgos"
+      },
+      {
+        "old": "Tercero, los costos de inferencia bajaron más de un 90% entre 2023 y 2025: GPT-4 se lanzó en marzo 2023 a $30 por millón de tokens input y GPT-4o cotiza en 2025 a $2.50/M; Claude Sonnet, en la misma ventana, pasó de $15/M a $3/M.</p>",
+        "new": "Tercero, el costo de inferencia por token bajó de forma marcada entre 2023 y 2025, lo que hizo viable operar agentes con volumen real.</p>"
+      },
+      {
+        "old": "En banca y salud LATAM, AWS Bedrock y Google Vertex AI son los favoritos porque permiten",
+        "new": "En sectores regulados como banca y salud, AWS Bedrock y Google Vertex AI suelen ser opciones naturales porque permiten"
+      },
+      {
+        "old": "<p>El 70% del trabajo de implementar un agente serio",
+        "new": "<p>La mayor parte del trabajo de implementar un agente serio"
+      },
+      {
+        "old": "<h2>7 casos de uso probados en empresas B2B LATAM</h2><p>Estos son los casos donde hemos visto ROI claro en proyectos reales, con KPIs medibles en menos de seis meses. El orden refleja frecuencia de adopción en el segmento medio-alto LATAM.</p>",
+        "new": "<h2>7 casos de uso de agentes IA en empresas B2B LATAM</h2><p>Estos son los casos donde un agente encaja con más naturalidad en una operación B2B. En cada uno verás los KPIs que conviene medir contra tu propia línea base.</p>"
+      },
+      {
+        "old": "los equipos de ventas B2B pierden entre 40% y 60% de leads inbound por falta de tiempo de respuesta. Un lead que llega a las 9 PM no se contacta hasta el día siguiente, y la tasa de conversión cae drásticamente.</p>",
+        "new": "los equipos de ventas B2B pierden una parte importante de los leads inbound por falta de tiempo de respuesta. Un lead que llega a las 9 PM no se contacta hasta el día siguiente, y para entonces su interés ya se enfrió.</p>"
+      },
+      {
+        "old": "responde en menos de 60 segundos por WhatsApp",
+        "new": "responde en segundos por WhatsApp"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: tiempo de primera respuesta de horas a &lt;1 minuto; aumento de 25–40% en leads calificados que agendan reunión; reducción de 50–70% en carga de SDRs junior consistentes con estudios sectoriales: Velocify analizó 3,5 millones de leads y encontró que responder en menos de 1 minuto genera 391% más conversiones frente a esperar 2 minutos, y Harvard Business Review documentó que el tiempo promedio de respuesta en empresas B2B es de 47 horas.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: tiempo de primera respuesta; leads calificados que agendan reunión; carga operativa de los SDRs junior.</p>"
+      },
+      {
+        "old": "Este es el caso con mejor ROI inicial en la mayoría de empresas B2B. Si te interesa",
+        "new": "Suele ser el caso más directo para empezar en una empresa B2B. Si te interesa"
+      },
+      {
+        "old": "entre 60% y 80% de tickets de soporte son repetitivos",
+        "new": "buena parte de los tickets de soporte son repetitivos"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: resolución autónoma de 45–65% de tickets nivel 1; reducción de 30–50% en tiempo promedio de resolución; CSAT estable o mejor que humano en tickets simples.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: tasa de resolución autónoma de tickets nivel 1; tiempo promedio de resolución; CSAT en tickets simples frente a la atención humana.</p>"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: producción de contenido 3x–5x con el mismo equipo; reducción de 40% en costo por pieza; tiempo de brief-a-publicación de 5 días a 1–2 días.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: volumen de contenido producido con el mismo equipo; costo por pieza; tiempo de brief a publicación.</p>"
+      },
+      {
+        "old": "<em>\"¿por qué subió 18% el gasto en AWS este mes?\"</em>",
+        "new": "<em>\"¿por qué subió el gasto en AWS este mes?\"</em>"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: reducción de 50–70% en tiempo de cierre mensual; detección temprana de desvíos FinOps que ahorran 15–25% en gasto cloud según el State of FinOps 2025 de la FinOps Foundation, las organizaciones con prácticas de optimización cloud ahorran entre 20% y 30% de su gasto; CloudZero documenta que el 21% del presupuesto cloud se pierde en recursos ociosos o mal dimensionados.<strong>Tiempo de implementación</strong>: 10–14 semanas.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: tiempo de cierre mensual; desvíos de gasto cloud detectados a tiempo; ahorro en gasto cloud frente a la línea base.</p><p><strong>Tiempo de implementación</strong>: 10–14 semanas.</p>"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: reducción de 60–80% en tiempo de revisión inicial; aumento en consistencia de criterios; trazabilidad 100% de decisiones.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: tiempo de revisión inicial; consistencia de criterios entre revisiones; trazabilidad de cada decisión.</p>"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: reducción de 50–70% en páginas fuera de horario; MTTR de incidentes menores cae 40–60%; ingenieros recuperan foco en trabajo estratégico.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: páginas fuera de horario; MTTR de incidentes menores; tiempo que los ingenieros recuperan para trabajo estratégico.</p>"
+      },
+      {
+        "old": "<p><strong>KPIs típicos</strong>: reducción de 60% en tiempo de screening; aumento en calidad de shortlist entregada al hiring manager; NPS de onboarding estable o superior.</p>",
+        "new": "<p><strong>KPIs a medir</strong>: tiempo de screening; calidad de la shortlist entregada al hiring manager; NPS de onboarding.</p>"
+      },
+      {
+        "old": "<strong>Ahorro en FTE</strong>: un agente que resuelve 50% de tickets nivel 1 equivale a 2–4 FTEs en una operación mediana. Payback típico de 6–12 meses.</p>",
+        "new": "<strong>Ahorro en FTE</strong>: un agente que resuelve tickets nivel 1 libera capacidad del equipo para trabajo de mayor valor. El payback depende del volumen y del costo actual por caso.</p>"
+      },
+      {
+        "old": "<strong>Aumento en conversión</strong>: agente comercial que responde en 60 segundos vs horas puede mover conversión de 8% a 12% en leads inbound. El impacto en pipeline se nota desde el mes 2.</p>",
+        "new": "<strong>Aumento en conversión</strong>: un agente comercial que responde en segundos, no en horas, puede mejorar la conversión de leads inbound. Mídelo contra tu línea base desde el primer mes.</p>"
+      },
+      {
+        "old": "<h2>Costos reales: implementación, operación, mantenimiento</h2>",
+        "new": "<h2>Costos: implementación, operación, mantenimiento</h2>"
+      },
+      {
+        "old": "<p>Para un agente empresarial productivo, no un prototipo, el rango en LATAM es:</p><ul><li><p><strong>Agente simple (un caso de uso, 2–3 integraciones)</strong>: USD 25.000–45.000.</p></li><li><p><strong>Agente medio (flujo multi-paso, RAG sobre base de conocimiento, 4–6 integraciones)</strong>: USD 50.000–90.000.</p></li><li><p><strong>Agente complejo (multi-agente, orquestación, compliance, alta disponibilidad)</strong>: USD 100.000–250.000.</p></li></ul><p>Estos rangos asumen equipo senior con experiencia, no consultoras commodity. Un proyecto barato",
+        "new": "<p>Para un agente empresarial productivo, no un prototipo, el costo depende del alcance y se define en el discovery. Estos son los niveles de complejidad que más lo mueven:</p><ul><li><p><strong>Agente simple (un caso de uso, 2–3 integraciones)</strong>: el alcance más acotado y, por lo general, el mejor punto de partida.</p></li><li><p><strong>Agente medio (flujo multi-paso, RAG sobre base de conocimiento, 4–6 integraciones)</strong>: exige más trabajo de datos e integración.</p></li><li><p><strong>Agente complejo (multi-agente, orquestación, compliance, alta disponibilidad)</strong>: concentra el mayor esfuerzo de diseño, pruebas y gobierno.</p></li></ul><p>En cualquier nivel, conviene un equipo senior con experiencia en agentes productivos, no consultoras commodity. Un proyecto barato"
+      },
+      {
+        "old": "<strong>LLM API</strong>: consumo por token. Claude 3.5 Sonnet y GPT-4o se mueven (precios  a mayo 2026: Claude Sonnet 4 cuesta $3/M tokens input y $15/M output tanto vía API de Anthropic como en AWS Bedrock; GPT-4o cuesta $2.50/M input y $10/M output vía OpenAI; Gemini 2.5 Pro cuesta $1.25/M input y $10/M output vía Google Vertex AI). Para un agente  de 50.000 interacciones/mes, el costo de API suele estar entre USD 500 y USD 3.000/mes según complejidad.</p>",
+        "new": "<strong>LLM API</strong>: consumo por token. El precio por millón de tokens varía según el modelo y el proveedor (Anthropic, AWS Bedrock, OpenAI, Google Vertex AI) y cambia con frecuencia, así que conviene tomarlo de la página de precios de cada uno al armar el caso de negocio. El gasto crece con el volumen de interacciones, el tamaño del contexto y el modelo elegido.</p>"
+      },
+      {
+        "old": "vector DB, orquestador, logging, monitoreo. Entre USD 300 y USD 1.500/mes en cargas medianas.</p>",
+        "new": "vector DB, orquestador, logging, monitoreo. Su costo depende del volumen de datos y del nivel de servicio.</p>"
+      },
+      {
+        "old": "monitoreo de calidad. Entre USD 2.000 y USD 8.000/mes según SLA.</p>",
+        "new": "monitoreo de calidad. Su costo depende del SLA acordado.</p>"
+      },
+      {
+        "old": "<p>Sin este triángulo, el agente es un riesgo operacional y regulatorio.</p>",
+        "new": "<p>Sin este triángulo, el agente es un riesgo operacional y regulatorio.</p><p>Estos roles son una parte del sistema de control que rodea al modelo. Para verlo completo, lee <a href=\"/blog/harness-engineering-agentes-ia\">harness engineering: las 7 capas que hacen confiable a un agente</a>.</p>"
+      },
+      {
+        "old": "(ej. 10% de tickets reales, una región, un segmento de leads)",
+        "new": "(ej. una fracción de los tickets reales, una región, un segmento de leads)"
+      },
+      {
+        "old": "<p>En Nivelics hemos ejecutado este roadmap en múltiples sectores—incluyendo SaaS B2B, servicios financieros, retail, manufactura y medios digitales en Colombia, México y Perú—. El patrón común es el mismo: sponsor ejecutivo claro, caso de uso acotado, métricas desde día uno.</p>",
+        "new": "<p>Lo que sostiene este roadmap es simple: sponsor ejecutivo claro, caso de uso acotado y métricas desde el día uno.</p>"
+      },
+      {
+        "old": "<p>El fee de implementación va desde USD 25.000 para un agente simple hasta USD 250.000 para uno complejo multi-agente con compliance. A eso se suman costos recurrentes de LLM API, infraestructura y MLOps que en operación mediana suelen ubicarse entre USD 3.000 y USD 12.000 mensuales.</p>",
+        "new": "<p>El costo depende del alcance y se define en el discovery: número de casos de uso e integraciones, estado de los datos y exigencias de compliance. A la implementación se suman costos recurrentes de LLM API, infraestructura y MLOps, que crecen con el volumen de interacciones y el modelo elegido.</p>"
+      },
+      {
+        "old": "<p>Depende del caso de uso. Agentes comerciales y de soporte nivel 1 suelen mostrar ROI medible en 3–6 meses. Agentes de compliance o análisis financiero complejo pueden tomar 6–12 meses. La clave",
+        "new": "<p>Depende del caso de uso, del volumen y de tu línea base. Los agentes comerciales y de soporte nivel 1 suelen mostrar resultados medibles antes que los de compliance o análisis financiero complejo. La clave"
+      },
+      {
+        "old": "El patrón que vemos en implementaciones serias es redistribución de capacidad",
+        "new": "Lo recomendable es plantearlo como redistribución de capacidad"
+      }
+    ],
+    "contentEn": [
+      {
+        "old": "\"our AI agent qualifies 400 leads per week, books meetings, and updates Salesforce autonomously\"",
+        "new": "\"our AI agent qualifies leads, books meetings, and updates Salesforce autonomously\""
+      },
+      {
+        "old": "which use cases pay back in under 12 months,",
+        "new": "which use cases pay back fastest,"
+      },
+      {
+        "old": "seven battle-tested use cases with real KPIs,",
+        "new": "seven use cases with the KPIs worth tracking,"
+      },
+      {
+        "old": "<p>In practice, 80% of our enterprise agent deployments start with Claude via Bedrock or direct API. The reasoning quality on multi-step tasks justifies the premium over cheaper models for the first 12 months. Once volume stabilizes, we revisit.</p>",
+        "new": "<p>In practice, many enterprise agents start with a frontier model via Bedrock or a direct API: reasoning quality on multi-step tasks usually justifies the premium over cheaper models in the first stage. Once volume stabilizes, revisit that choice.</p>"
+      },
+      {
+        "old": "<p>Our typical stack: Supabase (pgvector) for projects under 10M vectors, Pinecone",
+        "new": "<p>A common stack: Supabase (pgvector) for moderate volumes, Pinecone"
+      },
+      {
+        "old": "covers 90% of the surface area.</p>",
+        "new": "covers most of the surface area.</p>"
+      },
+      {
+        "old": "<h2>7 proven use cases in B2B enterprises across LATAM</h2><p>These are the use cases we have deployed or seen deployed in production over the last 18 months, with representative KPIs. Not promises—ranges based on actual implementations.</p>",
+        "new": "<h2>7 AI agent use cases in B2B enterprises across LATAM</h2><p>These are the use cases where an agent fits a B2B operation most naturally. For each one, you will see the KPIs worth measuring against your own baseline.</p>"
+      },
+      {
+        "old": "SDR teams spend 60–70% of their time on unqualified leads. Response time to inbound leads averages 4–8 hours, well past the 5-minute window where conversion drops off a cliff.</p>",
+        "new": "SDR teams spend a large share of their time on unqualified leads, and inbound leads often wait hours for a first response, long after their interest has cooled.</p>"
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: response time down from hours to under 60 seconds, qualification throughput up 3–5x, SDR time reallocated to outbound, meeting-to-opportunity conversion up 15–25% because AEs arrive prepared. These figures are consistent with independent benchmarks: Velocify's analysis of 3.5 million leads found that responding within 60 seconds produces 391% more conversions compared to a 2-minute delay; Harvard Business Review measured average B2B inbound response times at 47 hours; and Landbase's 2025 review of AI SDR deployments reported up to 70% improvement in lead-to-opportunity conversion rates.</p>",
+        "new": "<p><strong>KPIs to track</strong>: time to first response, qualification throughput, SDR time reallocated to outbound, and meeting-to-opportunity conversion (AEs arrive better prepared).</p>"
+      },
+      {
+        "old": "consume 40–60% of support capacity.",
+        "new": "consume a large share of support capacity."
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: 40–55% ticket deflection on tier-1, first-response time under 30 seconds, CSAT maintained or improved (counterintuitively—users prefer instant correct answers over waiting for a human).</p>",
+        "new": "<p><strong>KPIs to track</strong>: tier-1 ticket deflection rate, first-response time, and CSAT compared with human-handled tickets.</p>"
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: content throughput up 4–6x at equal headcount, time from brief to publish-ready draft reduced from 3–5 days to 2–4 hours.</p>",
+        "new": "<p><strong>KPIs to track</strong>: content throughput at equal headcount and time from brief to publish-ready draft.</p>"
+      },
+      {
+        "old": "spend the first 5–7 business days of each month assembling",
+        "new": "spend the first days of each month assembling"
+      },
+      {
+        "old": "a cloud cost line that jumped 35% week-over-week",
+        "new": "a cloud cost line that jumped sharply week-over-week"
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: monthly close reporting cycle reduced from 7 days to 2, cloud spend reduction of 15–25% in the first 6 months through continuous FinOps monitoring.</p>",
+        "new": "<p><strong>KPIs to track</strong>: length of the monthly close reporting cycle and cloud spend avoided through continuous FinOps monitoring, both against your baseline.</p>"
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: document review throughput up 8–10x, 100% coverage (vs. sampling), full audit trail.</p>",
+        "new": "<p><strong>KPIs to track</strong>: document review throughput, review coverage (every document instead of a sample), and completeness of the audit trail.</p>"
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: MTTR reduced 30–50% on recurring incidents, on-call load reduced meaningfully, zero alerts lost in noise.</p>",
+        "new": "<p><strong>KPIs to track</strong>: MTTR on recurring incidents, on-call load, and alerts lost in noise.</p>"
+      },
+      {
+        "old": "<p><strong>Typical KPIs</strong>: time-to-shortlist reduced from 10 days to 2, onboarding completion rate up 20–30%, recruiter time reallocated to closing top candidates.</p>",
+        "new": "<p><strong>KPIs to track</strong>: time-to-shortlist, onboarding completion rate, and recruiter time reallocated to closing top candidates.</p>"
+      },
+      {
+        "old": "<p>For the full catalog of our deployments, see <a target=\"_blank\" rel=\"noopener\" href=\"/servicios/inteligencia-artificial/agentes-ia\">AI agents services</a>. Across the sectors where we have deployed this roadmap—B2B SaaS, financial services, retail, and manufacturing in Colombia, Mexico, and Peru—the 90-day structure has consistently delivered a production-ready agent with measurable KPIs before the end of the quarter.</p>",
+        "new": "<p>For the full catalog, see <a target=\"_blank\" rel=\"noopener\" href=\"/servicios/inteligencia-artificial/agentes-ia\">AI agents services</a>.</p>"
+      },
+      {
+        "old": "Some should wait 6–12 months. Here is",
+        "new": "Some should wait until the basics are in place. Here is"
+      },
+      {
+        "old": "Can the process tolerate a 5–10% error rate during the first 3 months of operation (with human review)?",
+        "new": "Can the process tolerate some errors during the first months of operation (with human review)?"
+      },
+      {
+        "old": "<h2>Real costs: implementation, operation, maintenance</h2><p>Budget conversations need numbers, not ranges marketed as \"enterprise pricing.\" Here is the actual cost structure.</p>",
+        "new": "<h2>Costs: implementation, operation, maintenance</h2><p>Budget conversations get simpler when you separate one-time costs (implementation) from recurring ones (operation). Here is how the cost structure breaks down.</p>"
+      },
+      {
+        "old": "<p>A production-grade enterprise agent implementation in LATAM, delivered by a premium firm, typically lands in these ranges:</p><ul><li><p><strong>Single use case, 1–2 integrations, clear data</strong>: USD 45,000–80,000.</p></li><li><p><strong>Multi-integration, moderate complexity, some data cleanup</strong>: USD 80,000–180,000.</p></li><li><p><strong>Complex, multi-agent system with governance, compliance, multi-system integration</strong>: USD 180,000–450,000.</p></li></ul><p>These cover discovery, architecture, development, testing, deployment, and 30–60 days of post-launch stabilization. Beware of anyone quoting USD 15,000 for a production enterprise agent—what you will get is a demo, not a system.</p>",
+        "new": "<p>For a production-grade enterprise agent, not a prototype, cost depends on scope and is defined during discovery. These are the complexity levels that move it most:</p><ul><li><p><strong>Single use case, 1–2 integrations, clear data</strong>: the most contained scope and usually the best starting point.</p></li><li><p><strong>Multi-integration, moderate complexity, some data cleanup</strong>: more data and integration work.</p></li><li><p><strong>Complex, multi-agent system with governance, compliance, multi-system integration</strong>: the largest design, testing, and governance effort.</p></li></ul><p>Implementation covers discovery, architecture, development, testing, deployment, and a post-launch stabilization period. Be wary of quotes that look too low for a production enterprise agent—what you will get is a demo, not a system.</p>"
+      },
+      {
+        "old": "<strong>LLM API costs</strong>: (as of May 2026: Claude Sonnet 4 costs $3/M input and $15/M output tokens via Anthropic API and AWS Bedrock; GPT-4o costs $2.50/M input and $10/M output via OpenAI; Gemini 2.5 Pro costs $1.25/M input and $10/M output via Google Vertex AI). As a planning figure, budget USD 0.002–0.015 per agent interaction depending on model and context size. A sales agent handling 10,000 interactions per month typically runs USD 600–2,500 in API costs.</p>",
+        "new": "<strong>LLM API costs</strong>: token-based consumption. Price per million tokens varies by model and provider (Anthropic, AWS Bedrock, OpenAI, Google Vertex AI) and changes often, so take it from each provider's pricing page when you build the business case. Spend grows with interaction volume, context size, and the model you choose.</p>"
+      },
+      {
+        "old": "<strong>Vector database and infrastructure</strong>: USD 200–2,000 per month depending on data volume and tier (Supabase, Pinecone, managed Postgres).</p>",
+        "new": "<strong>Vector database and infrastructure</strong>: depends on data volume and service tier (Supabase, Pinecone, managed Postgres).</p>"
+      },
+      {
+        "old": "<strong>Observability and evaluation tooling</strong>: USD 300–1,500 per month (Langfuse, LangSmith, or custom).</p>",
+        "new": "<strong>Observability and evaluation tooling</strong>: Langfuse, LangSmith, or custom, depending on the level of tracing and evaluation you need.</p>"
+      },
+      {
+        "old": "<strong>MLOps and continuous improvement</strong>: a fraction of an engineer's time, typically USD 3,000–8,000 per month for ongoing evaluation, prompt tuning, and tool updates.</p>",
+        "new": "<strong>MLOps and continuous improvement</strong>: a fraction of an engineer's time for ongoing evaluation, prompt tuning, and tool updates; the cost depends on the agreed SLA.</p>"
+      },
+      {
+        "old": "end in finger-pointing when KPIs drift 6 months in.",
+        "new": "end in finger-pointing when KPIs drift months in."
+      },
+      {
+        "old": "We run continuous evaluation on every production agent, with weekly dashboards on accuracy, groundedness, and refusal rates.</p>",
+        "new": "Every production agent should run under continuous evaluation, with regular dashboards on accuracy, groundedness, and refusal rates.</p>"
+      },
+      {
+        "old": "what requires human approval, what it must never do.</p>",
+        "new": "what requires human approval, what it must never do.</p><p>These roles are one part of the control system around the model. To see the whole picture, read <a href=\"/en/blog/harness-engineering-agentes-ia\">harness engineering: the 7 layers that make an agent trustworthy</a>.</p>"
+      },
+      {
+        "old": "pilot with a limited real user group (10–20% of volume).",
+        "new": "pilot with a limited real user group (a small, controlled share of volume)."
+      },
+      {
+        "old": "Week 11: expand to 50% of volume,",
+        "new": "Week 11: expand to a larger share of volume,"
+      },
+      {
+        "old": "Miss any of those and add 30–60 days.</p>",
+        "new": "Miss any of those and the timeline stretches.</p>"
+      },
+      {
+        "old": "for scope, KPIs, and case studies.</p>",
+        "new": "for scope and KPIs.</p>"
+      },
+      {
+        "old": "<p>A production-grade single-use-case implementation in LATAM typically ranges from USD 45,000 to USD 180,000, depending on integration complexity and data readiness. Recurring costs (LLM API, infrastructure, MLOps) usually run USD 2,000–8,000 per month per agent at moderate volume. FinOps",
+        "new": "<p>Cost depends on scope and is defined during discovery: the number of use cases and integrations, data readiness, and compliance requirements. Recurring costs (LLM API, infrastructure, MLOps) grow with interaction volume and the model you choose. FinOps"
+      },
+      {
+        "old": "accelerates time-to-value by 3–4x and transfers knowledge",
+        "new": "accelerates time-to-value and transfers knowledge"
+      }
+    ],
+    "excerptEs": [
+      {
+        "old": "7 casos de uso reales,",
+        "new": "7 casos de uso,"
+      }
+    ],
+    "excerptEn": [
+      {
+        "old": "7 proven use cases,",
+        "new": "7 use cases,"
+      }
+    ],
+    "seoDescriptionEs": [
+      {
+        "old": "7 casos de uso reales,",
+        "new": "7 casos de uso,"
+      }
+    ],
+    "seoDescriptionEn": [
+      {
+        "old": "7 proven use cases,",
+        "new": "7 use cases,"
+      }
+    ]
+  }
+}

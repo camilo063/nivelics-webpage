@@ -67,7 +67,7 @@ Nivelics diseña, construye y opera software para empresas B2B que necesitan res
 
 ## Servicios
 
-- [IA aplicada](${BASE}/servicios/inteligencia-artificial): agentes autónomos, automatización, RAG
+- [IA aplicada](${BASE}/servicios/inteligencia-artificial): ingeniería de agentes en producción, integración vía MCP, IA privada on-premise, AgentOps, automatización, RAG
 - [Cloud & FinOps](${BASE}/servicios/cloud): migración, infraestructura, FinOps, seguridad, serverless, ethical hacking
 - [Staff Augmentation](${BASE}/servicios/staff-augmentation): talento tech bilingüe integrado en 5 días
 - [Desarrollo Digital](${BASE}/servicios/desarrollo-digital): web agentic, apps móviles, e-commerce, plataformas
@@ -179,7 +179,7 @@ Nivelics designs, builds and operates software for B2B companies that need measu
 
 ## Services
 
-- [Applied AI](${BASE}/en/services/artificial-intelligence): autonomous agents, automation, RAG
+- [Applied AI](${BASE}/en/services/artificial-intelligence): production AI agent engineering, MCP integration, on-premises private AI, AgentOps, automation, RAG
 - [Cloud & FinOps](${BASE}/en/services/cloud): migration, infrastructure, FinOps, security, serverless, ethical hacking
 - [Staff Augmentation](${BASE}/en/services/staff-augmentation): bilingual tech talent integrated in 5 days
 - [Digital Development](${BASE}/en/services/digital-development): agentic web, mobile apps, e-commerce, platforms
@@ -337,18 +337,50 @@ const SERVICIOS_CATALOG: { hub: ServicioEntry; subs: ServicioEntry[] }[] = [
       nameEs: "Inteligencia Artificial aplicada",
       nameEn: "Applied Artificial Intelligence",
       descEs:
-        "Agentes de IA, automatización de procesos y soluciones de contenido y marketing con resultados medibles.",
+        "Ingeniería de agentes de IA en producción (integración vía MCP, IA privada, AgentOps), automatización de procesos y soluciones de contenido y marketing.",
       descEn:
-        "AI agents, process automation and content/marketing solutions with measurable results.",
+        "Production AI agent engineering (MCP integration, private AI, AgentOps), process automation and content/marketing solutions.",
     },
     subs: [
       {
         es: "/servicios/inteligencia-artificial/agentes-ia",
         en: "/en/services/artificial-intelligence/ai-agents",
-        nameEs: "Agentes de IA",
-        nameEn: "AI Agents",
-        descEs: "Agentes conversacionales y operativos integrados a los sistemas de la empresa.",
-        descEn: "Conversational and operational agents integrated with company systems.",
+        nameEs: "Ingeniería de agentes a la medida",
+        nameEn: "Custom AI Agent Engineering",
+        descEs:
+          "Agentes de IA en producción con herramientas con permisos, verificación independiente, guardrails y trazabilidad (harness de 7 capas).",
+        descEn:
+          "AI agents in production with permissioned tools, independent verification, guardrails and traceability (a 7-layer harness).",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/integracion-sistemas-mcp",
+        en: "/en/services/artificial-intelligence/systems-integration-mcp",
+        nameEs: "Integración de sistemas y MCP",
+        nameEn: "Systems Integration & MCP",
+        descEs:
+          "Servidores MCP y adaptadores para conectar ERP, bases de datos, APIs y sistemas legados a agentes, con mínimo privilegio y auditoría.",
+        descEn:
+          "MCP servers and adapters that connect ERPs, databases, APIs and legacy systems to agents, with least privilege and audit logging.",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/ia-privada-on-premise",
+        en: "/en/services/artificial-intelligence/private-ai-on-premises",
+        nameEs: "IA privada",
+        nameEn: "Private AI",
+        descEs:
+          "Agentes con modelos de pesos abiertos on-premise o modelos comerciales desde la cuenta de nube del cliente, con enrutamiento por sensibilidad del dato.",
+        descEn:
+          "Agents with open-weight models on-premises or commercial models from the client's own cloud account, with routing by data sensitivity.",
+      },
+      {
+        es: "/servicios/inteligencia-artificial/agentops-gobierno-agentes",
+        en: "/en/services/artificial-intelligence/agentops",
+        nameEs: "AgentOps: operación y gobierno de agentes",
+        nameEn: "AgentOps: agent operations and governance",
+        descEs:
+          "Observabilidad, evals de regresión, detección de drift, control de costos, red teaming y auditoría de agentes en producción.",
+        descEn:
+          "Observability, regression evals, drift detection, cost control, red teaming and auditing for agents in production.",
       },
       {
         es: "/servicios/inteligencia-artificial/agentes-comerciales",

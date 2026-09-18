@@ -27,7 +27,7 @@ export const SERVICES: ServiceDef[] = [
     label: "Inteligencia Artificial",
     shortLabel: "IA",
     description:
-      "Implementamos soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.",
+      "Diseñamos, integramos y operamos agentes de IA en producción: con verificación independiente, guardrails, observabilidad y la opción de correr sobre tu propia infraestructura.",
     icon: Brain,
     color: "var(--ia)",
     gradient: "var(--grad-ia)",

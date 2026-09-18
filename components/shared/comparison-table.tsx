@@ -15,6 +15,8 @@ interface ComparisonTableProps {
   nivelicsLabel: string;
   /** Optional extra column label for 4-column variant */
   extraLabel?: string;
+  /** Encabezado de la primera columna. Por defecto en español: pásalo traducido en /en. */
+  criterionLabel?: string;
   rows: ComparisonRow[];
 }
 
@@ -23,6 +25,7 @@ export function ComparisonTable({
   alternativeLabel,
   nivelicsLabel,
   extraLabel,
+  criterionLabel = "Criterio",
   rows,
 }: ComparisonTableProps) {
   const hasExtra = extraLabel && rows.some((r) => r.extra);
@@ -49,7 +52,7 @@ export function ComparisonTable({
                     width: "28%",
                   }}
                 >
-                  Criterio
+                  {criterionLabel}
                 </th>
                 <th
                   style={{

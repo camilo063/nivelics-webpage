@@ -271,32 +271,7 @@
       }
     ],
     "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "10x",
-        "labelEn": "More leads processed — same team, no additional SDRs",
-        "labelEs": "Más leads procesados — mismo equipo, sin SDRs adicionales"
-      },
-      {
-        "unit": "",
-        "value": "<5s",
-        "labelEn": "Response time — vs. hours or days of manual process",
-        "labelEs": "Tiempo de respuesta — vs. horas o días del proceso manual"
-      },
-      {
-        "unit": "",
-        "value": "24/7",
-        "labelEn": "Active follow-up — cadences that never stop",
-        "labelEs": "Seguimiento activo — cadencias que nunca se detienen"
-      },
-      {
-        "unit": "",
-        "value": "40%",
-        "labelEn": "More conversions — average per better qualification and timing",
-        "labelEs": "Más conversiones — promedio por mejor calificación y timing"
-      }
-    ],
+    "metrics": [],
     "faqs": [
       {
         "answerEn": "No. The agent handles initial qualification, automated follow-up, and context gathering. When it detects a real opportunity, it escalates to the salesperson with all necessary information to close. Your team focuses on selling, not chasing cold leads.",
@@ -311,10 +286,10 @@
         "questionEs": "¿Cómo se personaliza el scoring de leads?"
       },
       {
-        "answerEn": "Yes. We have pre-built connectors for Odoo, HubSpot, Salesforce, and Pipedrive. For other CRMs, we build the integration within the first weeks of the project.",
-        "answerEs": "Sí. Tenemos conectores pre-construidos para Odoo, HubSpot, Salesforce y Pipedrive. Para otros CRMs, construimos la integración en las primeras semanas del proyecto.",
+        "questionEs": "¿Se integra con mi CRM actual?",
         "questionEn": "Does it integrate with my current CRM?",
-        "questionEs": "¿Se integra con mi CRM actual?"
+        "answerEs": "Sí. Tenemos conectores pre-construidos para Odoo, HubSpot, Salesforce y Pipedrive. Para otros CRMs, construimos la integración como parte del proyecto.",
+        "answerEn": "Yes. We have pre-built connectors for Odoo, HubSpot, Salesforce and Pipedrive. For other CRMs, we build the integration as part of the project."
       },
       {
         "answerEn": "Yes. You get a dashboard with every interaction, applied scoring, sent messages, and results. We also set up alerts for critical events like high-value leads or anomalies.",
@@ -323,10 +298,10 @@
         "questionEs": "¿Puedo ver qué hace el agente en tiempo real?"
       },
       {
-        "answerEn": "The agent is in production within 6-8 weeks. Pipeline impact is typically visible from the first month, with incremental improvements as the scoring model adjusts with real data.",
-        "answerEs": "El agente está en producción en 6-8 semanas. El impacto en pipeline suele ser visible desde el primer mes, con mejoras incrementales a medida que el modelo de scoring se ajusta con datos reales.",
-        "questionEn": "How soon will I see results?",
-        "questionEs": "¿En cuánto tiempo veo resultados?"
+        "questionEs": "¿Cuándo empiezo a ver resultados?",
+        "questionEn": "When will I start seeing results?",
+        "answerEs": "El plazo se define en el discovery, según tus canales, tu CRM y el alcance del piloto. Una vez en producción, medimos el impacto en tu pipeline con tus propios datos y ajustamos el scoring a medida que llegan casos reales.",
+        "answerEn": "The timeline is set in discovery, based on your channels, your CRM and the scope of the pilot. Once in production, we measure the impact on your pipeline with your own data and tune the scoring as real cases come in."
       }
     ],
     "ctaPrimaryTextEs": "Agendar demo",
@@ -350,12 +325,12 @@
     "sectorsTitleEs": null,
     "sectorsTitleEn": null,
     "sectors": null,
-    "sortOrder": 2,
+    "sortOrder": 5,
     "status": "published",
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.804Z",
-    "updatedAt": "2026-04-09T11:13:44.113Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   },
   {
@@ -563,10 +538,10 @@
     "benefits": [
       {
         "icon": "clock",
-        "copyEn": "Documented average in automation projects",
-        "copyEs": "Promedio documentado en proyectos de automatización",
-        "titleEn": "50% reduction in operational time",
-        "titleEs": "50% reducción tiempo operativo"
+        "titleEs": "Menos tiempo en tareas repetitivas",
+        "titleEn": "Less time on repetitive tasks",
+        "copyEs": "Medido contra una línea base con tus propios datos",
+        "copyEn": "Measured against a baseline built from your own data"
       },
       {
         "icon": "link",
@@ -584,32 +559,7 @@
       }
     ],
     "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "50%",
-        "labelEn": "Operational time reduction — documented project average",
-        "labelEs": "Reducción de tiempo operativo — promedio documentado en proyectos"
-      },
-      {
-        "unit": "",
-        "value": "0",
-        "labelEn": "Human errors — in automated processes",
-        "labelEs": "Errores humanos — en procesos automatizados"
-      },
-      {
-        "unit": "",
-        "value": "24/7",
-        "labelEn": "Availability — no additional cost for overtime",
-        "labelEs": "Disponibilidad — sin costo adicional por hora extra"
-      },
-      {
-        "unit": "",
-        "value": "30-50%",
-        "labelEn": "Cost savings — average operational cost reduction",
-        "labelEs": "Ahorro en costos — reducción de costos operativos promedio"
-      }
-    ],
+    "metrics": [],
     "faqs": [
       {
         "answerEn": "Any repetitive process involving documents, data, or rule-based decisions: financial reconciliations, invoice processing, employee onboarding, report generation, inventory management, approvals, and multi-step workflows.",
@@ -624,22 +574,22 @@
         "questionEs": "¿Necesito reemplazar mis sistemas actuales?"
       },
       {
-        "answerEn": "A typical process is automated in 4-8 weeks. In the first week we conduct discovery to map the current process, identify bottlenecks and define the MVP scope.",
-        "answerEs": "Un proceso típico se automatiza en 4-8 semanas. En la primera semana hacemos un discovery para mapear el proceso actual, identificar cuellos de botella y definir el alcance del MVP.",
+        "questionEs": "¿Cuánto tiempo toma implementar la automatización?",
         "questionEn": "How long does it take to implement automation?",
-        "questionEs": "¿Cuánto tiempo toma implementar la automatización?"
+        "answerEs": "El plazo se define en el discovery: ahí mapeamos el proceso actual, identificamos cuellos de botella y definimos el alcance del MVP.",
+        "answerEn": "The timeline is set in discovery: that is where we map the current process, identify bottlenecks and define the MVP scope."
       },
       {
-        "answerEn": "We measure time saved, errors eliminated, volume processed, and cost per transaction before and after. Our clients see 30-50% reduction in operational costs on average.",
-        "answerEs": "Medimos tiempo ahorrado, errores eliminados, volumen procesado y costo por transacción antes y después. Nuestros clientes ven entre 30-50% de reducción en costos operativos promedio.",
+        "questionEs": "¿Cómo se mide el ROI de la automatización?",
         "questionEn": "How is automation ROI measured?",
-        "questionEs": "¿Cómo se mide el ROI de la automatización?"
+        "answerEs": "Medimos tiempo de ejecución, errores, volumen procesado y costo por transacción antes y después, con tus propios datos. Definimos la línea base en el discovery para que el impacto se pueda comparar.",
+        "answerEn": "We measure execution time, errors, volume processed and cost per transaction before and after, with your own data. We set the baseline in discovery so the impact can be compared."
       },
       {
-        "answerEn": "Automation frees your team from repetitive tasks so they can focus on higher-value work: analysis, strategy, client relationships. In our experience, teams end up more productive and satisfied.",
-        "answerEs": "La automatización libera a tu equipo de tareas repetitivas para que se enfoquen en trabajo de mayor valor: análisis, estrategia, relaciones con clientes. En nuestra experiencia, los equipos terminan más productivos y satisfechos.",
-        "questionEn": "What happens to employees who were doing those tasks?",
-        "questionEs": "¿Qué pasa con los empleados que hacían esas tareas?"
+        "questionEs": "¿Qué pasa con los empleados que hacían esas tareas?",
+        "questionEn": "What happens to the employees who were doing those tasks?",
+        "answerEs": "La automatización libera a tu equipo de tareas repetitivas para que se enfoquen en trabajo de mayor valor: análisis, estrategia, relaciones con clientes. Tú defines cómo se redistribuye ese tiempo.",
+        "answerEn": "Automation frees your team from repetitive tasks so they can focus on higher-value work: analysis, strategy, client relationships. You decide how that time is redistributed."
       }
     ],
     "ctaPrimaryTextEs": "Agendar discovery",
@@ -651,8 +601,8 @@
     "coverImage": null,
     "seoTitleEs": "Automatización de Procesos con IA",
     "seoTitleEn": "AI Process Automation",
-    "seoDescriptionEs": "Automatizamos procesos en finanzas, RRHH y logística. Hasta 50% reducción de tiempo operativo.",
-    "seoDescriptionEn": "We automate processes in finance, HR, and logistics. Up to 50% reduction in operational time.",
+    "seoDescriptionEs": "Automatizamos procesos en finanzas, RRHH y logística sobre tus sistemas actuales, con registro completo de cada ejecución.",
+    "seoDescriptionEn": "We automate finance, HR and logistics processes on top of your current systems, with a full log of every run.",
     "schemaServiceJson": null,
     "hubMetrics": null,
     "frameworkTitleEs": null,
@@ -663,12 +613,12 @@
     "sectorsTitleEs": null,
     "sectorsTitleEn": null,
     "sectors": null,
-    "sortOrder": 3,
+    "sortOrder": 6,
     "status": "published",
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.975Z",
-    "updatedAt": "2026-04-09T11:24:41.314Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   },
   {
@@ -1158,10 +1108,10 @@
     "benefits": [
       {
         "icon": "arc-doc",
-        "copyEn": "SEO-optimized articles, landing pages and descriptions",
+        "titleEs": "Más volumen con el mismo equipo",
+        "titleEn": "More volume with the same team",
         "copyEs": "Artículos, landing pages y descripciones optimizados para SEO",
-        "titleEn": "10x more content volume",
-        "titleEs": "10x más volumen de contenido"
+        "copyEn": "SEO-optimized articles, landing pages and descriptions"
       },
       {
         "icon": "tri-person",
@@ -1179,32 +1129,7 @@
       }
     ],
     "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "10x",
-        "labelEn": "Higher production volume — with the same editorial team",
-        "labelEs": "Más volumen de producción — con el mismo equipo editorial"
-      },
-      {
-        "unit": "",
-        "value": "80%",
-        "labelEn": "Less time per piece — from days to hours per content",
-        "labelEs": "Menos tiempo por pieza — de días a horas por contenido"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Brand consistency — tone of voice applied automatically",
-        "labelEs": "Consistencia de marca — tono de voz aplicado automáticamente"
-      },
-      {
-        "unit": "",
-        "value": "3x",
-        "labelEn": "Better SEO positioning — through automatic keyword optimization",
-        "labelEs": "Mejor posicionamiento SEO — por optimización automática de keywords"
-      }
-    ],
+    "metrics": [],
     "faqs": [
       {
         "answerEn": "Not if done right. Our pipeline includes humanization stages, style review, and originality verification. Content goes through your editorial workflow before publishing — AI accelerates production, it doesn't replace human judgment.",
@@ -1231,10 +1156,10 @@
         "questionEs": "¿Funciona para contenido en múltiples idiomas?"
       },
       {
-        "answerEn": "The cost per piece is a fraction of traditional editorial cost. The model includes initial implementation + MRR based on monthly production volume. In discovery we define the exact price according to your volume and needs.",
-        "answerEs": "El costo por pieza es una fracción del costo editorial tradicional. El modelo incluye una implementación inicial + un MRR por volumen de producción mensual. En el discovery definimos el precio exacto según tu volumen y necesidades.",
+        "questionEs": "¿Cuánto cuesta la generación de contenido con IA?",
         "questionEn": "What does AI content generation cost?",
-        "questionEs": "¿Cuánto cuesta la generación de contenido con IA?"
+        "answerEs": "El modelo incluye una implementación inicial y un cargo mensual según el volumen de producción. En el discovery definimos el precio según tu volumen y necesidades.",
+        "answerEn": "The model includes an initial implementation and a monthly fee based on production volume. In discovery we set the price according to your volume and needs."
       }
     ],
     "ctaPrimaryTextEs": "Agendar demo",
@@ -1258,12 +1183,12 @@
     "sectorsTitleEs": null,
     "sectorsTitleEn": null,
     "sectors": null,
-    "sortOrder": 4,
+    "sortOrder": 7,
     "status": "published",
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.142Z",
-    "updatedAt": "2026-04-09T11:26:14.139Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   },
   {
@@ -1798,105 +1723,142 @@
     "serviceType": "sub",
     "accentColor": "ia",
     "icon": "dia-pulse",
-    "titleEs": "Agentes de IA",
-    "titleEn": "AI Agents",
-    "subtitleEs": "Automatización inteligente para ventas, soporte y operaciones.",
-    "subtitleEn": "Intelligent automation for sales, support and operations.",
-    "descriptionEs": "Automatización inteligente para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales. 3",
-    "descriptionEn": "Intelligent automation for sales, support and operations. Integration with WhatsApp, CRM and enterprise platforms.",
+    "titleEs": "Ingeniería de agentes a la medida",
+    "titleEn": "Custom AI Agent Engineering",
+    "subtitleEs": "Agentes de IA con herramientas con permisos, verificación independiente, guardrails y trazabilidad. Del discovery al piloto controlado en producción.",
+    "subtitleEn": "AI agents with permissioned tools, independent verification, guardrails and per-action traceability. From discovery to a controlled pilot in production.",
+    "descriptionEs": "Construimos agentes que ejecutan procesos completos dentro de tu operación —no demos— con el sistema alrededor del modelo que los hace confiables: herramientas con permisos, verificación independiente, guardrails y trazabilidad de cada acción.",
+    "descriptionEn": "We build agents that run complete processes inside your operation —not demos— together with the system around the model that makes them trustworthy: permissioned tools, independent verification, guardrails and traceability for every action.",
     "benefits": [
       {
-        "icon": "dia-pulse",
-        "copyEn": "They execute complex tasks without human intervention, connected to your systems with complete traceability",
-        "copyEs": "Ejecutan tareas complejas sin intervención humana, conectados a tus sistemas con trazabilidad completa",
-        "titleEn": "24/7 Autonomous Agents",
-        "titleEs": "Agentes autónomos 24/7"
+        "icon": "dia-flow",
+        "titleEs": "Agentes de proceso de punta a punta",
+        "titleEn": "End-to-end process agents",
+        "copyEs": "Un agente recibe una solicitud, consulta los sistemas necesarios, ejecuta los pasos y entrega el resultado. Solo escala a una persona cuando corresponde.",
+        "copyEn": "An agent receives a request, queries the systems involved, runs the steps and delivers the result. It only escalates to a person when it should."
       },
       {
-        "icon": "tri-rocket",
-        "copyEn": "From discovery to production with proven methodology",
-        "copyEs": "Desde discovery hasta producción con metodología probada",
-        "titleEn": "First agent in 6-8 weeks",
-        "titleEs": "Primer agente en 6-8 semanas"
+        "icon": "hex-nodes",
+        "titleEs": "Sistemas multiagente y orquestación",
+        "titleEn": "Multi-agent systems and orchestration",
+        "copyEs": "Un orquestador reparte el trabajo entre agentes especializados (investigar, ejecutar, verificar), con contratos claros entre ellos.",
+        "copyEn": "An orchestrator splits the work across specialized agents (research, execute, verify), with clear contracts between them."
       },
       {
-        "icon": "oct-shield",
-        "copyEn": "Logging, evals, and alerts on every agent execution",
-        "copyEs": "Logging, evals y alertas en cada ejecución del agente",
-        "titleEn": "Complete traceability",
-        "titleEs": "Trazabilidad completa"
+        "icon": "tri-alert",
+        "titleEs": "Agentes de operaciones TI",
+        "titleEn": "IT operations agents",
+        "copyEs": "Clasificación de alertas, correlación de incidentes, preparación de despliegues y runbooks asistidos. Siempre con aprobación humana para las acciones irreversibles.",
+        "copyEn": "Alert triage, incident correlation, deployment preparation and assisted runbooks. Always with human approval for irreversible actions."
+      },
+      {
+        "icon": "dia-search",
+        "titleEs": "Agentes sobre conocimiento interno (RAG con permisos)",
+        "titleEn": "Agents over internal knowledge (permission-aware RAG)",
+        "copyEs": "Responden sobre tus documentos, normas y bases de datos, respetan los permisos de quien pregunta y citan la fuente.",
+        "copyEn": "They answer over your documents, policies and databases, respect the permissions of whoever asks and cite the source."
+      },
+      {
+        "icon": "arc-doc",
+        "titleEs": "Agentes documentales con criterio",
+        "titleEn": "Document agents with judgment",
+        "copyEs": "Extraen datos, validan contra reglas de negocio y resuelven ambigüedades. Verifican antes de registrar cualquier dato.",
+        "copyEn": "They extract data, validate it against business rules and resolve ambiguity. They verify before recording anything."
+      },
+      {
+        "icon": "tri-person",
+        "titleEs": "Copilotos para equipos internos",
+        "titleEn": "Copilots for internal teams",
+        "copyEs": "Asistentes que preparan, redactan y proponen. La persona decide y aprueba.",
+        "copyEn": "Assistants that prepare, draft and propose. The person decides and approves."
       }
     ],
-    "processSteps": [],
-    "metrics": [
+    "processSteps": [
       {
-        "unit": "",
-        "value": "6-8",
-        "labelEn": "Weeks to first agent — from discovery to production",
-        "labelEs": "Semanas al primer agente — desde discovery hasta producción"
+        "number": 1,
+        "titleEs": "Discovery y diseño del harness",
+        "titleEn": "Discovery and harness design",
+        "descEs": "Proceso, sistemas involucrados, riesgos, nivel de autonomía por acción y criterios de éxito medibles.",
+        "descEn": "Process, systems involved, risks, autonomy level per action and measurable success criteria.",
+        "duration": "1–2 semanas"
       },
       {
-        "unit": "",
-        "value": "24/7",
-        "labelEn": "Availability — agents don't have schedules",
-        "labelEs": "Disponibilidad — los agentes no tienen horario"
+        "number": 2,
+        "titleEs": "Integración y herramientas",
+        "titleEn": "Integration and tools",
+        "descEs": "Conectores o servidores MCP con mínimo privilegio, entornos de prueba y datos de evaluación.",
+        "descEn": "Least-privilege connectors or MCP servers, test environments and evaluation data.",
+        "duration": "2–3 semanas"
       },
       {
-        "unit": "",
-        "value": "50%",
-        "labelEn": "Cost reduction — average for automated tasks",
-        "labelEs": "Reducción de costos — promedio en tareas automatizadas"
+        "number": 3,
+        "titleEs": "Construcción y evals",
+        "titleEn": "Build and evals",
+        "descEs": "Agente, verificador y conjunto de evals. Iteramos contra evidencia, no contra impresiones.",
+        "descEn": "Agent, verifier and eval suite. We iterate against evidence, not impressions.",
+        "duration": "2–4 semanas"
       },
       {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Traceability — logging and evals on every execution",
-        "labelEs": "Trazabilidad — logging y evals en cada ejecución"
+        "number": 4,
+        "titleEs": "Piloto controlado",
+        "titleEn": "Controlled pilot",
+        "descEs": "Producción con alcance limitado, aprobación humana y observabilidad completa.",
+        "descEn": "Production with limited scope, human approval and full observability.",
+        "duration": "2–4 semanas"
+      },
+      {
+        "number": 5,
+        "titleEs": "Operación y mejora",
+        "titleEn": "Operation and improvement",
+        "descEs": "AgentOps: monitoreo, drift, costos y nuevas capacidades.",
+        "descEn": "AgentOps: monitoring, drift, costs and new capabilities.",
+        "duration": "Continuo"
       }
     ],
+    "metrics": [],
     "faqs": [
       {
-        "answerEn": "A chatbot answers questions following predefined scripts. An AI agent makes decisions, executes actions in your systems (CRM, ERP, databases) and can orchestrate multi-step workflows autonomously, with intelligent escalation to humans when necessary.",
-        "answerEs": "Un chatbot responde preguntas siguiendo scripts predefinidos. Un agente de IA toma decisiones, ejecuta acciones en tus sistemas (CRM, ERP, bases de datos) y puede orquestar flujos multi-paso de forma autónoma, con escalamiento inteligente a humanos cuando es necesario.",
-        "questionEn": "What is an AI agent and how does it differ from a chatbot?",
-        "questionEs": "¿Qué es un agente de IA y en qué se diferencia de un chatbot?"
+        "questionEs": "¿En qué se diferencia un agente de un chatbot?",
+        "questionEn": "How is an agent different from a chatbot?",
+        "answerEs": "Un chatbot conversa. Un agente ejecuta: consulta sistemas, toma decisiones acotadas y completa tareas. Por eso necesita permisos, verificación y trazabilidad que un chatbot no requiere.",
+        "answerEn": "A chatbot talks. An agent acts: it queries systems, makes bounded decisions and completes tasks. That is why it needs permissions, verification and traceability that a chatbot does not."
       },
       {
-        "answerEn": "We integrate with WhatsApp Business, Slack, HubSpot, Salesforce, Odoo, ERP systems, SQL/NoSQL databases, REST APIs, and Cloud services (AWS, GCP, Azure). If you have a legacy system, we build custom connectors.",
-        "answerEs": "Integramos con WhatsApp Business, Slack, HubSpot, Salesforce, Odoo, sistemas ERP, bases de datos SQL/NoSQL, APIs REST y servicios cloud (AWS, GCP, Azure). Si tienes un sistema legacy, construimos conectores personalizados.",
-        "questionEn": "What systems do the agents integrate with?",
-        "questionEs": "¿Con qué sistemas se integran los agentes?"
+        "questionEs": "¿Tenemos que cambiar nuestros sistemas?",
+        "questionEn": "Do we have to change our systems?",
+        "answerEs": "No. Construimos una capa de integración (APIs o servidores MCP) sobre lo que ya tienes, incluidos los sistemas legados. El agente opera a través de esa capa, nunca directamente.",
+        "answerEn": "No. We build an integration layer (APIs or MCP servers) on top of what you already have, including legacy systems. The agent works through that layer, never directly."
       },
       {
-        "answerEn": "A simple agent starts at $8,000 USD for implementation + monthly operational MRR. In the first week's discovery, we define the exact cost with projected ROI for your specific case.",
-        "answerEs": "Un agente simple parte de $8,000 USD en implementación + MRR de operación mensual. En el discovery de la primera semana definimos el costo exacto con ROI proyectado para tu caso específico.",
-        "questionEn": "How much does it cost to implement an AI agent?",
-        "questionEs": "¿Cuánto cuesta implementar un agente de IA?"
+        "questionEs": "¿Qué pasa si el agente se equivoca?",
+        "questionEn": "What happens if the agent makes a mistake?",
+        "answerEs": "Diseñamos para que el error sea detectable y contenido: verificador independiente, evals antes de cada cambio, aprobación humana en acciones irreversibles, límites operativos y reversión. Cada error en producción se vuelve un caso de prueba.",
+        "answerEn": "We design so errors are detectable and contained: an independent verifier, evals before every change, human approval for irreversible actions, operational limits and rollback. Every production error becomes a test case."
       },
       {
-        "answerEn": "We implement automated evals and quality thresholds from day one. If the agent doesn't meet the threshold on a task, it automatically escalates to a human with full context. Monitoring is continuous and you receive real-time alerts.",
-        "answerEs": "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente con contexto completo. El monitoreo es continuo y recibes alertas en tiempo real.",
-        "questionEn": "What happens if the agent makes mistakes?",
-        "questionEs": "¿Qué pasa si el agente comete errores?"
+        "questionEs": "¿Dónde se procesan nuestros datos?",
+        "questionEn": "Where is our data processed?",
+        "answerEs": "Tú lo decides. Pueden procesarse en tu nube (Amazon Bedrock o Azure OpenAI, con despliegues regionales en la región que elijas, sin inferencia global ni entre regiones, y sin que el proveedor use tus datos para entrenar sus modelos) o en tu propia infraestructura con modelos de pesos abiertos.",
+        "answerEn": "You decide. It can be processed in your cloud (Amazon Bedrock or Azure OpenAI, with regional deployments in the region you choose, no global or cross-region inference, and without the provider using your data to train its models) or on your own infrastructure with open-weight models."
       },
       {
-        "answerEn": "Yes. We work with configurations that guarantee your data doesn't feed the training of external models. We also offer on-premise options or in your own AWS Bedrock or Azure OpenAI account.",
-        "answerEs": "Sí. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
-        "questionEn": "Are your data secure?",
-        "questionEs": "¿Mis datos están seguros?"
+        "questionEs": "¿Cuánto cuesta?",
+        "questionEn": "How much does it cost?",
+        "answerEs": "Depende del proceso, las integraciones y el nivel de autonomía. En el discovery definimos alcance, arquitectura y costo con criterios de éxito medibles.",
+        "answerEn": "It depends on the process, the integrations and the level of autonomy. In discovery we define scope, architecture and cost against measurable success criteria."
       }
     ],
     "ctaPrimaryTextEs": "Agendar discovery",
-    "ctaPrimaryTextEn": "Book a discovery call",
+    "ctaPrimaryTextEn": "Book a discovery session",
     "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": "Ver todos los servicios IA",
-    "ctaSecondaryTextEn": "View all AI services",
-    "ctaSecondaryUrl": "/servicios/inteligencia-artificial",
+    "ctaSecondaryTextEs": "Ver qué construimos",
+    "ctaSecondaryTextEn": "See what we build",
+    "ctaSecondaryUrl": "#soluciones",
     "coverImage": "",
-    "seoTitleEs": "Agentes de IA para Empresas",
-    "seoTitleEn": "AI Agents for Business",
-    "seoDescriptionEs": "LLMs que ejecutan tareas reales de negocio. Agentes autónomos integrados con tus sistemas.",
-    "seoDescriptionEn": "LLMs that execute real business tasks. Autonomous agents integrated with your systems.",
+    "seoTitleEs": "Ingeniería de agentes de IA a la medida para producción",
+    "seoTitleEn": "Custom AI agent engineering, built for production",
+    "seoDescriptionEs": "Agentes de IA con herramientas con permisos, verificación independiente, guardrails y trazabilidad. Del discovery al piloto controlado en producción.",
+    "seoDescriptionEn": "AI agents with permissioned tools, independent verification, guardrails and per-action traceability. From discovery to a controlled pilot in production.",
     "schemaServiceJson": null,
     "hubMetrics": [],
     "frameworkTitleEs": "",
@@ -1912,7 +1874,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.635Z",
-    "updatedAt": "2026-04-16T21:41:31.352Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   },
   {
@@ -2266,32 +2228,7 @@
       }
     ],
     "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "3x",
-        "labelEn": "Better conversion rate — through 1:1 personalization at scale",
-        "labelEs": "Mejor tasa de conversión — por personalización 1:1 a escala"
-      },
-      {
-        "unit": "",
-        "value": "40%",
-        "labelEn": "Lead cost reduction — less volume, higher intent",
-        "labelEs": "Reducción en costo por lead — menos volumen, mayor intención"
-      },
-      {
-        "unit": "",
-        "value": "24/7",
-        "labelEn": "Real-time triggers — immediate response to behavior",
-        "labelEs": "Triggers en tiempo real — respuesta inmediata al comportamiento"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "CRM Sync — real-time updated data",
-        "labelEs": "Sync con CRM — datos actualizados en tiempo real"
-      }
-    ],
+    "metrics": [],
     "faqs": [
       {
         "answerEn": "We analyze your customers' historical behavior (pages visited, emails opened, previous purchases, support interactions) and create models that predict purchase intent, churn risk, and potential value. Segments update in real-time with each new interaction.",
@@ -2306,16 +2243,16 @@
         "questionEs": "¿Se integra con mi CRM y herramientas de marketing?"
       },
       {
-        "answerEn": "Our clients see between 2x and 4x improvement in conversion rates through the combination of better segmentation, 1:1 personalization, and optimized timing. The exact impact depends on your current volume and data maturity.",
-        "answerEs": "Nuestros clientes ven entre 2x y 4x mejora en tasas de conversión por la combinación de mejor segmentación, personalización 1:1 y timing optimizado. El impacto exacto depende de tu volumen actual y madurez de datos.",
-        "questionEn": "How much does conversion actually improve?",
-        "questionEs": "¿Cuánto mejora la conversión realmente?"
+        "questionEs": "¿Cómo se mide el impacto en la conversión?",
+        "questionEn": "How is the impact on conversion measured?",
+        "answerEs": "Definimos una línea base con tus datos actuales y comparamos contra ella: tasa de conversión, costo por lead calificado y atribución por touchpoint. El impacto depende de tu volumen actual y de la madurez de tus datos, por eso lo medimos en tu operación y no lo prometemos de antemano.",
+        "answerEn": "We set a baseline with your current data and compare against it: conversion rate, cost per qualified lead and attribution by touchpoint. The impact depends on your current volume and data maturity, which is why we measure it in your operation instead of promising it up front."
       },
       {
-        "answerEn": "With 3-6 months of CRM and email marketing data, we can already train the first models. The more historical data, the better the prediction, but you don't need to wait years to see results.",
-        "answerEs": "Con 3-6 meses de datos de CRM y email marketing ya podemos entrenar los primeros modelos. Mientras más datos históricos, mejor la predicción, pero no necesitas esperar años para ver resultados.",
-        "questionEn": "Do you need a lot of data history to get started?",
-        "questionEs": "¿Necesito mucho historial de datos para empezar?"
+        "questionEs": "¿Necesito mucho historial de datos para empezar?",
+        "questionEn": "Do I need a lot of historical data to get started?",
+        "answerEs": "No necesariamente. En el discovery revisamos el historial de CRM y email marketing que tienes y definimos con qué modelos se puede empezar. Mientras más datos históricos, mejor la predicción.",
+        "answerEn": "Not necessarily. In discovery we review the CRM and email marketing history you have and decide which models you can start with. The more historical data, the better the prediction."
       },
       {
         "answerEn": "Only if you configure it that way. By default, campaigns go through an approval workflow before sending. Your team defines the level of autonomy: from suggestions that a human approves to fully automated sends with business rules.",
@@ -2345,12 +2282,12 @@
     "sectorsTitleEs": null,
     "sectorsTitleEn": null,
     "sectors": null,
-    "sortOrder": 5,
+    "sortOrder": 8,
     "status": "published",
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.317Z",
-    "updatedAt": "2026-04-09T11:26:44.957Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   },
   {
@@ -2551,31 +2488,31 @@
     "icon": "brain",
     "titleEs": "Agentes e IA aplicada",
     "titleEn": "AI Agents & Applied AI",
-    "subtitleEs": "No chatbots. Agentes autónomos integrados con tus sistemas que trabajan 24/7 y se miden con resultados reales.2",
-    "subtitleEn": "Not chatbots. Autonomous agents integrated with your systems that work 24/7, measured by real results.",
-    "descriptionEs": "Implementamos soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.3",
-    "descriptionEn": "We implement generative AI, MLOps and advanced analytics solutions to automate processes and generate actionable insights.",
+    "subtitleEs": "No son chatbots. Son agentes que se integran a tus sistemas, trabajan con permisos acotados y dejan rastro de cada decisión.",
+    "subtitleEn": "Not chatbots. Agents that plug into your systems, work with bounded permissions and leave a trail for every decision.",
+    "descriptionEs": "Diseñamos, integramos y operamos agentes de IA en producción: con verificación independiente, guardrails, observabilidad y la opción de correr sobre tu propia infraestructura.",
+    "descriptionEn": "We design, integrate and run AI agents in production: with independent verification, guardrails, observability and the option to run on your own infrastructure.",
     "benefits": [
       {
-        "icon": "dia-pulse",
-        "copyEn": "Intelligent automation of repetitive processes",
-        "copyEs": "Automatización inteligente de procesos repetitivos",
-        "titleEn": "50% reduction in operating costs",
-        "titleEs": "50% reducción costos operativos"
+        "icon": "oct-scan",
+        "titleEs": "Toda acción con efecto queda trazada y es auditable",
+        "titleEn": "Every action with side effects is traced and auditable",
+        "copyEs": "",
+        "copyEn": ""
       },
       {
-        "icon": "tri-rocket",
-        "copyEn": "From concept to production quickly",
-        "copyEs": "De concepto a producción rápidamente",
-        "titleEn": "First agent in 6-8 weeks",
-        "titleEs": "Primer agente en 6-8 semanas"
+        "icon": "dia-check",
+        "titleEs": "Ninguna acción crítica sin verificación o aprobación humana",
+        "titleEn": "No critical action without verification or human approval",
+        "copyEs": "",
+        "copyEn": ""
       },
       {
-        "icon": "link",
-        "copyEn": "CRM, ERP and existing workflows",
-        "copyEs": "CRM, ERP y flujos existentes",
-        "titleEn": "Integrated with your systems",
-        "titleEs": "Integrado con tus sistemas"
+        "icon": "oct-lock",
+        "titleEs": "Evals propias antes de salir a producción",
+        "titleEn": "Custom evals before going to production",
+        "copyEs": "",
+        "copyEn": ""
       }
     ],
     "processSteps": [
@@ -2612,70 +2549,121 @@
         "duration": "MRR ongoing"
       }
     ],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "50%",
-        "labelEn": "Operating cost reduction",
-        "labelEs": "Reducción costos operativos"
-      },
-      {
-        "unit": "sem",
-        "value": "6-8",
-        "labelEn": "Weeks to first agent",
-        "labelEs": "Semanas al primer agente"
-      }
-    ],
+    "metrics": [],
     "faqs": [
       {
-        "answerEn": "It depends on the process to be automated and the required integrations. A simple agent starts at $8,000 USD for implementation + operational MRR. During the first week's discovery, we define the exact cost with projected ROI.",
-        "answerEs": "Depende del proceso a automatizar y las integraciones requeridas. Un agente simple parte de $8,000 USD en implementación + MRR de operación. En el discovery de la primera semana definimos el costo exacto con ROI proyectado.",
-        "questionEn": "How much does it cost to implement an AI agent?",
-        "questionEs": "¿Cuánto cuesta implementar un agente de IA?"
+        "questionEs": "¿Qué construye Nivelics en inteligencia artificial?",
+        "questionEn": "What does Nivelics build in artificial intelligence?",
+        "answerEs": "Agentes de IA a la medida que operan procesos reales, la integración de tus sistemas vía APIs y MCP, despliegues de IA privada en tu infraestructura o en tu nube, y la operación continua de agentes (AgentOps). También agentes comerciales, automatización de procesos, gestión de contenido y marketing con IA.",
+        "answerEn": "Custom AI agents that run real processes, integration of your systems through APIs and MCP, private AI deployments on your infrastructure or cloud, and ongoing agent operations (AgentOps). Also sales agents, process automation, content management and AI-powered marketing."
       },
       {
-        "answerEn": "Within 6-8 weeks you have the first agent in production. Measurable ROI typically appears in month 2-3, when processed volume exceeds implementation cost.",
-        "answerEs": "En 6-8 semanas tienes el primer agente en producción. El ROI medible aparece típicamente en el mes 2-3, cuando el volumen procesado supera el costo de implementación.",
-        "questionEn": "How long before I see results?",
-        "questionEs": "¿En cuánto tiempo veo resultados?"
+        "questionEs": "¿Por dónde empezamos?",
+        "questionEn": "Where do we start?",
+        "answerEs": "Por un proceso concreto. En el discovery definimos criterios de éxito medibles, los sistemas involucrados y qué acciones puede ejecutar el agente solo y cuáles requieren aprobación. De ahí sale un piloto controlado en producción.",
+        "answerEn": "With one concrete process. In discovery we define measurable success criteria, the systems involved, and which actions the agent can run on its own and which need approval. That leads to a controlled pilot in production."
       },
       {
-        "answerEn": "No. We work with configurations that guarantee your data doesn't feed the training of external models. We also offer on-premise options or in your own AWS Bedrock or Azure OpenAI account.",
-        "answerEs": "No. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
-        "questionEn": "Are your data used to train the models?",
-        "questionEs": "¿Mis datos se usan para entrenar los modelos?"
+        "questionEs": "¿Nuestros datos se usan para entrenar modelos?",
+        "questionEn": "Is our data used to train models?",
+        "answerEs": "No con la arquitectura que diseñamos. Podemos procesar tus datos en tu nube (Amazon Bedrock o Azure OpenAI, con despliegues regionales y sin que el proveedor los use para entrenar) o en tu propia infraestructura con modelos de pesos abiertos.",
+        "answerEn": "Not with the architecture we design. We can process your data in your cloud (Amazon Bedrock or Azure OpenAI, with regional deployments and without the provider using it for training) or on your own infrastructure with open-weight models."
       },
       {
-        "answerEn": "We implement automated evals and quality thresholds from the start. If the agent doesn't meet the threshold on a task, it automatically escalates to a human. Monitoring is continuous.",
-        "answerEs": "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente. El monitoreo es continuo.",
-        "questionEn": "What happens if the agent makes mistakes?",
-        "questionEs": "¿Qué pasa si el agente comete errores?"
+        "questionEs": "¿Qué pasa si el agente se equivoca?",
+        "questionEn": "What happens if the agent makes a mistake?",
+        "answerEs": "Diseñamos para que el error sea detectable y contenido: verificador independiente, evals antes de cada cambio, aprobación humana en acciones irreversibles y trazabilidad completa. Cada error en producción se vuelve un caso de prueba.",
+        "answerEn": "We design so errors are detectable and contained: an independent verifier, evals before every change, human approval for irreversible actions and full traceability. Every production error becomes a test case."
       },
       {
-        "answerEn": "No. AI agents handle repetitive and high-volume tasks, freeing your team for higher-value work. In all our projects, client teams end up more productive, not smaller.",
-        "answerEs": "No. Los agentes de IA manejan las tareas repetitivas y de alto volumen, liberando a tu equipo para trabajo de mayor valor. En todos nuestros proyectos, los equipos cliente terminan más productivos, no más pequeños.",
-        "questionEn": "Does AI replace my team?",
-        "questionEs": "¿La IA reemplaza a mi equipo?"
+        "questionEs": "¿La IA reemplaza a mi equipo?",
+        "questionEn": "Will AI replace my team?",
+        "answerEs": "Diseñamos agentes para que absorban el trabajo repetitivo y de alto volumen, y para que las decisiones importantes sigan en manos de las personas.",
+        "answerEn": "We design agents to absorb repetitive, high-volume work and to keep important decisions in people's hands."
       }
     ],
-    "ctaPrimaryTextEs": "Ver servicios de IA",
-    "ctaPrimaryTextEn": "View AI services",
-    "ctaPrimaryUrl": "/servicios/inteligencia-artificial",
-    "ctaSecondaryTextEs": "Calcular mi ROI",
-    "ctaSecondaryTextEn": "Calculate my ROI",
+    "ctaPrimaryTextEs": "Ver soluciones",
+    "ctaPrimaryTextEn": "See our solutions",
+    "ctaPrimaryUrl": "#sub-services",
+    "ctaSecondaryTextEs": "Hablar con un experto",
+    "ctaSecondaryTextEn": "Talk to an expert",
     "ctaSecondaryUrl": "/contacto",
     "coverImage": "",
-    "seoTitleEs": "IA Aplicada a Negocios | Agentes, Automatización y RAG",
-    "seoTitleEn": "Applied AI for Business | Agents, Automation & RAG",
-    "seoDescriptionEs": "Soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.",
-    "seoDescriptionEn": "Generative AI, MLOps and advanced analytics solutions to automate processes and generate actionable insights.",
+    "seoTitleEs": "Desarrollo de agentes de IA en producción para empresas",
+    "seoTitleEn": "Production-ready AI agent development for enterprises",
+    "seoDescriptionEs": "Diseñamos, integramos y operamos agentes de IA en producción: integración vía MCP, IA privada, evals, guardrails y AgentOps. Sin cambiar tus sistemas.",
+    "seoDescriptionEn": "We design, integrate and run AI agents in production: MCP integration, private AI, evals, guardrails and AgentOps. Without changing your systems.",
     "schemaServiceJson": null,
     "hubMetrics": [],
-    "frameworkTitleEs": "",
-    "frameworkTitleEn": "",
-    "frameworkSubtitleEs": "",
-    "frameworkSubtitleEn": "",
-    "frameworkPillars": [],
+    "frameworkTitleEs": "Harness: 7 capas alrededor del modelo",
+    "frameworkTitleEn": "The harness: 7 layers around the model",
+    "frameworkSubtitleEs": "El modelo es la parte fácil. Lo que hace confiable a un agente es todo lo que lo rodea.",
+    "frameworkSubtitleEn": "The model is the easy part. What makes an agent trustworthy is everything around it.",
+    "frameworkPillars": [
+      {
+        "letter": "H",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Herramientas orquestadas",
+        "titleEn": "Orchestrated tools",
+        "descEs": "El modelo nunca toca un sistema directamente: una capa intermedia valida, limita y registra cada llamada.",
+        "descEn": "The model never touches a system directly: an intermediate layer validates, limits and logs every call."
+      },
+      {
+        "letter": "V",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Verificación independiente",
+        "titleEn": "Independent verification",
+        "descEs": "Quien revisa no es quien hace. Un verificador aprueba cada acción con efecto antes de ejecutarla.",
+        "descEn": "Whoever checks is not whoever acts. A verifier approves every action with side effects before it runs."
+      },
+      {
+        "letter": "C",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Contexto y memoria",
+        "titleEn": "Context and memory",
+        "descEs": "El agente recibe solo lo que necesita, de fuentes con permisos, y olvida lo que debe olvidar.",
+        "descEn": "The agent gets only what it needs, from permissioned sources, and forgets what it should forget."
+      },
+      {
+        "letter": "G",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Guardrails",
+        "titleEn": "Guardrails",
+        "descEs": "Límites de comportamiento, de datos, de herramientas y operativos, definidos antes de escribir el primer prompt.",
+        "descEn": "Behavioral, data, tool and operational limits, defined before the first prompt is written."
+      },
+      {
+        "letter": "O",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Observabilidad",
+        "titleEn": "Observability",
+        "descEs": "Cada paso queda trazado: qué vio, qué decidió, qué herramienta usó y con qué permiso. Diseñada para detectar el drift antes de que lo noten tus usuarios.",
+        "descEn": "Every step is traced: what it saw, what it decided, which tool it used and with what permission. Designed to catch drift before your users do."
+      },
+      {
+        "letter": "E",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Enrutamiento de modelos",
+        "titleEn": "Model routing",
+        "descEs": "Cada tarea va al modelo adecuado por costo, latencia y sensibilidad del dato, incluidos modelos privados.",
+        "descEn": "Every task goes to the right model by cost, latency and data sensitivity, including private models."
+      },
+      {
+        "letter": "F",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20",
+        "titleEs": "Feedback continuo",
+        "titleEn": "Continuous feedback",
+        "descEs": "Los errores en producción se convierten en casos de prueba. El agente mejora con evidencia, no con intuición.",
+        "descEn": "Production errors become test cases. The agent improves on evidence, not intuition."
+      }
+    ],
     "sectorsTitleEs": "",
     "sectorsTitleEn": "",
     "sectors": [],
@@ -2684,7 +2672,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:35.731Z",
-    "updatedAt": "2026-04-17T02:03:34.685Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   },
   {
@@ -2867,6 +2855,492 @@
     "publishedAt": "2026-09-15T16:51:45.660Z",
     "createdAt": "2026-09-15T16:51:45.741Z",
     "updatedAt": "2026-09-15T16:51:51.789Z",
+    "deletedAt": null
+  },
+  {
+    "id": "1a1273db-7a19-441a-aca7-2889bc1febb9",
+    "slugEs": "integracion-sistemas-mcp",
+    "slugEn": "systems-integration-mcp",
+    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
+    "serviceType": "sub",
+    "accentColor": "ia",
+    "icon": "hex-nodes",
+    "titleEs": "Integración de sistemas y MCP",
+    "titleEn": "Systems Integration & MCP",
+    "subtitleEs": "Servidores MCP a la medida y adaptadores para sistemas legados: conecta ERP, bases de datos y APIs a tus agentes con mínimo privilegio y auditoría.",
+    "subtitleEn": "Custom MCP servers and adapters for legacy systems: connect your ERP, databases and APIs to your agents with least privilege and a full audit trail.",
+    "descriptionEs": "Un agente vale lo que valen sus integraciones. Construimos la capa que une tus ERP, bases de datos, APIs internas y sistemas legados con agentes de IA usando Model Context Protocol (MCP), con mínimo privilegio y auditoría de cada llamada.",
+    "descriptionEn": "An agent is only as good as its integrations. We build the layer that connects your ERP, databases, internal APIs and legacy systems to AI agents using the Model Context Protocol (MCP), with least privilege and an audit trail for every call.",
+    "benefits": [
+      {
+        "icon": "hex-nodes",
+        "titleEs": "Servidores MCP a la medida",
+        "titleEn": "Custom MCP servers",
+        "copyEs": "Exponemos tus sistemas como herramientas con esquemas claros, validación de entradas y respuestas pensadas para un modelo.",
+        "copyEn": "We expose your systems as tools with clear schemas, input validation and responses designed for a model."
+      },
+      {
+        "icon": "oct-code",
+        "titleEs": "Adaptadores para sistemas legados",
+        "titleEn": "Adapters for legacy systems",
+        "copyEs": "Cuando no hay API, construimos una sobre bases de datos, archivos, colas o interfaces existentes, sin tocar el sistema original.",
+        "copyEn": "When there is no API, we build one on top of databases, files, queues or existing interfaces, without touching the original system."
+      },
+      {
+        "icon": "dia-flow",
+        "titleEs": "Capa de APIs y eventos",
+        "titleEn": "API and event layer",
+        "copyEs": "APIs internas, eventos y colas para que agentes y sistemas se comuniquen de forma confiable e idempotente.",
+        "copyEn": "Internal APIs, events and queues so agents and systems communicate reliably and idempotently."
+      },
+      {
+        "icon": "oct-lock",
+        "titleEs": "Seguridad de herramientas",
+        "titleEn": "Tool security",
+        "copyEs": "Mínimo privilegio, lectura separada de escritura, límites de uso, secretos fuera del alcance del modelo y defensa contra la inyección de instrucciones a través de herramientas.",
+        "copyEn": "Least privilege, reads separated from writes, usage limits, secrets out of the model's reach and defense against instruction injection through tools."
+      },
+      {
+        "icon": "oct-scan",
+        "titleEs": "Auditoría y trazabilidad",
+        "titleEn": "Audit and traceability",
+        "copyEs": "Registro de cada llamada, con quién la pidió, qué agente la hizo, con qué parámetros y qué resultado tuvo.",
+        "copyEn": "Every call is logged: who requested it, which agent made it, with which parameters and what the result was."
+      },
+      {
+        "icon": "hex-cycle",
+        "titleEs": "Capa de orquestación para agentes",
+        "titleEn": "Orchestration layer for agents",
+        "copyEs": "Combina pasos deterministas y decisiones de agentes, con reintentos y compensación.",
+        "copyEn": "Combines deterministic steps with agent decisions, with retries and compensation."
+      }
+    ],
+    "processSteps": [
+      {
+        "number": 1,
+        "titleEs": "Inventario de sistemas y datos",
+        "titleEn": "Systems and data inventory",
+        "descEs": "Qué sistemas intervienen, qué datos exponen, quién es dueño de cada uno y qué restricciones tienen.",
+        "descEn": "Which systems are involved, what data they expose, who owns each one and what constraints apply.",
+        "duration": "1 semana"
+      },
+      {
+        "number": 2,
+        "titleEs": "Diseño de herramientas y permisos",
+        "titleEn": "Tool and permission design",
+        "descEs": "Cada herramienta con su esquema, su permiso mínimo y su política de lectura o escritura.",
+        "descEn": "Every tool with its schema, its minimum permission and its read or write policy.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 3,
+        "titleEs": "Construcción de servidores y adaptadores",
+        "titleEn": "Build servers and adapters",
+        "descEs": "Servidores MCP y adaptadores con validación, límites y registro de auditoría.",
+        "descEn": "MCP servers and adapters with validation, limits and audit logging.",
+        "duration": "2–4 semanas"
+      },
+      {
+        "number": 4,
+        "titleEs": "Pruebas de seguridad y carga",
+        "titleEn": "Security and load testing",
+        "descEs": "Inyección a través de herramientas, abuso de permisos y comportamiento bajo carga.",
+        "descEn": "Injection through tools, permission abuse and behavior under load.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 5,
+        "titleEs": "Operación y versionado",
+        "titleEn": "Operation and versioning",
+        "descEs": "Versionado de herramientas, monitoreo de uso y evolución junto con tus sistemas.",
+        "descEn": "Tool versioning, usage monitoring and evolution alongside your systems.",
+        "duration": "Continuo"
+      }
+    ],
+    "metrics": [],
+    "faqs": [
+      {
+        "questionEs": "¿Qué es MCP?",
+        "questionEn": "What is MCP?",
+        "answerEs": "Model Context Protocol es un estándar abierto que Anthropic presentó en noviembre de 2024 para conectar modelos de IA con herramientas y datos. Desde diciembre de 2025 lo gobierna la Agentic AI Foundation, bajo la Linux Foundation. Define cómo un agente descubre y usa herramientas de forma uniforme, sin una integración a la medida para cada modelo.",
+        "answerEn": "The Model Context Protocol is an open standard that Anthropic introduced in November 2024 to connect AI models with tools and data. Since December 2025 it has been governed by the Agentic AI Foundation, under the Linux Foundation. It defines how an agent discovers and uses tools in a uniform way, with no custom integration for each model."
+      },
+      {
+        "questionEs": "¿Funciona con sistemas que no tienen API?",
+        "questionEn": "Does it work with systems that have no API?",
+        "answerEs": "Sí. Construimos un adaptador que expone el sistema de forma controlada, sin modificar el sistema original.",
+        "answerEn": "Yes. We build an adapter that exposes the system in a controlled way, without modifying the original system."
+      },
+      {
+        "questionEs": "¿MCP nos amarra a un proveedor de IA?",
+        "questionEn": "Does MCP lock us into one AI provider?",
+        "answerEs": "No. Es un protocolo abierto y neutral que soportan varios clientes y modelos. Las herramientas que construimos funcionan con distintos modelos.",
+        "answerEn": "No. It is an open, neutral protocol supported by several clients and models. The tools we build work across different models."
+      },
+      {
+        "questionEs": "¿Cómo evitan que el agente haga algo indebido en un sistema?",
+        "questionEn": "How do you stop the agent from doing something it should not in a system?",
+        "answerEs": "Cada herramienta tiene el mínimo permiso necesario, separamos lectura de escritura, limitamos los parámetros y exigimos verificación o aprobación para toda acción con efecto.",
+        "answerEn": "Every tool has the minimum permission it needs, we separate reads from writes, constrain parameters and require verification or approval for any action with side effects."
+      },
+      {
+        "questionEs": "¿Sirve sin agentes?",
+        "questionEn": "Is it useful without agents?",
+        "answerEs": "Sí. La capa de integración también ordena tus sistemas para otros usos, como automatización, reportes o aplicaciones nuevas.",
+        "answerEn": "Yes. The integration layer also puts your systems in order for other uses, such as automation, reporting or new applications."
+      }
+    ],
+    "ctaPrimaryTextEs": "Mapear mis integraciones",
+    "ctaPrimaryTextEn": "Map my integrations",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "Ver qué conectamos",
+    "ctaSecondaryTextEn": "See what we connect",
+    "ctaSecondaryUrl": "#soluciones",
+    "coverImage": null,
+    "seoTitleEs": "Integración de sistemas con MCP para agentes de IA",
+    "seoTitleEn": "Systems integration with MCP for AI agents",
+    "seoDescriptionEs": "Servidores MCP a la medida y adaptadores para sistemas legados: conecta ERP, bases de datos y APIs a tus agentes con mínimo privilegio y auditoría.",
+    "seoDescriptionEn": "Custom MCP servers and adapters for legacy systems: connect your ERP, databases and APIs to your agents with least privilege and a full audit trail.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 2,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": "2026-09-18T17:28:39.551Z",
+    "createdAt": "2026-09-18T17:28:39.551Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
+    "deletedAt": null
+  },
+  {
+    "id": "181cb0ad-23cd-4066-9498-52e4840cd35d",
+    "slugEs": "ia-privada-on-premise",
+    "slugEn": "private-ai-on-premises",
+    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
+    "serviceType": "sub",
+    "accentColor": "ia",
+    "icon": "oct-lock",
+    "titleEs": "IA privada",
+    "titleEn": "Private AI",
+    "subtitleEs": "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
+    "subtitleEn": "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
+    "descriptionEs": "Para organizaciones donde la información no puede salir de su control, desplegamos agentes con modelos de pesos abiertos en tu infraestructura o con modelos comerciales consumidos desde tu propia cuenta de nube. El rigor de evaluación, seguridad y operación es el mismo en ambos casos.",
+    "descriptionEn": "For organizations whose information cannot leave their control, we deploy agents with open-weight models on your infrastructure or with commercial models consumed from your own cloud account. The rigor of evaluation, security and operation is the same either way.",
+    "benefits": [
+      {
+        "icon": "oct-cube",
+        "titleEs": "Despliegue on-premise de modelos abiertos",
+        "titleEn": "On-premises deployment of open models",
+        "copyEs": "vLLM para producción y Ollama para pilotos, en tus servidores con GPU, con cuantización y dimensionamiento según tu carga.",
+        "copyEn": "vLLM for production and Ollama for pilots, on your GPU servers, with quantization and sizing for your load."
+      },
+      {
+        "icon": "hex-cloud",
+        "titleEs": "Nube en tu cuenta",
+        "titleEn": "Cloud in your own account",
+        "copyEs": "Modelos comerciales vía Amazon Bedrock o Azure OpenAI, consumidos desde tu cuenta, en tu región y con tus controles de acceso.",
+        "copyEn": "Commercial models through Amazon Bedrock or Azure OpenAI, consumed from your account, in your region and under your access controls."
+      },
+      {
+        "icon": "dia-flow",
+        "titleEs": "Arquitectura híbrida con enrutamiento",
+        "titleEn": "Hybrid architecture with routing",
+        "copyEs": "Clasificamos la sensibilidad de cada solicitud y la enviamos al modelo permitido: el privado para lo sensible y el más capaz para lo general.",
+        "copyEn": "We classify the sensitivity of every request and send it to the allowed model: the private one for sensitive data and the most capable one for everything else."
+      },
+      {
+        "icon": "dia-target",
+        "titleEs": "Evaluación y selección de modelos",
+        "titleEn": "Model evaluation and selection",
+        "copyEs": "Comparamos modelos con tus tareas reales antes de invertir en infraestructura.",
+        "copyEn": "We compare models on your real tasks before you invest in infrastructure."
+      },
+      {
+        "icon": "oct-lock",
+        "titleEs": "Entornos aislados",
+        "titleEn": "Air-gapped environments",
+        "copyEs": "Despliegues sin salida a internet, con actualizaciones controladas de modelos y dependencias.",
+        "copyEn": "Deployments with no internet egress and controlled updates for models and dependencies."
+      },
+      {
+        "icon": "dia-search",
+        "titleEs": "RAG privado",
+        "titleEn": "Private RAG",
+        "copyEs": "Búsqueda sobre tus documentos con índices y embeddings que también se quedan en tu infraestructura.",
+        "copyEn": "Search over your documents with indexes and embeddings that also stay on your infrastructure."
+      }
+    ],
+    "processSteps": [
+      {
+        "number": 1,
+        "titleEs": "Clasificación de datos y requisitos",
+        "titleEn": "Data classification and requirements",
+        "descEs": "Qué datos intervienen, qué nivel de sensibilidad tienen y qué exige la regulación o el contrato.",
+        "descEn": "Which data is involved, how sensitive it is and what regulation or contracts require.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 2,
+        "titleEs": "Benchmark de modelos con tus casos",
+        "titleEn": "Model benchmark on your cases",
+        "descEs": "Medimos calidad, latencia y costo operativo de los modelos candidatos con tus tareas reales.",
+        "descEn": "We measure quality, latency and operating cost of candidate models on your real tasks.",
+        "duration": "2 semanas"
+      },
+      {
+        "number": 3,
+        "titleEs": "Diseño de infraestructura y dimensionamiento",
+        "titleEn": "Infrastructure design and sizing",
+        "descEs": "GPU, memoria, almacenamiento y red según el modelo y la carga esperada.",
+        "descEn": "GPU, memory, storage and network based on the model and expected load.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 4,
+        "titleEs": "Despliegue, hardening y pruebas",
+        "titleEn": "Deployment, hardening and testing",
+        "descEs": "Instalación, endurecimiento de seguridad, pruebas de carga y de comportamiento.",
+        "descEn": "Installation, security hardening, load and behavior testing.",
+        "duration": "2–4 semanas"
+      },
+      {
+        "number": 5,
+        "titleEs": "Operación, actualización de modelos y evals",
+        "titleEn": "Operation, model updates and evals",
+        "descEs": "Actualizaciones controladas, evals de regresión y monitoreo.",
+        "descEn": "Controlled updates, regression evals and monitoring.",
+        "duration": "Continuo"
+      }
+    ],
+    "metrics": [],
+    "faqs": [
+      {
+        "questionEs": "¿Un modelo abierto es tan bueno como uno comercial?",
+        "questionEn": "Is an open model as good as a commercial one?",
+        "answerEs": "Para muchas tareas acotadas, sí; para otras, no. Por eso medimos con tus casos reales antes de decidir, y diseñamos arquitecturas híbridas cuando conviene.",
+        "answerEn": "For many bounded tasks, yes; for others, no. That is why we measure on your real cases before deciding, and design hybrid architectures when they make sense."
+      },
+      {
+        "questionEs": "¿Qué infraestructura necesitamos?",
+        "questionEn": "What infrastructure do we need?",
+        "answerEs": "Depende del modelo y de la carga. En el benchmark dimensionamos GPU, memoria y almacenamiento. También se puede empezar en la nube de tu cuenta y migrar después.",
+        "answerEn": "It depends on the model and the load. In the benchmark we size GPU, memory and storage. You can also start in your own cloud account and migrate later."
+      },
+      {
+        "questionEs": "¿Pueden operar sin conexión a internet?",
+        "questionEn": "Can it run with no internet connection?",
+        "answerEs": "Sí. Diseñamos despliegues aislados con un proceso controlado para actualizar modelos y dependencias.",
+        "answerEn": "Yes. We design air-gapped deployments with a controlled process for updating models and dependencies."
+      },
+      {
+        "questionEs": "¿Esto nos hace cumplir la regulación de datos?",
+        "questionEn": "Does this make us compliant with data regulation?",
+        "answerEs": "Ayuda a cumplirla, pero el cumplimiento depende de tus políticas y procesos. Trabajamos con tu equipo legal y de seguridad para que la arquitectura respalde esos requisitos (por ejemplo, la Ley 1581 de 2012).",
+        "answerEn": "It helps, but compliance depends on your policies and processes. We work with your legal and security teams so the architecture supports those requirements (for example, Colombia's Law 1581 of 2012 on personal data protection)."
+      },
+      {
+        "questionEs": "¿Quién opera los modelos después?",
+        "questionEn": "Who operates the models afterwards?",
+        "answerEs": "Podemos operarlos nosotros con AgentOps o transferir la operación a tu equipo, con documentación y acompañamiento.",
+        "answerEn": "We can operate them through AgentOps or hand the operation over to your team, with documentation and support."
+      }
+    ],
+    "ctaPrimaryTextEs": "Diseñar mi arquitectura privada",
+    "ctaPrimaryTextEn": "Design my private architecture",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "Ver modelos de despliegue",
+    "ctaSecondaryTextEn": "See deployment models",
+    "ctaSecondaryUrl": "#soluciones",
+    "coverImage": null,
+    "seoTitleEs": "IA privada: agentes de IA con modelos en tu infraestructura",
+    "seoTitleEn": "Private AI: AI agents with models on your infrastructure",
+    "seoDescriptionEs": "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
+    "seoDescriptionEn": "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 3,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": "2026-09-18T17:28:39.551Z",
+    "createdAt": "2026-09-18T17:28:39.551Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
+    "deletedAt": null
+  },
+  {
+    "id": "659513b3-06d9-469c-ba3d-2810b42ab121",
+    "slugEs": "agentops-gobierno-agentes",
+    "slugEn": "agentops",
+    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
+    "serviceType": "sub",
+    "accentColor": "ia",
+    "icon": "oct-monitor",
+    "titleEs": "AgentOps: operación y gobierno de agentes",
+    "titleEn": "AgentOps: agent operations and governance",
+    "subtitleEs": "Operamos agentes de IA en producción: trazas, evals de regresión, detección de drift, control de costos, red teaming y evidencia para auditoría.",
+    "subtitleEn": "We run AI agents in production: tracing, regression evals, drift detection, cost control, red teaming and audit-ready evidence for every action.",
+    "descriptionEs": "Un agente no se entrega y se olvida. Operamos tus agentes con evals continuas, observabilidad de cada paso, detección de drift, auditoría y control humano, para que sigan haciendo lo correcto cuando cambian los datos, los procesos o el modelo.",
+    "descriptionEn": "An agent is not delivered and forgotten. We operate your agents with continuous evals, step-level observability, drift detection, auditing and human control, so they keep doing the right thing when the data, the processes or the model change.",
+    "benefits": [
+      {
+        "icon": "oct-monitor",
+        "titleEs": "Observabilidad de agentes",
+        "titleEn": "Agent observability",
+        "copyEs": "Trazas de cada paso (entradas, decisiones, herramientas, costos, latencia), basadas en estándares abiertos como OpenTelemetry.",
+        "copyEn": "Traces for every step (inputs, decisions, tools, costs, latency), built on open standards such as OpenTelemetry."
+      },
+      {
+        "icon": "dia-check",
+        "titleEs": "Evals continuas",
+        "titleEn": "Continuous evals",
+        "copyEs": "Conjuntos de prueba propios que se ejecutan con cada cambio y periódicamente en producción.",
+        "copyEn": "Custom test suites that run on every change and periodically in production."
+      },
+      {
+        "icon": "dia-pulse",
+        "titleEs": "Detección de drift",
+        "titleEn": "Drift detection",
+        "copyEs": "Alertas cuando el comportamiento, la calidad o el costo del agente se desvían de su línea base.",
+        "copyEn": "Alerts when the agent's behavior, quality or cost drifts from its baseline."
+      },
+      {
+        "icon": "oct-lock",
+        "titleEs": "Guardrails y control humano",
+        "titleEn": "Guardrails and human control",
+        "copyEs": "Niveles de autonomía por tipo de acción, aprobaciones y límites operativos.",
+        "copyEn": "Autonomy levels per action type, approvals and operational limits."
+      },
+      {
+        "icon": "oct-shield",
+        "titleEs": "Red teaming de agentes",
+        "titleEn": "Agent red teaming",
+        "copyEs": "Pruebas ofensivas contra la inyección de instrucciones, la fuga de datos y el abuso de herramientas, con nuestro equipo de ethical hacking.",
+        "copyEn": "Offensive testing against instruction injection, data leakage and tool abuse, with our ethical hacking team."
+      },
+      {
+        "icon": "oct-scan",
+        "titleEs": "Gobierno y auditoría",
+        "titleEn": "Governance and audit",
+        "copyEs": "Inventario de agentes, responsables, versiones, permisos y evidencia para auditoría interna, tomando como referencia marcos como NIST AI RMF e ISO/IEC 42001.",
+        "copyEn": "An inventory of agents, owners, versions, permissions and evidence for internal audit, using frameworks such as the NIST AI RMF and ISO/IEC 42001 as a reference."
+      }
+    ],
+    "processSteps": [
+      {
+        "number": 1,
+        "titleEs": "Inventario y línea base",
+        "titleEn": "Inventory and baseline",
+        "descEs": "Qué agentes existen, quién es responsable, qué versiones corren y cómo se comportan hoy.",
+        "descEn": "Which agents exist, who owns them, which versions are running and how they behave today.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 2,
+        "titleEs": "Instrumentación y tableros",
+        "titleEn": "Instrumentation and dashboards",
+        "descEs": "Trazas, métricas de calidad y costo, y tableros por agente.",
+        "descEn": "Traces, quality and cost metrics, and a dashboard per agent.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 3,
+        "titleEs": "Evals y alertas",
+        "titleEn": "Evals and alerts",
+        "descEs": "Conjuntos de prueba propios y alertas sobre calidad, drift y costo.",
+        "descEn": "Custom test suites and alerts on quality, drift and cost.",
+        "duration": "2 semanas"
+      },
+      {
+        "number": 4,
+        "titleEs": "Red teaming inicial",
+        "titleEn": "Initial red teaming",
+        "descEs": "Pruebas ofensivas específicas para agentes y plan de corrección.",
+        "descEn": "Agent-specific offensive testing and a remediation plan.",
+        "duration": "1–2 semanas"
+      },
+      {
+        "number": 5,
+        "titleEs": "Operación con reportes periódicos",
+        "titleEn": "Operation with periodic reports",
+        "descEs": "Reportes de calidad, incidentes, costos y mejoras aplicadas.",
+        "descEn": "Reports on quality, incidents, costs and improvements applied.",
+        "duration": "Continuo"
+      }
+    ],
+    "metrics": [],
+    "faqs": [
+      {
+        "questionEs": "¿Pueden operar agentes que no construyeron ustedes?",
+        "questionEn": "Can you operate agents you did not build?",
+        "answerEs": "Sí. Empezamos con un inventario y una línea base, instrumentamos lo que falte y definimos evals antes de asumir la operación.",
+        "answerEn": "Yes. We start with an inventory and a baseline, instrument whatever is missing and define evals before taking over operations."
+      },
+      {
+        "questionEs": "¿Qué es el drift en un agente?",
+        "questionEn": "What is drift in an agent?",
+        "answerEs": "Es la desviación gradual de su comportamiento respecto a lo esperado, causada por cambios en los datos, en los procesos o en la versión del modelo. Se detecta comparando contra una línea base y con evals periódicas.",
+        "answerEn": "It is the gradual deviation of its behavior from what is expected, caused by changes in the data, the processes or the model version. It is detected by comparing against a baseline and with periodic evals."
+      },
+      {
+        "questionEs": "¿Qué queda registrado?",
+        "questionEn": "What gets logged?",
+        "answerEs": "Cada ejecución: qué recibió el agente, qué decidió, qué herramientas usó, con qué parámetros y permisos, y qué resultado obtuvo.",
+        "answerEn": "Every run: what the agent received, what it decided, which tools it used with which parameters and permissions, and what result it got."
+      },
+      {
+        "questionEs": "¿Cómo se reportan los resultados?",
+        "questionEn": "How are results reported?",
+        "answerEs": "Con tableros en vivo y un reporte periódico de calidad, incidentes, costos y mejoras aplicadas.",
+        "answerEn": "Through live dashboards and a periodic report on quality, incidents, costs and improvements applied."
+      },
+      {
+        "questionEs": "¿Hacen pruebas de seguridad a los agentes?",
+        "questionEn": "Do you security-test the agents?",
+        "answerEs": "Sí, con red teaming específico para agentes: inyección de instrucciones, abuso de herramientas y fuga de datos.",
+        "answerEn": "Yes, with agent-specific red teaming: instruction injection, tool abuse and data leakage."
+      }
+    ],
+    "ctaPrimaryTextEs": "Hablar de AgentOps",
+    "ctaPrimaryTextEn": "Talk about AgentOps",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "Ver qué operamos",
+    "ctaSecondaryTextEn": "See what we operate",
+    "ctaSecondaryUrl": "#soluciones",
+    "coverImage": null,
+    "seoTitleEs": "AgentOps: operación y gobierno de agentes de IA",
+    "seoTitleEn": "AgentOps: operations and governance for AI agents",
+    "seoDescriptionEs": "Operamos agentes de IA en producción: trazas, evals de regresión, detección de drift, control de costos, red teaming y evidencia para auditoría.",
+    "seoDescriptionEn": "We run AI agents in production: tracing, regression evals, drift detection, cost control, red teaming and audit-ready evidence for every action.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 4,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": "2026-09-18T17:28:39.551Z",
+    "createdAt": "2026-09-18T17:28:39.551Z",
+    "updatedAt": "2026-09-18T17:28:39.551Z",
     "deletedAt": null
   }
 ]
