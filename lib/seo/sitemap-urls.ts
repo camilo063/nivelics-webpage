@@ -18,7 +18,7 @@ export type SiteUrl = {
 
 // Única fuente de verdad. Cada entrada conoce su ruta ES y EN.
 // En el sitemap de cada locale se emite la ruta correspondiente + hreflang al otro.
-const SERVICIOS_MOD = new Date("2026-09-15");
+const SERVICIOS_MOD = new Date("2026-09-18");
 const INDUSTRIAS_MOD = new Date("2026-04-01");
 const NOSOTROS_MOD = new Date("2026-03-01");
 const CASOS_MOD = new Date("2025-12-15");
@@ -58,6 +58,24 @@ const STATIC_URLS: SiteUrl[] = [
   {
     es: "/servicios/inteligencia-artificial/agentes-ia",
     en: "/en/services/artificial-intelligence/ai-agents",
+    priority: 0.85,
+    lastModified: SERVICIOS_MOD,
+  },
+  {
+    es: "/servicios/inteligencia-artificial/integracion-sistemas-mcp",
+    en: "/en/services/artificial-intelligence/systems-integration-mcp",
+    priority: 0.85,
+    lastModified: SERVICIOS_MOD,
+  },
+  {
+    es: "/servicios/inteligencia-artificial/ia-privada-on-premise",
+    en: "/en/services/artificial-intelligence/private-ai-on-premises",
+    priority: 0.85,
+    lastModified: SERVICIOS_MOD,
+  },
+  {
+    es: "/servicios/inteligencia-artificial/agentops-gobierno-agentes",
+    en: "/en/services/artificial-intelligence/agentops",
     priority: 0.85,
     lastModified: SERVICIOS_MOD,
   },

@@ -12,6 +12,8 @@ interface CaseStudyCardProps {
   metric: string;
   service: string;
   url: string;
+  /** Texto del enlace. Por defecto en español: pásalo traducido en /en. */
+  ctaLabel?: string;
 }
 
 export function CaseStudyCard({
@@ -23,6 +25,7 @@ export function CaseStudyCard({
   metric,
   service,
   url,
+  ctaLabel = "Ver caso completo",
 }: CaseStudyCardProps) {
   return (
     <section className="py-10 md:py-14">
@@ -52,7 +55,7 @@ export function CaseStudyCard({
                   {service}
                 </span>
                 <span className="text-sm text-text-40 group-hover:text-primary transition-colors">
-                  Ver caso completo <ArrowRight size={14} className="inline" />
+                  {ctaLabel} <ArrowRight size={14} className="inline" />
                 </span>
               </div>
             </Link>

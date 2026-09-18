@@ -1,30 +1,36 @@
-// CMS-connected: 2026-05-07 — sub-services, benefits, processSteps and CTAs read from DB with hardcoded fallbacks
+// Hub de IA — línea «Ingeniería de agentes» (2026-09-18).
+// Copy bilingüe en lib/content/agentes.ts (IA_HUB). Del CMS solo se lee la lista de
+// subservicios (títulos, subtítulos, íconos y orden), que el admin sí mantiene.
+// Sin cifras de resultados: la banda de métricas pasó a «Principios de diseño».
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageWrapper } from "@/components/layout";
 import { HeroSplit } from "@/components/sections/hero-split";
-import { HeroSelector } from "@/components/sections/hero-selector";
-import { MetricsBar } from "@/components/sections/metrics-bar";
 import { ClientLogosBar } from "@/components/sections/client-logos-bar";
 import { TechStackGrid } from "@/components/sections/tech-stack-grid";
 import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { InlineContactForm } from "@/components/sections/inline-contact-form";
+import { CmsSubServicesGrid } from "@/components/sections/cms-servicio-sections";
 import {
-  CmsServicioBenefits,
-  CmsServicioProcess,
-  CmsSubServicesGrid,
-  resolveServicioCtas,
-} from "@/components/sections/cms-servicio-sections";
+  AgentProofSection,
+  DesignPrinciples,
+  HarnessFramework,
+} from "@/components/sections/agentes/agent-sections";
+import { GeoIconBox } from "@/lib/icons/geometric";
 import { getServiceSchema } from "@/lib/schema/service";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
-import { getAllUiLabels } from "@/lib/cms/ui-labels";
-import { uiLabel } from "@/lib/cms/ui-labels-helper";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
+import {
+  AGENT_ACCENT,
+  AGENT_SERVICES,
+  IA_HUB,
+  IA_SIBLINGS,
+  IA_SUB_PATHS,
+} from "@/lib/content/agentes";
 import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
@@ -37,93 +43,112 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
-  const cms = await getServicioData("inteligencia-artificial", locale);
+  const copy = IA_HUB[locale];
   return buildPageMetadata({
     locale,
     href: "/servicios/inteligencia-artificial",
-    title: cms?.seoTitle || "IA Aplicada a Negocios | Agentes, Automatización y RAG",
-    description:
-      cms?.seoDescription ||
-      "Soluciones de IA generativa, MLOps y analítica avanzada para automatizar procesos y generar insights accionables.",
+    title: copy.seoTitle,
+    description: copy.seoDescription,
   });
 }
 
-const SUB_SERVICES = [
-  {
-    icon: "bot",
-    title: "Agentes de IA",
-    description:
-      "Automatización inteligente para ventas, soporte y operaciones. Integración con WhatsApp, CRM y plataformas empresariales.",
-    href: "/servicios/inteligencia-artificial/agentes-ia",
-  },
-  {
-    icon: "bar-chart3",
-    title: "Agentes Comerciales",
-    description:
-      "IA que califica leads, hace seguimiento y escala oportunidades a tu equipo de ventas.",
-    href: "/servicios/inteligencia-artificial/agentes-comerciales",
-  },
-  {
-    icon: "workflow",
-    title: "Automatización de Procesos",
-    description:
-      "Eficiencia operacional con RPA + IA. Hasta 50% reducción de tiempo operativo en finanzas, RRHH y logística.",
-    href: "/servicios/inteligencia-artificial/automatizacion-procesos",
-  },
-  {
-    icon: "file-text",
-    title: "Gestión de Contenido",
-    description:
-      "SEO y marketing automatizado con IA. Generación y optimización de contenido a escala integrado con tu CMS.",
-    href: "/servicios/inteligencia-artificial/gestion-contenido",
-  },
-  {
-    icon: "megaphone",
-    title: "Marketing y CRM",
-    description:
-      "Segmentación inteligente, personalización de campañas y análisis predictivo integrado con tu CRM.",
-    href: "/servicios/inteligencia-artificial/marketing-crm",
-  },
+// Íconos de la grid cuando la BD no responde (el orden es el de IA_SIBLINGS).
+const FALLBACK_ICONS = [
+  "dia-pulse",
+  "hex-nodes",
+  "oct-lock",
+  "oct-monitor",
+  "arc-person",
+  "dia-flow",
+  "arc-doc",
+  "dia-target",
 ];
+
+// Subtítulos de la grid cuando la BD no responde.
+const FALLBACK_DESCRIPTIONS = {
+  es: [
+    AGENT_SERVICES.agentesIa.es.seoDescription,
+    AGENT_SERVICES.mcp.es.seoDescription,
+    AGENT_SERVICES.iaPrivada.es.seoDescription,
+    AGENT_SERVICES.agentops.es.seoDescription,
+    "IA que califica leads, hace seguimiento y escala oportunidades a tu equipo de ventas.",
+    "Elimina trabajo manual repetitivo con flujos inteligentes impulsados por IA.",
+    "SEO y contenido a escala con IA. Generación, optimización y distribución inteligente.",
+    "Prospectos calificados automáticamente con IA integrada a tu CRM y herramientas de marketing.",
+  ],
+  en: [
+    AGENT_SERVICES.agentesIa.en.seoDescription,
+    AGENT_SERVICES.mcp.en.seoDescription,
+    AGENT_SERVICES.iaPrivada.en.seoDescription,
+    AGENT_SERVICES.agentops.en.seoDescription,
+    "AI that qualifies leads, follows up and escalates opportunities to your sales team.",
+    "Eliminate repetitive manual work with intelligent AI-powered workflows.",
+    "SEO and content at scale with AI. Smart generation, optimization and distribution.",
+    "Qualified leads, automatically, with AI integrated into your CRM and marketing tools.",
+  ],
+};
 
 export default async function IAPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
   const isEn = locale === "en";
-  const [cms, uiLabels] = await Promise.all([
-    getServicioData("inteligencia-artificial", locale),
-    getAllUiLabels(),
-  ]);
+  const copy = IA_HUB[locale];
+
+  const cms = await getServicioData("inteligencia-artificial", locale);
   const subs = cms ? await getSubserviciosData(cms.id, locale) : [];
-  const cmsSubItems = subs.map((s) => ({
-    slug: s.slug,
-    title: s.title,
-    subtitle: s.subtitle,
-    icon: s.icon,
-  }));
-  const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
-    primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
-    secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
-    fallbackPrimary: { text: "Ver casos de uso", url: "#sub-services" },
-    fallbackSecondary: { text: "Calcular mi ROI", url: "/contacto" },
-  });
+
+  // La grid del CMS arma el enlace con la ruta ES aun en /en; aquí se resuelve por idioma.
+  const gridItems = subs.length
+    ? subs.map((s) => ({
+        icon: s.icon,
+        title: s.title,
+        description: s.subtitle,
+        href:
+          (IA_SUB_PATHS[s.slug] && IA_SUB_PATHS[s.slug][locale]) ??
+          `/servicios/inteligencia-artificial/${s.slug}`,
+      }))
+    : IA_SIBLINGS.map((s, i) => ({
+        icon: FALLBACK_ICONS[i] ?? null,
+        title: isEn ? s.nameEn : s.name,
+        description: FALLBACK_DESCRIPTIONS[locale][i] ?? "",
+        href: isEn ? s.urlEn : s.url,
+      }));
+
+  const hubUrl = isEn
+    ? "/en/services/artificial-intelligence"
+    : "/servicios/inteligencia-artificial";
   const serviceSchema = getServiceSchema({
-    name: "Inteligencia Artificial Aplicada",
-    description:
-      "Soluciones de IA generativa, agentes, MLOps y analítica avanzada para empresas B2B.",
-    url: "/servicios/inteligencia-artificial",
+    name: isEn
+      ? "Applied Artificial Intelligence and AI Agents"
+      : "Agentes e Inteligencia Artificial aplicada",
+    description: copy.description,
+    url: hubUrl,
     serviceType: "Artificial Intelligence Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
-    { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
-    { name: "Inteligencia Artificial", url: "/servicios/inteligencia-artificial" },
-  ]);
+  const breadcrumb = getBreadcrumbSchema(
+    isEn
+      ? [
+          { name: "Home", url: "/en" },
+          { name: "Services", url: "/en/services" },
+          { name: "Artificial Intelligence", url: hubUrl },
+        ]
+      : [
+          { name: "Inicio", url: "/" },
+          { name: "Servicios", url: "/servicios" },
+          { name: "Inteligencia Artificial", url: hubUrl },
+        ],
+  );
+
+  // Panel del hero: las 4 líneas de agentes + las dos hermanas más buscadas.
+  const panel = [0, 1, 2, 3, 5, 4].map((i) => ({
+    icon: FALLBACK_ICONS[i],
+    label: isEn ? IA_SIBLINGS[i].nameEn : IA_SIBLINGS[i].name,
+    href: isEn ? IA_SIBLINGS[i].urlEn : IA_SIBLINGS[i].url,
+  }));
 
   return (
     <PageWrapper>
-      {/* JSON-LD schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -132,321 +157,118 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            getFAQSchema([
-              {
-                question: "¿Qué tipos de IA implementa Nivelics?",
-                answer:
-                  "Implementamos IA generativa (chatbots, asistentes virtuales con LLMs), analítica avanzada con modelos predictivos, MLOps para pipelines de machine learning en producción, computer vision, NLP/NLU y consultoría estratégica en IA.",
-              },
-              {
-                question: "¿Cuánto tiempo toma un proyecto de IA?",
-                answer:
-                  "Un MVP de IA puede estar listo en 4-8 semanas dependiendo de la complejidad. Proyectos de analítica avanzada o MLOps en producción suelen tomar entre 8 y 16 semanas, incluyendo integración y validación con datos reales.",
-              },
-              {
-                question: "¿Necesito datos para implementar IA?",
-                answer:
-                  "Depende del caso de uso. Para modelos predictivos y analítica avanzada sí se requieren datos históricos. Para soluciones de IA generativa con LLMs, podemos arrancar con RAG sobre documentación existente sin necesidad de datasets de entrenamiento propios.",
-              },
-            ]),
-          ),
-        }}
-      />
 
-      {/* Hero */}
       <HeroSplit
         heroEffect="diagonal"
-        badge="Inteligencia Artificial Aplicada"
-        h1={cms?.title || "Agentes IA que"}
-        h1Accent="ejecutan tareas reales"
-        subtitle={
-          cms?.subtitle ||
-          "No chatbots. Agentes autónomos integrados con tus sistemas que trabajan 24/7 y se miden con resultados reales."
-        }
-        bullets={[
-          "50% reducción promedio en costos operativos",
-          "Primer agente en producción en 6-8 semanas",
-          "Integrado con tu CRM, ERP y flujos existentes",
-        ]}
-        ctaPrimary={ctaPrimary}
-        ctaSecondary={ctaSecondary}
-        accentColor="#8B5CF6"
+        badge={copy.badge}
+        // El H1 no sale del CMS: `title` es la etiqueta corta del hub y HeroSplit concatena
+        // `h1 + h1Accent` («Agentes e IA aplicada ejecutan tareas reales»).
+        h1={copy.h1}
+        h1Accent={copy.h1Accent}
+        subtitle={copy.subtitle}
+        bullets={copy.bullets}
+        ctaPrimary={{
+          text: isEn ? "See our solutions" : "Ver soluciones",
+          url: "#sub-services",
+        }}
+        ctaSecondary={{
+          text: isEn ? "Talk to an expert" : "Hablar con un experto",
+          url: isEn ? "/en/contact" : "/contacto",
+        }}
+        accentColor={AGENT_ACCENT}
         rightPanel={
-          <HeroSelector
-            title="¿Qué automatizas primero?"
-            accentColor="#8B5CF6"
-            options={[
-              {
-                icon: "📧",
-                label: "Calificación de leads",
-                url: "/servicios/inteligencia-artificial/agentes-comerciales",
-                description: "Agente que califica y puntúa leads automáticamente",
-              },
-              {
-                icon: "📄",
-                label: "Procesamiento de documentos",
-                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
-                description: "Extrae, clasifica y procesa documentos con IA",
-              },
-              {
-                icon: "💬",
-                label: "Atención al cliente 24/7",
-                url: "/servicios/inteligencia-artificial/agentes-ia",
-                description: "Agente que resuelve consultas sin intervención humana",
-              },
-              {
-                icon: "📊",
-                label: "Reportes automáticos",
-                url: "/servicios/inteligencia-artificial/automatizacion-procesos",
-                description: "Genera reportes ejecutivos desde tus datos",
-              },
-              {
-                icon: "🔍",
-                label: "Búsqueda inteligente (RAG)",
-                url: "/servicios/inteligencia-artificial/agentes-ia",
-                description: "Motor de búsqueda sobre documentos internos",
-              },
-            ]}
-          />
+          <nav aria-label={copy.panelTitle} className="glass rounded-xl p-5">
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-text-40">
+              {copy.panelTitle}
+            </p>
+            <ul className="space-y-1">
+              {panel.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-white/10 hover:bg-white/[0.03]"
+                  >
+                    <GeoIconBox name={item.icon} size={16} color="violet" />
+                    <span className="text-sm font-medium text-text-100">{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         }
         dataSection="ia-hero"
-        ariaLabel="Inteligencia Artificial Aplicada — agentes IA autónomos que ejecutan tareas reales de negocio, integrados con tus sistemas"
+        ariaLabel={`${copy.badge} — ${copy.subtitle}`}
       />
 
-      {/* Metrics */}
-      <MetricsBar
-        metrics={
-          cms?.metrics?.length
-            ? cms.metrics.map((m) => ({
-                value: m.value,
-                label: m.label,
-                sublabel: "",
-                unit: m.unit,
-              }))
-            : /* LEGACY FALLBACK */ [
-                {
-                  value: "50%",
-                  label: "Reducción de costos operativos",
-                  sublabel: "promedio en proyectos de automatización",
-                },
-                {
-                  value: "6-8",
-                  label: "Semanas al primer agente",
-                  sublabel: "desde discovery hasta producción",
-                },
-                {
-                  value: "24/7",
-                  label: "Disponibilidad",
-                  sublabel: "los agentes no tienen horario",
-                },
-                {
-                  value: "100%",
-                  label: "Trazabilidad",
-                  sublabel: "logging y evals en cada ejecución",
-                },
-              ]
-        }
-      />
+      <DesignPrinciples locale={locale} principles={copy.principles} />
 
-      {/* Sub-services */}
       <CmsSubServicesGrid
-        cmsItems={cmsSubItems}
-        fallback={SUB_SERVICES.map((s) => ({
-          icon: s.icon,
-          title: s.title,
-          description: s.description,
-          href: s.href,
-        }))}
+        cmsItems={[]}
+        fallback={gridItems}
         parentSlug="inteligencia-artificial"
-        titleEs="Soluciones especializadas"
-        titleEn="Specialised solutions"
+        titleEs={IA_HUB.es.subServicesTitle}
+        titleEn={IA_HUB.en.subServicesTitle}
         locale={locale}
         iconColor="violet"
       />
 
-      {/* Client logos */}
+      <HarnessFramework locale={locale} />
+
       <ClientLogosBar
-        title="IA en producción para"
+        title={copy.logosTitle}
         logos={[
-          { name: "Televisa / N+", sector: "Medios" },
+          { name: "Televisa / N+", sector: isEn ? "Media" : "Medios" },
           { name: "Grupo Bolívar", sector: "Fintech" },
-          { name: "Pulzo", sector: "Medios digitales" },
-          { name: "Crónica", sector: "Medios" },
+          { name: "Pulzo", sector: isEn ? "Digital media" : "Medios digitales" },
+          { name: "Crónica", sector: isEn ? "Media" : "Medios" },
           { name: "AB InBev-Bavaria", sector: "CPG" },
         ]}
       />
 
-      {/* Tech stack */}
-      <TechStackGrid
-        title="Stack de IA que implementamos"
-        categories={[
-          { name: "LLMs", items: ["GPT-4o", "Claude 3.5", "Gemini Pro", "Llama 3"] },
-          { name: "Frameworks", items: ["LangChain", "LangGraph", "CrewAI", "AutoGen"] },
-          { name: "RAG y vectores", items: ["Pinecone", "Weaviate", "pgvector", "Chroma"] },
-          { name: "Cloud IA", items: ["AWS Bedrock", "Google Vertex AI", "Azure OpenAI"] },
-          { name: "Observabilidad", items: ["LangSmith", "Weights & Biases", "custom evals"] },
-          { name: "Integraciones", items: ["Odoo", "Salesforce", "HubSpot", "WhatsApp API"] },
-        ]}
-      />
+      <TechStackGrid title={copy.stackTitle} categories={copy.stack} />
+
+      <AgentProofSection locale={locale} />
 
       {/* Enlace cruzado: la superficie de ataque de un agente de IA no la cubre un
           pentest tradicional, y es el ángulo que más nos diferencia. */}
-      <section className="pb-4">
+      <section className="py-8">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <ul className="max-w-3xl space-y-2 text-sm leading-relaxed text-text-70">
-            <li className="flex gap-2">
-              <span aria-hidden="true" className="text-primary">
-                ·
-              </span>
-              <span>
-                {isEn ? (
-                  <>
-                    <strong className="font-semibold text-text-100">
-                      Security audit for AI agents:
-                    </strong>{" "}
-                    prompt injection, training-data leakage, jailbreaks and abuse of connected tools
-                    — an attack surface traditional pentests do not cover.{" "}
-                    <Link
-                      href="/en/services/cloud/ethical-hacking"
-                      className="font-medium text-primary underline-offset-4 hover:underline"
-                    >
-                      See Cybersecurity and Ethical Hacking →
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <strong className="font-semibold text-text-100">
-                      Auditoría de seguridad de agentes de IA:
-                    </strong>{" "}
-                    prompt injection, fuga de datos de entrenamiento, jailbreaks y abuso de
-                    herramientas conectadas — una superficie de ataque que los pentests
-                    tradicionales no cubren.{" "}
-                    <Link
-                      href="/servicios/cloud/ciberseguridad-ethical-hacking"
-                      className="font-medium text-primary underline-offset-4 hover:underline"
-                    >
-                      Conoce Ciberseguridad y Ethical Hacking →
-                    </Link>
-                  </>
-                )}
-              </span>
-            </li>
-          </ul>
+          <p className="max-w-3xl text-sm leading-relaxed text-text-70">
+            <strong className="font-semibold text-text-100">{copy.securityLink.lead}</strong>{" "}
+            {copy.securityLink.text}{" "}
+            <Link
+              href={copy.securityLink.link.href}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {copy.securityLink.link.label}
+            </Link>
+          </p>
         </div>
       </section>
 
-      {/* Benefits from CMS (renders only when admin has populated benefits) */}
-      <CmsServicioBenefits
-        benefits={cms?.benefits}
-        accentColor="#8B5CF6"
-        titleEs="Beneficios del enfoque Inteligencia Artificial"
-        titleEn="Benefits of the AI approach"
-        locale={locale}
-      />
+      <ProcessTimeline title={copy.processTitle} accentColor={AGENT_ACCENT} steps={copy.process} />
 
-      {/* Process */}
-      <ProcessTimeline
-        title="Proceso de implementación de IA"
-        accentColor="#8B5CF6"
-        steps={[
-          {
-            number: "01",
-            title: "Discovery de procesos",
-            description: "Identificamos qué procesos tienen mayor ROI al automatizar.",
-            duration: "Semana 1",
-            deliverable: "Mapa de oportunidades + priorización",
-          },
-          {
-            number: "02",
-            title: "POC funcional",
-            description: "Construimos una prueba de concepto en tu entorno real.",
-            duration: "Semanas 2-3",
-            deliverable: "Agente funcionando en staging",
-          },
-          {
-            number: "03",
-            title: "MVP a producción",
-            description: "Refinamos, integramos y lanzamos a producción con monitoreo.",
-            duration: "Semanas 4-8",
-            deliverable: "Agente en producción + dashboard",
-          },
-          {
-            number: "04",
-            title: "Operación continua",
-            description: "Monitoreamos, evaluamos y evolucionamos el agente.",
-            duration: "MRR ongoing",
-            deliverable: "Reporte mensual de performance",
-          },
-        ]}
-      />
-
-      {/* Process from CMS (renders only when admin has populated processSteps) */}
-      <CmsServicioProcess
-        steps={cms?.processSteps}
-        accentColor="#8B5CF6"
-        titleEs="Cómo lo entregamos"
-        titleEn="How we deliver"
-        locale={locale}
-      />
-
-      {/* Case study */}
       <CaseStudyCard
         client="Pulzo"
-        sector="Medios Digitales"
+        sector={copy.caseStudy.sector}
         country="Colombia"
         countryFlag="🇨🇴"
-        result="Partnership tecnológico de +10 años con IA integrada"
-        metric="Millones de visitas mensuales"
-        service="IA + Desarrollo Digital"
-        url="/casos-de-exito/pulzo"
+        result={copy.caseStudy.result}
+        metric={copy.caseStudy.metric}
+        service={copy.caseStudy.service}
+        url={isEn ? "/en/success-stories/pulzo" : "/casos-de-exito/pulzo"}
+        ctaLabel={isEn ? "See full case study" : "Ver caso completo"}
       />
 
-      {/* FAQ */}
-      <FAQAccordion
-        title={uiLabel(uiLabels, "servicio.ia_faqs_title", locale)}
-        schemaEnabled
-        faqs={
-          cms?.faqs?.length
-            ? cms.faqs
-            : /* LEGACY FALLBACK */ [
-                {
-                  question: "¿Cuánto cuesta implementar un agente de IA?",
-                  answer:
-                    "Depende del proceso a automatizar y las integraciones requeridas. Un agente simple parte de $8,000 USD en implementación + MRR de operación. En el discovery de la primera semana definimos el costo exacto con ROI proyectado.",
-                },
-                {
-                  question: "¿En cuánto tiempo veo resultados?",
-                  answer:
-                    "En 6-8 semanas tienes el primer agente en producción. El ROI medible aparece típicamente en el mes 2-3, cuando el volumen procesado supera el costo de implementación.",
-                },
-                {
-                  question: "¿Mis datos se usan para entrenar los modelos?",
-                  answer:
-                    "No. Trabajamos con configuraciones que garantizan que tus datos no alimentan el entrenamiento de modelos externos. También ofrecemos opciones on-premise o en tu propia cuenta de AWS Bedrock o Azure OpenAI.",
-                },
-                {
-                  question: "¿Qué pasa si el agente comete errores?",
-                  answer:
-                    "Implementamos evals automáticas y umbrales de calidad desde el inicio. Si el agente no supera el umbral en una tarea, escala a un humano automáticamente. El monitoreo es continuo.",
-                },
-                {
-                  question: "¿La IA reemplaza a mi equipo?",
-                  answer:
-                    "No. Los agentes de IA manejan las tareas repetitivas y de alto volumen, liberando a tu equipo para trabajo de mayor valor. En todos nuestros proyectos, los equipos cliente terminan más productivos, no más pequeños.",
-                },
-              ]
-        }
-      />
+      {/* schemaEnabled emite el FAQPage: única fuente de ese bloque en la página (antes
+          había un segundo FAQPage manual con otras preguntas). */}
+      <FAQAccordion title={copy.faqTitle} schemaEnabled faqs={copy.faqs} />
 
-      {/* Contact form */}
       <InlineContactForm
-        title="¿Qué proceso quieres automatizar?"
-        subtitle="Cuéntanos el caso y calculamos el ROI potencial."
+        title={copy.contactTitle}
+        subtitle={copy.contactSubtitle}
         serviceDefault="ia"
+        accentColor={AGENT_ACCENT}
       />
     </PageWrapper>
   );

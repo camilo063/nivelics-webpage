@@ -35,6 +35,9 @@ const EN_TRANSLATION_STATUS: Record<string, TranslationStatus> = {
 
   // ── IA sub-pages ──
   "/servicios/inteligencia-artificial/agentes-ia": "complete",
+  "/servicios/inteligencia-artificial/integracion-sistemas-mcp": "complete",
+  "/servicios/inteligencia-artificial/ia-privada-on-premise": "complete",
+  "/servicios/inteligencia-artificial/agentops-gobierno-agentes": "complete",
   "/servicios/inteligencia-artificial/agentes-comerciales": "complete",
   "/servicios/inteligencia-artificial/automatizacion-procesos": "complete",
   "/servicios/inteligencia-artificial/gestion-contenido": "complete",
