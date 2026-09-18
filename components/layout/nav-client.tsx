@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect, useId } from "react";
 import type React from "react";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/locale-link";
+import { canonicalEsPath, localizePath, switchLocalePath } from "@/lib/i18n/localize-path";
 import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
@@ -228,14 +229,14 @@ function MobileAccordion({ title, children }: { title: string; children: React.R
 
 /* ── Language switch helpers ── */
 
+// Antes solo quitaban/agregaban «/en» y el selector llevaba de /servicios/cloud a
+// /en/servicios/cloud (que existía solo gracias a una redirección).
 function getEsUrl(path: string): string {
-  const stripped = path.replace(/^\/en(\/|$)/, "/");
-  return stripped || "/";
+  return switchLocalePath(path, "es");
 }
 
 function getEnUrl(path: string): string {
-  if (path.startsWith("/en")) return path;
-  return path === "/" ? "/en" : "/en" + path;
+  return switchLocalePath(path, "en");
 }
 
 /* ── Nav ── */
@@ -490,7 +491,12 @@ export function NavClient({
   }, [pathname]);
 
   function isActive(href: string) {
-    return pathname === href || pathname.startsWith(href + "/");
+    // `href` viene con la ruta ES; en /en el pathname es la ruta EN.
+    // Se compara en ES canónico: en SSR el pathname llega como /en/<ruta ES> y en el
+    // cliente como /en/<ruta EN>.
+    const current = canonicalEsPath(pathname);
+    const target = canonicalEsPath(localizePath(href, locale));
+    return current === target || current.startsWith(target + "/");
   }
 
   function close() {
@@ -511,7 +517,7 @@ export function NavClient({
         itemScope
         itemType="https://schema.org/SiteNavigationElement"
       >
-        <Link
+        <LocaleLink
           href={locale === "en" ? "/en" : "/"}
           className="flex items-center text-xl font-bold text-text-100 tracking-tight"
           itemProp="url"
@@ -538,7 +544,7 @@ export function NavClient({
             ) : (
               <span itemProp="name">{SITE.name}</span>
             ))}
-        </Link>
+        </LocaleLink>
 
         {/* ── Desktop ── */}
         <div className="flex items-center gap-7 max-lg:hidden">
@@ -548,7 +554,7 @@ export function NavClient({
             onMouseEnter={serviciosEnter}
             onMouseLeave={serviciosPanel.leave}
           >
-            <Link
+            <LocaleLink
               href={serviciosHref}
               id="nav-trigger-servicios"
               aria-haspopup="true"
@@ -567,7 +573,7 @@ export function NavClient({
                 size={14}
                 className={cn("transition-transform", serviciosPanel.open && "rotate-180")}
               />
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Productos */}
@@ -576,7 +582,7 @@ export function NavClient({
             onMouseEnter={productosEnter}
             onMouseLeave={productosPanel.leave}
           >
-            <Link
+            <LocaleLink
               href={productosHref}
               id="nav-trigger-productos"
               aria-haspopup="true"
@@ -595,7 +601,7 @@ export function NavClient({
                 size={14}
                 className={cn("transition-transform", productosPanel.open && "rotate-180")}
               />
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Industrias */}
@@ -604,7 +610,7 @@ export function NavClient({
             onMouseEnter={industriasEnter}
             onMouseLeave={industriasPanel.leave}
           >
-            <Link
+            <LocaleLink
               href={industriasHref}
               id="nav-trigger-industrias"
               aria-haspopup="true"
@@ -623,12 +629,12 @@ export function NavClient({
                 size={14}
                 className={cn("transition-transform", industriasPanel.open && "rotate-180")}
               />
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Nosotros */}
           <div className="relative" onMouseEnter={nosotrosEnter} onMouseLeave={nosotrosPanel.leave}>
-            <Link
+            <LocaleLink
               href={nosotrosHref}
               id="nav-trigger-nosotros"
               aria-haspopup="true"
@@ -645,12 +651,12 @@ export function NavClient({
                 size={14}
                 className={cn("transition-transform", nosotrosPanel.open && "rotate-180")}
               />
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Plain links */}
           {plainLinks.map((item) => (
-            <Link
+            <LocaleLink
               key={item.href}
               href={item.href}
               itemProp="url"
@@ -660,7 +666,7 @@ export function NavClient({
               )}
             >
               <span itemProp="name">{item.label}</span>
-            </Link>
+            </LocaleLink>
           ))}
 
           {/* Language switch */}
@@ -691,7 +697,7 @@ export function NavClient({
           </div>
 
           <Button asChild variant="cta" size="sm">
-            <Link href="/contacto">{t("talkToUs")}</Link>
+            <LocaleLink href="/contacto">{t("talkToUs")}</LocaleLink>
           </Button>
         </div>
 
@@ -751,7 +757,7 @@ export function NavClient({
                       data-nav-metric={`${col.metric.value} ${col.metric.context}`}
                     >
                       {/* Column header */}
-                      <Link
+                      <LocaleLink
                         href={col.href}
                         className="flex items-center gap-2 group"
                         aria-label={`${col.title} — ${col.description}`}
@@ -769,7 +775,7 @@ export function NavClient({
                         >
                           {col.title}
                         </span>
-                      </Link>
+                      </LocaleLink>
                       <p className="mt-1 text-[11px] leading-tight text-text-40">
                         {col.description}
                       </p>
@@ -784,7 +790,7 @@ export function NavClient({
                       <ul className="mt-3 space-y-0.5">
                         {col.items.map((item) => (
                           <li key={item.href}>
-                            <Link
+                            <LocaleLink
                               href={item.href}
                               aria-label={item.ariaLabel}
                               data-nav-category="servicios"
@@ -801,20 +807,20 @@ export function NavClient({
                                 {item.label}
                               </span>
                               <span className="block text-[11px] text-text-40">{item.desc}</span>
-                            </Link>
+                            </LocaleLink>
                           </li>
                         ))}
                       </ul>
 
                       {/* Footer link */}
                       <div className="mt-2 border-t border-white/[0.06] pt-2">
-                        <Link
+                        <LocaleLink
                           href={col.href}
                           className="text-xs font-medium transition-colors hover:brightness-125"
                           style={{ color: col.color }}
                         >
                           {col.footerLink}
-                        </Link>
+                        </LocaleLink>
                       </div>
                     </div>
                   );
@@ -869,7 +875,7 @@ export function NavClient({
                     const Icon = item.icon;
                     return (
                       <li key={item.href}>
-                        <Link
+                        <LocaleLink
                           href={item.href}
                           aria-label={item.ariaLabel}
                           itemProp="url"
@@ -903,19 +909,19 @@ export function NavClient({
                               {item.desc}
                             </span>
                           </div>
-                        </Link>
+                        </LocaleLink>
                       </li>
                     );
                   })}
                 </ul>
                 <div className="mt-4 border-t border-white/[0.06] pt-3 text-right">
-                  <Link
+                  <LocaleLink
                     href={industriasFooterLinkHref}
                     className="text-xs font-medium transition-colors hover:brightness-125"
                     style={{ color: "#F59E0B" }}
                   >
                     {industriasFooterLinkLabel}
-                  </Link>
+                  </LocaleLink>
                 </div>
               </nav>
             </div>
@@ -967,7 +973,7 @@ export function NavClient({
                     const pricing = locale === "en" ? p.pricingEn : p.pricingEs;
                     return (
                       <li key={p.slug}>
-                        <Link
+                        <LocaleLink
                           href={href}
                           itemProp="url"
                           data-nav-category="productos"
@@ -1072,19 +1078,19 @@ export function NavClient({
                           >
                             {pricing}
                           </span>
-                        </Link>
+                        </LocaleLink>
                       </li>
                     );
                   })}
                 </ul>
                 <div className="mt-4 border-t border-white/[0.06] pt-3 text-right">
-                  <Link
+                  <LocaleLink
                     href={productosFooterLinkHref}
                     className="text-xs font-medium transition-colors hover:brightness-125"
                     style={{ color: "#00D4FF" }}
                   >
                     {productosFooterLinkLabel}
-                  </Link>
+                  </LocaleLink>
                 </div>
               </nav>
             </div>
@@ -1138,7 +1144,7 @@ export function NavClient({
                       const Icon = item.icon;
                       return (
                         <li key={item.href}>
-                          <Link
+                          <LocaleLink
                             href={item.href}
                             aria-label={item.ariaLabel}
                             itemProp="url"
@@ -1172,7 +1178,7 @@ export function NavClient({
                                 {item.desc}
                               </span>
                             </div>
-                          </Link>
+                          </LocaleLink>
                         </li>
                       );
                     })}
@@ -1240,13 +1246,13 @@ export function NavClient({
                       <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>
                         {credFooterCaption}
                       </p>
-                      <Link
+                      <LocaleLink
                         href={credCtaUrl}
                         className="mt-2 block text-xs font-medium"
                         style={{ color: "#6366F1" }}
                       >
                         {credCtaText}
-                      </Link>
+                      </LocaleLink>
                     </div>
                   </div>
                 </div>
@@ -1270,26 +1276,26 @@ export function NavClient({
             <div className="flex flex-col gap-1 px-4 py-6">
               {/* Servicios */}
               <MobileAccordion title={serviciosLabel}>
-                <Link
+                <LocaleLink
                   href={serviciosHref}
                   onClick={close}
                   className="block rounded-lg px-3 py-2 text-sm font-medium text-primary"
                 >
                   {allServicesLabel}
-                </Link>
+                </LocaleLink>
                 {serviciosColumns.map((col) => {
                   return (
                     <MobileAccordion key={col.href} title={col.title}>
-                      <Link
+                      <LocaleLink
                         href={col.href}
                         onClick={close}
                         className="block rounded-lg px-3 py-1.5 text-xs font-medium"
                         style={{ color: col.color }}
                       >
                         {col.footerLink}
-                      </Link>
+                      </LocaleLink>
                       {col.items.map((item) => (
-                        <Link
+                        <LocaleLink
                           key={item.href}
                           href={item.href}
                           onClick={close}
@@ -1303,7 +1309,7 @@ export function NavClient({
                         >
                           <span className="block text-sm">{item.label}</span>
                           <span className="block text-[11px] text-text-40">{item.desc}</span>
-                        </Link>
+                        </LocaleLink>
                       ))}
                     </MobileAccordion>
                   );
@@ -1312,15 +1318,15 @@ export function NavClient({
 
               {/* Productos */}
               <MobileAccordion title={productosLabel}>
-                <Link
+                <LocaleLink
                   href={productosHref}
                   onClick={close}
                   className="block rounded-lg px-3 py-2 text-sm font-medium text-primary"
                 >
                   {allProductsLabel}
-                </Link>
+                </LocaleLink>
                 {productosItems.map((p) => (
-                  <Link
+                  <LocaleLink
                     key={p.slug}
                     href={`/productos/${p.slug}`}
                     onClick={close}
@@ -1331,7 +1337,7 @@ export function NavClient({
                       <span className="block text-sm font-medium text-text-100">{p.name}</span>
                       <span className="block text-[11px] text-text-40">{p.category}</span>
                     </div>
-                  </Link>
+                  </LocaleLink>
                 ))}
               </MobileAccordion>
 
@@ -1340,7 +1346,7 @@ export function NavClient({
                 {industriesItems.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <Link
+                    <LocaleLink
                       key={item.href}
                       href={item.href}
                       onClick={close}
@@ -1363,24 +1369,24 @@ export function NavClient({
                         <span className="block text-sm font-medium">{item.label}</span>
                         <span className="block text-[11px] text-text-40">{item.desc}</span>
                       </div>
-                    </Link>
+                    </LocaleLink>
                   );
                 })}
               </MobileAccordion>
 
               {/* Nosotros */}
               <MobileAccordion title={nosotrosLabel}>
-                <Link
+                <LocaleLink
                   href={nosotrosHref}
                   onClick={close}
                   className="block rounded-lg px-3 py-2 text-sm font-medium text-primary"
                 >
                   {aboutNivelicsLabel}
-                </Link>
+                </LocaleLink>
                 {nosotrosItems.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <Link
+                    <LocaleLink
                       key={item.href}
                       href={item.href}
                       onClick={close}
@@ -1403,14 +1409,14 @@ export function NavClient({
                         <span className="block text-sm font-medium">{item.label}</span>
                         <span className="block text-[11px] text-text-40">{item.desc}</span>
                       </div>
-                    </Link>
+                    </LocaleLink>
                   );
                 })}
               </MobileAccordion>
 
               <div className="border-t border-border mt-3 pt-3">
                 {plainLinks.map((item) => (
-                  <Link
+                  <LocaleLink
                     key={item.href}
                     href={item.href}
                     onClick={close}
@@ -1420,7 +1426,7 @@ export function NavClient({
                     )}
                   >
                     {item.label}
-                  </Link>
+                  </LocaleLink>
                 ))}
               </div>
 
@@ -1449,9 +1455,9 @@ export function NavClient({
               </div>
 
               <Button asChild variant="cta" className="mt-4 mx-3">
-                <Link href="/contacto" onClick={close}>
+                <LocaleLink href="/contacto" onClick={close}>
                   {t("talkToUs")}
-                </Link>
+                </LocaleLink>
               </Button>
             </div>
           </motion.div>

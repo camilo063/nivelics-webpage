@@ -1,8 +1,11 @@
 import { marked } from "marked";
+import { localizePath } from "@/lib/i18n/localize-path";
 
 interface ProseContentProps {
   content: string;
   className?: string;
+  /** En "en" los enlaces internos del cuerpo (escritos con la ruta ES) se traducen. */
+  locale?: "es" | "en";
 }
 
 const PROSE_CLASSES = [
@@ -39,8 +42,18 @@ export function renderToHtml(content: string): string {
   return marked.parse(content, { async: false }) as string;
 }
 
-export function ProseContent({ content, className }: ProseContentProps) {
-  const html = renderToHtml(content);
+// Los cuerpos EN de la BD enlazan a /blog/..., /servicios/..., /contacto: rutas ES.
+// Traducirlos al pintar evita editar a mano cientos de enlaces y cubre los futuros.
+function localizeLinks(html: string, locale: "es" | "en"): string {
+  if (locale !== "en") return html;
+  return html.replace(
+    /(<a\b[^>]*?\shref=)(["'])(\/[^"']*)\2/gi,
+    (_m, pre: string, q: string, href: string) => `${pre}${q}${localizePath(href, "en")}${q}`,
+  );
+}
+
+export function ProseContent({ content, className, locale = "es" }: ProseContentProps) {
+  const html = localizeLinks(renderToHtml(content), locale);
   return (
     <div
       className={`${PROSE_CLASSES}${className ? " " + className : ""}`}

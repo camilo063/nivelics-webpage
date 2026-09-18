@@ -2,7 +2,7 @@
 // Bilingüe con el patrón de cloud/finops (constantes _ES/_EN + isEn): la página hermana
 // cloud/seguridad tiene el copy en español duro y su versión /en sale a medias.
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
@@ -342,6 +342,7 @@ export default async function CiberseguridadEthicalHackingPage({
   const solutions = isEn ? SOLUTIONS_EN : SOLUTIONS_ES;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: isEn ? "Cybersecurity and Ethical Hacking" : "Ciberseguridad y Ethical Hacking",
     description: isEn
       ? "Pentesting, red team and cybersecurity audits by certified ethical hackers, under a signed rules-of-engagement agreement."
@@ -351,6 +352,7 @@ export default async function CiberseguridadEthicalHackingPage({
   });
 
   const breadcrumb = getBreadcrumbSchema(
+    locale,
     isEn
       ? [
           { name: "Home", url: "/en" },

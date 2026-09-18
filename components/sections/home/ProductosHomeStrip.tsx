@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { MappedProductoCard } from "@/lib/cms/productos";
@@ -77,7 +77,7 @@ export function ProductosHomeStrip({ productos, locale, title, cta }: Props) {
                       </div>
                       <Image
                         src={shot}
-                        alt={`${p.name} — interfaz real del producto`}
+                        alt={`${p.name} — ${isEn ? "actual product interface" : "interfaz real del producto"}`}
                         fill
                         sizes="(max-width: 640px) 100vw, 260px"
                         className="object-cover object-top pt-5 transition-transform duration-500 group-hover:scale-[1.04]"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { SITE } from "@/lib/constants";
 import { pickLocale } from "@/lib/cms/bilingual";
 import { uiLabel, type UiLabelMap } from "@/lib/cms/ui-labels-helper";

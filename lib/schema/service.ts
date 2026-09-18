@@ -1,17 +1,27 @@
+import { localizePath } from "@/lib/i18n/localize-path";
+
 interface ServiceSchemaInput {
   name: string;
   description: string;
   url: string;
   serviceType: string;
+  /** En "en" la URL escrita con la ruta ES se traduce. */
+  locale?: string;
 }
 
-export function getServiceSchema({ name, description, url, serviceType }: ServiceSchemaInput) {
+export function getServiceSchema({
+  name,
+  description,
+  url,
+  serviceType,
+  locale,
+}: ServiceSchemaInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name,
     description,
-    url: `https://www.nivelics.com${url}`,
+    url: `https://www.nivelics.com${locale === "en" ? localizePath(url, "en") : url}`,
     serviceType,
     provider: {
       "@type": "Organization",

@@ -97,6 +97,7 @@ export default async function InvestigacionMercadosPage({
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Soluciones Tecnológicas para Investigación de Mercados",
     description:
       ind?.heroSubtitle ||
@@ -104,7 +105,7 @@ export default async function InvestigacionMercadosPage({
     url: "/industrias/investigacion-de-mercados",
     serviceType: "Market Research Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     {

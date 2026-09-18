@@ -96,6 +96,7 @@ export default async function MediosEntretenimientoPage({
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Tecnología para Medios y Entretenimiento",
     description:
       ind?.heroSubtitle ||
@@ -103,7 +104,7 @@ export default async function MediosEntretenimientoPage({
     url: "/industrias/medios-entretenimiento",
     serviceType: "Media Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Medios y Entretenimiento", url: "/industrias/medios-entretenimiento" },

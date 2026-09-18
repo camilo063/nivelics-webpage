@@ -76,13 +76,14 @@ export default async function EcommercePage({ params }: { params: Promise<{ loca
     fallbackSecondary: { text: "Ver casos de exito", url: "/casos-de-exito" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Desarrollo E-commerce",
     description:
       "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
     url: "/servicios/desarrollo-digital/ecommerce",
     serviceType: "E-commerce Development",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Desarrollo Digital", url: "/servicios/desarrollo-digital" },

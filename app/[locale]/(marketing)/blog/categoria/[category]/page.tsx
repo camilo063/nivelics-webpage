@@ -1,6 +1,6 @@
 // CMS-connected: 2026-05-07 — categories and posts read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { notFound } from "next/navigation";
 import { PageWrapper } from "@/components/layout";
 import { ServiceBadge } from "@/components/shared";
@@ -115,7 +115,7 @@ export default async function BlogCategoryPage(props: Props) {
   const useFallback = dbPosts.length === 0 && !dbCategory;
   const fallbackPosts = useFallback ? FALLBACK_ALL_POSTS.filter((p) => p.category === slug) : [];
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Blog", url: "/blog" },
     { name: label, url: `/blog/categoria/${slug}` },

@@ -1,6 +1,6 @@
 // Secciones propias de la línea «Ingeniería de agentes». Sin estado de cliente: todo
 // server-rendered, para que el contenido llegue completo a crawlers y a agentes.
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { Reveal } from "@/components/effects/reveal";
 import { AGENT_PROOF, HARNESS_FRAMEWORK, type AgentLocale } from "@/lib/content/agentes";

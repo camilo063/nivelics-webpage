@@ -110,13 +110,14 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
     fallbackSecondary: { text: "Ver caso de ahorro real", url: "/casos-de-exito" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Cloud Computing (AWS, GCP, Azure)",
     description:
       "Arquitectura multi-cloud, migración, DevOps, SRE y optimización de costos con enfoque FinOps.",
     url: "/servicios/cloud",
     serviceType: "Cloud Computing Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Cloud", url: "/servicios/cloud" },

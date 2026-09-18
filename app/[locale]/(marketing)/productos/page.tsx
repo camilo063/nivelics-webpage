@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
@@ -207,7 +207,7 @@ export default async function ProductosHubPage({
                     <div className="relative aspect-[16/9] overflow-hidden border-b border-border-subtle bg-bg-surface">
                       <Image
                         src={PRODUCT_SHOTS[p.slug]}
-                        alt={`${p.name} — interfaz real del producto`}
+                        alt={`${p.name} — ${isEn ? "actual product interface" : "interfaz real del producto"}`}
                         fill
                         sizes="(max-width: 768px) 100vw, 400px"
                         className="object-cover object-top"

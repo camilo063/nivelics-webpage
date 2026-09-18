@@ -92,6 +92,7 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Industria 4.0 y Manufactura Inteligente",
     description:
       ind?.heroSubtitle ||
@@ -99,7 +100,7 @@ export default async function ManufacturaPage({ params }: { params: Promise<{ lo
     url: "/industrias/manufactura",
     serviceType: "Manufacturing Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Manufactura", url: "/industrias/manufactura" },

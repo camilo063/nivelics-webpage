@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { PageWrapper } from "@/components/layout";
@@ -69,7 +69,7 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       : TEAM_MEMBERS;
 
   const orgSchema = getOrganizationSchema();
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
   ]);

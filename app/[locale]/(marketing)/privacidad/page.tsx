@@ -42,7 +42,7 @@ export default async function PrivacidadPage({ params }: { params: Promise<{ loc
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
   const config = await getSiteConfigPublic().catch(() => null);
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: page?.title || "Política de Privacidad", url: "/privacidad" },
   ]);

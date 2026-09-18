@@ -79,7 +79,7 @@ const FALLBACK_EVENTS = [
 export default async function MetodologiaPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(__locale, [
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
     { name: "Metodología", url: "/nosotros/metodologia" },

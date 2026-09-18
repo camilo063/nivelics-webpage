@@ -1,8 +1,9 @@
 "use client";
 
 import { usePathname as useNextPathname } from "next/navigation";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { canonicalEsPath, localizePath } from "@/lib/i18n/localize-path";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 
 const SLUG_TO_KEY: Record<string, string> = {
   servicios: "services",
@@ -64,6 +65,16 @@ const SLUG_TO_KEY: Record<string, string> = {
   methodology: "methodology",
   certificaciones: "certifications",
   certifications: "certifications",
+  productos: "products",
+  products: "products",
+  precios: "pricing",
+  pricing: "pricing",
+  "medicion-de-audiencias": "audienceMeasurement",
+  "audience-measurement": "audienceMeasurement",
+  "investigacion-de-mercados": "marketResearch",
+  "market-research": "marketResearch",
+  ciberseguridad: "cybersecurity",
+  desarrollo: "development",
   "casos-de-exito": "successStories",
   "success-stories": "successStories",
   industrias: "industries",
@@ -107,11 +118,12 @@ export function Breadcrumb() {
   const rawPathname = useNextPathname();
   const t = useTranslations("breadcrumb");
 
-  // Strip /en prefix for processing — y se vuelve a poner en los enlaces: antes los
-  // crumbs de /en apuntaban a /services/... sin prefijo y redirigían a la página ES.
-  const isEn = /^\/en(\/|$)/.test(rawPathname);
-  const prefix = isEn ? "/en" : "";
-  const pathname = rawPathname.replace(/^\/en(\/|$)/, "/");
+  const locale = useLocale() === "en" ? "en" : "es";
+  const isEn = locale === "en";
+  // Se trabaja sobre la ruta ES canónica: en SSR el pathname de /en llega como
+  // /en/<ruta ES> y en el cliente como /en/<ruta EN>. Los enlaces se traducen al final.
+  const pathname = canonicalEsPath(rawPathname);
+  const homeHref = localizePath("/", locale);
 
   if (pathname === "/") return null;
 
@@ -120,8 +132,10 @@ export function Breadcrumb() {
 
   // Ocultar breadcrumb en páginas de subservicio (donde ya aparece SiblingServicesNav).
   // Path pattern: /servicios/{hub}/{subservice}
-  if ((segments[0] === "servicios" || segments[0] === "services") && segments.length >= 3)
-    return null;
+  if (segments[0] === "servicios" && segments.length >= 3) return null;
+  // Los artículos pintan su propio breadcrumb (con el título real) y su BreadcrumbList;
+  // aquí solo se podría mostrar el slug.
+  if (segments[0] === "blog" && segments.length === 2) return null;
 
   const crumbs: BreadcrumbItem[] = segments.map((segment, i) => {
     const key = SLUG_TO_KEY[segment];
@@ -130,7 +144,7 @@ export function Breadcrumb() {
       : segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
     return {
       label,
-      href: prefix + "/" + segments.slice(0, i + 1).join("/"),
+      href: localizePath("/" + segments.slice(0, i + 1).join("/"), locale),
     };
   });
 
@@ -142,7 +156,7 @@ export function Breadcrumb() {
         "@type": "ListItem",
         position: 1,
         name: t("home"),
-        item: `https://www.nivelics.com${prefix || "/"}`,
+        item: `https://www.nivelics.com${homeHref}`,
       },
       ...crumbs.map((c, i) => ({
         "@type": "ListItem",
@@ -173,7 +187,7 @@ export function Breadcrumb() {
         <ol className="flex items-center gap-1.5 max-md:hidden">
           <li className="shrink-0">
             <Link
-              href={prefix || "/"}
+              href={homeHref}
               className="text-xs text-text-40 transition-colors duration-150 hover:text-text-70 font-medium"
               aria-label={`${t("home")}`}
             >
@@ -195,7 +209,7 @@ export function Breadcrumb() {
                   <Link
                     href={crumb.href}
                     className="text-xs text-text-40 transition-colors duration-150 hover:text-text-70 font-medium"
-                    aria-label={`Ir a ${crumb.label}`}
+                    aria-label={isEn ? `Go to ${crumb.label}` : `Ir a ${crumb.label}`}
                   >
                     {crumb.label}
                   </Link>
@@ -209,7 +223,7 @@ export function Breadcrumb() {
         <ol className="flex items-center gap-1.5 md:hidden">
           <li className="shrink-0">
             <Link
-              href={prefix || "/"}
+              href={homeHref}
               className="text-xs text-text-40 transition-colors hover:text-text-70 font-medium"
             >
               {t("home")}

@@ -92,6 +92,7 @@ export default async function LogisticaPage({ params }: { params: Promise<{ loca
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Tecnología para Logística y Transporte",
     description:
       ind?.heroSubtitle ||
@@ -99,7 +100,7 @@ export default async function LogisticaPage({ params }: { params: Promise<{ loca
     url: "/industrias/logistica",
     serviceType: "Logistics Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Logística", url: "/industrias/logistica" },

@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { SERVICES } from "@/lib/constants";
 import { ServiceCard } from "@/components/shared";
 
 export function ServicesGrid() {
+  const isEn = useLocale() === "en";
   return (
     <section className="bg-bg-base py-16 md:py-24">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
@@ -15,11 +17,12 @@ export function ServicesGrid() {
           className="text-center"
         >
           <h2 className="text-3xl font-bold text-text-100 md:text-4xl">
-            Soluciones que impulsan resultados
+            {isEn ? "Solutions that drive results" : "Soluciones que impulsan resultados"}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-text-70">
-            Nuestro marco I+C+S integra inteligencia artificial, infraestructura cloud y talento
-            especializado para maximizar tu retorno.
+            {isEn
+              ? "Our I+C+S framework brings together artificial intelligence, cloud infrastructure and specialized talent to maximize your return."
+              : "Nuestro marco I+C+S integra inteligencia artificial, infraestructura cloud y talento especializado para maximizar tu retorno."}
           </p>
         </motion.div>
 
