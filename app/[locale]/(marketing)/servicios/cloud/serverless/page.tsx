@@ -54,13 +54,13 @@ const BENEFITS = [
     icon: "scaling",
     title: "Auto-scaling nativo",
     description:
-      "Escalamiento autom\u00e1tico de cero a millones de requests sin configuraci\u00f3n manual ni gesti\u00f3n de servidores.",
+      "Escalamiento automático de cero a millones de requests sin configuración manual ni gestión de servidores.",
   },
   {
     icon: "dollar-sign",
     title: "Costos basados en uso real",
     description:
-      "Paga solo por el tiempo de ejecuci\u00f3n que consumes. Sin servidores idle, sin costos fijos innecesarios.",
+      "Paga solo por el tiempo de ejecución que consumes. Sin servidores idle, sin costos fijos innecesarios.",
   },
 ];
 
@@ -76,13 +76,14 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
     fallbackSecondary: { text: "Ver beneficios", url: "#beneficios" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Soluciones Serverless",
     description:
       "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Paga solo por lo que usas.",
     url: "/servicios/cloud/serverless",
     serviceType: "Serverless Architecture Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Cloud", url: "/servicios/cloud" },
@@ -143,16 +144,16 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
 
       <HeroSplit
         heroEffect="particles"
-        badge="Cloud \u00b7 Serverless"
+        badge="Cloud · Serverless"
         h1={cms?.title || "Paga solo lo que usas,"}
-        h1Accent="escala sin l\u00edmites"
+        h1Accent="escala sin límites"
         subtitle={
           cms?.subtitle ||
           "Arquitecturas event-driven con Lambda, Cloud Functions y Azure Functions. Escala de cero a millones sin gestionar servidores."
         }
         bullets={[
           "Auto-scaling de 0 a millones de requests",
-          "Pay-per-use real \u2014 sin servidores idle",
+          "Pay-per-use real — sin servidores idle",
           "Cold starts gestionados con warm-up strategies",
         ]}
         ctaPrimary={ctaPrimary}
@@ -178,7 +179,7 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
                 },
                 { value: "70%", label: "Menos costo", sublabel: "vs. servidores dedicados" },
                 { value: "100ms", label: "Cold start", sublabel: "Con warm-up strategies" },
-                { value: "10x", label: "M\u00e1s r\u00e1pido", sublabel: "Time-to-market" },
+                { value: "10x", label: "Más rápido", sublabel: "Time-to-market" },
               ]
         }
       />
@@ -203,42 +204,42 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
       <CmsServicioBenefits
         benefits={cms?.benefits}
         accentColor="#3B82F6"
-        titleEs="Por qu\u00e9 elegir Serverless con Nivelics"
+        titleEs="Por qué elegir Serverless con Nivelics"
         titleEn="Why choose Serverless with Nivelics"
         locale={locale}
       />
       <CmsServicioProcess
         steps={cms?.processSteps}
         accentColor="#3B82F6"
-        titleEs="C\u00f3mo lo implementamos"
+        titleEs="Cómo lo implementamos"
         titleEn="How we deliver"
         locale={locale}
       />
 
       <ComparisonTable
-        title="\u00bfServerless con Nivelics vs. arquitectura tradicional?"
+        title="¿Serverless con Nivelics vs. arquitectura tradicional?"
         alternativeLabel="Arquitectura tradicional"
         nivelicsLabel="Nivelics Serverless"
         rows={[
           {
-            criterion: "Costo de c\u00f3mputo",
-            alternative: "Fijo \u2014 pagas aunque no uses los recursos",
-            nivelics: "Pay-per-use \u2014 solo lo que consumes",
+            criterion: "Costo de cómputo",
+            alternative: "Fijo — pagas aunque no uses los recursos",
+            nivelics: "Pay-per-use — solo lo que consumes",
           },
           {
             criterion: "Escalabilidad",
-            alternative: "Manual o semi-autom\u00e1tica",
-            nivelics: "Autom\u00e1tica e instant\u00e1nea sin intervenci\u00f3n",
+            alternative: "Manual o semi-automática",
+            nivelics: "Automática e instantánea sin intervención",
           },
           {
-            criterion: "Gesti\u00f3n de servidores",
+            criterion: "Gestión de servidores",
             alternative: "Tu equipo la absorbe completamente",
-            nivelics: "Cero gesti\u00f3n de infraestructura",
+            nivelics: "Cero gestión de infraestructura",
           },
           {
             criterion: "Time-to-market",
-            alternative: "M\u00e1s lento \u2014 infra previa necesaria",
-            nivelics: "M\u00e1s r\u00e1pido \u2014 foco en l\u00f3gica de negocio",
+            alternative: "Más lento — infra previa necesaria",
+            nivelics: "Más rápido — foco en lógica de negocio",
           },
           {
             criterion: "Cold starts",
@@ -248,18 +249,14 @@ export default async function ServerlessPage({ params }: { params: Promise<{ loc
           {
             criterion: "Costo a largo plazo",
             alternative: "Predecible pero inflexible",
-            nivelics: "Escala con el negocio \u2014 baja en periodos bajos",
+            nivelics: "Escala con el negocio — baja en periodos bajos",
           },
         ]}
       />
 
       <CTABanner />
 
-      <StickyMobileCta
-        text="Solicitar auditor\u00eda \u2192"
-        url="/contacto"
-        accentColor="#3B82F6"
-      />
+      <StickyMobileCta text="Solicitar auditoría →" url="/contacto" accentColor="#3B82F6" />
     </PageWrapper>
   );
 }

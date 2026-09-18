@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageWrapper } from "@/components/layout";
 import { IndustriasHubExtras } from "@/components/sections/industrias-hub-extras";
 import { HeroEffect } from "@/components/ui/hero-effect";
@@ -67,7 +67,7 @@ export default async function IndustriasHubPage({
     ? home?.industriasHubStatEn || HUB_FALLBACK.statEn
     : home?.industriasHubStatEs || HUB_FALLBACK.statEs;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: isEn ? "Home" : "Inicio", url: "/" },
     { name: isEn ? "Industries" : "Industrias", url: "/industrias" },
   ]);

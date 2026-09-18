@@ -93,6 +93,7 @@ export default async function FintechPage({ params }: { params: Promise<{ locale
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Soluciones Tecnológicas para Fintech",
     description:
       ind?.heroSubtitle ||
@@ -100,7 +101,7 @@ export default async function FintechPage({ params }: { params: Promise<{ locale
     url: "/industrias/fintech",
     serviceType: "Fintech Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Fintech", url: "/industrias/fintech" },

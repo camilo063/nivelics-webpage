@@ -382,7 +382,7 @@
         "unit": "",
         "value": "100%",
         "labelEn": "IaC — Infrastructure as Code",
-        "labelEs": "IaC — Infraestructura como c\\u00f3digo"
+        "labelEs": "IaC — Infraestructura como código"
       },
       {
         "unit": "",
@@ -394,7 +394,7 @@
         "unit": "",
         "value": "50%",
         "labelEn": "Fewer incidents — vs. manual management",
-        "labelEs": "Menos incidentes — vs. gesti\\u00f3n manual"
+        "labelEs": "Menos incidentes — vs. gestión manual"
       }
     ],
     "faqs": null,
@@ -407,7 +407,7 @@
     "coverImage": null,
     "seoTitleEs": "Infraestructura Cloud | Multi-cloud con IaC",
     "seoTitleEn": "Cloud Infrastructure | Multi-cloud with IaC",
-    "seoDescriptionEs": "Dise\\u00f1o e implementaci\\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\\u00f3n.",
+    "seoDescriptionEs": "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
     "seoDescriptionEn": "Design and implementation of scalable, secure and optimized cloud infrastructure for your operation.",
     "schemaServiceJson": null,
     "hubMetrics": null,
@@ -476,7 +476,7 @@
         "unit": "",
         "value": "60%",
         "labelEn": "Faster — vs. internal migration",
-        "labelEs": "Más rápido — vs. migraci\\u00f3n interna"
+        "labelEs": "Más rápido — vs. migración interna"
       },
       {
         "unit": "",
@@ -501,7 +501,7 @@
     "coverImage": "",
     "seoTitleEs": "Migración a AWS | Zero Downtime",
     "seoTitleEn": "AWS Migration | Zero Downtime",
-    "seoDescriptionEs": "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\\u00f3n de costos desde el d\\u00eda uno.",
+    "seoDescriptionEs": "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno.",
     "seoDescriptionEn": "We migrate your workloads to AWS with zero downtime strategy, planned rollback and cost optimization from day one.",
     "schemaServiceJson": null,
     "hubMetrics": [],
@@ -964,7 +964,7 @@
         "unit": "",
         "value": "10x",
         "labelEn": "Faster — Time-to-market",
-        "labelEs": "M\\u00e1s r\\u00e1pido — Time-to-market"
+        "labelEs": "Más rápido — Time-to-market"
       }
     ],
     "faqs": null,
@@ -2029,7 +2029,7 @@
     "titleEn": "Tech talent in 5 days",
     "subtitleEs": "Perfiles bilingües validados, integrados en tu equipo sin riesgos laborales.",
     "subtitleEn": "Validated bilingual profiles, integrated into your team with zero employment risk.",
-    "descriptionEs": "Equipos de ingeniería on-demand con talento senior verificado. Escalá tu capacidad sin comprometer calidad.",
+    "descriptionEs": "Equipos de ingeniería on-demand con talento senior verificado. Escala tu capacidad sin comprometer calidad.",
     "descriptionEn": "On-demand engineering teams with verified senior talent. Scale your capacity without compromising quality.",
     "benefits": [
       {
@@ -2333,7 +2333,7 @@
         "unit": "",
         "value": "100%",
         "labelEn": "Encryption — In transit and at rest",
-        "labelEs": "Cifrado — En tr\\u00e1nsito y reposo"
+        "labelEs": "Cifrado — En tránsito y reposo"
       },
       {
         "unit": "",
@@ -2345,13 +2345,13 @@
         "unit": "",
         "value": "24h",
         "labelEn": "Response — Maximum incident response time",
-        "labelEs": "Respuesta — Tiempo m\\u00e1ximo a incidentes"
+        "labelEs": "Respuesta — Tiempo máximo a incidentes"
       },
       {
         "unit": "",
         "value": "95%",
         "labelEn": "Compliance — Controls covered from day 1",
-        "labelEs": "Compliance — Controles cubiertos desde d\\u00eda 1"
+        "labelEs": "Compliance — Controles cubiertos desde día 1"
       }
     ],
     "faqs": null,
@@ -2364,7 +2364,7 @@
     "coverImage": null,
     "seoTitleEs": "Seguridad Cloud | SOC2, ISO27001",
     "seoTitleEn": "Cloud Security | SOC2, ISO27001",
-    "seoDescriptionEs": "Hardening, compliance (SOC2, ISO27001), gesti\\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud.",
+    "seoDescriptionEs": "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
     "seoDescriptionEn": "Hardening, compliance (SOC2, ISO27001), identity management and end-to-end encryption for your cloud infrastructure.",
     "schemaServiceJson": null,
     "hubMetrics": null,

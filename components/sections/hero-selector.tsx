@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 import { GeoIconBox, type IconColor } from "@/lib/icons/geometric";
 
@@ -73,9 +74,10 @@ interface HeroSelectorProps {
 export function HeroSelector({ title, options, accentColor }: HeroSelectorProps) {
   const pathname = usePathname();
   const iconColor = hexToIconColor(accentColor);
+  const isEn = useLocale() === "en";
 
   return (
-    <nav aria-label="Selecciona tu tipo de proyecto">
+    <nav aria-label={isEn ? "Choose your project type" : "Selecciona tu tipo de proyecto"}>
       <p className="text-xs font-medium uppercase tracking-wider text-text-40 mb-3">{title}</p>
       <div className="space-y-2">
         {options.map((opt, index) => {
@@ -146,7 +148,7 @@ export function HeroSelector({ title, options, accentColor }: HeroSelectorProps)
         className="mt-3 block text-center text-xs font-medium transition-colors hover:brightness-125"
         style={{ color: accentColor }}
       >
-        O cuéntanos tu caso personalizado →
+        {isEn ? "Or tell us about your specific case →" : "O cuéntanos tu caso personalizado →"}
       </Link>
     </nav>
   );

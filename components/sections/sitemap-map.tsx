@@ -1,3 +1,5 @@
+// next/link plano a propósito: el 404 raíz (app/not-found.tsx) lo usa fuera del
+// NextIntlClientProvider, y los href ya llegan resueltos por idioma (hrefEn).
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { SitemapSection } from "@/lib/seo/sitemap-sections";

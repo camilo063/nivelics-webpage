@@ -86,7 +86,7 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
   const config = await getSiteConfigPublic().catch(() => null);
   const channels = buildChannels(config?.phoneWhatsapp);
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: page?.title || "Soporte", url: "/soporte" },
   ]);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { ArrowRight, MessageCircle, Check, ChevronRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { Button } from "@/components/ui/button";

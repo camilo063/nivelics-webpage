@@ -1,7 +1,7 @@
 // CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 // Bilingüe con el patrón de cloud/ciberseguridad-ethical-hacking (constantes _ES/_EN + isEn).
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { HeroSplit } from "@/components/sections/hero-split";
@@ -369,12 +369,14 @@ export default async function GestionContenidoPage({
       : resolved.ctaSecondary;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: isEn ? "AI Content Management" : "Gestión de Contenido con IA",
     description: isEn ? DESCRIPTION_EN : DESCRIPTION_ES,
     url: isEn ? PATH_EN : PATH_ES,
     serviceType: "AI Content Management",
   });
   const breadcrumb = getBreadcrumbSchema(
+    locale,
     isEn
       ? [
           { name: "Home", url: "/en" },

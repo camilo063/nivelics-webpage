@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
@@ -83,7 +83,7 @@ export default async function TelevisaPage({ params }: { params: Promise<{ local
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
     : RESULTS;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Casos de Éxito", url: "/casos-de-exito" },
     { name: caso?.clientName || "Televisa / N+", url: "/casos-de-exito/televisa" },

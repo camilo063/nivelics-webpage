@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { ArrowRight } from "lucide-react";
+import { useLocale } from "next-intl";
 import { Reveal } from "@/components/effects/reveal";
 import { TiltCard } from "@/components/effects/tilt-card";
 
@@ -12,8 +13,11 @@ interface CaseStudyCardProps {
   metric: string;
   service: string;
   url: string;
-  /** Texto del enlace. Por defecto en español: pásalo traducido en /en. */
+  /** Texto del enlace. Por defecto, «Ver caso completo» / «See full case study» según el idioma. */
   ctaLabel?: string;
+  /** Prefijo del aria-label del enlace. Si no se pasa, sale del idioma activo
+   *  ("Caso de éxito" en ES, "Case study" en EN). */
+  ariaPrefix?: string;
 }
 
 export function CaseStudyCard({
@@ -25,8 +29,13 @@ export function CaseStudyCard({
   metric,
   service,
   url,
-  ctaLabel = "Ver caso completo",
+  ctaLabel,
+  ariaPrefix,
 }: CaseStudyCardProps) {
+  // Componente de servidor síncrono: next-intl permite useLocale aquí.
+  const locale = useLocale();
+  const prefix = ariaPrefix ?? (locale === "en" ? "Case study" : "Caso de éxito");
+  const cta = ctaLabel ?? (locale === "en" ? "See full case study" : "Ver caso completo");
   return (
     <section className="py-10 md:py-14">
       <div className="mx-auto max-w-[1280px] px-6 md:px-20">
@@ -35,7 +44,7 @@ export function CaseStudyCard({
             <Link
               href={url}
               className="group glass-elevated card-lift block rounded-xl p-8"
-              aria-label={`Caso de éxito: ${client} — ${result}`}
+              aria-label={`${prefix}: ${client} — ${result}`}
             >
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-text-40">
@@ -55,7 +64,7 @@ export function CaseStudyCard({
                   {service}
                 </span>
                 <span className="text-sm text-text-40 group-hover:text-primary transition-colors">
-                  {ctaLabel} <ArrowRight size={14} className="inline" />
+                  {cta} <ArrowRight size={14} className="inline" />
                 </span>
               </div>
             </Link>

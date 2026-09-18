@@ -96,6 +96,7 @@ export default async function RetailEcommercePage({
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Soluciones Tech para Retail y E-commerce",
     description:
       ind?.heroSubtitle ||
@@ -103,7 +104,7 @@ export default async function RetailEcommercePage({
     url: "/industrias/retail-ecommerce",
     serviceType: "Retail Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Retail y E-commerce", url: "/industrias/retail-ecommerce" },

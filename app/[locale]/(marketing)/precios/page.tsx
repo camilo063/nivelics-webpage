@@ -284,7 +284,7 @@ export default async function PreciosPage({ params }: { params: Promise<{ locale
   const services = isEn ? SERVICES_EN : SERVICES_ES;
   const faqs = isEn ? FAQ_EN : FAQ_ES;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: isEn ? "Home" : "Inicio", url: isEn ? "/en" : "/" },
     { name: isEn ? "Pricing" : "Precios", url: isEn ? "/en/pricing" : "/precios" },
   ]);

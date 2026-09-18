@@ -102,13 +102,14 @@ export default async function DatosIAPage({ params }: { params: Promise<{ locale
     fallbackSecondary: { text: "Conoce el proceso", url: "/servicios/staff-augmentation" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Datos e Inteligencia Artificial",
     description:
       "Data Scientists, Data Engineers y ML Engineers para proyectos de analítica avanzada y machine learning.",
     url: "/servicios/staff-augmentation/datos-ia",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },
