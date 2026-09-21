@@ -9,3 +9,12 @@ export { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "./industria";
 export { getBlogPostingSchema } from "./blog-posting";
 export { getReviewSchema } from "./review";
 export { getLocalBusinessSchema } from "./local-business";
+export {
+  getWebPageSchema,
+  absoluteUrl,
+  webPageId,
+  inLanguageOf,
+  SCHEMA_BASE,
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+} from "./webpage";

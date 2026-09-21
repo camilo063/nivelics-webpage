@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
-import { ServiceBadge, CTABanner } from "@/components/shared";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
+import { ServiceBadge, CTABanner, JsonLd } from "@/components/shared";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
+import { absoluteUrl } from "@/lib/schema/webpage";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { localizedUrls } from "@/lib/seo/page-meta";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
@@ -25,9 +25,12 @@ export async function generateMetadata({
   const canonical = isEn ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = "Casos de Éxito | Televisa, Grupo Bolívar, Two Maids";
-  const description =
-    "Conoce cómo hemos ayudado a empresas B2B a transformarse digitalmente con resultados medibles.";
+  const title = isEn
+    ? "Success Stories: Televisa, Grupo Bolívar, Two Maids"
+    : "Casos de éxito: Televisa, Grupo Bolívar, Two Maids";
+  const description = isEn
+    ? "See how we have helped B2B companies transform digitally: media, insurance, retail and consumer goods, in Latin America and the United States."
+    : "Conoce cómo hemos ayudado a empresas B2B a transformarse digitalmente: medios, seguros, retail y consumo masivo, en Latinoamérica y Estados Unidos.";
 
   return {
     title,
@@ -111,63 +114,93 @@ export default async function CasosDeExitoPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [rawCases, uiLabels] = await Promise.all([getAllCasosExito(), getAllUiLabels()]);
   const dbCases = rawCases.length
     ? rawCases.map((c) => mapCasoExito(c as Record<string, unknown>, locale))
     : null;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Casos de Éxito", url: "/casos-de-exito" },
-  ]);
-  const creativeWorks = getCreativeWorkSchema([
-    {
-      name: "Televisa / N+",
-      description: "Plataforma de noticias digitales para el mercado hispanohablante.",
-      url: "/casos-de-exito/televisa",
-    },
-    {
-      name: "Grupo Bolívar",
-      description: "Transformación digital multi-línea para seguros, salud y e-commerce.",
-      url: "/casos-de-exito/grupo-bolivar",
-    },
-    {
-      name: "Two Maids",
-      description: "Staff Augmentation para plataforma de gestión de franquicias en USA.",
-      url: "/casos-de-exito/two-maids",
-    },
-    {
-      name: "Crónica",
-      description: "Modernización de plataforma de noticias con IA en Argentina.",
-      url: "/casos-de-exito/cronica",
-    },
-    {
-      name: "Pulzo",
-      description: "Partnership tecnológico de largo plazo para medio digital colombiano.",
-      url: "/casos-de-exito/pulzo",
-    },
-    {
-      name: "Univision",
-      description: "Desarrollo digital para medios hispanos en USA y México.",
-      url: "/casos-de-exito/univision",
-    },
-    {
-      name: "AB InBev-Bavaria",
-      description: "Transformación digital en distribución para consumo masivo.",
-      url: "/casos-de-exito/ab-inbev",
-    },
-  ]);
+  const creativeWorks = getCreativeWorkSchema(
+    [
+      {
+        name: "Televisa / N+",
+        description: isEn
+          ? "Digital news platform for the Spanish-speaking market."
+          : "Plataforma de noticias digitales para el mercado hispanohablante.",
+        url: "/casos-de-exito/televisa",
+      },
+      {
+        name: "Grupo Bolívar",
+        description: isEn
+          ? "Multi-line digital transformation across insurance, health and e-commerce."
+          : "Transformación digital multi-línea para seguros, salud y e-commerce.",
+        url: "/casos-de-exito/grupo-bolivar",
+      },
+      {
+        name: "Two Maids",
+        description: isEn
+          ? "Staff augmentation for a franchise management platform in the USA."
+          : "Staff Augmentation para plataforma de gestión de franquicias en USA.",
+        url: "/casos-de-exito/two-maids",
+      },
+      {
+        name: "Crónica",
+        description: isEn
+          ? "News platform modernization with AI in Argentina."
+          : "Modernización de plataforma de noticias con IA en Argentina.",
+        url: "/casos-de-exito/cronica",
+      },
+      {
+        name: "Pulzo",
+        description: isEn
+          ? "Long-term technology partnership with a Colombian digital outlet."
+          : "Partnership tecnológico de largo plazo para medio digital colombiano.",
+        url: "/casos-de-exito/pulzo",
+      },
+      {
+        name: "Univision",
+        description: isEn
+          ? "Digital development for Hispanic media in the USA and Mexico."
+          : "Desarrollo digital para medios hispanos en USA y México.",
+        url: "/casos-de-exito/univision",
+      },
+      {
+        name: "AB InBev-Bavaria",
+        description: isEn
+          ? "Digital transformation in distribution for consumer goods."
+          : "Transformación digital en distribución para consumo masivo.",
+        url: "/casos-de-exito/ab-inbev",
+      },
+    ],
+    locale,
+  );
+
+  // ItemList de los casos: se arma con lo que realmente lista la página
+  // (las filas del CMS); si la BD no responde, con los CreativeWork de arriba.
+  const listItems = dbCases
+    ? dbCases.map((c) => ({ name: c.clientName || c.title, url: `/casos-de-exito/${c.slug}` }))
+    : [];
+  const casosItemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${absoluteUrl("/casos-de-exito", locale)}#casos`,
+    name: uiLabel(uiLabels, "caso.list_title", locale),
+    numberOfItems: listItems.length,
+    itemListElement: listItems.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      url: absoluteUrl(c.url, locale),
+    })),
+  };
 
   return (
     <PageWrapper>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorks) }}
       />
+      {listItems.length > 0 && <JsonLd data={casosItemList} />}
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

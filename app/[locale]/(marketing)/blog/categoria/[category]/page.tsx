@@ -1,6 +1,7 @@
 // CMS-connected: 2026-05-07 — categories and posts read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
+import { ORGANIZATION_ID, WEBSITE_ID } from "@/lib/schema/webpage";
 import { notFound } from "next/navigation";
 import { PageWrapper } from "@/components/layout";
 import { ServiceBadge } from "@/components/shared";
@@ -115,6 +116,20 @@ export default async function BlogCategoryPage(props: Props) {
   const useFallback = dbPosts.length === 0 && !dbCategory;
   const fallbackPosts = useFallback ? FALLBACK_ALL_POSTS.filter((p) => p.category === slug) : [];
 
+  // PageSchema se salta todo /blog/*, así que esta ruta emite su propia CollectionPage;
+  // si no, las 12 páginas de categoría se quedaban sin nodo de página en el grafo.
+  const canonical = `https://www.nivelics.com${locale === "en" ? "/en" : ""}/blog/categoria/${slug}`;
+  const collectionPage = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${canonical}#webpage`,
+    url: canonical,
+    name: `Blog: ${label}`,
+    inLanguage: locale === "en" ? "en-US" : "es-CO",
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+
   const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Blog", url: "/blog" },
@@ -126,6 +141,10 @@ export default async function BlogCategoryPage(props: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPage) }}
       />
 
       <section className="py-16 md:py-24">
@@ -155,9 +174,11 @@ export default async function BlogCategoryPage(props: Props) {
                     <p className="mt-2 text-sm text-text-70">{post.excerpt}</p>
                   ) : null}
                   <div className="mt-4 flex items-center gap-3 text-xs text-text-40">
-                    {post.publishedAt ? (
-                      <time>
-                        {new Date(post.publishedAt).toLocaleDateString(
+                    {(post.publishedAt ?? post.createdAt) ? (
+                      <time
+                        dateTime={new Date((post.publishedAt ?? post.createdAt)!).toISOString()}
+                      >
+                        {new Date((post.publishedAt ?? post.createdAt)!).toLocaleDateString(
                           locale === "en" ? "en-US" : "es-CO",
                           {
                             year: "numeric",
@@ -190,7 +211,7 @@ export default async function BlogCategoryPage(props: Props) {
                   </h2>
                   <p className="mt-2 text-sm text-text-70">{post.excerpt}</p>
                   <div className="mt-4 flex items-center gap-3 text-xs text-text-40">
-                    <time>
+                    <time dateTime={new Date(post.date).toISOString()}>
                       {new Date(post.date).toLocaleDateString("es-CO", {
                         year: "numeric",
                         month: "long",

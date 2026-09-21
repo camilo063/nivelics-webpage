@@ -17,8 +17,6 @@ import {
   resolveServicioCtas,
 } from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
@@ -38,14 +36,22 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const cms = await getServicioData("staff-augmentation", locale);
+  // La plantilla del layout añade « | Nivelics»: el título completo debe quedar bajo 65.
   return buildPageMetadata({
     locale,
     href: "/servicios/staff-augmentation",
-    title: cms?.seoTitle || "Staff Augmentation Premium Colombia | Talento Tech LATAM",
+    title:
+      cms?.seoTitle ||
+      (isEn
+        ? "Staff Augmentation Colombia | LATAM Tech Talent"
+        : "Staff Augmentation Colombia | Talento Tech LATAM"),
     description:
       cms?.seoDescription ||
-      "Equipos de ingeniería on-demand con talento senior verificado. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
+      (isEn
+        ? "On-demand engineering teams with vetted senior talent. Onboarding in 6 business days. Up to 40% savings vs. USA/Europe."
+        : "Equipos de ingeniería on-demand con talento senior verificado. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa."),
   });
 }
 
@@ -94,6 +100,7 @@ export default async function StaffAugmentationPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [cms, uiLabels, config] = await Promise.all([
     getServicioData("staff-augmentation", locale),
     getAllUiLabels(),
@@ -126,11 +133,6 @@ export default async function StaffAugmentationPage({
     url: "/servicios/staff-augmentation",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
-    { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },
-  ]);
 
   return (
     <PageWrapper className="pt-16">
@@ -139,41 +141,13 @@ export default async function StaffAugmentationPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            getFAQSchema([
-              {
-                question: "¿Cuánto tarda Nivelics en presentar candidatos de Staff Augmentation?",
-                answer:
-                  "Presentamos candidatos calificados en 5 días hábiles. Cada perfil pasa por pruebas técnicas y validación de soft skills antes de ser presentado. La integración completa al equipo del cliente se logra en 6 días hábiles.",
-              },
-              {
-                question: "¿Qué garantía ofrece Nivelics si el candidato no funciona?",
-                answer:
-                  "Ofrecemos garantía de reemplazo sin costo en menos de 10 días. Además, asignamos un Delivery Manager dedicado que acompaña al profesional durante todo el engagement para asegurar calidad y alineación.",
-              },
-              {
-                question: "¿Qué roles tech ofrece Nivelics en Staff Augmentation?",
-                answer:
-                  "Ofrecemos Frontend y Backend Engineers, Mobile Developers, DevOps y Cloud Engineers, Data y ML Engineers, QA Engineers, Tech Leads, Architects, Product Managers y Scrum Masters, todos con seniority verificado.",
-              },
-            ]),
-          ),
-        }}
-      />
 
       {/* 1. Hero — HeroSplit + HeroCalculator */}
       <HeroSplit
         heroEffect="diagonal"
         badge="Staff Augmentation Premium"
-        h1={cms?.title || "Talento tech colombiano"}
-        h1Accent="en 5 días hábiles"
+        h1={cms?.title || (isEn ? "Colombian tech talent" : "Talento tech colombiano")}
+        h1Accent={isEn ? "in 5 business days" : "en 5 días hábiles"}
         subtitle={
           cms?.subtitle ||
           "Desarrolladores, data engineers y diseñadores validados e integrados en tu equipo. Sin riesgos laborales, sin costos ocultos."

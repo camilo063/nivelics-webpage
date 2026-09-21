@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getHistoriaItems, mapHistoriaItem } from "@/lib/cms";
@@ -112,19 +111,8 @@ export default async function HistoriaPage({ params }: { params: Promise<{ local
         }))
       : TIMELINE;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Nosotros", url: "/nosotros" },
-    { name: "Historia", url: "/nosotros/historia" },
-  ]);
-
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="text-4xl font-bold text-text-100 md:text-5xl">Nuestra Historia</h1>

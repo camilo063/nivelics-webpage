@@ -157,7 +157,7 @@ const agentesIa: AgentService = {
   path: AGENT_PATHS.agentesIa,
   es: {
     name: "Ingeniería de agentes a la medida",
-    seoTitle: "Ingeniería de agentes de IA a la medida para producción",
+    seoTitle: "Ingeniería de agentes de IA a la medida",
     seoDescription:
       "Agentes de IA con herramientas con permisos, verificación independiente, guardrails y trazabilidad. Del discovery al piloto controlado en producción.",
     badge: "Inteligencia Artificial · Ingeniería de agentes",
@@ -823,7 +823,7 @@ const iaPrivada: AgentService = {
   path: AGENT_PATHS.iaPrivada,
   es: {
     name: "IA privada",
-    seoTitle: "IA privada: agentes de IA con modelos en tu infraestructura",
+    seoTitle: "IA privada: agentes con modelos en tu infraestructura",
     seoDescription:
       "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
     badge: "Inteligencia Artificial · IA privada",
@@ -984,7 +984,7 @@ const iaPrivada: AgentService = {
   },
   en: {
     name: "Private AI",
-    seoTitle: "Private AI: AI agents with models on your infrastructure",
+    seoTitle: "Private AI: agents with models on your infrastructure",
     seoDescription:
       "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
     badge: "Artificial Intelligence · Private AI",
@@ -1730,7 +1730,7 @@ export const IA_SUB_PATHS: Record<string, { es: string; en: string }> = Object.f
 
 export const IA_HUB = {
   es: {
-    seoTitle: "Desarrollo de agentes de IA en producción para empresas",
+    seoTitle: "Agentes de IA en producción para empresas",
     seoDescription:
       "Diseñamos, integramos y operamos agentes de IA en producción: integración vía MCP, IA privada, evals, guardrails y AgentOps. Sin cambiar tus sistemas.",
     badge: "Inteligencia Artificial Aplicada",

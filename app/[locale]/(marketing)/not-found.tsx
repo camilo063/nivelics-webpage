@@ -26,6 +26,8 @@ export default async function MarketingNotFound() {
   const en = locale === "en";
   const sections = getSitemapSectionsStatic();
 
+  // Sin `url`/`@id`: un 404 no tiene URL canónica (y apuntar a la home era falso).
+  // Se queda el nodo enlazado al sitio para que el grafo no tenga huérfanos.
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -33,8 +35,9 @@ export default async function MarketingNotFound() {
     description: en
       ? "The requested URL does not exist on nivelics.com"
       : "La URL solicitada no existe en nivelics.com",
-    url: "https://www.nivelics.com",
+    inLanguage: en ? "en-US" : "es-CO",
     isPartOf: { "@id": "https://www.nivelics.com/#website" },
+    publisher: { "@id": "https://www.nivelics.com/#organization" },
   };
 
   return (
@@ -73,8 +76,16 @@ export default async function MarketingNotFound() {
 
           <p className="mb-6 max-w-[340px] text-sm leading-relaxed text-text-70">
             {en
-              ? "The content you're looking for may have moved. Explore the full site map →"
-              : "El contenido que buscas puede haber cambiado de dirección. Explora el mapa completo →"}
+              ? "The content you're looking for may have moved. "
+              : "El contenido que buscas puede haber cambiado de dirección. "}
+            {/* El texto invitaba a «explorar el mapa completo» sin enlazarlo a ninguna
+                parte; ahora apunta al mapa del sitio en HTML. */}
+            <Link
+              href={en ? "/en/sitemap" : "/mapa-del-sitio"}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {en ? "Explore the full site map →" : "Explora el mapa completo →"}
+            </Link>
           </p>
 
           <div className="flex max-w-[340px] flex-col gap-2.5">

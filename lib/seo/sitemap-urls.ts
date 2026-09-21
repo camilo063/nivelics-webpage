@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { landingPages, blogPosts } from "@/lib/db/schema/admin";
+import { landingPages, blogPosts, servicios, industrias } from "@/lib/db/schema/admin";
 import { eq, and, isNull } from "drizzle-orm";
 import { getAllProductosSitemap } from "@/lib/cms/productos";
 import { getBlogCategoriesPublic } from "@/lib/cms/queries";
@@ -355,6 +355,7 @@ const STATIC_URLS: SiteUrl[] = [
   },
   { es: "/trabaja-con-nosotros", en: "/en/careers", priority: 0.6, lastModified: NOSOTROS_MOD },
   { es: "/soporte", en: "/en/support", priority: 0.5, lastModified: NOSOTROS_MOD },
+  { es: "/mapa-del-sitio", en: "/en/sitemap", priority: 0.4, lastModified: STATIC_LAST_MOD },
   {
     es: "/privacidad",
     en: "/en/privacy",
@@ -457,12 +458,60 @@ async function getProductosForSitemap() {
   }
 }
 
+/**
+ * `lastmod` real de las páginas que viven en la BD (servicios e industrias), indexado por
+ * su ruta ES. Las constantes SERVICIOS_MOD/INDUSTRIAS_MOD son fechas escritas a mano: si
+ * todas las URLs declaran la misma fecha y no cambia cuando cambia el contenido, Google
+ * acaba ignorando la señal.
+ */
+async function getDbLastMods(): Promise<Map<string, Date>> {
+  const map = new Map<string, Date>();
+  if (!db) return map;
+  try {
+    const [svc, ind] = await Promise.all([
+      db
+        .select({
+          id: servicios.id,
+          slugEs: servicios.slugEs,
+          parentId: servicios.parentId,
+          updatedAt: servicios.updatedAt,
+        })
+        .from(servicios)
+        .where(and(eq(servicios.status, "published"), isNull(servicios.deletedAt))),
+      db
+        .select({ slug: industrias.slugEs, updatedAt: industrias.updatedAt })
+        .from(industrias)
+        .where(and(eq(industrias.status, "published"), isNull(industrias.deletedAt))),
+    ]);
+
+    const bySlugOfId = new Map(svc.map((r) => [r.id, r.slugEs]));
+    for (const row of svc) {
+      if (!row.updatedAt) continue;
+      if (row.slugEs === "servicios") {
+        map.set("/servicios", row.updatedAt);
+      } else if (!row.parentId) {
+        map.set(`/servicios/${row.slugEs}`, row.updatedAt);
+      } else {
+        const hub = bySlugOfId.get(row.parentId);
+        if (hub) map.set(`/servicios/${hub}/${row.slugEs}`, row.updatedAt);
+      }
+    }
+    for (const row of ind) {
+      if (row.updatedAt) map.set(`/industrias/${row.slug}`, row.updatedAt);
+    }
+  } catch {
+    return map;
+  }
+  return map;
+}
+
 export async function getAllSiteUrls(): Promise<SiteUrl[]> {
-  const [landings, productos, posts, categories] = await Promise.all([
+  const [landings, productos, posts, categories, dbLastMods] = await Promise.all([
     getIndexableLandings(),
     getProductosForSitemap(),
     getBlogPostsForSitemap(),
     getBlogCategoriesPublic().catch(() => []),
+    getDbLastMods(),
   ]);
 
   const lastProductoUpdate = productos.reduce((latest, p) => {
@@ -482,7 +531,8 @@ export async function getAllSiteUrls(): Promise<SiteUrl[]> {
     if (u.es === "/blog") {
       return { ...u, lastModified: lastBlogUpdate };
     }
-    return u;
+    const fromDb = dbLastMods.get(u.es);
+    return fromDb ? { ...u, lastModified: fromDb } : u;
   });
 
   return [

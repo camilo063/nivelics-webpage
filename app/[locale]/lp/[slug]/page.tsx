@@ -27,6 +27,13 @@ const SERVICE_LABELS: Record<string, string> = {
   dev: "Desarrollo Digital",
 };
 
+const BRAND_SUFFIX = /\s*[|–—-]\s*Nivelics\s*$/i;
+
+/** Quita el « | Nivelics» final que ya trae el valor de BD: la plantilla lo vuelve a añadir. */
+function stripBrandSuffix(value: string): string {
+  return value.replace(BRAND_SUFFIX, "").trim() || value.trim();
+}
+
 async function getLanding(slug: string) {
   if (!db) return null;
   const result = await db
@@ -63,7 +70,9 @@ export async function generateMetadata({
   const isEn = __locale === "en";
   const urls = mirroredUrls(`/lp/${landing.slug}`);
   const canonical = isEn ? urls.en : urls.es;
-  const title = landing.metaTitle || landing.campaignName;
+  // El layout aplica la plantilla "%s | Nivelics". Varias landings guardan el sufijo dentro
+  // de `meta_title`, y el <title> salía como «… | Nivelics | Nivelics».
+  const title = stripBrandSuffix(landing.metaTitle || landing.campaignName);
   const description = landing.metaDescription || undefined;
   const ogImage = landing.ogImage || DEFAULT_OG_IMAGE;
 
@@ -114,23 +123,31 @@ export default async function LandingPageDynamic({
   const defaultServicio = SERVICE_LABELS[(landing.serviceType as string) || accentKey];
   const blocks = (landing.blocks as LandingBlock[]) || [];
 
+  // Mismo @id que la Organization del sitio: si no, esta landing declaraba una
+  // segunda empresa suelta, sin enlazar con el resto del grafo.
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://www.nivelics.com/#organization",
     name: "Nivelics",
     url: "https://www.nivelics.com",
     foundingDate: "2012",
   };
 
+  const lpCanonical = `https://www.nivelics.com${lpLocale === "en" ? "/en" : ""}/lp/${landing.slug}`;
   const pageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
+    "@id": `${lpCanonical}#webpage`,
     name: landing.metaTitle || landing.campaignName,
     description: landing.metaDescription,
-    url: `https://www.nivelics.com/lp/${landing.slug}`,
+    url: lpCanonical,
+    inLanguage: lpLocale === "en" ? "en-US" : "es-CO",
+    isPartOf: { "@id": "https://www.nivelics.com/#website" },
+    publisher: { "@id": "https://www.nivelics.com/#organization" },
     mainEntity: {
       "@type": "ContactPage",
-      url: `https://www.nivelics.com/lp/${landing.slug}#formulario`,
+      url: `${lpCanonical}#formulario`,
     },
   };
 

@@ -7,14 +7,8 @@ export function getWebSiteSchema() {
     name: "Nivelics",
     description: "Transformación digital con IA, Cloud y Staffing Premium para LATAM y USA",
     publisher: { "@id": "https://www.nivelics.com/#organization" },
-    inLanguage: ["es", "en"],
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://www.nivelics.com/blog?q={search_term_string}",
-      },
-      "query-input": "required name=search_term_string",
-    },
+    inLanguage: ["es-CO", "en-US"],
+    // Sin `potentialAction`/SearchAction: apuntaba a /blog?q=, un buscador que el
+    // sitio no tiene. Declararlo hacía que Google intentara una búsqueda inexistente.
   };
 }

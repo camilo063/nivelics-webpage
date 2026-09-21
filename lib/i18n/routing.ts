@@ -160,6 +160,7 @@ export const routing = defineRouting({
     "/blog": { es: "/blog", en: "/blog" },
     "/precios": { es: "/precios", en: "/pricing" },
     "/contacto": { es: "/contacto", en: "/contact" },
+    "/mapa-del-sitio": { es: "/mapa-del-sitio", en: "/sitemap" },
     "/trabaja-con-nosotros": { es: "/trabaja-con-nosotros", en: "/careers" },
     "/privacidad": { es: "/privacidad", en: "/privacy" },
     "/soporte": { es: "/soporte", en: "/support" },

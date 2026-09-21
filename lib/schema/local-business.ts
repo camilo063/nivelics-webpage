@@ -20,8 +20,8 @@ export function getLocalBusinessSchema(locale: "es" | "en" = "es") {
       ? "Colombian B2B digital transformation company: applied AI, Cloud computing and premium Staff Augmentation."
       : "Empresa colombiana de transformación digital B2B: Inteligencia Artificial aplicada, Cloud computing y Staff Augmentation premium.",
     foundingDate: "2012",
-    telephone: "+57-310-3926621",
-    email: "contacto@nivelics.com",
+    telephone: "+57-311-2146459",
+    email: "hola@nivelics.com",
     address: [
       {
         "@type": "PostalAddress",
@@ -39,8 +39,8 @@ export function getLocalBusinessSchema(locale: "es" | "en" = "es") {
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: "+57-310-3926621",
-        email: "contacto@nivelics.com",
+        telephone: "+57-311-2146459",
+        email: "hola@nivelics.com",
         contactType: "sales",
         availableLanguage: ["Spanish", "English"],
         areaServed: ["CO", "US", "MX", "SV", "PA", "EC", "PE", "AR"],

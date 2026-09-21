@@ -4,8 +4,8 @@ export const SITE = {
   name: "Nivelics",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nivelics.com",
   description: "Transformación digital B2B. Inteligencia Artificial, Cloud & Staffing Premium.",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "+573103926621",
-  email: "contacto@nivelics.com",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "+573112146459",
+  email: "hola@nivelics.com",
   founded: 2012,
   locations: ["Bogotá, Colombia", "Miami, FL"],
 } as const;

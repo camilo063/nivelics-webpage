@@ -4,10 +4,8 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { PageWrapper } from "@/components/layout";
 import { MetricCard, CTABanner } from "@/components/shared";
-import { Button } from "@/components/ui/button";
 import { METRICS, SITE } from "@/lib/constants";
 import { getOrganizationSchema } from "@/lib/schema/organization";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -26,9 +24,10 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: isEn ? "en" : "es",
     href: "/nosotros",
+    // La plantilla del layout añade « | Nivelics»: el título completo debe quedar bajo 65.
     title: isEn
-      ? "About Us — 13 Years of Digital Transformation in LATAM"
-      : "Quiénes Somos — 13 años en transformación digital LATAM",
+      ? "About Us — B2B Digital Transformation in LATAM"
+      : "Quiénes Somos — Transformación Digital B2B LATAM",
     description: isEn
       ? "Meet Nivelics: a Colombian B2B digital transformation company founded in 2012 with offices in Bogotá and Miami."
       : "Conoce a Nivelics: empresa colombiana de transformación digital B2B fundada en 2012 con sede en Bogotá y Miami.",
@@ -69,10 +68,6 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       : TEAM_MEMBERS;
 
   const orgSchema = getOrganizationSchema();
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Nosotros", url: "/nosotros" },
-  ]);
   const teamSchemas = membersToShow.map((m) => getPersonSchema(m));
 
   return (
@@ -80,10 +75,6 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <script
         type="application/ld+json"

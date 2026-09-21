@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { MessageCircle, Mail, Clock, HelpCircle } from "lucide-react";
+import { Clock, HelpCircle } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getFAQSchema } from "@/lib/schema/faq";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -33,13 +32,14 @@ export async function generateMetadata({
     description:
       page?.seoDescription ||
       (isEn
-        ? "Nivelics technical support. Contact us via WhatsApp and email. Business hours: Monday to Friday, 8:00 - 18:00 (GMT-5)."
-        : "Soporte técnico Nivelics. Contacto por WhatsApp y email. Horario de atención: Lunes a Viernes 8:00 - 18:00 (GMT-5)."),
+        ? "Nivelics technical support for B2B clients: report incidents over WhatsApp or email and get an answer within four business hours, Monday to Friday."
+        : "Soporte técnico de Nivelics para clientes B2B: reporta incidentes por WhatsApp o email y recibe respuesta en máximo 4 horas hábiles, de lunes a viernes."),
   });
 }
 
-// LEGACY FALLBACK
-const FAQ_ITEMS = [
+// LEGACY FALLBACK — el FAQPage de esta ruta se emite desde aquí, así que las preguntas
+// también tienen que viajar al idioma de la página.
+const FAQ_ITEMS_ES = [
   {
     question: "¿Cuál es el tiempo de respuesta del soporte técnico?",
     answer:
@@ -48,7 +48,7 @@ const FAQ_ITEMS = [
   {
     question: "¿Cómo reporto un incidente o bug en producción?",
     answer:
-      "Puedes reportar incidentes a través de WhatsApp al +57 310-3926621 o enviando un email a contacto@nivelics.com con el asunto 'Incidente - [Nombre del proyecto]'. Incluye una descripción del problema, pasos para reproducirlo y capturas de pantalla si es posible.",
+      "Puedes reportar incidentes a través de WhatsApp al +57 311-2146459 o enviando un email a hola@nivelics.com con el asunto 'Incidente - [Nombre del proyecto]'. Incluye una descripción del problema, pasos para reproducirlo y capturas de pantalla si es posible.",
   },
   {
     question: "¿Ofrecen soporte fuera del horario de atención?",
@@ -57,25 +57,74 @@ const FAQ_ITEMS = [
   },
 ];
 
+const FAQ_ITEMS_EN = [
+  {
+    question: "What is the technical support response time?",
+    answer:
+      "Our team answers support requests within a maximum of 4 business hours. For critical incidents, response time is under 1 hour during business hours.",
+  },
+  {
+    question: "How do I report an incident or a production bug?",
+    answer:
+      "You can report incidents over WhatsApp at +57 311-2146459 or by emailing hola@nivelics.com with the subject 'Incident - [Project name]'. Include a description of the problem, the steps to reproduce it and screenshots if possible.",
+  },
+  {
+    question: "Do you offer support outside business hours?",
+    answer:
+      "Standard support is available Monday to Friday, 8:00 to 18:00 (GMT-5). For clients with an extended support contract, we offer 24/7 coverage for critical incidents. Check the details of your plan with your Delivery Manager.",
+  },
+];
+
 // LEGACY FALLBACK
-const buildChannels = (phoneWhatsapp?: string | null) => [
+const buildChannels = (phoneWhatsapp: string | null | undefined, isEn: boolean) => [
   {
     icon: "message-circle",
     title: "WhatsApp",
-    description: "Respuesta rápida para consultas y soporte.",
+    description: isEn
+      ? "Fast answers for questions and support."
+      : "Respuesta rápida para consultas y soporte.",
     contact: waDisplay(phoneWhatsapp),
     href: waUrl(phoneWhatsapp),
-    linkText: "Enviar mensaje",
+    linkText: isEn ? "Send a message" : "Enviar mensaje",
   },
   {
     icon: "mail",
     title: "Email",
-    description: "Para solicitudes formales y documentación.",
-    contact: "contacto@nivelics.com",
-    href: "mailto:contacto@nivelics.com",
-    linkText: "Enviar email",
+    description: isEn
+      ? "For formal requests and documentation."
+      : "Para solicitudes formales y documentación.",
+    contact: "hola@nivelics.com",
+    href: "mailto:hola@nivelics.com",
+    linkText: isEn ? "Send an email" : "Enviar email",
   },
 ];
+
+const LABELS = {
+  es: {
+    heroTitle: "Soporte y Contacto Técnico",
+    heroSubtitle:
+      "Estamos aquí para ayudarte. Nuestro equipo de soporte técnico atiende tus consultas, incidentes y solicitudes de forma ágil y profesional.",
+    hoursTitle: "Horario de atención",
+    hoursDays: "Lunes a Viernes:",
+    hoursZone: "(GMT-5, hora Colombia)",
+    hoursNote: "Fuera de este horario, los mensajes serán atendidos al siguiente día hábil.",
+    faqTitle: "Preguntas frecuentes",
+    breadcrumbHome: "Inicio",
+    breadcrumbCurrent: "Soporte",
+  },
+  en: {
+    heroTitle: "Support & Technical Contact",
+    heroSubtitle:
+      "We are here to help. Our technical support team handles your questions, incidents and requests quickly and professionally.",
+    hoursTitle: "Business hours",
+    hoursDays: "Monday to Friday:",
+    hoursZone: "(GMT-5, Colombia time)",
+    hoursNote: "Outside these hours, messages are answered on the next business day.",
+    faqTitle: "Frequently asked questions",
+    breadcrumbHome: "Home",
+    breadcrumbCurrent: "Support",
+  },
+};
 
 export default async function SoportePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;
@@ -84,20 +133,15 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
   const raw = await getPageGeneral("support");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
   const config = await getSiteConfigPublic().catch(() => null);
-  const channels = buildChannels(config?.phoneWhatsapp);
+  const isEn = locale === "en";
+  const t = isEn ? LABELS.en : LABELS.es;
+  const channels = buildChannels(config?.phoneWhatsapp, isEn);
+  const faqItems = isEn ? FAQ_ITEMS_EN : FAQ_ITEMS_ES;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: page?.title || "Soporte", url: "/soporte" },
-  ]);
-  const faqSchema = getFAQSchema(FAQ_ITEMS);
+  const faqSchema = getFAQSchema(faqItems);
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -107,12 +151,9 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            {page?.title || "Soporte y Contacto Técnico"}
+            {page?.title || t.heroTitle}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Estamos aquí para ayudarte. Nuestro equipo de soporte técnico atiende tus consultas,
-            incidentes y solicitudes de forma ágil y profesional.
-          </p>
+          <p className="mt-6 max-w-2xl text-lg text-text-70">{t.heroSubtitle}</p>
         </div>
       </section>
 
@@ -152,14 +193,12 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
                 <Clock size={24} className="text-primary" aria-hidden="true" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-text-100">Horario de atención</h2>
+                <h2 className="text-xl font-semibold text-text-100">{t.hoursTitle}</h2>
                 <p className="mt-2 text-text-70">
-                  Lunes a Viernes: <strong className="text-text-100">8:00 - 18:00</strong> (GMT-5,
-                  hora Colombia)
+                  {t.hoursDays} <strong className="text-text-100">8:00 - 18:00</strong>{" "}
+                  {t.hoursZone}
                 </p>
-                <p className="mt-1 text-sm text-text-40">
-                  Fuera de este horario, los mensajes serán atendidos al siguiente día hábil.
-                </p>
+                <p className="mt-1 text-sm text-text-40">{t.hoursNote}</p>
               </div>
             </div>
           </div>
@@ -171,10 +210,10 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="flex items-center gap-3 mb-8">
             <HelpCircle size={28} className="text-primary" aria-hidden="true" />
-            <h2 className="text-3xl font-bold text-text-100">Preguntas frecuentes</h2>
+            <h2 className="text-3xl font-bold text-text-100">{t.faqTitle}</h2>
           </div>
           <div className="space-y-6">
-            {FAQ_ITEMS.map((item) => (
+            {faqItems.map((item) => (
               <div key={item.question} className="glass rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-text-100">{item.question}</h3>
                 <p className="mt-3 text-text-70 leading-relaxed">{item.answer}</p>

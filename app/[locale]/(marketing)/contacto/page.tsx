@@ -6,7 +6,13 @@ import { getSiteConfigPublic } from "@/lib/cms/queries";
 import type { Locale } from "@/lib/cms";
 import { JsonLd } from "@/components/shared/json-ld";
 import { getLocalBusinessSchema } from "@/lib/schema/local-business";
-import { ContactPageClient } from "./contact-page-client";
+import { PageWrapper } from "@/components/layout";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { SITE } from "@/lib/constants";
+import { waDisplay, waUrl } from "@/lib/utils/whatsapp";
+import { getWebPageSchema } from "@/lib/schema/webpage";
+import { contactLabels } from "./labels";
+import { ContactForm } from "./contact-page-client";
 
 export const revalidate = 86400;
 
@@ -81,18 +87,90 @@ export default async function ContactoPage({ params }: { params: Promise<{ local
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
   const config = await getSiteConfigPublic().catch(() => null);
 
+  const t = contactLabels(locale);
+
   return (
-    <>
+    // La WebPage de esta ruta se emite como ContactPage (mismo @id): no hay dos.
+    <PageWrapper webPage={false}>
       <JsonLd data={getLocalBusinessSchema(locale)} />
-      <Suspense fallback={null}>
-        <ContactPageClient
-          seoTitle={page?.seoTitle || undefined}
-          seoDescription={page?.seoDescription || undefined}
-          pageTitle={page?.title || undefined}
-          pageSubtitle={undefined}
-          phoneWhatsapp={config?.phoneWhatsapp}
-        />
-      </Suspense>
-    </>
+      <JsonLd
+        data={getWebPageSchema({
+          url: "/contacto",
+          locale,
+          type: "ContactPage",
+          name: page?.title || t.title,
+          description: page?.seoDescription || t.subtitle,
+          aboutId: "https://www.nivelics.com/#localbusiness",
+        })}
+      />
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-[1280px] px-6 md:px-20">
+          <div className="grid gap-12 lg:grid-cols-2">
+            {/* Info — se rendea en el servidor. Antes toda la página vivía dentro de un
+                <Suspense fallback={null}> por culpa de useSearchParams en el formulario, así
+                que el HTML llegaba sin H1 ni texto: invisible para Google y para los
+                rastreadores de IA, justo en la página de conversión. */}
+            <div>
+              <h1 className="text-4xl font-bold text-text-100 md:text-5xl">
+                {page?.title || t.title}
+              </h1>
+              <p className="mt-4 text-lg text-text-70">{page?.seoDescription || t.subtitle}</p>
+
+              <h2 className="mt-12 text-2xl font-bold text-text-100">{t.channels}</h2>
+              <div className="mt-6 space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <Mail size={20} className="text-primary" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-text-100">Email</h3>
+                    <a
+                      href={`mailto:${SITE.email}`}
+                      className="text-sm text-text-70 hover:text-primary"
+                    >
+                      {SITE.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <Phone size={20} className="text-primary" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-text-100">WhatsApp</h3>
+                    <a
+                      href={waUrl(config?.phoneWhatsapp)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-text-70 hover:text-primary"
+                    >
+                      {waDisplay(config?.phoneWhatsapp)}
+                    </a>
+                  </div>
+                </div>
+
+                {SITE.locations.map((loc) => (
+                  <div key={loc} className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <MapPin size={20} className="text-primary" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-text-100">{t.office}</h3>
+                      <p className="text-sm text-text-70">{loc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* El formulario lee ?from= con useSearchParams, así que va en cliente. */}
+            <Suspense fallback={<div className="glass min-h-[520px] rounded-xl p-8" />}>
+              <ContactForm />
+            </Suspense>
+          </div>
+        </div>
+      </section>
+    </PageWrapper>
   );
 }

@@ -28,18 +28,16 @@ export function getOrganizationSchema() {
         addressCountry: "US",
       },
     ],
-    telephone: "+57-310-3926621",
+    telephone: "+57-311-2146459",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+57-310-3926621",
+      telephone: "+57-311-2146459",
       contactType: "sales",
       availableLanguage: ["Spanish", "English"],
     },
-    sameAs: [
-      "https://www.linkedin.com/company/nivelics",
-      "https://www.instagram.com/nivelics",
-      "https://www.nivelics.com/en",
-    ],
+    // Solo perfiles externos: el mirror /en es la misma entidad y ya se declara
+    // con hreflang, no es un `sameAs`.
+    sameAs: ["https://www.linkedin.com/company/nivelics", "https://www.instagram.com/nivelics"],
     availableLanguage: ["Spanish", "English"],
     areaServed: ["CO", "US", "MX", "SV", "PA", "EC", "PE", "AR"],
     hasCredential: {

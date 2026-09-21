@@ -4,7 +4,6 @@ import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -30,10 +29,13 @@ export async function generateMetadata({
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Univision";
+  const isEn = locale === "en";
+  const title = caso?.seoTitle || (isEn ? "Univision Success Story" : "Caso de Éxito Univision");
   const description =
     caso?.seoDescription ||
-    "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.";
+    (isEn
+      ? "How Nivelics strengthened Univision's digital capabilities with embedded senior bilingual talent."
+      : "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.");
 
   return {
     title,
@@ -76,6 +78,7 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [raw, uiLabels] = await Promise.all([getCasoExito("univision"), getAllUiLabels()]);
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
@@ -83,21 +86,20 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
     : RESULTS;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Casos de Éxito", url: "/casos-de-exito" },
-    { name: caso?.clientName || "Univision", url: "/casos-de-exito/univision" },
-  ]);
-
-  const creativeWork = getCreativeWorkSchema([
-    {
-      name: caso?.clientName || "Univision",
-      description:
-        caso?.seoDescription ||
-        "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado.",
-      url: "/casos-de-exito/univision",
-    },
-  ])[0];
+  const creativeWork = getCreativeWorkSchema(
+    [
+      {
+        name: caso?.clientName || "Univision",
+        description:
+          caso?.seoDescription ||
+          (isEn
+            ? "How Nivelics strengthened Univision's digital capabilities with embedded senior bilingual talent."
+            : "Cómo Nivelics fortaleció las capacidades digitales de Univision con talento senior bilingüe integrado."),
+        url: "/casos-de-exito/univision",
+      },
+    ],
+    locale,
+  )[0];
 
   const review =
     caso?.testimonialQuote && caso.testimonialAuthor
@@ -113,10 +115,6 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <JsonLd data={creativeWork} />
       {review && <JsonLd data={review} />}
 

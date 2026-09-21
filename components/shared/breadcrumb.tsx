@@ -65,6 +65,8 @@ const SLUG_TO_KEY: Record<string, string> = {
   methodology: "methodology",
   certificaciones: "certifications",
   certifications: "certifications",
+  "mapa-del-sitio": "sitemap",
+  sitemap: "sitemap",
   productos: "products",
   products: "products",
   precios: "pricing",
@@ -114,6 +116,24 @@ interface BreadcrumbItem {
   href: string;
 }
 
+/**
+ * REGLA: un solo BreadcrumbList por página.
+ *
+ * Este componente lo monta `PageWrapper`, así que cubre TODAS las rutas públicas
+ * y es el único que debe emitir el JSON-LD de breadcrumb. Los `page.tsx` NO
+ * llaman a `getBreadcrumbSchema` salvo en los tres casos en que este componente
+ * no emite nada:
+ *   1. subpáginas de servicio (`/servicios/<hub>/<sub>`, profundidad ≥ 3),
+ *      donde manda `SiblingServicesNav`: el componente se oculta entero;
+ *   2. artículos del blog (`/blog/<slug>`), que pintan su propio breadcrumb con
+ *      el título real del post: el componente se oculta entero;
+ *   3. categorías del blog (`/blog/categoria/<slug>`): aquí sí se pinta la barra
+ *      visible (la página no trae otra), pero sin JSON-LD. El de la página es el
+ *      bueno porque salta el tramo «categoria», que no es una página navegable
+ *      (/blog/categoria da 404) y no puede aparecer como eslabón.
+ * Ahí el BreadcrumbList lo emite el page.tsx. En cualquier otra ruta, añadirlo
+ * desde la página duplica la entidad.
+ */
 export function Breadcrumb() {
   const rawPathname = useNextPathname();
   const t = useTranslations("breadcrumb");
@@ -136,17 +156,23 @@ export function Breadcrumb() {
   // Los artículos pintan su propio breadcrumb (con el título real) y su BreadcrumbList;
   // aquí solo se podría mostrar el slug.
   if (segments[0] === "blog" && segments.length === 2) return null;
+  // Categorías del blog: la barra visible sí se pinta (la página no trae otra),
+  // pero el JSON-LD lo emite el page.tsx, que salta el tramo «categoria».
+  const isBlogCategory = segments[0] === "blog" && segments[1] === "categoria";
 
-  const crumbs: BreadcrumbItem[] = segments.map((segment, i) => {
-    const key = SLUG_TO_KEY[segment];
-    const label = key
-      ? t(key)
-      : segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    return {
-      label,
-      href: localizePath("/" + segments.slice(0, i + 1).join("/"), locale),
-    };
-  });
+  const crumbs: BreadcrumbItem[] = segments
+    .map((segment, i) => {
+      const key = SLUG_TO_KEY[segment];
+      const label = key
+        ? t(key)
+        : segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+      return {
+        label,
+        href: localizePath("/" + segments.slice(0, i + 1).join("/"), locale),
+      };
+    })
+    // /blog/categoria no es una página navegable (404): no puede ser un eslabón.
+    .filter((_, i) => !(isBlogCategory && i === 1));
 
   const schemaData = {
     "@context": "https://schema.org",
@@ -174,10 +200,12 @@ export function Breadcrumb() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-      />
+      {!isBlogCategory && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      )}
       <nav
         aria-label="Breadcrumb"
         role="navigation"

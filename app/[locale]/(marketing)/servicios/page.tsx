@@ -4,8 +4,9 @@ import { ServicesGrid } from "@/components/sections";
 import { ServiciosHubExtras } from "@/components/sections/servicios-hub-extras";
 import { CTABanner, JsonLd } from "@/components/shared";
 import { HeroEffect } from "@/components/ui/hero-effect";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getServiceSchema } from "@/lib/schema/service";
+import { absoluteUrl } from "@/lib/schema/webpage";
+import { SERVICES } from "@/lib/constants";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData } from "@/lib/cms/get-servicio-data";
 import type { Locale, MappedServicio } from "@/lib/cms/types";
@@ -66,6 +67,9 @@ const FALLBACK_SECTORS = (isEn: boolean): MappedServicio["sectors"] => [
   { slug: "manufactura", icon: "⚙", label: isEn ? "Manufacturing" : "Manufactura" },
 ];
 
+// Los 4 hubs que renderiza <ServicesGrid /> (mismo filtro que el componente).
+const SERVICE_HUBS = SERVICES.filter((s) => s.slug !== "finops");
+
 export const revalidate = 86400;
 
 export async function generateMetadata({
@@ -88,9 +92,10 @@ export async function generateMetadata({
   const isEn = locale === "en";
   const title =
     hub?.seoTitle ||
+    // La plantilla del layout añade « | Nivelics»: el título completo debe quedar bajo 65.
     (isEn
-      ? "Digital Transformation Services: AI, Cloud and Staffing"
-      : "Servicios de Transformación Digital: IA, Cloud y Staffing");
+      ? "Digital Transformation Services: AI and Cloud"
+      : "Servicios de Transformación Digital: IA y Cloud");
   const description =
     hub?.seoDescription ||
     (isEn
@@ -134,10 +139,6 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
   const isEn = locale === "en";
   const hub = await getServicioData("servicios", locale);
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: isEn ? "Home" : "Inicio", url: "/" },
-    { name: isEn ? "Services" : "Servicios", url: "/servicios" },
-  ]);
   const serviceSchema = getServiceSchema({
     locale,
     name: isEn
@@ -149,6 +150,22 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
     url: "/servicios",
     serviceType: isEn ? "Digital Transformation" : "Transformación Digital",
   });
+
+  // ItemList de los 4 hubs que pinta <ServicesGrid /> — mismos datos (SERVICES),
+  // mismo orden, URLs del idioma servido.
+  const hubsItemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${absoluteUrl("/servicios", locale)}#hubs`,
+    name: isEn ? "Nivelics services" : "Servicios de Nivelics",
+    numberOfItems: SERVICE_HUBS.length,
+    itemListElement: SERVICE_HUBS.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: isEn ? s.labelEn : s.label,
+      url: absoluteUrl(s.href, locale),
+    })),
+  };
 
   const hubMetrics = hub?.hubMetrics.length ? hub.hubMetrics : FALLBACK_HUB_METRICS(isEn);
   const frameworkPillars = hub?.frameworkPillars.length
@@ -177,11 +194,8 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <JsonLd data={serviceSchema} />
+      <JsonLd data={hubsItemList} />
       <section className="relative overflow-hidden pt-12 pb-8 md:pt-16 md:pb-10">
         <HeroEffect kind="radar" opacity={0.9} />
         <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-20">

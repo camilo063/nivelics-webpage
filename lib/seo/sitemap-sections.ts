@@ -133,7 +133,7 @@ function buildSections(productosLinks: SitemapLink[]): SitemapSection[] {
           label: "Sitios Agentic-First",
           labelEn: "Agentic-First Sites",
           href: "/servicios/desarrollo-digital/sitios-web-agentic",
-          hrefEn: "/en/services/digital-development/agentic-websites",
+          hrefEn: "/en/services/digital-development/agentic-web",
         },
         {
           label: "E-commerce",

@@ -45,8 +45,8 @@ export async function generateMetadata({
     description:
       cms?.seoDescription ||
       (isEn
-        ? "We build websites navigable by AI agents and LLMs. Multilingual, complete Schema.org, llms.txt, Core Web Vitals ≥95. Indexed by Google SGE, ChatGPT, Claude and Perplexity."
-        : "Construimos sitios web navegables por IA, agentes y LLMs. Multi-idioma, Schema.org completo, llms.txt, Core Web Vitals ≥95. Indexados por Google SGE, ChatGPT, Claude y Perplexity."),
+        ? "Websites navigable by AI agents and LLMs: multilingual, full Schema.org, llms.txt and Core Web Vitals ≥95, indexed by ChatGPT, Claude and Perplexity."
+        : "Sitios web navegables por agentes de IA y LLMs: multi-idioma, Schema.org completo, llms.txt y Core Web Vitals ≥95, indexados por ChatGPT, Claude y Perplexity."),
   });
 }
 

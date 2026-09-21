@@ -199,13 +199,17 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
+      {/*
+        H1 fijo a propósito: `servicios.title_*` trae «hasta un 35%» / «by up to 35%», una cifra
+        sin respaldo público que además chocaba con el acento y se indexaba como «Optimiza tu
+        inversión cloud hasta un 35% hasta un 40%». El H1 queda cualitativo; las cifras siguen
+        donde sí están sustentadas (bullets y MetricsBar).
+      */}
       <HeroSplit
         heroEffect="particles"
         badge="Cloud · FinOps"
-        h1={
-          cms?.title || (isEn ? "Optimize your cloud investment" : "Optimiza tu inversión en cloud")
-        }
-        h1Accent={isEn ? "by up to 40%" : "hasta un 40%"}
+        h1={isEn ? "Optimize your cloud investment" : "Optimiza tu inversión cloud"}
+        h1Accent={isEn ? "with real FinOps" : "con FinOps real"}
         subtitle={
           cms?.subtitle ||
           (isEn

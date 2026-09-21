@@ -1,19 +1,34 @@
+import { ORGANIZATION_ID, SCHEMA_BASE } from "./webpage";
+
 interface PersonInput {
   name: string;
   jobTitle: string;
   description: string;
 }
 
+/** Slug estable a partir del nombre, para que /nosotros y /nosotros/equipo
+ *  describan a la misma persona y no dos entidades sueltas. */
+function personId(name: string): string {
+  const slug = name
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return `${SCHEMA_BASE}/#person-${slug}`;
+}
+
 export function getPersonSchema({ name, jobTitle, description }: PersonInput) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": personId(name),
     name,
     jobTitle,
     description,
     worksFor: {
       "@type": "Organization",
-      "@id": "https://www.nivelics.com/#organization",
+      "@id": ORGANIZATION_ID,
       name: "Nivelics SAS",
     },
   };

@@ -70,7 +70,10 @@ export function RelatedPosts({ posts, locale, heading }: Props) {
               </h3>
               <div className="mt-3 flex items-center gap-3 text-xs text-text-40">
                 {post.publishedAt ? (
-                  <time className="font-[family-name:var(--font-jetbrains-mono)]">
+                  <time
+                    dateTime={new Date(post.publishedAt).toISOString()}
+                    className="font-[family-name:var(--font-jetbrains-mono)]"
+                  >
                     {formatDate(post.publishedAt, locale)}
                   </time>
                 ) : null}

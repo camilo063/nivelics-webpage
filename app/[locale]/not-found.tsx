@@ -26,6 +26,8 @@ export default async function LocaleNotFound() {
   const en = locale === "en";
   const sections = getSitemapSectionsStatic();
 
+  // Sin `url`/`@id`: un 404 no tiene URL canónica (y apuntar a la home era falso).
+  // Se queda el nodo enlazado al sitio para que el grafo no tenga huérfanos.
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -33,8 +35,9 @@ export default async function LocaleNotFound() {
     description: en
       ? "The requested URL does not exist on nivelics.com"
       : "La URL solicitada no existe en nivelics.com",
-    url: "https://www.nivelics.com",
+    inLanguage: en ? "en-US" : "es-CO",
     isPartOf: { "@id": "https://www.nivelics.com/#website" },
+    publisher: { "@id": "https://www.nivelics.com/#organization" },
   };
 
   return (

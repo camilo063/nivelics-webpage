@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageWrapper } from "@/components/layout";
+import { JsonLd } from "@/components/shared";
+import { absoluteUrl } from "@/lib/schema/webpage";
 import { IndustriasHubExtras } from "@/components/sections/industrias-hub-extras";
 import { HeroEffect } from "@/components/ui/hero-effect";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getAllIndustrias, getHomeContent } from "@/lib/cms/queries";
@@ -67,17 +68,25 @@ export default async function IndustriasHubPage({
     ? home?.industriasHubStatEn || HUB_FALLBACK.statEn
     : home?.industriasHubStatEs || HUB_FALLBACK.statEs;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: isEn ? "Home" : "Inicio", url: "/" },
-    { name: isEn ? "Industries" : "Industrias", url: "/industrias" },
-  ]);
+  // ItemList con los sectores que ya pinta el grid de abajo: mismo orden,
+  // mismos nombres y URLs absolutas del idioma servido.
+  const industriasItemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${absoluteUrl("/industrias", locale)}#industrias`,
+    name: isEn ? "Industries served by Nivelics" : "Industrias que atiende Nivelics",
+    numberOfItems: industrias.length,
+    itemListElement: industrias.map((ind, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: ind.name,
+      url: absoluteUrl(`/industrias/${ind.slug}`, locale),
+    })),
+  };
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <JsonLd data={industriasItemList} />
 
       {/* Hero con grid perspectiva animado (Canvas) */}
       <section className="relative overflow-hidden py-16 md:py-20">
