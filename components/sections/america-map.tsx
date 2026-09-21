@@ -1,6 +1,7 @@
 "use client";
 
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
+import { useLocale } from "next-intl";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -32,23 +33,28 @@ const AMERICAS_CODES = [
   "862",
 ];
 
-const MARKERS = [
+const MARKERS: { name: string; nameEn?: string; lat: number; lng: number; isHQ: boolean }[] = [
   { name: "Colombia", lat: 4.71, lng: -74.07, isHQ: true },
   { name: "USA", lat: 25.77, lng: -80.19, isHQ: false },
-  { name: "México", lat: 19.43, lng: -99.13, isHQ: false },
+  { name: "México", nameEn: "Mexico", lat: 19.43, lng: -99.13, isHQ: false },
   { name: "El Salvador", lat: 13.69, lng: -89.19, isHQ: false },
-  { name: "Panamá", lat: 8.99, lng: -79.52, isHQ: false },
+  { name: "Panamá", nameEn: "Panama", lat: 8.99, lng: -79.52, isHQ: false },
   { name: "Ecuador", lat: -0.22, lng: -78.51, isHQ: false },
-  { name: "Perú", lat: -12.05, lng: -77.04, isHQ: false },
+  { name: "Perú", nameEn: "Peru", lat: -12.05, lng: -77.04, isHQ: false },
   { name: "Argentina", lat: -34.6, lng: -58.38, isHQ: false },
 ];
 
 export function AmericaMap() {
+  const isEn = useLocale() === "en";
   return (
     <div
       className="relative w-full max-w-md mx-auto"
       role="img"
-      aria-label="Mapa de presencia de Nivelics en América"
+      aria-label={
+        isEn
+          ? "Map of Nivelics' presence across the Americas"
+          : "Mapa de presencia de Nivelics en América"
+      }
     >
       <ComposableMap
         projection="geoMercator"
@@ -107,7 +113,7 @@ export function AmericaMap() {
                 fontFamily: "var(--font-inter), system-ui, sans-serif",
               }}
             >
-              {marker.name}
+              {isEn ? (marker.nameEn ?? marker.name) : marker.name}
             </text>
           </Marker>
         ))}

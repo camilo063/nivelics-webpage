@@ -36,10 +36,10 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     href: "/servicios/cloud/infraestructura",
-    title: cms?.seoTitle || "Arquitectura e Infraestructura Cloud | AWS \u00b7 GCP \u00b7 Azure",
+    title: cms?.seoTitle || "Arquitectura e Infraestructura Cloud | AWS · GCP · Azure",
     description:
       cms?.seoDescription ||
-      "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n.",
+      "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
   });
 }
 
@@ -48,19 +48,19 @@ const BENEFITS = [
     icon: "cloud",
     title: "Arquitectura multi-cloud",
     description:
-      "Dise\u00f1amos arquitecturas que aprovechan lo mejor de AWS, GCP y Azure, evitando vendor lock-in y optimizando costos.",
+      "Diseñamos arquitecturas que aprovechan lo mejor de AWS, GCP y Azure, evitando vendor lock-in y optimizando costos.",
   },
   {
     icon: "file-code",
     title: "IaC con Terraform/Pulumi",
     description:
-      "Infraestructura como c\u00f3digo versionada, reproducible y auditada con Terraform, Pulumi o CloudFormation.",
+      "Infraestructura como código versionada, reproducible y auditada con Terraform, Pulumi o CloudFormation.",
   },
   {
     icon: "shield-check",
     title: "Alta disponibilidad y disaster recovery",
     description:
-      "Arquitecturas multi-AZ y multi-regi\u00f3n con RPO/RTO definidos, failover autom\u00e1tico y planes de recuperaci\u00f3n probados.",
+      "Arquitecturas multi-AZ y multi-región con RPO/RTO definidos, failover automático y planes de recuperación probados.",
   },
 ];
 
@@ -80,13 +80,14 @@ export default async function InfraestructuraPage({
     fallbackSecondary: { text: "Ver beneficios", url: "#beneficios" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Arquitectura e Infraestructura Cloud",
     description:
-      "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n.",
+      "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
     url: "/servicios/cloud/infraestructura",
     serviceType: "Cloud Infrastructure Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Cloud", url: "/servicios/cloud" },
@@ -147,15 +148,15 @@ export default async function InfraestructuraPage({
 
       <HeroSplit
         heroEffect="particles"
-        badge="Cloud \u00b7 Infraestructura"
+        badge="Cloud · Infraestructura"
         h1={cms?.title || "Tu infra cloud"}
         h1Accent="siempre operando"
         subtitle={
           cms?.subtitle ||
-          "Dise\u00f1o e implementaci\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\u00f3n."
+          "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación."
         }
         bullets={[
-          "Arquitecturas multi-AZ y multi-regi\u00f3n",
+          "Arquitecturas multi-AZ y multi-región",
           "IaC con Terraform, Pulumi o CDK",
           "SLA de disponibilidad garantizado",
         ]}
@@ -168,32 +169,32 @@ export default async function InfraestructuraPage({
             accentColor="#3B82F6"
             options={[
               {
-                icon: "\ud83c\udfd7\ufe0f",
-                label: "Dise\u00f1o de Arquitectura",
+                icon: "🏗️",
+                label: "Diseño de Arquitectura",
                 url: "/servicios/cloud/infraestructura",
-                description: "Arquitectura cloud desde cero o redise\u00f1o de la existente.",
+                description: "Arquitectura cloud desde cero o rediseño de la existente.",
               },
               {
-                icon: "\ud83d\udcdc",
+                icon: "📜",
                 label: "IaC (Terraform / Pulumi)",
                 url: "/servicios/cloud/infraestructura",
-                description: "Infraestructura como c\u00f3digo versionada y reproducible.",
+                description: "Infraestructura como código versionada y reproducible.",
               },
               {
-                icon: "\ud83d\udd04",
+                icon: "🔄",
                 label: "Disaster Recovery",
                 url: "/servicios/cloud/infraestructura",
                 description: "Planes de DR con RPO/RTO definidos y probados.",
               },
               {
-                icon: "\ud83d\udcca",
+                icon: "📊",
                 label: "Observabilidad",
                 url: "/servicios/cloud/infraestructura",
                 description: "Monitoreo con Datadog, Grafana o CloudWatch.",
               },
               {
-                icon: "\u2699\ufe0f",
-                label: "Operaci\u00f3n Continua",
+                icon: "⚙️",
+                label: "Operación Continua",
                 url: "/servicios/cloud/infraestructura",
                 description: "Managed services 24/7 con SLA garantizado.",
               },
@@ -213,9 +214,9 @@ export default async function InfraestructuraPage({
               }))
             : /* LEGACY FALLBACK */ [
                 { value: "99.9%", label: "Disponibilidad", sublabel: "SLA garantizado" },
-                { value: "100%", label: "IaC", sublabel: "Infraestructura como c\u00f3digo" },
+                { value: "100%", label: "IaC", sublabel: "Infraestructura como código" },
                 { value: "24/7", label: "Monitoreo", sublabel: "Observabilidad completa" },
-                { value: "50%", label: "Menos incidentes", sublabel: "vs. gesti\u00f3n manual" },
+                { value: "50%", label: "Menos incidentes", sublabel: "vs. gestión manual" },
               ]
         }
       />
@@ -240,63 +241,59 @@ export default async function InfraestructuraPage({
       <CmsServicioBenefits
         benefits={cms?.benefits}
         accentColor="#3B82F6"
-        titleEs="Por qu\u00e9 elegir Infraestructura Cloud con Nivelics"
+        titleEs="Por qué elegir Infraestructura Cloud con Nivelics"
         titleEn="Why choose Cloud Infrastructure with Nivelics"
         locale={locale}
       />
       <CmsServicioProcess
         steps={cms?.processSteps}
         accentColor="#3B82F6"
-        titleEs="C\u00f3mo lo implementamos"
+        titleEs="Cómo lo implementamos"
         titleEn="How we deliver"
         locale={locale}
       />
 
       <ComparisonTable
-        title="\u00bfPor qu\u00e9 infraestructura gestionada vs. equipo interno?"
+        title="¿Por qué infraestructura gestionada vs. equipo interno?"
         alternativeLabel="Equipo interno de infra"
         nivelicsLabel="Nivelics Cloud Ops"
         rows={[
           {
             criterion: "Disponibilidad 24/7",
-            alternative: "Dif\u00edcil de sostener con equipo peque\u00f1o",
+            alternative: "Difícil de sostener con equipo pequeño",
             nivelics: "SLA garantizado con escalamiento definido",
           },
           {
             criterion: "IaC (Terraform / CDK)",
             alternative: "No siempre implementado",
-            nivelics: "Est\u00e1ndar en todos los proyectos",
+            nivelics: "Estándar en todos los proyectos",
           },
           {
             criterion: "Observabilidad",
-            alternative: "B\u00e1sica o manual",
+            alternative: "Básica o manual",
             nivelics: "Datadog / Grafana configurado desde el inicio",
           },
           {
             criterion: "Respuesta a incidentes",
-            alternative: "Variable \u2014 depende de qui\u00e9n est\u00e9 disponible",
+            alternative: "Variable — depende de quién esté disponible",
             nivelics: "Runbooks definidos + escalamiento claro",
           },
           {
             criterion: "Actualizaciones de seguridad",
-            alternative: "Reactivas \u2014 se parchea cuando hay incidente",
+            alternative: "Reactivas — se parchea cuando hay incidente",
             nivelics: "Proactivas con ventanas programadas",
           },
           {
             criterion: "Costo de especialistas senior",
-            alternative: "$8,000\u201315,000 USD/mes por perfil",
-            nivelics: "Fracci\u00f3n del costo \u2014 equipo completo",
+            alternative: "$8,000–15,000 USD/mes por perfil",
+            nivelics: "Fracción del costo — equipo completo",
           },
         ]}
       />
 
       <CTABanner />
 
-      <StickyMobileCta
-        text="Solicitar auditor\u00eda \u2192"
-        url="/contacto"
-        accentColor="#3B82F6"
-      />
+      <StickyMobileCta text="Solicitar auditoría →" url="/contacto" accentColor="#3B82F6" />
     </PageWrapper>
   );
 }

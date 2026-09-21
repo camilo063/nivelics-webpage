@@ -1,4 +1,7 @@
-import Link from "next/link";
+"use client";
+
+import { useLocale } from "next-intl";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { cn } from "@/lib/utils";
 import { PortalEffect } from "@/components/ui/portal-effect";
 import { Reveal } from "@/components/effects/reveal";
@@ -14,20 +17,37 @@ interface CTABannerProps {
   trustLine?: string;
 }
 
+// Textos por defecto por idioma. Antes solo existían en español y 26 páginas /en que
+// usan <CTABanner /> sin props lo mostraban así.
+const DEFAULTS = {
+  es: {
+    title: "¿Listo para transformar más rápido?",
+    description: "Conversemos sobre cómo la tecnología puede impulsar tus resultados.",
+    buttonText: "Agenda una reunión",
+  },
+  en: {
+    title: "Ready to transform faster?",
+    description: "Let's talk about how technology can drive your results.",
+    buttonText: "Book a meeting",
+  },
+};
+
 export function CTABanner({
-  title = "¿Listo para transformar más rápido?",
-  description = "Conversemos sobre cómo la tecnología puede impulsar tus resultados.",
-  buttonText = "Agenda una reunión",
+  title,
+  description,
+  buttonText,
   buttonHref = "/contacto",
   className,
-  locale: _locale = "es",
+  locale: localeProp,
   eyebrow,
   trustLine,
 }: CTABannerProps) {
+  const activeLocale = useLocale();
+  const d = DEFAULTS[(localeProp ?? activeLocale) === "en" ? "en" : "es"];
+  title ??= d.title;
+  description ??= d.description;
+  buttonText ??= d.buttonText;
   // `eyebrow` and `trustLine` are rendered only when the caller provides them.
-  // Callers that want bilingual defaults should pass the resolved values from
-  // ui_labels (keys: cta_banner.default_eyebrow / .default_trust).
-  void _locale;
   const resolvedEyebrow = eyebrow;
   const resolvedTrust = trustLine;
 

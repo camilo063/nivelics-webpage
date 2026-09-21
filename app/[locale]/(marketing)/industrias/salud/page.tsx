@@ -92,6 +92,7 @@ export default async function SaludPage({ params }: { params: Promise<{ locale: 
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Tecnología para el Sector Salud",
     description:
       ind?.heroSubtitle ||
@@ -99,7 +100,7 @@ export default async function SaludPage({ params }: { params: Promise<{ locale: 
     url: "/industrias/salud",
     serviceType: "Healthcare Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Salud", url: "/industrias/salud" },

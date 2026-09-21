@@ -97,13 +97,14 @@ export default async function DisenoUXUIPage({ params }: { params: Promise<{ loc
     fallbackSecondary: { text: "Conoce el proceso", url: "/servicios/staff-augmentation" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Diseñadores UX/UI",
     description:
       "Product designers senior con experiencia en design systems, research y prototipado.",
     url: "/servicios/staff-augmentation/diseno-ux-ui",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },

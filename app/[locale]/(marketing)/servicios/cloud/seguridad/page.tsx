@@ -1,6 +1,6 @@
 // CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { Shield, KeyRound, Activity } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
@@ -40,7 +40,7 @@ export async function generateMetadata({
     title: cms?.seoTitle || "Seguridad Cloud | Gobierno e Identidad en AWS y GCP",
     description:
       cms?.seoDescription ||
-      "Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud.",
+      "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
   });
 }
 
@@ -49,19 +49,19 @@ const BENEFITS = [
     icon: "shield",
     title: "Compliance SOC2 e ISO27001",
     description:
-      "Implementaci\u00f3n de controles y procesos para cumplir con SOC2, ISO27001 y otras normativas regulatorias del sector.",
+      "Implementación de controles y procesos para cumplir con SOC2, ISO27001 y otras normativas regulatorias del sector.",
   },
   {
     icon: "key-round",
     title: "IAM y Zero Trust",
     description:
-      "Gesti\u00f3n de identidades con principio de m\u00ednimo privilegio, MFA, SSO y arquitectura Zero Trust en toda tu infraestructura.",
+      "Gestión de identidades con principio de mínimo privilegio, MFA, SSO y arquitectura Zero Trust en toda tu infraestructura.",
   },
   {
     icon: "activity",
     title: "Monitoreo y respuesta a incidentes",
     description:
-      "Detecci\u00f3n de amenazas en tiempo real, alertas automatizadas y playbooks de respuesta a incidentes de seguridad.",
+      "Detección de amenazas en tiempo real, alertas automatizadas y playbooks de respuesta a incidentes de seguridad.",
   },
 ];
 
@@ -82,13 +82,14 @@ export default async function SeguridadCloudPage({
     fallbackSecondary: { text: "Ver capas de seguridad", url: "#capas" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Seguridad Cloud",
     description:
-      "Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud.",
+      "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
     url: "/servicios/cloud/seguridad",
     serviceType: "Cloud Security Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Cloud", url: "/servicios/cloud" },
@@ -149,17 +150,17 @@ export default async function SeguridadCloudPage({
 
       <HeroSplit
         heroEffect="particles"
-        badge="Cloud \u00b7 Seguridad"
+        badge="Cloud · Seguridad"
         h1={cms?.title || "Seguridad cloud"}
         h1Accent="sin excusas"
         subtitle={
           cms?.subtitle ||
-          "Hardening, compliance (SOC2, ISO27001), gesti\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud."
+          "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud."
         }
         bullets={[
           "Compliance SOC2, ISO27001 desde semana 1",
           "Arquitectura Zero Trust implementada",
-          "Detecci\u00f3n de amenazas en tiempo real",
+          "Detección de amenazas en tiempo real",
         ]}
         ctaPrimary={ctaPrimary}
         ctaSecondary={ctaSecondary}
@@ -170,32 +171,32 @@ export default async function SeguridadCloudPage({
             accentColor="#3B82F6"
             options={[
               {
-                icon: "\ud83d\udee1\ufe0f",
+                icon: "🛡️",
                 label: "Hardening & Baseline",
                 url: "/servicios/cloud/seguridad",
-                description: "Configuraci\u00f3n segura de cuentas, VPCs y servicios base.",
+                description: "Configuración segura de cuentas, VPCs y servicios base.",
               },
               {
-                icon: "\ud83d\udd10",
+                icon: "🔐",
                 label: "IAM & Zero Trust",
                 url: "/servicios/cloud/seguridad",
-                description: "M\u00ednimo privilegio, MFA, SSO y pol\u00edticas de acceso.",
+                description: "Mínimo privilegio, MFA, SSO y políticas de acceso.",
               },
               {
-                icon: "\ud83d\udccb",
+                icon: "📋",
                 label: "Compliance (SOC2 / ISO)",
                 url: "/servicios/cloud/seguridad",
                 description: "Roadmap de compliance con hitos y evidencias.",
               },
               {
-                icon: "\ud83d\udd12",
+                icon: "🔒",
                 label: "Cifrado End-to-End",
                 url: "/servicios/cloud/seguridad",
-                description: "Cifrado en tr\u00e1nsito y reposo con KMS gestionado.",
+                description: "Cifrado en tránsito y reposo con KMS gestionado.",
               },
               {
-                icon: "\ud83d\udea8",
-                label: "Detecci\u00f3n & Respuesta",
+                icon: "🚨",
+                label: "Detección & Respuesta",
                 url: "/servicios/cloud/seguridad",
                 description: "GuardDuty, Security Hub y playbooks de incidentes.",
               },
@@ -214,13 +215,13 @@ export default async function SeguridadCloudPage({
                 unit: m.unit,
               }))
             : /* LEGACY FALLBACK */ [
-                { value: "100%", label: "Cifrado", sublabel: "En tr\u00e1nsito y reposo" },
+                { value: "100%", label: "Cifrado", sublabel: "En tránsito y reposo" },
                 { value: "0", label: "Brechas", sublabel: "Tolerancia cero a incidentes" },
-                { value: "24h", label: "Respuesta", sublabel: "Tiempo m\u00e1ximo a incidentes" },
+                { value: "24h", label: "Respuesta", sublabel: "Tiempo máximo a incidentes" },
                 {
                   value: "95%",
                   label: "Compliance",
-                  sublabel: "Controles cubiertos desde d\u00eda 1",
+                  sublabel: "Controles cubiertos desde día 1",
                 },
               ]
         }
@@ -278,26 +279,26 @@ export default async function SeguridadCloudPage({
       <CmsServicioBenefits
         benefits={cms?.benefits}
         accentColor="#3B82F6"
-        titleEs="Por qu\u00e9 elegir Seguridad Cloud con Nivelics"
+        titleEs="Por qué elegir Seguridad Cloud con Nivelics"
         titleEn="Why choose Cloud Security with Nivelics"
         locale={locale}
       />
       <CmsServicioProcess
         steps={cms?.processSteps}
         accentColor="#3B82F6"
-        titleEs="C\u00f3mo lo implementamos"
+        titleEs="Cómo lo implementamos"
         titleEn="How we deliver"
         locale={locale}
       />
 
       <ComparisonTable
-        title="\u00bfPor qu\u00e9 seguridad cloud con Nivelics vs. sin programa formal?"
+        title="¿Por qué seguridad cloud con Nivelics vs. sin programa formal?"
         alternativeLabel="Sin programa de seguridad"
         nivelicsLabel="Nivelics Cloud Security"
         rows={[
           {
             criterion: "Visibilidad de vulnerabilidades",
-            alternative: "Reactiva \u2014 se descubre post-incidente",
+            alternative: "Reactiva — se descubre post-incidente",
             nivelics: "Escaneo continuo automatizado",
           },
           {
@@ -306,23 +307,23 @@ export default async function SeguridadCloudPage({
             nivelics: "Roadmap con hitos medibles desde semana 1",
           },
           {
-            criterion: "Gesti\u00f3n de identidades (IAM)",
-            alternative: "Permisiva por defecto \u2014 acceso amplio",
-            nivelics: "Principio de m\u00ednimo privilegio aplicado",
+            criterion: "Gestión de identidades (IAM)",
+            alternative: "Permisiva por defecto — acceso amplio",
+            nivelics: "Principio de mínimo privilegio aplicado",
           },
           {
-            criterion: "Cifrado en tr\u00e1nsito y reposo",
+            criterion: "Cifrado en tránsito y reposo",
             alternative: "Parcial o sin configurar",
             nivelics: "End-to-end configurado y auditado",
           },
           {
-            criterion: "Detecci\u00f3n de amenazas",
+            criterion: "Detección de amenazas",
             alternative: "No existe",
             nivelics: "GuardDuty / Security Hub activo",
           },
           {
             criterion: "Respuesta a incidentes",
-            alternative: "Sin plan \u2014 improvisaci\u00f3n",
+            alternative: "Sin plan — improvisación",
             nivelics: "Playbook probado con tiempos de respuesta",
           },
         ]}
@@ -330,11 +331,7 @@ export default async function SeguridadCloudPage({
 
       <CTABanner />
 
-      <StickyMobileCta
-        text="Solicitar auditor\u00eda \u2192"
-        url="/contacto"
-        accentColor="#3B82F6"
-      />
+      <StickyMobileCta text="Solicitar auditoría →" url="/contacto" accentColor="#3B82F6" />
     </PageWrapper>
   );
 }

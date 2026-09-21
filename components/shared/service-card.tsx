@@ -1,4 +1,7 @@
-import Link from "next/link";
+"use client";
+
+import { useLocale } from "next-intl";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import type { ServiceDef } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -13,6 +16,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service, index = 0, className }: ServiceCardProps) {
   const Icon = service.icon;
+  const isEn = useLocale() === "en";
 
   return (
     <Reveal delay={index * 80} className="h-full">
@@ -30,10 +34,14 @@ export function ServiceCard({ service, index = 0, className }: ServiceCardProps)
           >
             <Icon size={24} style={{ color: service.color }} />
           </div>
-          <h3 className="mb-2 text-lg font-semibold text-text-100">{service.label}</h3>
-          <p className="mb-4 text-sm leading-relaxed text-text-70">{service.description}</p>
+          <h3 className="mb-2 text-lg font-semibold text-text-100">
+            {isEn ? service.labelEn : service.label}
+          </h3>
+          <p className="mb-4 text-sm leading-relaxed text-text-70">
+            {isEn ? service.descriptionEn : service.description}
+          </p>
           <span className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
-            Conocer más <ArrowRight size={14} />
+            {isEn ? "Learn more" : "Conocer más"} <ArrowRight size={14} />
           </span>
         </Link>
       </TiltCard>

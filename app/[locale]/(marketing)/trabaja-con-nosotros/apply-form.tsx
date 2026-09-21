@@ -18,6 +18,23 @@ const MESSAGES = {
     submitError: "Error al enviar la solicitud",
     unexpectedError: "Error inesperado",
     optional: "(Opcional)",
+    sent: "Solicitud enviada",
+    sentBody:
+      "Revisaremos tu perfil y te contactaremos pronto. Gracias por tu interés en Nivelics.",
+    formAria: "Formulario de aplicación laboral Nivelics",
+    name: "Nombre completo",
+    namePh: "Tu nombre completo",
+    emailPh: "tu@email.com",
+    role: "Rol de interés",
+    selectRole: "Seleccionar rol",
+    roleIa: "IA / Machine Learning Engineer",
+    other: "Otro",
+    linkedinPh: "https://linkedin.com/in/tu-perfil",
+    message: "Mensaje",
+    messagePh: "Cuéntanos sobre tu experiencia y por qué te interesa Nivelics...",
+    submitAria: "Enviar solicitud de empleo",
+    sending: "Enviando...",
+    submit: "Enviar solicitud",
   },
   en: {
     nameMin: "Name must be at least 2 characters",
@@ -28,6 +45,23 @@ const MESSAGES = {
     submitError: "Error submitting the application",
     unexpectedError: "Unexpected error",
     optional: "(Optional)",
+    sent: "Application sent",
+    sentBody:
+      "We'll review your profile and get in touch soon. Thank you for your interest in Nivelics.",
+    formAria: "Nivelics job application form",
+    name: "Full name",
+    namePh: "Your full name",
+    emailPh: "you@email.com",
+    role: "Role of interest",
+    selectRole: "Select a role",
+    roleIa: "AI / Machine Learning Engineer",
+    other: "Other",
+    linkedinPh: "https://linkedin.com/in/your-profile",
+    message: "Message",
+    messagePh: "Tell us about your experience and why you're interested in Nivelics...",
+    submitAria: "Submit job application",
+    sending: "Sending...",
+    submit: "Submit application",
   },
 } as const;
 
@@ -96,10 +130,8 @@ export function ApplyForm() {
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
           <Send size={32} className="text-primary" aria-hidden="true" />
         </div>
-        <h3 className="mt-6 text-2xl font-bold text-text-100">Solicitud enviada</h3>
-        <p className="mt-2 text-text-70">
-          Revisaremos tu perfil y te contactaremos pronto. Gracias por tu interés en Nivelics.
-        </p>
+        <h3 className="mt-6 text-2xl font-bold text-text-100">{t.sent}</h3>
+        <p className="mt-2 text-text-70">{t.sentBody}</p>
       </div>
     );
   }
@@ -108,7 +140,7 @@ export function ApplyForm() {
     <form
       id="apply-form"
       data-purpose="job-application"
-      aria-label="Formulario de aplicación laboral Nivelics"
+      aria-label={t.formAria}
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-6"
     >
@@ -140,7 +172,7 @@ export function ApplyForm() {
 
       <div>
         <label htmlFor="apply-name" className="block text-sm font-medium text-text-100">
-          Nombre completo
+          {t.name}
         </label>
         <input
           id="apply-name"
@@ -150,7 +182,7 @@ export function ApplyForm() {
           aria-describedby={errors.name ? "apply-name-error" : undefined}
           {...register("name")}
           className={INPUT_CLASSES}
-          placeholder="Tu nombre completo"
+          placeholder={t.namePh}
         />
         {errors.name && (
           <p id="apply-name-error" className="mt-1 text-xs text-red-400" role="alert">
@@ -172,7 +204,7 @@ export function ApplyForm() {
           aria-describedby={errors.email ? "apply-email-error" : undefined}
           {...register("email")}
           className={INPUT_CLASSES}
-          placeholder="tu@email.com"
+          placeholder={t.emailPh}
         />
         {errors.email && (
           <p id="apply-email-error" className="mt-1 text-xs text-red-400" role="alert">
@@ -183,7 +215,7 @@ export function ApplyForm() {
 
       <div>
         <label htmlFor="apply-role" className="block text-sm font-medium text-text-100">
-          Rol de interés
+          {t.role}
         </label>
         <select
           id="apply-role"
@@ -193,17 +225,17 @@ export function ApplyForm() {
           {...register("role")}
           className="mt-1 w-full rounded-lg border border-border bg-bg-base px-4 py-3 text-sm text-text-100 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
         >
-          <option value="">Seleccionar rol</option>
+          <option value="">{t.selectRole}</option>
           <option value="frontend">Frontend Developer</option>
           <option value="backend">Backend Developer</option>
           <option value="fullstack">Fullstack Developer</option>
           <option value="devops">DevOps / Cloud Engineer</option>
           <option value="data">Data Engineer / Scientist</option>
-          <option value="ia">IA / Machine Learning Engineer</option>
+          <option value="ia">{t.roleIa}</option>
           <option value="qa">QA Engineer</option>
           <option value="pm">Project Manager / Delivery Manager</option>
           <option value="design">UX/UI Designer</option>
-          <option value="otro">Otro</option>
+          <option value="otro">{t.other}</option>
         </select>
         {errors.role && (
           <p id="apply-role-error" className="mt-1 text-xs text-red-400" role="alert">
@@ -225,7 +257,7 @@ export function ApplyForm() {
           aria-describedby={errors.linkedin ? "apply-linkedin-error" : undefined}
           {...register("linkedin")}
           className={INPUT_CLASSES}
-          placeholder="https://linkedin.com/in/tu-perfil"
+          placeholder={t.linkedinPh}
         />
         {errors.linkedin && (
           <p id="apply-linkedin-error" className="mt-1 text-xs text-red-400" role="alert">
@@ -236,7 +268,7 @@ export function ApplyForm() {
 
       <div>
         <label htmlFor="apply-message" className="block text-sm font-medium text-text-100">
-          Mensaje <span className="font-normal text-text-40">{t.optional}</span>
+          {t.message} <span className="font-normal text-text-40">{t.optional}</span>
         </label>
         <textarea
           id="apply-message"
@@ -247,7 +279,7 @@ export function ApplyForm() {
           aria-describedby={errors.message ? "apply-message-error" : undefined}
           {...register("message")}
           className={`${INPUT_CLASSES} resize-none`}
-          placeholder="Cuéntanos sobre tu experiencia y por qué te interesa Nivelics..."
+          placeholder={t.messagePh}
         />
         {errors.message && (
           <p id="apply-message-error" className="mt-1 text-xs text-red-400" role="alert">
@@ -271,9 +303,9 @@ export function ApplyForm() {
         size="lg"
         className="w-full"
         disabled={isSubmitting}
-        aria-label="Enviar solicitud de empleo"
+        aria-label={t.submitAria}
       >
-        {isSubmitting ? "Enviando..." : "Enviar solicitud"}
+        {isSubmitting ? t.sending : t.submit}
       </Button>
     </form>
   );

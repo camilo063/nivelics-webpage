@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
@@ -87,7 +87,7 @@ export default async function GrupoBolivarPage({
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
     : RESULTS;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Casos de Éxito", url: "/casos-de-exito" },
     { name: caso?.clientName || "Grupo Bolívar", url: "/casos-de-exito/grupo-bolivar" },

@@ -12,44 +12,58 @@ import type { Locale, MappedServicio } from "@/lib/cms/types";
 
 // Fallbacks used only when the DB record is missing or a field is empty.
 // The source of truth is the `servicios` row with slug_es='servicios'.
-const FALLBACK_HUB_METRICS: MappedServicio["hubMetrics"] = [
-  { value: "19+", label: "Soluciones especializadas" },
-  { value: "13+", label: "Años de experiencia" },
-  { value: "7", label: "Países con proyectos activos" },
-  { value: "40%", label: "Reducción de costos cloud" },
+const FALLBACK_HUB_METRICS = (isEn: boolean): MappedServicio["hubMetrics"] => [
+  { value: "19+", label: isEn ? "Specialized solutions" : "Soluciones especializadas" },
+  { value: "13+", label: isEn ? "Years of experience" : "Años de experiencia" },
+  { value: "7", label: isEn ? "Countries with active projects" : "Países con proyectos activos" },
+  { value: "40%", label: isEn ? "Cloud cost reduction" : "Reducción de costos cloud" },
 ];
 
-const FALLBACK_FRAMEWORK_PILLARS: MappedServicio["frameworkPillars"] = [
+const FALLBACK_FRAMEWORK_PILLARS = (isEn: boolean): MappedServicio["frameworkPillars"] => [
   {
     letter: "I",
     colorClass: "text-ia",
     borderClass: "border-violet-500/20",
-    title: "Inteligencia Artificial",
-    desc: "Agentes, automatización y analítica avanzada que miden su propio ROI. No chatbots — producción real.",
+    title: isEn ? "Artificial Intelligence" : "Inteligencia Artificial",
+    desc: isEn
+      ? "Agents, automation and advanced analytics that measure their own ROI. Not chatbots: real production."
+      : "Agentes, automatización y analítica avanzada que miden su propio ROI. No chatbots — producción real.",
   },
   {
     letter: "C",
     colorClass: "text-cloud",
     borderClass: "border-blue-500/20",
     title: "Cloud",
-    desc: "Infraestructura multi-cloud con gobierno, seguridad y FinOps desde el día 1. AWS, GCP y Azure certificados.",
+    desc: isEn
+      ? "Multi-cloud infrastructure with governance, security and FinOps from day one. AWS, GCP and Azure certified."
+      : "Infraestructura multi-cloud con gobierno, seguridad y FinOps desde el día 1. AWS, GCP y Azure certificados.",
   },
   {
     letter: "S",
     colorClass: "text-primary",
     borderClass: "border-cyan-500/20",
-    title: "Staffing Premium",
-    desc: "Perfiles senior bilingües validados, integrados en 5 días.",
+    title: isEn ? "Premium Staffing" : "Staffing Premium",
+    desc: isEn
+      ? "Validated bilingual senior profiles, integrated in 5 days."
+      : "Perfiles senior bilingües validados, integrados en 5 días.",
   },
 ];
 
-const FALLBACK_SECTORS: MappedServicio["sectors"] = [
+const FALLBACK_SECTORS = (isEn: boolean): MappedServicio["sectors"] => [
   { slug: "fintech", icon: "💳", label: "Fintech" },
-  { slug: "medios-entretenimiento", icon: "▶", label: "Medios y Entretenimiento" },
-  { slug: "salud", icon: "♥", label: "Salud" },
-  { slug: "retail-ecommerce", icon: "🛒", label: "Retail y E-commerce" },
-  { slug: "logistica", icon: "🚚", label: "Logística" },
-  { slug: "manufactura", icon: "⚙", label: "Manufactura" },
+  {
+    slug: "medios-entretenimiento",
+    icon: "▶",
+    label: isEn ? "Media & Entertainment" : "Medios y Entretenimiento",
+  },
+  { slug: "salud", icon: "♥", label: isEn ? "Healthcare" : "Salud" },
+  {
+    slug: "retail-ecommerce",
+    icon: "🛒",
+    label: isEn ? "Retail & E-commerce" : "Retail y E-commerce",
+  },
+  { slug: "logistica", icon: "🚚", label: isEn ? "Logistics" : "Logística" },
+  { slug: "manufactura", icon: "⚙", label: isEn ? "Manufacturing" : "Manufactura" },
 ];
 
 export const revalidate = 86400;
@@ -69,10 +83,19 @@ export async function generateMetadata({
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = hub?.seoTitle || "Servicios de Transformación Digital | IA · Cloud · Staffing";
+  // La fila en producción no tiene seo_*_en: sin rama por idioma, /en/services salía con
+  // título y descripción en español.
+  const isEn = locale === "en";
+  const title =
+    hub?.seoTitle ||
+    (isEn
+      ? "Digital Transformation Services: AI, Cloud and Staffing"
+      : "Servicios de Transformación Digital: IA, Cloud y Staffing");
   const description =
     hub?.seoDescription ||
-    "Descubre nuestras soluciones de Inteligencia Artificial, Cloud, Staff Augmentation y Desarrollo Digital.";
+    (isEn
+      ? "Explore our Artificial Intelligence, Cloud, Staff Augmentation and Digital Development solutions."
+      : "Descubre nuestras soluciones de Inteligencia Artificial, Cloud, Staff Augmentation y Desarrollo Digital.");
 
   return {
     title,
@@ -111,11 +134,12 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
   const isEn = locale === "en";
   const hub = await getServicioData("servicios", locale);
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: isEn ? "Home" : "Inicio", url: "/" },
     { name: isEn ? "Services" : "Servicios", url: "/servicios" },
   ]);
   const serviceSchema = getServiceSchema({
+    locale,
     name: isEn
       ? "Digital Transformation Services | AI · Cloud · Staffing"
       : "Servicios de Transformación Digital | IA · Cloud · Staffing",
@@ -126,11 +150,11 @@ export default async function ServiciosPage({ params }: { params: Promise<{ loca
     serviceType: isEn ? "Digital Transformation" : "Transformación Digital",
   });
 
-  const hubMetrics = hub?.hubMetrics.length ? hub.hubMetrics : FALLBACK_HUB_METRICS;
+  const hubMetrics = hub?.hubMetrics.length ? hub.hubMetrics : FALLBACK_HUB_METRICS(isEn);
   const frameworkPillars = hub?.frameworkPillars.length
     ? hub.frameworkPillars
-    : FALLBACK_FRAMEWORK_PILLARS;
-  const sectors = hub?.sectors.length ? hub.sectors : FALLBACK_SECTORS;
+    : FALLBACK_FRAMEWORK_PILLARS(isEn);
+  const sectors = hub?.sectors.length ? hub.sectors : FALLBACK_SECTORS(isEn);
 
   const frameworkTitle =
     hub?.frameworkTitle ||
