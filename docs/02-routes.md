@@ -19,6 +19,26 @@ When you add a new public route, **three** files change:
 3. [lib/seo/sitemap-urls.ts](../lib/seo/sitemap-urls.ts) — add to `STATIC_URLS`
    (or ensure it shows up via dynamic `getAllSiteUrls()`)
 
+## Internal links: always `LocaleLink`
+
+Links in content, nav_config, constants and the DB are written with the **ES path**
+(`/servicios/cloud`, `/contacto`). Rendered with plain `next/link`, those stay Spanish on
+`/en` pages and bounce the visitor to the Spanish site.
+
+- In marketing pages and shared components import
+  `import { LocaleLink as Link } from "@/components/i18n/locale-link"`. It translates the
+  href to the active locale with [`localizePath`](../lib/i18n/localize-path.ts) (built from
+  `routing.pathnames`). Paths already under `/en`, anchors, external URLs and assets pass
+  through untouched, so it is safe everywhere.
+- Server-side helpers that need a URL without React: `localizePath(href, locale)`.
+- `getBreadcrumbSchema(locale, items)` and `getServiceSchema({ locale, … })` translate the
+  JSON-LD URLs (and common crumb names) the same way.
+- Article bodies: `ProseContent` rewrites internal `href`s when given `locale="en"`.
+- The ES/EN switcher uses `switchLocalePath(pathname, target)`. `usePathname()` returns
+  `/en/<ES path>` during SSR (after next-intl's rewrite) and `/en/<EN path>` on the
+  client; `canonicalEsPath` normalizes both. Use it whenever you compare pathnames.
+- Exception: `translation-banner.tsx` links to the ES version on purpose (plain `next/link`).
+
 ## URL map
 
 ### Marketing (public)

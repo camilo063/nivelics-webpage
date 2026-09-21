@@ -30,10 +30,13 @@ export async function generateMetadata({
   // without collapsing EN and ES into a single entry.
   const canonical = locale === "en" ? CONTACTO_EN : CONTACTO_ES;
 
-  const title = page?.seoTitle || "Contacto | Nivelics";
+  const isEn = locale === "en";
+  const title = page?.seoTitle || (isEn ? "Contact" : "Contacto");
   const description =
     page?.seoDescription ||
-    "Cuéntanos sobre tu proyecto o desafío tecnológico y te contactamos en menos de 24 horas.";
+    (isEn
+      ? "Tell us about your project or technology challenge and we'll get back to you within 24 hours."
+      : "Cuéntanos sobre tu proyecto o desafío tecnológico y te contactamos en menos de 24 horas.");
 
   return {
     title,

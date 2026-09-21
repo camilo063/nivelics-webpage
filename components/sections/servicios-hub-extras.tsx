@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import type { MappedServicio } from "@/lib/cms/types";
 import { GeoIcon } from "@/lib/icons/geometric";
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 // Normaliza slugs históricos guardados en DB al slug real de la ruta pública (ES).
-// next-intl se encarga del rewrite a EN (/industries/...).
+// LocaleLink traduce la ruta a EN (/en/industries/...) según el idioma activo.
 const SECTOR_ROUTE_SLUG: Record<string, string> = {
   medios: "medios-entretenimiento",
   retail: "retail-ecommerce",

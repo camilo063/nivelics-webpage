@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
@@ -286,7 +286,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
         categoryName: p.categoryId ? (categoryById.get(p.categoryId)?.name ?? null) : null,
       }));
 
-    const breadcrumb = getBreadcrumbSchema([
+    const breadcrumb = getBreadcrumbSchema(locale, [
       { name: t(locale, "Inicio", "Home"), url: locale === "en" ? "/en" : "/" },
       { name: "Blog", url: locale === "en" ? "/en/blog" : "/blog" },
       { name: mapped.title, url: `${locale === "en" ? "/en" : ""}/blog/${slug}` },
@@ -392,7 +392,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                 headings={headings}
                 label={t(locale, "Contenido", "Contents")}
               />
-              <ProseContent content={processedHtml} />
+              <ProseContent content={processedHtml} locale={locale} />
 
               <CTAContextual categorySlug={category?.slug ?? null} locale={locale} />
 
@@ -425,7 +425,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
   const post = POSTS[slug];
   if (!post) notFound();
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Blog", url: "/blog" },
     { name: post.title, url: `/blog/${slug}` },
@@ -460,7 +460,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
 
           <h1 className="mt-4 text-3xl font-bold text-text-100 md:text-4xl">{post.title}</h1>
 
-          <ProseContent content={post.content} className="mt-12" />
+          <ProseContent content={post.content} className="mt-12" locale={locale} />
         </div>
       </article>
     </PageWrapper>

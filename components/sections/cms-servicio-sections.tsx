@@ -1,6 +1,6 @@
 // CMS-connected: 2026-05-07 — bridges MappedServicio.benefits / processSteps / CTAs
 // to the existing UI primitives so admin edits in /admin/servicios reach the public site.
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GeoIconBox } from "@/lib/icons/geometric";

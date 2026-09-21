@@ -103,13 +103,14 @@ export default async function DevOpsCloudPage({ params }: { params: Promise<{ lo
     fallbackSecondary: { text: "Conoce el proceso", url: "/servicios/staff-augmentation" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "DevOps e Infraestructura",
     description:
       "Cloud Architects y DevOps Engineers certificados en AWS, GCP y Azure. CI/CD, Terraform, Kubernetes.",
     url: "/servicios/staff-augmentation/devops-cloud",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },

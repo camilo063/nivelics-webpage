@@ -116,7 +116,7 @@ export default async function CasosDeExitoPage({
     ? rawCases.map((c) => mapCasoExito(c as Record<string, unknown>, locale))
     : null;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Casos de Éxito", url: "/casos-de-exito" },
   ]);

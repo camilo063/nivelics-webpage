@@ -9,7 +9,7 @@
 // El seed (scripts/seed-servicios-agentes.ts) escribe estos mismos textos en la BD para que
 // el admin, la grid del hub y llms.txt digan lo mismo que la página.
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
 import { CTABanner } from "@/components/shared";
@@ -62,12 +62,14 @@ export function AgentServicePage({
 
   const url = isEn ? service.path.en : service.path.es;
   const serviceSchema = getServiceSchema({
+    locale,
     name: copy.name,
     description: copy.seoDescription,
     url,
     serviceType: copy.serviceType,
   });
   const breadcrumb = getBreadcrumbSchema(
+    locale,
     isEn
       ? [
           { name: "Home", url: "/en" },

@@ -73,7 +73,7 @@ export default async function CertificacionesPage({
       })
     : null;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
     { name: "Certificaciones", url: "/nosotros/certificaciones" },
