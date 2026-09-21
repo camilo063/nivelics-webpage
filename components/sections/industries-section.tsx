@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { motion } from "framer-motion";
 import { ArrowRight, Landmark, Tv, HeartPulse, ShoppingBag, Truck, Factory } from "lucide-react";
 

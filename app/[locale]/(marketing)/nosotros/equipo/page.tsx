@@ -43,7 +43,7 @@ export default async function EquipoPage({ params }: { params: Promise<{ locale:
       ? mappedMembers.map((m) => ({ name: m.name, jobTitle: m.role, description: m.bio }))
       : TEAM_MEMBERS;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
     { name: "Equipo", url: "/nosotros/equipo" },

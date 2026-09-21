@@ -80,13 +80,14 @@ export default async function PlataformasWebPage({
     fallbackSecondary: { text: "Ver casos de exito", url: "/casos-de-exito" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Plataformas Web",
     description:
       "Plataformas web empresariales con React, Next.js y Node.js. Arquitectura moderna y escalable.",
     url: "/servicios/desarrollo-digital/plataformas-web",
     serviceType: "Web Development",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Desarrollo Digital", url: "/servicios/desarrollo-digital" },

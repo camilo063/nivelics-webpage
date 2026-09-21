@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import Image from "next/image";
 import type { Locale } from "@/lib/cms";
 import { BlogCardArt } from "@/components/shared/blog-card-art";

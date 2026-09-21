@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { getLocale } from "next-intl/server";
 import { SitemapMap } from "@/components/sections/sitemap-map";
 import { getSitemapSectionsStatic } from "@/lib/seo/sitemap-sections";

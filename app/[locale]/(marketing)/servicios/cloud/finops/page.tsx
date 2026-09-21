@@ -132,6 +132,7 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
   const pillars = isEn ? PILLARS_EN : PILLARS_ES;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: isEn ? "FinOps — Cloud Financial Optimization" : "FinOps — Optimización Financiera Cloud",
     description: isEn
       ? "Cloud financial governance and optimization. Typical 30-40% savings in cloud spend."
@@ -139,7 +140,7 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
     url: "/servicios/cloud/finops",
     serviceType: "FinOps Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: isEn ? "Home" : "Inicio", url: "/" },
     { name: isEn ? "Services" : "Servicios", url: "/servicios" },
     { name: "Cloud", url: "/servicios/cloud" },

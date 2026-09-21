@@ -80,13 +80,14 @@ export default async function DesarrolloSoftwarePage({
     fallbackSecondary: { text: "Conoce el proceso", url: "/servicios/staff-augmentation" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Desarrolladores de Software",
     description:
       "Ingenieros senior de software colombianos bilingües. React, Node.js, Python, Java, Go y más.",
     url: "/servicios/staff-augmentation/desarrollo-software",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },

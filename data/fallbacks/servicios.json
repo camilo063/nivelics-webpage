@@ -382,7 +382,7 @@
         "unit": "",
         "value": "100%",
         "labelEn": "IaC — Infrastructure as Code",
-        "labelEs": "IaC — Infraestructura como c\\u00f3digo"
+        "labelEs": "IaC — Infraestructura como código"
       },
       {
         "unit": "",
@@ -394,7 +394,7 @@
         "unit": "",
         "value": "50%",
         "labelEn": "Fewer incidents — vs. manual management",
-        "labelEs": "Menos incidentes — vs. gesti\\u00f3n manual"
+        "labelEs": "Menos incidentes — vs. gestión manual"
       }
     ],
     "faqs": null,
@@ -407,7 +407,7 @@
     "coverImage": null,
     "seoTitleEs": "Infraestructura Cloud | Multi-cloud con IaC",
     "seoTitleEn": "Cloud Infrastructure | Multi-cloud with IaC",
-    "seoDescriptionEs": "Dise\\u00f1o e implementaci\\u00f3n de infraestructura cloud escalable, segura y optimizada para tu operaci\\u00f3n.",
+    "seoDescriptionEs": "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
     "seoDescriptionEn": "Design and implementation of scalable, secure and optimized cloud infrastructure for your operation.",
     "schemaServiceJson": null,
     "hubMetrics": null,
@@ -424,7 +424,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.650Z",
-    "updatedAt": "2026-04-09T11:26:29.391Z",
+    "updatedAt": "2026-09-21T16:04:05.094Z",
     "deletedAt": null
   },
   {
@@ -476,7 +476,7 @@
         "unit": "",
         "value": "60%",
         "labelEn": "Faster — vs. internal migration",
-        "labelEs": "Más rápido — vs. migraci\\u00f3n interna"
+        "labelEs": "Más rápido — vs. migración interna"
       },
       {
         "unit": "",
@@ -501,7 +501,7 @@
     "coverImage": "",
     "seoTitleEs": "Migración a AWS | Zero Downtime",
     "seoTitleEn": "AWS Migration | Zero Downtime",
-    "seoDescriptionEs": "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimizaci\\u00f3n de costos desde el d\\u00eda uno.",
+    "seoDescriptionEs": "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno.",
     "seoDescriptionEn": "We migrate your workloads to AWS with zero downtime strategy, planned rollback and cost optimization from day one.",
     "schemaServiceJson": null,
     "hubMetrics": [],
@@ -518,7 +518,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.485Z",
-    "updatedAt": "2026-04-15T01:55:42.474Z",
+    "updatedAt": "2026-09-21T16:04:05.184Z",
     "deletedAt": null
   },
   {
@@ -964,7 +964,7 @@
         "unit": "",
         "value": "10x",
         "labelEn": "Faster — Time-to-market",
-        "labelEs": "M\\u00e1s r\\u00e1pido — Time-to-market"
+        "labelEs": "Más rápido — Time-to-market"
       }
     ],
     "faqs": null,
@@ -994,7 +994,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.978Z",
-    "updatedAt": "2026-04-09T11:28:03.484Z",
+    "updatedAt": "2026-09-21T16:04:05.271Z",
     "deletedAt": null
   },
   {
@@ -2018,6 +2018,106 @@
     "deletedAt": null
   },
   {
+    "id": "4e52a5d6-7a2e-445c-84a7-5bd2b430b650",
+    "slugEs": "marketing-crm",
+    "slugEn": "marketing-crm",
+    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
+    "serviceType": "sub",
+    "accentColor": "ia",
+    "icon": "dia-target",
+    "titleEs": "Marketing y CRM",
+    "titleEn": "Marketing & CRM",
+    "subtitleEs": "Segmentación dinámica, campañas personalizadas 1:1 y análisis predictivo integrado con tu CRM. Cada lead recibe el mensaje correcto en el momento correcto.",
+    "subtitleEn": "Dynamic segmentation, 1:1 personalized campaigns, and predictive analytics integrated with your CRM. Every lead receives the right message at the right time.",
+    "descriptionEs": "Prospectos calificados automáticamente con IA integrada a tu CRM y herramientas de marketing.",
+    "descriptionEn": "Automatically qualified prospects with AI integrated into your CRM and marketing tools.",
+    "benefits": [
+      {
+        "icon": "bar-chart-3",
+        "copyEn": "It automatically recalculates with each interaction",
+        "copyEs": "Se recalcula automáticamente con cada interacción",
+        "titleEn": "Real-time predictive segmentation",
+        "titleEs": "Segmentación predictiva en tiempo real"
+      },
+      {
+        "icon": "user",
+        "copyEn": "Each lead receives the right message at the right time",
+        "copyEs": "Cada lead recibe el mensaje correcto en el momento correcto",
+        "titleEn": "1:1 personalization at scale",
+        "titleEs": "Personalización 1:1 a escala"
+      },
+      {
+        "icon": "refresh-cw",
+        "copyEn": "Direct integration with Odoo, HubSpot and Salesforce",
+        "copyEs": "Integración directa con Odoo, HubSpot y Salesforce",
+        "titleEn": "Real-time CRM sync",
+        "titleEs": "Sync en tiempo real con CRM"
+      }
+    ],
+    "processSteps": null,
+    "metrics": [],
+    "faqs": [
+      {
+        "answerEn": "We analyze your customers' historical behavior (pages visited, emails opened, previous purchases, support interactions) and create models that predict purchase intent, churn risk, and potential value. Segments update in real-time with each new interaction.",
+        "answerEs": "Analizamos el comportamiento histórico de tus clientes (páginas visitadas, emails abiertos, compras anteriores, interacciones con soporte) y creamos modelos que predicen intención de compra, riesgo de churn y valor potencial. Los segmentos se actualizan en tiempo real con cada nueva interacción.",
+        "questionEn": "How does predictive segmentation work?",
+        "questionEs": "¿Cómo funciona la segmentación predictiva?"
+      },
+      {
+        "answerEn": "Yes. We have native integrations with Odoo, HubSpot, Salesforce, ActiveCampaign, and Mailchimp. Data syncs in real-time — not batch — so triggers and segments are always up-to-date.",
+        "answerEs": "Sí. Tenemos integraciones nativas con Odoo, HubSpot, Salesforce, ActiveCampaign y Mailchimp. Los datos se sincronizan en tiempo real — no batch — para que los triggers y segmentos estén siempre actualizados.",
+        "questionEn": "Does it integrate with my CRM and marketing tools?",
+        "questionEs": "¿Se integra con mi CRM y herramientas de marketing?"
+      },
+      {
+        "answerEn": "We set a baseline with your current data and compare against it: conversion rate, cost per qualified lead and attribution by touchpoint. The impact depends on your current volume and data maturity, which is why we measure it in your operation instead of promising it up front.",
+        "answerEs": "Definimos una línea base con tus datos actuales y comparamos contra ella: tasa de conversión, costo por lead calificado y atribución por touchpoint. El impacto depende de tu volumen actual y de la madurez de tus datos, por eso lo medimos en tu operación y no lo prometemos de antemano.",
+        "questionEn": "How is the impact on conversion measured?",
+        "questionEs": "¿Cómo se mide el impacto en la conversión?"
+      },
+      {
+        "answerEn": "Not necessarily. In discovery we review the CRM and email marketing history you have and decide which models you can start with. The more historical data, the better the prediction.",
+        "answerEs": "No necesariamente. En el discovery revisamos el historial de CRM y email marketing que tienes y definimos con qué modelos se puede empezar. Mientras más datos históricos, mejor la predicción.",
+        "questionEn": "Do I need a lot of historical data to get started?",
+        "questionEs": "¿Necesito mucho historial de datos para empezar?"
+      },
+      {
+        "answerEn": "Only if you configure it that way. By default, campaigns go through an approval workflow before sending. Your team defines the level of autonomy: from suggestions that a human approves to fully automated sends with business rules.",
+        "answerEs": "Solo si tu lo configuras así. Por defecto, las campañas pasan por un flujo de aprobación antes de enviarse. El nivel de autonomía lo defines tu equipo: desde sugerencias que un humano aprueba hasta envíos completamente automatizados con reglas de negocio.",
+        "questionEn": "Does AI send campaigns without approval?",
+        "questionEs": "¿La IA envía campañas sin aprobación?"
+      }
+    ],
+    "ctaPrimaryTextEs": "Agendar demo",
+    "ctaPrimaryTextEn": "Book a demo",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "Ver todos los servicios IA",
+    "ctaSecondaryTextEn": "View all AI services",
+    "ctaSecondaryUrl": "/servicios/inteligencia-artificial",
+    "coverImage": null,
+    "seoTitleEs": "Marketing y CRM con IA",
+    "seoTitleEn": "AI Marketing & CRM",
+    "seoDescriptionEs": "Segmentación inteligente, personalización de campañas y análisis predictivo integrado con tu CRM.",
+    "seoDescriptionEn": "Intelligent segmentation, campaign personalization, and predictive analytics integrated with your CRM.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 8,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:37.317Z",
+    "updatedAt": "2026-09-21T15:15:09.623Z",
+    "deletedAt": null
+  },
+  {
     "id": "dcc87d81-f5bc-4372-bd09-e20895b9a621",
     "slugEs": "staff-augmentation",
     "slugEn": "staff-augmentation",
@@ -2029,7 +2129,7 @@
     "titleEn": "Tech talent in 5 days",
     "subtitleEs": "Perfiles bilingües validados, integrados en tu equipo sin riesgos laborales.",
     "subtitleEn": "Validated bilingual profiles, integrated into your team with zero employment risk.",
-    "descriptionEs": "Equipos de ingeniería on-demand con talento senior verificado. Escalá tu capacidad sin comprometer calidad.",
+    "descriptionEs": "Equipos de ingeniería on-demand con talento senior verificado. Escala tu capacidad sin comprometer calidad.",
     "descriptionEn": "On-demand engineering teams with verified senior talent. Scale your capacity without compromising quality.",
     "benefits": [
       {
@@ -2187,7 +2287,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.120Z",
-    "updatedAt": "2026-04-14T19:47:37.134Z",
+    "updatedAt": "2026-09-21T16:04:04.690Z",
     "deletedAt": null
   },
   {
@@ -2233,7 +2333,7 @@
         "unit": "",
         "value": "100%",
         "labelEn": "Encryption — In transit and at rest",
-        "labelEs": "Cifrado — En tr\\u00e1nsito y reposo"
+        "labelEs": "Cifrado — En tránsito y reposo"
       },
       {
         "unit": "",
@@ -2245,13 +2345,13 @@
         "unit": "",
         "value": "24h",
         "labelEn": "Response — Maximum incident response time",
-        "labelEs": "Respuesta — Tiempo m\\u00e1ximo a incidentes"
+        "labelEs": "Respuesta — Tiempo máximo a incidentes"
       },
       {
         "unit": "",
         "value": "95%",
         "labelEn": "Compliance — Controls covered from day 1",
-        "labelEs": "Compliance — Controles cubiertos desde d\\u00eda 1"
+        "labelEs": "Compliance — Controles cubiertos desde día 1"
       }
     ],
     "faqs": null,
@@ -2264,7 +2364,7 @@
     "coverImage": null,
     "seoTitleEs": "Seguridad Cloud | SOC2, ISO27001",
     "seoTitleEn": "Cloud Security | SOC2, ISO27001",
-    "seoDescriptionEs": "Hardening, compliance (SOC2, ISO27001), gesti\\u00f3n de identidades y cifrado end-to-end para tu infraestructura cloud.",
+    "seoDescriptionEs": "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
     "seoDescriptionEn": "Hardening, compliance (SOC2, ISO27001), identity management and end-to-end encryption for your cloud infrastructure.",
     "schemaServiceJson": null,
     "hubMetrics": null,
@@ -2281,107 +2381,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.813Z",
-    "updatedAt": "2026-04-09T11:27:46.908Z",
-    "deletedAt": null
-  },
-  {
-    "id": "4e52a5d6-7a2e-445c-84a7-5bd2b430b650",
-    "slugEs": "marketing-crm",
-    "slugEn": "marketing-crm",
-    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
-    "serviceType": "sub",
-    "accentColor": "ia",
-    "icon": "dia-target",
-    "titleEs": "Marketing y CRM",
-    "titleEn": "Marketing & CRM",
-    "subtitleEs": "Segmentación dinámica, campañas personalizadas 1:1 y análisis predictivo integrado con tu CRM. Cada lead recibe el mensaje correcto en el momento correcto.",
-    "subtitleEn": "Dynamic segmentation, 1:1 personalized campaigns, and predictive analytics integrated with your CRM. Every lead receives the right message at the right time.",
-    "descriptionEs": "Prospectos calificados automáticamente con IA integrada a tu CRM y herramientas de marketing.",
-    "descriptionEn": "Automatically qualified prospects with AI integrated into your CRM and marketing tools.",
-    "benefits": [
-      {
-        "icon": "bar-chart-3",
-        "copyEn": "It automatically recalculates with each interaction",
-        "copyEs": "Se recalcula automáticamente con cada interacción",
-        "titleEn": "Real-time predictive segmentation",
-        "titleEs": "Segmentación predictiva en tiempo real"
-      },
-      {
-        "icon": "user",
-        "copyEn": "Each lead receives the right message at the right time",
-        "copyEs": "Cada lead recibe el mensaje correcto en el momento correcto",
-        "titleEn": "1:1 personalization at scale",
-        "titleEs": "Personalización 1:1 a escala"
-      },
-      {
-        "icon": "refresh-cw",
-        "copyEn": "Direct integration with Odoo, HubSpot and Salesforce",
-        "copyEs": "Integración directa con Odoo, HubSpot y Salesforce",
-        "titleEn": "Real-time CRM sync",
-        "titleEs": "Sync en tiempo real con CRM"
-      }
-    ],
-    "processSteps": null,
-    "metrics": [],
-    "faqs": [
-      {
-        "answerEn": "We analyze your customers' historical behavior (pages visited, emails opened, previous purchases, support interactions) and create models that predict purchase intent, churn risk, and potential value. Segments update in real-time with each new interaction.",
-        "answerEs": "Analizamos el comportamiento histórico de tus clientes (páginas visitadas, emails abiertos, compras anteriores, interacciones con soporte) y creamos modelos que predicen intención de compra, riesgo de churn y valor potencial. Los segmentos se actualizan en tiempo real con cada nueva interacción.",
-        "questionEn": "How does predictive segmentation work?",
-        "questionEs": "¿Cómo funciona la segmentación predictiva?"
-      },
-      {
-        "answerEn": "Yes. We have native integrations with Odoo, HubSpot, Salesforce, ActiveCampaign, and Mailchimp. Data syncs in real-time — not batch — so triggers and segments are always up-to-date.",
-        "answerEs": "Sí. Tenemos integraciones nativas con Odoo, HubSpot, Salesforce, ActiveCampaign y Mailchimp. Los datos se sincronizan en tiempo real — no batch — para que los triggers y segmentos estén siempre actualizados.",
-        "questionEn": "Does it integrate with my CRM and marketing tools?",
-        "questionEs": "¿Se integra con mi CRM y herramientas de marketing?"
-      },
-      {
-        "answerEn": "We set a baseline with your current data and compare against it: conversion rate, cost per qualified lead and attribution by touchpoint. The impact depends on your current volume and data maturity, which is why we measure it in your operation instead of promising it up front.",
-        "answerEs": "Definimos una línea base con tus datos actuales y comparamos contra ella: tasa de conversión, costo por lead calificado y atribución por touchpoint. El impacto depende de tu volumen actual y de la madurez de tus datos, por eso lo medimos en tu operación y no lo prometemos de antemano.",
-        "questionEn": "How is the impact on conversion measured?",
-        "questionEs": "¿Cómo se mide el impacto en la conversión?"
-      },
-      {
-        "answerEn": "Not necessarily. In discovery we review the CRM and email marketing history you have and decide which models you can start with. The more historical data, the better the prediction.",
-        "answerEs": "No necesariamente. En el discovery revisamos el historial de CRM y email marketing que tienes y definimos con qué modelos se puede empezar. Mientras más datos históricos, mejor la predicción.",
-        "questionEn": "Do I need a lot of historical data to get started?",
-        "questionEs": "¿Necesito mucho historial de datos para empezar?"
-      },
-      {
-        "answerEn": "Only if you configure it that way. By default, campaigns go through an approval workflow before sending. Your team defines the level of autonomy: from suggestions that a human approves to fully automated sends with business rules.",
-        "answerEs": "Solo si tu lo configuras así. Por defecto, las campañas pasan por un flujo de aprobación antes de enviarse. El nivel de autonomía lo defines tu equipo: desde sugerencias que un humano aprueba hasta envíos completamente automatizados con reglas de negocio.",
-        "questionEn": "Does AI send campaigns without approval?",
-        "questionEs": "¿La IA envía campañas sin aprobación?"
-      }
-    ],
-    "ctaPrimaryTextEs": "Agendar demo",
-    "ctaPrimaryTextEn": "Book a demo",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": "Ver todos los servicios IA",
-    "ctaSecondaryTextEn": "View all AI services",
-    "ctaSecondaryUrl": "/servicios/inteligencia-artificial",
-    "coverImage": null,
-    "seoTitleEs": "Marketing y CRM con IA",
-    "seoTitleEn": "AI Marketing & CRM",
-    "seoDescriptionEs": "Segmentación inteligente, personalización de campañas y análisis predictivo integrado con tu CRM.",
-    "seoDescriptionEn": "Intelligent segmentation, campaign personalization, and predictive analytics integrated with your CRM.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 8,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:37.317Z",
-    "updatedAt": "2026-09-21T15:15:09.623Z",
+    "updatedAt": "2026-09-21T16:04:05.358Z",
     "deletedAt": null
   },
   {

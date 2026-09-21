@@ -103,13 +103,14 @@ export default async function QASeguridadPage({ params }: { params: Promise<{ lo
     fallbackSecondary: { text: "Conoce el proceso", url: "/servicios/staff-augmentation" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "QA y Ciberseguridad",
     description:
       "QA Engineers, SDET y especialistas en ciberseguridad para asegurar calidad y protección en cada sprint.",
     url: "/servicios/staff-augmentation/qa-seguridad",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },

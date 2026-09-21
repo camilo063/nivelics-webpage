@@ -76,13 +76,14 @@ export default async function AppsMovilesPage({ params }: { params: Promise<{ lo
     fallbackSecondary: { text: "Ver casos de exito", url: "/casos-de-exito" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Desarrollo de Apps Moviles",
     description:
       "Apps nativas y cross-platform con React Native, Flutter, Swift y Kotlin. De la idea al App Store.",
     url: "/servicios/desarrollo-digital/apps-moviles",
     serviceType: "Mobile App Development",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Desarrollo Digital", url: "/servicios/desarrollo-digital" },

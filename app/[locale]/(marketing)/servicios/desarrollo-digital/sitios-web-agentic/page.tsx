@@ -1,6 +1,6 @@
 // CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { Search, Bot, Brain, Check, ChevronsRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
@@ -390,6 +390,7 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
   const faqItems = isEn ? FAQ_ITEMS_EN : FAQ_ITEMS_ES;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: isEn ? "Agentic-First Web Development" : "Desarrollo de Sitios Web Agentic-First",
     description: isEn
       ? "We build websites navigable by AI agents and LLMs. Multilingual, complete Schema.org, llms.txt, Core Web Vitals ≥95. Indexed by Google SGE, ChatGPT, Claude and Perplexity."
@@ -398,7 +399,7 @@ export default async function AgenticWebPage({ params }: { params: Promise<{ loc
     serviceType: "Web Development",
   });
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: isEn ? "Home" : "Inicio", url: "/" },
     { name: isEn ? "Services" : "Servicios", url: "/servicios" },
     {

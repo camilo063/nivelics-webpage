@@ -3,7 +3,7 @@
 // subservicios (títulos, subtítulos, íconos y orden), que el admin sí mantiene.
 // Sin cifras de resultados: la banda de métricas pasó a «Principios de diseño».
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import { PageWrapper } from "@/components/layout";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { ClientLogosBar } from "@/components/sections/client-logos-bar";
@@ -119,6 +119,7 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
     ? "/en/services/artificial-intelligence"
     : "/servicios/inteligencia-artificial";
   const serviceSchema = getServiceSchema({
+    locale,
     name: isEn
       ? "Applied Artificial Intelligence and AI Agents"
       : "Agentes e Inteligencia Artificial aplicada",
@@ -127,6 +128,7 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
     serviceType: "Artificial Intelligence Consulting",
   });
   const breadcrumb = getBreadcrumbSchema(
+    locale,
     isEn
       ? [
           { name: "Home", url: "/en" },

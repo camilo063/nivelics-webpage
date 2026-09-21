@@ -119,13 +119,14 @@ export default async function StaffAugmentationPage({
     },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Staff Augmentation Premium",
     description:
       "Talento tech colombiano bilingüe senior. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
     url: "/servicios/staff-augmentation",
     serviceType: "Staff Augmentation",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Staff Augmentation", url: "/servicios/staff-augmentation" },

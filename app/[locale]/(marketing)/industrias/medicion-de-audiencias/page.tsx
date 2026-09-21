@@ -97,6 +97,7 @@ export default async function MedicionAudienciasPage({
   const solutions = ind?.solutions?.length ? ind.solutions : SOLUTIONS;
 
   const serviceSchema = getServiceSchema({
+    locale,
     name: ind?.name || "Soluciones Tecnológicas para Medición de Audiencias",
     description:
       ind?.heroSubtitle ||
@@ -104,7 +105,7 @@ export default async function MedicionAudienciasPage({
     url: "/industrias/medicion-de-audiencias",
     serviceType: "Audience Measurement Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Industrias", url: "/industrias" },
     { name: ind?.name || "Medición de Audiencias", url: "/industrias/medicion-de-audiencias" },

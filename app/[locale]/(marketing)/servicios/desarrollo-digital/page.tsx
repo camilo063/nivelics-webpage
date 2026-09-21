@@ -105,13 +105,14 @@ export default async function DesarrolloDigitalPage({
     fallbackSecondary: { text: "Ver casos de éxito", url: "/casos-de-exito" },
   });
   const serviceSchema = getServiceSchema({
+    locale,
     name: "Desarrollo Digital",
     description:
       "Desarrollo de productos digitales, aplicaciones web y móviles con metodologías ágiles.",
     url: "/servicios/desarrollo-digital",
     serviceType: "Software Development",
   });
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Servicios", url: "/servicios" },
     { name: "Desarrollo Digital", url: "/servicios/desarrollo-digital" },

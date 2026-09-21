@@ -77,7 +77,7 @@ export default async function TrabajaConNosotrosPage({
   const raw = await getPageGeneral("careers");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: page?.title || "Trabaja con Nosotros", url: "/trabaja-con-nosotros" },
   ]);

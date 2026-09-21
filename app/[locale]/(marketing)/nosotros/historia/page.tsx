@@ -112,7 +112,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ local
         }))
       : TIMELINE;
 
-  const breadcrumb = getBreadcrumbSchema([
+  const breadcrumb = getBreadcrumbSchema(locale, [
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
     { name: "Historia", url: "/nosotros/historia" },
