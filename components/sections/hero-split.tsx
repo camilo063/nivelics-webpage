@@ -3,6 +3,39 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroEffect, type HeroEffectKind } from "@/components/ui/hero-effect";
 
+// El H1 se arma con un título (normalmente `servicios.title_*` de BD) más un acento fijo
+// definido en la página. Cuando el título de BD ya traía ese acento —entero o en versión
+// corta— el H1 indexado salía repetido: «Del concepto a producción a producción»,
+// «Talento tech en 5 días en 5 días hábiles». Antes de pintar recortamos del título la
+// cola que el acento ya dice, respetando límites de palabra.
+const normalizeWord = (w: string) => w.toLowerCase().replace(/[.,;:]+$/, "");
+
+/** ¿La cola del título es el acento, completo o abreviado (mismo orden, sin palabras extra)? */
+function tailRepeatsAccent(tail: string[], accent: string[]): boolean {
+  if (tail.length === 0 || tail.length > accent.length) return false;
+  if (tail.length === 1 && accent.length !== 1) return false;
+  if (tail[0] !== accent[0]) return false;
+  let i = 0;
+  for (const word of accent) {
+    if (i < tail.length && word === tail[i]) i += 1;
+  }
+  return i === tail.length;
+}
+
+function trimAccentOverlap(h1: string, accent?: string): string {
+  const base = h1.trim();
+  if (!accent) return base;
+  const baseWords = base.split(/\s+/);
+  const accentWords = accent.trim().split(/\s+/).map(normalizeWord);
+  for (let n = Math.min(baseWords.length, accentWords.length); n > 0; n -= 1) {
+    const tail = baseWords.slice(baseWords.length - n).map(normalizeWord);
+    if (tailRepeatsAccent(tail, accentWords)) {
+      return baseWords.slice(0, baseWords.length - n).join(" ");
+    }
+  }
+  return base;
+}
+
 interface HeroSplitProps {
   badge?: string;
   h1: string;
@@ -34,6 +67,7 @@ export function HeroSplit({
   heroEffect = "none",
   heroEffectOpacity,
 }: HeroSplitProps) {
+  const h1Main = trimAccentOverlap(h1, h1Accent);
   const defaultOpacity =
     heroEffect === "diagonal"
       ? 0.9
@@ -85,7 +119,8 @@ export function HeroSplit({
               className="text-4xl font-bold text-text-100 md:text-5xl lg:text-[52px] leading-tight"
               itemProp="name"
             >
-              {h1}{" "}
+              {h1Main}
+              {h1Main && h1Accent ? " " : null}
               {h1Accent && (
                 <span
                   className="bg-clip-text text-transparent"

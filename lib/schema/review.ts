@@ -1,3 +1,5 @@
+import { absoluteUrl, inLanguageOf } from "./webpage";
+
 interface ReviewSchemaOptions {
   /** Real client testimonial text, as stored in the CMS (never invented). */
   quote: string;
@@ -45,11 +47,13 @@ export function getReviewSchema({
       ? {
           about: {
             "@type": "CreativeWork",
+            // Mismo @id que el CreativeWork del caso: una sola entidad.
+            "@id": `${absoluteUrl(aboutUrl, locale)}#case`,
             name: aboutName,
-            url: `https://www.nivelics.com${aboutUrl}`,
+            url: absoluteUrl(aboutUrl, locale),
           },
         }
       : {}),
-    inLanguage: locale === "es" ? "es-CO" : "en-US",
+    inLanguage: inLanguageOf(locale),
   };
 }

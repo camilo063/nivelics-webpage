@@ -62,6 +62,7 @@ Links in content, nav_config, constants and the DB are written with the **ES pat
 | `/servicios/cloud/infraestructura`                             | `/en/services/cloud/infrastructure`                            |
 | `/servicios/cloud/seguridad`                                   | `/en/services/cloud/security`                                  |
 | `/servicios/cloud/ciberseguridad-ethical-hacking`              | `/en/services/cloud/ethical-hacking`                           |
+| `/mapa-del-sitio`                                              | `/en/sitemap`                                                  |
 | `/servicios/cloud/serverless`                                  | `/en/services/cloud/serverless`                                |
 | `/servicios/staff-augmentation`                                | `/en/services/staff-augmentation`                              |
 | `/servicios/staff-augmentation/desarrollo-software`            | `/en/services/staff-augmentation/software-development`         |

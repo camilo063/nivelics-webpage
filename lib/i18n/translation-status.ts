@@ -48,6 +48,7 @@ const EN_TRANSLATION_STATUS: Record<string, TranslationStatus> = {
   "/servicios/cloud/infraestructura": "complete",
   "/servicios/cloud/seguridad": "complete",
   "/servicios/cloud/ciberseguridad-ethical-hacking": "complete",
+  "/mapa-del-sitio": "complete",
   "/servicios/cloud/serverless": "complete",
 
   // ── Staff sub-pages ──

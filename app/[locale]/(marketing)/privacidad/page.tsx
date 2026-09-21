@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
@@ -42,21 +41,11 @@ export default async function PrivacidadPage({ params }: { params: Promise<{ loc
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
   const config = await getSiteConfigPublic().catch(() => null);
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: page?.title || "Política de Privacidad", url: "/privacidad" },
-  ]);
-
   // If DB has HTML content, render it; otherwise fall back to hardcoded
   const dbContent = page?.content as string | null;
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[800px] px-6 md:px-20">
           <h1 className="text-4xl font-bold text-text-100 md:text-5xl">

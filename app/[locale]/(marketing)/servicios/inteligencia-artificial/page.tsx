@@ -20,7 +20,6 @@ import {
 } from "@/components/sections/agentes/agent-sections";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { getServiceSchema } from "@/lib/schema/service";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
@@ -127,20 +126,6 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
     url: hubUrl,
     serviceType: "Artificial Intelligence Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema(
-    locale,
-    isEn
-      ? [
-          { name: "Home", url: "/en" },
-          { name: "Services", url: "/en/services" },
-          { name: "Artificial Intelligence", url: hubUrl },
-        ]
-      : [
-          { name: "Inicio", url: "/" },
-          { name: "Servicios", url: "/servicios" },
-          { name: "Inteligencia Artificial", url: hubUrl },
-        ],
-  );
 
   // Panel del hero: las 4 líneas de agentes + las dos hermanas más buscadas.
   const panel = [0, 1, 2, 3, 5, 4].map((i) => ({
@@ -154,10 +139,6 @@ export default async function IAPage({ params }: { params: Promise<{ locale: str
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
       <HeroSplit

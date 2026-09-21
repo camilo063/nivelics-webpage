@@ -8,7 +8,6 @@ import { MetricsBar } from "@/components/sections/metrics-bar";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getWebSiteSchema } from "@/lib/schema/website";
-import { getFAQSchema } from "@/lib/schema/faq";
 import { AmericaMapWrapper } from "@/components/sections/america-map-wrapper";
 import { ProductosHomeStrip } from "@/components/sections/home/ProductosHomeStrip";
 import { getAllProductosHub, mapProductoCard } from "@/lib/cms/productos";
@@ -169,9 +168,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const orgSchema = getOrganizationSchema();
   const webSiteSchema = getWebSiteSchema();
-  const faqSchema = getFAQSchema(
-    home.faqs.map((f) => ({ question: f.question, answer: f.answer })),
-  );
+  // El FAQPage lo emite el <FAQAccordion schemaEnabled> de la sección 9 con las
+  // mismas preguntas que se ven. Aquí se emitía un segundo FAQPage idéntico.
 
   // UI strings from the `ui_labels` table (editable from /admin/ui-labels).
   const uiViewAll = uiLabel(uiLabels, "ui.view", locale);
@@ -186,10 +184,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* ═══ 1. HERO — asimétrico, comprimido, display XL (Fase 1.5) ═══ */}

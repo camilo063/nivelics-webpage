@@ -90,62 +90,61 @@ export default async function ProductosHubPage({
     Hirely: { price: "0", category: "WebApplication" },
   };
 
+  // Esta CollectionPage ES la WebPage canónica del hub (mismo @id), por eso
+  // <PageWrapper webPage={false}>: si no, saldrían dos entidades de página.
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": `${hubUrl}#webpage`,
     name: isEn ? "Nivelics SaaS Products" : "Productos SaaS propios de Nivelics",
     url: hubUrl,
     description: isEn
       ? "PAYWL, Niveleads and Hirely: three SaaS products built by Nivelics."
       : "PAYWL, Niveleads e Hirely: tres productos SaaS construidos por Nivelics.",
+    inLanguage: isEn ? "en-US" : "es-CO",
+    isPartOf: { "@id": `${baseUrl}/#website` },
+    publisher: { "@id": `${baseUrl}/#organization` },
     author: { "@id": `${baseUrl}/#organization` },
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: products.length,
       itemListElement: products.map((p, i) => {
-        const pm = pricingMap[p.name] ?? { price: "0", category: "WebApplication" };
+        const pm = pricingMap[p.name];
+        const itemUrl = `${hubUrl}/${p.slug}`;
         return {
           "@type": "ListItem",
           position: i + 1,
+          name: p.name,
+          url: itemUrl,
           item: {
             "@type": "SoftwareApplication",
+            // Mismo @id que el Product de la ficha: una sola entidad por producto.
+            "@id": `${itemUrl}#product`,
             name: p.name,
-            url: `${hubUrl}/${p.slug}`,
-            applicationCategory: pm.category,
-            offers: {
-              "@type": "Offer",
-              price: pm.price,
-              priceCurrency: "USD",
-            },
+            url: itemUrl,
+            applicationCategory: pm?.category ?? "WebApplication",
+            // Sin precio público no se emite `offers`: un Offer con price "0"
+            // anunciaría gratis un producto que no lo es (Hirely).
+            ...(pm && pm.price !== "0"
+              ? {
+                  offers: {
+                    "@type": "Offer",
+                    price: pm.price,
+                    priceCurrency: "USD",
+                  },
+                }
+              : {}),
           },
         };
       }),
     },
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: isEn ? "Home" : "Inicio",
-        item: isEn ? `${baseUrl}/en` : baseUrl,
-      },
-      { "@type": "ListItem", position: 2, name: isEn ? "Products" : "Productos", item: hubUrl },
-    ],
-  };
-
   return (
-    <PageWrapper>
+    <PageWrapper webPage={false}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* HERO */}

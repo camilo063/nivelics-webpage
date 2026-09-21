@@ -1,4 +1,4 @@
-const BASE = "https://www.nivelics.com";
+import { absoluteUrl, inLanguageOf, ORGANIZATION_ID, WEBSITE_ID } from "./webpage";
 
 interface IndustriaSchemaParams {
   nombre: string;
@@ -8,23 +8,49 @@ interface IndustriaSchemaParams {
   keywords: string[];
 }
 
-export function getIndustriaWebPageSchema(params: IndustriaSchemaParams) {
+interface IndustriaSchemaOptions {
+  /** Idioma servido: fija url, inLanguage y de qué columna salen name/description. */
+  locale?: string;
+  /** Nombre del CMS ya resuelto al idioma servido. */
+  name?: string;
+  /** Descripción del CMS ya resuelta al idioma servido. */
+  description?: string;
+}
+
+/**
+ * WebPage de una página de industria. Es la WebPage canónica de esa ruta
+ * (mismo `@id` que emitiría `getWebPageSchema`), por eso esas páginas no
+ * renderizan además el `<PageSchema>` genérico.
+ */
+export function getIndustriaWebPageSchema(
+  params: IndustriaSchemaParams,
+  { locale, name, description }: IndustriaSchemaOptions = {},
+) {
+  const isEn = locale === "en";
+  const esPath = `/industrias/${params.slugEs}`;
+  const canonical = absoluteUrl(esPath, locale);
+  const pageName = name || params.nombre;
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: params.nombre,
-    description: params.descripcion,
-    url: `${BASE}/industrias/${params.slugEs}`,
-    inLanguage: "es",
+    "@id": `${canonical}#webpage`,
+    name: pageName,
+    description: description || params.descripcion,
+    url: canonical,
+    inLanguage: inLanguageOf(locale),
+    isPartOf: { "@id": WEBSITE_ID },
     about: {
       "@type": "Thing",
-      name: params.nombre,
+      name: pageName,
     },
-    author: {
-      "@id": `${BASE}/#organization`,
-    },
-    keywords: params.keywords.join(", "),
-    sameAs: `${BASE}/en/industries/${params.slugEn}`,
+    // El mirror /en no es un perfil externo: se enlaza con hreflang, no con sameAs.
+    // Lo que sí se enlaza aquí es el servicio que describe la página.
+    mainEntity: { "@id": `${canonical}#service` },
+    publisher: { "@id": ORGANIZATION_ID },
+    author: { "@id": ORGANIZATION_ID },
+    // `keywords` solo existe en español en INDUSTRIAS_SCHEMA_DATA: emitirlo en /en
+    // mezclaría idiomas en una página que declara inLanguage en-US.
+    ...(isEn ? {} : { keywords: params.keywords.join(", ") }),
   };
 }
 

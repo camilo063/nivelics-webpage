@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { ORGANIZATION_ID, WEBSITE_ID } from "@/lib/schema/webpage";
 import { LocaleLink as Link } from "@/components/i18n/locale-link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import {
   getAllBlogPostsLight,
@@ -60,6 +60,22 @@ function formatDate(d: Date | null, locale: Locale): string {
     month: "short",
     day: "numeric",
   });
+}
+
+/**
+ * Fecha efectiva del post: `published_at` es NULL en las filas migradas, así que
+ * se cae a `created_at` — la misma regla que usan el feed RSS y el JSON-LD del
+ * artículo, para que la fecha visible y la estructurada coincidan.
+ */
+function effectiveDate(p: MappedBlogPost): Date | null {
+  return p.publishedAt ?? p.createdAt ?? null;
+}
+
+/** schema.org pide URL absoluta; las portadas del CMS llegan relativas o en S3. */
+function absoluteImageUrl(src: string): string {
+  return /^https?:\/\//i.test(src)
+    ? src
+    : `https://www.nivelics.com${src.startsWith("/") ? "" : "/"}${src}`;
 }
 
 function computeReadingTime(p: MappedBlogPost): number {
@@ -212,20 +228,9 @@ export default async function BlogPage({
   const showPopularSidebar = !activeCategory && allPosts.length >= SIDEBAR_MIN_POSTS;
 
   // ─── Schema.org ──────────────────────────────────────────
-  const breadcrumbItems = activeCategory
-    ? [
-        { name: t(locale, "Inicio", "Home"), url: locale === "en" ? "/en" : "/" },
-        { name: "Blog", url: locale === "en" ? "/en/blog" : "/blog" },
-        {
-          name: categoryLabel(activeCategory, locale),
-          url: `${locale === "en" ? "/en" : ""}/blog?cat=${activeCategory.slug}`,
-        },
-      ]
-    : [
-        { name: t(locale, "Inicio", "Home"), url: locale === "en" ? "/en" : "/" },
-        { name: "Blog", url: locale === "en" ? "/en/blog" : "/blog" },
-      ];
-  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbItems);
+  // El BreadcrumbList lo emite el componente `Breadcrumb` que monta PageWrapper
+  // (ver components/shared/breadcrumb.tsx): un solo BreadcrumbList por página.
+  // Esta página lo emitía además por su cuenta y salían dos entidades.
 
   const postUrl = (slug: string): string =>
     `https://www.nivelics.com${locale === "en" ? "/en" : ""}/blog/${slug}`;
@@ -246,10 +251,13 @@ export default async function BlogPage({
       "Insights, guías y tendencias sobre transformación digital, IA, cloud y talento tech.",
       "Insights, guides and trends on digital transformation, AI, cloud and tech talent.",
     ),
+    "@id": `https://www.nivelics.com${locale === "en" ? "/en" : ""}/blog#webpage`,
     url: `https://www.nivelics.com${locale === "en" ? "/en" : ""}${
       activeCategory ? `/blog?cat=${activeCategory.slug}` : "/blog"
     }`,
-    inLanguage: locale === "en" ? "en" : "es",
+    inLanguage: locale === "en" ? "en-US" : "es-CO",
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORGANIZATION_ID },
     mainEntity: {
       "@type": "ItemList",
       itemListElement: schemaPosts.map((p, i) => ({
@@ -259,8 +267,10 @@ export default async function BlogPage({
           "@type": "BlogPosting",
           headline: p.title,
           url: postUrl(p.slug),
-          ...(p.publishedAt ? { datePublished: new Date(p.publishedAt).toISOString() } : {}),
-          ...(p.coverImage ? { image: p.coverImage } : {}),
+          // published_at es NULL en las filas migradas: sin este fallback 7 de
+          // cada 13 items del ItemList salían sin fecha.
+          ...(effectiveDate(p) ? { datePublished: effectiveDate(p)!.toISOString() } : {}),
+          ...(p.coverImage ? { image: absoluteImageUrl(p.coverImage) } : {}),
           ...(p.excerpt ? { description: p.excerpt } : {}),
         },
       })),
@@ -276,10 +286,6 @@ export default async function BlogPage({
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
@@ -340,9 +346,12 @@ export default async function BlogPage({
                   </p>
                 ) : null}
                 <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-text-55">
-                  {featured.publishedAt ? (
-                    <time className="font-[family-name:var(--font-jetbrains-mono)]">
-                      {formatDate(featured.publishedAt, locale)}
+                  {effectiveDate(featured) ? (
+                    <time
+                      dateTime={effectiveDate(featured)!.toISOString()}
+                      className="font-[family-name:var(--font-jetbrains-mono)]"
+                    >
+                      {formatDate(effectiveDate(featured), locale)}
                     </time>
                   ) : null}
                   <span aria-hidden="true" className="text-text-40">
@@ -466,9 +475,12 @@ export default async function BlogPage({
                           </p>
                         ) : null}
                         <div className="mt-4 flex items-center gap-3 text-xs text-text-40">
-                          {paged[0].publishedAt ? (
-                            <time className="font-[family-name:var(--font-jetbrains-mono)]">
-                              {formatDate(paged[0].publishedAt, locale)}
+                          {effectiveDate(paged[0]) ? (
+                            <time
+                              dateTime={effectiveDate(paged[0])!.toISOString()}
+                              className="font-[family-name:var(--font-jetbrains-mono)]"
+                            >
+                              {formatDate(effectiveDate(paged[0]), locale)}
                             </time>
                           ) : null}
                           <span aria-hidden="true">·</span>
@@ -521,9 +533,12 @@ export default async function BlogPage({
                             <p className="mt-2 text-sm text-text-55 line-clamp-2">{post.excerpt}</p>
                           ) : null}
                           <div className="mt-3 flex items-center gap-3 text-xs text-text-40">
-                            {post.publishedAt ? (
-                              <time className="font-[family-name:var(--font-jetbrains-mono)]">
-                                {formatDate(post.publishedAt, locale)}
+                            {effectiveDate(post) ? (
+                              <time
+                                dateTime={effectiveDate(post)!.toISOString()}
+                                className="font-[family-name:var(--font-jetbrains-mono)]"
+                              >
+                                {formatDate(effectiveDate(post), locale)}
                               </time>
                             ) : null}
                             <span aria-hidden="true">·</span>

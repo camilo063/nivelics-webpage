@@ -4,7 +4,6 @@ import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -30,10 +29,13 @@ export async function generateMetadata({
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Two Maids";
+  const isEn = locale === "en";
+  const title = caso?.seoTitle || (isEn ? "Two Maids Success Story" : "Caso de Éxito Two Maids");
   const description =
     caso?.seoDescription ||
-    "Cómo Nivelics ayudó a Two Maids a escalar su equipo tech y construir una plataforma de gestión para +100 franquicias en USA.";
+    (isEn
+      ? "How Nivelics helped Two Maids scale its tech team and build a management platform for over 100 franchises in the USA."
+      : "Cómo Nivelics ayudó a Two Maids a escalar su equipo tech y construir una plataforma de gestión para +100 franquicias en USA.");
 
   return {
     title,
@@ -76,6 +78,7 @@ export default async function TwoMaidsPage({ params }: { params: Promise<{ local
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [raw, uiLabels] = await Promise.all([getCasoExito("two-maids"), getAllUiLabels()]);
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
@@ -83,21 +86,20 @@ export default async function TwoMaidsPage({ params }: { params: Promise<{ local
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
     : RESULTS;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Casos de Éxito", url: "/casos-de-exito" },
-    { name: caso?.clientName || "Two Maids", url: "/casos-de-exito/two-maids" },
-  ]);
-
-  const creativeWork = getCreativeWorkSchema([
-    {
-      name: caso?.clientName || "Two Maids",
-      description:
-        caso?.seoDescription ||
-        "Cómo Nivelics ayudó a Two Maids a escalar su equipo tech y construir una plataforma de gestión para +100 franquicias en USA.",
-      url: "/casos-de-exito/two-maids",
-    },
-  ])[0];
+  const creativeWork = getCreativeWorkSchema(
+    [
+      {
+        name: caso?.clientName || "Two Maids",
+        description:
+          caso?.seoDescription ||
+          (isEn
+            ? "How Nivelics helped Two Maids scale its tech team and build a management platform for over 100 franchises in the USA."
+            : "Cómo Nivelics ayudó a Two Maids a escalar su equipo tech y construir una plataforma de gestión para +100 franquicias en USA."),
+        url: "/casos-de-exito/two-maids",
+      },
+    ],
+    locale,
+  )[0];
 
   const review =
     caso?.testimonialQuote && caso.testimonialAuthor
@@ -113,10 +115,6 @@ export default async function TwoMaidsPage({ params }: { params: Promise<{ local
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <JsonLd data={creativeWork} />
       {review && <JsonLd data={review} />}
 

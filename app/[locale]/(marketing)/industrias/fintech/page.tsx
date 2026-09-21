@@ -5,7 +5,6 @@ import { HeroEffect } from "@/components/ui/hero-effect";
 import { CTABanner, ServiceBadge } from "@/components/shared";
 import { IndustriaRichSections } from "@/components/sections/industria-rich-sections";
 import { getServiceSchema } from "@/lib/schema/service";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getIndustriaWebPageSchema, INDUSTRIAS_SCHEMA_DATA } from "@/lib/schema/industria";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
@@ -101,22 +100,17 @@ export default async function FintechPage({ params }: { params: Promise<{ locale
     url: "/industrias/fintech",
     serviceType: "Fintech Technology Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Industrias", url: "/industrias" },
-    { name: ind?.name || "Fintech", url: "/industrias/fintech" },
-  ]);
-  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["fintech"]);
+  const webPageSchema = getIndustriaWebPageSchema(INDUSTRIAS_SCHEMA_DATA["fintech"], {
+    locale,
+    name: ind?.name,
+    description: ind?.seoDescription || ind?.heroSubtitle,
+  });
 
   return (
-    <PageWrapper>
+    <PageWrapper webPage={false}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <script
         type="application/ld+json"

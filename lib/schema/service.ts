@@ -1,4 +1,4 @@
-import { localizePath } from "@/lib/i18n/localize-path";
+import { absoluteUrl, ORGANIZATION_ID, webPageId } from "./webpage";
 
 interface ServiceSchemaInput {
   name: string;
@@ -16,23 +16,24 @@ export function getServiceSchema({
   serviceType,
   locale,
 }: ServiceSchemaInput) {
+  const canonical = absoluteUrl(url, locale);
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${canonical}#service`,
     name,
     description,
-    url: `https://www.nivelics.com${locale === "en" ? localizePath(url, "en") : url}`,
+    url: canonical,
     serviceType,
     provider: {
       "@type": "Organization",
-      "@id": "https://www.nivelics.com/#organization",
+      "@id": ORGANIZATION_ID,
       name: "Nivelics SAS",
     },
     areaServed: ["CO", "MX", "US", "AR", "PE", "EC", "PA"],
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-    },
+    // Sin `offers`: no hay precio público por servicio. Un Offer con priceCurrency
+    // pero sin price ni priceSpecification es inválido para Google y se descartaba
+    // el nodo entero, así que se omite en lugar de inventar una cifra.
+    mainEntityOfPage: { "@id": webPageId(url, locale) },
   };
 }

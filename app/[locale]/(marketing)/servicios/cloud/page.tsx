@@ -16,8 +16,6 @@ import {
   resolveServicioCtas,
 } from "@/components/sections/cms-servicio-sections";
 import { getServiceSchema } from "@/lib/schema/service";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getFAQSchema } from "@/lib/schema/faq";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getServicioData, getSubserviciosData } from "@/lib/cms/get-servicio-data";
 import { getAllUiLabels } from "@/lib/cms/ui-labels";
@@ -117,45 +115,12 @@ export default async function CloudPage({ params }: { params: Promise<{ locale: 
     url: "/servicios/cloud",
     serviceType: "Cloud Computing Consulting",
   });
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
-    { name: "Cloud", url: "/servicios/cloud" },
-  ]);
 
   return (
     <PageWrapper>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            getFAQSchema([
-              {
-                question: "¿En qué plataformas cloud trabaja Nivelics?",
-                answer:
-                  "Trabajamos con AWS, Google Cloud Platform (GCP) y Microsoft Azure. Diseñamos arquitecturas multi-cloud y ayudamos a elegir la plataforma ideal según los requerimientos técnicos, de compliance y de costos de cada proyecto.",
-              },
-              {
-                question: "¿Cuánto tarda una migración a la nube?",
-                answer:
-                  "Depende del tamaño y complejidad de los workloads. Migraciones de aplicaciones individuales pueden completarse en 2-4 semanas. Migraciones empresariales completas suelen tomar entre 3 y 6 meses con estrategia de zero downtime y rollback.",
-              },
-              {
-                question: "¿Qué es FinOps y cómo reduce costos cloud?",
-                answer:
-                  "FinOps es la práctica de gobernanza financiera del gasto en cloud. Incluye visibilidad del consumo, rightsizing, reserved instances, eliminación de recursos huérfanos y políticas automatizadas. Nuestros clientes logran ahorros típicos del 30-40%.",
-              },
-            ]),
-          ),
-        }}
       />
 
       {/* Hero */}

@@ -17,7 +17,8 @@ import {
   getBlogCategoriesPublic,
 } from "@/lib/cms";
 import type { Locale, MappedBlogPost } from "@/lib/cms";
-import { processBlogContent } from "@/lib/utils/blog";
+import { getFAQSchema } from "@/lib/schema/faq";
+import { extractFaqPairs, processBlogContent } from "@/lib/utils/blog";
 import { TableOfContents, TableOfContentsCollapsible } from "@/components/shared/TableOfContents";
 import { ShareButtons } from "@/components/shared/ShareButtons";
 import { CTAContextual } from "@/components/shared/CTAContextual";
@@ -152,6 +153,17 @@ function formatDate(d: Date | null, locale: Locale): string {
   });
 }
 
+/** `datetime` de un <time>: fecha ISO completa, la misma que va al JSON-LD. */
+function isoDate(d: Date | null): string | undefined {
+  return d ? new Date(d).toISOString() : undefined;
+}
+
+/** Día calendario en UTC, para decidir si «actualizado» aporta algo sobre «publicado». */
+function sameDay(a: Date | null, b: Date | null): boolean {
+  if (!a || !b) return false;
+  return new Date(a).toISOString().slice(0, 10) === new Date(b).toISOString().slice(0, 10);
+}
+
 function t(locale: Locale, es: string, en: string): string {
   return locale === "en" ? en : es;
 }
@@ -258,7 +270,16 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
 
     const { html: processedHtml, headings } = processBlogContent(mapped.content);
     const readingTime = computeReadingTime(mapped);
-    const formattedDate = formatDate(mapped.publishedAt, locale);
+    // published_at es NULL en las filas migradas: la fecha efectiva es la misma
+    // que usan el feed y el JSON-LD, para que lo visible y lo estructurado coincidan.
+    const publishedDate = mapped.publishedAt ?? mapped.createdAt;
+    const rawUpdated = mapped.updatedAt ?? null;
+    const updatedDate =
+      rawUpdated && publishedDate && new Date(rawUpdated) < new Date(publishedDate)
+        ? null
+        : rawUpdated;
+    const showUpdated = updatedDate && !sameDay(updatedDate, publishedDate);
+    const formattedDate = formatDate(publishedDate, locale);
     const canonicalUrl = `https://www.nivelics.com${locale === "en" ? "/en" : ""}/blog/${slug}`;
 
     // Related: prefer same category, fill with most recent, dedupe, cap at 3.
@@ -281,7 +302,9 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
         excerpt: p.excerpt,
         coverImage: p.coverImage,
         coverImageAlt: p.coverImageAlt,
-        publishedAt: p.publishedAt,
+        // Misma fecha efectiva que el feed: sin esto las 46 filas migradas
+        // (published_at NULL) salían en las tarjetas sin fecha alguna.
+        publishedAt: p.publishedAt ?? p.createdAt,
         readingTimeMinutes: p.readingTimeMinutes,
         categoryName: p.categoryId ? (categoryById.get(p.categoryId)?.name ?? null) : null,
       }));
@@ -301,6 +324,11 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
       ? t(locale, `Por ${authorName}`, `By ${authorName}`)
       : t(locale, "Equipo Nivelics", "Nivelics Team");
 
+    // FAQPage solo cuando la sección existe y tiene ≥2 pares: el contenido vive
+    // dentro del artículo, así que el structured data sí es visible en la página.
+    const faqPairs = extractFaqPairs(processedHtml, locale);
+    const faqSchema = faqPairs.length ? getFAQSchema(faqPairs) : null;
+
     return (
       <PageWrapper>
         <script
@@ -311,6 +339,12 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPosting) }}
         />
+        {faqSchema ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        ) : null}
 
         <div className="mx-auto max-w-[1280px] px-6 md:px-20 py-10 md:py-14">
           {/* Breadcrumb */}
@@ -369,7 +403,18 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
               {formattedDate ? (
                 <>
                   <span className="text-text-40">•</span>
-                  <time className="text-text-40">{formattedDate}</time>
+                  <time className="text-text-40" dateTime={isoDate(publishedDate)}>
+                    {formattedDate}
+                  </time>
+                </>
+              ) : null}
+              {showUpdated ? (
+                <>
+                  <span className="text-text-40">•</span>
+                  <span className="text-text-40">
+                    {t(locale, "Actualizado el", "Updated")}{" "}
+                    <time dateTime={isoDate(updatedDate)}>{formatDate(updatedDate, locale)}</time>
+                  </span>
                 </>
               ) : null}
               <span className="text-text-40">•</span>
@@ -387,7 +432,9 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
 
           {/* Two-column layout */}
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_280px] lg:gap-14">
-            <article itemScope itemType="https://schema.org/BlogPosting">
+            {/* Sin itemScope/itemType: el BlogPosting va completo en el JSON-LD de
+                arriba; los microdatos vacíos creaban una segunda entidad sin propiedades. */}
+            <article>
               <TableOfContentsCollapsible
                 headings={headings}
                 label={t(locale, "Contenido", "Contents")}
@@ -437,7 +484,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <article itemScope itemType="https://schema.org/BlogPosting" className="py-16 md:py-24">
+      <article className="py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 md:px-20">
           <Button asChild variant="ghost" size="sm" className="mb-8">
             <Link href="/blog">
@@ -447,7 +494,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
           </Button>
 
           <div className="flex items-center gap-3 text-sm text-text-40">
-            <time>
+            <time dateTime={new Date(post.date).toISOString()}>
               {new Date(post.date).toLocaleDateString("es-CO", {
                 year: "numeric",
                 month: "long",

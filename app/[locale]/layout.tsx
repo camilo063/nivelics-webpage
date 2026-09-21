@@ -62,7 +62,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@nivelics",
     title: "Nivelics | IA · Cloud · Staffing Premium",
     images: ["/og/nivelics-home.jpg"],
   },

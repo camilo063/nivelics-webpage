@@ -2,8 +2,6 @@
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { getServiceSchema } from "@/lib/schema/service";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
-import { getFAQSchema } from "@/lib/schema/faq";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
 import { MetricsBar } from "@/components/sections/metrics-bar";
@@ -87,6 +85,7 @@ export default async function DesarrolloDigitalPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [cms, uiLabels] = await Promise.all([
     getServicioData("desarrollo-digital", locale),
     getAllUiLabels(),
@@ -112,11 +111,6 @@ export default async function DesarrolloDigitalPage({
     url: "/servicios/desarrollo-digital",
     serviceType: "Software Development",
   });
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
-    { name: "Desarrollo Digital", url: "/servicios/desarrollo-digital" },
-  ]);
 
   return (
     <PageWrapper>
@@ -125,17 +119,13 @@ export default async function DesarrolloDigitalPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
 
       {/* Hero */}
       <HeroSplit
         heroEffect="diagonal"
         badge="Desarrollo Digital"
-        h1={cms?.title || "Del concepto"}
-        h1Accent="a producción"
+        h1={cms?.title || (isEn ? "From concept" : "Del concepto")}
+        h1Accent={isEn ? "to production" : "a producción"}
         subtitle={
           cms?.subtitle ||
           "Diseñamos y construimos apps móviles, plataformas web y e-commerce con arquitectura moderna y entregas cada 2 semanas."

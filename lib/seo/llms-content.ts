@@ -22,16 +22,59 @@ async function safeGetProductosLlms(): Promise<ProductoLlmsRow[]> {
   }
 }
 
-export async function buildLlmsTxt(primary: "es" | "en"): Promise<string> {
-  const productos = await safeGetProductosLlms();
+type BlogIndexEntry = { title: string; url: string; date: string };
 
-  if (primary === "en") {
-    return buildEn(productos);
+/** Los N artículos más recientes, con la fecha efectiva (publicación o alta) en ISO. */
+async function safeGetRecentPosts(primary: "es" | "en", limit: number): Promise<BlogIndexEntry[]> {
+  let posts: Awaited<ReturnType<typeof getAllBlogPostsLight>> = [];
+  try {
+    posts = await getAllBlogPostsLight();
+  } catch {
+    return [];
   }
-  return buildEs(productos);
+  const prefix = primary === "en" ? "/en" : "";
+  return posts
+    .map((p) => ({ ...p, effective: p.publishedAt ?? p.createdAt ?? null }))
+    .filter((p) => p.effective)
+    .sort((a, b) => new Date(b.effective!).getTime() - new Date(a.effective!).getTime())
+    .slice(0, limit)
+    .map((p) => ({
+      title: (primary === "en" ? p.titleEn : p.titleEs) || p.titleEs || p.slug,
+      url: `${BASE}${prefix}/blog/${p.slug}`,
+      date: new Date(p.effective as unknown as string | Date).toISOString().split("T")[0],
+    }));
 }
 
-function buildEs(productos: ProductoLlmsRow[]): string {
+/** Sub-servicios del catálogo, aplanados, con su descripción y la URL del idioma. */
+function subServicioLines(primary: "es" | "en"): string {
+  return SERVICIOS_CATALOG.flatMap(({ hub, subs }) => {
+    const hubName = primary === "en" ? hub.nameEn : hub.nameEs;
+    return subs.map((s) => {
+      const name = primary === "en" ? s.nameEn : s.nameEs;
+      const desc = primary === "en" ? s.descEn : s.descEs;
+      const url = BASE + (primary === "en" ? s.en : s.es);
+      return `- [${name}](${url}) — ${desc} _(${hubName})_`;
+    });
+  }).join("\n");
+}
+
+function blogIndexLines(posts: BlogIndexEntry[]): string {
+  return posts.map((p) => `- [${p.title}](${p.url}) — ${p.date}`).join("\n");
+}
+
+export async function buildLlmsTxt(primary: "es" | "en"): Promise<string> {
+  const [productos, recentPosts] = await Promise.all([
+    safeGetProductosLlms(),
+    safeGetRecentPosts(primary, 10),
+  ]);
+
+  if (primary === "en") {
+    return buildEn(productos, recentPosts);
+  }
+  return buildEs(productos, recentPosts);
+}
+
+function buildEs(productos: ProductoLlmsRow[], recentPosts: BlogIndexEntry[]): string {
   const today = new Date().toISOString().split("T")[0];
   const productosLines = productos.length
     ? productos
@@ -63,7 +106,7 @@ Nivelics diseña, construye y opera software para empresas B2B que necesitan res
 - Líneas de servicio: IA aplicada, Cloud & FinOps, Staff Augmentation, Desarrollo Digital
 - Productos SaaS propios: PAYWL, Niveleads, Hirely
 - Reconocimiento: Great Place to Work Colombia 2022
-- Hiring: vacantes tech activas en ${BASE}/trabaja-con-nosotros
+- Hiring: no hay vacantes publicadas; se recibe candidatura espontánea por formulario en ${BASE}/trabaja-con-nosotros
 
 ## Servicios
 
@@ -71,6 +114,10 @@ Nivelics diseña, construye y opera software para empresas B2B que necesitan res
 - [Cloud & FinOps](${BASE}/servicios/cloud): migración, infraestructura, FinOps, seguridad, serverless, ethical hacking
 - [Staff Augmentation](${BASE}/servicios/staff-augmentation): talento tech bilingüe integrado en 5 días
 - [Desarrollo Digital](${BASE}/servicios/desarrollo-digital): web agentic, apps móviles, e-commerce, plataformas
+
+## Sub-servicios
+
+${subServicioLines("es")}
 
 ## Productos SaaS propios
 
@@ -115,6 +162,17 @@ Diagnóstico gratuito de 30 minutos. Sin RFP, sin presentaciones largas. URL: /c
 - [Pulzo](${BASE}/casos-de-exito/pulzo)
 - [Univisión](${BASE}/casos-de-exito/univision)
 
+## Blog — últimos artículos
+${
+  recentPosts.length
+    ? `
+${blogIndexLines(recentPosts)}
+
+Índice completo: ${BASE}/blog · Todos los artículos con resumen: ${BASE}/llms-full.txt`
+    : `
+- [Blog](${BASE}/blog) — Guías y análisis sobre IA aplicada, cloud y staff augmentation`
+}
+
 ## Empresa
 
 - [Sobre Nivelics](${BASE}/nosotros)
@@ -128,6 +186,7 @@ Diagnóstico gratuito de 30 minutos. Sin RFP, sin presentaciones largas. URL: /c
 - [Contactar](${BASE}/contacto)
 - [Soporte](${BASE}/soporte)
 - Email: hola@nivelics.com
+- WhatsApp: +57 311 214 6459
 - Sedes: Bogotá (Colombia) · Miami (USA)
 
 ## Alternate language
@@ -143,7 +202,7 @@ Diagnóstico gratuito de 30 minutos. Sin RFP, sin presentaciones largas. URL: /c
 `;
 }
 
-function buildEn(productos: ProductoLlmsRow[]): string {
+function buildEn(productos: ProductoLlmsRow[], recentPosts: BlogIndexEntry[]): string {
   const today = new Date().toISOString().split("T")[0];
   const productosLines = productos.length
     ? productos
@@ -175,7 +234,7 @@ Nivelics designs, builds and operates software for B2B companies that need measu
 - Service lines: Applied AI, Cloud & FinOps, Staff Augmentation, Digital Development
 - Proprietary SaaS products: PAYWL, Niveleads, Hirely
 - Recognition: Great Place to Work Colombia 2022
-- Hiring: open tech roles at ${BASE}/en/careers
+- Hiring: no posted openings; open applications are accepted through the form at ${BASE}/en/careers
 
 ## Services
 
@@ -183,6 +242,10 @@ Nivelics designs, builds and operates software for B2B companies that need measu
 - [Cloud & FinOps](${BASE}/en/services/cloud): migration, infrastructure, FinOps, security, serverless, ethical hacking
 - [Staff Augmentation](${BASE}/en/services/staff-augmentation): bilingual tech talent integrated in 5 days
 - [Digital Development](${BASE}/en/services/digital-development): agentic web, mobile apps, e-commerce, platforms
+
+## Sub-services
+
+${subServicioLines("en")}
 
 ## Proprietary SaaS products
 
@@ -227,6 +290,17 @@ Free 30-minute diagnostic. No RFP, no decks. URL: /en/contact
 - [Pulzo](${BASE}/en/success-stories/pulzo)
 - [Univision](${BASE}/en/success-stories/univision)
 
+## Blog — latest articles
+${
+  recentPosts.length
+    ? `
+${blogIndexLines(recentPosts)}
+
+Full index: ${BASE}/en/blog · Every article with a summary: ${BASE}/en/llms-full.txt`
+    : `
+- [Blog](${BASE}/en/blog) — Guides and analysis on applied AI, cloud and staff augmentation`
+}
+
 ## Company
 
 - [About Nivelics](${BASE}/en/about)
@@ -240,6 +314,7 @@ Free 30-minute diagnostic. No RFP, no decks. URL: /en/contact
 - [Contact](${BASE}/en/contact)
 - [Support](${BASE}/en/support)
 - Email: hola@nivelics.com
+- WhatsApp: +57 311 214 6459
 - Offices: Bogotá (Colombia) · Miami (USA)
 
 ## Alternate language
@@ -705,15 +780,31 @@ async function renderBlogFull(primary: "es" | "en"): Promise<string> {
 
   const title = primary === "en" ? "# Blog — published articles" : "# Blog — artículos publicados";
   const prefix = primary === "en" ? "/en" : "";
+  // published_at es NULL en las filas migradas: la fecha efectiva es la misma
+  // que usan el feed RSS y el JSON-LD del artículo.
+  const publishedLabel = primary === "en" ? "Published" : "Publicado";
+  const updatedLabel = primary === "en" ? "Updated" : "Actualizado";
   const body = posts
     .map((p) => {
       const postTitle = (primary === "en" ? p.titleEn : p.titleEs) || p.titleEs || p.slug;
       const excerpt = (primary === "en" ? p.excerptEn : p.excerptEs) || p.excerptEs || "";
       const url = `${BASE}${prefix}/blog/${p.slug}`;
-      return `- [${postTitle}](${url})${excerpt ? ` — ${excerpt}` : ""}`;
+      const published = isoDay(p.publishedAt ?? p.createdAt);
+      const updated = isoDay(p.updatedAt);
+      const meta: string[] = [];
+      if (published) meta.push(`${publishedLabel}: ${published}`);
+      if (updated && updated !== published) meta.push(`${updatedLabel}: ${updated}`);
+      const suffix = meta.length ? ` _(${meta.join(" · ")})_` : "";
+      return `- [${postTitle}](${url})${suffix}${excerpt ? ` — ${excerpt}` : ""}`;
     })
     .join("\n");
   return `\n${title}\n\n${body}\n`;
+}
+
+function isoDay(d: Date | string | null | undefined): string | null {
+  if (!d) return null;
+  const date = new Date(d);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString().split("T")[0];
 }
 
 function renderCasosEs(): string {

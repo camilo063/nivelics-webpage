@@ -91,57 +91,56 @@ export default async function ProductoDetailPage({
   const iconColor = ACCENT_TO_ICON[p.accentColor] ?? "cyan";
   const baseUrl = "https://www.nivelics.com";
   const canonical = isEn ? `${baseUrl}/en/products/${p.slug}` : `${baseUrl}/productos/${p.slug}`;
-  const hubUrl = isEn ? `${baseUrl}/en/products` : `${baseUrl}/productos`;
-  const homeUrl = isEn ? `${baseUrl}/en` : baseUrl;
+
+  // Product y SoftwareApplication describen la MISMA entidad: comparten @id
+  // (`<canonical>#product`) para que se fusionen en un solo nodo del grafo en
+  // lugar de competir como dos productos distintos.
+  const productId = `${canonical}#product`;
+
+  // Sin `pricing_from` en la fila (caso Hirely) no hay precio público: se omite
+  // `offers` entero en vez de anunciar price "0", que sería gratis y es falso.
+  const offers =
+    p.pricingFrom != null
+      ? {
+          "@type": "Offer",
+          price: p.pricingFrom.toString(),
+          priceCurrency: p.pricingCurrency,
+          availability: "https://schema.org/InStock",
+          url: canonical,
+        }
+      : null;
 
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": productId,
     name: p.name,
     applicationCategory: p.schemaCategory,
     operatingSystem: "Web",
     url: canonical,
     description: p.description,
-    offers: {
-      "@type": "Offer",
-      price: p.pricingFrom?.toString() ?? "0",
-      priceCurrency: p.pricingCurrency,
-      availability: "https://schema.org/InStock",
-    },
+    ...(offers ? { offers } : {}),
     author: { "@id": `${baseUrl}/#organization` },
     availableLanguage: ["es", "en"],
     sameAs: p.externalUrl,
+    mainEntityOfPage: { "@id": `${canonical}#webpage` },
   };
 
-  // Product schema (complements the SoftwareApplication above — both are emitted).
+  // Product schema (complements the SoftwareApplication above — both are emitted
+  // under the same @id, so consumers see one product, not two).
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": productId,
     name: p.name,
     description: p.description,
     url: canonical,
     ...(p.ogImage ? { image: p.ogImage } : {}),
     brand: { "@type": "Brand", name: "Nivelics" },
     manufacturer: { "@id": `${baseUrl}/#organization` },
-    offers: {
-      "@type": "Offer",
-      ...(p.pricingFrom != null
-        ? { price: p.pricingFrom.toString(), priceCurrency: p.pricingCurrency }
-        : {}),
-      availability: "https://schema.org/InStock",
-      url: canonical,
-    },
+    ...(offers ? { offers } : {}),
     sameAs: p.externalUrl,
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Inicio", item: homeUrl },
-      { "@type": "ListItem", position: 2, name: isEn ? "Products" : "Productos", item: hubUrl },
-      { "@type": "ListItem", position: 3, name: p.name, item: canonical },
-    ],
+    mainEntityOfPage: { "@id": `${canonical}#webpage` },
   };
 
   const faqSchema =
@@ -164,10 +163,6 @@ export default async function ProductoDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
       <JsonLd data={productSchema} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
       {faqSchema && (
         <script
           type="application/ld+json"

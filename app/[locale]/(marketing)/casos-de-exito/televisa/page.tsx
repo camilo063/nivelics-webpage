@@ -4,7 +4,6 @@ import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -30,10 +29,14 @@ export async function generateMetadata({
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Televisa N+";
+  const isEn = locale === "en";
+  const title =
+    caso?.seoTitle || (isEn ? "Televisa N+ Success Story" : "Caso de Éxito Televisa N+");
   const description =
     caso?.seoDescription ||
-    "Cómo Nivelics ayudó a Televisa a construir N+, una plataforma de noticias digitales tipo streaming escalable a millones de usuarios.";
+    (isEn
+      ? "How Nivelics helped Televisa build N+, a streaming-style digital news platform that scales to millions of users."
+      : "Cómo Nivelics ayudó a Televisa a construir N+, una plataforma de noticias digitales tipo streaming escalable a millones de usuarios.");
 
   return {
     title,
@@ -76,6 +79,7 @@ export default async function TelevisaPage({ params }: { params: Promise<{ local
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [raw, uiLabels] = await Promise.all([getCasoExito("televisa"), getAllUiLabels()]);
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
@@ -83,21 +87,20 @@ export default async function TelevisaPage({ params }: { params: Promise<{ local
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
     : RESULTS;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Casos de Éxito", url: "/casos-de-exito" },
-    { name: caso?.clientName || "Televisa / N+", url: "/casos-de-exito/televisa" },
-  ]);
-
-  const creativeWork = getCreativeWorkSchema([
-    {
-      name: caso?.clientName || "Televisa / N+",
-      description:
-        caso?.seoDescription ||
-        "Cómo Nivelics ayudó a Televisa a construir N+, una plataforma de noticias digitales tipo streaming escalable a millones de usuarios.",
-      url: "/casos-de-exito/televisa",
-    },
-  ])[0];
+  const creativeWork = getCreativeWorkSchema(
+    [
+      {
+        name: caso?.clientName || "Televisa / N+",
+        description:
+          caso?.seoDescription ||
+          (isEn
+            ? "How Nivelics helped Televisa build N+, a streaming-style digital news platform that scales to millions of users."
+            : "Cómo Nivelics ayudó a Televisa a construir N+, una plataforma de noticias digitales tipo streaming escalable a millones de usuarios."),
+        url: "/casos-de-exito/televisa",
+      },
+    ],
+    locale,
+  )[0];
 
   const review =
     caso?.testimonialQuote && caso.testimonialAuthor
@@ -113,10 +116,6 @@ export default async function TelevisaPage({ params }: { params: Promise<{ local
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <JsonLd data={creativeWork} />
       {review && <JsonLd data={review} />}
 

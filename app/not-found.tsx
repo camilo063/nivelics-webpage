@@ -31,13 +31,16 @@ export const metadata: Metadata = {
 export default function RootNotFound() {
   const sections = getSitemapSectionsStatic();
 
+  // Sin `url`/`@id`: un 404 no tiene URL canónica (y apuntar a la home era falso).
+  // Se queda el nodo enlazado al sitio para que el grafo no tenga huérfanos.
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: "Página no encontrada",
     description: "La URL solicitada no existe en nivelics.com",
-    url: "https://www.nivelics.com",
+    inLanguage: "es-CO",
     isPartOf: { "@id": "https://www.nivelics.com/#website" },
+    publisher: { "@id": "https://www.nivelics.com/#organization" },
   };
 
   return (
@@ -79,7 +82,13 @@ export default function RootNotFound() {
             </p>
 
             <p className="mb-6 mt-4 max-w-[340px] text-[13px] leading-relaxed text-text-70">
-              El contenido que buscas puede haber cambiado de dirección. Explora el mapa completo →
+              El contenido que buscas puede haber cambiado de dirección.{" "}
+              <Link
+                href="/mapa-del-sitio"
+                className="font-medium text-primary underline-offset-4 hover:underline"
+              >
+                Explora el mapa completo →
+              </Link>
             </p>
 
             <div className="flex max-w-[340px] flex-col gap-2.5">

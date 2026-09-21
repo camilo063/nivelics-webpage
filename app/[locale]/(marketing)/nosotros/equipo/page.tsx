@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner } from "@/components/shared";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -28,10 +27,31 @@ export async function generateMetadata({
   });
 }
 
+const LABELS = {
+  es: {
+    heroTitle: "El equipo que hace posible la transformación",
+    heroSubtitle:
+      "Liderazgo con experiencia en transformación digital, desarrollo de productos y expansión de mercados B2B en Latinoamérica y Estados Unidos.",
+    gridTitle: "Equipo directivo",
+    ctaTitle: "¿Quieres conocer al equipo?",
+    ctaDescription: "Agenda una reunión y conversemos sobre cómo podemos ayudarte.",
+  },
+  en: {
+    heroTitle: "The team behind the transformation",
+    heroSubtitle:
+      "Leadership with experience in digital transformation, product development and B2B market expansion across Latin America and the United States.",
+    gridTitle: "Leadership team",
+    ctaTitle: "Want to meet the team?",
+    ctaDescription: "Book a meeting and let's talk about how we can help you.",
+  },
+};
+
 export default async function EquipoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
+  const t = isEn ? LABELS.en : LABELS.es;
   const dbMembers = await getTeamMembers();
   const mappedMembers = dbMembers.length
     ? dbMembers.map((m) => mapTeamMember(m as Record<string, unknown>, locale))
@@ -43,19 +63,10 @@ export default async function EquipoPage({ params }: { params: Promise<{ locale:
       ? mappedMembers.map((m) => ({ name: m.name, jobTitle: m.role, description: m.bio }))
       : TEAM_MEMBERS;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Nosotros", url: "/nosotros" },
-    { name: "Equipo", url: "/nosotros/equipo" },
-  ]);
   const teamSchemas = membersToShow.map((m) => getPersonSchema(m));
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(teamSchemas) }}
@@ -64,20 +75,17 @@ export default async function EquipoPage({ params }: { params: Promise<{ locale:
       {/* Hero */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            El equipo que hace posible la transformación
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Liderazgo con experiencia en transformación digital, desarrollo de productos y expansión
-            de mercados B2B en Latinoamérica y Estados Unidos.
-          </p>
+          <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">{t.heroTitle}</h1>
+          <p className="mt-6 max-w-2xl text-lg text-text-70">{t.heroSubtitle}</p>
         </div>
       </section>
 
       {/* Team Grid */}
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* H2 real: sin él la página saltaba de H1 a los H3 de cada perfil. */}
+          <h2 className="text-3xl font-bold text-text-100">{t.gridTitle}</h2>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {membersToShow.map((member) => (
               <div key={member.name} className="glass glow-hover rounded-xl p-6">
                 <div className="flex items-start justify-between">
@@ -96,10 +104,7 @@ export default async function EquipoPage({ params }: { params: Promise<{ locale:
         </div>
       </section>
 
-      <CTABanner
-        title="¿Quieres conocer al equipo?"
-        description="Agenda una reunión y conversemos sobre cómo podemos ayudarte."
-      />
+      <CTABanner title={t.ctaTitle} description={t.ctaDescription} />
     </PageWrapper>
   );
 }

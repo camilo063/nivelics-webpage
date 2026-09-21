@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getCertificacionesPublic, pickLocale } from "@/lib/cms";
@@ -73,22 +72,11 @@ export default async function CertificacionesPage({
       })
     : null;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Nosotros", url: "/nosotros" },
-    { name: "Certificaciones", url: "/nosotros/certificaciones" },
-  ]);
-
   // Use DB data or fall back to hardcoded CERTIFICATIONS
   const useDbData = dbMapped && dbMapped.length > 0;
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-
       {/* Hero */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">

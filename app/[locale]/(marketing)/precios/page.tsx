@@ -3,7 +3,6 @@ import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { CTABanner } from "@/components/shared";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/lib/cms";
@@ -284,18 +283,10 @@ export default async function PreciosPage({ params }: { params: Promise<{ locale
   const services = isEn ? SERVICES_EN : SERVICES_ES;
   const faqs = isEn ? FAQ_EN : FAQ_ES;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: isEn ? "Home" : "Inicio", url: isEn ? "/en" : "/" },
-    { name: isEn ? "Pricing" : "Precios", url: isEn ? "/en/pricing" : "/precios" },
-  ]);
   const offerCatalog = getOfferCatalogSchema(isEn);
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalog) }}

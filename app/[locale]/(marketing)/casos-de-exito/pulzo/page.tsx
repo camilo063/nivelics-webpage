@@ -4,7 +4,6 @@ import { ArrowLeft } from "lucide-react";
 import { PageWrapper } from "@/components/layout";
 import { CTABanner, JsonLd, ServiceBadge } from "@/components/shared";
 import { Button } from "@/components/ui/button";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getCreativeWorkSchema } from "@/lib/schema/creative-work";
 import { getReviewSchema } from "@/lib/schema/review";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -30,10 +29,13 @@ export async function generateMetadata({
   const canonical = locale === "en" ? enUrl : esUrl;
   const ogImage = "https://www.nivelics.com/og/nivelics-home.jpg";
 
-  const title = caso?.seoTitle || "Caso de Éxito Pulzo";
+  const isEn = locale === "en";
+  const title = caso?.seoTitle || (isEn ? "Pulzo Success Story" : "Caso de Éxito Pulzo");
   const description =
     caso?.seoDescription ||
-    "Cómo Nivelics ha sido el partner tecnológico de Pulzo desde 2014, evolucionando su plataforma editorial a millones de visitas.";
+    (isEn
+      ? "How Nivelics has been Pulzo's technology partner since 2014, growing its editorial platform to millions of visits."
+      : "Cómo Nivelics ha sido el partner tecnológico de Pulzo desde 2014, evolucionando su plataforma editorial a millones de visitas.");
 
   return {
     title,
@@ -76,6 +78,7 @@ export default async function PulzoPage({ params }: { params: Promise<{ locale: 
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const [raw, uiLabels] = await Promise.all([getCasoExito("pulzo"), getAllUiLabels()]);
   const caso = raw ? mapCasoExito(raw as Record<string, unknown>, locale) : null;
 
@@ -83,21 +86,20 @@ export default async function PulzoPage({ params }: { params: Promise<{ locale: 
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
     : RESULTS;
 
-  const breadcrumb = getBreadcrumbSchema(locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Casos de Éxito", url: "/casos-de-exito" },
-    { name: caso?.clientName || "Pulzo", url: "/casos-de-exito/pulzo" },
-  ]);
-
-  const creativeWork = getCreativeWorkSchema([
-    {
-      name: caso?.clientName || "Pulzo",
-      description:
-        caso?.seoDescription ||
-        "Cómo Nivelics ha sido el partner tecnológico de Pulzo desde 2014, evolucionando su plataforma editorial a millones de visitas.",
-      url: "/casos-de-exito/pulzo",
-    },
-  ])[0];
+  const creativeWork = getCreativeWorkSchema(
+    [
+      {
+        name: caso?.clientName || "Pulzo",
+        description:
+          caso?.seoDescription ||
+          (isEn
+            ? "How Nivelics has been Pulzo's technology partner since 2014, growing its editorial platform to millions of visits."
+            : "Cómo Nivelics ha sido el partner tecnológico de Pulzo desde 2014, evolucionando su plataforma editorial a millones de visitas."),
+        url: "/casos-de-exito/pulzo",
+      },
+    ],
+    locale,
+  )[0];
 
   const review =
     caso?.testimonialQuote && caso.testimonialAuthor
@@ -113,10 +115,6 @@ export default async function PulzoPage({ params }: { params: Promise<{ locale: 
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <JsonLd data={creativeWork} />
       {review && <JsonLd data={review} />}
 

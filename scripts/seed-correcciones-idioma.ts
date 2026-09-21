@@ -3,7 +3,10 @@
  *
  * 1. El voseo «Escalá tu capacidad…» en la descripción ES de staff-augmentation (el sitio
  *    habla de «tú»).
- * 2. Escapes literales «\u00f3» guardados como texto en 4 filas de `servicios` (páginas de
+ * 2. Datos de contacto del pie (nav_config.footer): servía contacto@nivelics.com y el
+ *    WhatsApp 310 392 6621, mientras el JSON-LD y /contacto publican hola@nivelics.com y
+ *    311 214 6459. El dato oficial es el segundo (decisión del dueño, 2026-09-21).
+ * 3. Escapes literales «\u00f3» guardados como texto en 4 filas de `servicios` (páginas de
  *    cloud): se veían tal cual, «Infraestructura como c\u00f3digo». Se decodifican en todos los
  *    campos de texto y jsonb de la fila.
  *
@@ -18,7 +21,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { servicios } from "@/lib/db/schema/admin";
+import { navConfig, servicios } from "@/lib/db/schema/admin";
 
 const DRY_RUN = process.argv.includes("--dry-run");
 const FALLBACKS = process.argv.includes("--fallbacks");
@@ -100,6 +103,41 @@ async function fixEscapes(): Promise<void> {
   }
 }
 
+const FOOTER_CONTACT = {
+  contactEmail: "hola@nivelics.com",
+  contactWhatsappUrl: "https://wa.me/573112146459",
+};
+
+type Footer = Record<string, unknown>;
+
+/** Devuelve los campos que hay que corregir en el pie, o null si ya están bien. */
+function footerPatch(footer: Footer | null | undefined): Footer | null {
+  if (!footer) return null;
+  const patch: Footer = {};
+  for (const [k, v] of Object.entries(FOOTER_CONTACT)) {
+    if (footer[k] !== v) patch[k] = v;
+  }
+  return Object.keys(patch).length ? { ...footer, ...patch } : null;
+}
+
+async function fixFooterContact(): Promise<void> {
+  const [row] = await db!.select().from(navConfig).where(eq(navConfig.id, "main")).limit(1);
+  const patched = footerPatch(row?.footer as Footer | undefined);
+  if (!patched) {
+    console.log("• nav_config.footer: los datos de contacto ya estaban bien");
+    return;
+  }
+  if (DRY_RUN) {
+    console.log("• [dry-run] nav_config.footer: hola@nivelics.com + WhatsApp 311 214 6459");
+    return;
+  }
+  await db!
+    .update(navConfig)
+    .set({ footer: patched, updatedAt: new Date() })
+    .where(eq(navConfig.id, "main"));
+  console.log("✓ nav_config.footer: hola@nivelics.com + WhatsApp 311 214 6459");
+}
+
 async function main(): Promise<void> {
   if (FALLBACKS) {
     applyToFallbacks();
@@ -129,6 +167,7 @@ async function main(): Promise<void> {
     console.log(`✓ ${fix.slug}.${fix.field}: «${fix.from}» → «${fix.to}»`);
   }
   await fixEscapes();
+  await fixFooterContact();
   process.exit(0);
 }
 

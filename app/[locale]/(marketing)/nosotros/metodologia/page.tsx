@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { GeoIconBox } from "@/lib/icons/geometric";
 import { CTABanner } from "@/components/shared";
-import { getBreadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { setRequestLocale } from "next-intl/server";
 
@@ -19,9 +18,10 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: isEn ? "en" : "es",
     href: "/nosotros/metodologia",
+    // La plantilla del layout añade « | Nivelics»: el título completo debe quedar bajo 65.
     title: isEn
-      ? "Agile Methodology | Scrum Framework for Digital Products"
-      : "Metodología Ágil | Framework Scrum para Productos Digitales",
+      ? "Agile Scrum Methodology for Digital Products"
+      : "Metodología Ágil Scrum para Productos Digitales",
     description: isEn
       ? "The Nivelics Agile Framework, based on Scrum. A Delivery Manager on every project, 2-week sprints, continuous delivery."
       : "Framework Ágil Nivelics basado en Scrum. Delivery Manager en cada proyecto, sprints de 2 semanas, entrega continua.",
@@ -79,11 +79,6 @@ const FALLBACK_EVENTS = [
 export default async function MetodologiaPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
-  const breadcrumb = getBreadcrumbSchema(__locale, [
-    { name: "Inicio", url: "/" },
-    { name: "Nosotros", url: "/nosotros" },
-    { name: "Metodología", url: "/nosotros/metodologia" },
-  ]);
 
   // HowTo: las ceremonias del sprint son pasos secuenciales reales que la página
   // ya muestra en la sección "Eventos". Derivado de FALLBACK_EVENTS para que el
@@ -104,10 +99,6 @@ export default async function MetodologiaPage({ params }: { params: Promise<{ lo
 
   return (
     <PageWrapper>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}

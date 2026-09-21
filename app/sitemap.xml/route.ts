@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAllSiteUrls } from "@/lib/seo/sitemap-urls";
 
 /**
  * Sitemap index — referencia los sitemaps por locale generados por app/sitemap.ts
@@ -9,8 +10,15 @@ export const revalidate = 3600;
 
 const BASE = "https://www.nivelics.com";
 
-export function GET() {
-  const lastmod = new Date().toISOString();
+export async function GET() {
+  // Antes se emitía `new Date()` en cada petición: el índice decía «cambió ahora mismo»
+  // siempre, así que la señal no servía. Ahora es la fecha real más reciente del sitio.
+  const urls = await getAllSiteUrls();
+  const latest = urls.reduce<Date | null>((max, u) => {
+    const d = u.lastModified ? new Date(u.lastModified) : null;
+    return d && (!max || d > max) ? d : max;
+  }, null);
+  const lastmod = (latest ?? new Date()).toISOString();
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
