@@ -29,9 +29,20 @@ export function SiblingServicesNav({ parentService, siblings }: SiblingServicesN
 
   const parentName = isEn && parentService.nameEn ? parentService.nameEn : parentService.name;
   const accent = parentService.accentColor;
-  const hubHref = isEn
-    ? `/en/services/${pathname.split("/")[3] ? pathname.split("/")[3] : ""}`
-    : `/servicios/${pathname.split("/")[2] ?? ""}`;
+  // El hub sale de la URL del primer hermano, no del pathname. Antes se partía el
+  // pathname por posición y en SSR llega con el prefijo interno de next-intl
+  // (/es/servicios/... y /en/servicios/...), así que la pestaña del hub apuntaba a
+  // /servicios/servicios y a /en/services/inteligencia-artificial: 404 en ambos idiomas.
+  const hubFrom = (url: string | undefined, depth: number) =>
+    url
+      ? url
+          .split("/")
+          .slice(0, depth + 1)
+          .join("/")
+      : "";
+  const first = siblings[0];
+  const hubEs = hubFrom(first?.url, 2);
+  const hubHref = isEn ? (first?.urlEn ? hubFrom(first.urlEn, 3) : `/en${hubEs}`) : hubEs;
 
   return (
     <nav
