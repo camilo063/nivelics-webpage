@@ -15,7 +15,7 @@ import {
   siteConfig,
   pagesGeneral,
 } from "@/lib/db/schema/admin";
-import { eq, and, isNull, desc, asc } from "drizzle-orm";
+import { eq, and, isNull, desc, asc, sql } from "drizzle-orm";
 import {
   SITE_CONFIG_FB,
   NAV_CONFIG_FB,
@@ -30,6 +30,13 @@ import {
   CERTIFICACIONES_FB,
   PAGES_GENERAL_FB,
 } from "./fallbacks-data";
+
+// Orden de los listados del blog. En Postgres, `ORDER BY published_at DESC` pone los NULL
+// PRIMERO, y 46 de los 52 posts publicados no tienen published_at (se publicaron antes de
+// que existiera la columna): los artículos con fecha real quedaban al final del listado y
+// el «destacado» era uno sin fecha. Se ordena por la fecha efectiva, igual que el
+// ordenamiento del modo sin BD (byPublishedDesc).
+const byEffectiveDate = desc(sql`coalesce(${blogPosts.publishedAt}, ${blogPosts.createdAt})`);
 
 function byPublishedDesc<T extends { publishedAt: Date | null; createdAt?: Date | null }>(
   a: T,
@@ -314,7 +321,7 @@ export const getAllBlogPosts = cache(async () => {
     .select()
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
-    .orderBy(desc(blogPosts.publishedAt));
+    .orderBy(byEffectiveDate);
 });
 
 // Lighter variant for blog listings / category pages / related-post rails:
@@ -326,7 +333,7 @@ export const getAllBlogPostsLight = cache(async () => {
     .select(blogListingColumns)
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
-    .orderBy(desc(blogPosts.publishedAt));
+    .orderBy(byEffectiveDate);
   return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
 });
 
@@ -383,7 +390,7 @@ export const getFeaturedBlogPost = cache(async () => {
     .select(blogListingColumns)
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
-    .orderBy(desc(blogPosts.publishedAt))
+    .orderBy(byEffectiveDate)
     .limit(1);
   const r = rows[0];
   return r ? { ...r, contentEs: "", contentEn: "" } : null;
@@ -402,7 +409,7 @@ export const getBlogPostsByCategory = cache(async (categoryId: string) => {
         eq(blogPosts.status, "published"),
       ),
     )
-    .orderBy(desc(blogPosts.publishedAt));
+    .orderBy(byEffectiveDate);
   return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
 });
 
@@ -414,7 +421,7 @@ export const getPopularBlogPosts = cache(async (limit = 5) => {
     .select(blogListingColumns)
     .from(blogPosts)
     .where(and(isNull(blogPosts.deletedAt), eq(blogPosts.status, "published")))
-    .orderBy(desc(blogPosts.publishedAt))
+    .orderBy(byEffectiveDate)
     .limit(limit);
   return rows.map((r) => ({ ...r, contentEs: "", contentEn: "" }));
 });

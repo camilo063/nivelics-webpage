@@ -13,75 +13,75 @@
             "items": [
               {
                 "url": "/servicios/inteligencia-artificial/agentes-ia",
-                "labelEs": "Ingeniería de agentes",
                 "labelEn": "Agent Engineering",
-                "descriptionEs": "Agentes a la medida que llegan a producción",
-                "descriptionEn": "Custom agents that reach production",
+                "labelEs": "Ingeniería de agentes",
+                "ariaLabelEn": "Agent Engineering — custom AI agents with verification, guardrails and traceability",
                 "ariaLabelEs": "Ingeniería de agentes — agentes de IA a la medida con verificación, guardrails y trazabilidad",
-                "ariaLabelEn": "Agent Engineering — custom AI agents with verification, guardrails and traceability"
+                "descriptionEn": "Custom agents that reach production",
+                "descriptionEs": "Agentes a la medida que llegan a producción"
               },
               {
                 "url": "/servicios/inteligencia-artificial/integracion-sistemas-mcp",
-                "labelEs": "Integración y MCP",
                 "labelEn": "Integration & MCP",
-                "descriptionEs": "Conecta tus sistemas a tus agentes",
-                "descriptionEn": "Connect your systems to your agents",
+                "labelEs": "Integración y MCP",
+                "ariaLabelEn": "Systems Integration & MCP — MCP servers and adapters for legacy systems",
                 "ariaLabelEs": "Integración de sistemas y MCP — servidores MCP y adaptadores para sistemas legados",
-                "ariaLabelEn": "Systems Integration & MCP — MCP servers and adapters for legacy systems"
+                "descriptionEn": "Connect your systems to your agents",
+                "descriptionEs": "Conecta tus sistemas a tus agentes"
               },
               {
                 "url": "/servicios/inteligencia-artificial/ia-privada-on-premise",
-                "labelEs": "IA privada",
                 "labelEn": "Private AI",
-                "descriptionEs": "Modelos en tu infraestructura o tu nube",
-                "descriptionEn": "Models on your infrastructure or cloud",
+                "labelEs": "IA privada",
+                "ariaLabelEn": "Private AI — agents with on-premises models or in your own cloud account",
                 "ariaLabelEs": "IA privada — agentes con modelos on-premise o en tu propia cuenta de nube",
-                "ariaLabelEn": "Private AI — agents with on-premises models or in your own cloud account"
+                "descriptionEn": "Models on your infrastructure or cloud",
+                "descriptionEs": "Modelos en tu infraestructura o tu nube"
               },
               {
                 "url": "/servicios/inteligencia-artificial/agentops-gobierno-agentes",
-                "labelEs": "AgentOps",
                 "labelEn": "AgentOps",
-                "descriptionEs": "Operación y gobierno de agentes",
-                "descriptionEn": "Agent operations and governance",
+                "labelEs": "AgentOps",
+                "ariaLabelEn": "AgentOps — observability, evals, drift and auditing for agents in production",
                 "ariaLabelEs": "AgentOps — observabilidad, evals, drift y auditoría de agentes en producción",
-                "ariaLabelEn": "AgentOps — observability, evals, drift and auditing for agents in production"
+                "descriptionEn": "Agent operations and governance",
+                "descriptionEs": "Operación y gobierno de agentes"
               },
               {
                 "url": "/servicios/inteligencia-artificial/agentes-comerciales",
-                "labelEs": "Agentes Comerciales",
                 "labelEn": "Sales Agents",
-                "descriptionEs": "Automatiza tu proceso de ventas",
-                "descriptionEn": "Automate your sales pipeline",
+                "labelEs": "Agentes Comerciales",
+                "ariaLabelEn": "Sales Agents — AI that qualifies leads and scales sales opportunities",
                 "ariaLabelEs": "Agentes Comerciales — IA que califica leads y escala oportunidades de venta",
-                "ariaLabelEn": "Sales Agents — AI that qualifies leads and scales sales opportunities"
+                "descriptionEn": "Automate your sales pipeline",
+                "descriptionEs": "Automatiza tu proceso de ventas"
               },
               {
                 "url": "/servicios/inteligencia-artificial/automatizacion-procesos",
-                "labelEs": "Automatización de Procesos",
                 "labelEn": "Process Automation",
-                "descriptionEs": "Elimina trabajo manual repetitivo",
-                "descriptionEn": "Eliminate repetitive manual work",
+                "labelEs": "Automatización de Procesos",
+                "ariaLabelEn": "Process Automation — RPA and AI to eliminate manual work in finance, HR and logistics",
                 "ariaLabelEs": "Automatización de Procesos — RPA e IA para eliminar trabajo manual en finanzas, RRHH y logística",
-                "ariaLabelEn": "Process Automation — RPA and AI to eliminate manual work in finance, HR and logistics"
+                "descriptionEn": "Eliminate repetitive manual work",
+                "descriptionEs": "Elimina trabajo manual repetitivo"
               },
               {
                 "url": "/servicios/inteligencia-artificial/gestion-contenido",
-                "labelEs": "Gestión de Contenido",
                 "labelEn": "Content Management",
-                "descriptionEs": "SEO y contenido a escala con IA",
-                "descriptionEn": "SEO and content at scale with AI",
+                "labelEs": "Gestión de Contenido",
+                "ariaLabelEn": "Content Management — SEO content generation and optimization at scale with AI",
                 "ariaLabelEs": "Gestión de Contenido — generación y optimización de contenido SEO a escala con IA",
-                "ariaLabelEn": "Content Management — SEO content generation and optimization at scale with AI"
+                "descriptionEn": "SEO and content at scale with AI",
+                "descriptionEs": "SEO y contenido a escala con IA"
               },
               {
                 "url": "/servicios/inteligencia-artificial/marketing-crm",
-                "labelEs": "Marketing y CRM",
                 "labelEn": "Marketing & CRM",
-                "descriptionEs": "Prospectos calificados automáticamente",
-                "descriptionEn": "Qualified leads on autopilot",
+                "labelEs": "Marketing y CRM",
+                "ariaLabelEn": "Marketing & CRM — smart segmentation and campaign personalization integrated with your CRM",
                 "ariaLabelEs": "Marketing y CRM — segmentación inteligente y personalización de campañas integrada con tu CRM",
-                "ariaLabelEn": "Marketing & CRM — smart segmentation and campaign personalization integrated with your CRM"
+                "descriptionEn": "Qualified leads on autopilot",
+                "descriptionEs": "Prospectos calificados automáticamente"
               }
             ],
             "titleEn": "Artificial Intelligence",
@@ -654,6 +654,6 @@
       "contactWhatsappLabelEn": "WhatsApp",
       "contactWhatsappLabelEs": "WhatsApp"
     },
-    "updatedAt": "2026-09-15T16:51:46.386Z"
+    "updatedAt": "2026-09-21T15:15:09.867Z"
   }
 ]
