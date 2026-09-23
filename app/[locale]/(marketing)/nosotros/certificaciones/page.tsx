@@ -26,8 +26,21 @@ export async function generateMetadata({
   });
 }
 
-// LEGACY FALLBACK
-const CERTIFICATIONS = [
+const LABELS = {
+  es: {
+    h1: "Reconocimientos y Certificaciones",
+    intro:
+      "Nuestro trabajo y cultura han sido reconocidos por organizaciones líderes. Estos respaldos validan nuestro compromiso con la excelencia, el talento y la expansión internacional.",
+  },
+  en: {
+    h1: "Awards and Certifications",
+    intro:
+      "Our work and culture have been recognized by leading organizations. These endorsements validate our commitment to excellence, talent and international growth.",
+  },
+} as const;
+
+// LEGACY FALLBACK (ES)
+const CERTIFICATIONS_ES = [
   {
     icon: "award",
     title: "Great Place to Work Colombia 2022",
@@ -45,6 +58,28 @@ const CERTIFICATIONS = [
     title: "Nivelics LLC — Presencia USA",
     description:
       "A través de Nivelics LLC, nuestra entidad en Estados Unidos con sede en Miami, Florida, atendemos clientes en el mercado norteamericano. Esta presencia nos permite operar como nearshore partner para empresas de USA y Canadá, combinando la calidad del talento latinoamericano con la cercanía geográfica y cultural.",
+  },
+];
+
+// LEGACY FALLBACK (EN) — espejo exacto de CERTIFICATIONS_ES.
+const CERTIFICATIONS_EN = [
+  {
+    icon: "award",
+    title: "Great Place to Work Colombia 2022",
+    description:
+      "Nivelics was certified as a Great Place to Work in Colombia in 2022, recognizing an organizational culture built on trust, respect and the professional growth of our team. The certification reflects our commitment to creating a workplace where tech talent can grow and do its best work.",
+  },
+  {
+    icon: "building2",
+    title: "ANDI Member",
+    description:
+      "We are active members of ANDI (Asociación Nacional de Empresarios de Colombia), the country's most important business association. This membership connects us with the Colombian business ecosystem and lets us take part in national digital transformation initiatives.",
+  },
+  {
+    icon: "globe",
+    title: "Nivelics LLC — US Presence",
+    description:
+      "Through Nivelics LLC, our United States entity based in Miami, Florida, we serve clients in the North American market. This presence lets us operate as a nearshore partner for companies in the USA and Canada, combining the quality of Latin American talent with geographic and cultural proximity.",
   },
 ];
 
@@ -72,7 +107,11 @@ export default async function CertificacionesPage({
       })
     : null;
 
-  // Use DB data or fall back to hardcoded CERTIFICATIONS
+  const isEn = locale === "en";
+  const t = LABELS[isEn ? "en" : "es"];
+  const fallbackCerts = isEn ? CERTIFICATIONS_EN : CERTIFICATIONS_ES;
+
+  // Use DB data or fall back to the hardcoded list of the served language
   const useDbData = dbMapped && dbMapped.length > 0;
 
   return (
@@ -80,14 +119,8 @@ export default async function CertificacionesPage({
       {/* Hero */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Reconocimientos y Certificaciones
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Nuestro trabajo y cultura han sido reconocidos por organizaciones líderes. Estos
-            respaldos validan nuestro compromiso con la excelencia, el talento y la expansión
-            internacional.
-          </p>
+          <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">{t.h1}</h1>
+          <p className="mt-6 max-w-2xl text-lg text-text-70">{t.intro}</p>
         </div>
       </section>
 
@@ -109,7 +142,7 @@ export default async function CertificacionesPage({
                     </div>
                   </div>
                 ))
-              : CERTIFICATIONS.map((cert) => {
+              : fallbackCerts.map((cert) => {
                   return (
                     <div key={cert.title} className="glass glow-hover rounded-xl p-8 md:p-10">
                       <div className="flex items-start gap-6">

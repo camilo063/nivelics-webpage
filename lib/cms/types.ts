@@ -14,7 +14,9 @@ export interface CMSProcessStep {
   titleEn: string;
   descEs: string;
   descEn: string;
+  /** Duración en español; `durationEn` la traduce en /en (si falta, cae a esta). */
   duration: string;
+  durationEn?: string;
 }
 
 export interface CMSMetric {
@@ -77,6 +79,8 @@ export interface CMSSector {
 
 export interface CMSIndustriaMetric {
   value: string;
+  /** Valor en inglés. Opcional: solo se llena cuando el valor lleva palabras («5 días»). */
+  valueEn?: string;
   labelEs: string;
   labelEn: string;
 }

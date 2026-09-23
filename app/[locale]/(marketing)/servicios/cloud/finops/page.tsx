@@ -6,7 +6,7 @@ import { CTABanner } from "@/components/shared";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroCalculator } from "@/components/sections/hero-calculator";
-import { MetricsBar } from "@/components/sections/metrics-bar";
+import { DesignPrinciples } from "@/components/sections/agentes/agent-sections";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import {
   CmsServicioBenefits,
@@ -40,13 +40,13 @@ export async function generateMetadata({
     title:
       cms?.seoTitle ||
       (isEn
-        ? "FinOps | Cloud Cost Optimization up to 40%"
+        ? "FinOps: cloud cost optimization and governance"
         : "FinOps Cloud Colombia | Reduce costos AWS y GCP"),
     description:
       cms?.seoDescription ||
       (isEn
-        ? "Real-time cloud financial governance. Automated anomaly alerts and up to 40% savings in 90 days. AWS, GCP and Azure."
-        : "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 40% sin perder rendimiento."),
+        ? "Real-time cloud financial governance: cost visibility per team and service, automated anomaly alerts and an initial audit that quantifies the savings."
+        : "Gobernanza y optimización financiera de la nube: visibilidad por equipo y servicio, alertas de anomalías y una auditoría inicial que cuantifica el ahorro."),
   });
 }
 
@@ -135,8 +135,8 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
     locale,
     name: isEn ? "FinOps — Cloud Financial Optimization" : "FinOps — Optimización Financiera Cloud",
     description: isEn
-      ? "Cloud financial governance and optimization. Typical 30-40% savings in cloud spend."
-      : "Optimización y gobernanza financiera de la nube. Ahorro típico 30-40% en gasto cloud.",
+      ? "Cloud financial governance and optimization, with savings quantified in the initial audit."
+      : "Gobernanza y optimización financiera de la nube, con el ahorro cuantificado en la auditoría inicial.",
     url: "/servicios/cloud/finops",
     serviceType: "FinOps Consulting",
   });
@@ -200,9 +200,9 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
       />
 
       {/*
-        H1 fijo a propósito: `servicios.title_*` trae «hasta un 35%» / «by up to 35%», una cifra
+        H1 fijo a propósito: `servicios.title_*` traía «hasta un 35%» / «by up to 35%», una cifra
         sin respaldo público que además chocaba con el acento y se indexaba como «Optimiza tu
-        inversión cloud hasta un 35% hasta un 40%». El H1 queda cualitativo; las cifras siguen
+        inversión cloud hasta un 35% hasta un 40%». El H1 queda cualitativo, igual que el resto
         donde sí están sustentadas (bullets y MetricsBar).
       */}
       <HeroSplit
@@ -221,12 +221,12 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
             ? [
                 "Real-time spend dashboards",
                 "Automated anomaly alerts",
-                "Typical 30-40% savings in 90 days",
+                "Savings quantified in the initial audit",
               ]
             : [
                 "Dashboards de gasto en tiempo real",
                 "Alertas automáticas de anomalías",
-                "Ahorro típico del 30-40% en 90 días",
+                "Ahorro cuantificado en la auditoría inicial",
               ]
         }
         ctaPrimary={ctaPrimary}
@@ -235,36 +235,22 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
         rightPanel={<HeroCalculator type="cloud" accentColor="#3B82F6" />}
       />
 
-      <MetricsBar
-        metrics={
-          cms?.metrics?.length
-            ? cms.metrics.map((m) => ({
-                value: m.value,
-                label: m.label,
-                sublabel: "",
-                unit: m.unit,
-              }))
-            : isEn
-              ? [
-                  { value: "40%", label: "Bill reduction", sublabel: "Average in 90 days" },
-                  { value: "5x", label: "Project ROI", sublabel: "Return on investment" },
-                  { value: "2", label: "Weeks to first savings", sublabel: "Immediate quick wins" },
-                  { value: "30%", label: "Orphaned resources", sublabel: "Eliminated in audit" },
-                ]
-              : [
-                  { value: "40%", label: "Reducción de factura", sublabel: "Promedio en 90 días" },
-                  { value: "5x", label: "ROI del proyecto", sublabel: "Retorno sobre inversión" },
-                  {
-                    value: "2",
-                    label: "Semanas a primer ahorro",
-                    sublabel: "Quick wins inmediatos",
-                  },
-                  {
-                    value: "30%",
-                    label: "Recursos huérfanos",
-                    sublabel: "Eliminados en auditoría",
-                  },
-                ]
+      <DesignPrinciples
+        locale={locale}
+        principles={
+          isEn
+            ? [
+                "Cost visibility per team, service and environment",
+                "Anomaly alerts before the bill arrives",
+                "Savings quantified in the initial audit, not promised up front",
+                "Handoff to your team with the policies documented",
+              ]
+            : [
+                "Visibilidad de costos por equipo, servicio y ambiente",
+                "Alertas de anomalías antes de que llegue la factura",
+                "Ahorro cuantificado en la auditoría inicial, no prometido de antemano",
+                "Handoff a tu equipo con las políticas documentadas",
+              ]
         }
       />
 
@@ -337,26 +323,25 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
           </div>
 
           <h2 className="mt-16 text-3xl font-bold text-text-100">
-            {isEn ? "Typical Results" : "Resultados típicos"}
+            {isEn ? "What the engagement covers" : "Qué incluye el servicio"}
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {(isEn
               ? [
-                  { value: "30-40%", label: "Cloud bill reduction" },
-                  { value: "2-3 wk", label: "Time to first savings" },
-                  { value: "5x-10x", label: "Project ROI" },
-                  { value: "15-30%", label: "Orphaned resources eliminated" },
+                  "Audit of current spend, account by account",
+                  "Quick wins applied in the first weeks",
+                  "Dashboards by team and project",
+                  "Policies and alerts left running",
                 ]
               : [
-                  { value: "30-40%", label: "Reducción de factura cloud" },
-                  { value: "2-3 sem", label: "Tiempo a primeros ahorros" },
-                  { value: "5x-10x", label: "ROI del proyecto" },
-                  { value: "15-30%", label: "Recursos huérfanos eliminados" },
+                  "Auditoría del gasto actual, cuenta por cuenta",
+                  "Quick wins aplicados en las primeras semanas",
+                  "Dashboards por equipo y proyecto",
+                  "Políticas y alertas funcionando al cierre",
                 ]
-            ).map((r) => (
-              <div key={r.label} className="glass rounded-xl p-6 text-center">
-                <div className="font-mono text-3xl font-bold text-primary">{r.value}</div>
-                <p className="mt-2 text-sm text-text-70">{r.label}</p>
+            ).map((item) => (
+              <div key={item} className="glass rounded-xl p-6">
+                <p className="text-sm leading-relaxed text-text-70">{item}</p>
               </div>
             ))}
           </div>
@@ -389,8 +374,8 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
                 },
                 {
                   criterion: "Cost reduction",
-                  alternative: "0% — spend keeps growing",
-                  nivelics: "30–40% in the first 90 days",
+                  alternative: "None — spend keeps growing",
+                  nivelics: "Quantified in the audit and tracked month to month",
                 },
                 {
                   criterion: "Orphaned architectures",
@@ -431,8 +416,8 @@ export default async function FinOpsPage({ params }: { params: Promise<{ locale:
                 },
                 {
                   criterion: "Reducción de costos",
-                  alternative: "0% — el gasto sigue creciendo",
-                  nivelics: "30–40% en los primeros 90 días",
+                  alternative: "Ninguna — el gasto sigue creciendo",
+                  nivelics: "Cuantificado en la auditoría y medido mes a mes",
                 },
                 {
                   criterion: "Arquitecturas huérfanas",

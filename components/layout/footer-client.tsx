@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants";
 import { pickLocale } from "@/lib/cms/bilingual";
 import { uiLabel, type UiLabelMap } from "@/lib/cms/ui-labels-helper";
 import type { FooterData } from "@/lib/admin/actions/navegacion.actions";
+import { CONTACTO_FALLBACK, type ContactoSitio } from "@/lib/cms/contacto-shared";
 import type { Locale } from "@/lib/cms";
 
 interface FooterClientProps {
@@ -16,6 +17,8 @@ interface FooterClientProps {
   logoHeight?: number | null;
   footer?: FooterData;
   uiLabels?: UiLabelMap;
+  /** Datos de contacto resueltos desde site_config por `footer.tsx` (server). */
+  contacto?: ContactoSitio;
 }
 
 function SocialIcon({ href, label, svg }: { href: string; label: string; svg: React.ReactNode }) {
@@ -40,6 +43,7 @@ export function FooterClient({
   logoHeight = null,
   footer,
   uiLabels = {},
+  contacto = CONTACTO_FALLBACK,
 }: FooterClientProps) {
   const rawLocale = useLocale();
   const locale: Locale = rawLocale === "en" ? "en" : "es";
@@ -67,15 +71,30 @@ export function FooterClient({
     ? pickLocale(locale, footer.contactSupportLabelEs, footer.contactSupportLabelEn)
     : uiLabel(uiLabels, "footer.default_support", locale);
 
-  const contactEmail = footer?.contactEmail || SITE.email;
+  // PRECEDENCIA de los datos de contacto y de los perfiles sociales:
+  //   1. site_config  (Admin → Configuración) — la fuente única y transversal
+  //   2. nav_config.footer  (contactEmail / contactWhatsappUrl / socialLinkedin /
+  //      socialInstagram) — respaldo histórico: duplicaban el dato y llegaron a
+  //      contradecirlo, así que ya no mandan, solo cubren el caso de que
+  //      site_config esté vacío
+  //   3. `SITE` en lib/constants — si ni la BD ni el fallback traen nada
+  // `contacto.configured` es lo que site_config trae de verdad (null si está
+  // vacío); `contacto.<campo>` ya lleva el respaldo de constants aplicado.
+  const contactEmail = contacto.configured.email || footer?.contactEmail || contacto.email;
   const contactWhatsappUrl =
-    footer?.contactWhatsappUrl || `https://wa.me/${SITE.whatsapp.replace("+", "")}`;
+    contacto.configured.whatsappUrl || footer?.contactWhatsappUrl || contacto.whatsappUrl;
   const contactSupportUrl = footer?.contactSupportUrl || "/soporte";
 
   const columns = footer?.columns ?? [];
   const legalLinks = footer?.legalLinks ?? [];
-  const socialLinkedin = footer?.socialLinkedin || "https://www.linkedin.com/company/nivelics";
-  const socialInstagram = footer?.socialInstagram || "https://www.instagram.com/nivelics";
+  const socialLinkedin =
+    contacto.configured.linkedin || footer?.socialLinkedin || contacto.linkedin || SITE.linkedin;
+  const socialInstagram =
+    contacto.configured.instagram ||
+    footer?.socialInstagram ||
+    contacto.instagram ||
+    SITE.instagram;
+  const locations = [contacto.addressBogota, contacto.addressMiami].filter(Boolean);
 
   return (
     <footer className="border-t border-border bg-bg-surface">
@@ -112,7 +131,7 @@ export function FooterClient({
               {brandTagline}
             </p>
             <div className="flex flex-col gap-1 text-sm text-text-40">
-              {SITE.locations.map((loc) => (
+              {locations.map((loc) => (
                 <span key={loc}>{loc}</span>
               ))}
             </div>

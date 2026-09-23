@@ -7,6 +7,7 @@ import { BlocksRenderer, type LandingBlock } from "@/components/lp/BlockRenderer
 import { LpWhatsApp } from "@/components/lp/LpWhatsApp";
 import { DEFAULT_OG_IMAGE, mirroredUrls } from "@/lib/seo/page-meta";
 import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { LANDING_PAGES_FB } from "@/lib/cms/fallbacks-data";
 import { setRequestLocale } from "next-intl/server";
 
 export const revalidate = 86400;
@@ -34,8 +35,10 @@ function stripBrandSuffix(value: string): string {
   return value.replace(BRAND_SUFFIX, "").trim() || value.trim();
 }
 
+// Sin BD, estas rutas devolvían 404 mientras el resto del sitio seguía en pie: el
+// respaldo `LANDING_PAGES_FB` existía pero nadie lo consumía.
 async function getLanding(slug: string) {
-  if (!db) return null;
+  if (!db) return LANDING_PAGES_FB.find((l) => l.slug === slug && l.status !== "archived") || null;
   const result = await db
     .select()
     .from(landingPages)
@@ -45,7 +48,10 @@ async function getLanding(slug: string) {
 }
 
 export async function generateStaticParams() {
-  if (!db) return [];
+  if (!db)
+    return LANDING_PAGES_FB.filter((l) => l.status === "published").map((l) => ({
+      slug: l.slug,
+    }));
   try {
     const landings = await db
       .select({ slug: landingPages.slug })

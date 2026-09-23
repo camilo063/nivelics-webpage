@@ -148,7 +148,9 @@ export const BLOCK_TYPES = {
     icon: "minus",
     defaultData: {
       mostrar_whatsapp: true,
-      whatsapp_numero: "+573103926621",
+      // El número oficial vive en `SITE.whatsapp` (lib/constants). Aquí va literal
+      // porque `as const` no admite una referencia, pero los dos deben coincidir.
+      whatsapp_numero: "+573112146459",
       whatsapp_mensaje: "",
     },
   },

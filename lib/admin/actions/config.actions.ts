@@ -32,6 +32,7 @@ export async function updateSiteConfig(input: {
   addressBogota?: string;
   addressMiami?: string;
   linkedinUrl?: string;
+  instagramUrl?: string;
   googleAnalyticsId?: string;
   googleTagManagerId?: string;
 }) {
@@ -64,7 +65,11 @@ export async function updateSiteConfig(input: {
   revalidatePath("/llms.txt");
   revalidatePath("/llms-full.txt");
   revalidatePath("/robots.txt");
-  // Revalidate layouts that consume logo / global site config
-  revalidatePath("/", "layout");
-  revalidatePath("/en", "layout");
+  // Las páginas que imprimen el correo / WhatsApp / redes en el cuerpo o en el
+  // JSON-LD tienen `revalidate = 86400`: sin esto, cambiar un dato de contacto
+  // en el admin tardaría hasta un día en verse. `revalidatePublicPages` traduce
+  // cada ruta a sus dos idiomas (/contacto y /en/contact), refresca el layout
+  // raíz —de donde salen el pie y el nav— y avisa a IndexNow.
+  // (El import ya estaba en el archivo pero nunca se llamaba.)
+  await revalidatePublicPages(["/", "/contacto", "/soporte", "/privacidad", "/nosotros"]);
 }

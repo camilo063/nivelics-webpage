@@ -1,4 +1,6 @@
 import { getAllProductos, getAllProductosLlms, type ProductoLlmsRow } from "@/lib/cms/productos";
+import { getContactoSitio } from "@/lib/cms/contacto";
+import type { ContactoSitio } from "@/lib/cms/contacto-shared";
 import { getAllBlogPostsLight } from "@/lib/cms/queries";
 import type { Producto } from "@/lib/db/schema/admin";
 
@@ -63,18 +65,25 @@ function blogIndexLines(posts: BlogIndexEntry[]): string {
 }
 
 export async function buildLlmsTxt(primary: "es" | "en"): Promise<string> {
-  const [productos, recentPosts] = await Promise.all([
+  // El correo y el WhatsApp del bloque de contacto salen de site_config
+  // (Admin → Configuración), igual que en las páginas y en el JSON-LD.
+  const [productos, recentPosts, contacto] = await Promise.all([
     safeGetProductosLlms(),
     safeGetRecentPosts(primary, 10),
+    getContactoSitio(),
   ]);
 
   if (primary === "en") {
-    return buildEn(productos, recentPosts);
+    return buildEn(productos, recentPosts, contacto);
   }
-  return buildEs(productos, recentPosts);
+  return buildEs(productos, recentPosts, contacto);
 }
 
-function buildEs(productos: ProductoLlmsRow[], recentPosts: BlogIndexEntry[]): string {
+function buildEs(
+  productos: ProductoLlmsRow[],
+  recentPosts: BlogIndexEntry[],
+  contacto: ContactoSitio,
+): string {
   const today = new Date().toISOString().split("T")[0];
   const productosLines = productos.length
     ? productos
@@ -99,10 +108,10 @@ Nivelics diseña, construye y opera software para empresas B2B que necesitan res
 
 ## Quick Facts
 
-- Fundación: 2012 (13+ años de experiencia)
+- Fundación: 2012 (14+ años de experiencia)
 - Sedes: Bogotá (Colombia) y Miami (FL, USA)
 - Operación: proyectos activos en 7+ países (CO, US, MX, SV, PA, EC, PE, AR)
-- Equipo: 50+ ingenieros especializados · 200+ proyectos entregados · 98% retención de clientes
+- Catálogo: 4 líneas de servicio · 23 servicios especializados publicados
 - Líneas de servicio: IA aplicada, Cloud & FinOps, Staff Augmentation, Desarrollo Digital
 - Productos SaaS propios: PAYWL, Niveleads, Hirely
 - Reconocimiento: Great Place to Work Colombia 2022
@@ -128,7 +137,7 @@ ${productosLines}
 ### Productos SaaS (precio fijo, suscripción mensual)
 - **PAYWL**: desde $450 USD/mes (plan Business) hasta $1,900 USD/mes (Enterprise). Piloto gratuito de 90 días para medios elegibles. URL: /productos/paywl
 - **Niveleads**: desde $99 USD/mes (plan Starter, hasta 500 leads) hasta $249 USD/mes (plan Growth, leads ilimitados). Plan Enterprise a medida. URL: /productos/niveleads
-- **Hirely**: acceso anticipado gratuito (demo). Pricing por definir en lanzamiento oficial. URL: /productos/hirely
+- **Hirely**: demo gratis y acceso anticipado; producto en fase de lanzamiento. URL: /productos/hirely
 
 ### Servicios (pricing a medida, basado en scope y equipo)
 - **Staff Augmentation**: tarifas por perfil/hora según seniority y especialidad. Perfiles desde $25 USD/h (Junior) hasta $85 USD/h (Principal/Architect). Sin comisión de éxito.
@@ -185,8 +194,8 @@ ${blogIndexLines(recentPosts)}
 
 - [Contactar](${BASE}/contacto)
 - [Soporte](${BASE}/soporte)
-- Email: hola@nivelics.com
-- WhatsApp: +57 311 214 6459
+- Email: ${contacto.email}
+- WhatsApp: ${contacto.whatsappDisplay}
 - Sedes: Bogotá (Colombia) · Miami (USA)
 
 ## Alternate language
@@ -202,7 +211,11 @@ ${blogIndexLines(recentPosts)}
 `;
 }
 
-function buildEn(productos: ProductoLlmsRow[], recentPosts: BlogIndexEntry[]): string {
+function buildEn(
+  productos: ProductoLlmsRow[],
+  recentPosts: BlogIndexEntry[],
+  contacto: ContactoSitio,
+): string {
   const today = new Date().toISOString().split("T")[0];
   const productosLines = productos.length
     ? productos
@@ -227,10 +240,10 @@ Nivelics designs, builds and operates software for B2B companies that need measu
 
 ## Quick Facts
 
-- Founded: 2012 (13+ years of experience)
+- Founded: 2012 (14+ years of experience)
 - Offices: Bogotá (Colombia) and Miami (FL, USA)
 - Operations: active projects in 7+ countries (CO, US, MX, SV, PA, EC, PE, AR)
-- Team: 50+ specialized engineers · 200+ delivered projects · 98% client retention
+- Catalogue: 4 service lines · 23 specialized services published
 - Service lines: Applied AI, Cloud & FinOps, Staff Augmentation, Digital Development
 - Proprietary SaaS products: PAYWL, Niveleads, Hirely
 - Recognition: Great Place to Work Colombia 2022
@@ -256,7 +269,7 @@ ${productosLines}
 ### SaaS Products (fixed price, monthly subscription)
 - **PAYWL**: from $450 USD/month (Business plan) to $1,900 USD/month (Enterprise). Free 90-day pilot for eligible media. URL: /en/products/paywl
 - **Niveleads**: from $99 USD/month (Starter, up to 500 leads) to $249 USD/month (Growth, unlimited leads). Enterprise plan custom pricing. URL: /en/products/niveleads
-- **Hirely**: free early access (demo). Pricing TBD at official launch. URL: /en/products/hirely
+- **Hirely**: free demo and early access; product in launch phase. URL: /en/products/hirely
 
 ### Services (custom pricing, scope and team based)
 - **Staff Augmentation**: per profile/hour rates by seniority. Profiles from $25 USD/h (Junior) to $85 USD/h (Principal/Architect). No success fee.
@@ -313,8 +326,8 @@ Full index: ${BASE}/en/blog · Every article with a summary: ${BASE}/en/llms-ful
 
 - [Contact](${BASE}/en/contact)
 - [Support](${BASE}/en/support)
-- Email: hola@nivelics.com
-- WhatsApp: +57 311 214 6459
+- Email: ${contacto.email}
+- WhatsApp: ${contacto.whatsappDisplay}
 - Offices: Bogotá (Colombia) · Miami (USA)
 
 ## Alternate language
@@ -508,8 +521,8 @@ const SERVICIOS_CATALOG: { hub: ServicioEntry; subs: ServicioEntry[] }[] = [
         en: "/en/services/cloud/finops",
         nameEs: "FinOps",
         nameEn: "FinOps",
-        descEs: "Reducción de costos cloud del 30–40% con modelo de success fee.",
-        descEn: "30–40% cloud cost reduction with a success-fee model.",
+        descEs: "Optimización del gasto cloud con modelo de success fee sobre el ahorro logrado.",
+        descEn: "Cloud spend optimization with a success fee on the savings achieved.",
       },
       {
         es: "/servicios/cloud/migracion-aws",
@@ -832,7 +845,7 @@ function renderCasosEs(): string {
 - **País**: USA
 - **Reto**: Escalar el equipo técnico rápidamente sin los costos de contratación local en Estados Unidos.
 - **Solución implementada**: Staff Augmentation. Perfiles bilingües senior integrados al equipo existente en menos de 10 días.
-- **Resultado**: 40% de ahorro vs. contratación local en USA. Equipo técnico escalado sin interrupciones operativas.
+- **Resultado**: equipo técnico escalado sin interrupciones operativas, con ingenieros senior integrados al equipo del cliente.
 - **URL**: /casos-de-exito/two-maids
 
 ### AB InBev (Bavaria)
@@ -894,7 +907,7 @@ function renderCasosEn(): string {
 - **Country**: USA
 - **Challenge**: Rapidly scale the technical team without US-based hiring costs.
 - **Solution**: Staff Augmentation. Bilingual senior profiles integrated into the existing team in under 10 days.
-- **Result**: 40% savings vs. local US hiring. Technical team scaled without operational disruption.
+- **Result**: the technical team scaled without operational disruption, with senior engineers embedded in the client's team.
 - **URL**: /en/success-stories/two-maids
 
 ### AB InBev (Bavaria)

@@ -43,6 +43,8 @@ interface DifferentiatorItem {
 
 interface MetricItem {
   value: string;
+  /** Valor en inglés. Solo hace falta si el valor lleva palabras («5 días» → «5 days»). */
+  valueEn?: string;
   labelEs: string;
   labelEn: string;
 }
@@ -244,7 +246,7 @@ export default function IndustriaForm({ initialData }: IndustriaFormProps) {
         icon: data.icon,
         translationStatusEn: data.translationStatusEn,
         status: data.status,
-        metrics: data.metrics,
+        metrics: data.metrics.map((m) => ({ ...m, valueEn: m.valueEn ?? "" })),
         statHighlights: data.statHighlights,
         regulations: data.regulations,
         useCases: data.useCases,
@@ -556,7 +558,7 @@ export default function IndustriaForm({ initialData }: IndustriaFormProps) {
               {data.metrics.map((m, idx) => (
                 <div
                   key={idx}
-                  className="grid grid-cols-[120px_1fr_auto] gap-3 items-start border-b border-border pb-4 last:border-0"
+                  className="grid grid-cols-[120px_120px_1fr_auto] gap-3 items-start border-b border-border pb-4 last:border-0"
                 >
                   <div>
                     <label className="mb-1 block text-xs text-text-40">Valor</label>
@@ -565,7 +567,21 @@ export default function IndustriaForm({ initialData }: IndustriaFormProps) {
                       onChange={(e) =>
                         updateArrayItem<MetricItem>("metrics", idx, { ...m, value: e.target.value })
                       }
-                      placeholder="99.9%"
+                      placeholder="25%"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-xs text-text-40">Valor EN</label>
+                    <input
+                      value={m.valueEn ?? ""}
+                      onChange={(e) =>
+                        updateArrayItem<MetricItem>("metrics", idx, {
+                          ...m,
+                          valueEn: e.target.value,
+                        })
+                      }
+                      placeholder="Solo si lleva palabras"
                       className={inputClass}
                     />
                   </div>

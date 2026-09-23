@@ -29,15 +29,15 @@
       },
       {
         "unit": "",
-        "value": "40%",
-        "labelEn": "Savings vs. hiring in USA or Europe",
-        "labelEs": "Ahorro vs. contratar en USA o Europa"
+        "value": "4",
+        "labelEn": "Integrated service lines",
+        "labelEs": "Líneas de servicio integradas"
       },
       {
         "unit": "",
-        "value": "50+",
-        "labelEn": "Projects delivered in LATAM and USA",
-        "labelEs": "Proyectos entregados en LATAM y USA"
+        "value": "23",
+        "labelEn": "Specialized services published",
+        "labelEs": "Servicios especializados publicados"
       }
     ],
     "trustBarLogos": [],
@@ -131,8 +131,8 @@
         "questionEs": "¿En cuánto tiempo puede Nivelics integrar un perfil tech?"
       },
       {
-        "answerEn": "Pricing varies by service. Staff Augmentation uses a monthly per-resource model, with average savings of 40% vs. hiring in USA or Europe. Cloud and FinOps use a fixed fee plus success fee on actual savings. Applied AI varies based on agent complexity. The initial assessment is always free with no commitment.",
-        "answerEs": "Los precios varían según el servicio. Staff Augmentation tiene un modelo mensual por recurso, con un ahorro promedio del 40% vs. contratar en USA o Europa. Cloud y FinOps tienen modelos de fee fijo más success fee sobre el ahorro logrado. IA aplicada varía según la complejidad del agente. El diagnóstico inicial siempre es gratuito y sin compromiso.",
+        "answerEn": "Pricing depends on the service. Staff Augmentation works on a monthly per-resource model, with a single predictable rate instead of salary, benefits and hiring overhead. Cloud and FinOps combine a fixed fee with a success fee on the savings achieved. Applied AI depends on scope: in discovery we define scope, architecture and cost.",
+        "answerEs": "Los precios varían según el servicio. Staff Augmentation tiene un modelo mensual por recurso, con una tarifa única y predecible en lugar de salario, prestaciones y overhead de contratación. Cloud y FinOps combinan fee fijo y success fee sobre el ahorro logrado. IA aplicada varía según el alcance: en el discovery definimos alcance, arquitectura y costo.",
         "questionEn": "How much does it cost to work with Nivelics?",
         "questionEs": "¿Cuánto cuesta trabajar con Nivelics?"
       },
@@ -181,10 +181,10 @@
     "industriasHubTitleEn": "Technology that understands your industry",
     "industriasHubSubtitleEs": "Cada sector tiene sus propias reglas, regulación y comportamientos de usuario. Traemos el expertise de dominio para que no gastes los primeros 3 meses explicándonos tu negocio.",
     "industriasHubSubtitleEn": "Each sector has its own rules, regulations and user behaviors. We bring domain expertise so you don't spend the first 3 months explaining your business to us.",
-    "industriasHubStatEs": "13 años entregando tecnología en los sectores más exigentes de LATAM y USA",
-    "industriasHubStatEn": "13 years delivering technology in the most demanding sectors in LATAM and USA",
-    "industriasSectionTitleEs": "13 años entregando tecnología en los sectores más exigentes",
-    "industriasSectionTitleEn": "13 years delivering technology in the most demanding sectors",
+    "industriasHubStatEs": "14 años entregando tecnología en los sectores más exigentes de LATAM y USA",
+    "industriasHubStatEn": "14 years delivering technology in the most demanding sectors in LATAM and USA",
+    "industriasSectionTitleEs": "14 años entregando tecnología en los sectores más exigentes",
+    "industriasSectionTitleEn": "14 years delivering technology in the most demanding sectors",
     "industriasSectionSubtitleEs": "Integramos IA, Cloud y Staff Augmentation en un solo aliado con cuenta de resultados. Sin slides genéricos — profundidad de dominio y contratos con SLAs.",
     "industriasSectionSubtitleEn": "We integrate AI, Cloud and Staff Augmentation in a single partner with accountability. No generic decks — domain depth and SLA-backed contracts.",
     "industriasSectionMetrics": [
@@ -194,9 +194,9 @@
         "labelEs": "Países con proyectos activos"
       },
       {
-        "value": "40%",
-        "labelEn": "Average cloud cost reduction",
-        "labelEs": "Reducción promedio en costos cloud"
+        "value": "4",
+        "labelEn": "Integrated service lines",
+        "labelEs": "Líneas de servicio integradas"
       },
       {
         "value": "5 días",
@@ -241,6 +241,6 @@
       }
     ],
     "translationStatusEn": "complete",
-    "updatedAt": "2026-08-19T20:04:40.863Z"
+    "updatedAt": "2026-09-23T00:33:52.415Z"
   }
 ]

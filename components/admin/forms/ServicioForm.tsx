@@ -703,7 +703,7 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
                         value={metric.value}
                         onChange={(e) => updateMetric(index, "value", e.target.value)}
                         className={`${inputClass} font-mono`}
-                        placeholder="99.9%"
+                        placeholder="25%"
                       />
                     </div>
                     <div>
@@ -969,7 +969,7 @@ export default function ServicioForm({ initialData }: ServicioFormProps) {
                           arr[idx] = { ...arr[idx], value: e.target.value };
                           update("hubMetrics", arr);
                         }}
-                        placeholder="19+"
+                        placeholder="23"
                         className={inputClass}
                       />
                     </div>

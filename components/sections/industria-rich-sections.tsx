@@ -166,8 +166,8 @@ export function IndustriaRichSections({ industria, locale }: Props) {
             </h2>
             <p className="mb-8 max-w-2xl text-text-55">
               {isEn
-                ? "A repeatable method refined across 13 years and 7 countries."
-                : "Un método repetible afinado con 13 años en 7 países."}
+                ? "A repeatable method refined across 14 years and 7 countries."
+                : "Un método repetible afinado con 14 años en 7 países."}
             </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               {playbook.map((p) => (

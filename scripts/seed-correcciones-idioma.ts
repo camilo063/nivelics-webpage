@@ -6,7 +6,8 @@
  * 2. Datos de contacto del pie (nav_config.footer): servía contacto@nivelics.com y el
  *    WhatsApp 310 392 6621, mientras el JSON-LD y /contacto publican hola@nivelics.com y
  *    311 214 6459. El dato oficial es el segundo (decisión del dueño, 2026-09-21).
- * 3. Escapes literales «\u00f3» guardados como texto en 4 filas de `servicios` (páginas de
+ * 3. Errata visible en /nosotros/certificaciones: «Aprtners GCP» → «Partners GCP».
+ * 4. Escapes literales «\u00f3» guardados como texto en 4 filas de `servicios` (páginas de
  *    cloud): se veían tal cual, «Infraestructura como c\u00f3digo». Se decodifican en todos los
  *    campos de texto y jsonb de la fila.
  *
@@ -21,7 +22,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { navConfig, servicios } from "@/lib/db/schema/admin";
+import { certificaciones, navConfig, servicios } from "@/lib/db/schema/admin";
 
 const DRY_RUN = process.argv.includes("--dry-run");
 const FALLBACKS = process.argv.includes("--fallbacks");
@@ -65,7 +66,59 @@ const FIXES: Array<{
   },
 ];
 
+const FOOTER_CONTACT = {
+  contactEmail: "hola@nivelics.com",
+  contactWhatsappUrl: "https://wa.me/573112146459",
+};
+
+type Footer = Record<string, unknown>;
+
+/** Devuelve los campos que hay que corregir en el pie, o null si ya están bien. */
+function footerPatch(footer: Footer | null | undefined): Footer | null {
+  if (!footer) return null;
+  const patch: Footer = {};
+  for (const [k, v] of Object.entries(FOOTER_CONTACT)) {
+    if (footer[k] !== v) patch[k] = v;
+  }
+  return Object.keys(patch).length ? { ...footer, ...patch } : null;
+}
+
+/** Mismo resultado que la rama de BD, para que ambos modos no diverjan. */
+function applyNavFallback(): void {
+  const file = join(process.cwd(), "data/fallbacks/nav_config.json");
+  const rows = JSON.parse(readFileSync(file, "utf8")) as Array<{ footer?: Footer }>;
+  let changed = false;
+  for (const row of rows) {
+    const patched = footerPatch(row.footer);
+    if (patched) {
+      row.footer = patched;
+      changed = true;
+    }
+  }
+  if (!changed) {
+    console.log("• nav_config.json: los datos de contacto ya estaban bien");
+    return;
+  }
+  writeFileSync(file, JSON.stringify(rows, null, 2) + "\n");
+  console.log("✓ data/fallbacks/nav_config.json: contacto del pie");
+}
+
+function applyCertificacionesFallback(): void {
+  const file = join(process.cwd(), "data/fallbacks/certificaciones.json");
+  const rows = JSON.parse(readFileSync(file, "utf8")) as Array<Record<string, unknown>>;
+  const row = rows.find((r) => r.nameEs === "Aprtners GCP");
+  if (!row) {
+    console.log("• certificaciones.json: «Aprtners GCP» ya no está");
+    return;
+  }
+  row.nameEs = "Partners GCP";
+  writeFileSync(file, JSON.stringify(rows, null, 2) + "\n");
+  console.log("✓ data/fallbacks/certificaciones.json: «Partners GCP»");
+}
+
 function applyToFallbacks(): void {
+  applyNavFallback();
+  applyCertificacionesFallback();
   const file = join(process.cwd(), "data/fallbacks/servicios.json");
   const rows = JSON.parse(readFileSync(file, "utf8")) as Array<Record<string, unknown>>;
   let changed = 0;
@@ -80,6 +133,10 @@ function applyToFallbacks(): void {
       Object.assign(row, patch);
       changed++;
     }
+  }
+  if (!changed) {
+    console.log("• servicios.json: nada que corregir");
+    return;
   }
   writeFileSync(file, JSON.stringify(rows, null, 2) + "\n");
   console.log(`✓ data/fallbacks/servicios.json: ${changed} filas corregidas`);
@@ -103,21 +160,25 @@ async function fixEscapes(): Promise<void> {
   }
 }
 
-const FOOTER_CONTACT = {
-  contactEmail: "hola@nivelics.com",
-  contactWhatsappUrl: "https://wa.me/573112146459",
-};
-
-type Footer = Record<string, unknown>;
-
-/** Devuelve los campos que hay que corregir en el pie, o null si ya están bien. */
-function footerPatch(footer: Footer | null | undefined): Footer | null {
-  if (!footer) return null;
-  const patch: Footer = {};
-  for (const [k, v] of Object.entries(FOOTER_CONTACT)) {
-    if (footer[k] !== v) patch[k] = v;
+async function fixCertificaciones(): Promise<void> {
+  const [row] = await db!
+    .select()
+    .from(certificaciones)
+    .where(eq(certificaciones.nameEs, "Aprtners GCP"))
+    .limit(1);
+  if (!row) {
+    console.log("• certificaciones: «Aprtners GCP» ya no está");
+    return;
   }
-  return Object.keys(patch).length ? { ...footer, ...patch } : null;
+  if (DRY_RUN) {
+    console.log("• [dry-run] certificaciones: «Aprtners GCP» → «Partners GCP»");
+    return;
+  }
+  await db!
+    .update(certificaciones)
+    .set({ nameEs: "Partners GCP" })
+    .where(eq(certificaciones.id, row.id));
+  console.log("✓ certificaciones: «Aprtners GCP» → «Partners GCP»");
 }
 
 async function fixFooterContact(): Promise<void> {
@@ -168,6 +229,7 @@ async function main(): Promise<void> {
   }
   await fixEscapes();
   await fixFooterContact();
+  await fixCertificaciones();
   process.exit(0);
 }
 

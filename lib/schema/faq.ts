@@ -32,7 +32,7 @@ export const HOME_FAQ: FAQItem[] = [
   {
     question: "¿Qué es FinOps y cuánto puedo ahorrar?",
     answer:
-      "FinOps es la práctica de optimización y gobernanza financiera del gasto en cloud. Con nuestra implementación de FinOps, los clientes logran ahorros típicos del 30-40% en su factura cloud sin perder rendimiento.",
+      "FinOps es la práctica de optimización y gobernanza financiera del gasto en cloud. Nuestra implementación da visibilidad del gasto por equipo y por servicio, y se cobra con un success fee sobre el ahorro efectivamente logrado.",
   },
   {
     question: "¿En qué países opera Nivelics?",

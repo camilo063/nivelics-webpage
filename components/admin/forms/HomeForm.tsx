@@ -668,7 +668,7 @@ export default function HomeForm({ initialData }: HomeFormProps) {
           <div className="space-y-4">
             <div className="rounded-xl border border-border bg-bg-surface p-6 space-y-4">
               <h3 className="text-sm font-semibold text-text-100">
-                Sección Mapa (&ldquo;13 años. 7 países.&rdquo;)
+                Sección Mapa (&ldquo;14 años. 7 países.&rdquo;)
               </h3>
               <BilingualField
                 labelEs="Título ES"
@@ -738,7 +738,7 @@ export default function HomeForm({ initialData }: HomeFormProps) {
                         arr[idx] = { ...arr[idx], value: e.target.value };
                         update("mapMetrics", arr);
                       }}
-                      placeholder="13+"
+                      placeholder="14+"
                       className={`${inputClass} font-mono`}
                     />
                   </div>

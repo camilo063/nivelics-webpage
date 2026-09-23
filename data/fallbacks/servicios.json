@@ -15,11 +15,11 @@
     "descriptionEn": "Multi-cloud architecture, migration, DevOps and cost optimization with a FinOps approach.",
     "benefits": [
       {
-        "icon": "trending-down",
-        "copyEn": "Average on FinOps projects in the first 90 days",
-        "copyEs": "Promedio en proyectos FinOps en los primeros 90 días",
-        "titleEn": "30-40% cloud cost reduction",
-        "titleEs": "30-40% reducción gasto cloud"
+        "icon": "hex-chart",
+        "copyEn": "Visibility per team and per service from the first 90 days",
+        "copyEs": "Visibilidad por equipo y por servicio desde los primeros 90 días",
+        "titleEn": "Lower cloud spend with FinOps governance",
+        "titleEs": "Menos gasto cloud con gobierno FinOps"
       },
       {
         "icon": "oct-shield",
@@ -30,10 +30,10 @@
       },
       {
         "icon": "oct-monitor",
-        "copyEn": "In continuous infrastructure operation",
-        "copyEs": "En operación de infraestructura continua",
-        "titleEn": "99.9% uptime SLA",
-        "titleEs": "SLA de uptime 99.9%"
+        "copyEn": "Redundant architecture and observability in continuous operations",
+        "copyEs": "Arquitectura redundante y observabilidad en la operación continua",
+        "titleEn": "High availability by design",
+        "titleEs": "Alta disponibilidad por diseño"
       }
     ],
     "processSteps": [
@@ -43,7 +43,8 @@
         "number": 1,
         "titleEn": "Discovery and audit",
         "titleEs": "Discovery y auditoría",
-        "duration": "Semana 1-2"
+        "duration": "Semana 1-2",
+        "durationEn": "Weeks 1-2"
       },
       {
         "descEn": "We eliminate unused resources, optimize instances, and configure Reserved Instances.",
@@ -51,7 +52,8 @@
         "number": 2,
         "titleEn": "Quick wins",
         "titleEs": "Quick wins",
-        "duration": "Semana 3-4"
+        "duration": "Semana 3-4",
+        "durationEn": "Weeks 3-4"
       },
       {
         "descEn": "Tagging, budgets, automatic alerts and real-time dashboard.",
@@ -59,7 +61,8 @@
         "number": 3,
         "titleEn": "Government and automation",
         "titleEs": "Gobierno y automatización",
-        "duration": "Semana 5-6"
+        "duration": "Semana 5-6",
+        "durationEn": "Weeks 5-6"
       },
       {
         "descEn": "Monthly review, proactive adjustments, and cumulative savings report.",
@@ -67,21 +70,15 @@
         "number": 4,
         "titleEn": "Continuous operation",
         "titleEs": "Operación continua",
-        "duration": "MRR"
+        "duration": "MRR",
+        "durationEn": "MRR"
       }
     ],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "40%",
-        "labelEn": "Average cloud spend savings",
-        "labelEs": "Ahorro promedio en gasto cloud"
-      }
-    ],
+    "metrics": [],
     "faqs": [
       {
-        "answerEn": "The average across our projects is 30-40% reduction in cloud bills within the first 90 days. The range varies based on previous optimization levels. In the initial audit (free) we give you a concrete projection based on your current bill.",
-        "answerEs": "El promedio en nuestros proyectos es 30-40% de reducción en la factura cloud en los primeros 90 días. El rango varía según el nivel de optimización previo. En la auditoría inicial (gratuita) te damos una proyección concreta basada en tu factura actual.",
+        "answerEn": "It depends on how optimized your infrastructure already is: idle resources, oversized instances, missing reservations or autoscaling. The initial audit quantifies the possible savings in your own account before you commit to anything.",
+        "answerEs": "Depende de qué tan optimizada esté hoy tu infraestructura: recursos sin uso, instancias sobredimensionadas, falta de reservas o de autoescalado. La auditoría inicial cuantifica el ahorro posible en tu cuenta antes de comprometer nada.",
         "questionEn": "How much can I save with FinOps?",
         "questionEs": "¿Cuánto puedo ahorrar con FinOps?"
       },
@@ -119,8 +116,8 @@
     "coverImage": null,
     "seoTitleEs": "Cloud con Gobierno Real | AWS, GCP, Azure y FinOps",
     "seoTitleEn": "Cloud with Real Governance | AWS, GCP, Azure & FinOps",
-    "seoDescriptionEs": "AWS, GCP, Azure con gobierno y FinOps real. Reducción de costos hasta 40%.",
-    "seoDescriptionEn": "AWS, GCP, Azure with real governance and FinOps. Cloud cost reduction up to 40%.",
+    "seoDescriptionEs": "AWS, GCP y Azure con gobierno real y FinOps: arquitectura, migración, seguridad y operación continua con los costos bajo control.",
+    "seoDescriptionEn": "AWS, GCP and Azure with real governance and FinOps: architecture, migration, security and continuous operations with costs under control.",
     "schemaServiceJson": null,
     "hubMetrics": [],
     "frameworkTitleEs": null,
@@ -136,7 +133,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:35.950Z",
-    "updatedAt": "2026-04-14T19:47:36.950Z",
+    "updatedAt": "2026-09-21T20:42:14.239Z",
     "deletedAt": null
   },
   {
@@ -186,12 +183,6 @@
       },
       {
         "unit": "",
-        "value": "40%",
-        "labelEn": "Average savings — vs US hiring",
-        "labelEs": "Ahorro promedio — vs contratar en USA"
-      },
-      {
-        "unit": "",
         "value": "10",
         "labelEn": "Warranty days — Free replacement",
         "labelEs": "Días garantía — Reemplazo sin costo"
@@ -230,7 +221,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:38.302Z",
-    "updatedAt": "2026-04-09T11:24:56.662Z",
+    "updatedAt": "2026-09-21T20:33:27.384Z",
     "deletedAt": null
   },
   {
@@ -334,100 +325,6 @@
     "deletedAt": null
   },
   {
-    "id": "f5ef82fc-0ed4-47bb-ab0a-5650a4902946",
-    "slugEs": "infraestructura",
-    "slugEn": "infrastructure",
-    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
-    "serviceType": "sub",
-    "accentColor": "cloud",
-    "icon": "hex-nodes",
-    "titleEs": "Infraestructura Cloud",
-    "titleEn": "Cloud Infrastructure",
-    "subtitleEs": "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
-    "subtitleEn": "Design and implementation of scalable, secure and optimized cloud infrastructure for your operation.",
-    "descriptionEs": "Multi-cloud con IaC y observabilidad. Arquitectura escalable desde el día 1.",
-    "descriptionEn": "Multi-cloud with IaC and observability. Scalable architecture from day 1.",
-    "benefits": [
-      {
-        "icon": "hex-cloud",
-        "copyEn": "We design architectures that leverage the best of AWS, GCP, and Azure, avoiding vendor lock-in and optimizing costs.",
-        "copyEs": "Diseñamos arquitecturas que aprovechan lo mejor de AWS, GCP y Azure, evitando vendor lock-in y optimizando costos.",
-        "titleEn": "Multi-cloud architecture",
-        "titleEs": "Arquitectura multi-cloud"
-      },
-      {
-        "icon": "oct-code",
-        "copyEn": "Versioned, reproducible, and auditable infrastructure as code with Terraform, Pulumi, or CloudFormation.",
-        "copyEs": "Infraestructura como código versionada, reproducible y auditada con Terraform, Pulumi o CloudFormation.",
-        "titleEn": "IaC with Terraform/Pulumi",
-        "titleEs": "IaC con Terraform/Pulumi"
-      },
-      {
-        "icon": "tri-check",
-        "copyEn": "Multi-AZ and multi-region architectures with defined RPO/RTO, automatic failover, and tested recovery plans.",
-        "copyEs": "Arquitecturas multi-AZ y multi-región con RPO/RTO definidos, failover automático y planes de recuperación probados.",
-        "titleEn": "High availability and disaster recovery",
-        "titleEs": "Alta disponibilidad y disaster recovery"
-      }
-    ],
-    "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "99.9%",
-        "labelEn": "Availability — guaranteed SLA",
-        "labelEs": "Disponibilidad — SLA garantizado"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "IaC — Infrastructure as Code",
-        "labelEs": "IaC — Infraestructura como código"
-      },
-      {
-        "unit": "",
-        "value": "24/7",
-        "labelEn": "Monitoring — Complete Observability",
-        "labelEs": "Monitoreo — Observabilidad completa"
-      },
-      {
-        "unit": "",
-        "value": "50%",
-        "labelEn": "Fewer incidents — vs. manual management",
-        "labelEs": "Menos incidentes — vs. gestión manual"
-      }
-    ],
-    "faqs": null,
-    "ctaPrimaryTextEs": "Solicitar diseño",
-    "ctaPrimaryTextEn": "Request design",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": null,
-    "ctaSecondaryTextEn": null,
-    "ctaSecondaryUrl": null,
-    "coverImage": null,
-    "seoTitleEs": "Infraestructura Cloud | Multi-cloud con IaC",
-    "seoTitleEn": "Cloud Infrastructure | Multi-cloud with IaC",
-    "seoDescriptionEs": "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
-    "seoDescriptionEn": "Design and implementation of scalable, secure and optimized cloud infrastructure for your operation.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 3,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:37.650Z",
-    "updatedAt": "2026-09-21T16:04:05.094Z",
-    "deletedAt": null
-  },
-  {
     "id": "fc4bb85a-e2c3-4797-ae15-677d0aeb23e2",
     "slugEs": "migracion-aws",
     "slugEn": "aws-migration",
@@ -465,32 +362,7 @@
       }
     ],
     "processSteps": [],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "0",
-        "labelEn": "Downtime — Zero interruptions guaranteed",
-        "labelEs": "Downtime — Zero interrupciones garantizado"
-      },
-      {
-        "unit": "",
-        "value": "60%",
-        "labelEn": "Faster — vs. internal migration",
-        "labelEs": "Más rápido — vs. migración interna"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Documented — IaC + runbooks delivered",
-        "labelEs": "Documentado — IaC + runbooks entregados"
-      },
-      {
-        "unit": "",
-        "value": "30%",
-        "labelEn": "Day 1 savings — FinOps included",
-        "labelEs": "Ahorro desde día 1 — FinOps incluido"
-      }
-    ],
+    "metrics": [],
     "faqs": [],
     "ctaPrimaryTextEs": "Solicitar assessment",
     "ctaPrimaryTextEn": "Request assessment",
@@ -518,7 +390,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.485Z",
-    "updatedAt": "2026-09-21T16:04:05.184Z",
+    "updatedAt": "2026-09-21T20:33:27.559Z",
     "deletedAt": null
   },
   {
@@ -568,12 +440,6 @@
       },
       {
         "unit": "",
-        "value": "40%",
-        "labelEn": "Average savings — vs hiring in USA",
-        "labelEs": "Ahorro promedio — vs contratar en USA"
-      },
-      {
-        "unit": "",
         "value": "10",
         "labelEn": "Warranty days — Free replacement",
         "labelEs": "Días garantía — Reemplazo sin costo"
@@ -612,7 +478,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:38.807Z",
-    "updatedAt": "2026-04-09T11:27:31.036Z",
+    "updatedAt": "2026-09-21T20:33:27.648Z",
     "deletedAt": null
   },
   {
@@ -645,11 +511,11 @@
         "titleEs": "Integración en 5 días hábiles"
       },
       {
-        "icon": "hex-chart",
-        "copyEn": "Senior bilingual talent in time zones compatible with the United States at a fraction of the cost of hiring locally.",
-        "copyEs": "Talento senior bilingüe en zona horaria compatible con Estados Unidos a una fracción del costo de contratar localmente.",
-        "titleEn": "Save up to 40% vs USA",
-        "titleEs": "Ahorro hasta 40% vs USA"
+        "icon": "dia-target",
+        "copyEn": "A single monthly rate instead of salary, benefits and local hiring overhead",
+        "copyEs": "Tarifa mensual única en lugar de salario, prestaciones y overhead de contratación local",
+        "titleEn": "Predictable cost compared with hiring in the USA",
+        "titleEs": "Costo predecible frente a contratar en USA"
       }
     ],
     "processSteps": null,
@@ -659,12 +525,6 @@
         "value": "5",
         "labelEn": "Business days — To first candidate",
         "labelEs": "Días hábiles — Hasta primer candidato"
-      },
-      {
-        "unit": "",
-        "value": "40%",
-        "labelEn": "Average savings — vs hiring in USA",
-        "labelEs": "Ahorro promedio — vs contratar en USA"
       },
       {
         "unit": "",
@@ -706,7 +566,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:38.140Z",
-    "updatedAt": "2026-04-09T11:25:12.284Z",
+    "updatedAt": "2026-09-21T20:33:27.740Z",
     "deletedAt": null
   },
   {
@@ -747,32 +607,7 @@
       }
     ],
     "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "50+",
-        "labelEn": "Platforms delivered — SaaS, portals and dashboards",
-        "labelEs": "Plataformas entregadas — SaaS, portales y dashboards"
-      },
-      {
-        "unit": "",
-        "value": "<2s",
-        "labelEn": "Loading time — Core Web Vitals optimized",
-        "labelEs": "Tiempo de carga — Core Web Vitals optimizado"
-      },
-      {
-        "unit": "",
-        "value": "99.9%",
-        "labelEn": "Uptime — cloud-native architecture",
-        "labelEs": "Uptime — arquitectura cloud-native"
-      },
-      {
-        "unit": "",
-        "value": "0",
-        "labelEn": "Vendor lock-in — your code, standard stack",
-        "labelEs": "Vendor lock-in — codigo tuyo, stack estandar"
-      }
-    ],
+    "metrics": [],
     "faqs": null,
     "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
     "ctaPrimaryTextEn": "Tell us about your project",
@@ -800,7 +635,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:39.310Z",
-    "updatedAt": "2026-04-09T11:27:15.679Z",
+    "updatedAt": "2026-09-21T20:33:27.826Z",
     "deletedAt": null
   },
   {
@@ -841,32 +676,7 @@
       }
     ],
     "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "0",
-        "labelEn": "Servers to manage — Invisible infrastructure",
-        "labelEs": "Servidores que gestionar — Infraestructura invisible"
-      },
-      {
-        "unit": "",
-        "value": "70%",
-        "labelEn": "Lower cost — vs. dedicated servers",
-        "labelEs": "Menos costo — vs. servidores dedicados"
-      },
-      {
-        "unit": "",
-        "value": "100ms",
-        "labelEn": "Cold start — With warm-up strategies",
-        "labelEs": "Cold start — Con warm-up strategies"
-      },
-      {
-        "unit": "",
-        "value": "10x",
-        "labelEn": "Faster — Time-to-market",
-        "labelEs": "Más rápido — Time-to-market"
-      }
-    ],
+    "metrics": [],
     "faqs": null,
     "ctaPrimaryTextEs": "Hablar con un experto",
     "ctaPrimaryTextEn": "Talk to an expert",
@@ -894,7 +704,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.978Z",
-    "updatedAt": "2026-09-21T16:04:05.271Z",
+    "updatedAt": "2026-09-21T20:33:27.909Z",
     "deletedAt": null
   },
   {
@@ -944,12 +754,6 @@
       },
       {
         "unit": "",
-        "value": "40%",
-        "labelEn": "Average savings — vs hiring in USA",
-        "labelEs": "Ahorro promedio — vs contratar en USA"
-      },
-      {
-        "unit": "",
         "value": "10",
         "labelEn": "Guaranteed days — Free replacement",
         "labelEs": "Días garantía — Reemplazo sin costo"
@@ -988,7 +792,95 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:38.469Z",
-    "updatedAt": "2026-04-09T11:25:27.636Z",
+    "updatedAt": "2026-09-21T20:33:27.995Z",
+    "deletedAt": null
+  },
+  {
+    "id": "08882f0d-7c97-4e05-9392-7c4bc26e2f11",
+    "slugEs": "diseno-ux-ui",
+    "slugEn": "ux-ui-design",
+    "parentId": "dcc87d81-f5bc-4372-bd09-e20895b9a621",
+    "serviceType": "sub",
+    "accentColor": "staffing",
+    "icon": "dia-search",
+    "titleEs": "Diseño UX/UI",
+    "titleEn": "UX/UI Design",
+    "subtitleEs": "Product designers senior con experiencia en design systems, research y prototipado. UX y UI que impulsan métricas de negocio.",
+    "subtitleEn": "Senior product designers with experience in design systems, research, and prototyping. UX and UI that drive business metrics.",
+    "descriptionEs": "Product designers senior con experiencia en design systems, research y prototipado.",
+    "descriptionEn": "Senior product designers with experience in design systems, research and prototyping.",
+    "benefits": [
+      {
+        "icon": "hex-nodes",
+        "copyEn": "Creation and maintenance of design systems with reusable components, tokens and documentation for product teams.",
+        "copyEs": "Creación y mantenimiento de design systems con componentes reutilizables, tokens y documentación para equipos de producto.",
+        "titleEn": "Scalable design systems",
+        "titleEs": "Design systems escalables"
+      },
+      {
+        "icon": "dia-search",
+        "copyEn": "User research, usability testing, and heuristic analysis to make data-driven design decisions.",
+        "copyEs": "Investigación de usuarios, pruebas de usabilidad y análisis heurístico para tomar decisiones de diseño basadas en datos.",
+        "titleEn": "User research and testing",
+        "titleEs": "User research y testing"
+      },
+      {
+        "icon": "dia-search",
+        "copyEn": "Mastery of Figma, Framer, Maze, and the most current tools in the product design ecosystem.",
+        "copyEs": "Dominio de Figma, Framer, Maze y las herramientas más actuales del ecosistema de diseño de producto.",
+        "titleEn": "Figma and modern tools",
+        "titleEs": "Figma y herramientas modernas"
+      }
+    ],
+    "processSteps": null,
+    "metrics": [
+      {
+        "unit": "",
+        "value": "5",
+        "labelEn": "Business days — To first candidate",
+        "labelEs": "Días hábiles — Hasta primer candidato"
+      },
+      {
+        "unit": "",
+        "value": "10",
+        "labelEn": "Days warranty — No-cost replacement",
+        "labelEs": "Días garantía — Reemplazo sin costo"
+      },
+      {
+        "unit": "",
+        "value": "100%",
+        "labelEn": "Bilingual — Spanish and English",
+        "labelEs": "Bilingüe — Español e inglés"
+      }
+    ],
+    "faqs": null,
+    "ctaPrimaryTextEs": "Ver perfiles disponibles",
+    "ctaPrimaryTextEn": "View available profiles",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": null,
+    "ctaSecondaryTextEn": null,
+    "ctaSecondaryUrl": null,
+    "coverImage": null,
+    "seoTitleEs": "Diseño UX/UI | Staff Augmentation",
+    "seoTitleEn": "UX/UI Design | Staff Augmentation",
+    "seoDescriptionEs": "Product designers senior con experiencia en design systems, research y prototipado.",
+    "seoDescriptionEn": "Senior product designers with experience in design systems, research and prototyping. Transform your user experience today.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 4,
+    "status": "published",
+    "translationStatusEn": "auto",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:38.639Z",
+    "updatedAt": "2026-09-21T20:33:28.079Z",
     "deletedAt": null
   },
   {
@@ -1056,7 +948,8 @@
         "number": 1,
         "titleEn": "Architecture",
         "titleEs": "Arquitectura",
-        "duration": "Semana 1-2"
+        "duration": "Semana 1-2",
+        "durationEn": "Weeks 1-2"
       },
       {
         "descEn": "Next.js setup, CI/CD, edge hosting, robots.txt configuration, sitemap, llms.txt and analytics.",
@@ -1064,7 +957,8 @@
         "number": 2,
         "titleEn": "Infrastructure",
         "titleEs": "Infraestructura",
-        "duration": "Semana 2-4"
+        "duration": "Semana 2-4",
+        "durationEn": "Weeks 2-4"
       },
       {
         "descEn": "Development of each page with Server Components, Schema.org, hreflang and bilingual content.",
@@ -1072,7 +966,8 @@
         "number": 3,
         "titleEn": "Pages",
         "titleEs": "Páginas",
-        "duration": "Semana 3-6"
+        "duration": "Semana 3-6",
+        "durationEn": "Weeks 3-6"
       },
       {
         "descEn": "Core Web Vitals optimization, lazy loading, font subsetting, image optimization, and bundle analysis.",
@@ -1080,7 +975,8 @@
         "number": 4,
         "titleEn": "Performance",
         "titleEs": "Performance",
-        "duration": "Semana 5-7"
+        "duration": "Semana 5-7",
+        "durationEn": "Weeks 5-7"
       },
       {
         "descEn": "Automatic script that validates Schema.org, hreflang, canonical tags, sitemap, llms.txt, and PageSpeed on every deploy.",
@@ -1088,7 +984,8 @@
         "number": 5,
         "titleEn": "Audit",
         "titleEs": "Auditoría",
-        "duration": "Semana 6-8"
+        "duration": "Semana 6-8",
+        "durationEn": "Weeks 6-8"
       }
     ],
     "metrics": null,
@@ -1119,101 +1016,7 @@
     "translationStatusEn": "auto",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:39.482Z",
-    "updatedAt": "2026-04-09T11:28:20.667Z",
-    "deletedAt": null
-  },
-  {
-    "id": "08882f0d-7c97-4e05-9392-7c4bc26e2f11",
-    "slugEs": "diseno-ux-ui",
-    "slugEn": "ux-ui-design",
-    "parentId": "dcc87d81-f5bc-4372-bd09-e20895b9a621",
-    "serviceType": "sub",
-    "accentColor": "staffing",
-    "icon": "dia-search",
-    "titleEs": "Diseño UX/UI",
-    "titleEn": "UX/UI Design",
-    "subtitleEs": "Product designers senior con experiencia en design systems, research y prototipado. UX y UI que impulsan métricas de negocio.",
-    "subtitleEn": "Senior product designers with experience in design systems, research, and prototyping. UX and UI that drive business metrics.",
-    "descriptionEs": "Product designers senior con experiencia en design systems, research y prototipado.",
-    "descriptionEn": "Senior product designers with experience in design systems, research and prototyping.",
-    "benefits": [
-      {
-        "icon": "hex-nodes",
-        "copyEn": "Creation and maintenance of design systems with reusable components, tokens and documentation for product teams.",
-        "copyEs": "Creación y mantenimiento de design systems con componentes reutilizables, tokens y documentación para equipos de producto.",
-        "titleEn": "Scalable design systems",
-        "titleEs": "Design systems escalables"
-      },
-      {
-        "icon": "dia-search",
-        "copyEn": "User research, usability testing, and heuristic analysis to make data-driven design decisions.",
-        "copyEs": "Investigación de usuarios, pruebas de usabilidad y análisis heurístico para tomar decisiones de diseño basadas en datos.",
-        "titleEn": "User research and testing",
-        "titleEs": "User research y testing"
-      },
-      {
-        "icon": "dia-search",
-        "copyEn": "Mastery of Figma, Framer, Maze, and the most current tools in the product design ecosystem.",
-        "copyEs": "Dominio de Figma, Framer, Maze y las herramientas más actuales del ecosistema de diseño de producto.",
-        "titleEn": "Figma and modern tools",
-        "titleEs": "Figma y herramientas modernas"
-      }
-    ],
-    "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "5",
-        "labelEn": "Business days — To first candidate",
-        "labelEs": "Días hábiles — Hasta primer candidato"
-      },
-      {
-        "unit": "",
-        "value": "40%",
-        "labelEn": "Average Savings — vs hiring in USA",
-        "labelEs": "Ahorro promedio — vs contratar en USA"
-      },
-      {
-        "unit": "",
-        "value": "10",
-        "labelEn": "Days warranty — No-cost replacement",
-        "labelEs": "Días garantía — Reemplazo sin costo"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Bilingual — Spanish and English",
-        "labelEs": "Bilingüe — Español e inglés"
-      }
-    ],
-    "faqs": null,
-    "ctaPrimaryTextEs": "Ver perfiles disponibles",
-    "ctaPrimaryTextEn": "View available profiles",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": null,
-    "ctaSecondaryTextEn": null,
-    "ctaSecondaryUrl": null,
-    "coverImage": null,
-    "seoTitleEs": "Diseño UX/UI | Staff Augmentation",
-    "seoTitleEn": "UX/UI Design | Staff Augmentation",
-    "seoDescriptionEs": "Product designers senior con experiencia en design systems, research y prototipado.",
-    "seoDescriptionEn": "Senior product designers with experience in design systems, research and prototyping. Transform your user experience today.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 4,
-    "status": "published",
-    "translationStatusEn": "auto",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:38.639Z",
-    "updatedAt": "2026-04-09T11:25:43.138Z",
+    "updatedAt": "2026-09-21T20:42:14.344Z",
     "deletedAt": null
   },
   {
@@ -1248,12 +1051,12 @@
     "schemaServiceJson": null,
     "hubMetrics": [
       {
-        "value": "19+",
+        "value": "23",
         "labelEn": "Specialized solutions",
         "labelEs": "Soluciones especializadas"
       },
       {
-        "value": "13+",
+        "value": "14+",
         "labelEn": "Years of experience",
         "labelEs": "Años de experiencia"
       },
@@ -1261,11 +1064,6 @@
         "value": "7",
         "labelEn": "Countries with active projects",
         "labelEs": "Países con proyectos activos"
-      },
-      {
-        "value": "40%",
-        "labelEn": "Cloud cost reduction",
-        "labelEs": "Reducción de costos cloud"
       }
     ],
     "frameworkTitleEs": "Por qué el marco I+C+S funciona",
@@ -1346,313 +1144,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-14T18:24:32.417Z",
-    "updatedAt": "2026-04-14T19:42:51.700Z",
-    "deletedAt": null
-  },
-  {
-    "id": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
-    "slugEs": "desarrollo-digital",
-    "slugEn": "digital-development",
-    "parentId": null,
-    "serviceType": "hub",
-    "accentColor": "dev",
-    "icon": "code-2",
-    "titleEs": "Del concepto a producción",
-    "titleEn": "From concept to production",
-    "subtitleEs": "Apps, plataformas y e-commerce con arquitectura moderna y demos quincenales.",
-    "subtitleEn": "Apps, platforms and e-commerce with modern architecture and biweekly demos.",
-    "descriptionEs": "Desarrollo de productos digitales, aplicaciones web y móviles con metodologías ágiles y arquitectura moderna.",
-    "descriptionEn": "Digital product development, web and mobile applications with agile methodologies and modern architecture.",
-    "benefits": [
-      {
-        "icon": "monitor",
-        "copyEn": "You always know what we're working on — deliveries every 2 weeks",
-        "copyEs": "Siempre sabes en qué estamos — entregas cada 2 semanas",
-        "titleEn": "Biweekly Demo",
-        "titleEs": "Demo quincenal"
-      },
-      {
-        "icon": "oct-code",
-        "copyEn": "From the first sprint, without vendor lock-in",
-        "copyEs": "Desde el primer sprint, sin vendor lock-in",
-        "titleEn": "100% your code",
-        "titleEs": "Código 100% tuyo"
-      },
-      {
-        "icon": "check-circle",
-        "copyEn": "It's not a final step, it's part of each Sprint",
-        "copyEs": "No es un paso final, es parte de cada sprint",
-        "titleEn": "Integrated QA",
-        "titleEs": "QA integrado"
-      }
-    ],
-    "processSteps": [
-      {
-        "descEn": "We understand the business, define the scope, and validate technical viability.",
-        "descEs": "Entendemos el negocio, definimos el alcance y validamos viabilidad técnica.",
-        "number": 1,
-        "titleEn": "Discovery",
-        "titleEs": "Discovery",
-        "duration": "Semana 1"
-      },
-      {
-        "descEn": "We design the technical architecture and the Sprint plan.",
-        "descEs": "Diseñamos la arquitectura técnica y el plan de sprints.",
-        "number": 2,
-        "titleEn": "Architecture",
-        "titleEs": "Arquitectura",
-        "duration": "Semana 2"
-      },
-      {
-        "descEn": "2-week iterations with client demo at the end of each Sprint.",
-        "descEs": "Iteraciones de 2 semanas con demo al cliente al final de cada sprint.",
-        "number": 3,
-        "titleEn": "Development Sprints",
-        "titleEs": "Sprints de desarrollo",
-        "duration": "Semanas 3-N"
-      },
-      {
-        "descEn": "Complete testing, corrections, and production release.",
-        "descEs": "Testing completo, correcciones y lanzamiento a producción.",
-        "number": 4,
-        "titleEn": "QA and launch",
-        "titleEs": "QA y launch",
-        "duration": "Última semana"
-      },
-      {
-        "descEn": "Product maintenance, monitoring, and evolution.",
-        "descEs": "Mantenimiento, monitoreo y evolución del producto.",
-        "number": 5,
-        "titleEn": "Post-launch support",
-        "titleEs": "Soporte post-launch",
-        "duration": "Ongoing"
-      }
-    ],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "50+",
-        "labelEn": "Projects delivered — in LATAM and USA",
-        "labelEs": "Proyectos entregados — en LATAM y USA"
-      },
-      {
-        "unit": "",
-        "value": "13+",
-        "labelEn": "Years of experience — since 2012",
-        "labelEs": "Años de experiencia — desde 2012"
-      },
-      {
-        "unit": "",
-        "value": "7",
-        "labelEn": "Countries — Colombia, USA, Mexico and more",
-        "labelEs": "Países — Colombia, USA, México y más"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Code ownership — always belongs to the client",
-        "labelEs": "Propiedad del código — siempre del cliente"
-      }
-    ],
-    "faqs": [
-      {
-        "answerEn": "We use React, Next.js, and Node.js for web applications, React Native and Flutter for mobile apps, and serverless and microservices architectures with RESTful APIs and GraphQL. We choose the stack based on project requirements.",
-        "answerEs": "Usamos React, Next.js y Node.js para aplicaciones web, React Native y Flutter para apps móviles, y arquitecturas serverless y de microservicios con APIs RESTful y GraphQL. Elegimos la stack según las necesidades del proyecto.",
-        "questionEn": "What technologies does Nivelics use for software development?",
-        "questionEs": "¿Qué tecnologías usa Nivelics para desarrollo de software?"
-      },
-      {
-        "answerEn": "A functional MVP can be ready in 6-10 weeks using lean methodology and agile Sprints. This includes product discovery, UX design, development, QA, and production deployment.",
-        "answerEs": "Un MVP funcional puede estar listo en 6-10 semanas usando metodología lean y sprints ágiles. Esto incluye product discovery, diseño UX, desarrollo, QA y despliegue en producción.",
-        "questionEn": "How long does it take to develop an MVP?",
-        "questionEs": "¿Cuánto tiempo toma desarrollar un MVP?"
-      },
-      {
-        "answerEn": "Yes, we develop native mobile apps for iOS (Swift) and Android (Kotlin), as well as cross-platform applications with React Native and Flutter. We recommend the optimal approach based on the project's budget, timeline, and technical requirements.",
-        "answerEs": "Sí, desarrollamos apps móviles nativas para iOS (Swift) y Android (Kotlin), así como aplicaciones cross-platform con React Native y Flutter. Recomendamos el enfoque óptimo según el presupuesto, timeline y requerimientos técnicos del proyecto.",
-        "questionEn": "Does Nivelics develop native mobile applications?",
-        "questionEs": "¿Nivelics desarrolla aplicaciones móviles nativas?"
-      },
-      {
-        "answerEn": "The code is 100% owned by the client, always. We deliver the complete repository with documentation. No vendor lock-in.",
-        "answerEs": "El código es 100% del cliente, siempre. Entregamos el repositorio completo con documentación. Sin vendor lock-in.",
-        "questionEn": "What happens with code ownership?",
-        "questionEs": "¿Qué pasa con la propiedad del código?"
-      },
-      {
-        "answerEn": "Yes. We offer ongoing support plans (MRR) that include monitoring, bug fixes, security updates, and product evolution.",
-        "answerEs": "Sí. Ofrecemos planes de soporte continuo (MRR) que incluyen monitoreo, corrección de bugs, actualizaciones de seguridad y evolución del producto.",
-        "questionEn": "Do you offer post-launch maintenance?",
-        "questionEs": "¿Ofrecen mantenimiento post-lanzamiento?"
-      }
-    ],
-    "ctaPrimaryTextEs": "Ver Desarrollo Digital",
-    "ctaPrimaryTextEn": "View Digital Development",
-    "ctaPrimaryUrl": "/servicios/desarrollo-digital",
-    "ctaSecondaryTextEs": "Cotizar mi proyecto",
-    "ctaSecondaryTextEn": "Quote my project",
-    "ctaSecondaryUrl": "/contacto",
-    "coverImage": null,
-    "seoTitleEs": "Desarrollo Digital: apps y plataformas web",
-    "seoTitleEn": "Digital Development: apps and web platforms",
-    "seoDescriptionEs": "Del concepto a producción. Sprints medibles. 13 años de proyectos en LATAM y USA.",
-    "seoDescriptionEn": "From concept to production. Measurable sprints. 13 years of projects in LATAM and USA.",
-    "schemaServiceJson": null,
-    "hubMetrics": [],
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": [],
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": [],
-    "sortOrder": 4,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:36.296Z",
-    "updatedAt": "2026-09-21T18:13:37.330Z",
-    "deletedAt": null
-  },
-  {
-    "id": "a5d08ac2-9a81-47cc-acb3-8a3f91948403",
-    "slugEs": "finops",
-    "slugEn": "finops",
-    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
-    "serviceType": "sub",
-    "accentColor": "finops",
-    "icon": "hex-chart",
-    "titleEs": "Optimiza tu inversión cloud con FinOps real",
-    "titleEn": "Optimize your cloud investment with real FinOps",
-    "subtitleEs": "Implementamos prácticas FinOps para que cada dólar en la nube genere valor medible para tu negocio.",
-    "subtitleEn": "We implement FinOps practices so every dollar in the cloud generates measurable value for your business.",
-    "descriptionEs": "Optimización y gobernanza financiera de la nube. Reducimos costos hasta un 35% sin perder rendimiento.",
-    "descriptionEn": "Cloud financial governance and optimization. We reduce costs up to 35% without losing performance.",
-    "benefits": [
-      {
-        "icon": "eye",
-        "copyEn": "Real-time dashboards of consumption by team, service and environment.",
-        "copyEs": "Dashboards en tiempo real de consumo por equipo, servicio y ambiente.",
-        "titleEn": "Visibility",
-        "titleEs": "Visibilidad"
-      },
-      {
-        "icon": "trending-down",
-        "copyEn": "Rightsizing, reserved instances, spot fleet and orphaned resource elimination.",
-        "copyEs": "Rightsizing, instancias reservadas, spot fleet y eliminación de recursos huérfanos.",
-        "titleEn": "Optimization",
-        "titleEs": "Optimización"
-      },
-      {
-        "icon": "pie-chart",
-        "copyEn": "Tagging strategy, showback/chargeback and unit economics per product.",
-        "copyEs": "Estrategia de tagging, showback/chargeback y unit economics por producto.",
-        "titleEn": "Cost Allocation",
-        "titleEs": "Asignación de costos"
-      },
-      {
-        "icon": "bar-chart",
-        "copyEn": "Cost projection with predictive models and anomaly alerts.",
-        "copyEs": "Proyección de costos con modelos predictivos y alertas de anomalías.",
-        "titleEn": "Forecasting",
-        "titleEs": "Forecasting"
-      },
-      {
-        "icon": "dia-flow",
-        "copyEn": "Automated policies, budgets and approval workflows.",
-        "copyEs": "Políticas automatizadas, presupuestos y workflows de aprobación.",
-        "titleEn": "Governance",
-        "titleEs": "Gobernanza"
-      },
-      {
-        "icon": "hex-chart",
-        "copyEn": "Team training, FinOps ceremonies and efficiency metrics.",
-        "copyEs": "Capacitación de equipos, ceremonias FinOps y métricas de eficiencia.",
-        "titleEn": "FinOps Culture",
-        "titleEs": "Cultura FinOps"
-      }
-    ],
-    "processSteps": [
-      {
-        "descEn": "Current spend mapping, waste identification, benchmark against best practices.",
-        "descEs": "Mapeo del gasto actual, identificación de waste, benchmark contra mejores prácticas.",
-        "number": 1,
-        "titleEn": "Discovery",
-        "titleEs": "Discovery",
-        "duration": "Semana 1-2"
-      },
-      {
-        "descEn": "First savings implemented: rightsizing, reserved instances, orphaned resource elimination.",
-        "descEs": "Primeros ahorros implementados: rightsizing, instancias reservadas, eliminación de recursos huérfanos.",
-        "number": 2,
-        "titleEn": "Quick Wins",
-        "titleEs": "Quick Wins",
-        "duration": "Semana 3-4"
-      },
-      {
-        "descEn": "Automated policies, anomaly alerts, governance dashboards and handoff to internal team.",
-        "descEs": "Políticas automatizadas, alertas de anomalías, dashboards de gobernanza y handoff al equipo interno.",
-        "number": 3,
-        "titleEn": "Governance",
-        "titleEs": "Gobernanza",
-        "duration": "Semana 5-6"
-      }
-    ],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "30-40%",
-        "labelEn": "Cloud bill reduction",
-        "labelEs": "Reducción factura cloud"
-      },
-      {
-        "unit": "sem",
-        "value": "2-3",
-        "labelEn": "Time to first savings",
-        "labelEs": "Tiempo al primer ahorro"
-      },
-      {
-        "unit": "",
-        "value": "5x-10x",
-        "labelEn": "Project ROI",
-        "labelEs": "ROI del proyecto"
-      },
-      {
-        "unit": "",
-        "value": "15-30%",
-        "labelEn": "Orphaned resources eliminated",
-        "labelEs": "Recursos huérfanos eliminados"
-      }
-    ],
-    "faqs": [],
-    "ctaPrimaryTextEs": "Solicitar evaluación",
-    "ctaPrimaryTextEn": "Request assessment",
-    "ctaPrimaryUrl": "/servicios/cloud/finops",
-    "ctaSecondaryTextEs": "",
-    "ctaSecondaryTextEn": "",
-    "ctaSecondaryUrl": "",
-    "coverImage": "",
-    "seoTitleEs": "FinOps — Optimización Financiera Cloud",
-    "seoTitleEn": "FinOps — Cloud Financial Optimization",
-    "seoDescriptionEs": "Gobernanza y optimización financiera cloud. Ahorro típico de 30-40% en gasto cloud.",
-    "seoDescriptionEn": "Cloud financial governance and optimization. Typical 30-40% savings in cloud spend.",
-    "schemaServiceJson": null,
-    "hubMetrics": [],
-    "frameworkTitleEs": "",
-    "frameworkTitleEn": "",
-    "frameworkSubtitleEs": "",
-    "frameworkSubtitleEn": "",
-    "frameworkPillars": [],
-    "sectorsTitleEs": "",
-    "sectorsTitleEn": "",
-    "sectors": [],
-    "sortOrder": 1,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:36.467Z",
-    "updatedAt": "2026-09-21T18:13:38.012Z",
+    "updatedAt": "2026-09-22T23:44:40.859Z",
     "deletedAt": null
   },
   {
@@ -1720,7 +1212,8 @@
         "number": 1,
         "titleEn": "Discovery and harness design",
         "titleEs": "Discovery y diseño del harness",
-        "duration": "1–2 semanas"
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
       },
       {
         "descEn": "Least-privilege connectors or MCP servers, test environments and evaluation data.",
@@ -1728,7 +1221,8 @@
         "number": 2,
         "titleEn": "Integration and tools",
         "titleEs": "Integración y herramientas",
-        "duration": "2–3 semanas"
+        "duration": "2–3 semanas",
+        "durationEn": "2–3 weeks"
       },
       {
         "descEn": "Agent, verifier and eval suite. We iterate against evidence, not impressions.",
@@ -1736,7 +1230,8 @@
         "number": 3,
         "titleEn": "Build and evals",
         "titleEs": "Construcción y evals",
-        "duration": "2–4 semanas"
+        "duration": "2–4 semanas",
+        "durationEn": "2–4 weeks"
       },
       {
         "descEn": "Production with limited scope, human approval and full observability.",
@@ -1744,7 +1239,8 @@
         "number": 4,
         "titleEn": "Controlled pilot",
         "titleEs": "Piloto controlado",
-        "duration": "2–4 semanas"
+        "duration": "2–4 semanas",
+        "durationEn": "2–4 weeks"
       },
       {
         "descEn": "AgentOps: monitoring, drift, costs and new capabilities.",
@@ -1752,7 +1248,8 @@
         "number": 5,
         "titleEn": "Operation and improvement",
         "titleEs": "Operación y mejora",
-        "duration": "Continuo"
+        "duration": "Continuo",
+        "durationEn": "Ongoing"
       }
     ],
     "metrics": [],
@@ -1814,7 +1311,7 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.635Z",
-    "updatedAt": "2026-09-21T18:22:25.695Z",
+    "updatedAt": "2026-09-21T20:42:14.428Z",
     "deletedAt": null
   },
   {
@@ -1840,11 +1337,11 @@
         "titleEs": "Candidatos en 5 días hábiles"
       },
       {
-        "icon": "hex-chart",
-        "copyEn": "Competitive talent from Colombia (GMT-5)",
-        "copyEs": "Talento competitivo desde Colombia (GMT-5)",
-        "titleEn": "40% savings vs. USA",
-        "titleEs": "40% ahorro vs. USA"
+        "icon": "dia-target",
+        "copyEn": "A single monthly rate, with no salary, benefits or local hiring overhead",
+        "copyEs": "Tarifa mensual única, sin salario, prestaciones ni overhead de contratación local",
+        "titleEn": "Predictable cost compared with hiring in the USA",
+        "titleEs": "Costo predecible frente a contratar en USA"
       },
       {
         "icon": "oct-shield",
@@ -1868,7 +1365,8 @@
         "number": 1,
         "titleEn": "Profile brief",
         "titleEs": "Brief de perfil",
-        "duration": "30 min"
+        "duration": "30 min",
+        "durationEn": "30 min"
       },
       {
         "descEn": "We filter, technically interview and validate cultural fit.",
@@ -1876,7 +1374,8 @@
         "number": 2,
         "titleEn": "Selection & validation",
         "titleEs": "Selección y validación",
-        "duration": "3-4 días"
+        "duration": "3-4 días",
+        "durationEn": "3-4 days"
       },
       {
         "descEn": "We present the profiles and you run your own interview process.",
@@ -1884,7 +1383,8 @@
         "number": 3,
         "titleEn": "Client interview",
         "titleEs": "Entrevista con el cliente",
-        "duration": "Día 5"
+        "duration": "Día 5",
+        "durationEn": "Day 5"
       },
       {
         "descEn": "We coordinate access, tools and first days with your team.",
@@ -1892,7 +1392,8 @@
         "number": 4,
         "titleEn": "Onboarding & integration",
         "titleEs": "Onboarding e integración",
-        "duration": "Día 6-10"
+        "duration": "Día 6-10",
+        "durationEn": "Days 6-10"
       },
       {
         "descEn": "Assigned Delivery Manager to ensure everything works well.",
@@ -1900,24 +1401,19 @@
         "number": 5,
         "titleEn": "Ongoing follow-up",
         "titleEs": "Seguimiento continuo",
-        "duration": "Mensual"
+        "duration": "Mensual",
+        "durationEn": "Monthly"
       }
     ],
     "metrics": [
       {
-        "unit": "días",
+        "unit": "",
         "value": "5",
         "labelEn": "Business days to present candidate",
         "labelEs": "Días hábiles para presentar candidato"
       },
       {
         "unit": "",
-        "value": "40%",
-        "labelEn": "Average savings vs. USA",
-        "labelEs": "Ahorro promedio vs. USA"
-      },
-      {
-        "unit": "días",
         "value": "10",
         "labelEn": "Days replacement guarantee",
         "labelEs": "Días de garantía de reemplazo"
@@ -1970,8 +1466,8 @@
     "coverImage": null,
     "seoTitleEs": "Staff Augmentation: talento tech en LATAM",
     "seoTitleEn": "Staff Augmentation: tech talent in LATAM",
-    "seoDescriptionEs": "Equipos de ingeniería on-demand con talento senior verificado. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
-    "seoDescriptionEn": "On-demand engineering teams with verified senior talent. Integration in 6 business days. Up to 40% savings vs. USA/Europe.",
+    "seoDescriptionEs": "Equipos de ingeniería on-demand con talento senior verificado y bilingüe: candidatos en 5 días hábiles y costo mensual predecible.",
+    "seoDescriptionEn": "On-demand engineering teams with verified senior bilingual talent: candidates in 5 business days and a predictable monthly cost.",
     "schemaServiceJson": null,
     "hubMetrics": [],
     "frameworkTitleEs": null,
@@ -1987,7 +1483,95 @@
     "translationStatusEn": "complete",
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:36.120Z",
-    "updatedAt": "2026-09-21T18:13:37.677Z",
+    "updatedAt": "2026-09-21T20:42:14.514Z",
+    "deletedAt": null
+  },
+  {
+    "id": "aa9ee518-b280-472d-a325-2f4b002214fa",
+    "slugEs": "seguridad",
+    "slugEn": "security",
+    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
+    "serviceType": "sub",
+    "accentColor": "cloud",
+    "icon": "oct-shield",
+    "titleEs": "Seguridad Cloud",
+    "titleEn": "Cloud Security",
+    "subtitleEs": "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
+    "subtitleEn": "Hardening, compliance (SOC2, ISO27001), identity management, and end-to-end encryption for your cloud infrastructure.",
+    "descriptionEs": "SOC2, ISO27001 y hardening real. Seguridad desde la arquitectura.",
+    "descriptionEn": "SOC2, ISO27001 and real hardening. Security from the architecture.",
+    "benefits": [
+      {
+        "icon": "oct-shield",
+        "copyEn": "Implementation of controls and processes to comply with SOC2, ISO27001 and other regulatory standards in the sector.",
+        "copyEs": "Implementación de controles y procesos para cumplir con SOC2, ISO27001 y otras normativas regulatorias del sector.",
+        "titleEn": "SOC2 and ISO27001 Compliance",
+        "titleEs": "Compliance SOC2 e ISO27001"
+      },
+      {
+        "icon": "key-round",
+        "copyEn": "Identity management with least privilege principle, MFA, SSO and Zero Trust architecture across your entire infrastructure.",
+        "copyEs": "Gestión de identidades con principio de mínimo privilegio, MFA, SSO y arquitectura Zero Trust en toda tu infraestructura.",
+        "titleEn": "IAM and Zero Trust",
+        "titleEs": "IAM y Zero Trust"
+      },
+      {
+        "icon": "oct-monitor",
+        "copyEn": "Real-time threat detection, automated alerts, and security incident response playbooks.",
+        "copyEs": "Detección de amenazas en tiempo real, alertas automatizadas y playbooks de respuesta a incidentes de seguridad.",
+        "titleEn": "Incident monitoring and response",
+        "titleEs": "Monitoreo y respuesta a incidentes"
+      }
+    ],
+    "processSteps": null,
+    "metrics": [
+      {
+        "unit": "",
+        "value": "100%",
+        "labelEn": "Encryption — In transit and at rest",
+        "labelEs": "Cifrado — En tránsito y reposo"
+      },
+      {
+        "unit": "",
+        "value": "0",
+        "labelEn": "Breaches — Zero tolerance for incidents",
+        "labelEs": "Brechas — Tolerancia cero a incidentes"
+      },
+      {
+        "unit": "",
+        "value": "24h",
+        "labelEn": "Response — Maximum incident response time",
+        "labelEs": "Respuesta — Tiempo máximo a incidentes"
+      }
+    ],
+    "faqs": null,
+    "ctaPrimaryTextEs": "Solicitar auditoría",
+    "ctaPrimaryTextEn": "Request audit",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": null,
+    "ctaSecondaryTextEn": null,
+    "ctaSecondaryUrl": null,
+    "coverImage": null,
+    "seoTitleEs": "Seguridad Cloud | SOC2, ISO27001",
+    "seoTitleEn": "Cloud Security | SOC2, ISO27001",
+    "seoDescriptionEs": "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
+    "seoDescriptionEn": "Hardening, compliance (SOC2, ISO27001), identity management and end-to-end encryption for your cloud infrastructure.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 4,
+    "status": "published",
+    "translationStatusEn": "auto",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:37.813Z",
+    "updatedAt": "2026-09-21T20:33:28.333Z",
     "deletedAt": null
   },
   {
@@ -2091,288 +1675,6 @@
     "deletedAt": null
   },
   {
-    "id": "aa9ee518-b280-472d-a325-2f4b002214fa",
-    "slugEs": "seguridad",
-    "slugEn": "security",
-    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
-    "serviceType": "sub",
-    "accentColor": "cloud",
-    "icon": "oct-shield",
-    "titleEs": "Seguridad Cloud",
-    "titleEn": "Cloud Security",
-    "subtitleEs": "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
-    "subtitleEn": "Hardening, compliance (SOC2, ISO27001), identity management, and end-to-end encryption for your cloud infrastructure.",
-    "descriptionEs": "SOC2, ISO27001 y hardening real. Seguridad desde la arquitectura.",
-    "descriptionEn": "SOC2, ISO27001 and real hardening. Security from the architecture.",
-    "benefits": [
-      {
-        "icon": "oct-shield",
-        "copyEn": "Implementation of controls and processes to comply with SOC2, ISO27001 and other regulatory standards in the sector.",
-        "copyEs": "Implementación de controles y procesos para cumplir con SOC2, ISO27001 y otras normativas regulatorias del sector.",
-        "titleEn": "SOC2 and ISO27001 Compliance",
-        "titleEs": "Compliance SOC2 e ISO27001"
-      },
-      {
-        "icon": "key-round",
-        "copyEn": "Identity management with least privilege principle, MFA, SSO and Zero Trust architecture across your entire infrastructure.",
-        "copyEs": "Gestión de identidades con principio de mínimo privilegio, MFA, SSO y arquitectura Zero Trust en toda tu infraestructura.",
-        "titleEn": "IAM and Zero Trust",
-        "titleEs": "IAM y Zero Trust"
-      },
-      {
-        "icon": "oct-monitor",
-        "copyEn": "Real-time threat detection, automated alerts, and security incident response playbooks.",
-        "copyEs": "Detección de amenazas en tiempo real, alertas automatizadas y playbooks de respuesta a incidentes de seguridad.",
-        "titleEn": "Incident monitoring and response",
-        "titleEs": "Monitoreo y respuesta a incidentes"
-      }
-    ],
-    "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Encryption — In transit and at rest",
-        "labelEs": "Cifrado — En tránsito y reposo"
-      },
-      {
-        "unit": "",
-        "value": "0",
-        "labelEn": "Breaches — Zero tolerance for incidents",
-        "labelEs": "Brechas — Tolerancia cero a incidentes"
-      },
-      {
-        "unit": "",
-        "value": "24h",
-        "labelEn": "Response — Maximum incident response time",
-        "labelEs": "Respuesta — Tiempo máximo a incidentes"
-      },
-      {
-        "unit": "",
-        "value": "95%",
-        "labelEn": "Compliance — Controls covered from day 1",
-        "labelEs": "Compliance — Controles cubiertos desde día 1"
-      }
-    ],
-    "faqs": null,
-    "ctaPrimaryTextEs": "Solicitar auditoría",
-    "ctaPrimaryTextEn": "Request audit",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": null,
-    "ctaSecondaryTextEn": null,
-    "ctaSecondaryUrl": null,
-    "coverImage": null,
-    "seoTitleEs": "Seguridad Cloud | SOC2, ISO27001",
-    "seoTitleEn": "Cloud Security | SOC2, ISO27001",
-    "seoDescriptionEs": "Hardening, compliance (SOC2, ISO27001), gestión de identidades y cifrado end-to-end para tu infraestructura cloud.",
-    "seoDescriptionEn": "Hardening, compliance (SOC2, ISO27001), identity management and end-to-end encryption for your cloud infrastructure.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 4,
-    "status": "published",
-    "translationStatusEn": "auto",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:37.813Z",
-    "updatedAt": "2026-09-21T16:04:05.358Z",
-    "deletedAt": null
-  },
-  {
-    "id": "a54c32a1-d3e9-454d-b722-34cba902346c",
-    "slugEs": "apps-moviles",
-    "slugEn": "mobile-apps",
-    "parentId": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
-    "serviceType": "sub",
-    "accentColor": "dev",
-    "icon": "tri-rocket",
-    "titleEs": "Apps Móviles",
-    "titleEn": "Mobile Apps",
-    "subtitleEs": "iOS, Android, Flutter y React Native. Construimos apps nativas y cross-platform con entregas quincenales, QA integrado y código 100% tuyo desde el primer sprint.",
-    "subtitleEn": "iOS, Android, Flutter, and React Native. We build native and cross-platform apps with bi-weekly deliveries, integrated QA, and 100% your code from the first sprint.",
-    "descriptionEs": "iOS, Android, Flutter, React Native. Desarrollo nativo y cross-platform.",
-    "descriptionEn": "iOS, Android, Flutter, React Native. Native and cross-platform development.",
-    "benefits": [
-      {
-        "icon": "tri-rocket",
-        "copyEn": "Native development with Swift and Kotlin for apps that maximize each platform's capabilities.",
-        "copyEs": "Desarrollo nativo con Swift y Kotlin para apps que aprovechan al máximo las capacidades de cada plataforma.",
-        "titleEn": "Native iOS and Android",
-        "titleEs": "iOS y Android nativo"
-      },
-      {
-        "icon": "repeat",
-        "copyEn": "A single codebase for iOS and Android with React Native or Flutter, reducing development time and costs.",
-        "copyEs": "Una sola base de código para iOS y Android con React Native o Flutter, reduciendo tiempos y costos de desarrollo.",
-        "titleEn": "Cross-platform with React Native/Flutter",
-        "titleEs": "Cross-platform con React Native/Flutter"
-      },
-      {
-        "icon": "monitor-smartphone",
-        "copyEn": "Mobile experience-centered design with native gestures, fluid animations and optimized performance.",
-        "copyEs": "Diseño centrado en la experiencia móvil con gestos nativos, animaciones fluidas y rendimiento optimizado.",
-        "titleEn": "Mobile-first UX",
-        "titleEs": "UX mobile-first"
-      }
-    ],
-    "processSteps": null,
-    "metrics": [
-      {
-        "unit": "",
-        "value": "50+",
-        "labelEn": "Delivered Apps — iOS, Android and cross-platform",
-        "labelEs": "Apps entregadas — iOS, Android y cross-platform"
-      },
-      {
-        "unit": "",
-        "value": "2",
-        "labelEn": "Weeks per Sprint — biweekly demo with client",
-        "labelEs": "Semanas por sprint — demo quincenal con cliente"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Code ownership — always belongs to the client",
-        "labelEs": "Propiedad del codigo — siempre del cliente"
-      },
-      {
-        "unit": "",
-        "value": "4.8",
-        "labelEn": "Average store rating — App Store and Google Play",
-        "labelEs": "Rating promedio en stores — App Store y Google Play"
-      }
-    ],
-    "faqs": null,
-    "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
-    "ctaPrimaryTextEn": "Tell us about your project",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": null,
-    "ctaSecondaryTextEn": null,
-    "ctaSecondaryUrl": null,
-    "coverImage": null,
-    "seoTitleEs": "Apps Móviles | iOS, Android, Flutter",
-    "seoTitleEn": "Mobile Apps | iOS, Android, Flutter",
-    "seoDescriptionEs": "Apps nativas y cross-platform con React Native, Flutter, Swift y Kotlin. De la idea al App Store.",
-    "seoDescriptionEn": "Native and cross-platform apps with React Native, Flutter, Swift and Kotlin. From idea to App Store.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 1,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:38.975Z",
-    "updatedAt": "2026-04-09T11:24:25.507Z",
-    "deletedAt": null
-  },
-  {
-    "id": "98e77e02-3c1e-4b45-a705-7c4610876b4e",
-    "slugEs": "ecommerce",
-    "slugEn": "ecommerce",
-    "parentId": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
-    "serviceType": "sub",
-    "accentColor": "dev",
-    "icon": "hex-plus",
-    "titleEs": "E-commerce",
-    "titleEn": "E-commerce",
-    "subtitleEs": "E-commerce a medida con cero comisiones por transacción. Catálogo inteligente, pricing dinámico, pasarelas de pago y conexión real con tu ERP.",
-    "subtitleEn": "Custom e-commerce with zero transaction fees. Smart catalog, dynamic pricing, payment gateways and real integration with your ERP.",
-    "descriptionEs": "Plataformas propias sin comisiones. Arquitectura escalable para ventas digitales.",
-    "descriptionEn": "Own platforms with zero commissions. Scalable architecture for digital sales.",
-    "benefits": [
-      {
-        "icon": "hex-plus",
-        "copyEn": "Advanced catalog management with variants, segment-based pricing, scheduled discounts, and dynamic pricing rules.",
-        "copyEs": "Gestión avanzada de catálogo con variantes, precios por segmento, descuentos programados y reglas de pricing dinámico.",
-        "titleEn": "Dynamic catalog and pricing",
-        "titleEs": "Catálogo y pricing dinámico"
-      },
-      {
-        "icon": "credit-card",
-        "copyEn": "Integration with Stripe, MercadoPago, PayU and local gateways for secure payments with multiple payment methods.",
-        "copyEs": "Integración con Stripe, MercadoPago, PayU y pasarelas locales para pagos seguros con múltiples métodos de pago.",
-        "titleEn": "Integrated payment gateways",
-        "titleEs": "Pasarelas de pago integradas"
-      },
-      {
-        "icon": "package-check",
-        "copyEn": "Connection with SAP, Oracle, Odoo, and logistics systems for inventory synchronization, orders, and fulfillment.",
-        "copyEs": "Conexión con SAP, Oracle, Odoo y sistemas de logística para sincronización de inventario, órdenes y fulfillment.",
-        "titleEn": "ERP and logistics integration",
-        "titleEs": "Integración ERP y logística"
-      }
-    ],
-    "processSteps": [],
-    "metrics": [
-      {
-        "unit": "",
-        "value": "0%",
-        "labelEn": "Sales commissions — every sale is 100% yours",
-        "labelEs": "Comisiones por venta — cada venta es 100% tuya"
-      },
-      {
-        "unit": "%",
-        "value": "99.9",
-        "labelEn": "Guaranteed uptime — even on Black Friday",
-        "labelEs": "Uptime garantizado — incluso en Black Friday"
-      },
-      {
-        "unit": "",
-        "value": "100%",
-        "labelEn": "Your customer data — on your infrastructure",
-        "labelEs": "Datos del cliente tuyos — en tu infraestructura"
-      },
-      {
-        "unit": "",
-        "value": "<2s",
-        "labelEn": "Load time — optimized checkout",
-        "labelEs": "Tiempo de carga — checkout optimizado"
-      }
-    ],
-    "faqs": [],
-    "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
-    "ctaPrimaryTextEn": "Tell us about your project",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": "",
-    "ctaSecondaryTextEn": "",
-    "ctaSecondaryUrl": "",
-    "coverImage": "",
-    "seoTitleEs": "E-commerce | Plataformas Propias",
-    "seoTitleEn": "E-commerce | Custom Platforms",
-    "seoDescriptionEs": "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
-    "seoDescriptionEn": "B2B and B2C digital stores with catalog, dynamic pricing, payment gateways and ERP integration.",
-    "schemaServiceJson": null,
-    "hubMetrics": [],
-    "frameworkTitleEs": "",
-    "frameworkTitleEn": "",
-    "frameworkSubtitleEs": "",
-    "frameworkSubtitleEn": "",
-    "frameworkPillars": [],
-    "sectorsTitleEs": "",
-    "sectorsTitleEn": "",
-    "sectors": [],
-    "sortOrder": 2,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:39.144Z",
-    "updatedAt": "2026-05-07T20:26:44.912Z",
-    "deletedAt": null
-  },
-  {
     "id": "4894094e-60a2-4665-a011-ceaa31ee8dc8",
     "slugEs": "ciberseguridad-ethical-hacking",
     "slugEn": "ethical-hacking",
@@ -2461,6 +1763,144 @@
     "deletedAt": null
   },
   {
+    "id": "f5ef82fc-0ed4-47bb-ab0a-5650a4902946",
+    "slugEs": "infraestructura",
+    "slugEn": "infrastructure",
+    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
+    "serviceType": "sub",
+    "accentColor": "cloud",
+    "icon": "hex-nodes",
+    "titleEs": "Infraestructura Cloud",
+    "titleEn": "Cloud Infrastructure",
+    "subtitleEs": "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
+    "subtitleEn": "Design and implementation of scalable, secure and optimized cloud infrastructure for your operation.",
+    "descriptionEs": "Multi-cloud con IaC y observabilidad. Arquitectura escalable desde el día 1.",
+    "descriptionEn": "Multi-cloud with IaC and observability. Scalable architecture from day 1.",
+    "benefits": [
+      {
+        "icon": "hex-cloud",
+        "copyEn": "We design architectures that leverage the best of AWS, GCP, and Azure, avoiding vendor lock-in and optimizing costs.",
+        "copyEs": "Diseñamos arquitecturas que aprovechan lo mejor de AWS, GCP y Azure, evitando vendor lock-in y optimizando costos.",
+        "titleEn": "Multi-cloud architecture",
+        "titleEs": "Arquitectura multi-cloud"
+      },
+      {
+        "icon": "oct-code",
+        "copyEn": "Versioned, reproducible, and auditable infrastructure as code with Terraform, Pulumi, or CloudFormation.",
+        "copyEs": "Infraestructura como código versionada, reproducible y auditada con Terraform, Pulumi o CloudFormation.",
+        "titleEn": "IaC with Terraform/Pulumi",
+        "titleEs": "IaC con Terraform/Pulumi"
+      },
+      {
+        "icon": "tri-check",
+        "copyEn": "Multi-AZ and multi-region architectures with defined RPO/RTO, automatic failover, and tested recovery plans.",
+        "copyEs": "Arquitecturas multi-AZ y multi-región con RPO/RTO definidos, failover automático y planes de recuperación probados.",
+        "titleEn": "High availability and disaster recovery",
+        "titleEs": "Alta disponibilidad y disaster recovery"
+      }
+    ],
+    "processSteps": null,
+    "metrics": [],
+    "faqs": null,
+    "ctaPrimaryTextEs": "Solicitar diseño",
+    "ctaPrimaryTextEn": "Request design",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": null,
+    "ctaSecondaryTextEn": null,
+    "ctaSecondaryUrl": null,
+    "coverImage": null,
+    "seoTitleEs": "Infraestructura Cloud | Multi-cloud con IaC",
+    "seoTitleEn": "Cloud Infrastructure | Multi-cloud with IaC",
+    "seoDescriptionEs": "Diseño e implementación de infraestructura cloud escalable, segura y optimizada para tu operación.",
+    "seoDescriptionEn": "Design and implementation of scalable, secure and optimized cloud infrastructure for your operation.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 3,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:37.650Z",
+    "updatedAt": "2026-09-21T20:33:27.468Z",
+    "deletedAt": null
+  },
+  {
+    "id": "98e77e02-3c1e-4b45-a705-7c4610876b4e",
+    "slugEs": "ecommerce",
+    "slugEn": "ecommerce",
+    "parentId": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
+    "serviceType": "sub",
+    "accentColor": "dev",
+    "icon": "hex-plus",
+    "titleEs": "E-commerce",
+    "titleEn": "E-commerce",
+    "subtitleEs": "E-commerce a medida con cero comisiones por transacción. Catálogo inteligente, pricing dinámico, pasarelas de pago y conexión real con tu ERP.",
+    "subtitleEn": "Custom e-commerce with zero transaction fees. Smart catalog, dynamic pricing, payment gateways and real integration with your ERP.",
+    "descriptionEs": "Plataformas propias sin comisiones. Arquitectura escalable para ventas digitales.",
+    "descriptionEn": "Own platforms with zero commissions. Scalable architecture for digital sales.",
+    "benefits": [
+      {
+        "icon": "hex-plus",
+        "copyEn": "Advanced catalog management with variants, segment-based pricing, scheduled discounts, and dynamic pricing rules.",
+        "copyEs": "Gestión avanzada de catálogo con variantes, precios por segmento, descuentos programados y reglas de pricing dinámico.",
+        "titleEn": "Dynamic catalog and pricing",
+        "titleEs": "Catálogo y pricing dinámico"
+      },
+      {
+        "icon": "credit-card",
+        "copyEn": "Integration with Stripe, MercadoPago, PayU and local gateways for secure payments with multiple payment methods.",
+        "copyEs": "Integración con Stripe, MercadoPago, PayU y pasarelas locales para pagos seguros con múltiples métodos de pago.",
+        "titleEn": "Integrated payment gateways",
+        "titleEs": "Pasarelas de pago integradas"
+      },
+      {
+        "icon": "package-check",
+        "copyEn": "Connection with SAP, Oracle, Odoo, and logistics systems for inventory synchronization, orders, and fulfillment.",
+        "copyEs": "Conexión con SAP, Oracle, Odoo y sistemas de logística para sincronización de inventario, órdenes y fulfillment.",
+        "titleEn": "ERP and logistics integration",
+        "titleEs": "Integración ERP y logística"
+      }
+    ],
+    "processSteps": [],
+    "metrics": [],
+    "faqs": [],
+    "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
+    "ctaPrimaryTextEn": "Tell us about your project",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "",
+    "ctaSecondaryTextEn": "",
+    "ctaSecondaryUrl": "",
+    "coverImage": "",
+    "seoTitleEs": "E-commerce | Plataformas Propias",
+    "seoTitleEn": "E-commerce | Custom Platforms",
+    "seoDescriptionEs": "Tiendas digitales B2B y B2C con catalogo, pricing dinamico, pasarelas de pago e integracion ERP.",
+    "seoDescriptionEn": "B2B and B2C digital stores with catalog, dynamic pricing, payment gateways and ERP integration.",
+    "schemaServiceJson": null,
+    "hubMetrics": [],
+    "frameworkTitleEs": "",
+    "frameworkTitleEn": "",
+    "frameworkSubtitleEs": "",
+    "frameworkSubtitleEn": "",
+    "frameworkPillars": [],
+    "sectorsTitleEs": "",
+    "sectorsTitleEn": "",
+    "sectors": [],
+    "sortOrder": 2,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:39.144Z",
+    "updatedAt": "2026-09-21T20:33:28.501Z",
+    "deletedAt": null
+  },
+  {
     "id": "2203a869-1373-417a-b8c7-8a7e07e7faca",
     "slugEs": "integracion-sistemas-mcp",
     "slugEn": "systems-integration-mcp",
@@ -2525,7 +1965,8 @@
         "number": 1,
         "titleEn": "Systems and data inventory",
         "titleEs": "Inventario de sistemas y datos",
-        "duration": "1 semana"
+        "duration": "1 semana",
+        "durationEn": "1 week"
       },
       {
         "descEn": "Every tool with its schema, its minimum permission and its read or write policy.",
@@ -2533,7 +1974,8 @@
         "number": 2,
         "titleEn": "Tool and permission design",
         "titleEs": "Diseño de herramientas y permisos",
-        "duration": "1–2 semanas"
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
       },
       {
         "descEn": "MCP servers and adapters with validation, limits and audit logging.",
@@ -2541,7 +1983,8 @@
         "number": 3,
         "titleEn": "Build servers and adapters",
         "titleEs": "Construcción de servidores y adaptadores",
-        "duration": "2–4 semanas"
+        "duration": "2–4 semanas",
+        "durationEn": "2–4 weeks"
       },
       {
         "descEn": "Injection through tools, permission abuse and behavior under load.",
@@ -2549,7 +1992,8 @@
         "number": 4,
         "titleEn": "Security and load testing",
         "titleEs": "Pruebas de seguridad y carga",
-        "duration": "1–2 semanas"
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
       },
       {
         "descEn": "Tool versioning, usage monitoring and evolution alongside your systems.",
@@ -2557,7 +2001,8 @@
         "number": 5,
         "titleEn": "Operation and versioning",
         "titleEs": "Operación y versionado",
-        "duration": "Continuo"
+        "duration": "Continuo",
+        "durationEn": "Ongoing"
       }
     ],
     "metrics": [],
@@ -2619,7 +2064,7 @@
     "translationStatusEn": "complete",
     "publishedAt": "2026-09-21T15:15:08.567Z",
     "createdAt": "2026-09-21T15:15:08.658Z",
-    "updatedAt": "2026-09-21T18:22:25.903Z",
+    "updatedAt": "2026-09-21T20:42:14.690Z",
     "deletedAt": null
   },
   {
@@ -2687,7 +2132,8 @@
         "number": 1,
         "titleEn": "Inventory and baseline",
         "titleEs": "Inventario y línea base",
-        "duration": "1–2 semanas"
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
       },
       {
         "descEn": "Traces, quality and cost metrics, and a dashboard per agent.",
@@ -2695,7 +2141,8 @@
         "number": 2,
         "titleEn": "Instrumentation and dashboards",
         "titleEs": "Instrumentación y tableros",
-        "duration": "1–2 semanas"
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
       },
       {
         "descEn": "Custom test suites and alerts on quality, drift and cost.",
@@ -2703,7 +2150,8 @@
         "number": 3,
         "titleEn": "Evals and alerts",
         "titleEs": "Evals y alertas",
-        "duration": "2 semanas"
+        "duration": "2 semanas",
+        "durationEn": "2 weeks"
       },
       {
         "descEn": "Agent-specific offensive testing and a remediation plan.",
@@ -2711,7 +2159,8 @@
         "number": 4,
         "titleEn": "Initial red teaming",
         "titleEs": "Red teaming inicial",
-        "duration": "1–2 semanas"
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
       },
       {
         "descEn": "Reports on quality, incidents, costs and improvements applied.",
@@ -2719,7 +2168,8 @@
         "number": 5,
         "titleEn": "Operation with periodic reports",
         "titleEs": "Operación con reportes periódicos",
-        "duration": "Continuo"
+        "duration": "Continuo",
+        "durationEn": "Ongoing"
       }
     ],
     "metrics": [],
@@ -2781,366 +2231,7 @@
     "translationStatusEn": "complete",
     "publishedAt": "2026-09-21T15:15:08.921Z",
     "createdAt": "2026-09-21T15:15:09.014Z",
-    "updatedAt": "2026-09-21T18:22:26.308Z",
-    "deletedAt": null
-  },
-  {
-    "id": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
-    "slugEs": "inteligencia-artificial",
-    "slugEn": "artificial-intelligence",
-    "parentId": null,
-    "serviceType": "hub",
-    "accentColor": "ia",
-    "icon": "brain",
-    "titleEs": "Agentes e IA aplicada",
-    "titleEn": "AI Agents & Applied AI",
-    "subtitleEs": "No son chatbots. Son agentes que se integran a tus sistemas, trabajan con permisos acotados y dejan rastro de cada decisión.",
-    "subtitleEn": "Not chatbots. Agents that plug into your systems, work with bounded permissions and leave a trail for every decision.",
-    "descriptionEs": "Diseñamos, integramos y operamos agentes de IA en producción: con verificación independiente, guardrails, observabilidad y la opción de correr sobre tu propia infraestructura.",
-    "descriptionEn": "We design, integrate and run AI agents in production: with independent verification, guardrails, observability and the option to run on your own infrastructure.",
-    "benefits": [
-      {
-        "icon": "oct-scan",
-        "copyEn": "",
-        "copyEs": "",
-        "titleEn": "Every action with side effects is traced and auditable",
-        "titleEs": "Toda acción con efecto queda trazada y es auditable"
-      },
-      {
-        "icon": "dia-check",
-        "copyEn": "",
-        "copyEs": "",
-        "titleEn": "No critical action without verification or human approval",
-        "titleEs": "Ninguna acción crítica sin verificación o aprobación humana"
-      },
-      {
-        "icon": "oct-lock",
-        "copyEn": "",
-        "copyEs": "",
-        "titleEn": "Custom evals before going to production",
-        "titleEs": "Evals propias antes de salir a producción"
-      }
-    ],
-    "processSteps": [
-      {
-        "descEn": "We identify which processes have the highest ROI when automated.",
-        "descEs": "Identificamos qué procesos tienen mayor ROI al automatizar.",
-        "number": 1,
-        "titleEn": "Process discovery",
-        "titleEs": "Discovery de procesos",
-        "duration": "Semana 1"
-      },
-      {
-        "descEn": "We build a proof of concept in your real environment.",
-        "descEs": "Construimos una prueba de concepto en tu entorno real.",
-        "number": 2,
-        "titleEn": "Functional POC",
-        "titleEs": "POC funcional",
-        "duration": "Semanas 2-3"
-      },
-      {
-        "descEn": "We refine, integrate, and deploy to production with monitoring.",
-        "descEs": "Refinamos, integramos y lanzamos a producción con monitoreo.",
-        "number": 3,
-        "titleEn": "MVP to production",
-        "titleEs": "MVP a producción",
-        "duration": "Semanas 4-8"
-      },
-      {
-        "descEn": "We monitor, evaluate and evolve the agent.",
-        "descEs": "Monitoreamos, evaluamos y evolucionamos el agente.",
-        "number": 4,
-        "titleEn": "Continuous operation",
-        "titleEs": "Operación continua",
-        "duration": "MRR ongoing"
-      }
-    ],
-    "metrics": [],
-    "faqs": [
-      {
-        "answerEn": "Custom AI agents that run real processes, integration of your systems through APIs and MCP, private AI deployments on your infrastructure or cloud, and ongoing agent operations (AgentOps). Also sales agents, process automation, content management and AI-powered marketing.",
-        "answerEs": "Agentes de IA a la medida que operan procesos reales, la integración de tus sistemas vía APIs y MCP, despliegues de IA privada en tu infraestructura o en tu nube, y la operación continua de agentes (AgentOps). También agentes comerciales, automatización de procesos, gestión de contenido y marketing con IA.",
-        "questionEn": "What does Nivelics build in artificial intelligence?",
-        "questionEs": "¿Qué construye Nivelics en inteligencia artificial?"
-      },
-      {
-        "answerEn": "With one concrete process. In discovery we define measurable success criteria, the systems involved, and which actions the agent can run on its own and which need approval. That leads to a controlled pilot in production.",
-        "answerEs": "Por un proceso concreto. En el discovery definimos criterios de éxito medibles, los sistemas involucrados y qué acciones puede ejecutar el agente solo y cuáles requieren aprobación. De ahí sale un piloto controlado en producción.",
-        "questionEn": "Where do we start?",
-        "questionEs": "¿Por dónde empezamos?"
-      },
-      {
-        "answerEn": "Not with the architecture we design. We can process your data in your cloud (Amazon Bedrock or Azure OpenAI, with regional deployments and without the provider using it for training) or on your own infrastructure with open-weight models.",
-        "answerEs": "No con la arquitectura que diseñamos. Podemos procesar tus datos en tu nube (Amazon Bedrock o Azure OpenAI, con despliegues regionales y sin que el proveedor los use para entrenar) o en tu propia infraestructura con modelos de pesos abiertos.",
-        "questionEn": "Is our data used to train models?",
-        "questionEs": "¿Nuestros datos se usan para entrenar modelos?"
-      },
-      {
-        "answerEn": "We design so errors are detectable and contained: an independent verifier, evals before every change, human approval for irreversible actions and per-action traceability. Every production error becomes a test case.",
-        "answerEs": "Diseñamos para que el error sea detectable y contenido: verificador independiente, evals antes de cada cambio, aprobación humana en acciones irreversibles y trazabilidad de cada acción. Cada error en producción se vuelve un caso de prueba.",
-        "questionEn": "What happens if the agent makes a mistake?",
-        "questionEs": "¿Qué pasa si el agente se equivoca?"
-      },
-      {
-        "answerEn": "We design agents to absorb repetitive, high-volume work and to keep important decisions in people's hands.",
-        "answerEs": "Diseñamos agentes para que absorban el trabajo repetitivo y de alto volumen, y para que las decisiones importantes sigan en manos de las personas.",
-        "questionEn": "Will AI replace my team?",
-        "questionEs": "¿La IA reemplaza a mi equipo?"
-      }
-    ],
-    "ctaPrimaryTextEs": "Ver soluciones",
-    "ctaPrimaryTextEn": "See our solutions",
-    "ctaPrimaryUrl": "#sub-services",
-    "ctaSecondaryTextEs": "Hablar con un experto",
-    "ctaSecondaryTextEn": "Talk to an expert",
-    "ctaSecondaryUrl": "/contacto",
-    "coverImage": "",
-    "seoTitleEs": "Agentes de IA en producción para empresas",
-    "seoTitleEn": "Production-ready AI agent development for enterprises",
-    "seoDescriptionEs": "Diseñamos, integramos y operamos agentes de IA en producción: integración vía MCP, IA privada, evals, guardrails y AgentOps. Sin cambiar tus sistemas.",
-    "seoDescriptionEn": "We design, integrate and run AI agents in production: MCP integration, private AI, evals, guardrails and AgentOps. Without changing your systems.",
-    "schemaServiceJson": null,
-    "hubMetrics": [],
-    "frameworkTitleEs": "Harness: 7 capas alrededor del modelo",
-    "frameworkTitleEn": "The harness: 7 layers around the model",
-    "frameworkSubtitleEs": "El modelo es la parte fácil. Lo que hace confiable a un agente es todo lo que lo rodea.",
-    "frameworkSubtitleEn": "The model is the easy part. What makes an agent trustworthy is everything around it.",
-    "frameworkPillars": [
-      {
-        "descEn": "The model never touches a system directly: an intermediate layer validates, limits and logs every call.",
-        "descEs": "El modelo nunca toca un sistema directamente: una capa intermedia valida, limita y registra cada llamada.",
-        "letter": "H",
-        "titleEn": "Orchestrated tools",
-        "titleEs": "Herramientas orquestadas",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      },
-      {
-        "descEn": "Whoever checks is not whoever acts. A verifier approves every action with side effects before it runs.",
-        "descEs": "Quien revisa no es quien hace. Un verificador aprueba cada acción con efecto antes de ejecutarla.",
-        "letter": "V",
-        "titleEn": "Independent verification",
-        "titleEs": "Verificación independiente",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      },
-      {
-        "descEn": "The agent gets only what it needs, from permissioned sources, and forgets what it should forget.",
-        "descEs": "El agente recibe solo lo que necesita, de fuentes con permisos, y olvida lo que debe olvidar.",
-        "letter": "C",
-        "titleEn": "Context and memory",
-        "titleEs": "Contexto y memoria",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      },
-      {
-        "descEn": "Behavioral, data, tool and operational limits, defined before the first prompt is written.",
-        "descEs": "Límites de comportamiento, de datos, de herramientas y operativos, definidos antes de escribir el primer prompt.",
-        "letter": "G",
-        "titleEn": "Guardrails",
-        "titleEs": "Guardrails",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      },
-      {
-        "descEn": "Every step is traced: what it saw, what it decided, which tool it used and with what permission. Designed to catch drift before your users do.",
-        "descEs": "Cada paso queda trazado: qué vio, qué decidió, qué herramienta usó y con qué permiso. Diseñada para detectar el drift antes de que lo noten tus usuarios.",
-        "letter": "O",
-        "titleEn": "Observability",
-        "titleEs": "Observabilidad",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      },
-      {
-        "descEn": "Every task goes to the right model by cost, latency and data sensitivity, including private models.",
-        "descEs": "Cada tarea va al modelo adecuado por costo, latencia y sensibilidad del dato, incluidos modelos privados.",
-        "letter": "E",
-        "titleEn": "Model routing",
-        "titleEs": "Enrutamiento de modelos",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      },
-      {
-        "descEn": "Production errors become test cases. The agent improves on evidence, not intuition.",
-        "descEs": "Los errores en producción se convierten en casos de prueba. El agente mejora con evidencia, no con intuición.",
-        "letter": "F",
-        "titleEn": "Continuous feedback",
-        "titleEs": "Feedback continuo",
-        "colorClass": "text-ia",
-        "borderClass": "border-violet-500/20"
-      }
-    ],
-    "sectorsTitleEs": "",
-    "sectorsTitleEn": "",
-    "sectors": [],
-    "sortOrder": 1,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": null,
-    "createdAt": "2026-04-09T01:55:35.731Z",
-    "updatedAt": "2026-09-21T18:22:25.442Z",
-    "deletedAt": null
-  },
-  {
-    "id": "0499effa-6d9b-4b6c-a62c-764f246a2767",
-    "slugEs": "ia-privada-on-premise",
-    "slugEn": "private-ai-on-premises",
-    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
-    "serviceType": "sub",
-    "accentColor": "ia",
-    "icon": "oct-lock",
-    "titleEs": "IA privada",
-    "titleEn": "Private AI",
-    "subtitleEs": "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
-    "subtitleEn": "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
-    "descriptionEs": "Para organizaciones donde la información no puede salir de su control, desplegamos agentes con modelos de pesos abiertos en tu infraestructura o con modelos comerciales consumidos desde tu propia cuenta de nube. El rigor de evaluación, seguridad y operación es el mismo en ambos casos.",
-    "descriptionEn": "For organizations whose information cannot leave their control, we deploy agents with open-weight models on your infrastructure or with commercial models consumed from your own cloud account. The rigor of evaluation, security and operation is the same either way.",
-    "benefits": [
-      {
-        "icon": "oct-cube",
-        "copyEn": "vLLM for production and Ollama for pilots, on your GPU servers, with quantization and sizing for your load.",
-        "copyEs": "vLLM para producción y Ollama para pilotos, en tus servidores con GPU, con cuantización y dimensionamiento según tu carga.",
-        "titleEn": "On-premises deployment of open models",
-        "titleEs": "Despliegue on-premise de modelos abiertos"
-      },
-      {
-        "icon": "hex-cloud",
-        "copyEn": "Commercial models through Amazon Bedrock or Azure OpenAI, consumed from your account, in your region and under your access controls.",
-        "copyEs": "Modelos comerciales vía Amazon Bedrock o Azure OpenAI, consumidos desde tu cuenta, en tu región y con tus controles de acceso.",
-        "titleEn": "Cloud in your own account",
-        "titleEs": "Nube en tu cuenta"
-      },
-      {
-        "icon": "dia-flow",
-        "copyEn": "We classify the sensitivity of every request and send it to the allowed model: the private one for sensitive data and the most capable one for everything else.",
-        "copyEs": "Clasificamos la sensibilidad de cada solicitud y la enviamos al modelo permitido: el privado para lo sensible y el más capaz para lo general.",
-        "titleEn": "Hybrid architecture with routing",
-        "titleEs": "Arquitectura híbrida con enrutamiento"
-      },
-      {
-        "icon": "dia-target",
-        "copyEn": "We compare models on your real tasks before you invest in infrastructure.",
-        "copyEs": "Comparamos modelos con tus tareas reales antes de invertir en infraestructura.",
-        "titleEn": "Model evaluation and selection",
-        "titleEs": "Evaluación y selección de modelos"
-      },
-      {
-        "icon": "oct-lock",
-        "copyEn": "Deployments with no internet egress and controlled updates for models and dependencies.",
-        "copyEs": "Despliegues sin salida a internet, con actualizaciones controladas de modelos y dependencias.",
-        "titleEn": "Air-gapped environments",
-        "titleEs": "Entornos aislados"
-      },
-      {
-        "icon": "dia-search",
-        "copyEn": "Search over your documents with indexes and embeddings that also stay on your infrastructure.",
-        "copyEs": "Búsqueda sobre tus documentos con índices y embeddings que también se quedan en tu infraestructura.",
-        "titleEn": "Private RAG",
-        "titleEs": "RAG privado"
-      }
-    ],
-    "processSteps": [
-      {
-        "descEn": "Which data is involved, how sensitive it is and what regulation or contracts require.",
-        "descEs": "Qué datos intervienen, qué nivel de sensibilidad tienen y qué exige la regulación o el contrato.",
-        "number": 1,
-        "titleEn": "Data classification and requirements",
-        "titleEs": "Clasificación de datos y requisitos",
-        "duration": "1–2 semanas"
-      },
-      {
-        "descEn": "We measure quality, latency and operating cost of candidate models on your real tasks.",
-        "descEs": "Medimos calidad, latencia y costo operativo de los modelos candidatos con tus tareas reales.",
-        "number": 2,
-        "titleEn": "Model benchmark on your cases",
-        "titleEs": "Benchmark de modelos con tus casos",
-        "duration": "2 semanas"
-      },
-      {
-        "descEn": "GPU, memory, storage and network based on the model and expected load.",
-        "descEs": "GPU, memoria, almacenamiento y red según el modelo y la carga esperada.",
-        "number": 3,
-        "titleEn": "Infrastructure design and sizing",
-        "titleEs": "Diseño de infraestructura y dimensionamiento",
-        "duration": "1–2 semanas"
-      },
-      {
-        "descEn": "Installation, security hardening, load and behavior testing.",
-        "descEs": "Instalación, endurecimiento de seguridad, pruebas de carga y de comportamiento.",
-        "number": 4,
-        "titleEn": "Deployment, hardening and testing",
-        "titleEs": "Despliegue, hardening y pruebas",
-        "duration": "2–4 semanas"
-      },
-      {
-        "descEn": "Controlled updates, regression evals and monitoring.",
-        "descEs": "Actualizaciones controladas, evals de regresión y monitoreo.",
-        "number": 5,
-        "titleEn": "Operation, model updates and evals",
-        "titleEs": "Operación, actualización de modelos y evals",
-        "duration": "Continuo"
-      }
-    ],
-    "metrics": [],
-    "faqs": [
-      {
-        "answerEn": "For many bounded tasks, yes; for others, no. That is why we measure on your real cases before deciding, and design hybrid architectures when they make sense.",
-        "answerEs": "Para muchas tareas acotadas, sí; para otras, no. Por eso medimos con tus casos reales antes de decidir, y diseñamos arquitecturas híbridas cuando conviene.",
-        "questionEn": "Is an open model as good as a commercial one?",
-        "questionEs": "¿Un modelo abierto es tan bueno como uno comercial?"
-      },
-      {
-        "answerEn": "It depends on the model and the load. In the benchmark we size GPU, memory and storage. You can also start in your own cloud account and migrate later.",
-        "answerEs": "Depende del modelo y de la carga. En el benchmark dimensionamos GPU, memoria y almacenamiento. También se puede empezar en la nube de tu cuenta y migrar después.",
-        "questionEn": "What infrastructure do we need?",
-        "questionEs": "¿Qué infraestructura necesitamos?"
-      },
-      {
-        "answerEn": "Yes. We design air-gapped deployments with a controlled process for updating models and dependencies.",
-        "answerEs": "Sí. Diseñamos despliegues aislados con un proceso controlado para actualizar modelos y dependencias.",
-        "questionEn": "Can it run with no internet connection?",
-        "questionEs": "¿Pueden operar sin conexión a internet?"
-      },
-      {
-        "answerEn": "It helps, but compliance depends on your policies and processes. We work with your legal and security teams so the architecture supports those requirements (for example, Colombia's Law 1581 of 2012 on personal data protection).",
-        "answerEs": "Ayuda a cumplirla, pero el cumplimiento depende de tus políticas y procesos. Trabajamos con tu equipo legal y de seguridad para que la arquitectura respalde esos requisitos (por ejemplo, la Ley 1581 de 2012).",
-        "questionEn": "Does this make us compliant with data regulation?",
-        "questionEs": "¿Esto nos hace cumplir la regulación de datos?"
-      },
-      {
-        "answerEn": "We can operate them through AgentOps or hand the operation over to your team, with documentation and support.",
-        "answerEs": "Podemos operarlos nosotros con AgentOps o transferir la operación a tu equipo, con documentación y acompañamiento.",
-        "questionEn": "Who operates the models afterwards?",
-        "questionEs": "¿Quién opera los modelos después?"
-      }
-    ],
-    "ctaPrimaryTextEs": "Diseñar mi arquitectura privada",
-    "ctaPrimaryTextEn": "Design my private architecture",
-    "ctaPrimaryUrl": "/contacto",
-    "ctaSecondaryTextEs": "Ver modelos de despliegue",
-    "ctaSecondaryTextEn": "See deployment models",
-    "ctaSecondaryUrl": "#soluciones",
-    "coverImage": null,
-    "seoTitleEs": "IA privada: agentes con modelos en tu infraestructura",
-    "seoTitleEn": "Private AI: agents with models on your infrastructure",
-    "seoDescriptionEs": "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
-    "seoDescriptionEn": "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
-    "schemaServiceJson": null,
-    "hubMetrics": null,
-    "frameworkTitleEs": null,
-    "frameworkTitleEn": null,
-    "frameworkSubtitleEs": null,
-    "frameworkSubtitleEn": null,
-    "frameworkPillars": null,
-    "sectorsTitleEs": null,
-    "sectorsTitleEn": null,
-    "sectors": null,
-    "sortOrder": 3,
-    "status": "published",
-    "translationStatusEn": "complete",
-    "publishedAt": "2026-09-21T15:15:08.737Z",
-    "createdAt": "2026-09-21T15:15:08.826Z",
-    "updatedAt": "2026-09-21T18:22:26.105Z",
+    "updatedAt": "2026-09-21T20:42:14.774Z",
     "deletedAt": null
   },
   {
@@ -3341,6 +2432,726 @@
     "publishedAt": null,
     "createdAt": "2026-04-09T01:55:37.142Z",
     "updatedAt": "2026-09-21T18:22:26.928Z",
+    "deletedAt": null
+  },
+  {
+    "id": "0499effa-6d9b-4b6c-a62c-764f246a2767",
+    "slugEs": "ia-privada-on-premise",
+    "slugEn": "private-ai-on-premises",
+    "parentId": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
+    "serviceType": "sub",
+    "accentColor": "ia",
+    "icon": "oct-lock",
+    "titleEs": "IA privada",
+    "titleEn": "Private AI",
+    "subtitleEs": "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
+    "subtitleEn": "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
+    "descriptionEs": "Para organizaciones donde la información no puede salir de su control, desplegamos agentes con modelos de pesos abiertos en tu infraestructura o con modelos comerciales consumidos desde tu propia cuenta de nube. El rigor de evaluación, seguridad y operación es el mismo en ambos casos.",
+    "descriptionEn": "For organizations whose information cannot leave their control, we deploy agents with open-weight models on your infrastructure or with commercial models consumed from your own cloud account. The rigor of evaluation, security and operation is the same either way.",
+    "benefits": [
+      {
+        "icon": "oct-cube",
+        "copyEn": "vLLM for production and Ollama for pilots, on your GPU servers, with quantization and sizing for your load.",
+        "copyEs": "vLLM para producción y Ollama para pilotos, en tus servidores con GPU, con cuantización y dimensionamiento según tu carga.",
+        "titleEn": "On-premises deployment of open models",
+        "titleEs": "Despliegue on-premise de modelos abiertos"
+      },
+      {
+        "icon": "hex-cloud",
+        "copyEn": "Commercial models through Amazon Bedrock or Azure OpenAI, consumed from your account, in your region and under your access controls.",
+        "copyEs": "Modelos comerciales vía Amazon Bedrock o Azure OpenAI, consumidos desde tu cuenta, en tu región y con tus controles de acceso.",
+        "titleEn": "Cloud in your own account",
+        "titleEs": "Nube en tu cuenta"
+      },
+      {
+        "icon": "dia-flow",
+        "copyEn": "We classify the sensitivity of every request and send it to the allowed model: the private one for sensitive data and the most capable one for everything else.",
+        "copyEs": "Clasificamos la sensibilidad de cada solicitud y la enviamos al modelo permitido: el privado para lo sensible y el más capaz para lo general.",
+        "titleEn": "Hybrid architecture with routing",
+        "titleEs": "Arquitectura híbrida con enrutamiento"
+      },
+      {
+        "icon": "dia-target",
+        "copyEn": "We compare models on your real tasks before you invest in infrastructure.",
+        "copyEs": "Comparamos modelos con tus tareas reales antes de invertir en infraestructura.",
+        "titleEn": "Model evaluation and selection",
+        "titleEs": "Evaluación y selección de modelos"
+      },
+      {
+        "icon": "oct-lock",
+        "copyEn": "Deployments with no internet egress and controlled updates for models and dependencies.",
+        "copyEs": "Despliegues sin salida a internet, con actualizaciones controladas de modelos y dependencias.",
+        "titleEn": "Air-gapped environments",
+        "titleEs": "Entornos aislados"
+      },
+      {
+        "icon": "dia-search",
+        "copyEn": "Search over your documents with indexes and embeddings that also stay on your infrastructure.",
+        "copyEs": "Búsqueda sobre tus documentos con índices y embeddings que también se quedan en tu infraestructura.",
+        "titleEn": "Private RAG",
+        "titleEs": "RAG privado"
+      }
+    ],
+    "processSteps": [
+      {
+        "descEn": "Which data is involved, how sensitive it is and what regulation or contracts require.",
+        "descEs": "Qué datos intervienen, qué nivel de sensibilidad tienen y qué exige la regulación o el contrato.",
+        "number": 1,
+        "titleEn": "Data classification and requirements",
+        "titleEs": "Clasificación de datos y requisitos",
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
+      },
+      {
+        "descEn": "We measure quality, latency and operating cost of candidate models on your real tasks.",
+        "descEs": "Medimos calidad, latencia y costo operativo de los modelos candidatos con tus tareas reales.",
+        "number": 2,
+        "titleEn": "Model benchmark on your cases",
+        "titleEs": "Benchmark de modelos con tus casos",
+        "duration": "2 semanas",
+        "durationEn": "2 weeks"
+      },
+      {
+        "descEn": "GPU, memory, storage and network based on the model and expected load.",
+        "descEs": "GPU, memoria, almacenamiento y red según el modelo y la carga esperada.",
+        "number": 3,
+        "titleEn": "Infrastructure design and sizing",
+        "titleEs": "Diseño de infraestructura y dimensionamiento",
+        "duration": "1–2 semanas",
+        "durationEn": "1–2 weeks"
+      },
+      {
+        "descEn": "Installation, security hardening, load and behavior testing.",
+        "descEs": "Instalación, endurecimiento de seguridad, pruebas de carga y de comportamiento.",
+        "number": 4,
+        "titleEn": "Deployment, hardening and testing",
+        "titleEs": "Despliegue, hardening y pruebas",
+        "duration": "2–4 semanas",
+        "durationEn": "2–4 weeks"
+      },
+      {
+        "descEn": "Controlled updates, regression evals and monitoring.",
+        "descEs": "Actualizaciones controladas, evals de regresión y monitoreo.",
+        "number": 5,
+        "titleEn": "Operation, model updates and evals",
+        "titleEs": "Operación, actualización de modelos y evals",
+        "duration": "Continuo",
+        "durationEn": "Ongoing"
+      }
+    ],
+    "metrics": [],
+    "faqs": [
+      {
+        "answerEn": "For many bounded tasks, yes; for others, no. That is why we measure on your real cases before deciding, and design hybrid architectures when they make sense.",
+        "answerEs": "Para muchas tareas acotadas, sí; para otras, no. Por eso medimos con tus casos reales antes de decidir, y diseñamos arquitecturas híbridas cuando conviene.",
+        "questionEn": "Is an open model as good as a commercial one?",
+        "questionEs": "¿Un modelo abierto es tan bueno como uno comercial?"
+      },
+      {
+        "answerEn": "It depends on the model and the load. In the benchmark we size GPU, memory and storage. You can also start in your own cloud account and migrate later.",
+        "answerEs": "Depende del modelo y de la carga. En el benchmark dimensionamos GPU, memoria y almacenamiento. También se puede empezar en la nube de tu cuenta y migrar después.",
+        "questionEn": "What infrastructure do we need?",
+        "questionEs": "¿Qué infraestructura necesitamos?"
+      },
+      {
+        "answerEn": "Yes. We design air-gapped deployments with a controlled process for updating models and dependencies.",
+        "answerEs": "Sí. Diseñamos despliegues aislados con un proceso controlado para actualizar modelos y dependencias.",
+        "questionEn": "Can it run with no internet connection?",
+        "questionEs": "¿Pueden operar sin conexión a internet?"
+      },
+      {
+        "answerEn": "It helps, but compliance depends on your policies and processes. We work with your legal and security teams so the architecture supports those requirements (for example, Colombia's Law 1581 of 2012 on personal data protection).",
+        "answerEs": "Ayuda a cumplirla, pero el cumplimiento depende de tus políticas y procesos. Trabajamos con tu equipo legal y de seguridad para que la arquitectura respalde esos requisitos (por ejemplo, la Ley 1581 de 2012).",
+        "questionEn": "Does this make us compliant with data regulation?",
+        "questionEs": "¿Esto nos hace cumplir la regulación de datos?"
+      },
+      {
+        "answerEn": "We can operate them through AgentOps or hand the operation over to your team, with documentation and support.",
+        "answerEs": "Podemos operarlos nosotros con AgentOps o transferir la operación a tu equipo, con documentación y acompañamiento.",
+        "questionEn": "Who operates the models afterwards?",
+        "questionEs": "¿Quién opera los modelos después?"
+      }
+    ],
+    "ctaPrimaryTextEs": "Diseñar mi arquitectura privada",
+    "ctaPrimaryTextEn": "Design my private architecture",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": "Ver modelos de despliegue",
+    "ctaSecondaryTextEn": "See deployment models",
+    "ctaSecondaryUrl": "#soluciones",
+    "coverImage": null,
+    "seoTitleEs": "IA privada: agentes con modelos en tu infraestructura",
+    "seoTitleEn": "Private AI: agents with models on your infrastructure",
+    "seoDescriptionEs": "Agentes de IA con modelos abiertos en tu infraestructura o en tu cuenta de nube (Amazon Bedrock, Azure OpenAI), con enrutamiento por sensibilidad del dato.",
+    "seoDescriptionEn": "AI agents with open-weight models on your infrastructure or in your own cloud account (Amazon Bedrock, Azure OpenAI), with routing by data sensitivity.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 3,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": "2026-09-21T15:15:08.737Z",
+    "createdAt": "2026-09-21T15:15:08.826Z",
+    "updatedAt": "2026-09-21T20:42:14.946Z",
+    "deletedAt": null
+  },
+  {
+    "id": "a54c32a1-d3e9-454d-b722-34cba902346c",
+    "slugEs": "apps-moviles",
+    "slugEn": "mobile-apps",
+    "parentId": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
+    "serviceType": "sub",
+    "accentColor": "dev",
+    "icon": "tri-rocket",
+    "titleEs": "Apps Móviles",
+    "titleEn": "Mobile Apps",
+    "subtitleEs": "iOS, Android, Flutter y React Native. Construimos apps nativas y cross-platform con entregas quincenales, QA integrado y código 100% tuyo desde el primer sprint.",
+    "subtitleEn": "iOS, Android, Flutter, and React Native. We build native and cross-platform apps with bi-weekly deliveries, integrated QA, and 100% your code from the first sprint.",
+    "descriptionEs": "iOS, Android, Flutter, React Native. Desarrollo nativo y cross-platform.",
+    "descriptionEn": "iOS, Android, Flutter, React Native. Native and cross-platform development.",
+    "benefits": [
+      {
+        "icon": "tri-rocket",
+        "copyEn": "Native development with Swift and Kotlin for apps that maximize each platform's capabilities.",
+        "copyEs": "Desarrollo nativo con Swift y Kotlin para apps que aprovechan al máximo las capacidades de cada plataforma.",
+        "titleEn": "Native iOS and Android",
+        "titleEs": "iOS y Android nativo"
+      },
+      {
+        "icon": "repeat",
+        "copyEn": "A single codebase for iOS and Android with React Native or Flutter, reducing development time and costs.",
+        "copyEs": "Una sola base de código para iOS y Android con React Native o Flutter, reduciendo tiempos y costos de desarrollo.",
+        "titleEn": "Cross-platform with React Native/Flutter",
+        "titleEs": "Cross-platform con React Native/Flutter"
+      },
+      {
+        "icon": "monitor-smartphone",
+        "copyEn": "Mobile experience-centered design with native gestures, fluid animations and optimized performance.",
+        "copyEs": "Diseño centrado en la experiencia móvil con gestos nativos, animaciones fluidas y rendimiento optimizado.",
+        "titleEn": "Mobile-first UX",
+        "titleEs": "UX mobile-first"
+      }
+    ],
+    "processSteps": null,
+    "metrics": [],
+    "faqs": null,
+    "ctaPrimaryTextEs": "Cuéntanos tu proyecto",
+    "ctaPrimaryTextEn": "Tell us about your project",
+    "ctaPrimaryUrl": "/contacto",
+    "ctaSecondaryTextEs": null,
+    "ctaSecondaryTextEn": null,
+    "ctaSecondaryUrl": null,
+    "coverImage": null,
+    "seoTitleEs": "Apps Móviles | iOS, Android, Flutter",
+    "seoTitleEn": "Mobile Apps | iOS, Android, Flutter",
+    "seoDescriptionEs": "Apps nativas y cross-platform con React Native, Flutter, Swift y Kotlin. De la idea al App Store.",
+    "seoDescriptionEn": "Native and cross-platform apps with React Native, Flutter, Swift and Kotlin. From idea to App Store.",
+    "schemaServiceJson": null,
+    "hubMetrics": null,
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": null,
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": null,
+    "sortOrder": 1,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:38.975Z",
+    "updatedAt": "2026-09-21T20:33:28.418Z",
+    "deletedAt": null
+  },
+  {
+    "id": "19d587a6-3702-44b0-bcbd-ef3daeeb0b47",
+    "slugEs": "inteligencia-artificial",
+    "slugEn": "artificial-intelligence",
+    "parentId": null,
+    "serviceType": "hub",
+    "accentColor": "ia",
+    "icon": "brain",
+    "titleEs": "Agentes e IA aplicada",
+    "titleEn": "AI Agents & Applied AI",
+    "subtitleEs": "No son chatbots. Son agentes que se integran a tus sistemas, trabajan con permisos acotados y dejan rastro de cada decisión.",
+    "subtitleEn": "Not chatbots. Agents that plug into your systems, work with bounded permissions and leave a trail for every decision.",
+    "descriptionEs": "Diseñamos, integramos y operamos agentes de IA en producción: con verificación independiente, guardrails, observabilidad y la opción de correr sobre tu propia infraestructura.",
+    "descriptionEn": "We design, integrate and run AI agents in production: with independent verification, guardrails, observability and the option to run on your own infrastructure.",
+    "benefits": [
+      {
+        "icon": "oct-scan",
+        "copyEn": "",
+        "copyEs": "",
+        "titleEn": "Every action with side effects is traced and auditable",
+        "titleEs": "Toda acción con efecto queda trazada y es auditable"
+      },
+      {
+        "icon": "dia-check",
+        "copyEn": "",
+        "copyEs": "",
+        "titleEn": "No critical action without verification or human approval",
+        "titleEs": "Ninguna acción crítica sin verificación o aprobación humana"
+      },
+      {
+        "icon": "oct-lock",
+        "copyEn": "",
+        "copyEs": "",
+        "titleEn": "Custom evals before going to production",
+        "titleEs": "Evals propias antes de salir a producción"
+      }
+    ],
+    "processSteps": [
+      {
+        "descEn": "We identify which processes have the highest ROI when automated.",
+        "descEs": "Identificamos qué procesos tienen mayor ROI al automatizar.",
+        "number": 1,
+        "titleEn": "Process discovery",
+        "titleEs": "Discovery de procesos",
+        "duration": "Semana 1",
+        "durationEn": "Week 1"
+      },
+      {
+        "descEn": "We build a proof of concept in your real environment.",
+        "descEs": "Construimos una prueba de concepto en tu entorno real.",
+        "number": 2,
+        "titleEn": "Functional POC",
+        "titleEs": "POC funcional",
+        "duration": "Semanas 2-3",
+        "durationEn": "Weeks 2-3"
+      },
+      {
+        "descEn": "We refine, integrate, and deploy to production with monitoring.",
+        "descEs": "Refinamos, integramos y lanzamos a producción con monitoreo.",
+        "number": 3,
+        "titleEn": "MVP to production",
+        "titleEs": "MVP a producción",
+        "duration": "Semanas 4-8",
+        "durationEn": "Weeks 4-8"
+      },
+      {
+        "descEn": "We monitor, evaluate and evolve the agent.",
+        "descEs": "Monitoreamos, evaluamos y evolucionamos el agente.",
+        "number": 4,
+        "titleEn": "Continuous operation",
+        "titleEs": "Operación continua",
+        "duration": "MRR ongoing",
+        "durationEn": "MRR ongoing"
+      }
+    ],
+    "metrics": [],
+    "faqs": [
+      {
+        "answerEn": "Custom AI agents that run real processes, integration of your systems through APIs and MCP, private AI deployments on your infrastructure or cloud, and ongoing agent operations (AgentOps). Also sales agents, process automation, content management and AI-powered marketing.",
+        "answerEs": "Agentes de IA a la medida que operan procesos reales, la integración de tus sistemas vía APIs y MCP, despliegues de IA privada en tu infraestructura o en tu nube, y la operación continua de agentes (AgentOps). También agentes comerciales, automatización de procesos, gestión de contenido y marketing con IA.",
+        "questionEn": "What does Nivelics build in artificial intelligence?",
+        "questionEs": "¿Qué construye Nivelics en inteligencia artificial?"
+      },
+      {
+        "answerEn": "With one concrete process. In discovery we define measurable success criteria, the systems involved, and which actions the agent can run on its own and which need approval. That leads to a controlled pilot in production.",
+        "answerEs": "Por un proceso concreto. En el discovery definimos criterios de éxito medibles, los sistemas involucrados y qué acciones puede ejecutar el agente solo y cuáles requieren aprobación. De ahí sale un piloto controlado en producción.",
+        "questionEn": "Where do we start?",
+        "questionEs": "¿Por dónde empezamos?"
+      },
+      {
+        "answerEn": "Not with the architecture we design. We can process your data in your cloud (Amazon Bedrock or Azure OpenAI, with regional deployments and without the provider using it for training) or on your own infrastructure with open-weight models.",
+        "answerEs": "No con la arquitectura que diseñamos. Podemos procesar tus datos en tu nube (Amazon Bedrock o Azure OpenAI, con despliegues regionales y sin que el proveedor los use para entrenar) o en tu propia infraestructura con modelos de pesos abiertos.",
+        "questionEn": "Is our data used to train models?",
+        "questionEs": "¿Nuestros datos se usan para entrenar modelos?"
+      },
+      {
+        "answerEn": "We design so errors are detectable and contained: an independent verifier, evals before every change, human approval for irreversible actions and per-action traceability. Every production error becomes a test case.",
+        "answerEs": "Diseñamos para que el error sea detectable y contenido: verificador independiente, evals antes de cada cambio, aprobación humana en acciones irreversibles y trazabilidad de cada acción. Cada error en producción se vuelve un caso de prueba.",
+        "questionEn": "What happens if the agent makes a mistake?",
+        "questionEs": "¿Qué pasa si el agente se equivoca?"
+      },
+      {
+        "answerEn": "We design agents to absorb repetitive, high-volume work and to keep important decisions in people's hands.",
+        "answerEs": "Diseñamos agentes para que absorban el trabajo repetitivo y de alto volumen, y para que las decisiones importantes sigan en manos de las personas.",
+        "questionEn": "Will AI replace my team?",
+        "questionEs": "¿La IA reemplaza a mi equipo?"
+      }
+    ],
+    "ctaPrimaryTextEs": "Ver soluciones",
+    "ctaPrimaryTextEn": "See our solutions",
+    "ctaPrimaryUrl": "#sub-services",
+    "ctaSecondaryTextEs": "Hablar con un experto",
+    "ctaSecondaryTextEn": "Talk to an expert",
+    "ctaSecondaryUrl": "/contacto",
+    "coverImage": "",
+    "seoTitleEs": "Agentes de IA en producción para empresas",
+    "seoTitleEn": "Production-ready AI agent development for enterprises",
+    "seoDescriptionEs": "Diseñamos, integramos y operamos agentes de IA en producción: integración vía MCP, IA privada, evals, guardrails y AgentOps. Sin cambiar tus sistemas.",
+    "seoDescriptionEn": "We design, integrate and run AI agents in production: MCP integration, private AI, evals, guardrails and AgentOps. Without changing your systems.",
+    "schemaServiceJson": null,
+    "hubMetrics": [],
+    "frameworkTitleEs": "Harness: 7 capas alrededor del modelo",
+    "frameworkTitleEn": "The harness: 7 layers around the model",
+    "frameworkSubtitleEs": "El modelo es la parte fácil. Lo que hace confiable a un agente es todo lo que lo rodea.",
+    "frameworkSubtitleEn": "The model is the easy part. What makes an agent trustworthy is everything around it.",
+    "frameworkPillars": [
+      {
+        "descEn": "The model never touches a system directly: an intermediate layer validates, limits and logs every call.",
+        "descEs": "El modelo nunca toca un sistema directamente: una capa intermedia valida, limita y registra cada llamada.",
+        "letter": "H",
+        "titleEn": "Orchestrated tools",
+        "titleEs": "Herramientas orquestadas",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      },
+      {
+        "descEn": "Whoever checks is not whoever acts. A verifier approves every action with side effects before it runs.",
+        "descEs": "Quien revisa no es quien hace. Un verificador aprueba cada acción con efecto antes de ejecutarla.",
+        "letter": "V",
+        "titleEn": "Independent verification",
+        "titleEs": "Verificación independiente",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      },
+      {
+        "descEn": "The agent gets only what it needs, from permissioned sources, and forgets what it should forget.",
+        "descEs": "El agente recibe solo lo que necesita, de fuentes con permisos, y olvida lo que debe olvidar.",
+        "letter": "C",
+        "titleEn": "Context and memory",
+        "titleEs": "Contexto y memoria",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      },
+      {
+        "descEn": "Behavioral, data, tool and operational limits, defined before the first prompt is written.",
+        "descEs": "Límites de comportamiento, de datos, de herramientas y operativos, definidos antes de escribir el primer prompt.",
+        "letter": "G",
+        "titleEn": "Guardrails",
+        "titleEs": "Guardrails",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      },
+      {
+        "descEn": "Every step is traced: what it saw, what it decided, which tool it used and with what permission. Designed to catch drift before your users do.",
+        "descEs": "Cada paso queda trazado: qué vio, qué decidió, qué herramienta usó y con qué permiso. Diseñada para detectar el drift antes de que lo noten tus usuarios.",
+        "letter": "O",
+        "titleEn": "Observability",
+        "titleEs": "Observabilidad",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      },
+      {
+        "descEn": "Every task goes to the right model by cost, latency and data sensitivity, including private models.",
+        "descEs": "Cada tarea va al modelo adecuado por costo, latencia y sensibilidad del dato, incluidos modelos privados.",
+        "letter": "E",
+        "titleEn": "Model routing",
+        "titleEs": "Enrutamiento de modelos",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      },
+      {
+        "descEn": "Production errors become test cases. The agent improves on evidence, not intuition.",
+        "descEs": "Los errores en producción se convierten en casos de prueba. El agente mejora con evidencia, no con intuición.",
+        "letter": "F",
+        "titleEn": "Continuous feedback",
+        "titleEs": "Feedback continuo",
+        "colorClass": "text-ia",
+        "borderClass": "border-violet-500/20"
+      }
+    ],
+    "sectorsTitleEs": "",
+    "sectorsTitleEn": "",
+    "sectors": [],
+    "sortOrder": 1,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:35.731Z",
+    "updatedAt": "2026-09-21T20:42:14.860Z",
+    "deletedAt": null
+  },
+  {
+    "id": "a5d08ac2-9a81-47cc-acb3-8a3f91948403",
+    "slugEs": "finops",
+    "slugEn": "finops",
+    "parentId": "6ba01636-8b21-4058-a98f-8e89296b2f8a",
+    "serviceType": "sub",
+    "accentColor": "finops",
+    "icon": "hex-chart",
+    "titleEs": "Optimiza tu inversión cloud con FinOps real",
+    "titleEn": "Optimize your cloud investment with real FinOps",
+    "subtitleEs": "Implementamos prácticas FinOps para que cada dólar en la nube genere valor medible para tu negocio.",
+    "subtitleEn": "We implement FinOps practices so every dollar in the cloud generates measurable value for your business.",
+    "descriptionEs": "Optimización y gobernanza financiera de la nube: visibilidad del gasto por equipo y por servicio, y un modelo de success fee sobre el ahorro logrado.",
+    "descriptionEn": "Cloud financial governance and optimization: spend visibility by team and by service, with a success fee on the savings achieved.",
+    "benefits": [
+      {
+        "icon": "eye",
+        "copyEn": "Real-time dashboards of consumption by team, service and environment.",
+        "copyEs": "Dashboards en tiempo real de consumo por equipo, servicio y ambiente.",
+        "titleEn": "Visibility",
+        "titleEs": "Visibilidad"
+      },
+      {
+        "icon": "trending-down",
+        "copyEn": "Rightsizing, reserved instances, spot fleet and orphaned resource elimination.",
+        "copyEs": "Rightsizing, instancias reservadas, spot fleet y eliminación de recursos huérfanos.",
+        "titleEn": "Optimization",
+        "titleEs": "Optimización"
+      },
+      {
+        "icon": "pie-chart",
+        "copyEn": "Tagging strategy, showback/chargeback and unit economics per product.",
+        "copyEs": "Estrategia de tagging, showback/chargeback y unit economics por producto.",
+        "titleEn": "Cost Allocation",
+        "titleEs": "Asignación de costos"
+      },
+      {
+        "icon": "bar-chart",
+        "copyEn": "Cost projection with predictive models and anomaly alerts.",
+        "copyEs": "Proyección de costos con modelos predictivos y alertas de anomalías.",
+        "titleEn": "Forecasting",
+        "titleEs": "Forecasting"
+      },
+      {
+        "icon": "dia-flow",
+        "copyEn": "Automated policies, budgets and approval workflows.",
+        "copyEs": "Políticas automatizadas, presupuestos y workflows de aprobación.",
+        "titleEn": "Governance",
+        "titleEs": "Gobernanza"
+      },
+      {
+        "icon": "hex-chart",
+        "copyEn": "Team training, FinOps ceremonies and efficiency metrics.",
+        "copyEs": "Capacitación de equipos, ceremonias FinOps y métricas de eficiencia.",
+        "titleEn": "FinOps Culture",
+        "titleEs": "Cultura FinOps"
+      }
+    ],
+    "processSteps": [
+      {
+        "descEn": "Current spend mapping, waste identification, benchmark against best practices.",
+        "descEs": "Mapeo del gasto actual, identificación de waste, benchmark contra mejores prácticas.",
+        "number": 1,
+        "titleEn": "Discovery",
+        "titleEs": "Discovery",
+        "duration": "Semana 1-2",
+        "durationEn": "Weeks 1-2"
+      },
+      {
+        "descEn": "First savings implemented: rightsizing, reserved instances, orphaned resource elimination.",
+        "descEs": "Primeros ahorros implementados: rightsizing, instancias reservadas, eliminación de recursos huérfanos.",
+        "number": 2,
+        "titleEn": "Quick Wins",
+        "titleEs": "Quick Wins",
+        "duration": "Semana 3-4",
+        "durationEn": "Weeks 3-4"
+      },
+      {
+        "descEn": "Automated policies, anomaly alerts, governance dashboards and handoff to internal team.",
+        "descEs": "Políticas automatizadas, alertas de anomalías, dashboards de gobernanza y handoff al equipo interno.",
+        "number": 3,
+        "titleEn": "Governance",
+        "titleEs": "Gobernanza",
+        "duration": "Semana 5-6",
+        "durationEn": "Weeks 5-6"
+      }
+    ],
+    "metrics": [],
+    "faqs": [],
+    "ctaPrimaryTextEs": "Solicitar evaluación",
+    "ctaPrimaryTextEn": "Request assessment",
+    "ctaPrimaryUrl": "/servicios/cloud/finops",
+    "ctaSecondaryTextEs": "",
+    "ctaSecondaryTextEn": "",
+    "ctaSecondaryUrl": "",
+    "coverImage": "",
+    "seoTitleEs": "FinOps — Optimización Financiera Cloud",
+    "seoTitleEn": "FinOps — Cloud Financial Optimization",
+    "seoDescriptionEs": "Gobernanza y optimización financiera de la nube: visibilidad por equipo y servicio, y una auditoría inicial que cuantifica el ahorro posible.",
+    "seoDescriptionEn": "Cloud financial governance and optimization: visibility per team and service, and an initial audit that quantifies the possible savings.",
+    "schemaServiceJson": null,
+    "hubMetrics": [],
+    "frameworkTitleEs": "",
+    "frameworkTitleEn": "",
+    "frameworkSubtitleEs": "",
+    "frameworkSubtitleEn": "",
+    "frameworkPillars": [],
+    "sectorsTitleEs": "",
+    "sectorsTitleEn": "",
+    "sectors": [],
+    "sortOrder": 1,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:36.467Z",
+    "updatedAt": "2026-09-23T00:30:09.566Z",
+    "deletedAt": null
+  },
+  {
+    "id": "b5792c43-1895-4de0-85c1-af9c6be36dd3",
+    "slugEs": "desarrollo-digital",
+    "slugEn": "digital-development",
+    "parentId": null,
+    "serviceType": "hub",
+    "accentColor": "dev",
+    "icon": "code-2",
+    "titleEs": "Del concepto a producción",
+    "titleEn": "From concept to production",
+    "subtitleEs": "Apps, plataformas y e-commerce con arquitectura moderna y demos quincenales.",
+    "subtitleEn": "Apps, platforms and e-commerce with modern architecture and biweekly demos.",
+    "descriptionEs": "Desarrollo de productos digitales, aplicaciones web y móviles con metodologías ágiles y arquitectura moderna.",
+    "descriptionEn": "Digital product development, web and mobile applications with agile methodologies and modern architecture.",
+    "benefits": [
+      {
+        "icon": "monitor",
+        "copyEn": "You always know what we're working on — deliveries every 2 weeks",
+        "copyEs": "Siempre sabes en qué estamos — entregas cada 2 semanas",
+        "titleEn": "Biweekly Demo",
+        "titleEs": "Demo quincenal"
+      },
+      {
+        "icon": "oct-code",
+        "copyEn": "From the first sprint, without vendor lock-in",
+        "copyEs": "Desde el primer sprint, sin vendor lock-in",
+        "titleEn": "100% your code",
+        "titleEs": "Código 100% tuyo"
+      },
+      {
+        "icon": "check-circle",
+        "copyEn": "It's not a final step, it's part of each Sprint",
+        "copyEs": "No es un paso final, es parte de cada sprint",
+        "titleEn": "Integrated QA",
+        "titleEs": "QA integrado"
+      }
+    ],
+    "processSteps": [
+      {
+        "descEn": "We understand the business, define the scope, and validate technical viability.",
+        "descEs": "Entendemos el negocio, definimos el alcance y validamos viabilidad técnica.",
+        "number": 1,
+        "titleEn": "Discovery",
+        "titleEs": "Discovery",
+        "duration": "Semana 1",
+        "durationEn": "Week 1"
+      },
+      {
+        "descEn": "We design the technical architecture and the Sprint plan.",
+        "descEs": "Diseñamos la arquitectura técnica y el plan de sprints.",
+        "number": 2,
+        "titleEn": "Architecture",
+        "titleEs": "Arquitectura",
+        "duration": "Semana 2",
+        "durationEn": "Week 2"
+      },
+      {
+        "descEn": "2-week iterations with client demo at the end of each Sprint.",
+        "descEs": "Iteraciones de 2 semanas con demo al cliente al final de cada sprint.",
+        "number": 3,
+        "titleEn": "Development Sprints",
+        "titleEs": "Sprints de desarrollo",
+        "duration": "Semanas 3-N",
+        "durationEn": "Weeks 3-N"
+      },
+      {
+        "descEn": "Complete testing, corrections, and production release.",
+        "descEs": "Testing completo, correcciones y lanzamiento a producción.",
+        "number": 4,
+        "titleEn": "QA and launch",
+        "titleEs": "QA y launch",
+        "duration": "Última semana",
+        "durationEn": "Final week"
+      },
+      {
+        "descEn": "Product maintenance, monitoring, and evolution.",
+        "descEs": "Mantenimiento, monitoreo y evolución del producto.",
+        "number": 5,
+        "titleEn": "Post-launch support",
+        "titleEs": "Soporte post-launch",
+        "duration": "Ongoing",
+        "durationEn": "Ongoing"
+      }
+    ],
+    "metrics": [
+      {
+        "unit": "",
+        "value": "14+",
+        "labelEn": "Years of experience — since 2012",
+        "labelEs": "Años de experiencia — desde 2012"
+      },
+      {
+        "unit": "",
+        "value": "7",
+        "labelEn": "Countries — Colombia, USA, Mexico and more",
+        "labelEs": "Países — Colombia, USA, México y más"
+      },
+      {
+        "unit": "",
+        "value": "100%",
+        "labelEn": "Code ownership — always belongs to the client",
+        "labelEs": "Propiedad del código — siempre del cliente"
+      }
+    ],
+    "faqs": [
+      {
+        "answerEn": "We use React, Next.js, and Node.js for web applications, React Native and Flutter for mobile apps, and serverless and microservices architectures with RESTful APIs and GraphQL. We choose the stack based on project requirements.",
+        "answerEs": "Usamos React, Next.js y Node.js para aplicaciones web, React Native y Flutter para apps móviles, y arquitecturas serverless y de microservicios con APIs RESTful y GraphQL. Elegimos la stack según las necesidades del proyecto.",
+        "questionEn": "What technologies does Nivelics use for software development?",
+        "questionEs": "¿Qué tecnologías usa Nivelics para desarrollo de software?"
+      },
+      {
+        "answerEn": "A functional MVP can be ready in 6-10 weeks using lean methodology and agile Sprints. This includes product discovery, UX design, development, QA, and production deployment.",
+        "answerEs": "Un MVP funcional puede estar listo en 6-10 semanas usando metodología lean y sprints ágiles. Esto incluye product discovery, diseño UX, desarrollo, QA y despliegue en producción.",
+        "questionEn": "How long does it take to develop an MVP?",
+        "questionEs": "¿Cuánto tiempo toma desarrollar un MVP?"
+      },
+      {
+        "answerEn": "Yes, we develop native mobile apps for iOS (Swift) and Android (Kotlin), as well as cross-platform applications with React Native and Flutter. We recommend the optimal approach based on the project's budget, timeline, and technical requirements.",
+        "answerEs": "Sí, desarrollamos apps móviles nativas para iOS (Swift) y Android (Kotlin), así como aplicaciones cross-platform con React Native y Flutter. Recomendamos el enfoque óptimo según el presupuesto, timeline y requerimientos técnicos del proyecto.",
+        "questionEn": "Does Nivelics develop native mobile applications?",
+        "questionEs": "¿Nivelics desarrolla aplicaciones móviles nativas?"
+      },
+      {
+        "answerEn": "The code is 100% owned by the client, always. We deliver the complete repository with documentation. No vendor lock-in.",
+        "answerEs": "El código es 100% del cliente, siempre. Entregamos el repositorio completo con documentación. Sin vendor lock-in.",
+        "questionEn": "What happens with code ownership?",
+        "questionEs": "¿Qué pasa con la propiedad del código?"
+      },
+      {
+        "answerEn": "Yes. We offer ongoing support plans (MRR) that include monitoring, bug fixes, security updates, and product evolution.",
+        "answerEs": "Sí. Ofrecemos planes de soporte continuo (MRR) que incluyen monitoreo, corrección de bugs, actualizaciones de seguridad y evolución del producto.",
+        "questionEn": "Do you offer post-launch maintenance?",
+        "questionEs": "¿Ofrecen mantenimiento post-lanzamiento?"
+      }
+    ],
+    "ctaPrimaryTextEs": "Ver Desarrollo Digital",
+    "ctaPrimaryTextEn": "View Digital Development",
+    "ctaPrimaryUrl": "/servicios/desarrollo-digital",
+    "ctaSecondaryTextEs": "Cotizar mi proyecto",
+    "ctaSecondaryTextEn": "Quote my project",
+    "ctaSecondaryUrl": "/contacto",
+    "coverImage": null,
+    "seoTitleEs": "Desarrollo Digital: apps y plataformas web",
+    "seoTitleEn": "Digital Development: apps and web platforms",
+    "seoDescriptionEs": "Del concepto a producción. Sprints medibles. 14 años de proyectos en LATAM y USA.",
+    "seoDescriptionEn": "From concept to production. Measurable sprints. 14 years of projects in LATAM and USA.",
+    "schemaServiceJson": null,
+    "hubMetrics": [],
+    "frameworkTitleEs": null,
+    "frameworkTitleEn": null,
+    "frameworkSubtitleEs": null,
+    "frameworkSubtitleEn": null,
+    "frameworkPillars": [],
+    "sectorsTitleEs": null,
+    "sectorsTitleEn": null,
+    "sectors": [],
+    "sortOrder": 4,
+    "status": "published",
+    "translationStatusEn": "complete",
+    "publishedAt": null,
+    "createdAt": "2026-04-09T01:55:36.296Z",
+    "updatedAt": "2026-09-23T03:13:30.075Z",
     "deletedAt": null
   }
 ]

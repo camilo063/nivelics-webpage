@@ -7,6 +7,7 @@ import { GeoIcon, type IconColor } from "@/lib/icons/geometric";
 import { MetricsBar } from "@/components/sections/metrics-bar";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { getOrganizationSchema } from "@/lib/schema/organization";
+import { getContactoSitio } from "@/lib/cms/contacto";
 import { getWebSiteSchema } from "@/lib/schema/website";
 import { AmericaMapWrapper } from "@/components/sections/america-map-wrapper";
 import { ProductosHomeStrip } from "@/components/sections/home/ProductosHomeStrip";
@@ -166,8 +167,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     sublabel: m.label,
   }));
 
-  const orgSchema = getOrganizationSchema();
-  const webSiteSchema = getWebSiteSchema();
+  // Correo, teléfono y perfiles sociales del JSON-LD salen de site_config (admin).
+  const orgSchema = getOrganizationSchema(await getContactoSitio(), locale);
+  const webSiteSchema = getWebSiteSchema(locale);
   // El FAQPage lo emite el <FAQAccordion schemaEnabled> de la sección 9 con las
   // mismas preguntas que se ven. Aquí se emitía un segundo FAQPage idéntico.
 

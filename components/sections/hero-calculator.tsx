@@ -16,8 +16,10 @@ const LABELS = {
     cloudLabel: "¿Cuánto es tu factura cloud mensual?",
     staffResult: "Con Nivelics pagarías:",
     cloudResult: "Ahorro potencial con FinOps:",
-    staffNote: "Basado en proyectos reales. El ahorro exacto depende del perfil y la dedicación.",
-    cloudNote: "Promedio de 30-40% en nuestros proyectos. La auditoría inicial es gratuita.",
+    staffNote:
+      "Estimación de referencia. El costo exacto depende del perfil, la seniority y la dedicación.",
+    cloudNote:
+      "Estimación con una reducción del 35% como referencia. La cifra real sale de la auditoría inicial, que es gratuita.",
     staffTrust: "Candidatos en 5 días · Sin compromiso",
     cloudTrust: "Auditoría gratuita · Sin compromiso",
     region: "Calculadora de ahorro",
@@ -34,8 +36,10 @@ const LABELS = {
     cloudLabel: "How much is your monthly cloud bill?",
     staffResult: "With Nivelics you would pay:",
     cloudResult: "Potential savings with FinOps:",
-    staffNote: "Based on real projects. Exact savings depend on the profile and time commitment.",
-    cloudNote: "30-40% average across our projects. The initial audit is free.",
+    staffNote:
+      "Reference estimate. The exact cost depends on the profile, seniority and time commitment.",
+    cloudNote:
+      "Estimate based on a 35% reduction as a reference. The real figure comes out of the initial audit, which is free.",
     staffTrust: "Candidates in 5 days · No commitment",
     cloudTrust: "Free audit · No commitment",
     region: "Savings calculator",
@@ -133,6 +137,7 @@ export function HeroCalculator(props: HeroCalculatorProps) {
   }
 
   // Staff / Cloud mode
+  // Supuestos de la estimación, no resultados medidos: se muestran como tales en las notas.
   const pct = type === "staff" ? 0.4 : 0.35;
   const savings = Math.round(value * pct);
   const result = Math.round(value * (1 - pct));

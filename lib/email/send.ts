@@ -1,9 +1,8 @@
 import "server-only";
 import { Resend } from "resend";
-import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { getContactoSitio } from "@/lib/cms/contacto";
 
 const FROM = "Nivelics Leads <leads@nivelics.com>";
-const FALLBACK_TO = "contacto@nivelics.com";
 
 function escapeHtml(value: string): string {
   return value
@@ -46,18 +45,14 @@ export interface SendResult {
 }
 
 /**
- * Resolve the destination email from `siteConfig.emailContact`, falling back
- * to `contacto@nivelics.com` when the admin hasn't configured one.
+ * Buzón al que llegan los leads. Sale de `site_config.emailContact` por la misma
+ * cadena que publica el sitio (`getContactoSitio()`, que nunca lanza y ya trae el
+ * respaldo de lib/constants). Antes el respaldo de este archivo era
+ * `contacto@nivelics.com` y el del sitio `hola@nivelics.com`: con site_config
+ * vacío, los leads se iban a un buzón distinto del que se publicaba.
  */
 async function resolveTo(): Promise<string> {
-  try {
-    const config = await getSiteConfigPublic();
-    const configured = config?.emailContact?.trim();
-    if (configured) return configured;
-  } catch {
-    // fall through to default
-  }
-  return FALLBACK_TO;
+  return (await getContactoSitio()).email;
 }
 
 function buildSubject(input: LeadEmailInput): string {

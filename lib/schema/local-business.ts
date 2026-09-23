@@ -1,11 +1,19 @@
+import { CONTACTO_FALLBACK, type ContactoSitio } from "@/lib/cms/contacto-shared";
+
 const BASE = "https://www.nivelics.com";
 
 /**
  * LocalBusiness + ContactPoint para /contacto.
- * Datos reales alineados con lib/schema/organization.ts (sedes Bogotá/Miami,
- * teléfono y email corporativos).
+ *
+ * El correo, el teléfono y los perfiles sociales llegan por parámetro desde la
+ * página (que sí puede hacer `await getContactoSitio()`), así que son los mismos
+ * que se ven en pantalla y los mismos de Organization. El valor por defecto es
+ * el respaldo de `lib/constants`, para no romper llamadas sin argumentos.
  */
-export function getLocalBusinessSchema(locale: "es" | "en" = "es") {
+export function getLocalBusinessSchema(
+  locale: "es" | "en" = "es",
+  contacto: ContactoSitio = CONTACTO_FALLBACK,
+) {
   const isEn = locale === "en";
   return {
     "@context": "https://schema.org",
@@ -20,8 +28,8 @@ export function getLocalBusinessSchema(locale: "es" | "en" = "es") {
       ? "Colombian B2B digital transformation company: applied AI, Cloud computing and premium Staff Augmentation."
       : "Empresa colombiana de transformación digital B2B: Inteligencia Artificial aplicada, Cloud computing y Staff Augmentation premium.",
     foundingDate: "2012",
-    telephone: "+57-311-2146459",
-    email: "hola@nivelics.com",
+    telephone: contacto.whatsappE164,
+    email: contacto.email,
     address: [
       {
         "@type": "PostalAddress",
@@ -39,15 +47,15 @@ export function getLocalBusinessSchema(locale: "es" | "en" = "es") {
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: "+57-311-2146459",
-        email: "hola@nivelics.com",
+        telephone: contacto.whatsappE164,
+        email: contacto.email,
         contactType: "sales",
         availableLanguage: ["Spanish", "English"],
         areaServed: ["CO", "US", "MX", "SV", "PA", "EC", "PE", "AR"],
       },
     ],
     parentOrganization: { "@id": `${BASE}/#organization` },
-    sameAs: ["https://www.linkedin.com/company/nivelics", "https://www.instagram.com/nivelics"],
+    sameAs: contacto.sameAs,
     availableLanguage: ["Spanish", "English"],
     areaServed: ["CO", "US", "MX", "SV", "PA", "EC", "PE", "AR"],
   };

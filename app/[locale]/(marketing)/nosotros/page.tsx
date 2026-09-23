@@ -6,6 +6,7 @@ import { PageWrapper } from "@/components/layout";
 import { MetricCard, CTABanner } from "@/components/shared";
 import { METRICS, SITE } from "@/lib/constants";
 import { getOrganizationSchema } from "@/lib/schema/organization";
+import { getContactoSitio } from "@/lib/cms/contacto";
 import { getPersonSchema, TEAM_MEMBERS } from "@/lib/schema/person";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
@@ -34,7 +35,7 @@ export async function generateMetadata({
   });
 }
 
-const VALUES = [
+const VALUES_ES = [
   {
     icon: "target",
     title: "Impacto Medible",
@@ -52,6 +53,71 @@ const VALUES = [
   },
 ];
 
+const VALUES_EN = [
+  {
+    icon: "target",
+    title: "Measurable Impact",
+    description: "Every project has clear KPIs. If it cannot be measured, it cannot be improved.",
+  },
+  {
+    icon: "heart",
+    title: "Partners, not Vendors",
+    description: "We commit to the business outcome, not only to the technical delivery.",
+  },
+  {
+    icon: "calendar",
+    title: "Commitment to Delivery",
+    description: "Deadlines are sacred. We plan with buffer and communicate transparently.",
+  },
+];
+
+const SUBPAGES_ES = [
+  { label: "Historia", href: "/nosotros/historia", desc: "Timeline 2012–2026" },
+  { label: "Equipo Directivo", href: "/nosotros/equipo", desc: "Nuestros líderes" },
+  { label: "Metodología", href: "/nosotros/metodologia", desc: "Framework ágil Nivelics" },
+  {
+    label: "Certificaciones",
+    href: "/nosotros/certificaciones",
+    desc: "GPTW y reconocimientos",
+  },
+];
+
+const SUBPAGES_EN = [
+  { label: "History", href: "/nosotros/historia", desc: "Timeline 2012–2026" },
+  { label: "Leadership Team", href: "/nosotros/equipo", desc: "Our leaders" },
+  { label: "Methodology", href: "/nosotros/metodologia", desc: "The Nivelics agile framework" },
+  {
+    label: "Certifications",
+    href: "/nosotros/certificaciones",
+    desc: "GPTW and awards",
+  },
+];
+
+const LABELS = {
+  es: {
+    heroPre: "impulsando la",
+    heroAccent: "transformación digital",
+    heroPost: "de empresas B2B",
+    heroIntro:
+      "Nivelics nació en Bogotá con la misión de cerrar la brecha tecnológica entre Latinoamérica y los mercados más competitivos del mundo. Hoy operamos desde Colombia y Miami, sirviendo clientes en toda la región.",
+    team: "Equipo Directivo",
+    values: "Nuestros Valores",
+    more: "Conoce más sobre Nivelics",
+    seeMore: "Ver más",
+  },
+  en: {
+    heroPre: "driving the",
+    heroAccent: "digital transformation",
+    heroPost: "of B2B companies",
+    heroIntro:
+      "Nivelics was born in Bogotá with the mission of closing the technology gap between Latin America and the most competitive markets in the world. Today we operate from Colombia and Miami, serving clients across the region.",
+    team: "Leadership Team",
+    values: "Our Values",
+    more: "Learn more about Nivelics",
+    seeMore: "See more",
+  },
+} as const;
+
 export default async function NosotrosPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
@@ -67,7 +133,14 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       ? mappedMembers.map((m) => ({ name: m.name, jobTitle: m.role, description: m.bio }))
       : TEAM_MEMBERS;
 
-  const orgSchema = getOrganizationSchema();
+  const isEn = locale === "en";
+  const t = LABELS[isEn ? "en" : "es"];
+  const values = isEn ? VALUES_EN : VALUES_ES;
+  const subpages = isEn ? SUBPAGES_EN : SUBPAGES_ES;
+
+  // Correo, teléfono y perfiles sociales del JSON-LD salen de site_config (admin).
+  // El `locale` decide el idioma de `description` y `knowsAbout`.
+  const orgSchema = getOrganizationSchema(await getContactoSitio(), locale);
   const teamSchemas = membersToShow.map((m) => getPersonSchema(m));
 
   return (
@@ -85,14 +158,10 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <h1 className="max-w-3xl text-4xl font-bold text-text-100 md:text-5xl">
-            Desde {SITE.founded}, impulsando la{" "}
-            <span className="text-primary">transformación digital</span> de empresas B2B
+            {isEn ? "Since" : "Desde"} {SITE.founded}, {t.heroPre}{" "}
+            <span className="text-primary">{t.heroAccent}</span> {t.heroPost}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-text-70">
-            Nivelics nació en Bogotá con la misión de cerrar la brecha tecnológica entre
-            Latinoamérica y los mercados más competitivos del mundo. Hoy operamos desde Colombia y
-            Miami, sirviendo clientes en toda la región.
-          </p>
+          <p className="mt-6 max-w-2xl text-lg text-text-70">{t.heroIntro}</p>
 
           <div className="mt-8 flex flex-wrap gap-4">
             {SITE.locations.map((loc) => (
@@ -113,7 +182,12 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {METRICS.map((m) => (
-              <MetricCard key={m.label} value={m.value} suffix={m.suffix} label={m.label} />
+              <MetricCard
+                key={m.label}
+                value={m.value}
+                suffix={m.suffix}
+                label={isEn ? m.labelEn : m.label}
+              />
             ))}
           </div>
         </div>
@@ -122,7 +196,7 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       {/* Team */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Equipo Directivo</h2>
+          <h2 className="text-3xl font-bold text-text-100">{t.team}</h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {membersToShow.map((member) => (
               <div key={member.name} className="glass glow-hover rounded-xl p-6">
@@ -138,9 +212,9 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       {/* Values */}
       <section className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Nuestros Valores</h2>
+          <h2 className="text-3xl font-bold text-text-100">{t.values}</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {VALUES.map((v) => (
+            {values.map((v) => (
               <div key={v.title} className="glass glow-hover rounded-xl p-6">
                 <div className="mb-4">
                   <GeoIconBox name={v.icon} size={22} color="cyan" />
@@ -156,22 +230,9 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
       {/* Subpages */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Conoce más sobre Nivelics</h2>
+          <h2 className="text-3xl font-bold text-text-100">{t.more}</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { label: "Historia", href: "/nosotros/historia", desc: "Timeline 2012–2026" },
-              { label: "Equipo Directivo", href: "/nosotros/equipo", desc: "Nuestros líderes" },
-              {
-                label: "Metodología",
-                href: "/nosotros/metodologia",
-                desc: "Framework ágil Nivelics",
-              },
-              {
-                label: "Certificaciones",
-                href: "/nosotros/certificaciones",
-                desc: "GPTW y reconocimientos",
-              },
-            ].map((item) => (
+            {subpages.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -182,7 +243,7 @@ export default async function NosotrosPage({ params }: { params: Promise<{ local
                 </h3>
                 <p className="mt-1 text-sm text-text-70">{item.desc}</p>
                 <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Ver más <ArrowRight size={14} />
+                  {t.seeMore} <ArrowRight size={14} />
                 </span>
               </Link>
             ))}

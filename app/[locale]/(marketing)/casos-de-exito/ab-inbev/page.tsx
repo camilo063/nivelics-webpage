@@ -70,9 +70,24 @@ export async function generateMetadata({
 
 // LEGACY FALLBACK
 const RESULTS = [
-  { metric: "Digital", label: "Procesos de distribución digitalizados" },
-  { metric: "Real-time", label: "Trazabilidad en tiempo real" },
-  { metric: "Mejorada", label: "Eficiencia operativa mejorada" },
+  {
+    metric: "Digital",
+    metricEn: "Digital",
+    label: "Procesos de distribución digitalizados",
+    labelEn: "Distribution processes digitized",
+  },
+  {
+    metric: "En vivo",
+    metricEn: "Real-time",
+    label: "Trazabilidad en tiempo real",
+    labelEn: "Real-time traceability",
+  },
+  {
+    metric: "Mejorada",
+    metricEn: "Improved",
+    label: "Eficiencia operativa mejorada",
+    labelEn: "Improved operational efficiency",
+  },
 ];
 
 export default async function ABInBevPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -85,7 +100,10 @@ export default async function ABInBevPage({ params }: { params: Promise<{ locale
 
   const results = caso?.metrics?.length
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
-    : RESULTS;
+    : RESULTS.map((r) => ({
+        metric: isEn ? r.metricEn : r.metric,
+        label: isEn ? r.labelEn : r.label,
+      }));
 
   const creativeWork = getCreativeWorkSchema(
     [
@@ -128,7 +146,7 @@ export default async function ABInBevPage({ params }: { params: Promise<{ locale
           </Button>
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
+            <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
             <ServiceBadge variant="cloud">Cloud</ServiceBadge>
             <span className="text-sm text-text-40">
               {caso?.clientCountry || "El Salvador"} &middot;{" "}
@@ -198,7 +216,7 @@ export default async function ABInBevPage({ params }: { params: Promise<{ locale
               {uiLabel(uiLabels, "caso.services_used_label", locale)}
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">
-              <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
+              <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
               <ServiceBadge variant="cloud">Cloud</ServiceBadge>
             </div>
           </div>

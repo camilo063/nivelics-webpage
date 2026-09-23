@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
-import { getSiteConfigPublic } from "@/lib/cms/queries";
+import { getContactoSitio } from "@/lib/cms/contacto";
 import type { Locale } from "@/lib/cms";
 import { JsonLd } from "@/components/shared/json-ld";
 import { getLocalBusinessSchema } from "@/lib/schema/local-business";
 import { PageWrapper } from "@/components/layout";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { SITE } from "@/lib/constants";
-import { waDisplay, waUrl } from "@/lib/utils/whatsapp";
 import { getWebPageSchema } from "@/lib/schema/webpage";
 import { contactLabels } from "./labels";
 import { ContactForm } from "./contact-page-client";
@@ -85,14 +83,16 @@ export default async function ContactoPage({ params }: { params: Promise<{ local
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("contact");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
-  const config = await getSiteConfigPublic().catch(() => null);
+  // Correo, WhatsApp y sedes: site_config (Admin → Configuración). Los mismos
+  // valores alimentan el LocalBusiness de abajo, así que no pueden contradecirse.
+  const contacto = await getContactoSitio();
 
   const t = contactLabels(locale);
 
   return (
     // La WebPage de esta ruta se emite como ContactPage (mismo @id): no hay dos.
     <PageWrapper webPage={false}>
-      <JsonLd data={getLocalBusinessSchema(locale)} />
+      <JsonLd data={getLocalBusinessSchema(locale, contacto)} />
       <JsonLd
         data={getWebPageSchema({
           url: "/contacto",
@@ -125,10 +125,10 @@ export default async function ContactoPage({ params }: { params: Promise<{ local
                   <div>
                     <h3 className="font-medium text-text-100">Email</h3>
                     <a
-                      href={`mailto:${SITE.email}`}
+                      href={contacto.emailHref}
                       className="text-sm text-text-70 hover:text-primary"
                     >
-                      {SITE.email}
+                      {contacto.email}
                     </a>
                   </div>
                 </div>
@@ -140,17 +140,17 @@ export default async function ContactoPage({ params }: { params: Promise<{ local
                   <div>
                     <h3 className="font-medium text-text-100">WhatsApp</h3>
                     <a
-                      href={waUrl(config?.phoneWhatsapp)}
+                      href={contacto.whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm text-text-70 hover:text-primary"
                     >
-                      {waDisplay(config?.phoneWhatsapp)}
+                      {contacto.whatsappDisplay}
                     </a>
                   </div>
                 </div>
 
-                {SITE.locations.map((loc) => (
+                {[contacto.addressBogota, contacto.addressMiami].map((loc) => (
                   <div key={loc} className="flex items-start gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                       <MapPin size={20} className="text-primary" aria-hidden="true" />

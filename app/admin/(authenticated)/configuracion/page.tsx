@@ -34,6 +34,7 @@ export default async function ConfiguracionPage() {
                 addressBogota: config.addressBogota || "",
                 addressMiami: config.addressMiami || "",
                 linkedinUrl: config.linkedinUrl || "",
+                instagramUrl: config.instagramUrl || "",
                 googleAnalyticsId: config.googleAnalyticsId || "",
                 googleTagManagerId: config.googleTagManagerId || "",
               }

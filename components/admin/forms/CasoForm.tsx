@@ -28,12 +28,15 @@ interface CasoData {
   resultsEs: string;
   resultsEn: string;
   metric1Value: string;
+  metric1ValueEn: string;
   metric1LabelEs: string;
   metric1LabelEn: string;
   metric2Value: string;
+  metric2ValueEn: string;
   metric2LabelEs: string;
   metric2LabelEn: string;
   metric3Value: string;
+  metric3ValueEn: string;
   metric3LabelEs: string;
   metric3LabelEn: string;
   testimonialQuoteEs: string;
@@ -67,12 +70,15 @@ const defaultCaso: CasoData = {
   resultsEs: "",
   resultsEn: "",
   metric1Value: "",
+  metric1ValueEn: "",
   metric1LabelEs: "",
   metric1LabelEn: "",
   metric2Value: "",
+  metric2ValueEn: "",
   metric2LabelEs: "",
   metric2LabelEn: "",
   metric3Value: "",
+  metric3ValueEn: "",
   metric3LabelEs: "",
   metric3LabelEn: "",
   testimonialQuoteEs: "",
@@ -351,24 +357,27 @@ export default function CasoForm({ initialData, isNew = true }: CasoFormProps) {
                     {
                       n: 1,
                       valKey: "metric1Value",
+                      valEnKey: "metric1ValueEn",
                       esKey: "metric1LabelEs",
                       enKey: "metric1LabelEn",
                     },
                     {
                       n: 2,
                       valKey: "metric2Value",
+                      valEnKey: "metric2ValueEn",
                       esKey: "metric2LabelEs",
                       enKey: "metric2LabelEn",
                     },
                     {
                       n: 3,
                       valKey: "metric3Value",
+                      valEnKey: "metric3ValueEn",
                       esKey: "metric3LabelEs",
                       enKey: "metric3LabelEn",
                     },
                   ] as const
-                ).map(({ n, valKey, esKey, enKey }) => (
-                  <div key={n} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                ).map(({ n, valKey, valEnKey, esKey, enKey }) => (
+                  <div key={n} className="grid grid-cols-1 gap-3 sm:grid-cols-4">
                     <div>
                       <label className="mb-1 block text-xs text-text-40">Valor {n}</label>
                       <input
@@ -376,6 +385,16 @@ export default function CasoForm({ initialData, isNew = true }: CasoFormProps) {
                         value={caso[valKey]}
                         onChange={(e) => update(valKey, e.target.value)}
                         placeholder="95%"
+                        className="w-full rounded-lg border border-border bg-bg-elevated px-3 py-2 text-sm text-text-100 focus:border-primary focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs text-text-40">Valor {n} EN</label>
+                      <input
+                        type="text"
+                        value={caso[valEnKey]}
+                        onChange={(e) => update(valEnKey, e.target.value)}
+                        placeholder="Solo si lleva palabras: «+10 años» → «10+ years»"
                         className="w-full rounded-lg border border-border bg-bg-elevated px-3 py-2 text-sm text-text-100 focus:border-primary focus:outline-none"
                       />
                     </div>
