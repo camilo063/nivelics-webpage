@@ -156,13 +156,13 @@
             ],
             "titleEn": "Cloud",
             "titleEs": "Cloud",
-            "metricValue": "40%",
+            "metricValue": "5",
             "footerLinkEn": "See all Cloud →",
             "footerLinkEs": "Ver todo Cloud →",
             "descriptionEn": "AWS, GCP, Azure with real governance and FinOps",
             "descriptionEs": "AWS, GCP, Azure con gobierno y FinOps real",
-            "metricLabelEn": "average cloud spend reduction",
-            "metricLabelEs": "reducción gasto cloud promedio"
+            "metricLabelEn": "specialized cloud services",
+            "metricLabelEs": "servicios cloud especializados"
           },
           {
             "url": "/servicios/staff-augmentation",
@@ -217,13 +217,13 @@
             ],
             "titleEn": "Staff Augmentation",
             "titleEs": "Staff Augmentation",
-            "metricValue": "40%",
+            "metricValue": "5",
             "footerLinkEn": "See all Staff Augmentation →",
             "footerLinkEs": "Ver todo Staff Augmentation →",
             "descriptionEn": "Validated Colombian tech talent for your team",
             "descriptionEs": "Talento tech colombiano validado para tu equipo",
-            "metricLabelEn": "savings vs. hiring in USA or Europe",
-            "metricLabelEs": "ahorro vs. contratar en USA o Europa"
+            "metricLabelEn": "days to the first candidate presented",
+            "metricLabelEs": "días al primer candidato presentado"
           },
           {
             "url": "/servicios/desarrollo-digital",
@@ -269,7 +269,7 @@
             ],
             "titleEn": "Digital Development",
             "titleEs": "Desarrollo Digital",
-            "metricValue": "13",
+            "metricValue": "14",
             "footerLinkEn": "See all Digital Development →",
             "footerLinkEs": "Ver todo Desarrollo Digital →",
             "descriptionEn": "From concept to production. Measurable sprints",
@@ -437,8 +437,8 @@
             "labelEs": "Historia",
             "ariaLabelEn": "About Nivelics — founded in 2012, projects in 7 countries",
             "ariaLabelEs": "Historia de Nivelics — fundada en 2012, proyectos en 7 países",
-            "descriptionEn": "13 years building technology across LATAM",
-            "descriptionEs": "13 años construyendo tecnología en LATAM"
+            "descriptionEn": "14 years building technology across LATAM",
+            "descriptionEs": "14 años construyendo tecnología en LATAM"
           },
           {
             "url": "/nosotros/equipo",
@@ -480,7 +480,7 @@
           "awardName": "Great Place to Work",
           "ctaTextEn": "Our story →",
           "ctaTextEs": "Conoce nuestra historia →",
-          "metricValue1": "13",
+          "metricValue1": "14",
           "metricValue2": "7+",
           "awardCaptionEn": "Colombia · 2022",
           "awardCaptionEs": "Colombia · 2022",
@@ -654,6 +654,6 @@
       "contactWhatsappLabelEn": "WhatsApp",
       "contactWhatsappLabelEs": "WhatsApp"
     },
-    "updatedAt": "2026-09-21T18:22:27.472Z"
+    "updatedAt": "2026-09-23T02:30:03.514Z"
   }
 ]

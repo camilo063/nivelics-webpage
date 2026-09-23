@@ -159,3 +159,67 @@ The six articles of the line live in `content/agentes/articulos/{es,en}/*.md`
 touches only those slugs — do **not** use `seed-blog-posts.ts` for them, it upserts
 every generated article and would overwrite admin edits. Covers and diagrams are
 static files in `public/blog/agentes/`.
+
+## Contact data: one source, administrable
+
+Email, WhatsApp and social profiles live in **`site_config` (row `main`)**, edited in
+Admin → Configuración. Nothing public should hardcode them: they used to be duplicated in
+`lib/constants`, in the schema builders and in `nav_config.footer`, and the three drifted
+apart — the JSON-LD published one email while the footer published another.
+
+Precedence: **`site_config` → `data/fallbacks/site_config.json` → `SITE` in
+[lib/constants](../lib/constants/index.ts)** (last-resort only, documented as such).
+
+- Server code: `getContactoSitio()` in [lib/cms/contacto.ts](../lib/cms/contacto.ts).
+- Client components: import from [lib/cms/contacto-shared.ts](../lib/cms/contacto-shared.ts)
+  (types + `CONTACTO_FALLBACK`). **Never import `lib/cms/contacto.ts` from a `"use client"`
+  file**: it pulls `lib/cms/queries` → `fallbacks-data` → `server-only` and the whole site
+  stops compiling.
+- `scripts/seed-contacto-config.ts` sets the official values; `updateSiteConfig` revalidates
+  the public pages, so a change in the admin shows up immediately.
+
+## Content rule: no unsupported figures
+
+The site does not publish savings percentages, delivered-project counts, store ratings or
+SLAs that don't exist in a contract. Claims that survive are verifiable or are real service
+commitments (candidates in 5 business days, 10-day replacement guarantee, 100% code
+ownership, 0% commissions, 14+ years since 2012 — that single figure, nowhere 13+).
+
+Retired by the owner on 2026-09-21 and not to be reintroduced: «40% savings vs. hiring in
+the USA/Europe», «200+ projects delivered», «50+ engineers», «98% client retention», and
+every uptime promise (99.5% / 99.9% / 99.95%) — there is no signed availability SLA.
+Figures that describe a named client's project outcome (Grupo Bolívar's 25% and 85%,
+Crónica's 50%, Televisa's 40% time-to-market) are a different category and stayed.
+
+The figures that appear on a service page come from **`servicios.metrics` / `benefits` /
+`faqs` / `seo_description_*` in the DB**, not from the arrays in the page file — those are
+only the no-DB fallback. Cleaning the code alone changes nothing on the live site. See
+[scripts/seed-limpiar-cifras-servicios.ts](../scripts/seed-limpiar-cifras-servicios.ts),
+which also fills `processSteps[].durationEn` and clears Spanish `metrics[].unit`, both of
+which leaked into `/en`.
+
+The same rule reaches four more tables, each with its own script, because no single source
+covers them: [`seed-limpiar-cifras-home.ts`](../scripts/seed-limpiar-cifras-home.ts)
+(`home_content` + `servicios.hub_metrics`),
+[`seed-limpiar-cifras-historia.ts`](../scripts/seed-limpiar-cifras-historia.ts)
+(`historia_items`), [`seed-limpiar-uptime.ts`](../scripts/seed-limpiar-uptime.ts)
+(`industrias.metrics` + `landing_pages`) and
+[`seed-casos-metricas-en.ts`](../scripts/seed-casos-metricas-en.ts) (`casos_exito`). The
+`/llms*.txt` figures live in code, in [lib/seo/llms-content.ts](../lib/seo/llms-content.ts).
+
+### `casos_exito`: the metric value is bilingual too
+
+The labels were always `metric_N_label_es/_en`, but the **value** was a single column and
+went out unchanged on `/en`, so the English home read «+10 años» under "Long-term
+partnership". Migration `0012_casos_metric_value_en.sql` adds
+`metric_{1,2,3}_value_en`; it is optional, and `mapCasoExito` falls back to the ES value
+when it is empty, because «25%» or «+100» need no translation. The admin form has the
+field next to the value, so it stays editable.
+
+### Landing pages keep their own phone number
+
+`landing_pages.blocks` stores the WhatsApp number inside the B18 block's jsonb, so
+`getContactoSitio()` never reaches it. The default for new blocks is the literal in
+[lib/admin/landing-blocks.ts](../lib/admin/landing-blocks.ts) and must match
+`SITE.whatsapp`. Existing rows are fixed with
+[`seed-whatsapp-landings.ts`](../scripts/seed-whatsapp-landings.ts).

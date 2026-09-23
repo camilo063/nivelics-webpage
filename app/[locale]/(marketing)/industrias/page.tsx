@@ -19,8 +19,8 @@ const HUB_FALLBACK = {
     "Cada sector tiene sus propias reglas, regulación y comportamientos de usuario. Traemos el expertise de dominio para que no gastes los primeros 3 meses explicándonos tu negocio.",
   subtitleEn:
     "Every sector has its own rules, regulations and user behaviors. We bring the domain expertise so you don't waste the first 3 months explaining your business.",
-  statEs: "13 años entregando tecnología en los sectores más exigentes de LATAM y USA",
-  statEn: "13 years delivering technology in the most demanding sectors in LATAM and USA",
+  statEs: "14 años entregando tecnología en los sectores más exigentes de LATAM y USA",
+  statEn: "14 years delivering technology in the most demanding sectors in LATAM and USA",
 };
 
 export const revalidate = 86400;
@@ -38,7 +38,7 @@ export async function generateMetadata({
     href: "/industrias",
     title: "Industrias | IA, Cloud y Staffing por sector",
     description:
-      "Experiencia comprobada en fintech, medios, salud, retail, logística y manufactura. 13 años entregando tecnología en los sectores más exigentes de LATAM y USA.",
+      "Experiencia comprobada en fintech, medios, salud, retail, logística y manufactura. 14 años entregando tecnología en los sectores más exigentes de LATAM y USA.",
   });
 }
 

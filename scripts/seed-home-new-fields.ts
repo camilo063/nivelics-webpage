@@ -10,7 +10,7 @@ async function main() {
   const updates = {
     heroCtaPrimaryUrl: "/contacto",
     heroCtaSecondaryUrl:
-      "https://wa.me/573103926621?text=Hola%2C%20quiero%20información%20sobre%20Nivelics",
+      "https://wa.me/573112146459?text=Hola%2C%20quiero%20información%20sobre%20Nivelics",
 
     // Trust bar header
     trustBarTitleEs: "Empresas en LATAM y USA que ya transformaron con Nivelics",
@@ -126,7 +126,7 @@ async function main() {
     finalCtaPrimaryUrl: "/contacto",
     finalCtaSecondaryEs: "Hablar por WhatsApp",
     finalCtaSecondaryEn: "Chat on WhatsApp",
-    finalCtaSecondaryUrl: "https://wa.me/573103926621",
+    finalCtaSecondaryUrl: "https://wa.me/573112146459",
     finalCtaFinePrintEs: "Respondemos en menos de 24 horas. Sin ventas agresivas.",
     finalCtaFinePrintEn: "We reply in under 24 hours. No aggressive sales.",
   };

@@ -522,7 +522,7 @@ const footer: FooterData = {
   contactEmail: "contacto@nivelics.com",
   contactWhatsappLabelEs: "WhatsApp",
   contactWhatsappLabelEn: "WhatsApp",
-  contactWhatsappUrl: "https://wa.me/573103926621",
+  contactWhatsappUrl: "https://wa.me/573112146459",
   contactSupportLabelEs: "Soporte",
   contactSupportLabelEn: "Support",
   contactSupportUrl: "/soporte",

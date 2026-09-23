@@ -27,6 +27,8 @@ const differentiatorItemSchema = z.object({
 
 const metricItemSchema = z.object({
   value: z.string().optional().default(""),
+  // Solo se llena cuando el valor lleva palabras: «5 días» → «5 days».
+  valueEn: z.string().optional().default(""),
   labelEs: z.string().optional().default(""),
   labelEn: z.string().optional().default(""),
 });

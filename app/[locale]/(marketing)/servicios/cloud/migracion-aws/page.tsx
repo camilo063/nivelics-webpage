@@ -1,4 +1,6 @@
 // CMS-connected: 2026-05-07 — benefits, processSteps and CTAs read from DB with hardcoded fallbacks
+// Bilingüe con el patrón de cloud/ciberseguridad-ethical-hacking (constantes _ES/_EN + isEn):
+// todo el copy duro de esta página salía en español en /en/services/cloud/aws-migration.
 import type { Metadata } from "next";
 import { PageWrapper } from "@/components/layout";
 import { SiblingServicesNav } from "@/components/navigation/sibling-services-nav";
@@ -7,7 +9,7 @@ import { ComparisonTable } from "@/components/shared/comparison-table";
 import { BenefitCard } from "@/components/shared/benefit-card";
 import { HeroSplit } from "@/components/sections/hero-split";
 import { HeroSelector } from "@/components/sections/hero-selector";
-import { MetricsBar } from "@/components/sections/metrics-bar";
+import { DesignPrinciples } from "@/components/sections/agentes/agent-sections";
 import { StickyMobileCta } from "@/components/ui/sticky-mobile-cta";
 import {
   CmsServicioBenefits,
@@ -23,6 +25,8 @@ import type { Locale } from "@/lib/cms/types";
 
 export const revalidate = 86400;
 
+const ACCENT = "#3B82F6";
+
 export async function generateMetadata({
   params,
 }: {
@@ -31,18 +35,42 @@ export async function generateMetadata({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const cms = await getServicioData("migracion-aws", locale);
+  // El layout aplica la plantilla "%s | Nivelics" — nunca repetir el sufijo aquí.
   return buildPageMetadata({
     locale,
     href: "/servicios/cloud/migracion-aws",
-    title: cms?.seoTitle || "Migración a AWS | Cloud Migration sin Interrupciones",
+    title:
+      cms?.seoTitle ||
+      (isEn
+        ? "AWS Migration | Cloud Migration Without Interruptions"
+        : "Migración a AWS | Cloud Migration sin Interrupciones"),
     description:
       cms?.seoDescription ||
-      "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno.",
+      (isEn
+        ? "We migrate your workloads to AWS with a zero-downtime strategy, a planned rollback and cost optimisation from day one."
+        : "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno."),
   });
 }
 
-const BENEFITS = [
+/* ── Principios de diseño (reemplazan a MetricsBar) ──────────────────────── */
+
+const PRINCIPLES_ES = [
+  "Migración sin downtime con plan de rollback probado",
+  "Estrategia 6R definida workload por workload",
+  "IaC y runbooks entregados al cierre del proyecto",
+  "FinOps incluido desde el diseño de la migración",
+];
+
+const PRINCIPLES_EN = [
+  "Migration with no downtime and a tested rollback plan",
+  "A 6R strategy defined workload by workload",
+  "IaC and runbooks handed over when the project closes",
+  "FinOps built in from the migration design",
+];
+
+const BENEFITS_ES = [
   {
     icon: "clipboard-check",
     title: "Assessment y estrategia de migración",
@@ -63,6 +91,169 @@ const BENEFITS = [
   },
 ];
 
+const BENEFITS_EN = [
+  {
+    icon: "clipboard-check",
+    title: "Assessment and migration strategy",
+    description:
+      "We evaluate your current infrastructure, define the migration strategy (rehost, replatform, refactor) and the step-by-step roadmap.",
+  },
+  {
+    icon: "shield-check",
+    title: "Zero downtime with rollback",
+    description:
+      "Migration without interruptions, with a tested rollback plan, continuous validation and a controlled cutover so your operation is never affected.",
+  },
+  {
+    icon: "gauge",
+    title: "Post-migration optimisation",
+    description:
+      "Rightsizing, reserved instances and cost monitoring from your first day on AWS, so the cloud investment pays off.",
+  },
+];
+
+const STRATEGIES_ES = [
+  {
+    icon: "☁️",
+    label: "Rehost (Lift & Shift)",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Mueve tus servidores tal cual a EC2 con mínimo cambio.",
+  },
+  {
+    icon: "⚙️",
+    label: "Replatform",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Migra con ajustes para aprovechar servicios managed de AWS.",
+  },
+  {
+    icon: "🛠️",
+    label: "Refactor",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Rediseña tu app para arquitectura cloud-native.",
+  },
+  {
+    icon: "📦",
+    label: "Repurchase",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Reemplaza software on-premise por SaaS equivalente.",
+  },
+  {
+    icon: "🔒",
+    label: "Retain / Retire",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Decide qué mantener on-prem y qué decomisionar.",
+  },
+];
+
+const STRATEGIES_EN = [
+  {
+    icon: "☁️",
+    label: "Rehost (Lift & Shift)",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Move your servers to EC2 as they are, with minimal change.",
+  },
+  {
+    icon: "⚙️",
+    label: "Replatform",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Migrate with tweaks that take advantage of AWS managed services.",
+  },
+  {
+    icon: "🛠️",
+    label: "Refactor",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Redesign your app for a cloud-native architecture.",
+  },
+  {
+    icon: "📦",
+    label: "Repurchase",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Replace on-premise software with an equivalent SaaS.",
+  },
+  {
+    icon: "🔒",
+    label: "Retain / Retire",
+    url: "/servicios/cloud/migracion-aws",
+    description: "Decide what stays on-prem and what gets decommissioned.",
+  },
+];
+
+const COMPARISON_ES = [
+  {
+    criterion: "Tiempo estimado",
+    alternative: "Plazos largos y difíciles de estimar",
+    nivelics: "Plazo acotado con metodología probada",
+  },
+  {
+    criterion: "Riesgo de downtime",
+    alternative: "Alto — sin playbook validado",
+    nivelics: "Mínimo — estrategia de rollback siempre activa",
+  },
+  {
+    criterion: "Certificaciones AWS",
+    alternative: "No garantizadas",
+    nivelics: "Equipo AWS Certified Partner",
+  },
+  {
+    criterion: "Documentación final",
+    alternative: "Incompleta o inexistente",
+    nivelics: "IaC + runbooks + arquitectura documentada",
+  },
+  {
+    criterion: "Optimización de costos",
+    alternative: "Lift-and-shift sin gobierno",
+    nivelics: "FinOps incluido desde el diseño",
+  },
+  {
+    criterion: "Seguridad desde el inicio",
+    alternative: "Reactiva — se corrige después",
+    nivelics: "Hardening y compliance desde día 1",
+  },
+  {
+    criterion: "Soporte post-migración",
+    alternative: "Equipo interno saturado por el proyecto",
+    nivelics: "Operación continua disponible",
+  },
+];
+
+const COMPARISON_EN = [
+  {
+    criterion: "Estimated time",
+    alternative: "Long timelines, hard to estimate",
+    nivelics: "A bounded timeline with a proven methodology",
+  },
+  {
+    criterion: "Downtime risk",
+    alternative: "High — no validated playbook",
+    nivelics: "Minimal — rollback strategy always active",
+  },
+  {
+    criterion: "AWS certifications",
+    alternative: "Not guaranteed",
+    nivelics: "AWS Certified Partner team",
+  },
+  {
+    criterion: "Final documentation",
+    alternative: "Incomplete or missing",
+    nivelics: "IaC + runbooks + documented architecture",
+  },
+  {
+    criterion: "Cost optimisation",
+    alternative: "Lift-and-shift with no governance",
+    nivelics: "FinOps built into the design",
+  },
+  {
+    criterion: "Security from the start",
+    alternative: "Reactive — fixed afterwards",
+    nivelics: "Hardening and compliance from day 1",
+  },
+  {
+    criterion: "Post-migration support",
+    alternative: "In-house team drained by the project",
+    nivelics: "Ongoing operation available",
+  },
+];
+
 export default async function MigracionAWSPage({
   params,
 }: {
@@ -71,18 +262,23 @@ export default async function MigracionAWSPage({
   const { locale: __locale } = await params;
   setRequestLocale(__locale);
   const locale = (await getLocale()) as Locale;
+  const isEn = locale === "en";
   const cms = await getServicioData("migracion-aws", locale);
   const { ctaPrimary, ctaSecondary } = resolveServicioCtas({
     primary: cms ? { text: cms.ctaPrimaryText, url: cms.ctaPrimaryUrl } : null,
     secondary: cms ? { text: cms.ctaSecondaryText, url: cms.ctaSecondaryUrl } : null,
-    fallbackPrimary: { text: "Solicitar assessment", url: "/contacto" },
-    fallbackSecondary: { text: "Ver beneficios", url: "#beneficios" },
+    fallbackPrimary: {
+      text: isEn ? "Request an assessment" : "Solicitar assessment",
+      url: "/contacto",
+    },
+    fallbackSecondary: { text: isEn ? "See the benefits" : "Ver beneficios", url: "#beneficios" },
   });
   const serviceSchema = getServiceSchema({
     locale,
-    name: "Migración a AWS",
-    description:
-      "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno.",
+    name: isEn ? "AWS Migration" : "Migración a AWS",
+    description: isEn
+      ? "We migrate your workloads to AWS with a zero-downtime strategy, a planned rollback and cost optimisation from day one."
+      : "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno.",
     url: "/servicios/cloud/migracion-aws",
     serviceType: "Cloud Migration Consulting",
   });
@@ -96,7 +292,7 @@ export default async function MigracionAWSPage({
   return (
     <PageWrapper>
       <SiblingServicesNav
-        parentService={{ name: "Cloud", nameEn: "Cloud", accentColor: "#3B82F6" }}
+        parentService={{ name: "Cloud", nameEn: "Cloud", accentColor: ACCENT }}
         siblings={[
           {
             name: "FinOps",
@@ -148,87 +344,49 @@ export default async function MigracionAWSPage({
       <HeroSplit
         heroEffect="particles"
         badge="Cloud · AWS Migration"
-        h1={cms?.title || "Migra a AWS"}
-        h1Accent="sin downtime"
+        h1={cms?.title || (isEn ? "Move to AWS" : "Migra a AWS")}
+        h1Accent={isEn ? "with zero downtime" : "sin downtime"}
         subtitle={
           cms?.subtitle ||
-          "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno."
+          (isEn
+            ? "We migrate your workloads to AWS with a zero-downtime strategy, a planned rollback and cost optimisation from day one."
+            : "Migramos tus workloads a AWS con estrategia de zero downtime, rollback planificado y optimización de costos desde el día uno.")
         }
-        bullets={[
-          "Assessment gratuito de tu infraestructura",
-          "Estrategia 6R adaptada a cada workload",
-          "Rollback plan probado antes de cada cutover",
-        ]}
+        bullets={
+          isEn
+            ? [
+                "Free assessment of your current infrastructure",
+                "6R strategy adapted to each workload",
+                "Rollback plan tested before every cutover",
+              ]
+            : [
+                "Assessment gratuito de tu infraestructura",
+                "Estrategia 6R adaptada a cada workload",
+                "Rollback plan probado antes de cada cutover",
+              ]
+        }
         ctaPrimary={ctaPrimary}
         ctaSecondary={ctaSecondary}
-        accentColor="#3B82F6"
+        accentColor={ACCENT}
         rightPanel={
           <HeroSelector
-            title="Elige tu estrategia de migración"
-            accentColor="#3B82F6"
-            options={[
-              {
-                icon: "☁️",
-                label: "Rehost (Lift & Shift)",
-                url: "/servicios/cloud/migracion-aws",
-                description: "Mueve tus servidores tal cual a EC2 con mínimo cambio.",
-              },
-              {
-                icon: "⚙️",
-                label: "Replatform",
-                url: "/servicios/cloud/migracion-aws",
-                description: "Migra con ajustes para aprovechar servicios managed de AWS.",
-              },
-              {
-                icon: "🛠️",
-                label: "Refactor",
-                url: "/servicios/cloud/migracion-aws",
-                description: "Rediseña tu app para arquitectura cloud-native.",
-              },
-              {
-                icon: "📦",
-                label: "Repurchase",
-                url: "/servicios/cloud/migracion-aws",
-                description: "Reemplaza software on-premise por SaaS equivalente.",
-              },
-              {
-                icon: "🔒",
-                label: "Retain / Retire",
-                url: "/servicios/cloud/migracion-aws",
-                description: "Decide qué mantener on-prem y qué decomisionar.",
-              },
-            ]}
+            title={isEn ? "Choose your migration strategy" : "Elige tu estrategia de migración"}
+            accentColor={ACCENT}
+            options={isEn ? STRATEGIES_EN : STRATEGIES_ES}
           />
         }
       />
 
-      <MetricsBar
-        metrics={
-          cms?.metrics?.length
-            ? cms.metrics.map((m) => ({
-                value: m.value,
-                label: m.label,
-                sublabel: "",
-                unit: m.unit,
-              }))
-            : /* LEGACY FALLBACK */ [
-                { value: "0", label: "Downtime", sublabel: "Zero interrupciones garantizado" },
-                {
-                  value: "60%",
-                  label: "Más rápido",
-                  sublabel: "vs. migración interna",
-                },
-                { value: "100%", label: "Documentado", sublabel: "IaC + runbooks entregados" },
-                { value: "30%", label: "Ahorro desde día 1", sublabel: "FinOps incluido" },
-              ]
-        }
-      />
+      {/* Principios de diseño: reemplazan a MetricsBar, que mostraba cifras sin respaldo */}
+      <DesignPrinciples locale={locale} principles={isEn ? PRINCIPLES_EN : PRINCIPLES_ES} />
 
       <section id="beneficios" className="bg-bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h2 className="text-3xl font-bold text-text-100">Beneficios clave</h2>
+          <h2 className="text-3xl font-bold text-text-100">
+            {isEn ? "Key benefits" : "Beneficios clave"}
+          </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
-            {BENEFITS.map((b) => (
+            {(isEn ? BENEFITS_EN : BENEFITS_ES).map((b) => (
               <BenefitCard
                 key={b.title}
                 title={b.title}
@@ -243,65 +401,38 @@ export default async function MigracionAWSPage({
 
       <CmsServicioBenefits
         benefits={cms?.benefits}
-        accentColor="#3B82F6"
+        accentColor={ACCENT}
         titleEs="Por qué elegir Migración a AWS con Nivelics"
         titleEn="Why choose AWS Migration with Nivelics"
         locale={locale}
       />
       <CmsServicioProcess
         steps={cms?.processSteps}
-        accentColor="#3B82F6"
+        accentColor={ACCENT}
         titleEs="Cómo lo implementamos"
         titleEn="How we deliver"
         locale={locale}
       />
 
       <ComparisonTable
-        title="¿Por qué migrar con Nivelics vs. hacerlo con equipo interno?"
-        alternativeLabel="Migración interna"
+        title={
+          isEn
+            ? "Why migrate with Nivelics instead of doing it with an in-house team?"
+            : "¿Por qué migrar con Nivelics vs. hacerlo con equipo interno?"
+        }
+        criterionLabel={isEn ? "Criterion" : "Criterio"}
+        alternativeLabel={isEn ? "In-house migration" : "Migración interna"}
         nivelicsLabel="Nivelics Migration"
-        rows={[
-          {
-            criterion: "Tiempo estimado",
-            alternative: "12–18 meses",
-            nivelics: "3–6 meses (metodología probada)",
-          },
-          {
-            criterion: "Riesgo de downtime",
-            alternative: "Alto — sin playbook validado",
-            nivelics: "Mínimo — estrategia de rollback siempre activa",
-          },
-          {
-            criterion: "Certificaciones AWS",
-            alternative: "No garantizadas",
-            nivelics: "Equipo AWS Certified Partner",
-          },
-          {
-            criterion: "Documentación final",
-            alternative: "Incompleta o inexistente",
-            nivelics: "IaC + runbooks + arquitectura documentada",
-          },
-          {
-            criterion: "Optimización de costos",
-            alternative: "Lift-and-shift sin gobierno",
-            nivelics: "FinOps incluido desde el diseño",
-          },
-          {
-            criterion: "Seguridad desde el inicio",
-            alternative: "Reactiva — se corrige después",
-            nivelics: "Hardening y compliance desde día 1",
-          },
-          {
-            criterion: "Soporte post-migración",
-            alternative: "Equipo interno saturado por el proyecto",
-            nivelics: "Operación continua disponible",
-          },
-        ]}
+        rows={isEn ? COMPARISON_EN : COMPARISON_ES}
       />
 
-      <CTABanner />
+      <CTABanner locale={locale} />
 
-      <StickyMobileCta text="Solicitar auditoría →" url="/contacto" accentColor="#3B82F6" />
+      <StickyMobileCta
+        text={isEn ? "Request an audit →" : "Solicitar auditoría →"}
+        url="/contacto"
+        accentColor={ACCENT}
+      />
     </PageWrapper>
   );
 }

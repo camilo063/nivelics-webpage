@@ -14,10 +14,9 @@ import type { Locale, MappedServicio } from "@/lib/cms/types";
 // Fallbacks used only when the DB record is missing or a field is empty.
 // The source of truth is the `servicios` row with slug_es='servicios'.
 const FALLBACK_HUB_METRICS = (isEn: boolean): MappedServicio["hubMetrics"] => [
-  { value: "19+", label: isEn ? "Specialized solutions" : "Soluciones especializadas" },
-  { value: "13+", label: isEn ? "Years of experience" : "Años de experiencia" },
+  { value: "23", label: isEn ? "Specialized solutions" : "Soluciones especializadas" },
+  { value: "14+", label: isEn ? "Years of experience" : "Años de experiencia" },
   { value: "7", label: isEn ? "Countries with active projects" : "Países con proyectos activos" },
-  { value: "40%", label: isEn ? "Cloud cost reduction" : "Reducción de costos cloud" },
 ];
 
 const FALLBACK_FRAMEWORK_PILLARS = (isEn: boolean): MappedServicio["frameworkPillars"] => [

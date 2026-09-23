@@ -1,11 +1,26 @@
 import { Brain, Cloud, Users, Code2, DollarSign, type LucideIcon } from "lucide-react";
 
+/**
+ * ÚLTIMO RESPALDO de los datos de contacto, no la fuente de verdad.
+ *
+ * La fuente única es la fila `main` de `site_config` (Admin → Configuración):
+ * `emailContact`, `phoneWhatsapp`, `addressBogota`, `addressMiami`,
+ * `linkedinUrl`, `instagramUrl`. Todo el sitio —páginas, pie y JSON-LD— los lee
+ * a través de `getContactoSitio()` (lib/cms/contacto.ts).
+ *
+ * Los valores de abajo solo se usan si la BD no responde y el fallback de
+ * `data/fallbacks/site_config.json` tampoco trae el campo. Si cambian los datos
+ * oficiales, se cambian en el admin; esto se actualiza únicamente para que el
+ * modo degradado no publique un dato viejo.
+ */
 export const SITE = {
   name: "Nivelics",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nivelics.com",
   description: "Transformación digital B2B. Inteligencia Artificial, Cloud & Staffing Premium.",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "+573112146459",
+  whatsapp: "+573112146459",
   email: "hola@nivelics.com",
+  linkedin: "https://www.linkedin.com/company/nivelics",
+  instagram: "https://www.instagram.com/nivelics",
   founded: 2012,
   locations: ["Bogotá, Colombia", "Miami, FL"],
 } as const;
@@ -114,9 +129,13 @@ export const INDUSTRIES = [
   { label: "Manufactura", href: "/industrias/manufactura" },
 ] as const;
 
+// `labelEn` es la etiqueta del mirror /en (la usa /nosotros). `label` sigue siendo
+// la española para quien no distingue idioma.
+// Solo cifras contables: «200+ proyectos», «98% de retención» y «50+ ingenieros» se
+// quitaron por no tener fuente. Los años salen de 2012, la fundación.
 export const METRICS = [
-  { value: 200, suffix: "+", label: "Proyectos entregados" },
-  { value: 13, suffix: "+", label: "Años de experiencia" },
-  { value: 98, suffix: "%", label: "Retención de clientes" },
-  { value: 50, suffix: "+", label: "Ingenieros especializados" },
+  { value: 14, suffix: "+", label: "Años de experiencia", labelEn: "Years of experience" },
+  { value: 7, suffix: "+", label: "Países con proyectos", labelEn: "Countries with projects" },
+  { value: 4, suffix: "", label: "Líneas de servicio", labelEn: "Service lines" },
+  { value: 23, suffix: "", label: "Servicios especializados", labelEn: "Specialized services" },
 ] as const;

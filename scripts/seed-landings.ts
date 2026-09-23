@@ -158,7 +158,7 @@ const LANDINGS: LandingSeed[] = [
         order: 7,
         data: {
           mostrar_whatsapp: true,
-          whatsapp_numero: "+573103926621",
+          whatsapp_numero: "+573112146459",
           whatsapp_mensaje: "Hola, quiero información sobre Staff Augmentation con Nivelics",
         },
       },
@@ -274,7 +274,7 @@ const LANDINGS: LandingSeed[] = [
         order: 7,
         data: {
           mostrar_whatsapp: true,
-          whatsapp_numero: "+573103926621",
+          whatsapp_numero: "+573112146459",
           whatsapp_mensaje: "Hola, quiero el diagnóstico gratuito de FinOps AWS con Nivelics",
         },
       },
@@ -405,7 +405,7 @@ const LANDINGS: LandingSeed[] = [
         order: 7,
         data: {
           mostrar_whatsapp: true,
-          whatsapp_numero: "+573103926621",
+          whatsapp_numero: "+573112146459",
           whatsapp_mensaje: "Hola, quiero información sobre IA para retail con Nivelics",
         },
       },
@@ -550,7 +550,7 @@ const LANDINGS: LandingSeed[] = [
         order: 8,
         data: {
           mostrar_whatsapp: true,
-          whatsapp_numero: "+573103926621",
+          whatsapp_numero: "+573112146459",
           whatsapp_mensaje: "Hola, quiero comparar opciones de Staff Augmentation con Nivelics",
         },
       },
@@ -653,7 +653,7 @@ const LANDINGS: LandingSeed[] = [
         order: 6,
         data: {
           mostrar_whatsapp: true,
-          whatsapp_numero: "+573103926621",
+          whatsapp_numero: "+573112146459",
           whatsapp_mensaje: "Hola, quiero agendar mi diagnóstico gratuito con Nivelics",
         },
       },

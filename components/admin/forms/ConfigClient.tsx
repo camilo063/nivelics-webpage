@@ -28,6 +28,7 @@ interface ConfigData {
   addressBogota: string;
   addressMiami: string;
   linkedinUrl: string;
+  instagramUrl: string;
   googleAnalyticsId: string;
   googleTagManagerId: string;
 }
@@ -46,11 +47,15 @@ const defaultConfig: ConfigData = {
   logoTitleEn: "",
   faviconUrl: "",
   defaultOgImage: "",
-  phoneWhatsapp: "+573103926621",
-  emailContact: "contacto@nivelics.com",
-  addressBogota: "",
-  addressMiami: "",
-  linkedinUrl: "",
+  // Valores oficiales (dueño, 2026-09-21). Solo se usan para pre-llenar el
+  // formulario cuando `site_config` todavía no tiene fila; la fuente de verdad
+  // es lo que quede guardado en la BD.
+  phoneWhatsapp: "+573112146459",
+  emailContact: "hola@nivelics.com",
+  addressBogota: "Bogotá, Colombia",
+  addressMiami: "Miami, FL",
+  linkedinUrl: "https://www.linkedin.com/company/nivelics",
+  instagramUrl: "https://www.instagram.com/nivelics",
   googleAnalyticsId: "",
   googleTagManagerId: "",
 };
@@ -343,13 +348,28 @@ export default function ConfigClient({ initialData }: { initialData: Partial<Con
                 className={inputClass + " resize-none"}
               />
             </div>
-            <div>
-              <label className="mb-2 block text-sm font-medium text-text-70">LinkedIn URL</label>
-              <input
-                value={config.linkedinUrl}
-                onChange={(e) => update("linkedinUrl", e.target.value)}
-                className={inputClass}
-              />
+            {/* LinkedIn e Instagram alimentan el `sameAs` de los datos estructurados
+                y los iconos del pie. Si se dejan vacíos, el sitio cae al respaldo
+                de lib/constants. */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-text-70">LinkedIn URL</label>
+                <input
+                  value={config.linkedinUrl}
+                  onChange={(e) => update("linkedinUrl", e.target.value)}
+                  className={inputClass}
+                  placeholder="https://www.linkedin.com/company/nivelics"
+                />
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-text-70">Instagram URL</label>
+                <input
+                  value={config.instagramUrl}
+                  onChange={(e) => update("instagramUrl", e.target.value)}
+                  className={inputClass}
+                  placeholder="https://www.instagram.com/nivelics"
+                />
+              </div>
             </div>
           </>
         )}

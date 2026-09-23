@@ -125,12 +125,18 @@ export const casosExito = pgTable("casos_exito", {
   resultsEs: text("results_es"),
   resultsEn: text("results_en"),
   metric1Value: varchar("metric_1_value", { length: 100 }),
+  /** Valor en inglés; si está vacío se usa `metric1Value` (las cifras no se traducen). */
+  metric1ValueEn: varchar("metric_1_value_en", { length: 100 }),
   metric1LabelEs: varchar("metric_1_label_es", { length: 255 }),
   metric1LabelEn: varchar("metric_1_label_en", { length: 255 }),
   metric2Value: varchar("metric_2_value", { length: 100 }),
+  /** Valor en inglés; si está vacío se usa `metric2Value` (las cifras no se traducen). */
+  metric2ValueEn: varchar("metric_2_value_en", { length: 100 }),
   metric2LabelEs: varchar("metric_2_label_es", { length: 255 }),
   metric2LabelEn: varchar("metric_2_label_en", { length: 255 }),
   metric3Value: varchar("metric_3_value", { length: 100 }),
+  /** Valor en inglés; si está vacío se usa `metric3Value` (las cifras no se traducen). */
+  metric3ValueEn: varchar("metric_3_value_en", { length: 100 }),
   metric3LabelEs: varchar("metric_3_label_es", { length: 255 }),
   metric3LabelEn: varchar("metric_3_label_en", { length: 255 }),
   testimonialQuoteEs: text("testimonial_quote_es"),
@@ -494,7 +500,7 @@ export const homeContent = pgTable("home_content", {
   productsStripTitleEn: text("products_strip_title_en"),
   productsStripCtaEs: varchar("products_strip_cta_es", { length: 255 }),
   productsStripCtaEn: varchar("products_strip_cta_en", { length: 255 }),
-  // ─── MAP SECTION ("13 años. 7 países.") ───
+  // ─── MAP SECTION ("14 años. 7 países.") ───
   mapTitleEs: text("map_title_es"),
   mapTitleEn: text("map_title_en"),
   mapSubtitleEs: text("map_subtitle_es"),
@@ -606,6 +612,7 @@ export const siteConfig = pgTable("site_config", {
   addressBogota: text("address_bogota"),
   addressMiami: text("address_miami"),
   linkedinUrl: text("linkedin_url"),
+  instagramUrl: text("instagram_url"),
   googleAnalyticsId: varchar("google_analytics_id", { length: 100 }),
   googleTagManagerId: varchar("google_tag_manager_id", { length: 100 }),
   llmsTxtContent: text("llms_txt_content"),

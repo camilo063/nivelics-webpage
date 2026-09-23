@@ -70,9 +70,24 @@ export async function generateMetadata({
 
 // LEGACY FALLBACK
 const RESULTS = [
-  { metric: "3", label: "Productos digitales lanzados" },
-  { metric: "25%", label: "Reducción de costos operativos" },
-  { metric: "85%", label: "Adopción digital" },
+  {
+    metric: "3",
+    metricEn: "3",
+    label: "Productos digitales lanzados",
+    labelEn: "Digital products launched",
+  },
+  {
+    metric: "25%",
+    metricEn: "25%",
+    label: "Reducción de costos operativos",
+    labelEn: "Operating cost reduction",
+  },
+  {
+    metric: "85%",
+    metricEn: "85%",
+    label: "Adopción digital",
+    labelEn: "Digital adoption",
+  },
 ];
 
 export default async function GrupoBolivarPage({
@@ -89,7 +104,10 @@ export default async function GrupoBolivarPage({
 
   const results = caso?.metrics?.length
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
-    : RESULTS;
+    : RESULTS.map((r) => ({
+        metric: isEn ? r.metricEn : r.metric,
+        label: isEn ? r.labelEn : r.label,
+      }));
 
   const creativeWork = getCreativeWorkSchema(
     [
@@ -132,9 +150,9 @@ export default async function GrupoBolivarPage({
           </Button>
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
+            <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
             <ServiceBadge variant="cloud">Cloud</ServiceBadge>
-            <ServiceBadge variant="ia">IA</ServiceBadge>
+            <ServiceBadge variant="ia">{isEn ? "AI" : "IA"}</ServiceBadge>
             <span className="text-sm text-text-40">
               {caso?.clientCountry || "Colombia"} &middot;{" "}
               {caso?.clientSector || "Seguros / Salud / E-commerce"}
@@ -203,9 +221,9 @@ export default async function GrupoBolivarPage({
               {uiLabel(uiLabels, "caso.services_used_label", locale)}
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">
-              <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
+              <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
               <ServiceBadge variant="cloud">Cloud</ServiceBadge>
-              <ServiceBadge variant="ia">IA</ServiceBadge>
+              <ServiceBadge variant="ia">{isEn ? "AI" : "IA"}</ServiceBadge>
             </div>
           </div>
         </div>

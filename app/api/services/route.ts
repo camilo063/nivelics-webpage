@@ -40,7 +40,7 @@ const SERVICES = [
     slug: "finops",
     name: "FinOps",
     shortName: "FinOps",
-    description: "Optimización y gobierno de costos cloud. Ahorro típico 30-40%.",
+    description: "Optimización y gobierno de costos cloud con success fee sobre el ahorro logrado.",
     url: "/servicios/cloud/finops",
     subservices: [
       "Visibilidad",
@@ -56,7 +56,7 @@ const SERVICES = [
     name: "Staff Augmentation Premium",
     shortName: "Staffing",
     description:
-      "Talento colombiano bilingüe senior. Integración en 6 días hábiles. Ahorro hasta 40% vs. USA/Europa.",
+      "Talento colombiano bilingüe senior, integrado a tu equipo. Primer candidato presentado en 5 días hábiles y garantía de reemplazo.",
     url: "/servicios/staff-augmentation",
     subservices: [
       "Frontend Engineers",

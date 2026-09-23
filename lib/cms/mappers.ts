@@ -45,7 +45,7 @@ export function mapServicio(data: Record<string, unknown>, locale: Locale): Mapp
     number: s.number,
     title: pick(locale, s.titleEs, s.titleEn),
     desc: pick(locale, s.descEs, s.descEn),
-    duration: s.duration,
+    duration: pick(locale, s.duration, s.durationEn) || s.duration,
   }));
 
   const metrics = ((data.metrics as CMSMetric[] | null) || []).map((m) => ({
@@ -139,8 +139,9 @@ export function mapIndustria(data: Record<string, unknown>, locale: Locale): Map
     desc: pick(locale, d.descEs, d.descEn),
   }));
 
+  // `valueEn` es opcional: «25%» se sirve igual en los dos idiomas, «5 días» no.
   const metrics = ((data.metrics as CMSIndustriaMetric[] | null) || []).map((m) => ({
-    value: m.value,
+    value: locale === "en" ? m.valueEn || m.value : m.value,
     label: pick(locale, m.labelEs, m.labelEn),
   }));
 
@@ -216,9 +217,13 @@ export function mapIndustria(data: Record<string, unknown>, locale: Locale): Map
 }
 
 export function mapCasoExito(data: Record<string, unknown>, locale: Locale): MappedCasoExito {
-  const m1 = data.metric1Value as string;
-  const m2 = data.metric2Value as string;
-  const m3 = data.metric3Value as string;
+  // El valor en inglés es opcional: una cifra como «25%» o «+100» se sirve igual en los
+  // dos idiomas y solo se traduce cuando lleva palabras («+10 años» → "10+ years").
+  const value = (es: unknown, en: unknown): string =>
+    (locale === "en" ? (en as string) || (es as string) : (es as string)) || "";
+  const m1 = value(data.metric1Value, data.metric1ValueEn);
+  const m2 = value(data.metric2Value, data.metric2ValueEn);
+  const m3 = value(data.metric3Value, data.metric3ValueEn);
   const metrics: Array<{ value: string; label: string }> = [];
   if (m1)
     metrics.push({

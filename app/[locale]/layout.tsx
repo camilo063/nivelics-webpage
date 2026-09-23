@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Nivelics",
   },
   description:
-    "Transformación digital para empresas en LATAM y USA. IA aplicada, Cloud (AWS/GCP), FinOps y Staff Augmentation premium. Bogotá + Miami. 13 años de proyectos entregados.",
+    "Transformación digital para empresas en LATAM y USA. IA aplicada, Cloud (AWS/GCP), FinOps y Staff Augmentation premium. Bogotá + Miami. 14 años de proyectos entregados.",
   authors: [{ name: "Nivelics SAS", url: "https://www.nivelics.com" }],
   creator: "Nivelics SAS",
   alternates: {

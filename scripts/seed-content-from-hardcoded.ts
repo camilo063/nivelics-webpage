@@ -183,7 +183,7 @@ async function upsertSiteConfig() {
     siteNameEn: "Nivelics",
     taglineEs: "Transformaci\u00f3n digital B2B. IA, Cloud & Staffing Premium.",
     taglineEn: "B2B digital transformation. AI, Cloud & Premium Staffing.",
-    phoneWhatsapp: "+573103926621",
+    phoneWhatsapp: "+573112146459",
     emailContact: "contacto@nivelics.com",
     addressBogota: "Bogot\u00e1, Colombia",
     addressMiami: "Miami, FL",

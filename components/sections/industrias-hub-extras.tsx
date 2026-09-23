@@ -27,8 +27,8 @@ export function IndustriasHubExtras({ locale, positioningTitle, positioningCopy,
   const resolvedTitle =
     positioningTitle ||
     (isEn
-      ? "13 years delivering technology in the most demanding sectors"
-      : "13 años entregando tecnología en los sectores más exigentes");
+      ? "14 years delivering technology in the most demanding sectors"
+      : "14 años entregando tecnología en los sectores más exigentes");
   const resolvedCopy =
     positioningCopy ||
     (isEn

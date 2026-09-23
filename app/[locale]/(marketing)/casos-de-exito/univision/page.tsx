@@ -69,9 +69,24 @@ export async function generateMetadata({
 
 // LEGACY FALLBACK
 const RESULTS = [
-  { metric: "Integrado", label: "Equipo integrado exitosamente" },
-  { metric: "Mejoradas", label: "Plataformas digitales mejoradas" },
-  { metric: "100%", label: "Cobertura bilingüe total" },
+  {
+    metric: "Integrado",
+    metricEn: "Embedded",
+    label: "Equipo integrado exitosamente",
+    labelEn: "Team successfully integrated",
+  },
+  {
+    metric: "Mejoradas",
+    metricEn: "Improved",
+    label: "Plataformas digitales mejoradas",
+    labelEn: "Digital platforms improved",
+  },
+  {
+    metric: "100%",
+    metricEn: "100%",
+    label: "Cobertura bilingüe total",
+    labelEn: "Full bilingual coverage",
+  },
 ];
 
 export default async function UnivisionPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -84,7 +99,10 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
 
   const results = caso?.metrics?.length
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
-    : RESULTS;
+    : RESULTS.map((r) => ({
+        metric: isEn ? r.metricEn : r.metric,
+        label: isEn ? r.labelEn : r.label,
+      }));
 
   const creativeWork = getCreativeWorkSchema(
     [
@@ -128,7 +146,7 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <ServiceBadge variant="staffing">Staffing</ServiceBadge>
-            <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
+            <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
             <span className="text-sm text-text-40">
               {caso?.clientCountry || "México"} &middot; {caso?.clientSector || "Medios"}
             </span>
@@ -197,7 +215,7 @@ export default async function UnivisionPage({ params }: { params: Promise<{ loca
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">
               <ServiceBadge variant="staffing">Staffing</ServiceBadge>
-              <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
+              <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
             </div>
           </div>
         </div>

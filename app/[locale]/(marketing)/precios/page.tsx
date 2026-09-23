@@ -114,7 +114,7 @@ const SERVICES_ES: PriceCard[] = [
     name: "Cloud / FinOps",
     price: "Success fee 20–30% del ahorro",
     detail:
-      "Discovery con fee fijo y success fee sobre los ahorros generados el primer año (ahorro típico del 30–40% de la factura cloud).",
+      "Discovery con fee fijo y success fee sobre los ahorros generados el primer año: si no hay ahorro, no hay success fee.",
     href: "/servicios/cloud/finops",
   },
   {
@@ -149,7 +149,7 @@ const SERVICES_EN: PriceCard[] = [
     name: "Cloud / FinOps",
     price: "Success fee: 20–30% of savings",
     detail:
-      "Fixed-fee discovery and a success fee on first-year savings (typical savings: 30–40% of the cloud bill).",
+      "Fixed-fee discovery and a success fee on first-year savings: no savings, no success fee.",
     href: "/en/services/cloud/finops",
   },
   {
@@ -171,7 +171,7 @@ const FAQ_ES = [
   {
     question: "¿El success fee de FinOps cómo funciona?",
     answer:
-      "Pagas un fee fijo de discovery y después un porcentaje (20–30%) del ahorro que generamos en tu factura cloud durante el primer año. Si no hay ahorro, no hay success fee. El ahorro típico es del 30–40%.",
+      "Pagas un fee fijo de discovery y después un porcentaje (20–30%) del ahorro que generamos en tu factura cloud durante el primer año. Si no hay ahorro, no hay success fee. La auditoría inicial cuantifica cuánto ahorro hay disponible en tu caso antes de que te comprometas.",
   },
   {
     question: "¿Qué incluye la tarifa por hora de Staff Augmentation?",
@@ -194,7 +194,7 @@ const FAQ_EN = [
   {
     question: "How does the FinOps success fee work?",
     answer:
-      "You pay a fixed discovery fee and then a percentage (20–30%) of the savings we generate on your cloud bill during the first year. No savings, no success fee. Typical savings are 30–40%.",
+      "You pay a fixed discovery fee and then a percentage (20–30%) of the savings we generate on your cloud bill during the first year. No savings, no success fee. The initial audit quantifies how much saving is available in your case before you commit.",
   },
   {
     question: "What does the Staff Augmentation hourly rate include?",

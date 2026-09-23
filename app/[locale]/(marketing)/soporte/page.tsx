@@ -6,8 +6,8 @@ import { getFAQSchema } from "@/lib/schema/faq";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { getPageGeneral, mapPageGeneral } from "@/lib/cms";
-import { getSiteConfigPublic } from "@/lib/cms/queries";
-import { waDisplay, waUrl } from "@/lib/utils/whatsapp";
+import { getContactoSitio } from "@/lib/cms/contacto";
+import type { ContactoSitio } from "@/lib/cms/contacto-shared";
 import type { Locale } from "@/lib/cms";
 
 export const revalidate = 86400;
@@ -39,7 +39,11 @@ export async function generateMetadata({
 
 // LEGACY FALLBACK — el FAQPage de esta ruta se emite desde aquí, así que las preguntas
 // también tienen que viajar al idioma de la página.
-const FAQ_ITEMS_ES = [
+//
+// El correo y el WhatsApp que aparecen dentro de las respuestas se interpolan desde
+// site_config (Admin → Configuración): son los mismos que muestran las tarjetas de
+// canales y los del JSON-LD, y antes estaban escritos a mano en cada idioma.
+const faqItemsEs = (c: ContactoSitio) => [
   {
     question: "¿Cuál es el tiempo de respuesta del soporte técnico?",
     answer:
@@ -47,8 +51,7 @@ const FAQ_ITEMS_ES = [
   },
   {
     question: "¿Cómo reporto un incidente o bug en producción?",
-    answer:
-      "Puedes reportar incidentes a través de WhatsApp al +57 311-2146459 o enviando un email a hola@nivelics.com con el asunto 'Incidente - [Nombre del proyecto]'. Incluye una descripción del problema, pasos para reproducirlo y capturas de pantalla si es posible.",
+    answer: `Puedes reportar incidentes a través de WhatsApp al ${c.whatsappDisplay} o enviando un email a ${c.email} con el asunto 'Incidente - [Nombre del proyecto]'. Incluye una descripción del problema, pasos para reproducirlo y capturas de pantalla si es posible.`,
   },
   {
     question: "¿Ofrecen soporte fuera del horario de atención?",
@@ -57,7 +60,7 @@ const FAQ_ITEMS_ES = [
   },
 ];
 
-const FAQ_ITEMS_EN = [
+const faqItemsEn = (c: ContactoSitio) => [
   {
     question: "What is the technical support response time?",
     answer:
@@ -65,8 +68,7 @@ const FAQ_ITEMS_EN = [
   },
   {
     question: "How do I report an incident or a production bug?",
-    answer:
-      "You can report incidents over WhatsApp at +57 311-2146459 or by emailing hola@nivelics.com with the subject 'Incident - [Project name]'. Include a description of the problem, the steps to reproduce it and screenshots if possible.",
+    answer: `You can report incidents over WhatsApp at ${c.whatsappDisplay} or by emailing ${c.email} with the subject 'Incident - [Project name]'. Include a description of the problem, the steps to reproduce it and screenshots if possible.`,
   },
   {
     question: "Do you offer support outside business hours?",
@@ -76,15 +78,15 @@ const FAQ_ITEMS_EN = [
 ];
 
 // LEGACY FALLBACK
-const buildChannels = (phoneWhatsapp: string | null | undefined, isEn: boolean) => [
+const buildChannels = (c: ContactoSitio, isEn: boolean) => [
   {
     icon: "message-circle",
     title: "WhatsApp",
     description: isEn
       ? "Fast answers for questions and support."
       : "Respuesta rápida para consultas y soporte.",
-    contact: waDisplay(phoneWhatsapp),
-    href: waUrl(phoneWhatsapp),
+    contact: c.whatsappDisplay,
+    href: c.whatsappUrl,
     linkText: isEn ? "Send a message" : "Enviar mensaje",
   },
   {
@@ -93,8 +95,8 @@ const buildChannels = (phoneWhatsapp: string | null | undefined, isEn: boolean) 
     description: isEn
       ? "For formal requests and documentation."
       : "Para solicitudes formales y documentación.",
-    contact: "hola@nivelics.com",
-    href: "mailto:hola@nivelics.com",
+    contact: c.email,
+    href: c.emailHref,
     linkText: isEn ? "Send an email" : "Enviar email",
   },
 ];
@@ -132,11 +134,13 @@ export default async function SoportePage({ params }: { params: Promise<{ locale
   const locale = (await getLocale()) as Locale;
   const raw = await getPageGeneral("support");
   const page = raw ? mapPageGeneral(raw as Record<string, unknown>, locale) : null;
-  const config = await getSiteConfigPublic().catch(() => null);
+  // Correo y WhatsApp: site_config (Admin → Configuración), la misma fuente que usan
+  // el pie, /contacto y los datos estructurados.
+  const contacto = await getContactoSitio();
   const isEn = locale === "en";
   const t = isEn ? LABELS.en : LABELS.es;
-  const channels = buildChannels(config?.phoneWhatsapp, isEn);
-  const faqItems = isEn ? FAQ_ITEMS_EN : FAQ_ITEMS_ES;
+  const channels = buildChannels(contacto, isEn);
+  const faqItems = isEn ? faqItemsEn(contacto) : faqItemsEs(contacto);
 
   const faqSchema = getFAQSchema(faqItems);
 

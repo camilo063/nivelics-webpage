@@ -27,8 +27,21 @@ export async function generateMetadata({
   });
 }
 
-// LEGACY FALLBACK
-const TIMELINE = [
+const LABELS = {
+  es: {
+    h1: "Nuestra Historia",
+    intro: "Más de una década de evolución constante, siempre al ritmo de la tecnología.",
+    timeline: "Timeline",
+  },
+  en: {
+    h1: "Our History",
+    intro: "More than a decade of constant evolution, always at the pace of technology.",
+    timeline: "Timeline",
+  },
+} as const;
+
+// LEGACY FALLBACK (ES)
+const TIMELINE_ES = [
   {
     year: "2012",
     title: "Fundación",
@@ -47,7 +60,7 @@ const TIMELINE = [
   {
     year: "2018",
     title: "Staff Augmentation",
-    description: "Lanzamos nuestra línea de staffing premium con +20 ingenieros dedicados.",
+    description: "Lanzamos nuestra línea de staffing premium con ingenieros dedicados por cliente.",
   },
   {
     year: "2019",
@@ -57,7 +70,8 @@ const TIMELINE = [
   {
     year: "2020",
     title: "Expansión Regional",
-    description: "Clientes en México, Perú, Chile y Centroamérica. Equipo supera las 40 personas.",
+    description:
+      "Clientes en México, Perú, Chile y Centroamérica. El equipo crece con la operación regional.",
   },
   {
     year: "2021",
@@ -83,12 +97,78 @@ const TIMELINE = [
   {
     year: "2025",
     title: "Argentina & Consolidación",
-    description: "Expansión a Argentina (Crónica). +200 proyectos entregados acumulados.",
+    description: "Expansión a Argentina (Crónica), primer cliente del Cono Sur.",
   },
   {
     year: "2026",
     title: "Hoy",
-    description: "+50 ingenieros, presencia en 8 países, consolidación del marco I+C+S.",
+    description: "Presencia en 7+ países y consolidación del marco estratégico I+C+S.",
+  },
+];
+
+// LEGACY FALLBACK (EN) — espejo exacto de TIMELINE_ES.
+const TIMELINE_EN = [
+  {
+    year: "2012",
+    title: "Founding",
+    description: "Nivelics is born in Bogotá as a software development consultancy.",
+  },
+  {
+    year: "2014",
+    title: "First large clients",
+    description: "Contracts with companies in the Colombian banking and insurance sector.",
+  },
+  {
+    year: "2016",
+    title: "Pivot to Cloud",
+    description: "We add cloud architecture and infrastructure services (AWS, Azure).",
+  },
+  {
+    year: "2018",
+    title: "Staff Augmentation",
+    description:
+      "We launched our premium staffing line with engineers dedicated to a single client.",
+  },
+  {
+    year: "2019",
+    title: "Expansion into Mexico",
+    description: "Project with Televisa/N+. Our first client outside Colombia.",
+  },
+  {
+    year: "2020",
+    title: "Regional Expansion",
+    description:
+      "Clients in Mexico, Peru, Chile and Central America. The team grows with the regional operation.",
+  },
+  {
+    year: "2021",
+    title: "Grupo Bolívar & GPTW",
+    description: "Grupo Bolívar project. Great Place to Work Colombia certification.",
+  },
+  {
+    year: "2022",
+    title: "Miami Office",
+    description: "We open our Miami office (Nivelics LLC) for the US-LATAM market.",
+  },
+  {
+    year: "2023",
+    title: "AI Practice",
+    description: "Our Artificial Intelligence practice begins. First generative AI projects.",
+  },
+  {
+    year: "2024",
+    title: "AI & FinOps",
+    description: "Formal launch of the AI and FinOps practices. I+C+S strategic framework.",
+  },
+  {
+    year: "2025",
+    title: "Argentina & Consolidation",
+    description: "Expansion to Argentina (Crónica), our first Southern Cone client.",
+  },
+  {
+    year: "2026",
+    title: "Today",
+    description: "Presence in 7+ countries and consolidation of the I+C+S strategic framework.",
   },
 ];
 
@@ -101,7 +181,10 @@ export default async function HistoriaPage({ params }: { params: Promise<{ local
     ? dbItems.map((item) => mapHistoriaItem(item as Record<string, unknown>, locale))
     : null;
 
-  // Use DB items or fall back to hardcoded TIMELINE
+  const isEn = locale === "en";
+  const t = LABELS[isEn ? "en" : "es"];
+
+  // Use DB items or fall back to the hardcoded timeline of the served language
   const timelineToShow =
     mappedItems && mappedItems.length > 0
       ? mappedItems.map((item) => ({
@@ -109,18 +192,18 @@ export default async function HistoriaPage({ params }: { params: Promise<{ local
           title: item.title,
           description: item.description,
         }))
-      : TIMELINE;
+      : isEn
+        ? TIMELINE_EN
+        : TIMELINE_ES;
 
   return (
     <PageWrapper>
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1280px] px-6 md:px-20">
-          <h1 className="text-4xl font-bold text-text-100 md:text-5xl">Nuestra Historia</h1>
-          <p className="mt-4 max-w-2xl text-lg text-text-70">
-            Más de una década de evolución constante, siempre al ritmo de la tecnología.
-          </p>
+          <h1 className="text-4xl font-bold text-text-100 md:text-5xl">{t.h1}</h1>
+          <p className="mt-4 max-w-2xl text-lg text-text-70">{t.intro}</p>
 
-          <h2 className="mt-16 text-3xl font-bold text-text-100">Timeline</h2>
+          <h2 className="mt-16 text-3xl font-bold text-text-100">{t.timeline}</h2>
           <div className="mt-8 relative">
             {/* Timeline line */}
             <div className="absolute left-4 top-0 bottom-0 w-px bg-border md:left-1/2" />

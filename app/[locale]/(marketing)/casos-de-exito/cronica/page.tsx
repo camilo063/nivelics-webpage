@@ -71,9 +71,24 @@ export async function generateMetadata({
 
 // LEGACY FALLBACK
 const RESULTS = [
-  { metric: "Alto tráfico", label: "Portal de alto tráfico modernizado" },
-  { metric: "IA", label: "Personalización con IA implementada" },
-  { metric: "50%", label: "Procesos editoriales más eficientes" },
+  {
+    metric: "Alto tráfico",
+    metricEn: "High traffic",
+    label: "Portal de alto tráfico modernizado",
+    labelEn: "High-traffic portal modernized",
+  },
+  {
+    metric: "IA",
+    metricEn: "AI",
+    label: "Personalización con IA implementada",
+    labelEn: "AI personalization implemented",
+  },
+  {
+    metric: "50%",
+    metricEn: "50%",
+    label: "Procesos editoriales más eficientes",
+    labelEn: "More efficient editorial processes",
+  },
 ];
 
 export default async function CronicaPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -86,7 +101,10 @@ export default async function CronicaPage({ params }: { params: Promise<{ locale
 
   const results = caso?.metrics?.length
     ? caso.metrics.map((m) => ({ metric: m.value, label: m.label }))
-    : RESULTS;
+    : RESULTS.map((r) => ({
+        metric: isEn ? r.metricEn : r.metric,
+        label: isEn ? r.labelEn : r.label,
+      }));
 
   const creativeWork = getCreativeWorkSchema(
     [
@@ -129,8 +147,8 @@ export default async function CronicaPage({ params }: { params: Promise<{ locale
           </Button>
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
-            <ServiceBadge variant="ia">IA</ServiceBadge>
+            <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
+            <ServiceBadge variant="ia">{isEn ? "AI" : "IA"}</ServiceBadge>
             <span className="text-sm text-text-40">
               {caso?.clientCountry || "Argentina"} &middot; {caso?.clientSector || "Medios"}
             </span>
@@ -198,8 +216,8 @@ export default async function CronicaPage({ params }: { params: Promise<{ locale
               {uiLabel(uiLabels, "caso.services_used_label", locale)}
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">
-              <ServiceBadge variant="dev">Desarrollo</ServiceBadge>
-              <ServiceBadge variant="ia">IA</ServiceBadge>
+              <ServiceBadge variant="dev">{isEn ? "Development" : "Desarrollo"}</ServiceBadge>
+              <ServiceBadge variant="ia">{isEn ? "AI" : "IA"}</ServiceBadge>
             </div>
           </div>
         </div>

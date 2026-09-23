@@ -63,46 +63,178 @@ export async function generateMetadata({
 }
 
 // LEGACY FALLBACK
+// Son los siete clientes reales, los mismos que sirve la BD. Antes había aquí cinco casos
+// inventados («Migración Cloud para Grupo Financiero», «42% ahorro en 6 meses»…) que solo
+// aparecían si la BD no respondía: contenido fabricado y además solo en español.
 const CASES = [
   {
-    title: "Migración Cloud para Grupo Financiero",
-    badge: "cloud" as const,
-    industry: "Servicios Financieros",
-    challenge: "Infraestructura on-premise con 99.2% uptime y costos crecientes.",
-    solution: "Migración a AWS multi-AZ con arquitectura serverless y CI/CD automatizado.",
-    results: ["99.95% uptime", "35% reducción de costos", "Deploy time: 45min → 8min"],
-  },
-  {
-    title: "Chatbot IA para Aseguradora Líder",
-    badge: "ia" as const,
-    industry: "Seguros",
-    challenge: "Call center saturado con tiempos de espera de +15 minutos.",
-    solution: "Asistente virtual con LLM fine-tuned en pólizas y procesos de reclamaciones.",
-    results: ["60% reducción en llamadas", "NPS +22 puntos", "ROI en 4 meses"],
-  },
-  {
-    title: "Equipo Dedicado para Fintech",
-    badge: "staffing" as const,
-    industry: "Fintech",
-    challenge: "Necesidad de escalar 3x el equipo de ingeniería en 30 días para nuevo lanzamiento.",
-    solution: "8 ingenieros senior (React, Node.js, AWS) integrados con procesos Scrum existentes.",
-    results: ["Lanzamiento on-time", "0 rotación en 12 meses", "Velocidad +40%"],
-  },
-  {
-    title: "FinOps para Retailer Regional",
-    badge: "finops" as const,
-    industry: "Retail",
-    challenge: "Factura cloud creciendo 20% MoM sin visibilidad del gasto por equipo.",
-    solution: "Implementación completa de FinOps: tagging, dashboards, rightsizing y governance.",
-    results: ["42% ahorro en 6 meses", "100% visibilidad por equipo", "Cultura FinOps adoptada"],
-  },
-  {
-    title: "Plataforma E-commerce B2B",
+    title: "Televisa / N+: Plataforma de Noticias Digitales",
+    titleEn: "Televisa / N+: Digital News Platform",
     badge: "dev" as const,
-    industry: "Manufactura",
-    challenge: "Procesos de pedido manuales con Excel y email generando errores y retrasos.",
-    solution: "Portal B2B con catálogo, pricing dinámico, integración SAP y app móvil.",
-    results: ["70% automatización de pedidos", "Error rate: 12% → 0.5%", "Adopción 95% en 3 meses"],
+    industry: "Medios / Streaming",
+    industryEn: "Media / Streaming",
+    challenge:
+      "Televisa necesitaba una plataforma digital de noticias tipo streaming para el mercado hispanohablante, capaz de manejar picos masivos de tráfico durante eventos noticiosos en vivo.",
+    challengeEn:
+      "Televisa needed a streaming-type digital news platform for the Spanish-speaking market, capable of handling massive traffic spikes during live news events.",
+    solution:
+      "Diseñamos una arquitectura cloud escalable en AWS con CDN global, equipo de ingeniería Nivelics integrado al equipo Televisa, y pipelines de CI/CD para deploys múltiples al día.",
+    solutionEn:
+      "We designed a scalable cloud architecture on AWS with global CDN, integrated Nivelics engineering team with Televisa's team, and CI/CD pipelines for multiple daily deploys.",
+    results: [
+      "Plataforma escalable a millones de usuarios",
+      "preparada para los picos de tráfico de eventos noticiosos en vivo",
+      "y 40% más rápido en time-to-market",
+    ],
+    resultsEn: [
+      "A platform that scales to millions of users",
+      "built for the traffic peaks of live news events",
+      "and 40% faster time-to-market",
+    ],
+  },
+  {
+    title: "Grupo Bolívar: Transformación Digital Multi-línea",
+    titleEn: "Grupo Bolívar: Multi-line Digital Transformation",
+    badge: "ia" as const,
+    industry: "Seguros / Salud / E-commerce",
+    industryEn: "Insurance / Health / E-commerce",
+    challenge:
+      "Grupo Bolívar necesitaba modernizar múltiples líneas de negocio simultáneamente, integrando canales digitales y optimizando procesos internos.",
+    challengeEn:
+      "Grupo Bolívar needed to modernize multiple business lines simultaneously, integrating digital channels and optimizing internal processes.",
+    solution:
+      "Rediseño y desarrollo de productos digitales para seguros, salud y e-commerce con equipo dedicado y metodología ágil.",
+    solutionEn:
+      "Redesigned and developed digital products for insurance, healthcare and e-commerce with dedicated team and agile methodology.",
+    results: [
+      "3 productos digitales lanzados",
+      "25% reducción de costos operativos",
+      "85% adopción digital",
+    ],
+    resultsEn: [
+      "3 digital products launched",
+      "25% reduction in operational costs",
+      "85% digital adoption",
+    ],
+  },
+  {
+    title: "Two Maids: Escalamiento de Equipo Tech en USA",
+    titleEn: "Two Maids: Tech Team Scaling in the USA",
+    badge: "staffing" as const,
+    industry: "Servicios / Franquicias",
+    industryEn: "Services / Franchises",
+    challenge:
+      "Two Maids necesitaba escalar su equipo de desarrollo rápidamente para construir una plataforma de gestión de franquicias sin los costos de contratación directa en USA.",
+    challengeEn:
+      "Two Maids needed to scale their development team quickly to build a franchise management platform without the costs of direct hiring in the USA.",
+    solution:
+      "Staff Augmentation con ingenieros senior colombianos integrados al equipo de Two Maids. Desarrollo de plataforma para +100 franquicias.",
+    solutionEn:
+      "Staff Augmentation with senior Colombian engineers integrated into Two Maids' team. Platform development for +100 franchises.",
+    results: [
+      "Equipo escalado en menos de 10 días",
+      "ingenieros senior integrados al equipo de Two Maids y una plataforma que gestiona más de 100 franquicias",
+    ],
+    resultsEn: [
+      "Team scaled in under 10 days",
+      "senior engineers embedded in the Two Maids team and a platform that manages more than 100 franchises",
+    ],
+  },
+  {
+    title: "AB InBev-Bavaria: Transformación Digital en Consumo Masivo",
+    titleEn: "AB InBev-Bavaria: Digital Transformation in Mass Consumer Markets",
+    badge: "dev" as const,
+    industry: "Consumo Masivo",
+    industryEn: "Consumer goods",
+    challenge:
+      "AB InBev-Bavaria necesitaba digitalizar procesos de distribución y ventas en la región centroamericana.",
+    challengeEn:
+      "AB InBev-Bavaria needed to digitize distribution and sales processes in the Central American region.",
+    solution:
+      "Desarrollo de soluciones digitales para optimizar la cadena de distribución y las operaciones de venta en campo.",
+    solutionEn:
+      "Development of digital solutions to optimize the distribution chain and field sales operations.",
+    results: [
+      "Procesos de distribución digitalizados con trazabilidad en tiempo real y eficiencia operativa mejorada",
+    ],
+    resultsEn: [
+      "Digitized distribution processes with real-time traceability and improved operational efficiency",
+    ],
+  },
+  {
+    title: "Crónica: Modernización de Plataforma de Noticias",
+    titleEn: "Case Study: News Platform Modernization",
+    badge: "ia" as const,
+    industry: "Medios",
+    industryEn: "Media",
+    challenge:
+      "Crónica, uno de los medios más reconocidos de Argentina, necesitaba modernizar su plataforma digital para competir en la era del contenido personalizado.",
+    challengeEn:
+      "Crónica, one of Argentina's most recognized media outlets, needed to modernize its digital platform to compete in the era of personalized content.",
+    solution:
+      "Rediseño completo del portal de noticias con arquitectura moderna, personalización de contenido con IA y optimización de procesos editoriales.",
+    solutionEn:
+      "Complete redesign of the news portal with modern architecture, AI-powered content personalization and editorial process optimization.",
+    results: [
+      "Portal de alto tráfico modernizado",
+      "personalización con IA implementada",
+      "procesos editoriales 50% más eficientes",
+    ],
+    resultsEn: [
+      "High-traffic portal modernized",
+      "AI-powered personalization implemented",
+      "editorial processes 50% more efficient",
+    ],
+  },
+  {
+    title: "Pulzo: Partnership Tecnológico en 2014",
+    titleEn: "Pulzo: Technology Partnership 2014",
+    badge: "dev" as const,
+    industry: "Medios Digitales",
+    industryEn: "Digital media",
+    challenge:
+      "Pulzo, medio digital líder en Colombia, necesitaba un partner tecnológico de confianza para escalar su plataforma y optimizar su operación digital.",
+    challengeEn:
+      "Pulzo, Colombia's leading digital media company, needed a trusted technology partner to scale their platform and optimize their digital operations.",
+    solution:
+      "Partnership tecnológico de largo plazo con Nivelics. Desarrollo y evolución continua de la plataforma editorial con foco en performance y escalabilidad.",
+    solutionEn:
+      "Long-term technology partnership with Nivelics. Ongoing development and evolution of the editorial platform with focus on performance and scalability.",
+    results: [
+      "Partnership de largo plazo (+10 años)",
+      "plataforma escalable a millones de visitas",
+      "evolución tecnológica continua",
+    ],
+    resultsEn: [
+      "Long-term partnership (+10 years)",
+      "scalable platform handling millions of visits",
+      "continuous technological evolution",
+    ],
+  },
+  {
+    title: "Univision: Desarrollo Digital para Medios Hispanos",
+    titleEn: "Univision: Digital Development for Hispanic Media",
+    badge: "staffing" as const,
+    industry: "Medios / Broadcasting",
+    industryEn: "Media / Broadcasting",
+    challenge:
+      "Univision requería capacidad de desarrollo adicional para sus plataformas digitales dirigidas al mercado hispano en USA y México.",
+    challengeEn:
+      "Univision required additional development capacity for their digital platforms targeting the Hispanic market in the USA and Mexico.",
+    solution:
+      "Equipo de desarrollo Nivelics integrado para fortalecer las capacidades digitales de Univision con talento senior bilingüe.",
+    solutionEn:
+      "Nivelics development team integrated to strengthen Univision's digital capabilities with senior bilingual talent.",
+    results: [
+      "Equipo integrado exitosamente",
+      "plataformas digitales mejoradas",
+      "cobertura bilingüe total",
+    ],
+    resultsEn: [
+      "Successfully integrated team",
+      "improved digital platforms",
+      "complete bilingual coverage",
+    ],
   },
 ];
 
@@ -254,14 +386,25 @@ export default async function CasosDeExitoPage({
                     </div>
                   </article>
                 ))
-              : CASES.map((c) => (
+              : CASES.map((raw) => ({
+                  ...raw,
+                  title: isEn ? raw.titleEn : raw.title,
+                  industry: isEn ? raw.industryEn : raw.industry,
+                  challenge: isEn ? raw.challengeEn : raw.challenge,
+                  solution: isEn ? raw.solutionEn : raw.solution,
+                  results: isEn ? raw.resultsEn : raw.results,
+                })).map((c) => (
                   <article key={c.title} className="glass glow-hover rounded-xl p-8">
                     <div className="flex flex-wrap items-center gap-3 mb-4">
                       <ServiceBadge variant={c.badge}>
                         {c.badge === "ia"
-                          ? "IA"
+                          ? isEn
+                            ? "AI"
+                            : "IA"
                           : c.badge === "dev"
-                            ? "Desarrollo"
+                            ? isEn
+                              ? "Development"
+                              : "Desarrollo"
                             : c.badge.charAt(0).toUpperCase() + c.badge.slice(1)}
                       </ServiceBadge>
                       <span className="text-xs text-text-40">{c.industry}</span>
