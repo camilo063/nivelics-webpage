@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>45 Minutes Plumbing Supply</title>
+<meta name="description" content="Plumbing supplies delivered to your jobsite in 45 minutes. Licensed plumbers on call 24/7.">
+<meta name="theme-color" content="#14284B">
+
+<!-- Instalación como app (Android / Chrome) -->
+<link rel="manifest" href="manifest.webmanifest">
+
+<!-- Instalación como app (iPhone / iPad) -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="45 Minutes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#14284B; --navy-deep:#0E1C36; --navy-soft:#23396A;
+  --orange:#E2560F; --orange-brand:#F26A21; --orange-text:#C24A0C; --peach:#FFE3D3; --peach-soft:#FFF1E8; --apricot:#FFB48A;
+  --red:#B81F26; --red-deep:#8F151B; --green:#1F6B3A;
+  --bg:#F3F5F9; --ink:#14284B; --ink-2:#3D4A63; --muted:#5A6680; --line:#E6EAF1; --border:#D5DBE6; --chip:#E2E7F0;
+  --safe-top:env(safe-area-inset-top,0px); --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--navy-deep);font-family:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+button{font-family:inherit;cursor:pointer;color:inherit}
+input,textarea{font-family:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--orange-brand);outline-offset:2px}
+.cond{font-family:'Barlow Condensed','Barlow',sans-serif}
+
+#app{position:relative;max-width:480px;height:100vh;height:100dvh;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+@media (min-width:520px){#app{box-shadow:0 0 0 1px #0003,0 30px 80px #0006}}
+main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative}
+.noscroll{scrollbar-width:none}.noscroll::-webkit-scrollbar{display:none}
+
+/* motion */
+.scr{animation:fu .38s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tap{transition:transform .12s ease,background .2s ease}
+.tap:active{transform:scale(.96)}
+.pulse{animation:pl 1.6s ease-out infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(234,91,19,.55)}100%{box-shadow:0 0 0 18px rgba(234,91,19,0)}}
+.pop{animation:pp .5s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pp{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.blink{animation:bk 1.4s ease-in-out infinite}
+@keyframes bk{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* header + nav */
+.top{flex-shrink:0;background:var(--navy);display:flex;align-items:center;gap:12px;padding:calc(10px + var(--safe-top)) 16px 10px}
+.top-logo{width:42px;height:42px;border-radius:50%;border:2px solid var(--orange-brand);background:#fff;object-fit:cover}
+.top-txt{flex:1;min-width:0}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--apricot)}
+.top-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:23px;color:#fff;line-height:1.1}
+.icon-btn{position:relative;width:46px;height:46px;border-radius:12px;border:0;background:var(--navy-soft);color:#fff;display:flex;align-items:center;justify-content:center}
+.badge{position:absolute;top:-5px;right:-5px;min-width:21px;height:21px;padding:0 4px;border-radius:11px;background:var(--orange-brand);color:var(--navy);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+nav.tabs{flex-shrink:0;background:#fff;border-top:1px solid var(--chip);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:var(--safe-bottom)}
+nav.tabs button{height:66px;border:0;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:700}
+nav.tabs button.on{color:var(--orange-text)}
+
+/* building blocks */
+.pad{padding:16px;display:flex;flex-direction:column;gap:14px}
+.card{background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(20,40,75,.08)}
+.h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;margin:0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.btn{border:0;border-radius:14px;font-family:'Barlow Condensed',sans-serif;font-weight:800;letter-spacing:.03em;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-primary{background:var(--orange);color:#fff;height:58px;font-size:21px}
+.btn-dark{background:var(--navy);color:#fff;height:54px;font-size:19px}
+.btn-sm{height:46px;padding:0 22px;font-size:19px;border-radius:12px}
+.btn-outline{height:44px;padding:0 16px;border-radius:12px;border:2px solid var(--navy);background:#fff;color:var(--navy);font-weight:800;font-size:14px;font-family:'Barlow',sans-serif;letter-spacing:0}
+.pill{flex-shrink:0;height:44px;padding:0 16px;border-radius:22px;border:1.5px solid var(--border);background:#fff;color:var(--navy);font-weight:700;font-size:14px;white-space:nowrap}
+.pill.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tag{display:inline-block;padding:2px 7px;border-radius:6px;font-size:11px;font-weight:800;color:var(--navy)}
+.tag.fast{background:var(--peach)}.tag.slow{background:var(--chip)}
+.choice{border:2px solid var(--border);background:#fff;border-radius:14px;padding:12px;text-align:left;color:var(--navy);display:flex;flex-direction:column;gap:2px}
+.choice.on{border-color:var(--orange);background:var(--peach-soft)}
+.choice b{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:700}
+.field input,.field textarea{min-height:44px;border-radius:10px;border:1.5px solid var(--border);padding:10px 12px;font-size:16px;color:var(--navy);background:#fff;resize:none}
+.row{display:flex;justify-content:space-between;gap:10px}
+.list-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.list-row:last-child{border-bottom:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.empty{padding:36px 24px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:34px;height:34px;border-radius:9px;border:0;font-size:18px;font-weight:700}
+.st-minus{background:var(--chip);color:var(--navy)}.st-plus{background:var(--navy);color:#fff}
+
+/* welcome */
+.welcome{position:absolute;inset:0;z-index:10;background:var(--navy-deep);display:flex;flex-direction:column;overflow-y:auto}
+.welcome-hero{height:clamp(220px,36vh,320px);background:#fff;flex-shrink:0;padding-top:var(--safe-top)}
+.welcome-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.welcome-logo{width:112px;height:112px;border-radius:50%;border:4px solid var(--orange-brand);margin:-56px auto 0;display:block;position:relative;background:#fff;flex-shrink:0}
+.welcome-copy{padding:18px 28px 0;text-align:center;display:flex;flex-direction:column;gap:10px}
+.welcome-actions{margin-top:auto;padding:24px 24px calc(24px + var(--safe-bottom));display:flex;flex-direction:column;gap:12px}
+
+/* home */
+.zone{background:var(--peach);color:var(--navy);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+.search{height:50px;border-radius:14px;border:1.5px solid var(--border);background:#fff;color:var(--muted);font-size:15px;display:flex;align-items:center;gap:10px;padding:0 16px;text-align:left;width:100%}
+.active-order{border:0;width:100%;text-align:left;background:var(--navy);color:#fff;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--orange-brand);flex-shrink:0}
+.hero{border-radius:18px;overflow:hidden;background:var(--navy)}
+.hero img{width:100%;height:180px;object-fit:cover;display:block}
+.hero-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.cat-btn{height:92px;border:0;border-radius:14px;background:#fff;box-shadow:0 1px 3px rgba(20,40,75,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px}
+.cat-ico{width:38px;height:38px;border-radius:10px;background:var(--peach);display:flex;align-items:center;justify-content:center;color:var(--orange-text)}
+.emergency{border:0;width:100%;border-radius:16px;background:var(--red);color:#fff;padding:16px;display:flex;align-items:center;gap:14px;text-align:left}
+.emergency-ico{width:46px;height:46px;border-radius:12px;background:var(--red-deep);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* shop */
+.pills{display:flex;gap:8px;overflow-x:auto;padding:14px 16px 6px}
+.product{padding:12px;display:flex;gap:12px;align-items:center}
+.thumb{width:64px;height:64px;border-radius:12px;background:#EEF2F8;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.add{width:46px;height:46px;border-radius:12px;border:0;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vstep{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0}
+.vstep button{width:44px;height:34px;border:0;font-size:20px;font-weight:700}
+.sticky-bar{position:sticky;bottom:0;padding:12px 16px 14px;background:var(--bg)}
+.sticky-bar button{width:100%;height:56px;border:0;border-radius:14px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-weight:800;font-size:16px}
+
+/* track */
+.eta-card{background:var(--navy);color:#fff;border-radius:18px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.map{position:relative;height:220px;border-radius:16px;overflow:hidden;background:#E3E9F2;border:1px solid var(--border)}
+.map-inner{position:absolute;left:50%;top:0;width:358px;height:220px;transform:translateX(-50%)}
+.map-label{position:absolute;font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.06em}
+.van{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--orange);border:3px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;transition:left 1s linear,top 1s linear}
+#route{transition:stroke-dashoffset 1s linear}
+.step{display:flex;gap:12px}
+.step-rail{display:flex;flex-direction:column;align-items:center}
+.step-dot{width:18px;height:18px;border-radius:50%;border:3px solid #B8C2D3;background:#fff;flex-shrink:0;transition:background .4s}
+.step.done .step-dot{background:var(--orange);border-color:var(--orange)}
+.step-line{width:2px;flex:1;min-height:22px;background:var(--border)}
+.step.done .step-line{background:var(--orange)}
+.step-label{font-weight:700;font-size:15px;color:var(--muted)}
+.step.done .step-label{color:var(--navy)}
+
+#toast{position:fixed;left:50%;bottom:calc(92px + var(--safe-bottom));transform:translate(-50%,16px);opacity:0;pointer-events:none;z-index:50;background:var(--navy);color:#fff;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:0 8px 24px rgba(14,28,54,.3);transition:opacity .25s,transform .25s cubic-bezier(.2,.8,.2,1)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* iOS install hint */
+#install{position:fixed;left:12px;right:12px;bottom:calc(12px + var(--safe-bottom));z-index:60;max-width:456px;margin:0 auto;background:#fff;color:var(--navy);border-radius:16px;padding:14px 16px;box-shadow:0 12px 40px rgba(14,28,54,.35);display:none;gap:12px;align-items:center}
+#install.show{display:flex}
+#install img{width:48px;height:48px;border-radius:12px}
+#install .x{border:0;background:var(--chip);width:36px;height:36px;border-radius:10px;font-size:18px;font-weight:700;flex-shrink:0}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="install" role="dialog" aria-label="Install the app"></div>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- assets & icons ---------- */
+const IMG = { logo: 'assets/logo.jpg', van: 'assets/van.jpg', store: 'assets/store.jpg', site: 'assets/site.jpg' };
+const svg = (d, sz = 22, sw = 2) => `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const P = {
+  truck: '<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+  cart: '<path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/>',
+  pin: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  fitting: '<path d="M4 9h7a3 3 0 0 1 3 3v8"/><path d="M4 5v8"/><path d="M10 20h8"/>',
+  pipe: '<path d="M3 8h8a4 4 0 0 1 4 4v9"/><path d="M3 12h6a2 2 0 0 1 2 2v7"/><path d="M9 3v5"/>',
+  phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  home: '<path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/>',
+  grid: '<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  msg: '<path d="M4 5h16v11H8l-4 4z"/>',
+  share: '<path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v8h14v-8"/>'
+};
+
+/* ---------- data ---------- */
+const CATS = [
+  { id: 'pex', label: 'PEX & Fittings' }, { id: 'valves', label: 'Valves' },
+  { id: 'heaters', label: 'Water Heaters' }, { id: 'drain', label: 'Drain & DWV' },
+  { id: 'copper', label: 'Copper' }, { id: 'tools', label: 'Tools' }
+];
+const PRODUCTS = [
+  { id: 'p1', cat: 'pex', name: 'PEX-A Tubing', spec: '1/2" × 100 ft coil', price: 64.9, fast: true },
+  { id: 'p2', cat: 'pex', name: 'PEX Crimp Rings', spec: '1/2" · bag of 100', price: 18.5, fast: true },
+  { id: 'p3', cat: 'pex', name: 'Brass PEX Elbow', spec: '1/2" · pack of 10', price: 22.4, fast: true },
+  { id: 'p4', cat: 'valves', name: 'Quarter-Turn Ball Valve', spec: '3/4" full port', price: 14.75, fast: true },
+  { id: 'p5', cat: 'valves', name: 'Angle Stop Valve', spec: '1/2" × 3/8" comp.', price: 8.95, fast: true },
+  { id: 'p6', cat: 'valves', name: 'Pressure Reducing Valve', spec: '3/4" lead-free', price: 89.0, fast: false },
+  { id: 'p7', cat: 'heaters', name: 'Gas Water Heater', spec: '50 gal · tall', price: 849.0, fast: false },
+  { id: 'p8', cat: 'heaters', name: 'Water Heater Connector', spec: '3/4" × 18" flex', price: 11.4, fast: true },
+  { id: 'p9', cat: 'heaters', name: 'T&P Relief Valve', spec: '3/4" · 150 psi', price: 16.2, fast: true },
+  { id: 'p10', cat: 'drain', name: 'PVC DWV Pipe', spec: '2" × 10 ft', price: 12.8, fast: true },
+  { id: 'p11', cat: 'drain', name: 'P-Trap Kit', spec: '1-1/2" PVC', price: 9.6, fast: true },
+  { id: 'p12', cat: 'copper', name: 'Copper Pipe Type L', spec: '3/4" × 10 ft', price: 58.3, fast: false },
+  { id: 'p13', cat: 'copper', name: 'Push-to-Connect Coupling', spec: '1/2"', price: 9.9, fast: true },
+  { id: 'p14', cat: 'tools', name: 'PEX Crimp Tool', spec: '3/8"–1" heads', price: 79.0, fast: false },
+  { id: 'p15', cat: 'tools', name: 'Pipe Wrench', spec: '18" cast iron', price: 34.5, fast: true }
+];
+const BY_ID = Object.fromEntries(PRODUCTS.map((p) => [p.id, p]));
+const REORDERS = {
+  last: { p1: 2, p2: 1, p4: 4, p8: 2 },
+  ocean: { p10: 4, p11: 3, p5: 6 },
+  aventura: { p7: 1, p8: 2, p9: 1 }
+};
+const SERVICES = [
+  { id: 'repairs', name: 'Repairs', desc: 'Leaks, faucets, toilets & fixtures' },
+  { id: 'drain', name: 'Drain Cleaning', desc: 'Clogs, sewer lines, grease traps' },
+  { id: 'heater', name: 'Water Heaters', desc: 'Repair, replacement & installs' },
+  { id: 'commercial', name: 'Commercial Plumbing', desc: 'Restaurants, retail & buildings' }
+];
+const TITLES = { home: 'Home', shop: 'Shop Supplies', cart: 'Your Order', track: 'Live Tracking', services: 'Plumbing Services', book: 'Book a Plumber', booked: 'Request Sent', account: 'Pro Account' };
+const STEPS = [
+  { label: 'Order confirmed', sub: 'Pro account · PO attached', t: 0 },
+  { label: 'Picked & loaded', sub: 'From stock on the nearest van', t: 0.12 },
+  { label: 'Van on the way', sub: 'Driver: Marcus R.', t: 0.3 },
+  { label: 'Arriving at jobsite', sub: 'Meet at Gate B', t: 0.85 },
+  { label: 'Delivered', sub: 'Photo + signature on file', t: 1 }
+];
+const ROUTE = [[36, 186], [36, 128], [150, 128], [150, 70], [250, 70], [250, 40], [322, 40]];
+const ROUTE_LEN = 432;
+const ETA0 = 2280; // 38 min
+const DEMO_SPEED = 30; // segundos simulados por segundo real (demo)
+
+/* ---------- state ---------- */
+const s = {
+  screen: 'welcome', cat: 'pex', cart: {}, delivery: 'express',
+  orderPlaced: false, orderMode: 'express', eta: 0, orderTotal: '', orderCount: 0,
+  svc: 'repairs', urgency: 'now', po: '', form: { name: '', phone: '', addr: '', desc: '' }
+};
+let lastScreen = null;
+
+/* ---------- helpers ---------- */
+const $ = (sel) => document.querySelector(sel);
+const fmt = (n) => '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const qty = (id) => s.cart[id] || 0;
+const cartCount = () => Object.values(s.cart).reduce((a, b) => a + b, 0);
+const tag = (p) => `<span class="tag ${p.fast ? 'fast' : 'slow'}">${p.fast ? '45-MIN' : 'SAME DAY'}</span>`;
+
+function totals() {
+  const ids = Object.keys(s.cart);
+  const sub = ids.reduce((a, id) => a + BY_ID[id].price * s.cart[id], 0);
+  const disc = sub * 0.10;
+  const fee = ids.length && s.delivery === 'express' ? 14.99 : 0;
+  const tax = (sub - disc) * 0.07;
+  return { sub, disc, fee, tax, total: sub - disc + fee + tax, slow: ids.filter((id) => !BY_ID[id].fast).length };
+}
+
+function track() {
+  const scheduled = s.orderMode === 'scheduled';
+  const p = s.orderPlaced && !scheduled ? 1 - s.eta / ETA0 : 0;
+  let d = p * ROUTE_LEN, x = ROUTE[0][0], y = ROUTE[0][1];
+  for (let i = 1; i < ROUTE.length; i++) {
+    const [ax, ay] = ROUTE[i - 1], [bx, by] = ROUTE[i];
+    const len = Math.abs(bx - ax) + Math.abs(by - ay);
+    if (d <= len) { const t = len ? d / len : 0; x = ax + (bx - ax) * t; y = ay + (by - ay) * t; break; }
+    d -= len; x = bx; y = by;
+  }
+  const delivered = s.orderPlaced && !scheduled && s.eta === 0;
+  const mm = Math.floor(s.eta / 60), ss = s.eta % 60;
+  return {
+    p, x, y, delivered, scheduled,
+    eta: scheduled ? '7:00 AM' : delivered ? 'Delivered' : `${mm}:${String(ss).padStart(2, '0')}`,
+    status: scheduled ? 'Scheduled delivery' : delivered ? 'Delivered' : p >= 0.85 ? 'Arriving now' : p >= 0.3 ? 'Van on the way' : 'Preparing your order',
+    caption: scheduled ? 'Tomorrow, 7–8 AM window' : delivered ? 'Signed at Gate B' : 'Estimated arrival, live',
+    steps: STEPS.map((st, i) => ({ ...st, done: scheduled ? i === 0 : (i === 4 ? delivered : p >= st.t), last: i === 4 }))
+  };
+}
+
+/* ---------- views ---------- */
+function vWelcome() {
+  return `<section class="welcome scr" aria-label="Welcome">
+    <div class="welcome-hero"><img src="${IMG.van}" alt="45 Minutes Plumbing Supply delivery van"></div>
+    <img class="welcome-logo pop" src="${IMG.logo}" alt="45 Minutes Plumbing Supply logo">
+    <div class="welcome-copy">
+      <h1 class="cond" style="margin:0;font-weight:800;font-size:36px;line-height:1;color:var(--orange-brand)">DON'T STOP WORKING.</h1>
+      <div class="cond" style="font-weight:800;font-size:28px;line-height:1.05;color:#fff">WE BRING THE SUPPLY TO YOU.</div>
+      <p style="margin:6px 0 0;font-size:16px;line-height:1.45;color:#D6DDEA">Plumbing supplies delivered to your jobsite in 45 minutes. Licensed plumbers on call 24/7.</p>
+    </div>
+    <div class="welcome-actions">
+      <button class="btn btn-primary tap" data-act="go" data-arg="home">${svg(P.truck, 22, 2.2)} I'M A PRO — ORDER SUPPLIES</button>
+      <button class="btn tap" data-act="go" data-arg="services" style="height:56px;border:2px solid #5A6E93;background:transparent;color:#fff;font-size:20px;font-weight:700">I NEED A PLUMBER</button>
+      <div style="text-align:center;font-size:13px;color:#A9B4C8;margin-top:4px">Hollywood · Hallandale Beach · Aventura · N. Miami Beach</div>
+    </div>
+  </section>`;
+}
+
+function vHeader() {
+  const n = cartCount();
+  return `<header class="top">
+    <img class="top-logo" src="${IMG.logo}" alt="">
+    <div class="top-txt"><div class="eyebrow">45 Minutes Plumbing Supply</div><div class="top-title">${TITLES[s.screen] || ''}</div></div>
+    <button class="icon-btn tap" data-act="go" data-arg="cart" aria-label="Open order cart">${svg(P.cart)}${n ? `<span class="badge pop">${n}</span>` : ''}</button>
+  </header>`;
+}
+
+function vNav() {
+  const on = (list) => list.includes(s.screen) ? 'on' : '';
+  return `<nav class="tabs" aria-label="Main">
+    <button class="tap ${on(['home'])}" data-act="go" data-arg="home">${svg(P.home, 24)}Home</button>
+    <button class="tap ${on(['shop', 'cart'])}" data-act="go" data-arg="shop">${svg(P.grid, 24)}Shop</button>
+    <button class="tap ${on(['track'])}" data-act="go" data-arg="track">${svg(P.truck, 24)}Track</button>
+    <button class="tap ${on(['services', 'book', 'booked'])}" data-act="go" data-arg="services">${svg(P.wrench, 24)}Services</button>
+    <button class="tap ${on(['account'])}" data-act="go" data-arg="account">${svg(P.user, 24)}Pro</button>
+  </nav>`;
+}
+
+function vHome() {
+  const t = track();
+  const active = s.orderPlaced && !t.delivered;
+  return `<div class="pad">
+    <div class="card" style="padding:12px 14px;display:flex;align-items:center;gap:12px">
+      <span style="color:var(--orange)">${svg(P.pin, 22, 2.2)}</span>
+      <div style="flex:1;min-width:0"><div class="small muted" style="font-weight:600">Delivering to jobsite</div><div style="font-size:15px;font-weight:700">Harbor View Tower, Hollywood, FL</div></div>
+      <span class="zone">45-MIN ZONE</span>
+    </div>
+    <button class="search tap" data-act="go" data-arg="shop">${svg(P.search, 20, 2.2)} Search PEX, valves, water heaters…</button>
+    ${active ? `<button class="active-order tap" data-act="go" data-arg="track">
+      <span class="dot pulse"></span>
+      <span style="flex:1;display:flex;flex-direction:column"><span id="home-status" style="font-size:13px;color:#C9D2E3;font-weight:600">${t.status}</span>
+      <span class="cond" style="font-size:24px;font-weight:800">${t.scheduled ? 'Tomorrow at ' : 'Arrives in '}<span id="home-eta">${t.eta}</span></span></span>
+      <span style="font-weight:800;color:var(--apricot);font-size:15px">Track ›</span></button>` : ''}
+    <div class="hero">
+      <img src="${IMG.site}" alt="Delivery van arriving at a construction site">
+      <div class="hero-body">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--apricot)">EVERY MINUTE MATTERS</div>
+        <div class="cond" style="font-weight:800;font-size:27px;line-height:1.05;color:#fff">Stop driving to the supply store.</div>
+        <p style="margin:0;color:#D6DDEA;font-size:14px;line-height:1.4">Order from the jobsite. The van comes to you.</p>
+        <button class="btn btn-primary btn-sm tap" data-act="go" data-arg="shop" style="align-self:flex-start;margin-top:8px">ORDER NOW</button>
+      </div>
+    </div>
+    <h2 class="h2">Shop by category</h2>
+    <div class="grid3">${CATS.map((c) => `<button class="cat-btn tap" data-act="cat" data-arg="${c.id}"><span class="cat-ico">${svg(P.fitting)}</span><span style="font-size:13px;font-weight:700;text-align:center;line-height:1.15">${c.label}</span></button>`).join('')}</div>
+    <div class="card" style="padding:16px;display:flex;align-items:center;gap:12px">
+      <div style="flex:1"><div style="font-size:12px;font-weight:800;letter-spacing:.08em" class="muted">REORDER LAST JOB</div><div style="font-size:16px;font-weight:700;margin-top:2px">Harbor View Tower, 4 items</div><div class="small muted">PEX, crimp rings, valves, connectors</div></div>
+      <button class="btn-outline tap" data-act="reorder" data-arg="last">Reorder</button>
+    </div>
+    <button class="emergency tap" data-act="go" data-arg="services">
+      <span class="emergency-ico">${svg(P.phone, 24)}</span>
+      <span style="flex:1;display:flex;flex-direction:column"><span class="cond" style="font-weight:800;font-size:22px">24/7 EMERGENCY SERVICE</span><span style="font-size:14px;color:#FFE0E0">Leak, burst pipe or clog? Get a licensed plumber.</span></span>
+      <span style="font-size:22px;font-weight:800">›</span>
+    </button>
+    <div style="border-radius:16px;border:2px dashed #9AA8C2;padding:16px;display:flex;flex-direction:column;gap:8px">
+      <div class="cond" style="font-weight:800;font-size:20px">45 MINUTES PRO CONTRACTOR</div>
+      <div style="font-size:14px;color:var(--ink-2);line-height:1.5">Volume pricing, recurring orders, delivery to every project, digital purchase history and Net-30 invoicing.</div>
+      <button class="tap" data-act="go" data-arg="account" style="align-self:flex-start;height:44px;padding:0 16px;border:0;border-radius:12px;background:var(--navy);color:#fff;font-weight:700;font-size:14px">View my Pro account</button>
+    </div>
+    <div style="height:8px"></div>
+  </div>`;
+}
+
+function vShop() {
+  const t = totals(), n = cartCount();
+  const items = PRODUCTS.filter((p) => p.cat === s.cat).map((p) => {
+    const q = qty(p.id);
+    const ctrl = q === 0
+      ? `<button class="add tap" data-act="add" data-arg="${p.id}" aria-label="Add ${esc(p.name)} to order">${svg(P.plus, 22, 2.6)}</button>`
+      : `<div class="vstep pop">
+          <button class="tap" data-act="inc" data-arg="${p.id}" aria-label="Increase quantity" style="border-radius:10px 10px 4px 4px;background:var(--navy);color:#fff">+</button>
+          <span style="font-weight:800;font-size:15px">${q}</span>
+          <button class="tap" data-act="dec" data-arg="${p.id}" aria-label="Decrease quantity" style="border-radius:4px 4px 10px 10px;background:var(--chip);color:var(--navy)">−</button>
+        </div>`;
+    return `<div class="card product">
+      <div class="thumb">${svg(P.pipe, 30, 1.8)}</div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;align-items:flex-start">
+        ${tag(p)}<span style="font-size:15px;font-weight:700;line-height:1.2">${esc(p.name)}</span>
+        <span class="small muted">${esc(p.spec)}</span><span style="font-size:16px;font-weight:800">${fmt(p.price)}</span>
+      </div>${ctrl}</div>`;
+  }).join('');
+  return `<div>
+    <div class="pills noscroll" role="tablist">${CATS.map((c) => `<button class="pill tap ${c.id === s.cat ? 'on' : ''}" data-act="pickcat" data-arg="${c.id}">${c.label}</button>`).join('')}</div>
+    <div style="padding:8px 16px 0;display:flex;gap:8px;font-size:12px;color:var(--ink-2);align-items:center;flex-wrap:wrap">
+      <span class="tag fast">45-MIN</span><span>on a van near you</span><span class="tag slow" style="margin-left:6px">SAME DAY</span><span>from the store</span>
+    </div>
+    <div style="padding:12px 16px 24px;display:flex;flex-direction:column;gap:10px">${items}</div>
+    ${n ? `<div class="sticky-bar"><button class="tap" data-act="go" data-arg="cart"><span>${n} items, ${fmt(t.sub)}</span><span style="color:var(--apricot)">Review order ›</span></button></div>` : ''}
+  </div>`;
+}
+
+function vCart() {
+  const ids = Object.keys(s.cart);
+  if (!ids.length) {
+    return `<div class="pad"><div class="card empty">
+      <div class="cond" style="font-weight:800;font-size:24px">Your order is empty</div>
+      <p style="margin:0;font-size:15px" class="muted">Add materials and we'll bring them to the jobsite.</p>
+      <button class="btn btn-primary btn-sm tap" data-act="go" data-arg="shop" style="margin-top:6px">SHOP SUPPLIES</button>
+    </div></div>`;
+  }
+  const t = totals();
+  return `<div class="pad">
+    <div class="card" style="padding:4px 14px">${ids.map((id) => {
+      const p = BY_ID[id];
+      return `<div class="list-row">
+        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:700">${esc(p.name)}</div><div class="small muted">${esc(p.spec)}, ${p.fast ? '45-min' : 'same day'}</div></div>
+        <div class="stepper"><button class="st-minus tap" data-act="dec" data-arg="${id}" aria-label="Decrease quantity">−</button><span style="min-width:20px;text-align:center;font-weight:800">${s.cart[id]}</span><button class="st-plus tap" data-act="inc" data-arg="${id}" aria-label="Increase quantity">+</button></div>
+        <div style="width:72px;text-align:right;font-weight:800">${fmt(p.price * s.cart[id])}</div>
+      </div>`;
+    }).join('')}</div>
+    <h2 class="h2">Delivery</h2>
+    <div class="grid2">
+      <button class="choice tap ${s.delivery === 'express' ? 'on' : ''}" data-act="delivery" data-arg="express"><b>45-MIN EXPRESS</b><span class="small" style="color:var(--ink-2)">To the jobsite, $14.99</span></button>
+      <button class="choice tap ${s.delivery === 'scheduled' ? 'on' : ''}" data-act="delivery" data-arg="scheduled"><b>SCHEDULED</b><span class="small" style="color:var(--ink-2)">Tomorrow 7–8 AM, free</span></button>
+    </div>
+    ${t.slow && s.delivery === 'express' ? `<div style="background:#FFF4E5;border-radius:12px;padding:10px 12px;font-size:13px;color:#5C3A00;line-height:1.4">${t.slow} ${t.slow === 1 ? 'item isn’t' : 'items aren’t'} on a nearby van. Everything else arrives in 45 min; the rest follows same-day in a second drop.</div>` : ''}
+    <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:12px">
+      <div class="row" style="align-items:center"><div><div style="font-size:12px;font-weight:700" class="muted">JOBSITE</div><div style="font-weight:700">Harbor View Tower, Gate B</div></div>
+        <button class="tap" style="border:0;background:transparent;color:var(--orange-text);font-weight:800;font-size:14px;height:44px">Change</button></div>
+      <label class="field">PO / JOB NUMBER<input type="text" data-field="po" value="${esc(s.po)}" placeholder="e.g. HVT-2214" autocomplete="off"></label>
+      <div class="row"><span style="font-size:12px;font-weight:700" class="muted">PAYMENT</span><span style="font-weight:700">Pro account, Net 30</span></div>
+    </div>
+    <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:8px;font-size:15px">
+      <div class="row"><span style="color:var(--ink-2)">Subtotal</span><span>${fmt(t.sub)}</span></div>
+      <div class="row"><span style="color:var(--ink-2)">Pro pricing</span><span style="color:var(--green);font-weight:700">−${fmt(t.disc)}</span></div>
+      <div class="row"><span style="color:var(--ink-2)">Delivery</span><span>${t.fee ? fmt(t.fee) : 'Free'}</span></div>
+      <div class="row"><span style="color:var(--ink-2)">Sales tax</span><span>${fmt(t.tax)}</span></div>
+      <div class="row" style="border-top:1px solid var(--line);padding-top:10px;font-weight:800;font-size:19px"><span>Total</span><span>${fmt(t.total)}</span></div>
+    </div>
+    <button class="btn btn-primary tap" data-act="place" style="margin-bottom:12px">PLACE ORDER, ${fmt(t.total)}</button>
+  </div>`;
+}
+
+function vSteps(t) {
+  return t.steps.map((st) => `<div class="step ${st.done ? 'done' : ''}">
+    <div class="step-rail"><span class="step-dot"></span>${st.last ? '' : '<span class="step-line"></span>'}</div>
+    <div style="padding-bottom:12px"><div class="step-label">${st.label}</div><div class="small muted">${st.sub}</div></div>
+  </div>`).join('');
+}
+
+function vTrack() {
+  if (!s.orderPlaced) {
+    return `<div class="pad"><div class="card empty">
+      <div class="cond" style="font-weight:800;font-size:24px">No active deliveries</div>
+      <p style="margin:0;font-size:15px" class="muted">Place an order and watch the van come to you, live.</p>
+      <button class="btn btn-primary btn-sm tap" data-act="go" data-arg="shop" style="margin-top:6px">SHOP SUPPLIES</button>
+    </div></div>`;
+  }
+  const t = track();
+  return `<div class="pad">
+    <div class="eta-card">
+      <div><div id="trk-status" class="blink" style="font-size:13px;font-weight:700;color:var(--apricot);letter-spacing:.06em;text-transform:uppercase">${t.status}</div>
+        <div id="trk-eta" class="cond" style="font-weight:800;font-size:44px;line-height:1">${t.eta}</div>
+        <div id="trk-cap" style="font-size:13px;color:#C9D2E3">${t.caption}</div></div>
+      <div style="text-align:right;font-size:13px;color:#C9D2E3">Order #45-1027<br><span style="color:#fff;font-weight:700;font-size:16px">${s.orderTotal}</span><br>${s.orderCount} items</div>
+    </div>
+    <div class="map"><div class="map-inner">
+      <svg width="358" height="220" viewBox="0 0 358 220" style="position:absolute;left:0;top:0" aria-hidden="true">
+        <rect x="50" y="140" width="90" height="70" rx="6" fill="#F4F7FB"/><rect x="50" y="82" width="90" height="36" rx="6" fill="#F4F7FB"/>
+        <rect x="164" y="82" width="74" height="90" rx="6" fill="#F4F7FB"/><rect x="164" y="10" width="74" height="48" rx="6" fill="#DDEFE3"/>
+        <rect x="264" y="56" width="84" height="116" rx="6" fill="#F4F7FB"/><rect x="0" y="0" width="22" height="220" fill="#CFE3F1"/>
+        <path d="M36 0 V220 M0 128 H358 M150 0 V220 M0 70 H358 M250 0 V220 M250 40 H358" stroke="#fff" stroke-width="12" fill="none"/>
+        <path d="M36 186 L36 128 L150 128 L150 70 L250 70 L250 40 L322 40" stroke="#9AA8C2" stroke-width="5" fill="none" stroke-dasharray="2 8" stroke-linecap="round"/>
+        <path id="route" d="M36 186 L36 128 L150 128 L150 70 L250 70 L250 40 L322 40" stroke="#E2560F" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${ROUTE_LEN}" stroke-dashoffset="${Math.round(ROUTE_LEN * (1 - t.p))}"/>
+      </svg>
+      <div class="map-label" style="left:44px;top:112px">HOLLYWOOD BLVD</div>
+      <div class="map-label" style="left:156px;top:30px;color:#3E6B4E">PARK</div>
+      <div class="map-label" style="left:154px;top:150px;transform:rotate(-90deg);transform-origin:left top">I-95</div>
+      <div style="position:absolute;left:14px;top:190px;background:var(--navy);color:#fff;font-size:10px;font-weight:800;padding:3px 6px;border-radius:6px">45 MIN STORE</div>
+      <div style="position:absolute;left:300px;top:4px;background:#fff;color:var(--navy);font-size:10px;font-weight:800;padding:3px 6px;border-radius:6px;border:1.5px solid var(--navy)">JOBSITE</div>
+      <div style="position:absolute;left:314px;top:32px;width:16px;height:16px;border-radius:50%;background:var(--navy);border:3px solid #fff"></div>
+      <div id="van" class="van pulse" style="left:${Math.round(t.x - 16)}px;top:${Math.round(t.y - 16)}px">${svg('<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/>', 16, 2.6)}</div>
+    </div></div>
+    <div class="card" id="trk-steps" style="padding:16px;display:flex;flex-direction:column">${vSteps(t)}</div>
+    <div class="card" style="padding:14px;display:flex;align-items:center;gap:12px">
+      <div style="width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center">MR</div>
+      <div style="flex:1"><div style="font-weight:700">Marcus R., your driver</div><div class="small muted">Van 02, mobile supply store</div></div>
+      <button class="tap" aria-label="Message driver" style="width:44px;height:44px;border-radius:12px;border:0;background:var(--chip);color:var(--navy);display:flex;align-items:center;justify-content:center">${svg(P.msg, 20)}</button>
+      <button class="tap" aria-label="Call driver" style="width:44px;height:44px;border-radius:12px;border:0;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center">${svg(P.phone, 20)}</button>
+    </div>
+    <div id="trk-done">${t.delivered ? `<button class="btn btn-dark tap pop" data-act="resetOrder" style="width:100%;margin-bottom:12px">DELIVERED — BACK TO WORK</button>` : ''}</div>
+  </div>`;
+}
+
+function vServices() {
+  return `<div class="pad">
+    <div class="hero">
+      <img src="${IMG.store}" alt="45 Minutes Plumbing Supply store with delivery vans" style="height:170px">
+      <div class="hero-body">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--apricot)">45 MINUTES PLUMBING SERVICES</div>
+        <div class="cond" style="font-weight:800;font-size:26px;color:#fff;line-height:1.05">Professional Plumbing. Reliable Solutions.</div>
+        <div style="font-size:14px;color:#D6DDEA">Residential and commercial, licensed and insured</div>
+      </div>
+    </div>
+    <button class="emergency tap" data-act="emergency">
+      <span class="dot pulse" style="background:#fff"></span>
+      <span style="flex:1;display:flex;flex-direction:column"><span class="cond" style="font-weight:800;font-size:22px">EMERGENCY — SEND A PLUMBER NOW</span><span style="font-size:14px;color:#FFE0E0">Available 24/7 in our service area</span></span>
+    </button>
+    <h2 class="h2">What do you need?</h2>
+    ${SERVICES.map((v) => `<button class="card tap" data-act="svc" data-arg="${v.id}" style="border:0;padding:14px;display:flex;align-items:center;gap:14px;text-align:left;width:100%">
+      <span class="cat-ico" style="width:46px;height:46px;border-radius:12px">${svg(P.wrench)}</span>
+      <span style="flex:1;display:flex;flex-direction:column"><span style="font-weight:800;font-size:16px">${v.name}</span><span class="small muted">${v.desc}</span></span>
+      <span style="font-size:22px;font-weight:800;color:#9AA8C2">›</span></button>`).join('')}
+    <div style="height:8px"></div>
+  </div>`;
+}
+
+function vBook() {
+  const f = s.form;
+  return `<div class="pad">
+    <button class="tap" data-act="go" data-arg="services" style="align-self:flex-start;height:40px;border:0;background:transparent;color:var(--orange-text);font-weight:800;font-size:15px;padding:0">‹ All services</button>
+    <h2 class="h2">Service</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">${SERVICES.map((v) => `<button class="pill tap ${v.id === s.svc ? 'on' : ''}" data-act="svcpick" data-arg="${v.id}">${v.name}</button>`).join('')}</div>
+    <h2 class="h2">When?</h2>
+    <div class="grid2">
+      <button class="choice tap ${s.urgency === 'now' ? 'on' : ''}" data-act="urgency" data-arg="now"><span style="font-weight:800;font-size:16px">Right now</span><span class="small" style="color:var(--ink-2)">Emergency dispatch</span></button>
+      <button class="choice tap ${s.urgency === 'later' ? 'on' : ''}" data-act="urgency" data-arg="later"><span style="font-weight:800;font-size:16px">Schedule</span><span class="small" style="color:var(--ink-2)">Pick a day and time</span></button>
+    </div>
+    <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:12px">
+      <label class="field">NAME<input type="text" data-field="name" value="${esc(f.name)}" placeholder="Your name" autocomplete="name"></label>
+      <label class="field">PHONE<input type="tel" data-field="phone" value="${esc(f.phone)}" placeholder="(954) 000-0000" autocomplete="tel"></label>
+      <label class="field">SERVICE ADDRESS<input type="text" data-field="addr" value="${esc(f.addr)}" placeholder="Street, city" autocomplete="street-address"></label>
+      <label class="field">WHAT'S HAPPENING?<textarea rows="3" data-field="desc" placeholder="e.g. Water leaking under the kitchen sink">${esc(f.desc)}</textarea></label>
+      <button class="tap" style="height:44px;border-radius:10px;border:1.5px dashed #9AA8C2;background:#F7F9FC;color:var(--navy);font-weight:700;font-size:14px">+ Add photos of the problem</button>
+    </div>
+    <button class="btn btn-primary tap" data-act="submitBook" style="margin-bottom:12px">REQUEST A PLUMBER</button>
+  </div>`;
+}
+
+function vBooked() {
+  const svc = (SERVICES.find((v) => v.id === s.svc) || {}).name || 'Repairs';
+  const now = s.urgency === 'now';
+  return `<div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+    <div class="pop" style="width:96px;height:96px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center">${svg(P.check, 48, 2.6)}</div>
+    <div class="cond" style="font-weight:800;font-size:30px">Request received</div>
+    <p style="margin:0;font-size:16px;color:var(--ink-2);line-height:1.45">${now ? 'A licensed plumber is being dispatched. We’ll call you to confirm arrival time.' : 'We’ll call you to confirm a day and time that works for you.'}</p>
+    <div class="card" style="padding:14px 16px;width:100%;text-align:left;display:flex;flex-direction:column;gap:6px">
+      <div class="row"><span class="muted">Service</span><span style="font-weight:700">${svc}</span></div>
+      <div class="row"><span class="muted">Priority</span><span style="font-weight:700">${now ? 'Emergency, now' : 'Scheduled'}</span></div>
+      <div class="row"><span class="muted">Ticket</span><span style="font-weight:700">SRV-3381</span></div>
+    </div>
+    <button class="btn btn-dark tap" data-act="go" data-arg="home" style="width:100%;font-family:'Barlow',sans-serif;font-size:16px;letter-spacing:0">Back to home</button>
+  </div>`;
+}
+
+function vAccount() {
+  const hist = [
+    { site: 'Harbor View Tower', meta: 'Last Tue, 4 items, 41 min', key: 'last' },
+    { site: 'Ocean Dr. restaurant remodel', meta: 'Sep 24, 7 items, 36 min', key: 'ocean' },
+    { site: 'Aventura condo #1204', meta: 'Sep 19, 2 items, same day', key: 'aventura' }
+  ];
+  const stat = (v, l) => `<div style="background:var(--navy-soft);border-radius:12px;padding:10px"><div class="cond" style="font-weight:800;font-size:24px">${v}</div><div style="font-size:12px;color:#C9D2E3">${l}</div></div>`;
+  const rowLink = (l, r) => `<div class="list-row" style="justify-content:space-between;padding:14px 0"><span style="font-weight:600">${l}</span><span class="muted">${r}</span></div>`;
+  return `<div class="pad">
+    <div style="background:var(--navy);color:#fff;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:12px"><img src="${IMG.logo}" alt="" style="width:52px;height:52px;border-radius:50%;border:2px solid var(--orange-brand);background:#fff">
+        <div><div class="cond" style="font-weight:800;font-size:22px">Rivera Plumbing LLC</div><div style="font-size:13px;color:var(--apricot);font-weight:800;letter-spacing:.08em">PRO CONTRACTOR, GOLD</div></div></div>
+      <div class="grid3" style="gap:8px">${stat('14', 'Orders this month')}${stat('38m', 'Avg. delivery')}${stat('Net 30', 'Terms')}</div>
+    </div>
+    <h2 class="h2">Recent orders</h2>
+    <div class="card" style="padding:4px 14px">${hist.map((h) => `<div class="list-row"><div style="flex:1"><div style="font-weight:700">${h.site}</div><div class="small muted">${h.meta}</div></div><button class="btn-outline tap" data-act="reorder" data-arg="${h.key}" style="height:40px;font-size:13px">Reorder</button></div>`).join('')}</div>
+    <h2 class="h2">Account</h2>
+    <div class="card" style="padding:0 14px">${rowLink('Saved jobsites', '3 ›')}${rowLink('Team and who can order', '4 ›')}${rowLink('Invoices and statements', '›')}${rowLink('Language', 'English / Español ›')}</div>
+    <button class="tap" data-act="restart" style="height:46px;border:0;background:transparent;color:var(--muted);font-weight:700;font-size:14px;margin-bottom:8px">Restart demo</button>
+  </div>`;
+}
+
+const VIEWS = { home: vHome, shop: vShop, cart: vCart, track: vTrack, services: vServices, book: vBook, booked: vBooked, account: vAccount };
+
+/* ---------- render ---------- */
+function render() {
+  const app = $('#app');
+  const changed = s.screen !== lastScreen;
+  const prevScroll = $('main') ? $('main').scrollTop : 0;
+  if (s.screen === 'welcome') {
+    app.innerHTML = vWelcome();
+  } else {
+    app.innerHTML = vHeader() + `<main class="noscroll"><div class="${changed ? 'scr' : ''}">${VIEWS[s.screen]()}</div></main>` + vNav();
+    const m = $('main');
+    if (m) m.scrollTop = changed ? 0 : prevScroll;
+  }
+  lastScreen = s.screen;
+}
+const set = (patch) => { Object.assign(s, patch); render(); };
+
+let toastTimer;
+function toast(msg) {
+  const el = $('#toast');
+  el.innerHTML = `<span style="color:var(--apricot)">${svg(P.check, 18, 3)}</span>${esc(msg)}`;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1700);
+}
+
+/* ---------- actions ---------- */
+const setQty = (id, q) => { const c = { ...s.cart }; if (q <= 0) delete c[id]; else c[id] = q; set({ cart: c }); };
+const A = {
+  go: (sc) => set({ screen: sc }),
+  cat: (id) => set({ cat: id, screen: 'shop' }),
+  pickcat: (id) => set({ cat: id }),
+  add: (id) => { setQty(id, 1); toast(BY_ID[id].name + ' added'); },
+  inc: (id) => setQty(id, qty(id) + 1),
+  dec: (id) => setQty(id, qty(id) - 1),
+  reorder: (key) => { set({ cart: { ...REORDERS[key] }, screen: 'cart' }); toast('Last order added'); },
+  delivery: (m) => set({ delivery: m }),
+  place: () => { const t = totals(); set({ orderPlaced: true, orderMode: s.delivery, eta: ETA0, orderTotal: fmt(t.total), orderCount: cartCount(), cart: {}, po: '', screen: 'track' }); },
+  resetOrder: () => set({ orderPlaced: false, eta: 0, screen: 'home' }),
+  emergency: () => set({ svc: 'repairs', urgency: 'now', screen: 'book' }),
+  svc: (id) => set({ svc: id, urgency: 'later', screen: 'book' }),
+  svcpick: (id) => set({ svc: id }),
+  urgency: (u) => set({ urgency: u }),
+  submitBook: () => set({ screen: 'booked', form: { name: '', phone: '', addr: '', desc: '' } }),
+  restart: () => set({ screen: 'welcome', cart: {}, orderPlaced: false, eta: 0, cat: 'pex', delivery: 'express' })
+};
+
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
+  const fn = A[b.dataset.act];
+  if (fn) fn(b.dataset.arg);
+});
+document.addEventListener('input', (e) => {
+  const f = e.target.dataset && e.target.dataset.field;
+  if (!f) return;
+  if (f === 'po') s.po = e.target.value; else s.form[f] = e.target.value;
+});
+
+/* ---------- live tracking tick (demo acelerado) ---------- */
+setInterval(() => {
+  if (!(s.orderPlaced && s.orderMode === 'express' && s.eta > 0)) return;
+  s.eta = Math.max(0, s.eta - DEMO_SPEED);
+  const t = track();
+  if (s.screen === 'track') {
+    $('#trk-status').textContent = t.status;
+    $('#trk-eta').textContent = t.eta;
+    $('#trk-cap').textContent = t.caption;
+    $('#van').style.left = Math.round(t.x - 16) + 'px';
+    $('#van').style.top = Math.round(t.y - 16) + 'px';
+    $('#route').setAttribute('stroke-dashoffset', Math.round(ROUTE_LEN * (1 - t.p)));
+    $('#trk-steps').innerHTML = vSteps(t);
+    if (t.delivered) $('#trk-done').innerHTML = `<button class="btn btn-dark tap pop" data-act="resetOrder" style="width:100%;margin-bottom:12px">DELIVERED — BACK TO WORK</button>`;
+  } else if (s.screen === 'home') {
+    if (t.delivered) render();
+    else { const a = $('#home-eta'), b = $('#home-status'); if (a) a.textContent = t.eta; if (b) b.textContent = t.status; }
+  }
+}, 1000);
+
+/* ---------- install hint (iPhone no muestra aviso automático) ---------- */
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+let dismissed = false;
+try { dismissed = localStorage.getItem('45min-install-dismissed') === '1'; } catch (_) {}
+if (isIOS && !standalone && !dismissed) {
+  const box = $('#install');
+  box.innerHTML = `<img src="icons/apple-touch-icon.png" alt="">
+    <div style="flex:1;font-size:14px;line-height:1.35"><b>Install 45 Minutes</b><br>Tap ${svg(P.share, 16, 2.2)} Share, then <b>Add to Home Screen</b>.</div>
+    <button class="x" aria-label="Close">×</button>`;
+  setTimeout(() => box.classList.add('show'), 2500);
+  box.querySelector('.x').addEventListener('click', () => { box.classList.remove('show'); try { localStorage.setItem('45min-install-dismissed', '1'); } catch (_) {} });
+}
+
+/* ---------- service worker ---------- */
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+
+render();
+})();
+</script>
+</body>
+</html>
