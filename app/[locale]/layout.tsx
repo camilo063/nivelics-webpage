@@ -107,6 +107,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <AnalyticsScripts gaId={gaId} gtmId={gtmId} />
+        <meta name="facebook-domain-verification" content="p1mwx0x2tny9717c8aq7v0ediqv6h9" />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AnalyticsNoscript gtmId={gtmId} />
